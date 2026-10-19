@@ -67,13 +67,13 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 4 — Build profile intake
 
-- [ ] Create one synthetic sample profile; use no real CV or personal data.
-- [ ] Add fields for current skills, experience, and interests.
-- [ ] Let the user load the synthetic sample profile.
-- [ ] Let the user edit the profile before asking for recommendations.
-- [ ] Validate required fields and show useful input errors.
-- [ ] Display the completed profile for review.
-- [ ] Carry the reviewed profile into the matching flow without re-entering it.
+- [x] Create one synthetic sample profile; use no real CV or personal data.
+- [x] Add fields for current skills, experience, and interests.
+- [x] Let the user load the synthetic sample profile.
+- [x] Let the user edit the profile before asking for recommendations.
+- [x] Validate required fields and show useful input errors.
+- [x] Display the completed profile for review.
+- [x] Carry the reviewed profile into the matching flow without re-entering it.
 
 **Done when:** The sample user can create a profile and continue through the app.  
 **Commit focus:** Profile form and synthetic data.

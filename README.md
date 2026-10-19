@@ -18,7 +18,7 @@ AI is changing the skills employers need faster than many workers can adapt. **T
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app shell runs locally. Its navigation and placeholder screens are real, but profile intake, sourced trend data, matching, pathways, and external service integrations are still being built.
+> **Project stage:** The React and TypeScript app shell and synthetic profile intake run locally. Sourced trend data, matching, pathways, and external service integrations are still being built.
 
 ## The Problem
 
@@ -136,7 +136,7 @@ npm install
 npm run dev
 ```
 
-Open the local URL shown by Vite. To check a production build, run `npm run build`. The app currently shows the journey shell and honest placeholders; it does not yet make career recommendations.
+Open the local URL shown by Vite. To check a production build, run `npm run build`. The app accepts a synthetic profile and shows honest placeholders for the remaining steps; it does not yet make career recommendations.
 
 ## Hackathon Submission Requirements
 

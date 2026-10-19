@@ -3,6 +3,20 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 type Screen = 'profile' | 'radar' | 'roles' | 'pathway';
+type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string };
+type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[] };
+
+const emptyProfile: ProfileDraft = { currentRole: '', skills: '', experience: '', interests: '' };
+const sampleProfile: ProfileDraft = {
+  currentRole: 'Junior Accountant',
+  skills: 'Excel, bookkeeping, financial reporting',
+  experience: '2 years supporting monthly reports and reconciliations',
+  interests: 'data analysis, dashboards',
+};
+
+function splitEntries(value: string) {
+  return [...new Set(value.split(',').map((entry) => entry.trim()).filter(Boolean))];
+}
 
 const screens: { id: Screen; label: string; number: string; description: string }[] = [
   { id: 'profile', label: 'My profile', number: '01', description: 'Skills, experience and interests' },
@@ -16,7 +30,7 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
     eyebrow: 'Start here',
     title: 'Where are you today?',
     body: 'Add your current skills, experience and interests. This will become the starting point for explainable career matches.',
-    next: 'Profile intake is the next build step.',
+    next: 'Enter a profile to begin.',
   },
   radar: {
     eyebrow: 'Evidence',
@@ -40,8 +54,29 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
 
 function App() {
   const [screen, setScreen] = useState<Screen>('profile');
+  const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profileError, setProfileError] = useState('');
   const activeIndex = screens.findIndex((item) => item.id === screen);
   const content = screenCopy[screen];
+
+  function updateDraft(field: keyof ProfileDraft, value: string) {
+    setDraft((current) => ({ ...current, [field]: value }));
+    setProfile(null);
+    setProfileError('');
+  }
+
+  function saveProfile(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const skills = splitEntries(draft.skills);
+    const interests = splitEntries(draft.interests);
+    if (!draft.currentRole.trim() || !draft.experience.trim() || skills.length === 0 || interests.length === 0) {
+      setProfileError('Complete every field and separate multiple skills or interests with commas.');
+      return;
+    }
+    setProfile({ currentRole: draft.currentRole.trim(), skills, experience: draft.experience.trim(), interests });
+    setProfileError('');
+  }
 
   return (
     <div className="app-shell">
@@ -66,7 +101,7 @@ function App() {
       </aside>
 
       <main className="main-content">
-        <header className="topbar"><span>Career navigation workspace</span><span className="status-pill">Planning build</span></header>
+        <header className="topbar"><span>Career navigation workspace</span><span className="status-pill">Prototype build</span></header>
         <div className="content-wrap">
           <div className="progress-row"><span>YOUR JOURNEY</span><span>{String(activeIndex + 1).padStart(2, '0')} / 04</span></div>
           <div className="progress-track"><div style={{ width: `${((activeIndex + 1) / screens.length) * 100}%` }} /></div>
@@ -75,10 +110,27 @@ function App() {
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
           </section>
-          <section className="work-card" aria-label={`${screens[activeIndex].label} status`}>
-            <div className="card-icon" aria-hidden="true">{activeIndex + 1}</div>
-            <div><h2>{screens[activeIndex].label}</h2><p>{content.next}</p></div>
-          </section>
+          {screen === 'profile' ? (
+            <section className="profile-panel" aria-label="Skills profile">
+              <div className="panel-heading"><div><h2>Build your skills profile</h2><p>Use a fictional example for the demo. No CV upload or personal details are needed.</p></div><button type="button" className="text-button" onClick={() => { setDraft(sampleProfile); setProfile(null); setProfileError(''); }}>Load sample profile</button></div>
+              <form onSubmit={saveProfile} noValidate>
+                <div className="field-grid">
+                  <label>Current role<input value={draft.currentRole} onChange={(event) => updateDraft('currentRole', event.target.value)} placeholder="e.g. Junior Accountant" autoComplete="off" /></label>
+                  <label>Current skills<input value={draft.skills} onChange={(event) => updateDraft('skills', event.target.value)} placeholder="e.g. Excel, reporting" autoComplete="off" /><small>Separate skills with commas.</small></label>
+                </div>
+                <label>Experience<textarea value={draft.experience} onChange={(event) => updateDraft('experience', event.target.value)} placeholder="Describe the work you have done" rows={3} /></label>
+                <label>Interests<input value={draft.interests} onChange={(event) => updateDraft('interests', event.target.value)} placeholder="e.g. data analysis, dashboards" autoComplete="off" /><small>Separate interests with commas.</small></label>
+                {profileError && <p className="form-error" role="alert">{profileError}</p>}
+                <button type="submit" className="primary-button">Review profile</button>
+              </form>
+              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p><button type="button" className="text-button" onClick={() => setScreen('radar')}>Continue to skills radar →</button></div>}
+            </section>
+          ) : (
+            <section className="work-card" aria-label={`${screens[activeIndex].label} status`}>
+              <div className="card-icon" aria-hidden="true">{activeIndex + 1}</div>
+              <div><h2>{screens[activeIndex].label}</h2><p>{content.next}</p>{screen === 'roles' && profile && <p className="profile-context">Profile ready: {profile.currentRole} · {profile.skills.length} skills entered</p>}</div>
+            </section>
+          )}
           <div className="page-actions">
             {activeIndex > 0 && <button type="button" className="secondary-button" onClick={() => setScreen(screens[activeIndex - 1].id)}>Back</button>}
             {activeIndex < screens.length - 1 && <button type="button" className="primary-button" onClick={() => setScreen(screens[activeIndex + 1].id)}>Explore next <span aria-hidden="true">→</span></button>}
