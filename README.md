@@ -6,7 +6,7 @@
 
 **An AI-powered, evidence-driven career navigation and reskilling platform for Malaysia's future-ready workforce.**
 
-![Status](https://img.shields.io/badge/status-planning%20stage-blue)
+![Status](https://img.shields.io/badge/status-app%20shell-blue)
 ![Domain](https://img.shields.io/badge/domain-Aiversecity%20Future--Ready%20Workforce-green)
 ![SDGs](https://img.shields.io/badge/impact-UN%20SDGs-orange)
 
@@ -18,7 +18,7 @@ AI is changing the skills employers need faster than many workers can adapt. **T
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** Planning and documentation. There is no runnable prototype in this repository yet. Features and architecture below describe the intended implementation.
+> **Project stage:** The React and TypeScript app shell runs locally. Its navigation and placeholder screens are real, but profile intake, sourced trend data, matching, pathways, and external service integrations are still being built.
 
 ## The Problem
 
@@ -100,25 +100,20 @@ The proposed roles for Jooble Malaysia, Malaysia's Official Open API, ESCO, and 
 - Avoid making recommendations based on protected or irrelevant personal attributes.
 - Disclose development assistance from AI tools, including Codex, in the required Technical & Tools Declaration. The team must review and be able to explain all submitted work.
 
-## Proposed Architecture
+## Current App Structure
 
 ```text
 TomorrowWorks/
-├── frontend/               # Profile, radar, matching and pathway UI
-├── backend/                # API and orchestration (if needed)
-├── data/
-│   ├── sample-profiles/    # Synthetic demo profiles
-│   └── sources/            # Public datasets, metadata and citations
-├── services/
-│   ├── trend-signals/      # Source ingestion and trend extraction
-│   ├── skill-matching/     # Explainable role ranking and gaps
-│   ├── pathways/           # Learning-plan generation
-│   └── sdg-mapping/        # SDG tags and explanations
-├── docs/                   # Design, methodology, demo and sources
-└── README.md
+├── index.html              # Browser entry point
+├── src/
+│   ├── main.tsx            # Journey navigation and app shell
+│   └── styles.css          # Responsive styles
+├── package.json            # Scripts and pinned dependencies
+├── CHECKLIST.md            # Staged build and submission tasks
+└── API_PLAN.md             # Proposed sources and validation steps
 ```
 
-**Technology stack:** To be decided by the team. The hackathon brief allows free choice of stack. This folder structure is a proposal and should be updated to match the actual codebase.
+**Current stack:** React, TypeScript and Vite. Replit hosting and RunPod GPU integration remain separate build stages.
 
 ## MVP Priorities
 
@@ -134,7 +129,14 @@ TomorrowWorks/
 
 ## Running Locally
 
-Setup commands will be added **once the technology stack and runnable code are in place**. Do not assume the project can be started from this README alone yet.
+Use Node.js 20 or newer. From this repository:
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local URL shown by Vite. To check a production build, run `npm run build`. The app currently shows the journey shell and honest placeholders; it does not yet make career recommendations.
 
 ## Hackathon Submission Requirements
 

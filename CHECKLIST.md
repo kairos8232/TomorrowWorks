@@ -55,11 +55,11 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 3 — Set up a runnable Replit app
 
-- [ ] Create the smallest runnable app and project structure.
-- [ ] Add a basic page and navigation for the demo journey.
+- [x] Create the smallest runnable app and project structure.
+- [x] Add a basic page and navigation for the demo journey.
 - [ ] Run the project in Replit and retain proof of its use for the tools declaration.
 - [ ] Call the RunPod GPU step from the Replit backend using a service secret.
-- [ ] Add exact local run commands to the README.
+- [x] Add exact local run commands to the README.
 - [ ] Have another team member follow the run instructions successfully.
 
 **Done when:** The app starts in Replit and can use the RunPod result in a visible demo flow.

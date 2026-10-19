@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root { font-family: 'DM Sans', sans-serif; color: #14233a; background: #f3f6f9; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button { font: inherit; cursor: pointer; }
+.app-shell { min-height: 100vh; display: grid; grid-template-columns: 292px minmax(0, 1fr); }
+.sidebar { background: #0d1728; color: #fff; padding: 32px 20px; display: flex; flex-direction: column; }
+.brand { display: flex; align-items: center; gap: 11px; font: 800 21px 'Manrope', sans-serif; letter-spacing: -.06em; padding: 2px 13px; }
+.brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: #24c8b5; color: #09251f; font-size: 19px; }
+.brand-accent { color: #38d9c5; }
+.sidebar-kicker { color: #8fa1b9; font-size: 12px; margin: 8px 0 44px 56px; }
+.journey { display: grid; gap: 8px; }
+.journey-step { width: 100%; border: 1px solid transparent; border-radius: 14px; background: transparent; color: #aebcd0; padding: 14px 12px; display: flex; align-items: flex-start; text-align: left; gap: 13px; }
+.journey-step:hover, .journey-step:focus-visible { border-color: #355168; outline: none; }
+.journey-step.active { background: #1c3145; color: #fff; border-color: #2c5260; }
+.journey-number { color: #46d2c2; font: 700 12px 'Manrope', sans-serif; padding-top: 2px; }
+.journey-step strong, .journey-step small { display: block; }
+.journey-step strong { font-size: 14px; margin-bottom: 4px; }
+.journey-step small { font-size: 11px; line-height: 1.4; color: #91a8b9; }
+.sidebar-note { margin: auto 12px 2px; padding: 20px 0 0; border-top: 1px solid #263749; color: #d8e2ec; font-weight: 600; font-size: 12px; line-height: 1.65; }
+.sidebar-note span { color: #8fa1b9; font-weight: 400; }
+.main-content { min-width: 0; }
+.topbar { min-height: 74px; padding: 20px clamp(28px, 5vw, 76px); display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid #e4ebf1; background: white; color: #53647a; font-size: 13px; font-weight: 700; }
+.status-pill { border-radius: 99px; background: #e9f7f3; color: #0d796d; padding: 8px 12px; white-space: nowrap; font-size: 11px; }
+.content-wrap { max-width: 990px; margin: 0 auto; padding: clamp(32px, 6vw, 74px) clamp(24px, 5vw, 76px); }
+.progress-row { display: flex; justify-content: space-between; color: #75879b; font: 800 11px 'Manrope', sans-serif; letter-spacing: .14em; }
+.progress-track { height: 5px; border-radius: 99px; background: #e0e9ed; margin-top: 14px; overflow: hidden; }
+.progress-track > div { height: 100%; background: #25baa8; border-radius: inherit; transition: width .2s ease; }
+.hero { padding: clamp(45px, 8vw, 88px) 0 38px; }
+.eyebrow { display: inline-block; color: #0f9c8d; font: 800 11px 'Manrope', sans-serif; text-transform: uppercase; letter-spacing: .16em; margin-bottom: 17px; }
+h1, h2 { font-family: 'Manrope', sans-serif; }
+h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spacing: -.055em; }
+.hero p { max-width: 650px; color: #5a6d80; font-size: 16px; line-height: 1.75; margin: 22px 0 0; }
+.work-card { display: flex; align-items: center; gap: 20px; background: white; padding: 28px; border: 1px solid #e2eaf0; border-radius: 20px; box-shadow: 0 14px 35px rgba(29, 64, 90, .045); }
+.card-icon { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: #e5f8f4; color: #0b9283; font: 800 19px 'Manrope', sans-serif; }
+.work-card h2 { margin: 0 0 6px; font-size: 17px; }
+.work-card p { margin: 0; color: #6d7f91; font-size: 13px; line-height: 1.6; }
+.page-actions { margin-top: 26px; display: flex; justify-content: flex-end; gap: 12px; }
+.primary-button, .secondary-button { border-radius: 11px; padding: 12px 18px; font-size: 13px; font-weight: 700; }
+.primary-button { background: #0e8176; border: 1px solid #0e8176; color: white; }
+.primary-button:hover { background: #08695f; }
+.secondary-button { background: white; border: 1px solid #d3dfe6; color: #2f4c60; }
+.secondary-button:hover { background: #f4f8fa; }
+@media (max-width: 760px) { .app-shell { display: block; } .sidebar { padding: 16px; } .brand { padding: 0; } .sidebar-kicker, .sidebar-note { display: none; } .journey { display: flex; overflow-x: auto; margin-top: 16px; } .journey-step { min-width: 135px; padding: 10px; } .journey-step small { display: none; } .topbar { min-height: 60px; padding: 16px 24px; } .work-card { align-items: flex-start; padding: 20px; } }
