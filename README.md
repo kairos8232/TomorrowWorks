@@ -88,6 +88,8 @@ The key prototype goal is to show that **changing trend evidence changes a caree
 
 ## Data, Evidence and AI Guardrails
 
+The proposed roles for Jooble Malaysia, Malaysia's Official Open API, ESCO, and optional research feeds are documented in [API_PLAN.md](API_PLAN.md). These sources must pass the Stage 1 access and suitability checks before the app presents their data.
+
 - Use **public, open or synthetic data only**; no real CVs or personal records in demos.
 - Show the **name, date and link/reference** for each underlying trend source.
 - Document the scoring methodology, assumptions and limitations.

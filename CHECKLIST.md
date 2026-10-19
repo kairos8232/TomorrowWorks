@@ -15,6 +15,7 @@ Completed in local commit `e4d623a`.
 - [ ] Choose one primary user and one example career transition.
 - [ ] Decide what runs in Replit and what GPU task runs in RunPod.
 - [ ] Test candidate trend sources from the intended runtime and choose one public, updateable source.
+- [ ] Validate the proposed Jooble Malaysia, OpenDOSM, and ESCO uses in [API_PLAN.md](API_PLAN.md), including access and usage terms.
 - [ ] Check whether the source measures research activity, actual job demand, or another signal; label it accurately.
 - [ ] Write the exact demo journey: profile → trend → role → pathway.
 - [ ] Record prototype assumptions, limits, and the hardest technical risk.
@@ -22,7 +23,7 @@ Completed in local commit `e4d623a`.
 **Done when:** A teammate can explain who the demo serves, what it shows, and which source supports it.  
 **Commit focus:** MVP scope and source decision.
 
-The arXiv API is a candidate for research activity signals. Its official documentation is still available, but the API response and suitability for this demo must be checked before selection.
+The proposed API roles, limits, and Stage 1 validation steps are in [API_PLAN.md](API_PLAN.md). Jooble Malaysia and OpenDOSM are the first sources to test; ESCO supports matching. OpenAlex and arXiv remain optional research sources.
 
 ## Stage 2 — Prove the RunPod GPU step
 
