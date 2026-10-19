@@ -10,6 +10,21 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 Completed in local commit `e4d623a`.
 
+## App functions to build
+
+The user journey is **profile → evidence → matched roles → learning plan → SDG impact and scenarios**. The preliminary build must show a working slice of this journey, with the trend signal affecting a recommendation. The final product must cover all six required functions below. The stages that follow contain the implementation checkboxes.
+
+| Required function | User action and visible result | Data and behaviour to implement | Stage |
+| --- | --- | --- | --- |
+| Skills profile | Enter or edit skills, experience, and interests; load a synthetic example and review it before matching. | Validate required input and keep the demo free of real CVs or personal records. | 4 |
+| Future Skills Radar | Open a radar view and see which supported skills or roles are rising or declining, with a plain-language explanation. | Import at least one updatable public source; keep the original source link, source date, retrieval date, and an honest definition of each trend. | 5–6 |
+| Future-role matching | Ask for suitable roles; see a ranked role list, an explainable score, existing skills, missing skills, and evidence behind each recommendation. | Compare the profile against verified role requirements and let sourced trend signals affect the ranking or explanation. | 7–8 |
+| Reskilling pathway | Select a recommended role; see ordered learning steps, time estimates, and verified free or low-cost resources. | Build steps from the displayed skills gap and explain the basis for each estimate. | 10 |
+| SDG connection | Open a role or skill and see its linked SDG and a short reason the connection matters. | Review each role and skill mapping; avoid decorative claims. | 11 |
+| Future scenarios | Switch between at least two AI-change assumptions and see what changes in roles or pathways. | State each assumption and label the results as estimates. | 12 |
+
+**Supporting functions:** Replit serves the app, RunPod supplies one visible GPU result, and a documented refresh process updates the sourced trend sample. Show a dated snapshot label when the demo is using saved data. If the app calls a live API, keep a clearly labelled snapshot fallback for the demo.
+
 ## Stage 1 — Decide the MVP
 
 - [ ] Choose one primary user and one example career transition.
@@ -19,7 +34,7 @@ Completed in local commit `e4d623a`.
 - [ ] Import a small attributed sample and define a repeatable way to refresh it; a live API call is optional.
 - [ ] Review the optional Jooble Malaysia, OpenDOSM, and ESCO uses in [API_PLAN.md](API_PLAN.md) only if they improve the demo.
 - [ ] Check whether the source measures research activity, actual job demand, or another signal; label it accurately.
-- [ ] Write the exact demo journey: profile → trend → role → pathway.
+- [ ] Draw the exact preliminary demo journey and identify which of the six functions are working now versus described in the proposal.
 - [ ] Record prototype assumptions, limits, the hardest technical risk, and a demo fallback.
 
 **Done when:** A teammate can explain who the demo serves, what it shows, and which source supports it.  
@@ -55,8 +70,10 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Create one synthetic sample profile; use no real CV or personal data.
 - [ ] Add fields for current skills, experience, and interests.
 - [ ] Let the user load the synthetic sample profile.
+- [ ] Let the user edit the profile before asking for recommendations.
 - [ ] Validate required fields and show useful input errors.
 - [ ] Display the completed profile for review.
+- [ ] Carry the reviewed profile into the matching flow without re-entering it.
 
 **Done when:** The sample user can create a profile and continue through the app.  
 **Commit focus:** Profile form and synthetic data.
@@ -77,6 +94,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [ ] Show rising and declining skills or roles from the stored signals.
 - [ ] Display the source and date beside each signal.
+- [ ] Let the user open the original source or its attribution from the radar.
 - [ ] Explain what “rising” and “declining” mean in this prototype.
 - [ ] Show a clear state for missing or stale data.
 
@@ -89,6 +107,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Document the scoring formula and its assumptions.
 - [ ] Rank roles for the sample profile.
 - [ ] Show existing skills, missing skills, and the reason for each score.
+- [ ] Let the user select a role to inspect its skills gap and later open its learning pathway.
 - [ ] Link every recommendation to its supporting source and date; do not invent jobs, courses, or statistics.
 - [ ] Explain that recommendations support a person's career decision and do not make a final hiring decision.
 - [ ] Check the results against hand-calculated examples.
@@ -128,6 +147,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Estimate the time for each step and explain the basis for the estimate.
 - [ ] Check each learning-resource link and its price or free-access claim.
 - [ ] Display the ordered pathway in the app.
+- [ ] Link each learning step back to the missing skill it addresses.
 
 **Done when:** The sample user can follow a practical plan with working resources.  
 **Commit focus:** Learning-plan logic and display.
@@ -147,6 +167,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Define assumptions for moderate and rapid AI-change scenarios.
 - [ ] Let the user switch between scenarios.
 - [ ] Show how the recommendations or pathways change.
+- [ ] Keep the same profile when switching scenarios so the comparison is understandable.
 - [ ] Label forecasts as estimates and explain the uncertainty.
 
 **Done when:** A user can compare at least two plausible outcomes.  
@@ -167,3 +188,16 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 **Done when:** All six features work, and, if shortlisted, the final materials and demo are ready for judges.
 **Commit focus:** Separate small fixes and documentation commits; update checked items with the work they describe.
+
+## Optional improvements after the required functions
+
+These are ideas from the Domain 1 brief, not submission blockers. Pick them only after the required journey works and there is time to verify them.
+
+- [ ] Employer view with a team skills-gap heatmap and group learning plan.
+- [ ] Automatic re-planning when a refreshed trend signal changes a recommendation.
+- [ ] Additional language support and a low-bandwidth mode.
+- [ ] Learner progress tracking or skill badges.
+- [ ] Fairness checks for differences related to age, gender, or background.
+- [ ] Aggregated SDG contribution view for a person, organisation, or region.
+
+Additional APIs in [API_PLAN.md](API_PLAN.md) are also optional unless Stage 1 selects one as the required updatable source.
