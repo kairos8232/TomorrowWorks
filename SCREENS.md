@@ -122,6 +122,6 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 - Use consistent names for roles, skills, signals, sources, and scenarios across screens.
 - Put source and date near public-data claims. Label synthetic examples, snapshots, and estimates.
-- Make navigation usable on a phone and by keyboard; express errors and status in text.
+- At 980 CSS pixels and below, navigation moves above the content in compact, scrollable rows; form columns stack at 620 pixels and below. Keep navigation usable by keyboard and express errors and status in text.
 - Replit serves the app. A RunPod GPU result must affect a visible feature when integrated, with its model, input, output, and fallback documented.
 - Keep service credentials and real personal data out of the browser bundle and repository.

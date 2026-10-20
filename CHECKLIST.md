@@ -128,7 +128,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 4f — Improve the web experience
 
-- [ ] At medium and narrow widths, use compact navigation and give the page enough space for its content.
+- [x] At medium and narrow widths, use compact navigation and give the page enough space for its content.
 - [ ] Put the working personal-demo action near the public introduction; keep source status visible and shorten repetitive card copy.
 - [ ] Verify the public landing and personal comparison at phone width, with no horizontal page overflow.
 - [ ] Verify keyboard navigation, visible focus, form labels, and the fictional profile-to-gap flow.
