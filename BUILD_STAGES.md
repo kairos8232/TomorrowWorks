@@ -35,7 +35,7 @@ The first practical Replit check can happen before the RunPod endpoint exists. T
 
 | Stage | Small commit slices | Verify before checking the stage |
 | --- | --- | --- |
-| 5 Trend signals | **5a** Store one permitted, dated source sample with original link and retrieval date. **5b** Implement and document the rule converting source fields to signals. **5c** Add a repeatable refresh command and a changed-input check. | The refresh can be repeated, and changed input produces changed stored signals. |
+| 5 Trend signals | **Done: 5a** DOSM Q1 and Q2 2026 snapshots with link, release and retrieval dates (`scripts/import_dosm_jmi.py`). **Done: 5b** ILO Table A1 importer → `data/sources/ilo-genai-exposure-2025.json`. **5c** ESCO importer for the selected roles' essential skills → `data/roles.json`, labelled as adapted from ESCO. **5d** Signal rules (demand `D`, resilience `R`) in code with a changed-input check (Q1 vs Q2). | The refresh can be repeated, and changed input produces changed stored signals. |
 | 6 Public market | **6a** Display sourced current demand and requested skills. **6b** Add a separately labelled future outlook, signal definitions, and attribution links. **6c** Add empty, stale, and unavailable states. | Visitors can browse first, and every market claim can be traced to its source, measure, geography, and date. |
 | 7 Role matches | **7a** Add a small verified role-to-skill set. **7b** Implement a documented, hand-checkable score. **7c** Show ranked role cards, matched/missing skills, and reasons. **7d** Add role selection and the skills-gap detail. | The sample profile produces a ranking that a teammate can calculate and explain. |
 | 8 Trends affect matches | **8a** Feed the stored signals into the documented ranking or explanation. **8b** Show the specific signal beside each affected result. **8c** Save a repeatable before/after demo case. | Changing one sourced signal visibly changes a score, order, or explanation. |
@@ -52,6 +52,16 @@ For the preliminary build, the key working slice is Stages 4–8, including 4b's
 | 12 Future scenarios | **12a** Define moderate and rapid assumptions. **12b** Calculate the difference for the same profile. **12c** Add a labelled switch and explanation on role/pathway screens. | A user can see what assumption changed and why the output differs. |
 | 13 Final verification | **13a** Fix one blocking journey issue per commit. **13b** Audit accessibility, mobile layout, links, and claims in focused passes. **13c** Update finalist declarations and report. **13d** Prepare slides and live demo evidence if shortlisted. | The full journey works and the required final materials match the actual implementation. |
 
-## Next selection
+## Next selection (updated 21 Oct 2026)
 
-Improve the narrow layout and public action hierarchy in **4f**, then validate sources in **1b** before showing employer requirements or news claims. Finish the narrow mobile check in **4c**. Replit import **3a** can be done as soon as the repo is ready, while the RunPod request and backend connection remain separate slices.
+Preliminary deadline: **Sun 25 Oct, 7:59 AM MYT**. Aim to submit on **Sat 24 Oct night**. UI polish (4c, 4f–4h leftovers) waits until the core slice works.
+
+| Day | Slices | Done when |
+| --- | --- | --- |
+| Wed 21 | ~~5b ILO importer~~ (done) · 5c ESCO roles · 7a–7b scoring module with the worked-example test · 3a import repo into Replit · **2a RunPod Job A: embed ESCO skills on a GPU Pod** (script ready: `runpod/embed_esco_skills.py`) | `npm test` passes the hand-checked example; app runs in Replit; RunPod Pod run done and screenshot saved. |
+| Thu 22 | 7c role cards with score breakdown · 8a–8c Q1/Q2 snapshot switch · 12a–12c moderate/fast scenario switch · source footer with ESCO acknowledgement · deploy on Replit | Same profile shows different scores when the snapshot or scenario changes; every number links to its source. |
+| Fri 23 | 2b–2c RunPod Job B: Serverless `bge-m3` endpoint, searchable-list fallback · 3b–3c call it from the Replit backend · 11a SDG links (ESCO green skills + reviewed role mapping) · 10a–10c short pathway with verified free resources | Typing a description returns real ESCO skills; Pod ID, GPU and runtime recorded. |
+| Sat 24 | 9a PRD · 9b slides · 9c–9d Tools Declaration (Replit + RunPod evidence, ESCO/ILO/DOSM credits) and 5–7 min video · 9e repo public, default branch, committee collaborators | All six deliverables open correctly from another device. |
+| Sun 25 | Submit before 7:59 AM; no commits after. | Submission receipt saved. |
+
+If a day slips, drop in this order: pathway detail (10) → SDG polish (11b) → visual polish. **RunPod is never dropped** (team decision): Job A runs on Wednesday so its evidence exists early, and Job B keeps a fallback but stays in the build. Never drop the snapshot switch either: it is the feature judges score most.

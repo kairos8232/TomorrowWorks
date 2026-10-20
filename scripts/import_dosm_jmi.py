@@ -1,9 +1,10 @@
 """Convert a DOSM Job Market Insights (JMI) data file into a JSON snapshot.
 
 Usage:
-    python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx 2026-10-21
+    python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx 2026-08-18 2026-10-21
 
-The second argument is the date you downloaded the file (retrievedAt).
+Arguments: the DOSM file, the release date shown on the DOSM release page
+(publishedAt), and the date you downloaded the file (retrievedAt).
 Output: data/sources/dosm-jmi-<latest quarter>.json
 
 The DOSM file has one sheet with two tables:
@@ -67,7 +68,7 @@ def read_table(ws, title_prefix, columns):
     return rows
 
 
-def main(xlsx_path, retrieved_at):
+def main(xlsx_path, published_at, retrieved_at):
     ws = openpyxl.load_workbook(xlsx_path, data_only=True).active
     columns = quarter_columns(ws)
     if not columns:
@@ -95,6 +96,7 @@ def main(xlsx_path, retrieved_at):
             "url": f"https://www.dosm.gov.my/portal-main/release-content/big-data-analytics-job-market-insights-{q.lower()}{year}",
             "file": Path(xlsx_path).name,
             "latestQuarter": latest,
+            "publishedAt": published_at,
             "retrievedAt": retrieved_at,
             "geography": "Malaysia",
             "measure": "Number of job offerings advertised online on private recruitment websites",
@@ -112,6 +114,6 @@ def main(xlsx_path, retrieved_at):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], sys.argv[3])
