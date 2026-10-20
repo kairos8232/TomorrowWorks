@@ -20,6 +20,7 @@ The stage numbers below match `CHECKLIST.md`. Some setup can happen while anothe
 | 2 Prove the RunPod GPU step | **2a** Specify the model task, input, output, and visible effect on a role match. **2b** Add a minimal request example and run it on a Pod or Serverless endpoint. **2c** Record observed runtime, cost, response, and required evidence without secrets. | A real request returns a useful result; the team can show where that result appears in the app. |
 | 3 Run in Replit | **3a** Import the existing GitHub repo into Replit and record the project/run proof. **3b** Add the smallest server endpoint and secret-backed RunPod call. **3c** Connect its result to the screen and document the fallback. **3d** Have a teammate follow the run instructions. | The same repo runs in Replit, the RunPod result affects a visible demo result, and the proof is ready for the tools declaration. |
 | 4 Profile intake | **Done:** synthetic form, validation, review, and in-memory profile handoff. Improve individual error messages in a later focused commit if needed. | A teammate can load, edit, and review the sample profile without real personal data. |
+| 4b Enter guidance | **4b-a** Start on a public market shell. **4b-b** Add an honest sign-in entry with a fictional-demo continuation. **4b-c** Add optional work preferences or strengths to the profile. | A visitor can browse first, follow the demo entry, and review a synthetic profile without an account claim. |
 
 The first practical Replit check can happen before the RunPod endpoint exists. That check completes only the Replit import slice of Stage 3. The RunPod integration items remain open until a real response is shown in the app.
 
@@ -28,12 +29,12 @@ The first practical Replit check can happen before the RunPod endpoint exists. T
 | Stage | Small commit slices | Verify before checking the stage |
 | --- | --- | --- |
 | 5 Trend signals | **5a** Store one permitted, dated source sample with original link and retrieval date. **5b** Implement and document the rule converting source fields to signals. **5c** Add a repeatable refresh command and a changed-input check. | The refresh can be repeated, and changed input produces changed stored signals. |
-| 6 Skills radar | **6a** Display the saved signals with source and dates. **6b** Add definitions of rising/declining and working attribution links. **6c** Add empty, stale, and unavailable states. | Every claim on the radar can be traced to its source and date. |
+| 6 Public market | **6a** Display sourced current demand and requested skills. **6b** Add a separately labelled future outlook, signal definitions, and attribution links. **6c** Add empty, stale, and unavailable states. | Visitors can browse first, and every market claim can be traced to its source, measure, geography, and date. |
 | 7 Role matches | **7a** Add a small verified role-to-skill set. **7b** Implement a documented, hand-checkable score. **7c** Show ranked role cards, matched/missing skills, and reasons. **7d** Add role selection and the skills-gap detail. | The sample profile produces a ranking that a teammate can calculate and explain. |
 | 8 Trends affect matches | **8a** Feed the stored signals into the documented ranking or explanation. **8b** Show the specific signal beside each affected result. **8c** Save a repeatable before/after demo case. | Changing one sourced signal visibly changes a score, order, or explanation. |
 | 9 Preliminary submission | **9a** Complete the PRD. **9b** Prepare pitch slides. **9c** Verify the Replit prototype and record Replit/RunPod tools evidence. **9d** Complete the video and tools declaration. **9e** Check repository access, submitted links, and receipt. | All six required deliverables are accessible and submitted by the handbook deadline. Keep non-repository submission files in their intended location, separate from code. |
 
-For the preliminary build, the key working slice is Stages 4–8. The proposal can describe Stages 10–12 while they are still planned; do not present those screens as completed functions.
+For the preliminary build, the key working slice is Stages 4–8, including 4b's demo entry. The proposal can describe real account and résumé handling and Stages 10–12 while they are still planned; do not present those functions as complete.
 
 ## Full product and finalist work
 
@@ -46,4 +47,4 @@ For the preliminary build, the key working slice is Stages 4–8. The proposal c
 
 ## Next selection
 
-Start with **Stage 1a**, then validate the source in **1b**. The current app already provides the Profile screen; Radar, Role Matches, and Pathway remain placeholders. Replit import **3a** can be done as soon as the repo is ready, while the RunPod request and backend connection remain separate slices.
+Update the app shell in **4b-a**, then add the demo entry in **4b-b**. Validate the source in **1b** before showing demand claims. Replit import **3a** can be done as soon as the repo is ready, while the RunPod request and backend connection remain separate slices.

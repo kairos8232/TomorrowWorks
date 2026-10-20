@@ -12,12 +12,12 @@ Completed in local commit `e4d623a`.
 
 ## App functions to build
 
-The user journey is **profile → evidence → matched roles → learning plan → SDG impact and scenarios**. The preliminary build must show a working slice of this journey, with the trend signal affecting a recommendation. The final product must cover all six required functions below. The stages that follow contain the implementation checkboxes.
+The user journey is **public market discovery → sign-in entry → skills profile → matched roles → learning plan → SDG impact and scenarios**. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
 
 | Required function | User action and visible result | Data and behaviour to implement | Stage |
 | --- | --- | --- | --- |
-| Skills profile | Enter or edit skills, experience, and interests; load a synthetic example and review it before matching. | Validate required input and keep the demo free of real CVs or personal records. | 4 |
-| Future Skills Radar | Open a radar view and see which supported skills or roles are rising or declining, with a plain-language explanation. | Import at least one updatable public source; keep the original source link, source date, retrieval date, and an honest definition of each trend. | 5–6 |
+| Public market explorer | Browse current role demand, skills requested now, and a separately labelled future outlook before entering personal information. | Import at least one updatable public source; show its measure, geography, original link, publication date, retrieval date, and an honest definition of each trend. | 5–6, 12 |
+| Skills profile | After the sign-in entry, enter or edit skills, experience, interests, and optional work preferences; load a synthetic example and review it before matching. | Validate required input; keep the preliminary demo free of real CVs or personal records. Résumé upload is a later optional intake method. | 4–4b |
 | Future-role matching | Ask for suitable roles; see a ranked role list, an explainable score, existing skills, missing skills, and evidence behind each recommendation. | Compare the profile against verified role requirements and let sourced trend signals affect the ranking or explanation. | 7–8 |
 | Reskilling pathway | Select a recommended role; see ordered learning steps, time estimates, and verified free or low-cost resources. | Build steps from the displayed skills gap and explain the basis for each estimate. | 10 |
 | SDG connection | Open a role or skill and see its linked SDG and a short reason the connection matters. | Review each role and skill mapping; avoid decorative claims. | 11 |
@@ -35,6 +35,7 @@ The user journey is **profile → evidence → matched roles → learning plan �
 - [ ] Review the optional Jooble Malaysia, OpenDOSM, and ESCO uses in [API_PLAN.md](API_PLAN.md) only if they improve the demo.
 - [ ] Check whether the source measures research activity, actual job demand, or another signal; label it accurately.
 - [ ] Draw the exact preliminary demo journey and identify which of the six functions are working now versus described in the proposal.
+- [ ] Decide whether real sign-in and résumé upload belong after the preliminary demo; document account, consent, storage, and deletion requirements before implementing them.
 - [ ] Record prototype assumptions, limits, the hardest technical risk, and a demo fallback.
 
 **Done when:** A teammate can explain who the demo serves, what it shows, and which source supports it.  
@@ -78,6 +79,17 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 **Done when:** The sample user can create a profile and continue through the app.  
 **Commit focus:** Profile form and synthetic data.
 
+## Stage 4b — Enter personalised guidance
+
+- [ ] Start the app on the public market screen and offer an action to begin personalised guidance.
+- [ ] Add a clearly labelled sign-in entry screen; the preliminary demo continues with a fictional profile and creates no account.
+- [ ] Add an optional work-preferences or strengths field; do not infer personality or request protected traits.
+- [ ] Keep a real account flow and résumé upload as separate unchecked work until the team decides consent, storage, review, and deletion behaviour.
+- [ ] Verify that the visitor can browse first, continue through the demo entry, review the profile, and reach matches without a misleading sign-in claim.
+
+**Done when:** The public-first demo flow works and states plainly that sign-in and résumé upload are not implemented.
+**Commit focus:** Split the market-first navigation, demo sign-in entry, and optional profile field into separate commits.
+
 ## Stage 5 — Add trend signals
 
 - [ ] Fetch or import the chosen public source through a repeatable process.
@@ -90,16 +102,16 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 **Done when:** The source can be refreshed and the app can trace each signal to it.  
 **Commit focus:** Source ingestion, metadata, and refresh process.
 
-## Stage 6 — Build the Future Skills Radar
+## Stage 6 — Build the public market explorer
 
-- [ ] Show rising and declining skills or roles from the stored signals.
-- [ ] Display the source and date beside each signal.
-- [ ] Let the user open the original source or its attribution from the radar.
-- [ ] Explain what “rising” and “declining” mean in this prototype.
+- [ ] Show supported current demand and skills-needed signals, with future outlook in a separate labelled section.
+- [ ] Display the measure, geography, source, publication date, and snapshot date beside each signal.
+- [ ] Let the visitor open the original source or its attribution.
+- [ ] Explain what “rising” and “declining” mean for the chosen source; label future claims as estimates.
 - [ ] Show a clear state for missing or stale data.
 
-**Done when:** A user can see the evidence behind each displayed trend.  
-**Commit focus:** Radar display and source context.
+**Done when:** A visitor can browse before profiling and see the evidence behind each displayed claim.
+**Commit focus:** Public market display and source context.
 
 ## Stage 7 — Add explainable role matching
 

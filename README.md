@@ -18,7 +18,7 @@ AI is changing the skills employers need faster than many workers can adapt. **T
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app shell and synthetic profile intake run locally. Sourced trend data, matching, pathways, and external service integrations are still being built.
+> **Project stage:** The React and TypeScript app shell and synthetic profile intake run locally. The public-first journey, sourced market data, matching, pathways, sign-in, and external integrations are still being built.
 
 ## The Problem
 
@@ -40,19 +40,21 @@ Instead of offering generic chatbot career advice, TomorrowWorks is designed to 
 
 ```mermaid
 flowchart TD
-    A[Enter skills, experience and interests] --> B[Build skills profile]
-    C[Updateable AI and job-market sources] --> D[Future Skills Radar]
-    B --> E[Explainable future-role matching]
-    D --> E
-    E --> F[Skills-gap breakdown]
-    F --> G[Personalised reskilling pathway]
-    E --> H[Multiple future scenarios]
-    G --> I[SDG contribution mapping]
+    A[Browse current demand and skills needed] --> B[Review separately labelled future outlook]
+    C[Updateable public sources] --> A
+    C --> B
+    B --> D[Sign-in entry]
+    D --> E[Review skills, experience, interests and work preferences]
+    E --> F[Explainable role matches and skills gaps]
+    A --> F
+    F --> G[Personalised learning pathway]
+    F --> H[Future scenarios]
+    G --> I[SDG explanations]
     H --> I
 ```
 
-1. **Build a profile:** Enter skills, experience and interests using a form or questionnaire; CV upload is an optional intake method.
-2. **Explore the Future Skills Radar:** See rising and declining skills and roles, with source names and dates.
+1. **Explore the market:** Browse supported current demand and skills needed, with source names, dates, and a separately labelled future outlook.
+2. **Start personal guidance:** Enter through sign-in, then add skills, experience, interests, and optional work preferences or strengths. The first demo uses a fictional profile and clearly labels sign-in as planned. Résumé upload is a later optional method.
 3. **Find suitable roles:** Review ranked recommendations, understandable match scores, and missing skills.
 4. **Follow a pathway:** Receive an ordered learning plan with estimated time and free or low-cost learning resources.
 5. **Understand impact and uncertainty:** See relevant SDGs and compare more than one plausible AI-adoption scenario.
@@ -61,7 +63,7 @@ flowchart TD
 
 | Feature | Planned implementation | Acceptance check |
 | --- | --- | --- |
-| Skills profile intake | Form/questionnaire for skills, experience and interests | Sample user can create a profile |
+| Skills profile intake | Form/questionnaire for skills, experience, interests, and optional work preferences after the sign-in entry | Sample user can review a fictional profile; real sign-in and résumé upload remain planned |
 | AI-trend signal layer | Ingest at least one updateable public AI/job-market data source | Display source and date; updated data can change output |
 | Future-role matching | Rank roles using documented scoring logic | Each role has a score and an explainable skills gap |
 | Personalised reskilling | Generate an ordered, time-estimated learning pathway | Link to verifiable free/low-cost resources |
@@ -70,7 +72,7 @@ flowchart TD
 
 ### Suggested differentiator: Future Signal Engine
 
-**Evidence → Skill trend → Future role → Personal fit → Skill gap → Learning plan**
+**Public market evidence → Current skills demand and future outlook → Personal fit → Skill gap → Learning plan**
 
 The key prototype goal is to show that **changing trend evidence changes a career recommendation or its explanation**. This distinguishes TomorrowWorks from a static list of jobs or a generic CV chatbot.
 
@@ -120,6 +122,7 @@ TomorrowWorks/
 ## MVP Priorities
 
 - [x] Create a synthetic sample profile and a working intake form
+- [ ] Open on a public market view with an honest demo sign-in entry
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
