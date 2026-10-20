@@ -47,6 +47,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 2 — Prove the RunPod GPU step
 
+- [x] Install the official Runpod Codex skills and plugin; record the local tool status in [RUNPOD_SETUP.md](RUNPOD_SETUP.md).
+- [ ] Complete Runpod OAuth in Codex Desktop and verify the connection by listing Pods.
 - [ ] Choose one small GPU inference task that affects a visible demo result.
 - [ ] Create a RunPod Pod or Serverless endpoint and run a minimal request.
 - [ ] Record the model, input, output, runtime, and approximate cost.

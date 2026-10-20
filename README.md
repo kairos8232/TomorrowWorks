@@ -116,11 +116,12 @@ TomorrowWorks/
 ├── PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
 ├── UI_UX.md                # Screen layout and usability decisions
 ├── DESIGN.md               # Visual and component consistency rules
+├── RUNPOD_SETUP.md         # Agent connection status and remaining account step
 ├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
 
-**Current stack:** React, TypeScript and Vite. Replit hosting and RunPod GPU integration remain separate build stages.
+**Current stack:** React, TypeScript and Vite. [Runpod agent tooling](RUNPOD_SETUP.md) is installed locally but awaits account sign-in; the GPU inference task and Replit integration remain separate build stages.
 
 ## MVP Priorities
 
