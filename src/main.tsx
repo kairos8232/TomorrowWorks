@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-type Screen = 'market' | 'signin' | 'profile' | 'roles' | 'pathway';
+type Screen = 'market' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'roles' | 'pathway';
 type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string; workPreferences: string };
 type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[]; workPreferences: string };
 
@@ -20,7 +20,10 @@ function splitEntries(value: string) {
 }
 
 const screens: { id: Screen; label: string; description: string }[] = [
-  { id: 'market', label: 'Explore market', description: 'Demand now and future outlook' },
+  { id: 'market', label: 'Explore', description: 'Market overview' },
+  { id: 'demand', label: 'Demand', description: 'Roles in demand now' },
+  { id: 'skills', label: 'Skills', description: 'Skills requested now' },
+  { id: 'outlook', label: 'Outlook', description: 'Possible future change' },
   { id: 'signin', label: 'Sign in', description: 'Demo entry for personal guidance' },
   { id: 'profile', label: 'My profile', description: 'Skills, experience and interests' },
   { id: 'roles', label: 'Role matches', description: 'Scores, reasons and skills gaps' },
@@ -33,6 +36,24 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
     title: 'What does work need next?',
     body: 'Explore today’s demand and the skills employers need. Future outlooks will be shown separately as estimates, with dates and sources.',
     next: 'No public market source has been connected yet.',
+  },
+  demand: {
+    eyebrow: 'Explore the market',
+    title: 'Where is demand now?',
+    body: 'Browse role demand only when a verified source supports the measure and location shown.',
+    next: 'No verified demand source is connected yet. Counts, rankings, and trends will appear with the measure, geography, and date.',
+  },
+  skills: {
+    eyebrow: 'Explore the market',
+    title: 'Which skills are needed now?',
+    body: 'See requested skills from dated public evidence once the source and extraction method are verified.',
+    next: 'No verified skills source is connected yet. This view will explain which roles request each skill and where the evidence comes from.',
+  },
+  outlook: {
+    eyebrow: 'Explore the market',
+    title: 'What could change?',
+    body: 'Explore possible future scenarios separately from today’s demand, with their assumptions and uncertainty clearly labelled.',
+    next: 'Future scenarios are not available yet. This view will show estimates and assumptions, not guaranteed job forecasts.',
   },
   signin: {
     eyebrow: 'Personal guidance',
@@ -107,7 +128,7 @@ function App() {
             <button
               className={`journey-step${screen === item.id ? ' active' : ''}`}
               key={item.id}
-              onClick={() => setScreen(!demoEntered && item.id !== 'market' && item.id !== 'signin' ? 'signin' : item.id)}
+              onClick={() => setScreen(!demoEntered && !['market', 'demand', 'skills', 'outlook', 'signin'].includes(item.id) ? 'signin' : item.id)}
               type="button"
               aria-current={screen === item.id ? 'step' : undefined}
             >
@@ -129,12 +150,19 @@ function App() {
           {screen === 'market' ? (
             <>
               <section className="market-grid" aria-label="Public market overview">
-                <div className="market-card"><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p></div>
-                <div className="market-card"><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p></div>
-                <div className="market-card"><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p></div>
+                <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p><span className="card-link">Explore demand →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p><span className="card-link">Explore skills →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p><span className="card-link">Explore outlook →</span></button>
               </section>
               <div className="market-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Get personalised guidance</button></div>
             </>
+          ) : screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
+            <section className="topic-panel" aria-label={`${screens[activeIndex].label} information`}>
+              <span className="market-label">SOURCE STATUS</span>
+              <h2>Evidence is being connected</h2>
+              <p>{content.next}</p>
+              <button type="button" className="text-button" onClick={() => setScreen('market')}>Browse market overview →</button>
+            </section>
           ) : screen === 'signin' ? (
             <section className="work-card" aria-label="Demo entry">
               <div className="card-icon" aria-hidden="true">✦</div>

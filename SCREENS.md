@@ -23,7 +23,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Help a visitor discover the labour market before sharing personal details.
 
-**Current:** The app opens on a public market shell with three placeholders. No source, demand figures, or trends are connected yet. The step counter and generic Next/Back controls have been removed; independent public destinations are next.
+**Current:** The app opens on a public market shell with cards that open independent Demand, Skills, and Outlook destinations. No source, demand figures, or trends are connected yet.
 
 **Planned:**
 
@@ -39,7 +39,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Let a visitor choose what to explore and switch topics freely.
 
-**Current:** These topics are sections of Explore. Dedicated views are planned in Stage 4c; each must show an honest empty state until sourced data is ready.
+**Current:** Demand, Skills, and Outlook each have a dedicated view with an honest empty state. Visitors can switch topics without entering the demo. Sourced content remains future work.
 
 **Planned:** Demand describes the exact present-day measure and geography. Skills shows requested skills supported by the source. Outlook shows dated scenarios and assumptions, never current job counts. Each view links back to evidence once connected.
 

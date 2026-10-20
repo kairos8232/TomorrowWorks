@@ -93,7 +93,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 ## Stage 4c — Replace the guided journey with browsing
 
 - [x] Remove screen numbers, the journey counter, progress bar, and generic Next/Back controls.
-- [ ] Give Explore, Demand, Skills, and Outlook independent public destinations reachable in any order.
+- [x] Give Explore, Demand, Skills, and Outlook independent public destinations reachable in any order.
 - [ ] Put My career and the demo sign-in entry apart from public browsing; do not make sign-in a numbered destination.
 - [ ] Keep profile, role matches, and pathway available as personal destinations after demo entry, with task-specific links where helpful.
 - [ ] Check desktop and mobile navigation, including a visitor switching public topics and returning from the personal area.
