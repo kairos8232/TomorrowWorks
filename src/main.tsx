@@ -264,10 +264,14 @@ function App() {
                   <label>Current role<input value={draft.currentRole} onChange={(event) => updateDraft('currentRole', event.target.value)} placeholder="e.g. Junior Accountant" autoComplete="off" /></label>
                   <label>Current skills<input value={draft.skills} onChange={(event) => updateDraft('skills', event.target.value)} placeholder="e.g. Excel, reporting" autoComplete="off" /><small>Separate skills with commas.</small></label>
                 </div>
-                <label>Experience<textarea value={draft.experience} onChange={(event) => updateDraft('experience', event.target.value)} placeholder="Describe the work you have done" rows={3} /></label>
-                <label>Interests<input value={draft.interests} onChange={(event) => updateDraft('interests', event.target.value)} placeholder="e.g. data analysis, dashboards" autoComplete="off" /><small>Separate interests with commas.</small></label>
-                <label>Work preferences or strengths (optional)<textarea value={draft.workPreferences} onChange={(event) => updateDraft('workPreferences', event.target.value)} placeholder="e.g. I enjoy explaining data and working with a team" rows={2} /><small>Describe tasks or ways of working you prefer. This does not affect matching yet.</small></label>
-                <label>Current certificates or qualifications (optional)<input value={draft.qualifications} onChange={(event) => updateDraft('qualifications', event.target.value)} placeholder="Use the fictional demo only" autoComplete="off" /><small>Separate entries with commas. No certificate is assumed from your job title.</small></label>
+                <div className="field-grid">
+                  <label>Experience<textarea value={draft.experience} onChange={(event) => updateDraft('experience', event.target.value)} placeholder="Describe the work you have done" rows={3} /></label>
+                  <label>Interests<input value={draft.interests} onChange={(event) => updateDraft('interests', event.target.value)} placeholder="e.g. data analysis, dashboards" autoComplete="off" /><small>Separate interests with commas.</small></label>
+                </div>
+                <div className="field-grid">
+                  <label>Work preferences or strengths (optional)<textarea value={draft.workPreferences} onChange={(event) => updateDraft('workPreferences', event.target.value)} placeholder="e.g. I enjoy explaining data and working with a team" rows={2} /><small>Describe tasks or ways of working you prefer. This does not affect matching yet.</small></label>
+                  <label>Current certificates or qualifications (optional)<input value={draft.qualifications} onChange={(event) => updateDraft('qualifications', event.target.value)} placeholder="Use the fictional demo only" autoComplete="off" /><small>Separate entries with commas. No certificate is assumed from your job title.</small></label>
+                </div>
                 {profileError && <p className="form-error" role="alert">{profileError}</p>}
                 <button type="submit" className="primary-button">Review profile</button>
               </form>

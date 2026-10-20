@@ -141,7 +141,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Widen desktop content and arrange the four public overview cards across the available width without leaving a single orphan card.
 - [x] Shorten medium-screen navigation and intro spacing so the public choices appear sooner.
-- [ ] Pair related profile fields across the page while keeping labels and helper text readable.
+- [x] Pair related profile fields across the page while keeping labels and helper text readable.
 - [ ] Show the target editor beside its comparison at wide widths; stack it cleanly on smaller screens.
 - [ ] Check the landing page, profile, and comparison for clipping, horizontal page overflow, and keyboard access at narrow and wide widths.
 - [ ] Record the actual responsive layout in [UI_UX.md](UI_UX.md) and [SCREENS.md](SCREENS.md).
