@@ -6,7 +6,7 @@
 
 **A public, evidence-driven guide to changing work and skills, with optional personal career guidance.**
 
-![Status](https://img.shields.io/badge/status-app%20shell-blue)
+![Status](https://img.shields.io/badge/status-data%20layer%20built-blue)
 ![Domain](https://img.shields.io/badge/domain-Aiversecity%20Future--Ready%20Workforce-green)
 ![SDGs](https://img.shields.io/badge/impact-UN%20SDGs-orange)
 
@@ -18,7 +18,7 @@ AI and other industry changes affect people across ages, occupations, and career
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app has cross-industry public browsing, honest no-source states, synthetic profile intake, and an illustrative personal skill-gap comparison. Sourced role matching, verified certificate requirements, pathways, news and market feeds, sign-in, and external integrations are still being built.
+> **Project stage (21 Oct 2026):** The app (React, TypeScript, Vite) runs on Replit with public browsing, honest no-source states, synthetic profile intake, and a skill-gap preview. The **data layer is built from real sources**: DOSM job-vacancy snapshots (Q1 and Q2 2026), ILO GenAI exposure scores, a nine-role set from ESCO, and ESCO skill embeddings computed on a RunPod GPU. Next: the scoring module, then sourced role matches, the snapshot and scenario switches, RunPod skill search, pathway and SDG links. Day-by-day plan: [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026); log: [PROGRESS_LOG.md](PROGRESS_LOG.md).
 
 ## The Problem
 
@@ -72,29 +72,66 @@ The key prototype goal is to show that **changing trend evidence changes a caree
 
 ## Chosen Signals and Matching (Preliminary Build)
 
-Details, data shapes, and the worked example are in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md).
+Details, data shapes, findings and the worked example are in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md).
 
-- **Demo user:** a junior accounting or bookkeeping worker in the Klang Valley whose routine tasks are increasingly done by AI tools.
-- **Demand signal (updatable):** DOSM *Job Market Insights*, quarterly online vacancies by occupation major group. Q1 and Q2 2026 are imported with `scripts/import_dosm_jmi.py`; Q3 2026 is a real future refresh.
-- **AI-exposure signal:** ILO *Generative AI and Jobs* refined index (2025), per ISCO-08 occupation, which aligns with MASCO.
-- **Role skills:** a small curated role set with ESCO-linked essential skills.
-- **Score:** `wF·skill fit + wD·demand trend + wR·(1 − AI exposure)`, with every part shown. Moderate and fast AI-change scenarios use different weights, labelled as estimates.
-- **Proof that trends matter:** a Q1 vs Q2 2026 data-snapshot switch changes scores for the same profile.
-- **AI use:** a multilingual embedding model on RunPod searches the official ESCO skill taxonomy, so a person's own description maps to real skill records they confirm. It never creates roles, courses, or scores.
+**Demo user:** a junior accounting assistant in the Klang Valley, 1–5 years in, whose routine tasks (data entry, billing, reconciliation, reports) are increasingly done by AI tools, deciding what to learn next. The clerical accounting work around this job (ISCO 4311) is in the ILO's highest GenAI-exposure gradient, while accountants are among DOSM's top advertised jobs.
 
-## Example Demo (Illustrative Only)
+### Data sources (all public, dated, attributed)
 
-**Sample profile:** Junior Accountant; skills in Excel, bookkeeping and financial reporting; interested in analytics.
+| Signal | Source | In the repo | Status |
+| --- | --- | --- | --- |
+| **Demand now** (the required updatable source) | DOSM *Big Data Analytics: Job Market Insights*, quarterly online job offerings by occupation major group | `data/sources/dosm-jmi-2026-q1.json`, `-q2.json` (`scripts/import_dosm_jmi.py`) | Imported; totals match DOSM's release (Q2 2026: 555,509) |
+| **AI exposure** | ILO Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025), Table A1 | `data/sources/ilo-genai-exposure-2025.json` (`scripts/import_ilo_exposure.py`) | Imported; 427 occupations, 112 exposed, 13 in Gradient 4 (match the paper) |
+| **Roles and skills** | ESCO v1.2.1 (European Commission) | `data/roles.json` (`scripts/build_roles.py`) | Built; 9 ESCO occupations with essential/optional skills and green/digital flags |
+| **Skill search index** | ESCO v1.2.1 skills embedded with `BAAI/bge-m3` on a **RunPod GPU** | `data/derived/esco/` (`runpod/embed_esco_skills.py`) | Done: 13,960 skills in 92.5 s on an NVIDIA RTX A5000 |
 
-This is one synthetic test case for matching. The public product is intended for people in any career stage and industry.
+**Known limits:** DOSM's data file gives vacancies by major group only (not per job), so roles in one group share a demand signal; year-on-year DOSM changes are distorted by wider source coverage, so only quarter-on-quarter change is used. ILO exposure means tasks *could* change, not that jobs disappear.
 
-**Possible recommendation:** Financial Data Analyst.
+### Role set
 
-**Existing skills:** Excel, financial reporting, domain knowledge.  
-**Potential gaps:** SQL, Power BI, Python.  
-**Example pathway:** SQL fundamentals → dashboarding → Python analytics → AI-assisted financial analysis.
+| Role (ESCO) | ISCO | ILO exposure | Essential skills |
+| --- | --- | --- | --- |
+| billing clerk | 4311 | 0.64 (Gradient 4) | 12 |
+| **accounting assistant** (demo user's job) | 3313 | 0.49 (Gradient 2) | 20 |
+| bookkeeper | 3313 | 0.49 (Gradient 2) | 18 |
+| accountant | 2411 | 0.51 (Gradient 3) | 26 |
+| financial analyst | 2413 | 0.62 (Gradient 4) | 23 |
+| business analyst | 2421 | 0.46 (Gradient 2) | 26 |
+| data analyst | 2511 | 0.49 (Gradient 2) | 36 |
+| software developer | 2512 | 0.53 (Gradient 3) | 24 |
+| sustainability manager | 1213 | 0.36 (Not exposed) | 48 |
 
-> This is **synthetic demonstration content**, not a validated labour-market forecast. Do not display fabricated demand percentages, job statistics, course links, or match scores as real evidence.
+### Scoring
+
+`score = wF·F + wD·D + wR·R`, every part shown on screen:
+
+- **F, skill fit:** share of the role's ESCO essential skills the person has confirmed.
+- **D, demand trend:** `clamp(0.5 + quarter-on-quarter change, 0, 1)` for the role's DOSM major group.
+- **R, AI resilience:** `1 − ILO mean exposure`.
+
+| Scenario (estimate) | wF | wD | wR |
+| --- | --- | --- | --- |
+| Moderate AI change | 0.60 | 0.25 | 0.15 |
+| Fast AI change | 0.50 | 0.20 | 0.30 |
+
+**Proof that trends matter:** a *Data snapshot* switch (DOSM Q1 ↔ Q2 2026) changes D for the same profile. Real example: Professionals +15.8% → −9.5% (D 0.66 → 0.41); Clerical support −1.8% → −17.2% (D 0.48 → 0.33). A future DOSM release is added by running the importer on the new file, with no code change.
+
+### Where AI is used: RunPod
+
+RunPod is a required part of the build ([RUNPOD_SETUP.md](RUNPOD_SETUP.md)). One open-weights multilingual model, `BAAI/bge-m3`:
+
+1. **Job A (GPU Pod, done):** embedded every ESCO skill once (Pod `40jrr8aulh76tb`, RTX A5000, 92.5 s).
+2. **Job B (Serverless, next):** embeds the person's own description (English, Bahasa Malaysia or Chinese); the app returns the nearest real ESCO skills and the person confirms which are true.
+
+The model only retrieves existing ESCO records. It never creates roles, courses, statistics or scores. If the endpoint is unavailable, the person picks skills from a searchable list.
+
+## Example Demo (Synthetic Profile)
+
+**Sample profile (fictional):** accounting assistant; confirms ESCO skills such as *accounting entries*, *maintain financial records*, *use accounting systems*, *issue sales invoices*; interested in analytics.
+
+**How a match is explained:** for *data analyst*, the app lists which of its 36 ESCO essential skills the profile already holds and which are missing (for example *query languages*, *data visualisation software*, *perform data cleansing*), shows D from the DOSM Professionals group and R from ILO code 2511, and shows the scenario weights. A pathway then orders the missing skills.
+
+> The profile is **synthetic**. No score, percentage or course is shown unless it is calculated from the sources above or verified; the README gives no example scores on purpose.
 
 ## Data, Evidence and AI Guardrails
 
@@ -129,12 +166,22 @@ TomorrowWorks/
 ├── UI_UX.md                # Screen layout and usability decisions
 ├── DESIGN.md               # Visual and component consistency rules
 ├── RUNPOD_SETUP.md         # RunPod GPU jobs, evidence, and agent tooling status
-├── runpod/                 # Scripts that run on RunPod (ESCO skill embedding)
+├── runpod/
+│   └── embed_esco_skills.py # RunPod GPU job: embed ESCO skills
 ├── SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
 ├── CLAUDE.md               # Context and rules for coding agents
 ├── PROGRESS_LOG.md         # What was done, findings, and open items
-├── scripts/                # Source importers (DOSM)
-├── data/sources/           # Converted, attributed source snapshots
+├── scripts/
+│   ├── import_dosm_jmi.py      # DOSM xlsx → data/sources/dosm-jmi-<quarter>.json
+│   ├── import_ilo_exposure.py  # ILO WP140 PDF → data/sources/ilo-genai-exposure-2025.json
+│   └── build_roles.py          # ESCO CSV → data/roles.json
+├── data/
+│   ├── sources/            # Converted, attributed source snapshots (DOSM, ILO)
+│   ├── roles.json          # Nine ESCO roles with skills (adapted ESCO selection)
+│   ├── derived/esco/       # ESCO skill vectors from the RunPod GPU run
+│   └── raw/                # Original downloads (gitignored)
+├── .replit, replit.md      # Replit run workflow and notes
+├── vite.config.ts          # Allows Replit's preview proxy
 ├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
@@ -148,7 +195,11 @@ TomorrowWorks/
 - [x] Replace the numbered journey with freely browsable market destinations
 - [x] Add public industry and search controls and a workplace-changes view
 - [x] Add an illustrative personal skill-gap comparison for a chosen target
+- [x] Import DOSM (Q1, Q2 2026) and ILO exposure data with source metadata
+- [x] Build a nine-role set with skills from ESCO v1.2.1
+- [x] Embed ESCO skills on a RunPod GPU (Job A)
 - [ ] Connect one updateable trend source and display its date/citation *(DOSM imported with dates; display pending)*
+- [ ] Serve skill search from a RunPod Serverless endpoint (Job B)
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
 - [ ] Demonstrate that updated trend data affects matching
@@ -167,6 +218,20 @@ npm start
 ```
 
 Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) after the server starts. `npm run dev` works too. To check a production build, run `npm run build`. The app accepts a synthetic profile and compares its listed skills with an editable illustrative target. It does not yet make sourced career recommendations or verify certificate requirements.
+
+**On Replit:** the project is imported from branch `dev`; press **Pull** in Replit's Git tool, then **Run** (port 5000, see `replit.md`). Do not commit lockfile changes that point to Replit's internal package mirror.
+
+**Rebuilding the data** (raw files go in `data/raw/`, which is gitignored; download links are in each JSON's `source` block):
+
+```bash
+pip install openpyxl                       # DOSM importer
+brew install poppler                       # pdftotext, for the ILO importer (macOS)
+python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx 2026-08-18 <download date>
+python3 scripts/import_ilo_exposure.py "data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf" <download date>
+python3 scripts/build_roles.py "data/raw/ESCO dataset - v1.2.1 - classification - en - csv"
+```
+
+The ESCO embedding runs on a RunPod GPU Pod; see [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required).
 
 ## UI design workflow
 
@@ -214,6 +279,11 @@ Team members and responsibilities: **TBD**.
 Licensed under the [Apache License, Version 2.0](LICENSE), as required by the Participant Handbook for the submitted repository. The project team retains ownership of its original work; third-party components retain their own licenses and must be attributed as applicable.
 
 ## Acknowledgements
+
+**This publication uses the ESCO classification of the European Commission.** `data/roles.json` is an adapted selection of ESCO v1.2.1; the Commission does not guarantee ESCO's accuracy or completeness.
+
+Data sources: Department of Statistics Malaysia (DOSM), *Big Data Analytics: Job Market Insights*, Q1 and Q2 2026; International Labour Organization, Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025); European Commission, ESCO v1.2.1. Model: `BAAI/bge-m3` (open weights), run on RunPod.
+
 
 Built for the **Aiversecity Future-Ready Workforce Domain (Domain 1)** hackathon challenge. Requirements and judging criteria are adapted from the event's *Domain 1 — Problem Statement & Marking Rubric* document.
 
