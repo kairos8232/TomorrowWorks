@@ -104,6 +104,7 @@ TomorrowWorks/
 ├── index.html              # Browser entry point
 ├── src/
 │   ├── main.tsx            # Journey navigation and app shell
+│   ├── market.ts           # Industry and sourced-evidence contract
 │   └── styles.css          # Responsive styles
 ├── package.json            # Scripts and pinned dependencies
 ├── CHECKLIST.md            # Staged build and submission tasks
