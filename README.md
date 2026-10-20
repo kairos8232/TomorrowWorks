@@ -200,7 +200,7 @@ TomorrowWorks/
 - [x] Embed ESCO skills on a RunPod GPU (Job A)
 - [ ] Connect one updateable trend source and display its date/citation *(DOSM imported with dates; display pending)*
 - [ ] Serve skill search from a RunPod Serverless endpoint (Job B)
-- [ ] Build a transparent skill-to-role matching function
+- [x] Build a transparent skill-to-role matching function (`src/scoring.ts`, tested with `npm test`)
 - [ ] Show ranked roles and missing skills
 - [ ] Demonstrate that updated trend data affects matching
 - [ ] Generate a time-estimated learning pathway with verified resources
@@ -215,6 +215,7 @@ Use Node.js 20 or newer. From this repository:
 ```bash
 npm install
 npm start
+npm test      # scoring rules and real-data checks
 ```
 
 Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) after the server starts. `npm run dev` works too. To check a production build, run `npm run build`. The app accepts a synthetic profile and compares its listed skills with an editable illustrative target. It does not yet make sourced career recommendations or verify certificate requirements.

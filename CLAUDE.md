@@ -40,6 +40,7 @@ React 19 + TypeScript + Vite 6. Node 20+.
 npm install
 npm start          # http://127.0.0.1:5173
 npm run build      # tsc --noEmit && vite build
+npm test           # vitest: scoring rules, worked example, real-data checks
 ```
 
 Key code: `src/main.tsx` (app shell and screens), `src/market.ts` (evidence record type and filters; `marketSignals` is empty until a source is imported), `src/personal.ts` (exact-name skill comparison).
@@ -48,7 +49,7 @@ Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Tab
 
 `scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
 
-Planned: a scoring module with a unit test for the worked example in `SIGNALS_AND_MATCHING.md`.
+Scoring: `src/scoring.ts` (pure functions: skill fit, demand trend, AI resilience, scenarios, ranking); tests in `src/scoring.test.ts`. Change the rule only together with its tests and `SIGNALS_AND_MATCHING.md`.
 
 ## Git
 

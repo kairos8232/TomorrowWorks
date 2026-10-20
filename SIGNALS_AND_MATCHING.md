@@ -1,6 +1,6 @@
 # Trend signals and role matching
 
-**Status:** decision proposed on 21 Oct 2026. DOSM Q1 and Q2 2026 imported (`data/sources/`). ILO Table A1 imported (`data/sources/ilo-genai-exposure-2025.json`, 427 occupations). ESCO skills embedded on RunPod (`data/derived/esco/`). Role set built (`data/roles.json`, 9 roles). Scoring module is next. Day-by-day plan: [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026). This document chooses the minimum source set for the preliminary demo and defines a scoring rule a teammate can check by hand. It replaces the open source choice in [API_PLAN.md](API_PLAN.md) Stage 1. Check items in [CHECKLIST.md](CHECKLIST.md) only after the work is verified.
+**Status:** decision proposed on 21 Oct 2026. DOSM Q1 and Q2 2026 imported (`data/sources/`). ILO Table A1 imported (`data/sources/ilo-genai-exposure-2025.json`, 427 occupations). ESCO skills embedded on RunPod (`data/derived/esco/`). Role set built (`data/roles.json`, 9 roles). Scoring implemented in `src/scoring.ts` with tests (`npm test`). Day-by-day plan: [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026). This document chooses the minimum source set for the preliminary demo and defines a scoring rule a teammate can check by hand. It replaces the open source choice in [API_PLAN.md](API_PLAN.md) Stage 1. Check items in [CHECKLIST.md](CHECKLIST.md) only after the work is verified.
 
 ## Demo user (sharp slice for the rubric)
 

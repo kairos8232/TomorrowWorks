@@ -4,6 +4,16 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:39–01:50 MYT) — README refreshed; scoring module built
+
+- **README:** project stage, data-source table with verified counts, role set, scoring formula and scenarios, RunPod section, rebuild commands, Replit notes, and the ESCO acknowledgement plus source citations.
+- **`src/scoring.ts`:** pure functions for skill fit (ESCO URIs), demand trend (DOSM quarter-on-quarter by major group), AI resilience (ILO), two scenarios, missing-signal weight sharing, and ranking.
+- **`src/scoring.test.ts` (11 tests, `npm test`):** the hand-checked worked example (moderate 0.5275 → 53; fast 0.531), quarter wrap-around, clamping, weight redistribution, URI matching, and real-data checks (every role has DOSM and ILO signals; Professionals D 0.658 → 0.405; switching snapshot lowers the accountant's score).
+- **Tooling:** added vitest; 3.2.x had critical advisories in dev-only dependencies, so pinned **vitest 5.0.5** (works with Vite 6.4.3; `npm audit`: 0 vulnerabilities). `tsconfig.json` gains `resolveJsonModule`.
+- **Finding — exact skill matching is too strict:** with the demo user's 20 ESCO skills, their current job scores F = 1.00 and every move scores F ≈ 0 (ESCO occupations rarely share skill records), so moves are ranked only by D and R. Proposed fix (awaiting Carson's decision): count *transferable* skills using the RunPod ESCO vectors, and list the current job separately from recommended moves.
+
+---
+
 ## 21 Oct 2026 (01:33–01:45 MYT) — Role set built from ESCO
 
 - **New `scripts/build_roles.py` → `data/roles.json`.** Nine ESCO occupations, each chosen by URI; everything else copied from ESCO v1.2.1. Skills carry `green`/`digital` flags from ESCO's own collections. File states the ESCO acknowledgement, licence and that it is an adapted selection.

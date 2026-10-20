@@ -196,14 +196,14 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 ## Stage 7 — Add explainable role matching
 
 - [x] Define a small, verified set of roles and required skills: 9 ESCO occupations with essential and optional skills in `data/roles.json`, built by `scripts/build_roles.py`.
-- [ ] Document the scoring formula and its assumptions.
+- [x] Document the scoring formula and its assumptions (SIGNALS_AND_MATCHING.md; implemented in `src/scoring.ts`).
 - [ ] Rank roles for the sample profile.
 - [ ] Show existing skills, missing skills, and the reason for each score.
 - [ ] Let the user select a role to inspect its skills gap and later open its learning pathway.
 - [ ] Link every recommendation to its supporting source and date; do not invent jobs, courses, or statistics.
 - [ ] Verify any role-specific certificate or qualification requirement, including jurisdiction, source date, and required/preferred status; keep unknowns visible.
 - [ ] Explain that recommendations support a person's career decision and do not make a final hiring decision.
-- [ ] Check the results against hand-calculated examples.
+- [x] Check the results against hand-calculated examples (`npm test`: worked example 0.5275 / 0.531, weight redistribution, real DOSM D values).
 
 **Done when:** A user can understand why roles were ranked in that order.  
 **Commit focus:** Matching logic and skills-gap display.
