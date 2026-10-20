@@ -4,6 +4,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
 button { font: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible, .nav-item:focus-visible, .market-card:focus-visible { outline: 3px solid #4ac9ba; outline-offset: 3px; }
 .app-shell { min-height: 100vh; display: grid; grid-template-columns: 292px minmax(0, 1fr); }
 .sidebar { background: #0d1728; color: #fff; padding: 32px 20px; display: flex; flex-direction: column; }
 .brand { display: flex; align-items: center; gap: 11px; font: 800 21px 'Manrope', sans-serif; letter-spacing: -.06em; padding: 2px 13px; }

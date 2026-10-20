@@ -131,7 +131,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] At medium and narrow widths, use compact navigation and give the page enough space for its content.
 - [x] Put the working personal-demo action near the public introduction; keep source status visible and shorten repetitive card copy.
 - [ ] Verify the public landing and personal comparison at phone width, with no horizontal page overflow.
-- [ ] Verify keyboard navigation, visible focus, form labels, and the fictional profile-to-gap flow.
+- [x] Verify keyboard navigation, visible focus, form labels, and the fictional profile-to-gap flow.
 - [ ] Update [UI_UX.md](UI_UX.md) and [SCREENS.md](SCREENS.md) with actual behaviour after each slice.
 
 **Done when:** The first screen has a clear action and readable topic choices, and the public and personal flows work at narrow widths and by keyboard.
