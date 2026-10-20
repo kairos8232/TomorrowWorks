@@ -158,6 +158,16 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 **Done when:** Important text is comfortable to read at normal browser zoom, and larger type does not clip controls or hide their meaning.
 **Commit focus:** Typography change and its verified documentation in one focused commit.
 
+## Stage 4i — Record and apply UI design consistency
+
+- [x] Install Impeccable for Codex in the project and document how to repeat the local install without committing generated tool files.
+- [ ] Run its rendered design scan at desktop and phone widths; fix verified, focused issues without inventing market evidence.
+- [ ] Record the observed palette, type hierarchy, layout breakpoints, component states, and content rules in [DESIGN.md](DESIGN.md), with links to the product and screen guides.
+- [ ] Build the app and verify the public landing page after the change; keep a separate list of untested screens or improvements.
+
+**Done when:** The installed skill can be used locally, the design rules are clear enough to guide another small UI commit, and the documented checks match the rendered site.
+**Commit focus:** Tool setup, focused UI fix, and design reference in separate small commits.
+
 ## Stage 5 — Add trend signals
 
 - [ ] Fetch or import the chosen public source through a repeatable process.

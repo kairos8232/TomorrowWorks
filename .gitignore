@@ -4,3 +4,5 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+.agents/skills/impeccable/
+.codex/hooks.json
