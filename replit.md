@@ -12,6 +12,16 @@
 - Check types and create the production bundle with `npm run build`.
 - Local development remains available with `npm start` on port 5173.
 
+## Publish
+
+`.replit` has a `[deployment]` section: **static** site. Replit runs
+`npm ci && npm run build` and serves the `dist/` folder. Press **Publish** in
+Replit; the app has no server code, so nothing else is needed.
+
+When RunPod Job B (free-text skill search) is connected, the RunPod API key
+must stay on a server, so the deployment will switch to an Autoscale server
+with the key in Replit Secrets. Never put the key in front-end code.
+
 ## Scope and services
 
 The current application is a browser-only prototype. No secrets, database,

@@ -4,6 +4,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:52 MYT) — Replit publish fixed
+
+- Publishing failed with "Could not find run command": `.replit` only described the editor workflow. Added a `[deployment]` section: `deploymentTarget = "static"`, build `npm ci && npm run build`, `publicDir = "dist"`. The exact build command was verified from a clean checkout.
+- Static is right for now (no server code). RunPod Job B needs the API key on a server, so publishing will move to Autoscale then; noted in `replit.md`.
+- Published URL (once live) is the **prototype link** and the **Replit proof** for the submission.
+
+---
+
 ## 21 Oct 2026 (01:46–02:00 MYT) — Role matches screen built
 
 - **New `src/RoleMatches.tsx`**, shown on **My career → Role matches** (after the fictional-profile entry). Controls: current ESCO job, **Data snapshot** (DOSM 2026 Q1 / Q2), **AI-change scenario** (moderate / fast). The scenario's assumption, weights and the DOSM source with its release date are stated under the controls.
