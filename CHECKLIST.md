@@ -118,10 +118,10 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 ## Stage 4e — Preview personal skill and credential gaps
 
 - [x] Add optional current certificates or qualifications to the fictional profile and its review.
-- [ ] Let the person choose a promotion or career-move target and edit an illustrative target-skill list.
-- [ ] Compare the reviewed profile with that list using a documented, hand-checkable rule; show matched and missing skills without a fabricated readiness percentage.
-- [ ] Show a separate certificate/qualification section that says when no applicable requirement is verified.
-- [ ] Keep the preview inside My career and label it as a synthetic, in-memory exercise; verify profile changes update the comparison.
+- [x] Let the person choose a promotion or career-move target and edit an illustrative target-skill list.
+- [x] Compare the reviewed profile with that list using a documented, hand-checkable rule; show matched and missing skills without a fabricated readiness percentage.
+- [x] Show a separate certificate/qualification section that says when no applicable requirement is verified.
+- [x] Keep the preview inside My career and label it as a synthetic, in-memory exercise; verify profile changes update the comparison.
 
 **Done when:** A teammate can review a fictional profile, choose a target, and explain every displayed personal gap without mistaking sample inputs for employer requirements. Source-backed matching, verified credentials, pathway resources, and trend influence remain in Stages 5–12.
 **Commit focus:** Profile qualifications and target comparison in separate small commits.
@@ -157,6 +157,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Show existing skills, missing skills, and the reason for each score.
 - [ ] Let the user select a role to inspect its skills gap and later open its learning pathway.
 - [ ] Link every recommendation to its supporting source and date; do not invent jobs, courses, or statistics.
+- [ ] Verify any role-specific certificate or qualification requirement, including jurisdiction, source date, and required/preferred status; keep unknowns visible.
 - [ ] Explain that recommendations support a person's career decision and do not make a final hiring decision.
 - [ ] Check the results against hand-calculated examples.
 

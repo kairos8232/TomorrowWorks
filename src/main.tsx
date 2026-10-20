@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { filterMarketSignals, industries, marketSignals, type IndustryId, type MarketSignal, type SignalKind } from './market';
+import { compareSkills, samplePromotionTarget, type Target, type TargetDraft } from './personal';
 import './styles.css';
 
-type Screen = 'market' | 'changes' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'roles' | 'pathway';
+type Screen = 'market' | 'changes' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'gaps' | 'roles' | 'pathway';
 type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string; workPreferences: string; qualifications: string };
 type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[]; workPreferences: string; qualifications: string[] };
 
@@ -44,11 +45,12 @@ const screens: { id: Screen; label: string; description: string }[] = [
   { id: 'outlook', label: 'Outlook', description: 'Possible future change' },
   { id: 'signin', label: 'Sign in', description: 'Demo entry for personal guidance' },
   { id: 'profile', label: 'My profile', description: 'Skills, experience and interests' },
+  { id: 'gaps', label: 'My skill gaps', description: 'Compare a chosen target' },
   { id: 'roles', label: 'Role matches', description: 'Scores, reasons and skills gaps' },
   { id: 'pathway', label: 'My pathway', description: 'Learning steps and SDG links' },
 ];
 const publicScreens = screens.filter((item) => item.id === 'market' || item.id === 'changes' || item.id === 'demand' || item.id === 'skills' || item.id === 'outlook');
-const personalScreens = screens.filter((item) => item.id === 'profile' || item.id === 'roles' || item.id === 'pathway');
+const personalScreens = screens.filter((item) => item.id === 'profile' || item.id === 'gaps' || item.id === 'roles' || item.id === 'pathway');
 
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
   market: {
@@ -93,6 +95,12 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
     body: 'Add your current skills, experience and interests. This will become the starting point for explainable career matches.',
     next: 'Enter a profile to begin.',
   },
+  gaps: {
+    eyebrow: 'Personal guidance · fictional demo',
+    title: 'What should I build next?',
+    body: 'Choose a promotion or career-move target and compare its illustrative skill list with your reviewed profile. This preview does not claim employer requirements.',
+    next: 'Review a fictional profile before comparing your skills with a target.',
+  },
   roles: {
     eyebrow: 'Recommendations',
     title: 'Find your next role',
@@ -113,6 +121,9 @@ function App() {
   const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileError, setProfileError] = useState('');
+  const [targetDraft, setTargetDraft] = useState<TargetDraft>(samplePromotionTarget);
+  const [target, setTarget] = useState<Target | null>(null);
+  const [targetError, setTargetError] = useState('');
   const [industry, setIndustry] = useState<IndustryId>('all');
   const [search, setSearch] = useState('');
   const activeScreen = screens.find((item) => item.id === screen)!;
@@ -121,11 +132,13 @@ function App() {
   const visibleSignals = currentKind ? filterMarketSignals(marketSignals, currentKind, industry, search) : [];
   const hasViewSource = currentKind ? marketSignals.some((signal) => currentKind === 'all' || signal.kind === currentKind) : false;
   const industryLabel = industries.find((item) => item.id === industry)!.label;
+  const comparison = profile && target ? compareSkills(profile.skills, target.skills) : null;
 
   function updateDraft(field: keyof ProfileDraft, value: string) {
     setDraft((current) => ({ ...current, [field]: value }));
     setProfile(null);
     setProfileError('');
+    setTarget(null);
   }
 
   function saveProfile(event: React.FormEvent<HTMLFormElement>) {
@@ -140,11 +153,35 @@ function App() {
     setProfileError('');
   }
 
+  function updateTarget(field: 'role' | 'skills', value: string) {
+    setTargetDraft((current) => ({ ...current, [field]: value }));
+    setTarget(null);
+    setTargetError('');
+  }
+
+  function updateMoveType(value: TargetDraft['moveType']) {
+    setTargetDraft((current) => ({ ...current, moveType: value }));
+    setTarget(null);
+    setTargetError('');
+  }
+
+  function saveTarget(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const skills = splitEntries(targetDraft.skills);
+    if (!targetDraft.role.trim() || skills.length === 0) {
+      setTargetError('Enter a target role and at least one illustrative target skill.');
+      return;
+    }
+    setTarget({ moveType: targetDraft.moveType, role: targetDraft.role.trim(), skills });
+    setTargetError('');
+  }
+
   function enterDemo() {
     if (!demoEntered) {
       setDraft(sampleProfile);
       setProfile(null);
       setProfileError('');
+      setTarget(null);
     }
     setDemoEntered(true);
     setScreen('profile');
@@ -231,8 +268,32 @@ function App() {
                 {profileError && <p className="form-error" role="alert">{profileError}</p>}
                 <button type="submit" className="primary-button">Review profile</button>
               </form>
-              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<p><strong>Current certificates or qualifications:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None entered for this fictional profile'}</p><button type="button" className="text-button" onClick={() => setScreen('roles')}>Continue to role matches →</button></div>}
+              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<p><strong>Current certificates or qualifications:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None entered for this fictional profile'}</p><button type="button" className="text-button" onClick={() => setScreen('gaps')}>Compare skills for a target →</button></div>}
             </section>
+          ) : screen === 'gaps' ? (
+            profile ? <section className="profile-panel" aria-label="Personal skill-gap preview">
+              <div className="panel-heading"><div><h2>Compare with a chosen target</h2><p>Fictional demo. The target list is editable and illustrative, not a verified employer requirement.</p></div><button type="button" className="text-button" onClick={() => setScreen('profile')}>Edit profile</button></div>
+              <p className="profile-context">Reviewed profile: {profile.currentRole} · {profile.skills.length} current skills</p>
+              <form onSubmit={saveTarget} noValidate>
+                <div className="field-grid">
+                  <label>Next move<select value={targetDraft.moveType} onChange={(event) => updateMoveType(event.target.value as TargetDraft['moveType'])}><option value="promotion">Promotion in my field</option><option value="career move">Move to another role</option></select></label>
+                  <label>Target role<input value={targetDraft.role} onChange={(event) => updateTarget('role', event.target.value)} placeholder="Role you want to explore" autoComplete="off" /></label>
+                </div>
+                <label>Illustrative target skills<input value={targetDraft.skills} onChange={(event) => updateTarget('skills', event.target.value)} placeholder="e.g. Excel, budgeting, team leadership" autoComplete="off" /><small>Separate skills with commas. These are example inputs, not sourced requirements.</small></label>
+                {targetError && <p className="form-error" role="alert">{targetError}</p>}
+                <button type="submit" className="primary-button">Compare with my profile</button>
+              </form>
+              {target && comparison && <div className="gap-results" aria-live="polite">
+                <span className="review-label">ILLUSTRATIVE COMPARISON</span>
+                <h3>{target.moveType === 'promotion' ? 'Promotion target' : 'Career-move target'}: {target.role}</h3>
+                <p>Exact skill names are compared after ignoring case and extra spaces. This does not assess proficiency, experience, eligibility, or promotion readiness.</p>
+                <div className="gap-grid">
+                  <div><h4>Skills you listed already</h4><div className="tag-row">{comparison.matched.length ? comparison.matched.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>) : <p>No exact matches in this illustrative target list.</p>}</div></div>
+                  <div><h4>Skills to work on for this target</h4><div className="tag-row">{comparison.missing.length ? comparison.missing.map((skill) => <span className="skill-tag skill-gap" key={skill}>{skill}</span>) : <p>All entered target skill names match. Proficiency is still unassessed.</p>}</div></div>
+                </div>
+                <div className="credential-note"><h4>Certificates or qualifications</h4><p><strong>You entered:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None for this fictional profile.'}</p><p><strong>Target requirement:</strong> No applicable certificate requirement has been verified yet. We cannot say which certificate is needed for this role or promotion.</p></div>
+              </div>}
+            </section> : <section className="work-card" aria-label="Profile needed"><div className="card-icon" aria-hidden="true">✦</div><div><h2>Review your fictional profile first</h2><p>{content.next}</p><button type="button" className="primary-button demo-entry" onClick={() => setScreen('profile')}>Open my profile</button></div></section>
           ) : (
             <section className="work-card" aria-label={`${activeScreen.label} status`}>
               <div className="card-icon" aria-hidden="true">✦</div>

@@ -18,7 +18,7 @@ AI and other industry changes affect people across ages, occupations, and career
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app has cross-industry public browsing, honest no-source states, and synthetic profile intake. News and market feeds, matching, pathways, sign-in, and external integrations are still being built.
+> **Project stage:** The React and TypeScript app has cross-industry public browsing, honest no-source states, synthetic profile intake, and an illustrative personal skill-gap comparison. Sourced role matching, verified certificate requirements, pathways, news and market feeds, sign-in, and external integrations are still being built.
 
 ## The Problem
 
@@ -46,7 +46,8 @@ flowchart TD
     A --> E[My career action]
     E --> F[Demo entry or future sign-in]
     F --> G[My profile]
-    G --> H[Role matches]
+    G --> K[My skill gaps for a chosen target]
+    K --> H[Role matches]
     H --> I[My pathway]
 ```
 
@@ -56,9 +57,9 @@ The public area has independent Explore, Workplace changes, Demand, Skills, and 
 
 | Feature | Planned implementation | Acceptance check |
 | --- | --- | --- |
-| Skills profile intake | Form/questionnaire for skills, experience, interests, and optional work preferences after the sign-in entry | Sample user can review a fictional profile; real sign-in and résumé upload remain planned |
+| Skills profile intake | Form/questionnaire for skills, experience, interests, optional qualifications, and work preferences after the sign-in entry | Sample user can review a fictional profile; real sign-in and résumé upload remain planned |
 | AI-trend signal layer | Ingest at least one updateable public AI/job-market data source | Display source and date; updated data can change output |
-| Future-role matching | Rank roles using documented scoring logic | Each role has a score and an explainable skills gap |
+| Future-role matching | Rank sourced roles using documented scoring logic; let a person inspect the gap for a chosen promotion or career move | Each role has an explainable skills gap and any certificate requirement is verified or marked unknown |
 | Personalised reskilling | Generate an ordered, time-estimated learning pathway | Link to verifiable free/low-cost resources |
 | SDG mapping | Connect each recommended role and skill to at least one SDG | Explain why the SDG connection matters |
 | Handling uncertainty | Compare at least two future scenarios | Clearly label forecasts as estimates, not certainties |
@@ -105,6 +106,7 @@ TomorrowWorks/
 ├── src/
 │   ├── main.tsx            # Public and personal navigation and app shell
 │   ├── market.ts           # Industry and sourced-evidence contract
+│   ├── personal.ts         # Illustrative target and exact skill comparison
 │   └── styles.css          # Responsive styles
 ├── package.json            # Scripts and pinned dependencies
 ├── CHECKLIST.md            # Staged build and submission tasks
@@ -123,6 +125,7 @@ TomorrowWorks/
 - [x] Open on a public market view with an honest demo sign-in entry
 - [x] Replace the numbered journey with freely browsable market destinations
 - [x] Add public industry and search controls and a workplace-changes view
+- [x] Add an illustrative personal skill-gap comparison for a chosen target
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
@@ -141,7 +144,7 @@ npm install
 npm start
 ```
 
-Open [http://localhost:5173/](http://localhost:5173/) after the server starts. `npm run dev` works too. To check a production build, run `npm run build`. The app accepts a synthetic profile and shows honest placeholders for the remaining steps; it does not yet make career recommendations.
+Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) after the server starts. `npm run dev` works too. To check a production build, run `npm run build`. The app accepts a synthetic profile and compares its listed skills with an editable illustrative target. It does not yet make sourced career recommendations or verify certificate requirements.
 
 ## Hackathon Submission Requirements
 

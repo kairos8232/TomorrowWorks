@@ -70,8 +70,8 @@ h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spa
 .profile-panel form { display: grid; gap: 18px; }
 .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .profile-panel label { display: grid; gap: 8px; font-size: 12px; font-weight: 700; color: #354b61; }
-.profile-panel input, .profile-panel textarea { width: 100%; border: 1px solid #ccd9e2; border-radius: 10px; padding: 12px 13px; font: 400 13px 'DM Sans', sans-serif; color: #14233a; background: #fbfdfe; }
-.profile-panel input:focus, .profile-panel textarea:focus { outline: 2px solid #86dfd2; border-color: #0d9b8b; }
+.profile-panel input, .profile-panel textarea, .profile-panel select { width: 100%; border: 1px solid #ccd9e2; border-radius: 10px; padding: 12px 13px; font: 400 13px 'DM Sans', sans-serif; color: #14233a; background: #fbfdfe; }
+.profile-panel input:focus, .profile-panel textarea:focus, .profile-panel select:focus { outline: 2px solid #86dfd2; border-color: #0d9b8b; }
 .profile-panel label small { color: #8293a4; font-size: 11px; font-weight: 400; }
 .profile-panel form > .primary-button { justify-self: start; margin-top: 2px; }
 .form-error { margin: 0; color: #a33333; background: #fff1f1; border-radius: 8px; padding: 10px 12px; font-size: 12px; }
@@ -83,9 +83,19 @@ h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spa
 .skill-tag { padding: 6px 9px; border-radius: 7px; background: #edf7f5; color: #0b766c; font-size: 11px; font-weight: 700; }
 .profile-review .review-interests { margin-bottom: 16px; }
 .profile-context { margin-top: 9px !important; color: #0a887a !important; }
+.gap-results { margin-top: 28px; border-top: 1px solid #e1e9ef; padding-top: 24px; }
+.gap-results h3 { font: 800 19px 'Manrope', sans-serif; margin: 8px 0; }
+.gap-results h4 { font: 800 13px 'Manrope', sans-serif; margin: 0 0 10px; }
+.gap-results p { color: #5b7083; font-size: 13px; line-height: 1.6; }
+.gap-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 22px 0; }
+.gap-grid > div, .credential-note { background: #f8fbfc; border: 1px solid #e2eaf0; border-radius: 13px; padding: 18px; }
+.gap-grid .tag-row { margin-bottom: 0; }
+.gap-grid .tag-row p { margin: 0; }
+.skill-gap { background: #fff2e9; color: #99532e; }
+.credential-note p { margin: 5px 0 0; }
 .primary-button, .secondary-button { border-radius: 11px; padding: 12px 18px; font-size: 13px; font-weight: 700; }
 .primary-button { background: #0e8176; border: 1px solid #0e8176; color: white; }
 .primary-button:hover { background: #08695f; }
 .secondary-button { background: white; border: 1px solid #d3dfe6; color: #2f4c60; }
 .secondary-button:hover { background: #f4f8fa; }
-@media (max-width: 760px) { .app-shell { display: block; } .sidebar { padding: 16px; } .brand { padding: 0; } .sidebar-kicker, .sidebar-note { display: none; } .nav-group { margin-top: 18px; } .nav-group-label { margin-bottom: 8px; } .nav-list { display: flex; overflow-x: auto; } .nav-item { min-width: max-content; padding: 10px 12px; } .nav-item small { display: none; } .personal-group { margin-top: 14px; padding-top: 12px; } .topbar { min-height: 60px; padding: 16px 24px; } .work-card { align-items: flex-start; padding: 20px; } .market-grid, .browse-fields, .field-grid { grid-template-columns: 1fr; } .panel-heading { display: block; } .panel-heading .text-button { margin-top: 14px; } }
+@media (max-width: 760px) { .app-shell { display: block; } .sidebar { padding: 16px; } .brand { padding: 0; } .sidebar-kicker, .sidebar-note { display: none; } .nav-group { margin-top: 18px; } .nav-group-label { margin-bottom: 8px; } .nav-list { display: flex; overflow-x: auto; } .nav-item { min-width: max-content; padding: 10px 12px; } .nav-item small { display: none; } .personal-group { margin-top: 14px; padding-top: 12px; } .topbar { min-height: 60px; padding: 16px 24px; } .work-card { align-items: flex-start; padding: 20px; } .market-grid, .browse-fields, .field-grid, .gap-grid { grid-template-columns: 1fr; } .panel-heading { display: block; } .panel-heading .text-button { margin-top: 14px; } }

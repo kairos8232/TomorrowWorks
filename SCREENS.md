@@ -96,9 +96,9 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Let a person compare their reviewed skills with a target they choose, including a promotion target, without treating public market evidence as a personal verdict.
 
-**Current:** Planned; the app has a reviewed sample profile but no personal comparison yet.
+**Current:** After reviewing the fictional profile, the person can choose a promotion or career move, edit an illustrative role and target-skill list, and compare exact skill names. The view separates skills already listed from missing names, shows any entered current qualifications, and says that no applicable certificate requirement is verified. Editing the profile or target clears the old comparison. No score or employer requirement is claimed.
 
-**Planned early demo:** Show an editable, explicitly illustrative target role and its skill list. Compare exact normalised names with the reviewed profile, list matched and missing skills, and state that this is a simple checklist comparison. Show current certificates/qualifications if entered and a clear **no verified requirement** state until applicable credential sources are checked. Link to Role matches and My pathway as those Domain 1 features are built.
+**Next:** Link the comparison to sourced role requirements and role selection, then produce a learning pathway and SDG explanations. Keep the certificate section in its unverified state until applicable sources are checked.
 
 **Sourced version:** Distinguish required from preferred skills and credentials. Show source, jurisdiction, date, and coverage for each target requirement; use trend evidence in the recommendation or its explanation. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the evidence contract.
 
