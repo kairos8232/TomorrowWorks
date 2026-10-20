@@ -58,7 +58,7 @@ Preliminary deadline: **Sun 25 Oct, 7:59 AM MYT**. Aim to submit on **Sat 24 Oct
 
 | Day | Slices | Done when |
 | --- | --- | --- |
-| Wed 21 | ~~5b ILO importer~~ (done) · 5c ESCO roles · 7a–7b scoring module with the worked-example test · 3a import repo into Replit · **2a RunPod Job A: embed ESCO skills on a GPU Pod** (script ready: `runpod/embed_esco_skills.py`) | `npm test` passes the hand-checked example; app runs in Replit; RunPod Pod run done and screenshot saved. |
+| Wed 21 | ~~5b ILO importer~~ (done) · 5c ESCO roles · 7a–7b scoring module with the worked-example test · ~~3a import repo into Replit~~ (done; keep the project link as proof) · ~~**2a RunPod Job A**~~ (done: RTX A5000, 92.5 s) | `npm test` passes the hand-checked example; app runs in Replit; RunPod Pod run done and screenshot saved. |
 | Thu 22 | 7c role cards with score breakdown · 8a–8c Q1/Q2 snapshot switch · 12a–12c moderate/fast scenario switch · source footer with ESCO acknowledgement · deploy on Replit | Same profile shows different scores when the snapshot or scenario changes; every number links to its source. |
 | Fri 23 | 2b–2c RunPod Job B: Serverless `bge-m3` endpoint, searchable-list fallback · 3b–3c call it from the Replit backend · 11a SDG links (ESCO green skills + reviewed role mapping) · 10a–10c short pathway with verified free resources | Typing a description returns real ESCO skills; Pod ID, GPU and runtime recorded. |
 | Sat 24 | 9a PRD · 9b slides · 9c–9d Tools Declaration (Replit + RunPod evidence, ESCO/ILO/DOSM credits) and 5–7 min video · 9e repo public, default branch, committee collaborators | All six deliverables open correctly from another device. |

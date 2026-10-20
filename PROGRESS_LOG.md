@@ -4,6 +4,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:25–01:40 MYT) — Replit import reviewed; GitHub linked to Claude
+
+- **Replit:** repo imported from GitHub branch `dev`; Replit Agent configured it and pushed two commits ("Save agent progress", `f3c5e4e`, `205d9f1`). Its own notes are in the entry below. **Replit Agent is an AI tool and must be listed in the Tools Declaration** (purpose: Replit run setup only).
+- **Reviewed every file it changed:** `.replit` (run workflow on port 5000), `replit.md` (run notes), `vite.config.ts` (`allowedHosts: true` for Replit's preview proxy), and this log — all fine, no secrets.
+- **Fixed one problem:** it rewrote `react` and `react-dom` download URLs in `package-lock.json` to `http://package-firewall.replit.internal/…`, which exists only inside Replit, so `npm ci` would fail anywhere else. Restored the lockfile from `5444784` (same versions). Verified `npm ci` and `npm run build` pass with the restored lockfile and the new `vite.config.ts`. If Replit rewrites the lockfile again, do not commit that change.
+- **Workflow from now on:** features are written in the repo and pushed to `dev`; in Replit, press **Pull** and run. Do not ask Replit Agent to build features (keeps code explainable and history clean). Ignore its suggested "smoke checks" task.
+- **GitHub access for Claude:** Claude GitHub App installed on `kairos8232`; recommended scope is *Only select repositories → TomorrowWorks*. Claude can now fetch and push `dev` directly. The repo stays private until submission.
+
 ## 21 Oct 2026 — Imported app running on Replit
 
 - Installed the existing React, TypeScript and Vite dependencies, preserving their pinned versions and the repository structure.
