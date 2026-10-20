@@ -6,7 +6,7 @@ Context for Claude (and any coding agent) working in this repository.
 
 Team entry for the **SDC Hackathon 2026** (XMUM AI Club), **Domain 1: Aiversecity Future-Ready Workforce**. A web app that takes a person from "who I am today" to "where I can be in the AI era": skills profile → AI/job-market trend signals → explainable role matches → reskilling pathway, with SDG links and at least two future scenarios.
 
-Read in this order: `README.md` (overview and submission rules) → `SIGNALS_AND_MATCHING.md` (chosen sources and scoring rule) → `CHECKLIST.md` (status) → `BUILD_STAGES.md` (next small commit). `PRODUCT_SCOPE.md`, `PERSONAL_GUIDANCE.md`, `SCREENS.md`, `UI_UX.md`, `DESIGN.md` hold product and UI rules.
+Read in this order: `README.md` (overview and submission rules) → `SIGNALS_AND_MATCHING.md` (chosen sources and scoring rule) → `CHECKLIST.md` (status) → `BUILD_STAGES.md` (next small commit). `PROGRESS_LOG.md` records what was done and what is open — read it first, and add an entry after each working session. `PRODUCT_SCOPE.md`, `PERSONAL_GUIDANCE.md`, `SCREENS.md`, `UI_UX.md`, `DESIGN.md` hold product and UI rules.
 
 The official PDFs (Domain 1 brief, handbooks, T&C) live **outside this repo** in the owner's `ChatGPT/TomorrowWorks` folder. Treat that folder as read-only; never copy the PDFs into the repo.
 
@@ -26,6 +26,7 @@ Judges want a rough, **working** version of the most important feature: **trend 
 - **Public, open or synthetic data only.** No real CVs or personal data, ever.
 - **LLMs never generate roles, courses or scores.** If used, an LLM only maps text onto known lists, and the model is disclosed.
 - **Replit must be used** (proof goes in the Tools Declaration). **RunPod is used** for the ESCO skill-embedding step (GPU work must run on RunPod); keep its Pod ID, GPU type and runtime for the declaration. Datasets must come from the original publisher or a mirror with a clear source and licence.
+- **ESCO licence:** the app footer must say *"This service uses the ESCO classification of the European Commission."*; documents using ESCO say *"This publication uses the ESCO classification of the European Commission."* Label any adapted ESCO content (curated roles, synonyms) as adapted. Details in `SIGNALS_AND_MATCHING.md`.
 - **No secrets in the repo.** Use `.env` locally (gitignored) and Replit Secrets.
 - `LICENSE` must stay Apache 2.0. The repo must be public at submission with committee accounts as collaborators.
 - Commit history must be small and truthful. One visible behaviour per commit, with its `CHECKLIST.md` update. Never bundle a large commit near a deadline.

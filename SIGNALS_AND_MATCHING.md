@@ -39,7 +39,19 @@ Checked against the Q2 2026 release page: total 555,509; Professionals 285,907 (
 ## Files still to obtain by hand
 
 1. ILO WP140 PDF (Annex **Table A1**, page 48: ISCO-08 4-digit occupations by exposure gradient, with mean and SD). The paper's web page does not include the table rows, and the linked task-score site offers no download.
-2. ESCO v1.2 classification download (CSV, English) from the [ESCO download page](https://esco.ec.europa.eu/en/use-esco/download). Needed for both role skills and the RunPod step.
+2. ESCO classification download from the [ESCO download page](https://esco.ec.europa.eu/en/use-esco/download). Needed for both role skills and the RunPod step. Unzip into `data/raw/esco/` (gitignored).
+
+### ESCO download settings and licence (requested 21 Oct 2026)
+
+**Package:** ESCO dataset **v1.2.1** (last update 10 Dec 2025), Content **Classification** (not *Delta*, which holds only changes), Language **en**, File type **csv** (48.95 MB). Ignore the "ESCO datamodel" box; that is the technical schema. The file arrives by e-mail after a request form. Expected files include `skills_en.csv`, `occupations_en.csv`, `occupationSkillRelations_en.csv` and `ISCOGroups_en.csv`. ESCO has no Bahasa Malaysia or Chinese labels; the multilingual embedding model bridges that.
+
+**Licence conditions** (Commission Decision 2011/833/EU; free reuse for any purpose):
+
+1. **Acknowledge ESCO.** The app must show: *"This service uses the ESCO classification of the European Commission."* Reports, the PRD and slides that use ESCO must say: *"This publication uses the ESCO classification of the European Commission."*
+2. **Mark adaptations.** Any modified or adapted version of ESCO (e.g. our curated role list with Malaysia-specific skill edits, or a synonym list) must be labelled as adapted, not presented as ESCO itself.
+3. **No accuracy guarantee.** The Commission does not guarantee that ESCO is accurate, current or complete, including translations. State this as a limitation; skills suggested from ESCO are still confirmed by the user.
+
+Declare ESCO v1.2.1 and its licence in the Technical & Tools Declaration.
 
 ## Data shape
 

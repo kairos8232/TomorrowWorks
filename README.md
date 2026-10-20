@@ -131,6 +131,9 @@ TomorrowWorks/
 ├── RUNPOD_SETUP.md         # Agent connection status and remaining account step
 ├── SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
 ├── CLAUDE.md               # Context and rules for coding agents
+├── PROGRESS_LOG.md         # What was done, findings, and open items
+├── scripts/                # Source importers (DOSM)
+├── data/sources/           # Converted, attributed source snapshots
 ├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
