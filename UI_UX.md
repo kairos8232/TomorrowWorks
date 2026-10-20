@@ -18,6 +18,7 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 - Show evidence, dates, and uncertainty near any sourced claim. Mark the current role target as illustrative and credentials as unverified until a relevant source is checked.
 - Forms have visible labels, helpful error text, keyboard focus, and sensible mobile stacking. Buttons state their action; navigation remains available without a forced sequence.
 - Keep reading and control text at a comfortable size at normal browser zoom. Scale it with wider screens without shrinking key explanations, form fields, or evidence notes into fine print.
+- Let the screen heading carry the page hierarchy; avoid a repeated small label above each heading. Keep supporting text at readable contrast on the canvas and use calmer line wrapping for public summaries.
 
 ## Current UX debt and first slices
 
@@ -30,5 +31,6 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 | 4g-b — Done | Profile fields all stacked after the first pair. | Current role/skills, experience/interests, and work preferences/qualifications now sit in three field pairs above 620 pixels. | At 765 pixels, each field column is about 312 pixels wide and the form fits without horizontal page overflow. |
 | 4g-c — In progress | The skill-gap result appeared below its editor. | At 1380 pixels and above, a saved comparison places the target editor beside its result; below that width, they stack. | The 765-pixel comparison still works without horizontal page overflow. A wide-window and phone-width visual check remain open. |
 | 4h-a/b — Done | Much of the interface used 11–13 pixel text, making it hard to read at full-screen size. | Public card copy and personal paragraphs now start at 16 pixels and grow on wider screens; navigation is 15–16 pixels, inputs 16, and helper/evidence text at least 14. | At 765 pixels, landing and profile have no horizontal page overflow; cards, labels, and fields remain readable. Larger type increases page height, so wide and phone visual checks remain open. |
+| 4i-b — Done | The public hero repeated a tracked label above its heading, and supporting text had measured low contrast. | Removed the repeated hero labels, increased hero and card-link contrast, and softened heading tracking. | Impeccable rendered scans at 1440×900 and 390×844 returned no findings for the public landing page; the 765-pixel preview has no horizontal page overflow. |
 
 Keep these as separate small commits. Update this file if the design choice changes, and mark checklist items only after the interface is verified.

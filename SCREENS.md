@@ -27,6 +27,8 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Current:** The app opens on a public market shell with a fictional skill-gap demo action near the introduction, followed by cards for independent Workplace changes, Demand, Skills, and Outlook destinations. Overview industry and keyword controls follow the cards; topic views place controls before results. Controls report the selected scope. The sourced evidence list is intentionally empty, so no demand figures or trends are shown yet.
 
+The introduction starts with the screen heading, without a repeated small kicker. Supporting text and card links use the accessible-contrast colors noted in [UI_UX.md](UI_UX.md).
+
 **Planned:**
 
 - Separate **current demand** (for example, relevant vacancy or labour-market measures), **skills requested now**, and **future outlook**. A future outlook is a scenario or estimate, never a present-day fact.

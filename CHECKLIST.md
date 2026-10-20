@@ -161,7 +161,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 ## Stage 4i — Record and apply UI design consistency
 
 - [x] Install Impeccable for Codex in the project and document how to repeat the local install without committing generated tool files.
-- [ ] Run its rendered design scan at desktop and phone widths; fix verified, focused issues without inventing market evidence.
+- [x] Run its rendered design scan at desktop and phone widths; fix verified, focused issues without inventing market evidence.
 - [ ] Record the observed palette, type hierarchy, layout breakpoints, component states, and content rules in [DESIGN.md](DESIGN.md), with links to the product and screen guides.
 - [ ] Build the app and verify the public landing page after the change; keep a separate list of untested screens or improvements.
 

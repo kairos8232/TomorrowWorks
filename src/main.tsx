@@ -52,63 +52,53 @@ const screens: { id: Screen; label: string; description: string }[] = [
 const publicScreens = screens.filter((item) => item.id === 'market' || item.id === 'changes' || item.id === 'demand' || item.id === 'skills' || item.id === 'outlook');
 const personalScreens = screens.filter((item) => item.id === 'profile' || item.id === 'gaps' || item.id === 'roles' || item.id === 'pathway');
 
-const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
+const screenCopy: Record<Screen, { title: string; body: string; next: string }> = {
   market: {
-    eyebrow: 'Start exploring',
     title: 'Explore work. Plan what comes next.',
     body: 'Browse workplace changes, demand, skills, and possible futures across industries. Each claim will show its source and coverage once verified.',
     next: 'No public market source has been connected yet.',
   },
   changes: {
-    eyebrow: 'Explore the market',
     title: 'What is changing at work?',
     body: 'Browse dated reports and announcements about workplace issues across the covered industries. Each item will link to its original source.',
     next: 'No verified news or announcement feed is connected yet. Reported issues will appear here with source, date, industry tag, and coverage limits.',
   },
   demand: {
-    eyebrow: 'Explore the market',
     title: 'Where is demand now?',
     body: 'Browse role demand only when a verified source supports the measure and location shown.',
     next: 'No verified demand source is connected yet. Counts, rankings, and trends will appear with the measure, geography, and date.',
   },
   skills: {
-    eyebrow: 'Explore the market',
     title: 'Which skills are needed now?',
     body: 'See requested skills from dated public evidence once the source and extraction method are verified.',
     next: 'No verified skills source is connected yet. This view will explain which roles request each skill and where the evidence comes from.',
   },
   outlook: {
-    eyebrow: 'Explore the market',
     title: 'What could change?',
     body: 'Explore possible future scenarios separately from today’s demand, with their assumptions and uncertainty clearly labelled.',
     next: 'Future scenarios are not available yet. This view will show estimates and assumptions, not guaranteed job forecasts.',
   },
   signin: {
-    eyebrow: 'Personal guidance',
     title: 'Make it yours',
     body: 'A future account will let you save your profile and return to your plan. Sign-in is not available in this prototype.',
     next: 'No account is created in the demo.',
   },
   profile: {
-    eyebrow: 'Personal guidance',
     title: 'Where are you today?',
     body: 'Add your current skills, experience and interests. This will become the starting point for explainable career matches.',
     next: 'Enter a profile to begin.',
   },
   gaps: {
-    eyebrow: 'Personal guidance · fictional demo',
     title: 'What should I build next?',
     body: 'Choose a promotion or career-move target and compare its illustrative skill list with your reviewed profile. This preview does not claim employer requirements.',
     next: 'Review a fictional profile before comparing your skills with a target.',
   },
   roles: {
-    eyebrow: 'Recommendations',
     title: 'Find your next role',
     body: 'Role cards will show a match score, supporting evidence, existing skills and the skills to build next.',
     next: 'No roles have been ranked yet.',
   },
   pathway: {
-    eyebrow: 'Action plan',
     title: 'Make your next move',
     body: 'Choose a role to see ordered learning steps, time estimates, verified resources and its SDG connection.',
     next: 'The learning pathway is not available yet.',
@@ -226,7 +216,6 @@ function App() {
         <header className="topbar"><span>Career market explorer</span><button type="button" className="career-button" onClick={() => setScreen(demoEntered ? 'profile' : 'signin')}>{demoEntered ? 'My profile' : 'My career'}</button></header>
         <div className="content-wrap">
           <section className="hero" aria-labelledby="screen-title">
-            <span className="eyebrow">{content.eyebrow}</span>
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
             {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Try the skill-gap demo</button><span>Fictional profile · no account needed</span></div>}
