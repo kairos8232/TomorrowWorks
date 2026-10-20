@@ -1,6 +1,20 @@
 # API plan for TomorrowWorks
 
-This is a menu of proposed sources, not a requirement to integrate every API. The Domain 1 brief requires at least one **updatable** AI or job-market trend source, with its name and date; hard-coded lists alone do not count. It does not require a live API call during the demo. The preliminary demo needs a rough, working feature, preferably trend evidence feeding role matching. Stage 1 of [CHECKLIST.md](CHECKLIST.md) chooses the minimum source and verifies that changed input changes the output.
+This is a menu of proposed sources, not a requirement to integrate every API. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the public claims each source must support. The Domain 1 brief requires at least one **updatable** AI or job-market trend source, with its name and date; hard-coded lists alone do not count. It does not require a live API call during the demo. The preliminary demo needs a rough, working feature, preferably trend evidence feeding role matching. Stage 1 of [CHECKLIST.md](CHECKLIST.md) chooses the minimum source and verifies that changed input changes the output.
+
+## Cross-industry source map
+
+| Signal type | Possible source | What the app may say | What it must not infer |
+| --- | --- | --- | --- |
+| Reported workplace issue | Dated news or official announcement metadata | “This source reported this issue for this industry.” | That the issue affects every worker, that coverage equals severity, or that jobs are growing/declining. |
+| Advertised role or skill | Permitted job-ad API sample | “These ads in this sample mention this role or skill.” | Total hiring, national vacancies, or a reliable future forecast. |
+| Labour-market context | Relevant official dataset | The published statistic, period, geography, and definition. | Role-level demand unless the dataset actually measures it. |
+| Occupation/skill relationship | Reviewed classification source | A source describes a role as related to a skill. | That the relationship is validated for every Malaysian employer. |
+| Future outlook | Documented scenario combining dated inputs | “Under these assumptions, this estimate changes.” | A guaranteed outcome or a present-day measurement. |
+
+Every imported item needs a source name, original URL, publication date or period, retrieval date, geography, industry tag and tagging method, signal type, and coverage/limitations. A measure is required for any numeric claim. Keep original evidence separate from any inferred issue label or scenario output. Search and industry filters operate only on available records; an empty result must say whether the source has no coverage or no match.
+
+The architecture can serve people in any industry, but the first sourced snapshot will cover only the industries verified in that source. Do not label an “All industries” view as complete national coverage.
 
 ## Smallest valid demo data path
 
@@ -11,12 +25,22 @@ This is a menu of proposed sources, not a requirement to integrate every API. Th
 
 This path needs no live API dependency during judging. An API integration is useful if access and terms allow it, but can be added in a later small stage.
 
-## Primary sources to test
+## News and official-announcement candidates
+
+| Source | Product use | Access and boundary |
+| --- | --- | --- |
+| [GDELT DOC 2.0 API](https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/) | Candidate for dated article links about workplace changes across industries. Search terms and industry tagging rules need testing. | [GDELT's terms](https://gdeltproject.org/about.html) require a GDELT citation and link when its data is used. Check live response quality, Malaysia relevance, and publisher rights before showing article metadata. A matching article is news coverage, not verified labour demand. No live response has been tested for this project yet. |
+| [NewsAPI](https://newsapi.org/docs) | Alternative article-search candidate if its coverage fits. | Its [Developer plan](https://newsapi.org/pricing) is limited to development/testing and cannot power a deployed Replit demo under that plan. It needs a key and appropriate access terms; no key or live response has been tested. |
+| Government or agency announcements | Candidate for directly attributable policy, training, or industry notices. | Select a specific feed/API and check its terms, update dates, and relevance before integration. |
+
+Collect permitted metadata and link to the original article or announcement. Do not copy full article bodies into the repository or create a news archive. Use an explicit, reviewable topic rule for “automation,” “skills shortage,” “wages,” or another issue tag; never turn a headline into a measured labour-market claim.
+
+## Job and official-statistics sources to test
 
 | Source | Product use | What its data means | Access and check |
 | --- | --- | --- | --- |
 | [Jooble Malaysia REST API](https://my.jooble.org/api/about) | Possible source of Malaysian job ads for target roles and skill mentions. | A sample of advertised vacancies, not a complete measure of Malaysian hiring or future demand. | Requires a Malaysia-specific API key. The [REST API documentation](https://help.jooble.org/en/support/solutions/articles/60001448238-rest-api-documentation) describes a free plan with 500 requests per key for its lifetime. Test response fields, coverage, dates, and permission for the intended display/analysis before relying on it. Not required if another suitable public source is chosen. |
-| [Malaysia's Official Open API](https://developer.data.gov.my/quickstart) and [OpenDOSM catalogue](https://open.dosm.gov.my/data-catalogue) | Add Malaysian employment and wage context beside career recommendations. Query only specific relevant datasets once selected. | Official labour statistics, often broader and slower moving than individual job ads. Do not treat them as live role-level vacancies. | No API token is required; the [published limit](https://developer.data.gov.my/rate-limit) for the Data Catalogue and OpenDOSM endpoints is four requests per minute. Confirm the chosen dataset's fields, licence, geography, and update date. |
+| [Malaysia's Official Open API](https://developer.data.gov.my/quickstart) and [OpenDOSM catalogue](https://open.dosm.gov.my/data-catalogue) | Add Malaysian employment and wage context beside career recommendations. The [employment by sector dataset](https://open.dosm.gov.my/data-catalogue/employment_sector) is a candidate for broad sector context. | Official labour statistics, often broader and slower moving than individual job ads. The employment-by-sector dataset is annual employment share, not live vacancies or skill demand. | No API token is required; the [published limit](https://developer.data.gov.my/rate-limit) for the Data Catalogue and OpenDOSM endpoints is four requests per minute. Confirm the chosen dataset's fields, licence, geography, and update date before use. |
 
 ## Supporting sources to test
 
@@ -29,8 +53,8 @@ The [arXiv API](https://info.arxiv.org/help/api/index.html) is another optional 
 
 ## How the sources would work together
 
-1. A synthetic user profile supplies current skills and interests.
-2. The chosen public trend source supplies a dated sample or live response. Extract role and skill signals only when the source supports them, using documented rules; retain source URLs and dates.
+1. A visitor browses available public evidence by industry and search term without a profile. News, advertised vacancies, official statistics, and future estimates stay visibly distinct.
+2. The chosen public trend source supplies a dated sample or live response. Extract role and skill signals only when the source supports them, using documented rules; retain source URLs and dates. A separate permitted news source may supply reported workplace issues.
 3. ESCO can supply candidate role-to-skill relationships. Compare the profile with those relationships and explain the matched and missing skills. Any Malaysian adaptation must be recorded.
 4. OpenDOSM can supply dated labour-market context where a relevant dataset exists. Display its measure separately from vacancy counts.
 5. The app combines these signals in a documented recommendation formula, then shows a learning pathway. RunPod's GPU result should have a defined, visible role in that flow; Replit hosts the app and keeps API credentials in secrets.
@@ -39,6 +63,8 @@ The [arXiv API](https://info.arxiv.org/help/api/index.html) is another optional 
 ## Stage 1 validation before implementation
 
 - [ ] Select one public, updatable trend source and verify its sample data, update dates, reuse terms, and fit for the demo claim.
+- [ ] Select a small initial set of covered industries; record gaps and the source's industry-tagging method.
+- [ ] If workplace news is included, test a permitted article or announcement feed, its reuse rules, and its relevance; keep it distinct from demand.
 - [ ] Choose a small attributed snapshot and a repeatable refresh/import method; verify that changed input affects a recommendation or explanation.
 - [ ] If Jooble is chosen, obtain a Malaysia key and check its current terms for displaying, retaining, and analysing job ads, as well as the request limit.
 - [ ] If OpenDOSM is chosen, select a relevant dataset and check its fields, frequency, update date, and licence.
