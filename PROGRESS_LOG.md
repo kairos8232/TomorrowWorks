@@ -4,6 +4,15 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:00–02:10 MYT) — Home page points to real data
+
+- Home button is now **"See ranked career moves"** and opens Role matches directly; the old "no verified source connected" notice is gone because public views now have sources.
+- **Demand view:** 9 DOSM occupation-group cards (Q2 2026 count, Q1 → Q2 change, full source block). **Outlook view:** ILO exposure cards for the 9 roles, labelled as possible task change, not job loss. Cards say "All industries combined" instead of listing every industry.
+- **Finding:** DOSM's Q2 2026 *industry* table puts 49% of ads under "Unclassified" (Q1: 8%), so industry-level changes are not shown; the occupation table is unaffected.
+- Verified in a browser: 9 Demand cards, 9 Outlook cards, home button lands on Role matches with 9 role cards. `npm test` 15 passing.
+
+---
+
 ## 21 Oct 2026 (01:52 MYT) — Replit publish fixed
 
 - Publishing failed with "Could not find run command": `.replit` only described the editor workflow. Added a `[deployment]` section: `deploymentTarget = "static"`, build `npm ci && npm run build`, `publicDir = "dist"`. The exact build command was verified from a clean checkout.

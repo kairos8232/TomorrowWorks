@@ -31,7 +31,7 @@ function SignalCard({ signal }: { signal: MarketSignal }) {
     <h2>{signal.title}</h2>
     <p>{signal.summary}</p>
     <p className="signal-source">{signal.source.name} · Published {signal.source.publishedAt} · Retrieved {signal.source.retrievedAt}</p>
-    <p className="signal-source">{signal.source.geography} · {signal.industries.map((id) => industries.find((item) => item.id === id)!.label).join(', ')}</p>
+    <p className="signal-source">{signal.source.geography} · {signal.industries.length >= industries.length - 1 ? 'All industries combined' : signal.industries.map((id) => industries.find((item) => item.id === id)!.label).join(', ')}</p>
     <p className="signal-source">Coverage: {signal.source.coverage}{signal.source.measure ? ` · Measure: ${signal.source.measure}` : ''}</p>
     {signal.assumptions && <p className="signal-source">Assumptions: {signal.assumptions.join('; ')}</p>}
     <a href={signal.source.url} target="_blank" rel="noreferrer">Open original source ↗</a>
@@ -56,7 +56,7 @@ const personalScreens = screens.filter((item) => item.id === 'profile' || item.i
 const screenCopy: Record<Screen, { title: string; body: string; next: string }> = {
   market: {
     title: 'Explore work. Plan what comes next.',
-    body: 'Browse workplace changes, demand, skills, and possible futures across industries. Each claim will show its source and coverage once verified.',
+    body: 'See where Malaysian job ads are moving, how exposed roles are to generative AI, and which career moves fit your skills. Every number links to its source.',
     next: 'No public market source has been connected yet.',
   },
   changes: {
@@ -66,7 +66,7 @@ const screenCopy: Record<Screen, { title: string; body: string; next: string }> 
   },
   demand: {
     title: 'Where is demand now?',
-    body: 'Browse role demand only when a verified source supports the measure and location shown.',
+    body: 'Online job ads in Malaysia by occupation group, from DOSM Job Market Insights (Q1 and Q2 2026). Job ads are not all vacancies.',
     next: 'No verified demand source is connected yet. Counts, rankings, and trends will appear with the measure, geography, and date.',
   },
   skills: {
@@ -76,7 +76,7 @@ const screenCopy: Record<Screen, { title: string; body: string; next: string }> 
   },
   outlook: {
     title: 'What could change?',
-    body: 'Explore possible future scenarios separately from today’s demand, with their assumptions and uncertainty clearly labelled.',
+    body: 'How exposed each role is to generative AI, from the ILO global index (2025). Exposure means tasks could change; it is not a job-loss forecast. Compare scenarios in Role matches.',
     next: 'Future scenarios are not available yet. This view will show estimates and assumptions, not guaranteed job forecasts.',
   },
   signin: {
@@ -219,7 +219,7 @@ function App() {
           <section className="hero" aria-labelledby="screen-title">
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
-            {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Try the skill-gap demo</button><span>Fictional profile · no account needed</span></div>}
+            {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => { setDemoEntered(true); setScreen('roles'); }}>See ranked career moves</button><span>Fictional profile · real DOSM, ILO and ESCO data · no account needed</span></div>}
             {screen === 'market' && marketSignals.length === 0 && <div className="hero-source-status">Public evidence: no verified source connected yet.</div>}
           </section>
           {screen !== 'market' && browseControls}

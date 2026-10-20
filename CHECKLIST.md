@@ -184,8 +184,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 6 — Build the public market explorer
 
-- [ ] Show supported current demand and skills-needed signals, with future outlook in a separate labelled section.
-- [ ] Display the measure, geography, source, publication date, and snapshot date beside each signal.
+- [ ] Show supported current demand and skills-needed signals, with future outlook in a separate labelled section. *Demand (DOSM, 9 occupation groups) and Outlook (ILO exposure for the 9 roles) are live; Skills view still empty.*
+- [x] Display the measure, geography, source, publication date, and snapshot date beside each signal.
 - [ ] Let the visitor open the original source or its attribution.
 - [ ] Explain what “rising” and “declining” mean for the chosen source; label future claims as estimates.
 - [ ] Show a clear state for missing or stale data.

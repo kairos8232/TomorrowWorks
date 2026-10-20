@@ -34,6 +34,8 @@ Checked against the Q2 2026 release page: total 555,509; Professionals 285,907 (
 | Clerical support workers | 48,784 (−1.8%) | 40,408 (−17.2%) |
 | Service and sales workers | 42,094 (−15.7%) | 32,511 (−22.8%) |
 
+**Industry table caveat (found 21 Oct 2026):** in the Q2 2026 file, 273,024 ads (49%) are *Unclassified* by economic activity, against 49,549 (8%) in Q1. Industry-level Q1 → Q2 changes are therefore distorted and are **not shown**. The occupation-group table has no unclassified ads in Q2 and is the one used.
+
 **Use quarter-on-quarter change only.** Year-on-year changes are above +80% for almost every group, which most likely reflects DOSM widening the set of job sites it collects from, not real demand doubling. Say this in the PRD as a known limitation.
 
 ## ILO import (done)
