@@ -1,6 +1,6 @@
 # TomorrowWorks build checklist
 
-This checklist tracks the hackathon prototype. Complete one stage at a time. Check an item only after the work is present and verified. Commit the stage's implementation and its checklist updates together; split a stage into smaller commits if needed. [SCREENS.md](SCREENS.md) explains each screen, and [BUILD_STAGES.md](BUILD_STAGES.md) lists small commit slices. The ChatGPT reference PDFs stay outside this repository.
+This checklist tracks the hackathon prototype. Complete one stage at a time. Check an item only after the work is present and verified. Commit the stage's implementation and its checklist updates together; split a stage into smaller commits if needed. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the broad audience and evidence rules, [SCREENS.md](SCREENS.md) explains each screen, and [BUILD_STAGES.md](BUILD_STAGES.md) lists small commit slices. The ChatGPT reference PDFs stay outside this repository.
 
 ## Stage 0 — Repository documents
 
@@ -12,11 +12,11 @@ Completed in local commit `e4d623a`.
 
 ## App functions to build
 
-The product has a public market area where visitors choose Explore, Demand, Skills, or Outlook in any order. A separate My career action enters the personal area: profile, role matches, and pathway. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
+The product serves people across ages, industries, and career stages. Its public area offers Explore, Workplace changes, Demand, Skills, and Outlook in any order, with industry and search controls. A separate My career action enters the personal area: profile, role matches, and pathway. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
 
 | Required function | User action and visible result | Data and behaviour to implement | Stage |
 | --- | --- | --- | --- |
-| Public market explorer | Browse current role demand, skills requested now, and a separately labelled future outlook before entering personal information. | Import at least one updatable public source; show its measure, geography, original link, publication date, retrieval date, and an honest definition of each trend. | 5–6, 12 |
+| Public market explorer | Browse reported workplace changes, current role demand, skills requested now, and a separately labelled future outlook before entering personal information. | Import at least one updatable public source; show its measure, coverage, geography, original link, publication date, retrieval date, and an honest definition of each trend. News coverage cannot stand in for demand. | 4d, 5–6, 12 |
 | Skills profile | After the sign-in entry, enter or edit skills, experience, interests, and optional work preferences; load a synthetic example and review it before matching. | Validate required input; keep the preliminary demo free of real CVs or personal records. Résumé upload is a later optional intake method. | 4–4b |
 | Future-role matching | Ask for suitable roles; see a ranked role list, an explainable score, existing skills, missing skills, and evidence behind each recommendation. | Compare the profile against verified role requirements and let sourced trend signals affect the ranking or explanation. | 7–8 |
 | Reskilling pathway | Select a recommended role; see ordered learning steps, time estimates, and verified free or low-cost resources. | Build steps from the displayed skills gap and explain the basis for each estimate. | 10 |
@@ -27,10 +27,12 @@ The product has a public market area where visitors choose Explore, Demand, Skil
 
 ## Stage 1 — Decide the MVP
 
-- [ ] Choose one primary user and one example career transition.
+- [x] Define the intended audience across ages, industries, and career stages; keep Malaysia-first source coverage explicit in [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md).
+- [ ] Choose a few industries for the first sourced demo and one synthetic profile case to test matching; do not frame them as the only intended users.
 - [ ] Keep the development repository private during the hacking period and plan judge access before submission.
 - [ ] Decide what runs in Replit and what GPU task runs in RunPod.
 - [ ] Choose one public, updatable trend source and verify its data, date, and reuse terms.
+- [ ] Evaluate a news or official-announcement source for workplace issues separately from job-demand evidence.
 - [ ] Import a small attributed sample and define a repeatable way to refresh it; a live API call is optional.
 - [ ] Review the optional Jooble Malaysia, OpenDOSM, and ESCO uses in [API_PLAN.md](API_PLAN.md) only if they improve the demo.
 - [ ] Check whether the source measures research activity, actual job demand, or another signal; label it accurately.
@@ -101,6 +103,17 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 **Done when:** The app feels like a market dashboard with optional personal guidance rather than a five-step form.
 **Commit focus:** Navigation structure and public destinations; keep sourced content for Stages 5–6.
+
+## Stage 4d — Support cross-industry discovery
+
+- [ ] Add Workplace changes as a public destination, with an honest empty state until a source is validated.
+- [ ] Add industry and keyword controls across public views without requiring a profile or age input.
+- [ ] Define a reusable evidence record carrying type, industry, title, source link, dates, geography, measure, and coverage.
+- [ ] Show the selected scope and a useful no-results or no-source state; never treat news coverage as job demand.
+- [ ] Verify public navigation and filters, then update the screen guide with actual behaviour.
+
+**Done when:** Anyone can explore the public areas by industry and search term, and unsupported claims remain visibly unavailable.
+**Commit focus:** Separate evidence model, browsing controls, and Workplace changes view into small commits.
 
 ## Stage 5 — Add trend signals
 

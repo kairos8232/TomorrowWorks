@@ -7,6 +7,7 @@ This guide describes the intended user journey. **Current** says what works toda
 | Area | User's question | Access | Build stages |
 | --- | --- | --- | --- |
 | Explore | What can I find in the market? | Public landing page | 4c, 6 |
+| Workplace changes | Which reported issues could affect work? | Public browsing; news or announcements | 4d, 5–6 |
 | Demand | Which roles have supported demand signals now? | Public browsing | 5–6 |
 | Skills | Which skills are requested now? | Public browsing | 5–6 |
 | Outlook | What could change under stated assumptions? | Public browsing; estimates | 6, 12 |
@@ -15,7 +16,7 @@ This guide describes the intended user journey. **Current** says what works toda
 | My pathway | What should I learn next? | Personal area after role selection | 10–12 |
 | Demo entry | How do I try personal guidance? | Action from personal area; real sign-in planned | 4b, 4c |
 
-The product behaves like a browseable market app. **Explore, Demand, Skills, and Outlook are destinations**, not numbered steps. Visitors can move among them in any order, without an account. A separate **My career** action opens the personal area. The preliminary demo uses a clearly labelled fictional profile in place of real sign-in and résumé upload. It must not pretend to create an account or parse a résumé.
+The product behaves like a browseable market app. **Explore, Workplace changes, Demand, Skills, and Outlook are destinations**, not numbered steps. Visitors can switch industries or search within available evidence without an account. A separate **My career** action opens the personal area. The preliminary demo uses a clearly labelled fictional profile in place of real sign-in and résumé upload. It must not pretend to create an account or parse a résumé.
 
 The preliminary working slice should prove **public, dated signal → changed role recommendation or explanation**. The final product adds the full pathway, SDG connections, and scenario comparison. A screen with missing data explains the gap instead of inventing a result. Do not show a journey counter, progress bar, or generic Next/Back controls; use navigation and task-specific actions instead.
 
@@ -32,16 +33,17 @@ The preliminary working slice should prove **public, dated signal → changed ro
 - Define what “rising” or “declining” means for that source. Do not turn research activity into a Malaysian hiring claim.
 - Show a dated snapshot label, its refresh method, and useful empty, stale, and unavailable states.
 - Make current demand, skills, and future outlook browsable destinations. Offer a separate action for personalised guidance.
+- Show the selected industry, search term, and coverage status without implying every industry has data.
 
 **Ready when:** A visitor can understand what is needed now, what might change, and the evidence and uncertainty behind each claim. Stages 5–6 supply the public view; Stage 12 adds scenario comparison.
 
-## Demand, Skills, and Outlook
+## Workplace changes, Demand, Skills, and Outlook
 
 **Purpose:** Let a visitor choose what to explore and switch topics freely.
 
-**Current:** Demand, Skills, and Outlook each have a dedicated view with an honest empty state. Visitors can switch topics without entering the demo. Sourced content remains future work.
+**Current:** Demand, Skills, and Outlook each have a dedicated view with an honest empty state. Visitors can switch topics without entering the demo. Workplace changes and shared industry/search controls are planned in Stage 4d. Sourced content remains future work.
 
-**Planned:** Demand describes the exact present-day measure and geography. Skills shows requested skills supported by the source. Outlook shows dated scenarios and assumptions, never current job counts. Each view links back to evidence once connected.
+**Planned:** Workplace changes shows attributed news or official announcements, tagged by industry and issue type; a report is not proof of the issue's scale. Demand describes the exact present-day measure and geography. Skills shows requested skills supported by the source. Outlook shows dated scenarios and assumptions, never current job counts. Each view links back to evidence once connected.
 
 ## Demo entry
 

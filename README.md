@@ -4,7 +4,7 @@
 
 ### Navigate the future of work, one skill at a time.
 
-**An AI-powered, evidence-driven career navigation and reskilling platform for Malaysia's future-ready workforce.**
+**A public, evidence-driven guide to changing work and skills, with optional personal career guidance.**
 
 ![Status](https://img.shields.io/badge/status-app%20shell-blue)
 ![Domain](https://img.shields.io/badge/domain-Aiversecity%20Future--Ready%20Workforce-green)
@@ -14,11 +14,11 @@
 
 ## Overview
 
-AI is changing the skills employers need faster than many workers can adapt. **TomorrowWorks** aims to help working adults, graduates, career switchers, and career advisers understand which roles may be changing, identify transferable skills, and plan practical next steps.
+AI and other industry changes affect people across ages, occupations, and career stages. **TomorrowWorks** aims to help anyone explore what is happening at work, which skills and roles have supported demand signals, and what might change. The first source coverage is Malaysia-first; visitors can browse without an account.
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app opens on a public market shell and includes synthetic profile intake. Sourced market data, matching, pathways, sign-in, and external integrations are still being built.
+> **Project stage:** The React and TypeScript app has public browsing placeholders and synthetic profile intake. Cross-industry issue discovery, sourced market data, matching, pathways, sign-in, and external integrations are still being built.
 
 ## The Problem
 
@@ -31,10 +31,7 @@ Instead of offering generic chatbot career advice, TomorrowWorks is designed to 
 
 ## Who It Is For
 
-- Working adults facing possible job displacement
-- Fresh graduates and career switchers
-- HR and learning-and-development teams
-- TVET and university career centres
+Anyone interested in work and skills, including students, employed or unemployed people, people returning to work, career switchers, advisers, and employers. The product does not ask for age to browse. Initial source coverage may be limited; the app must show those limits clearly. See [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) for the full product promise and evidence rules.
 
 ## How People Use the App
 
@@ -43,6 +40,7 @@ flowchart TD
     A[Explore market] --- B[Demand now]
     A --- C[Skills needed now]
     A --- D[Future outlook]
+    A --- J[Workplace changes and issues]
     B --- C
     C --- D
     A --> E[My career action]
@@ -52,7 +50,7 @@ flowchart TD
     H --> I[My pathway]
 ```
 
-The public area has independent Explore, Demand, Skills, and Outlook views. Visitors can move among them freely and see source names, dates, and the distinction between present-day measures and future estimates. **My career** is a separate action for personal guidance. The first demo uses a fictional profile and labels sign-in as planned; résumé upload is a later optional method. Role matches, pathways, SDG explanations, and scenario comparisons appear as their features are built.
+The public area has independent Explore, Workplace changes, Demand, Skills, and Outlook views, plus industry and search controls. Visitors can move among them freely and see the distinction between reported issues, present-day measures, and future estimates. **My career** is a separate action for personal guidance. The first demo uses a fictional profile and labels sign-in as planned; résumé upload is a later optional method. Role matches, pathways, SDG explanations, and scenario comparisons appear as their features are built.
 
 ## Required Features
 
@@ -75,6 +73,8 @@ The key prototype goal is to show that **changing trend evidence changes a caree
 
 **Sample profile:** Junior Accountant; skills in Excel, bookkeeping and financial reporting; interested in analytics.
 
+This is one synthetic test case for matching. The public product is intended for people in any career stage and industry.
+
 **Possible recommendation:** Financial Data Analyst.
 
 **Existing skills:** Excel, financial reporting, domain knowledge.  
@@ -85,7 +85,7 @@ The key prototype goal is to show that **changing trend evidence changes a caree
 
 ## Data, Evidence and AI Guardrails
 
-The proposed roles for Jooble Malaysia, Malaysia's Official Open API, ESCO, and optional research feeds are documented in [API_PLAN.md](API_PLAN.md). These sources must pass the Stage 1 access and suitability checks before the app presents their data.
+Candidate news, vacancy, official-statistics, and skills sources are documented in [API_PLAN.md](API_PLAN.md). These sources must pass the Stage 1 access and suitability checks before the app presents their data.
 
 - Use **public, open or synthetic data only**; no real CVs or personal records in demos.
 - Show the **name, date and link/reference** for each underlying trend source.
@@ -109,6 +109,7 @@ TomorrowWorks/
 ├── CHECKLIST.md            # Staged build and submission tasks
 ├── BUILD_STAGES.md         # Small commit slices for each stage
 ├── SCREENS.md              # Purpose and behaviour of each screen
+├── PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
 
@@ -119,6 +120,7 @@ TomorrowWorks/
 - [x] Create a synthetic sample profile and a working intake form
 - [x] Open on a public market view with an honest demo sign-in entry
 - [x] Replace the numbered journey with freely browsable market destinations
+- [ ] Add public industry and search controls and a workplace-changes view
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
