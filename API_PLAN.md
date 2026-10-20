@@ -10,9 +10,10 @@ This is a menu of proposed sources, not a requirement to integrate every API. [P
 | Advertised role or skill | Permitted job-ad API sample | “These ads in this sample mention this role or skill.” | Total hiring, national vacancies, or a reliable future forecast. |
 | Labour-market context | Relevant official dataset | The published statistic, period, geography, and definition. | Role-level demand unless the dataset actually measures it. |
 | Occupation/skill relationship | Reviewed classification source | A source describes a role as related to a skill. | That the relationship is validated for every Malaysian employer. |
+| Certificate or qualification requirement | Dated employer posting, regulator, or professional body for the target role and jurisdiction | A specific credential is required or preferred **by that source**. | That a certificate is mandatory for every employer or promotion, or that a public news story proves it. |
 | Future outlook | Documented scenario combining dated inputs | “Under these assumptions, this estimate changes.” | A guaranteed outcome or a present-day measurement. |
 
-Every imported item needs a source name, original URL, publication date or period, retrieval date, geography, industry tag and tagging method, signal type, and coverage/limitations. A measure is required for any numeric claim. Keep original evidence separate from any inferred issue label or scenario output. Search and industry filters operate only on available records; an empty result must say whether the source has no coverage or no match.
+Every imported item needs a source name, original URL, publication date or period, retrieval date, geography, industry tag and tagging method, signal type, and coverage/limitations. A measure is required for any numeric claim. A personal credential requirement also needs the target role, jurisdiction, issuing or requiring body, and whether it is required or preferred. Keep original evidence separate from any inferred issue label or scenario output. Search and industry filters operate only on available records; an empty result must say whether the source has no coverage or no match.
 
 The architecture can serve people in any industry, but the first sourced snapshot will cover only the industries verified in that source. Do not label an “All industries” view as complete national coverage.
 
@@ -69,6 +70,7 @@ The [arXiv API](https://info.arxiv.org/help/api/index.html) is another optional 
 - [ ] If Jooble is chosen, obtain a Malaysia key and check its current terms for displaying, retaining, and analysing job ads, as well as the request limit.
 - [ ] If OpenDOSM is chosen, select a relevant dataset and check its fields, frequency, update date, and licence.
 - [ ] If ESCO is used for matching, test a relevant occupation/skill lookup and note any API-key migration effect.
+- [ ] Before naming a certificate as needed for a role or promotion, verify an applicable dated employer, regulator, or professional-body requirement and record whether it is required or preferred.
 - [ ] Decide whether an AI research feed is useful for the first demo. If used, test OpenAlex or arXiv and label it as research activity.
 - [ ] Record sample fields, request limits, fallback behaviour, and a source-to-feature mapping before checking off the Stage 1 source decision.
 
