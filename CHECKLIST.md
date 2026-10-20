@@ -81,7 +81,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 4b — Enter personalised guidance
 
-- [ ] Start the app on the public market screen and offer an action to begin personalised guidance.
+- [x] Start the app on the public market screen and offer an action to begin personalised guidance.
 - [ ] Add a clearly labelled sign-in entry screen; the preliminary demo continues with a fictional profile and creates no account.
 - [ ] Add an optional work-preferences or strengths field; do not infer personality or request protected traits.
 - [ ] Keep a real account flow and résumé upload as separate unchecked work until the team decides consent, storage, review, and deletion behaviour.

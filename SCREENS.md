@@ -20,7 +20,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Help a visitor discover the labour market before sharing personal details.
 
-**Current:** The existing Skills radar is a placeholder reached after Profile. No demand figures or trends are connected. The market-first screen below is the next app-shell change.
+**Current:** The app opens on a public market shell with separate current-demand, skills-needed, and future-outlook placeholders. No source, demand figures, or trends are connected yet. Its next action currently leads to Profile; the labelled sign-in entry is the next slice.
 
 **Planned:**
 

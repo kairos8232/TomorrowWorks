@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-type Screen = 'profile' | 'radar' | 'roles' | 'pathway';
+type Screen = 'market' | 'profile' | 'roles' | 'pathway';
 type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string };
 type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[] };
 
@@ -19,24 +19,24 @@ function splitEntries(value: string) {
 }
 
 const screens: { id: Screen; label: string; number: string; description: string }[] = [
-  { id: 'profile', label: 'My profile', number: '01', description: 'Skills, experience and interests' },
-  { id: 'radar', label: 'Skills radar', number: '02', description: 'Dated signals from a public source' },
+  { id: 'market', label: 'Explore market', number: '01', description: 'Demand now and future outlook' },
+  { id: 'profile', label: 'My profile', number: '02', description: 'Skills, experience and interests' },
   { id: 'roles', label: 'Role matches', number: '03', description: 'Scores, reasons and skills gaps' },
   { id: 'pathway', label: 'My pathway', number: '04', description: 'Learning steps and SDG links' },
 ];
 
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
+  market: {
+    eyebrow: 'Start exploring',
+    title: 'What does work need next?',
+    body: 'Explore today’s demand and the skills employers need. Future outlooks will be shown separately as estimates, with dates and sources.',
+    next: 'No public market source has been connected yet.',
+  },
   profile: {
-    eyebrow: 'Start here',
+    eyebrow: 'Personal guidance',
     title: 'Where are you today?',
     body: 'Add your current skills, experience and interests. This will become the starting point for explainable career matches.',
     next: 'Enter a profile to begin.',
-  },
-  radar: {
-    eyebrow: 'Evidence',
-    title: 'See what is changing',
-    body: 'The radar will show dated signals from an updatable public source, with a link back to the evidence.',
-    next: 'No trend data has been connected yet.',
   },
   roles: {
     eyebrow: 'Recommendations',
@@ -53,7 +53,7 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
 };
 
 function App() {
-  const [screen, setScreen] = useState<Screen>('profile');
+  const [screen, setScreen] = useState<Screen>('market');
   const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileError, setProfileError] = useState('');
@@ -110,7 +110,13 @@ function App() {
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
           </section>
-          {screen === 'profile' ? (
+          {screen === 'market' ? (
+            <section className="market-grid" aria-label="Public market overview">
+              <div className="market-card"><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p></div>
+              <div className="market-card"><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p></div>
+              <div className="market-card"><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p></div>
+            </section>
+          ) : screen === 'profile' ? (
             <section className="profile-panel" aria-label="Skills profile">
               <div className="panel-heading"><div><h2>Build your skills profile</h2><p>Use a fictional example for the demo. No CV upload or personal details are needed.</p></div><button type="button" className="text-button" onClick={() => { setDraft(sampleProfile); setProfile(null); setProfileError(''); }}>Load sample profile</button></div>
               <form onSubmit={saveProfile} noValidate>
@@ -123,7 +129,7 @@ function App() {
                 {profileError && <p className="form-error" role="alert">{profileError}</p>}
                 <button type="submit" className="primary-button">Review profile</button>
               </form>
-              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p><button type="button" className="text-button" onClick={() => setScreen('radar')}>Continue to skills radar →</button></div>}
+              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p><button type="button" className="text-button" onClick={() => setScreen('roles')}>Continue to role matches →</button></div>}
             </section>
           ) : (
             <section className="work-card" aria-label={`${screens[activeIndex].label} status`}>

@@ -18,7 +18,7 @@ AI is changing the skills employers need faster than many workers can adapt. **T
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app shell and synthetic profile intake run locally. The public-first journey, sourced market data, matching, pathways, sign-in, and external integrations are still being built.
+> **Project stage:** The React and TypeScript app opens on a public market shell and includes synthetic profile intake. Sourced market data, matching, pathways, sign-in, and external integrations are still being built.
 
 ## The Problem
 
