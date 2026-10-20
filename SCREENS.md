@@ -65,7 +65,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Capture the person's starting skills and relevant preferences for matching.
 
-**Current:** A fictional Junior Accountant example, form for role, skills, experience, interests, and optional work preferences or strengths, validation, review, and in-memory handoff. Refreshing clears the profile. The optional field is displayed in the review and does not affect matching yet.
+**Current:** A fictional Junior Accountant example, form for role, skills, experience, interests, optional work preferences or strengths, and optional current qualifications; validation, review, and in-memory handoff. Refreshing clears the profile. The optional fields are displayed in the review and do not affect matching yet.
 
 **Planned:**
 

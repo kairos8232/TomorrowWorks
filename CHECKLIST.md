@@ -117,7 +117,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 4e — Preview personal skill and credential gaps
 
-- [ ] Add optional current certificates or qualifications to the fictional profile and its review.
+- [x] Add optional current certificates or qualifications to the fictional profile and its review.
 - [ ] Let the person choose a promotion or career-move target and edit an illustrative target-skill list.
 - [ ] Compare the reviewed profile with that list using a documented, hand-checkable rule; show matched and missing skills without a fabricated readiness percentage.
 - [ ] Show a separate certificate/qualification section that says when no applicable requirement is verified.
