@@ -75,12 +75,12 @@ The key prototype goal is to show that **changing trend evidence changes a caree
 Details, data shapes, and the worked example are in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md).
 
 - **Demo user:** a junior accounting or bookkeeping worker in the Klang Valley whose routine tasks are increasingly done by AI tools.
-- **Demand signal (updatable):** DOSM *Job Market Insights*, quarterly online vacancies by occupation (Q1 and Q2 2026 snapshots; Q3 2026 is a real future refresh).
+- **Demand signal (updatable):** DOSM *Job Market Insights*, quarterly online vacancies by occupation major group. Q1 and Q2 2026 are imported with `scripts/import_dosm_jmi.py`; Q3 2026 is a real future refresh.
 - **AI-exposure signal:** ILO *Generative AI and Jobs* refined index (2025), per ISCO-08 occupation, which aligns with MASCO.
 - **Role skills:** a small curated role set with ESCO-linked essential skills.
 - **Score:** `wF·skill fit + wD·demand trend + wR·(1 − AI exposure)`, with every part shown. Moderate and fast AI-change scenarios use different weights, labelled as estimates.
 - **Proof that trends matter:** a Q1 vs Q2 2026 data-snapshot switch changes scores for the same profile.
-- **AI use:** optional open-weights LLM on RunPod that maps free text to known skills only; it never creates roles, courses, or scores.
+- **AI use:** a multilingual embedding model on RunPod searches the official ESCO skill taxonomy, so a person's own description maps to real skill records they confirm. It never creates roles, courses, or scores.
 
 ## Example Demo (Illustrative Only)
 

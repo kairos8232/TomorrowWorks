@@ -25,7 +25,7 @@ Judges want a rough, **working** version of the most important feature: **trend 
 - **No invented data.** No fabricated jobs, courses, statistics, vacancy counts, match scores or SDG claims. Every displayed signal carries source name, URL, publication date, retrieval date, geography and measure. Empty or "no data" states are fine; made-up numbers are not.
 - **Public, open or synthetic data only.** No real CVs or personal data, ever.
 - **LLMs never generate roles, courses or scores.** If used, an LLM only maps text onto known lists, and the model is disclosed.
-- **Replit must be used** (proof goes in the Tools Declaration). **RunPod is required only for GPU work.**
+- **Replit must be used** (proof goes in the Tools Declaration). **RunPod is used** for the ESCO skill-embedding step (GPU work must run on RunPod); keep its Pod ID, GPU type and runtime for the declaration. Datasets must come from the original publisher or a mirror with a clear source and licence.
 - **No secrets in the repo.** Use `.env` locally (gitignored) and Replit Secrets.
 - `LICENSE` must stay Apache 2.0. The repo must be public at submission with committee accounts as collaborators.
 - Commit history must be small and truthful. One visible behaviour per commit, with its `CHECKLIST.md` update. Never bundle a large commit near a deadline.
@@ -43,7 +43,9 @@ npm run build      # tsc --noEmit && vite build
 
 Key code: `src/main.tsx` (app shell and screens), `src/market.ts` (evidence record type and filters; `marketSignals` is empty until a source is imported), `src/personal.ts` (exact-name skill comparison).
 
-Planned: `data/sources/*.json` (converted source snapshots), `data/roles.json`, `scripts/import-dosm.mjs`, and a scoring module with a unit test for the worked example in `SIGNALS_AND_MATCHING.md`.
+Data: `scripts/import_dosm_jmi.py` (needs openpyxl) converts a DOSM JMI xlsx in `data/raw/` (gitignored) into `data/sources/dosm-jmi-<quarter>.json`. DOSM occupation data is by **major group only**; use quarter-on-quarter change, not year-on-year.
+
+Planned: ILO exposure JSON, `data/roles.json`, ESCO skill embeddings from RunPod, and a scoring module with a unit test for the worked example in `SIGNALS_AND_MATCHING.md`.
 
 ## Git
 

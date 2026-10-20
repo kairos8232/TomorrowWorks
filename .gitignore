@@ -6,3 +6,6 @@ dist/
 .DS_Store
 .agents/skills/impeccable/
 .codex/hooks.json
+
+# Official source files: download from the URLs in data/sources/*.json
+data/raw/
