@@ -17,6 +17,7 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 - Explain an empty state with **what is missing** and **what the visitor can do now**. Do not show fake cards or numbers to fill space.
 - Show evidence, dates, and uncertainty near any sourced claim. Mark the current role target as illustrative and credentials as unverified until a relevant source is checked.
 - Forms have visible labels, helpful error text, keyboard focus, and sensible mobile stacking. Buttons state their action; navigation remains available without a forced sequence.
+- Keep reading and control text at a comfortable size at normal browser zoom. Scale it with wider screens without shrinking key explanations, form fields, or evidence notes into fine print.
 
 ## Current UX debt and first slices
 

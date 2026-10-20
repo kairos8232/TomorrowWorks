@@ -149,6 +149,15 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 **Done when:** Wide screens make use of their horizontal space, medium screens show useful content sooner, and phone layouts still fit without sideways page scrolling.
 **Commit focus:** Public layout, profile form, and comparison layout in separate small commits.
 
+## Stage 4h — Make text readable at full-screen size
+
+- [ ] Increase body copy, navigation, action, label, input, helper, and evidence text sizes; keep a clear heading hierarchy.
+- [ ] Check the public landing page and personal form at the current medium preview width for readability and sideways overflow.
+- [ ] Check the larger-screen typography and phone layout when those viewport previews are available; update [UI_UX.md](UI_UX.md) and [SCREENS.md](SCREENS.md) with verified behaviour.
+
+**Done when:** Important text is comfortable to read at normal browser zoom, and larger type does not clip controls or hide their meaning.
+**Commit focus:** Typography change and its verified documentation in one focused commit.
+
 ## Stage 5 — Add trend signals
 
 - [ ] Fetch or import the chosen public source through a repeatable process.
