@@ -12,12 +12,12 @@ Completed in local commit `e4d623a`.
 
 ## App functions to build
 
-The product serves people across ages, industries, and career stages. Its public area offers Explore, Workplace changes, Demand, Skills, and Outlook in any order, with industry and search controls. A separate My career action enters the personal area: profile, role matches, and pathway. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
+The product serves people across ages, industries, and career stages. Its public area offers Explore, Workplace changes, Demand, Skills, and Outlook in any order, with industry and search controls. A separate My career action enters the personal area: profile, skill gaps for a chosen promotion or move, role matches, and pathway. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) separates public claims from individual advice and records credential evidence rules. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
 
 | Required function | User action and visible result | Data and behaviour to implement | Stage |
 | --- | --- | --- | --- |
 | Public market explorer | Browse reported workplace changes, current role demand, skills requested now, and a separately labelled future outlook before entering personal information. | Import at least one updatable public source; show its measure, coverage, geography, original link, publication date, retrieval date, and an honest definition of each trend. News coverage cannot stand in for demand. | 4d, 5–6, 12 |
-| Skills profile | After the sign-in entry, enter or edit skills, experience, interests, and optional work preferences; load a synthetic example and review it before matching. | Validate required input; keep the preliminary demo free of real CVs or personal records. Résumé upload is a later optional intake method. | 4–4b |
+| Skills profile | After the sign-in entry, enter or edit skills, experience, interests, optional qualifications and work preferences; load a synthetic example and review it before matching. | Validate required input; keep the preliminary demo free of real CVs or personal records. Résumé upload is a later optional intake method. | 4–4e |
 | Future-role matching | Ask for suitable roles; see a ranked role list, an explainable score, existing skills, missing skills, and evidence behind each recommendation. | Compare the profile against verified role requirements and let sourced trend signals affect the ranking or explanation. | 7–8 |
 | Reskilling pathway | Select a recommended role; see ordered learning steps, time estimates, and verified free or low-cost resources. | Build steps from the displayed skills gap and explain the basis for each estimate. | 10 |
 | SDG connection | Open a role or skill and see its linked SDG and a short reason the connection matters. | Review each role and skill mapping; avoid decorative claims. | 11 |
@@ -114,6 +114,17 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 **Done when:** Anyone can explore the public areas by industry and search term, and unsupported claims remain visibly unavailable.
 **Commit focus:** Separate evidence model, browsing controls, and Workplace changes view into small commits.
+
+## Stage 4e — Preview personal skill and credential gaps
+
+- [ ] Add optional current certificates or qualifications to the fictional profile and its review.
+- [ ] Let the person choose a promotion or career-move target and edit an illustrative target-skill list.
+- [ ] Compare the reviewed profile with that list using a documented, hand-checkable rule; show matched and missing skills without a fabricated readiness percentage.
+- [ ] Show a separate certificate/qualification section that says when no applicable requirement is verified.
+- [ ] Keep the preview inside My career and label it as a synthetic, in-memory exercise; verify profile changes update the comparison.
+
+**Done when:** A teammate can review a fictional profile, choose a target, and explain every displayed personal gap without mistaking sample inputs for employer requirements. Source-backed matching, verified credentials, pathway resources, and trend influence remain in Stages 5–12.
+**Commit focus:** Profile qualifications and target comparison in separate small commits.
 
 ## Stage 5 — Add trend signals
 

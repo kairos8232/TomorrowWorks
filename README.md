@@ -50,7 +50,7 @@ flowchart TD
     H --> I[My pathway]
 ```
 
-The public area has independent Explore, Workplace changes, Demand, Skills, and Outlook views, plus industry and search controls. Visitors can move among them freely and see the distinction between reported issues, present-day measures, and future estimates. **My career** is a separate action for personal guidance. The first demo uses a fictional profile and labels sign-in as planned; résumé upload is a later optional method. Role matches, pathways, SDG explanations, and scenario comparisons appear as their features are built.
+The public area has independent Explore, Workplace changes, Demand, Skills, and Outlook views, plus industry and search controls. Visitors can move among them freely and see the distinction between reported issues, present-day measures, and future estimates. **My career** is a separate action for personal guidance: review the person's skills and qualifications, compare them with an explicit promotion or career-move target, then explore role matches and a pathway as those Domain 1 features are built. The first demo uses a fictional profile and labels sign-in as planned; résumé upload is a later optional method. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the personal flow and evidence boundary.
 
 ## Required Features
 
@@ -103,7 +103,7 @@ Candidate news, vacancy, official-statistics, and skills sources are documented 
 TomorrowWorks/
 ├── index.html              # Browser entry point
 ├── src/
-│   ├── main.tsx            # Journey navigation and app shell
+│   ├── main.tsx            # Public and personal navigation and app shell
 │   ├── market.ts           # Industry and sourced-evidence contract
 │   └── styles.css          # Responsive styles
 ├── package.json            # Scripts and pinned dependencies
@@ -111,6 +111,7 @@ TomorrowWorks/
 ├── BUILD_STAGES.md         # Small commit slices for each stage
 ├── SCREENS.md              # Purpose and behaviour of each screen
 ├── PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
+├── PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
 

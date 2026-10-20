@@ -12,6 +12,7 @@ This guide describes the intended user journey. **Current** says what works toda
 | Skills | Which skills are requested now? | Public browsing | 5–6 |
 | Outlook | What could change under stated assumptions? | Public browsing; estimates | 6, 12 |
 | My profile | What skills, experience, interests, and work preferences describe me? | Personal area | 4, 4b |
+| Skill gaps | Which skills or qualifications am I missing for a chosen promotion or move? | Personal demo after profile review; sourced version later | 4e, 7 |
 | Role matches | Which roles fit me, and why? | Personal area after profile review | 7–8, 12 |
 | My pathway | What should I learn next? | Personal area after role selection | 10–12 |
 | Demo entry | How do I try personal guidance? | Action from personal area; real sign-in planned | 4b, 4c |
@@ -90,6 +91,16 @@ The preliminary working slice should prove **public, dated signal → changed ro
 - In Stage 12, compare moderate and rapid AI-change assumptions using the same profile. Label all future results as estimates.
 
 **Ready when:** A teammate can hand-check the ranking and change a sourced signal to produce a visible difference. Recommendations support a career decision; they do not make a hiring decision.
+
+## Skill gaps
+
+**Purpose:** Let a person compare their reviewed skills with a target they choose, including a promotion target, without treating public market evidence as a personal verdict.
+
+**Current:** Planned; the app has a reviewed sample profile but no personal comparison yet.
+
+**Planned early demo:** Show an editable, explicitly illustrative target role and its skill list. Compare exact normalised names with the reviewed profile, list matched and missing skills, and state that this is a simple checklist comparison. Show current certificates/qualifications if entered and a clear **no verified requirement** state until applicable credential sources are checked. Link to Role matches and My pathway as those Domain 1 features are built.
+
+**Sourced version:** Distinguish required from preferred skills and credentials. Show source, jurisdiction, date, and coverage for each target requirement; use trend evidence in the recommendation or its explanation. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the evidence contract.
 
 ## My pathway
 

@@ -22,7 +22,7 @@ Visitors can choose any area, industry, or search term in any order. Search and 
 
 ## Personal guidance
 
-**My career** is optional. The preliminary demo uses a fictional profile and says clearly that sign-in, résumé upload, and saved accounts do not exist yet. Later personal guidance can use reviewed skills, experience, interests, and optional work preferences to explain role matches and learning pathways. An example career transition is a test case, not the product's target audience.
+**My career** is optional. The preliminary demo uses a fictional profile and says clearly that sign-in, résumé upload, and saved accounts do not exist yet. Personal guidance compares reviewed skills and optional qualifications with a **chosen target role** to show individual gaps for a promotion or career move. Later sourced role matching and learning pathways build on that comparison. An example career transition is a test case, not the product's target audience. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the personal questions, credential rules, and demo boundary.
 
 No age, gender, ethnicity, or other protected trait is needed to browse or generate matches. Avoid personality scores inferred from news or a résumé. Any real résumé flow needs consent, review, storage, and deletion decisions before implementation.
 
