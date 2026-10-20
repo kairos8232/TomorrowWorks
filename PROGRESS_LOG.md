@@ -92,8 +92,8 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 
 ### 6. Open items (next)
 
-1. **Carson:** download the ILO WP140 PDF (Annex Table A1, page 48) into `data/raw/`. The ILO web page has only the gradient definitions; the task-score site has no download.
-2. **Carson:** when the ESCO e-mail arrives, unzip v1.2.1 (Classification, English, CSV) into `data/raw/esco/`.
+1. ~~Download the ILO WP140 PDF~~ — done: `data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf` (53 pages). Table A1 is present and readable as text, e.g. 4311 Accounting and Bookkeeping Clerks mean 0.64 / SD 0.07; 2411 Accountants 0.51 / 0.08.
+2. ~~Download ESCO~~ — done: `data/raw/ESCO dataset - v1.2.1 - classification - en - csv/` (19 CSV files). It also includes `greenSkillsCollection_en.csv` and `greenShareOcc_en.csv`, which can support a sourced SDG 7/12/13 link for green skills.
 3. Add the ESCO acknowledgement to the app footer and to the PRD, slides and Tools Declaration.
 4. Verify the candidate role codes against MASCO 2020.
 5. Then build: ILO importer → `data/roles.json` → scoring module + unit test → snapshot/scenario switches in the UI → RunPod embedding job → Replit deployment.
