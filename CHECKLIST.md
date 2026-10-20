@@ -126,6 +126,17 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 **Done when:** A teammate can review a fictional profile, choose a target, and explain every displayed personal gap without mistaking sample inputs for employer requirements. Source-backed matching, verified credentials, pathway resources, and trend influence remain in Stages 5–12.
 **Commit focus:** Profile qualifications and target comparison in separate small commits.
 
+## Stage 4f — Improve the web experience
+
+- [ ] At medium and narrow widths, use compact navigation and give the page enough space for its content.
+- [ ] Put the working personal-demo action near the public introduction; keep source status visible and shorten repetitive card copy.
+- [ ] Verify the public landing and personal comparison at phone width, with no horizontal page overflow.
+- [ ] Verify keyboard navigation, visible focus, form labels, and the fictional profile-to-gap flow.
+- [ ] Update [UI_UX.md](UI_UX.md) and [SCREENS.md](SCREENS.md) with actual behaviour after each slice.
+
+**Done when:** The first screen has a clear action and readable topic choices, and the public and personal flows work at narrow widths and by keyboard.
+**Commit focus:** Navigation layout, public action hierarchy, and accessibility checks in separate commits.
+
 ## Stage 5 — Add trend signals
 
 - [ ] Fetch or import the chosen public source through a repeatable process.

@@ -1,0 +1,28 @@
+# TomorrowWorks UI and UX guide
+
+This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the product, [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines private-area questions, and [SCREENS.md](SCREENS.md) records each screen's actual behaviour. The reusable project skill is [tomorrowworks-web-ux](skills/tomorrowworks-web-ux/SKILL.md).
+
+## Visitor priorities
+
+1. **Public:** Understand what can be explored, pick an industry or topic, and see whether a dated source actually covers it. A visitor can browse without a profile.
+2. **Personal demo:** Recognise that My career uses a fictional, unsaved profile. Review it, choose a target, and see a hand-checkable skill comparison.
+3. **Later Domain 1 work:** Compare sourced future roles, see why they match, follow a reskilling pathway, inspect SDG reasons, and compare scenarios. Empty or planned states must not imply those features already work.
+
+## Screen design rules
+
+- Put the main question and useful action in the first view. Avoid large empty hero space that pushes content below the fold.
+- Keep public navigation and My career visibly separate. On narrower screens, use a compact horizontal navigation and full-width content rather than squeezing a desktop sidebar beside the page.
+- Use plain labels: **Workplace changes** for reports, **Demand** for supported present measures, **Skills** for public role-skill evidence, and **My skill gaps** for an individual's comparison.
+- Explain an empty state with **what is missing** and **what the visitor can do now**. Do not show fake cards or numbers to fill space.
+- Show evidence, dates, and uncertainty near any sourced claim. Mark the current role target as illustrative and credentials as unverified until a relevant source is checked.
+- Forms have visible labels, helpful error text, keyboard focus, and sensible mobile stacking. Buttons state their action; navigation remains available without a forced sequence.
+
+## Current UX debt and first slices
+
+| Slice | Visible problem | Change | Check |
+| --- | --- | --- | --- |
+| 4f-a | The fixed sidebar squeezes content in medium-width windows. | Switch to a compact, scrollable top navigation before the content becomes too narrow. | At a narrow viewport, headings, filters, cards, and personal forms fit without horizontal page overflow. |
+| 4f-b | The public landing page spends too much space on introduction while the working personal demo action sits below empty topic cards. | Tighten the introduction, place the demo action near it, and shorten card copy. | A visitor can see the main action and at least one topic card early; the no-source message remains explicit. |
+| 4f-c | Keyboard and small-screen behaviour need a focused pass. | Check focus visibility, field labels, navigation, and the personal comparison at phone width. | A keyboard user can complete the fictional profile-to-gap flow; no control is clipped. |
+
+Keep these as separate small commits. Update this file if the design choice changes, and mark checklist items only after the interface is verified.

@@ -114,6 +114,8 @@ TomorrowWorks/
 ├── SCREENS.md              # Purpose and behaviour of each screen
 ├── PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
 ├── PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
+├── UI_UX.md                # Screen layout and usability decisions
+├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
 

@@ -24,6 +24,7 @@ The stage numbers below match `CHECKLIST.md`. Some setup can happen while anothe
 | 4c Browsing navigation | **Done: 4c-a** Remove the numbered journey and generic next/back controls. **Done: 4c-b** Add independent public Demand, Skills, and Outlook destinations. **4c-c** Separate My career entry and verify navigation; narrow mobile check remains open. | Visitors can switch public topics in any order and enter personal guidance only when they choose it. |
 | 4d Cross-industry discovery | **Done: 4d-a** Define industry and evidence records. **Done: 4d-b** Add public industry and keyword controls with clear coverage states. **Done: 4d-c** Add Workplace changes view and source-aware empty state. | Visitors can search and switch covered industries without a profile; news, demand, and forecasts are kept distinct. |
 | 4e Personal gap preview | **Done: 4e-a** Add optional current qualifications to the fictional profile. **Done: 4e-b** Compare reviewed skills with an editable illustrative promotion or move target. **Done: 4e-c** Show the certificate evidence state and verify profile edits change the displayed gap. | A teammate can hand-check every displayed gap and tell sample inputs apart from sourced requirements. |
+| 4f Web UX | **4f-a** Give medium-width screens a compact navigation layout. **4f-b** Bring the working demo action into the first view and tighten public copy. **4f-c** Check phone width and keyboard flow. | The main action and topic choices are easy to find, and no content is clipped at narrow widths. |
 
 The first practical Replit check can happen before the RunPod endpoint exists. That check completes only the Replit import slice of Stage 3. The RunPod integration items remain open until a real response is shown in the app.
 
@@ -50,4 +51,4 @@ For the preliminary build, the key working slice is Stages 4–8, including 4b's
 
 ## Next selection
 
-Build the personal gap preview in **4e**, then validate sources in **1b** before showing employer requirements or news claims. Finish the narrow mobile check in **4c**. Replit import **3a** can be done as soon as the repo is ready, while the RunPod request and backend connection remain separate slices.
+Improve the narrow layout and public action hierarchy in **4f**, then validate sources in **1b** before showing employer requirements or news claims. Finish the narrow mobile check in **4c**. Replit import **3a** can be done as soon as the repo is ready, while the RunPod request and backend connection remain separate slices.
