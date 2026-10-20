@@ -4,6 +4,16 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:14–02:25 MYT) — Expanded role row made focused
+
+**Feedback (Carson):** the expanded row was crowded and wordy.
+
+- The three explanation sentences became one short fact under each column: skill count under *Skill fit*, DOSM group and change under *Demand*, ILO exposure and gradient under *AI resilience*.
+- Skills sit side by side: **You have** (transferable skills first, dashed outline, "≈ your skill" underneath) and **To build**. Each list shows 8 skills, then "+N more".
+- One small ESCO link at the end. Checked at 1440 px and 390 px.
+
+---
+
 ## 21 Oct 2026 (02:12 MYT) — Full-width notes; no tabular figures
 
 - Notes, reasons and empty-state text no longer stop at a fixed width (they left an odd gap inside full-width tables); page intros may run to 960 px.

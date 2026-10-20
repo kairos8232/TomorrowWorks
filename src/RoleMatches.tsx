@@ -1,3 +1,4 @@
+import type React from 'react';
 // Role matches screen: explainable scores from real sources.
 // Data: ESCO roles, DOSM Q1/Q2 2026 snapshots, ILO exposure, and transferable
 // skills precomputed from the RunPod ESCO embeddings. Scoring: ./scoring.ts.
@@ -40,6 +41,19 @@ function Delta({ value }: { value: number | undefined }) {
   return <span className={`delta ${value > 0 ? 'up' : 'down'}`} aria-label={`${value > 0 ? 'up' : 'down'} ${Math.abs(value)} since the last switch`}>{value > 0 ? '▲' : '▼'}{Math.abs(value)}</span>;
 }
 
+// Shows the first few skills and a button for the rest, so long lists stay scannable.
+function SkillList({ title, empty, children }: { title: string; empty: string; children: React.ReactNode[] }) {
+  const [all, setAll] = useState(false);
+  const LIMIT = 8;
+  const shown = all ? children : children.slice(0, LIMIT);
+  return <div className="skill-list">
+    <h4>{title} <span>{children.length}</span></h4>
+    {children.length === 0 ? <p className="note">{empty}</p> : <div className="tag-row">{shown}
+      {children.length > LIMIT && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? 'Show fewer' : `+${children.length - LIMIT} more`}</button>}
+    </div>}
+  </div>;
+}
+
 function LedgerRow({ result, rank, delta }: { result: RoleScore; rank: number | null; delta?: number }) {
   const { role, fit, demand, resilience } = result;
   const [open, setOpen] = useState(false);
@@ -54,16 +68,21 @@ function LedgerRow({ result, rank, delta }: { result: RoleScore; rank: number | 
       <span className="score"><Delta value={delta} />{result.score100}</span>
     </button>
     {open && <div className="ledger-detail">
-      <ul className="reasons">
-        <li><strong>Skills.</strong> You hold {fit.matched.length} of the {role.essentialSkills.length} essential ESCO skills{fit.transferable.length ? ` and ${fit.transferable.length} more are transferable (half credit)` : ''}.</li>
-        {demand && <li><strong>Demand.</strong> DOSM online job ads for {demand.group}: {demand.before.toLocaleString()} in {demand.previous}, {demand.now.toLocaleString()} in {demand.current} ({pct(demand.change)}).</li>}
-        {resilience && <li><strong>AI exposure.</strong> ILO score {resilience.exposure.toFixed(2)} ({resilience.gradient}): the share of tasks generative AI could change, not a job-loss forecast.</li>}
-        {result.missingSignals.length > 0 && <li>No data for {result.missingSignals.join(', ')}; its weight was shared between the other parts.</li>}
-      </ul>
-      {fit.transferable.length > 0 && <div><h4>Transferable skills</h4><ul className="pairs">{fit.transferable.map((t) => <li key={t.need.uri}><span className="skill-tag">{t.need.label}</span> from your <em>{t.have.label}</em> <small>(similarity {t.similarity.toFixed(2)})</small></li>)}</ul></div>}
-      <div><h4>Skills you hold</h4><div className="tag-row">{fit.matched.length ? fit.matched.map((s) => <span className="skill-tag" key={s.uri}>{s.label}</span>) : <p>None of this role's essential skills yet.</p>}</div></div>
-      {fit.missing.length > 0 && <div><h4>Skills to build</h4><div className="tag-row">{fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri} title={s.green ? 'ESCO green skill' : undefined}>{s.label}{s.green ? ' (green skill)' : ''}</span>)}</div></div>}
-      <p className="note">ISCO {role.isco}. <a href={role.escoUri} target="_blank" rel="noreferrer">View this occupation in ESCO</a></p>
+      <div className="detail-facts">
+        <span className="fact-f">{role.essentialSkills.length} essential ESCO skills<small>transferable count half</small></span>
+        <span className="fact-d">{demand ? <>{demand.group} {pct(demand.change)}<small>DOSM {demand.previous} to {demand.current}</small></> : 'No DOSM data'}</span>
+        <span className="fact-r">{resilience ? <>ILO exposure {resilience.exposure.toFixed(2)}<small>{resilience.gradient}</small></> : 'No ILO data'}</span>
+      </div>
+      <div className="detail-skills">
+        <SkillList title="You have" empty="None of this role's essential skills yet.">
+          {[...fit.transferable.map((t) => <span className="skill-tag related" key={t.need.uri} title={`Transferable from your ${t.have.label} (similarity ${t.similarity.toFixed(2)})`}>{t.need.label}<small>≈ {t.have.label}</small></span>),
+            ...fit.matched.map((s) => <span className="skill-tag" key={s.uri}>{s.label}</span>)]}
+        </SkillList>
+        <SkillList title="To build" empty="Nothing missing.">
+          {fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri}>{s.label}</span>)}
+        </SkillList>
+      </div>
+      <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">ESCO occupation {role.isco}</a>
     </div>}
   </li>;
 }

@@ -172,11 +172,17 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .delta.up { color: #1e6b4f; }
 .delta.down { color: #a8402b; }
 @media (prefers-reduced-motion: no-preference) { .delta { animation: delta-in .5s ease-out; } @keyframes delta-in { from { opacity: 0; transform: translateY(-4px); } } }
-.ledger-detail { padding: 4px 12px 18px 76px; display: grid; gap: 10px; }
-.ledger-detail h4 { margin: 6px 0 4px; font-size: 15px; }
-.reasons { margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.6; }
-.pairs { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 15px; }
-.pairs small { color: #5d6873; }
+.ledger-detail { padding: 0 12px 20px; display: grid; gap: 16px; }
+.detail-facts { display: grid; grid-template-columns: 48px minmax(180px, 1.6fr) repeat(3, minmax(110px, 1fr)) 88px; gap: 16px; font-size: 14px; font-weight: 600; color: #1c2430; }
+.detail-facts small { display: block; font-weight: 400; color: #5d6873; }
+.fact-f { grid-column: 3; } .fact-d { grid-column: 4; } .fact-r { grid-column: 5; }
+.detail-skills { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-left: 64px; }
+.skill-list h4 { margin: 0 0 8px; font-size: 14px; }
+.skill-list h4 span { color: #5d6873; font-weight: 400; }
+.skill-list .tag-row { margin: 0; gap: 6px; align-items: center; }
+.skill-tag.related { background: #ffffff; border: 1px dashed #1e6b4f; }
+.skill-tag small { display: block; font-weight: 400; font-size: 12px; color: #5d6873; }
+.esco-link { margin-left: 64px; font-size: 14px; color: #1e6b4f; }
 .skill-tag { border-radius: 4px; font-weight: 600; }
 .skill-editor { border-top: 1px solid #d9ded9; padding: 14px 0 0; margin-top: 18px; }
 .skill-editor summary { cursor: pointer; font-weight: 700; }
@@ -193,6 +199,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .part { grid-template-columns: 1fr 38px; }
   .part::before { content: attr(data-label); font-size: 13px; color: #5d6873; grid-column: 1 / -1; }
   .ledger-detail { padding-left: 12px; }
+  .detail-facts { grid-template-columns: 1fr; gap: 8px; } .fact-f, .fact-d, .fact-r { grid-column: auto; }
+  .detail-skills { grid-template-columns: 1fr; margin-left: 0; } .esco-link { margin-left: 0; }
 }
 
 /* No tabular figures: in Schibsted Grotesk they widen commas and full stops ("99 , 447"). Right alignment keeps columns readable. */
