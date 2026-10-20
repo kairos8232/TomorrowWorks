@@ -25,7 +25,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Help a visitor discover the labour market before sharing personal details.
 
-**Current:** The app opens on a public market shell with cards that open independent Workplace changes, Demand, Skills, and Outlook destinations. Industry and keyword controls work across public views and report the selected scope. The sourced evidence list is intentionally empty, so no demand figures or trends are shown yet.
+**Current:** The app opens on a public market shell with a fictional skill-gap demo action near the introduction, followed by cards for independent Workplace changes, Demand, Skills, and Outlook destinations. Overview industry and keyword controls follow the cards; topic views place controls before results. Controls report the selected scope. The sourced evidence list is intentionally empty, so no demand figures or trends are shown yet.
 
 **Planned:**
 

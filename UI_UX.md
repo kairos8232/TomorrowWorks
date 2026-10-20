@@ -22,7 +22,7 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 | Slice | Visible problem | Change | Check |
 | --- | --- | --- | --- |
 | 4f-a — Done | The fixed sidebar squeezes content in medium-width windows. | Switch to a compact, scrollable top navigation at 980 CSS pixels and below; stack form columns at 620 pixels and below. | At a 765-pixel window, the page has full width and no horizontal page overflow. |
-| 4f-b | The public landing page spends too much space on introduction while the working personal demo action sits below empty topic cards. | Tighten the introduction, place the demo action near it, and shorten card copy. | A visitor can see the main action and at least one topic card early; the no-source message remains explicit. |
+| 4f-b — Done | The public landing page spends too much space on introduction while the working personal demo action sits below empty topic cards. | Tighten the introduction, place the fictional-demo action near it, show topic cards before overview filters, and shorten card copy. | The action and topic choices are visible before the source-status controls; the no-source message remains explicit. |
 | 4f-c | Keyboard and small-screen behaviour need a focused pass. | Check focus visibility, field labels, navigation, and the personal comparison at phone width. | A keyboard user can complete the fictional profile-to-gap flow; no control is clipped. |
 
 Keep these as separate small commits. Update this file if the design choice changes, and mark checklist items only after the interface is verified.

@@ -55,8 +55,8 @@ const personalScreens = screens.filter((item) => item.id === 'profile' || item.i
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
   market: {
     eyebrow: 'Start exploring',
-    title: 'What does work need next?',
-    body: 'Explore reported workplace changes, today’s demand, and requested skills across industries. Future outlooks will be shown separately as estimates, with dates and sources.',
+    title: 'Explore work. Plan what comes next.',
+    body: 'Browse workplace changes, demand, skills, and possible futures across industries. Each claim will show its source and coverage once verified.',
     next: 'No public market source has been connected yet.',
   },
   changes: {
@@ -133,6 +133,13 @@ function App() {
   const hasViewSource = currentKind ? marketSignals.some((signal) => currentKind === 'all' || signal.kind === currentKind) : false;
   const industryLabel = industries.find((item) => item.id === industry)!.label;
   const comparison = profile && target ? compareSkills(profile.skills, target.skills) : null;
+  const browseControls = currentKind ? <section className="browse-controls" aria-label="Filter public evidence">
+    <div className="browse-fields">
+      <label>Industry<select value={industry} onChange={(event) => setIndustry(event.target.value as IndustryId)}>{industries.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
+      <label>Search available evidence<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Topic, role, or skill" /></label>
+    </div>
+    <p className="scope-status" aria-live="polite">{industryLabel} · {search.trim() ? `search: “${search.trim()}” · ` : ''}{visibleSignals.length} verified {visibleSignals.length === 1 ? 'signal' : 'signals'} in this view. {marketSignals.length === 0 ? 'No source has been imported yet.' : ''}</p>
+  </section> : null;
 
   function updateDraft(field: keyof ProfileDraft, value: string) {
     setDraft((current) => ({ ...current, [field]: value }));
@@ -222,24 +229,20 @@ function App() {
             <span className="eyebrow">{content.eyebrow}</span>
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
+            {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Try the skill-gap demo</button><span>Fictional profile · no account needed</span></div>}
+            {screen === 'market' && marketSignals.length === 0 && <div className="hero-source-status">Public evidence: no verified source connected yet.</div>}
           </section>
-          {currentKind && <section className="browse-controls" aria-label="Filter public evidence">
-            <div className="browse-fields">
-              <label>Industry<select value={industry} onChange={(event) => setIndustry(event.target.value as IndustryId)}>{industries.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
-              <label>Search available evidence<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Topic, role, or skill" /></label>
-            </div>
-            <p className="scope-status" aria-live="polite">{industryLabel} · {search.trim() ? `search: “${search.trim()}” · ` : ''}{visibleSignals.length} verified {visibleSignals.length === 1 ? 'signal' : 'signals'} in this view. {marketSignals.length === 0 ? 'No source has been imported yet.' : ''}</p>
-          </section>}
+          {screen !== 'market' && browseControls}
           {screen === 'market' ? (
             <>
               <section className="market-grid" aria-label="Public market overview">
-                <button type="button" className="market-card" onClick={() => setScreen('changes')}><span className="market-label">WORKPLACE CHANGES</span><h2>Reported workplace issues</h2><p>Browse dated reports about automation, skills, wages, and other work topics once a permitted feed is verified.</p><span className="card-link">Explore reported changes →</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p><span className="card-link">Explore demand →</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p><span className="card-link">Explore skills →</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p><span className="card-link">Explore outlook →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('changes')}><span className="market-label">WORKPLACE CHANGES</span><h2>Reported workplace issues</h2><p>Dated reports and announcements about work, linked to their source when connected.</p><span className="card-link">Explore reported changes →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Present-day vacancy or labour measures, with their exact coverage once sourced.</p><span className="card-link">Explore demand →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Skills requested for covered roles, with source and date when verified.</p><span className="card-link">Explore skills →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Possible scenarios with assumptions, separate from today's demand.</p><span className="card-link">Explore outlook →</span></button>
               </section>
+              {browseControls}
               {visibleSignals.length > 0 && <section className="signal-list" aria-label="Available market evidence">{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section>}
-              <div className="market-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Get personalised guidance</button></div>
             </>
           ) : screen === 'changes' || screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
             visibleSignals.length > 0 ? <section className="signal-list" aria-label={`${activeScreen.label} evidence`}>{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section> : <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
