@@ -151,8 +151,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 4h — Make text readable at full-screen size
 
-- [ ] Increase body copy, navigation, action, label, input, helper, and evidence text sizes; keep a clear heading hierarchy.
-- [ ] Check the public landing page and personal form at the current medium preview width for readability and sideways overflow.
+- [x] Increase body copy, navigation, action, label, input, helper, and evidence text sizes; keep a clear heading hierarchy.
+- [x] Check the public landing page and personal form at the current medium preview width for readability and sideways overflow.
 - [ ] Check the larger-screen typography and phone layout when those viewport previews are available; update [UI_UX.md](UI_UX.md) and [SCREENS.md](SCREENS.md) with verified behaviour.
 
 **Done when:** Important text is comfortable to read at normal browser zoom, and larger type does not clip controls or hide their meaning.
