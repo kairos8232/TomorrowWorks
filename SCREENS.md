@@ -124,5 +124,6 @@ The preliminary working slice should prove **public, dated signal → changed ro
 - Put source and date near public-data claims. Label synthetic examples, snapshots, and estimates.
 - At 980 CSS pixels and below, navigation moves above the content in compact, scrollable rows; form columns stack at 620 pixels and below. The public overview uses two balanced card columns from 621–1379 pixels and four from 1380 pixels upward, within a wider content area. Buttons and links have visible keyboard focus. Keep navigation usable by keyboard and express errors and status in text.
 - In My profile, current role/skills, experience/interests, and work preferences/qualifications share rows above 620 pixels. Keep the fictional-profile explanation and helper text visible beside their fields.
+- In My skill gaps, a saved illustrative target and its result sit side by side from 1380 pixels upward; narrower layouts show the result below the target editor. No result appears before a target is compared.
 - Replit serves the app. A RunPod GPU result must affect a visible feature when integrated, with its model, input, output, and fallback documented.
 - Keep service credentials and real personal data out of the browser bundle and repository.

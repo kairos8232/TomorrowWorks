@@ -281,6 +281,7 @@ function App() {
             profile ? <section className="profile-panel" aria-label="Personal skill-gap preview">
               <div className="panel-heading"><div><h2>Compare with a chosen target</h2><p>Fictional demo. The target list is editable and illustrative, not a verified employer requirement.</p></div><button type="button" className="text-button" onClick={() => setScreen('profile')}>Edit profile</button></div>
               <p className="profile-context">Reviewed profile: {profile.currentRole} · {profile.skills.length} current skills</p>
+              <div className={`gap-workspace${target && comparison ? ' has-results' : ''}`}>
               <form onSubmit={saveTarget} noValidate>
                 <div className="field-grid">
                   <label>Next move<select value={targetDraft.moveType} onChange={(event) => updateMoveType(event.target.value as TargetDraft['moveType'])}><option value="promotion">Promotion in my field</option><option value="career move">Move to another role</option></select></label>
@@ -300,6 +301,7 @@ function App() {
                 </div>
                 <div className="credential-note"><h4>Certificates or qualifications</h4><p><strong>You entered:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None for this fictional profile.'}</p><p><strong>Target requirement:</strong> No applicable certificate requirement has been verified yet. We cannot say which certificate is needed for this role or promotion.</p></div>
               </div>}
+              </div>
             </section> : <section className="work-card" aria-label="Profile needed"><div className="card-icon" aria-hidden="true">✦</div><div><h2>Review your fictional profile first</h2><p>{content.next}</p><button type="button" className="primary-button demo-entry" onClick={() => setScreen('profile')}>Open my profile</button></div></section>
           ) : (
             <section className="work-card" aria-label={`${activeScreen.label} status`}>
