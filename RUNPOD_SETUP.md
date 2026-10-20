@@ -52,13 +52,18 @@ Both jobs use one open-weights model, `BAAI/bge-m3`. It only turns text into vec
 
 Check locally first, without a GPU: `python3 runpod/embed_esco_skills.py "data/raw/ESCO dataset - v1.2.1 - classification - en - csv/skills_en.csv" out/ --dry-run` (verified 21 Oct: 13,960 skills).
 
-### Job B steps (Serverless endpoint)
+### Job B steps (Serverless endpoint) — code ready 21 Oct, endpoint to create
 
-1. In RunPod Serverless, deploy an embedding worker for `BAAI/bge-m3` (the Infinity embedding quick-deploy, if offered on the account; confirm in the console). Set min workers 0, max workers 1.
-2. Store the endpoint ID and an API key as **Replit Secrets** (`RUNPOD_ENDPOINT_ID`, `RUNPOD_API_KEY`). Never commit them.
-3. The Replit backend sends the description, receives the vector, and ranks it against `esco-skill-vectors.f16.npy` by cosine similarity.
-4. Send one request a few minutes before judging or recording: a cold start can take tens of seconds.
-5. **Record the Serverless endpoint URL** for the Tools Declaration.
+**Code (done):** `server/index.mjs` sends the person's text to `https://api.runpod.ai/v2/<ENDPOINT_ID>/openai/v1/embeddings` (the Infinity worker's OpenAI-compatible route, body `{"model": "BAAI/bge-m3", "input": [text]}`), normalises the vector and ranks it against the Job A vectors (`server/search.mjs`). Max 500 characters, 20 searches per minute per visitor, 90 s timeout for cold starts. Tested end to end with a local fake endpoint in the same response format; **multilingual quality is untested until the live endpoint exists.**
+
+**Carson, tomorrow (about 10 min):**
+1. RunPod → **Serverless → New Endpoint** → **Infinity Vector Embeddings** (official embedding worker). If not listed, screenshot the page for Claude.
+2. Environment variable **`MODEL_NAMES` = `BAAI/bge-m3`** (must match Job A).
+3. GPU: a 24 GB card (RTX A5000 / L4 / 4090). Workers: **Active 0, Max 1**. Idle timeout **5 s**. Deploy, copy the **Endpoint ID**.
+4. RunPod → **Settings → API Keys → Create** (Serverless access only if offered).
+5. Replit → **Tools → Secrets**: `RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`. **Never paste the key in chat, GitHub or a file.**
+6. Replit → **Git → Pull**, then **Run**; open `/api/health` and check `"runpod": true`. Try a search in English, Bahasa Malaysia and Chinese; send Claude the results.
+7. **Publish** (Autoscale). Record the endpoint URL for the Tools Declaration.
 
 ### Fallback (the demo never depends on a live call)
 

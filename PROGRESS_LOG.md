@@ -4,6 +4,19 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:16–02:45 MYT) — RunPod Job B: server and search box built (endpoint tomorrow)
+
+**Decision (Carson):** do Job B for real; Carson creates the RunPod endpoint tomorrow, code finished tonight.
+
+- **`server/search.mjs`:** reads the Job A float16 `.npy` without extra packages, de-duplicates by ESCO URI (13,939 skills), normalises the query and returns the top 10 at similarity ≥ 0.5.
+- **`server/index.mjs`:** serves `dist/`; `GET /api/health`; `POST /api/skill-search` → RunPod Infinity worker's OpenAI-compatible route (format checked against the [worker README](https://github.com/runpod-workers/worker-infinity-embedding)). Key and endpoint only from env (Replit Secrets). Limits: 500 characters, 20 searches/min per visitor, 90 s cold-start timeout. Clear messages when not configured or failing; the skill list stays as fallback.
+- **App:** "Describe your work in your own words" box in *Edit your skills*; results show similarity and can be added; added skills (even outside the role set) feed transferable-skill scoring.
+- **Tests:** 21 passing (6 new: float16 decoding, 13,939 unique skills, a skill's own vector returns itself, scaling-invariance, dimension check). **End to end** with a local fake endpoint in RunPod's response format: not-configured message, 10 results in 73 ms, adding a skill moved the accountant from 45 to 47. The fake returns a fixed vector, so **real multilingual quality is untested** until the live endpoint.
+- **Replit:** Run now builds and starts the server; publishing switched to **Autoscale** (`node server/index.mjs`) because the key must stay server-side.
+- **Tomorrow (Carson, about 10 min):** steps in [RUNPOD_SETUP.md](RUNPOD_SETUP.md#job-b-steps-serverless-endpoint--code-ready-21-oct-endpoint-to-create).
+
+---
+
 ## 21 Oct 2026 (02:14–02:25 MYT) — Expanded role row made focused
 
 **Feedback (Carson):** the expanded row was crowded and wordy.

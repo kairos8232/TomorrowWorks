@@ -184,7 +184,8 @@ TomorrowWorks/
 │   ├── derived/esco/       # ESCO skill vectors from the RunPod GPU run
 │   └── raw/                # Original downloads (gitignored)
 ├── .replit, replit.md      # Replit run workflow and notes
-├── vite.config.ts          # Allows Replit's preview proxy
+├── vite.config.ts          # Allows Replit's preview proxy; proxies /api in development
+├── server/                 # Node server: built app + RunPod skill search (Job B)
 ├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
@@ -202,7 +203,7 @@ TomorrowWorks/
 - [x] Build a nine-role set with skills from ESCO v1.2.1
 - [x] Embed ESCO skills on a RunPod GPU (Job A)
 - [ ] Connect one updateable trend source and display its date/citation *(DOSM imported with dates; display pending)*
-- [ ] Serve skill search from a RunPod Serverless endpoint (Job B)
+- [ ] Serve skill search from a RunPod Serverless endpoint (Job B) *(server and search box built and tested; live endpoint pending)*
 - [x] Build a transparent skill-to-role matching function (`src/scoring.ts`, tested with `npm test`)
 - [x] Show ranked roles and missing skills (Role matches screen)
 - [x] Demonstrate that updated trend data affects matching (DOSM Q1 ↔ Q2 switch)
@@ -218,7 +219,8 @@ Use Node.js 20 or newer. From this repository:
 ```bash
 npm install
 npm start
-npm test      # scoring rules and real-data checks
+npm test      # scoring rules, search and real-data checks
+npm run serve # Node server on :5000 (built app + /api/skill-search); needs RUNPOD_API_KEY and RUNPOD_ENDPOINT_ID for search
 ```
 
 Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) after the server starts. `npm run dev` works too. To check a production build, run `npm run build`. The app accepts a synthetic profile and compares its listed skills with an editable illustrative target. It does not yet make sourced career recommendations or verify certificate requirements.

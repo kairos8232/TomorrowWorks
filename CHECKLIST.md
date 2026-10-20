@@ -63,7 +63,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Create the smallest runnable app and project structure.
 - [x] Add a basic page and navigation for the demo journey.
 - [ ] Run the project in Replit and retain proof of its use for the tools declaration. *Runs in Replit Preview from branch `dev` (21 Oct); keep the Replit project link or a later deployment URL as proof.*
-- [ ] Call the RunPod GPU step from the Replit backend using a service secret.
+- [ ] Call the RunPod GPU step from the Replit backend using a service secret. *Server code done and tested with a local fake endpoint (`server/index.mjs`); live endpoint and Replit Secrets pending.*
 - [x] Add exact local run commands to the README.
 - [ ] Have another team member follow the run instructions successfully.
 

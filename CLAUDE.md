@@ -40,7 +40,8 @@ React 19 + TypeScript + Vite 6. Node 20+.
 npm install
 npm start          # http://127.0.0.1:5173
 npm run build      # tsc --noEmit && vite build
-npm test           # vitest: scoring rules, worked example, real-data checks
+npm test           # vitest: scoring rules, worked example, search, real-data checks
+npm run serve      # server/index.mjs on :5000: dist/ + POST /api/skill-search (RunPod Job B)
 ```
 
 Key code: `src/main.tsx` (app shell and screens), `src/market.ts` (evidence record type and filters; `marketSignals` is empty until a source is imported), `src/personal.ts` (exact-name skill comparison).
@@ -48,6 +49,8 @@ Key code: `src/main.tsx` (app shell and screens), `src/market.ts` (evidence reco
 Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Table A1 via `pdftotext -layout`), ESCO v1.2.1 CSV folder. `scripts/import_ilo_exposure.py <pdf> <download date>` (needs pdftotext) writes `data/sources/ilo-genai-exposure-2025.json`. `runpod/embed_esco_skills.py` runs on a RunPod GPU Pod (`--dry-run` locally). `scripts/import_dosm_jmi.py <file> <release date> <download date>` (needs openpyxl) converts a DOSM JMI xlsx in `data/raw/` (gitignored) into `data/sources/dosm-jmi-<quarter>.json`. DOSM occupation data is by **major group only**; use quarter-on-quarter change, not year-on-year.
 
 `scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
+
+Server: `server/index.mjs` (no dependencies) serves `dist/` and `/api/skill-search`; `server/search.mjs` loads the RunPod vectors and ranks skills (tests in `server/search.test.mjs`). The RunPod key is read from env (Replit Secrets) only. Replit publishes as **Autoscale**.
 
 Scoring: `src/scoring.ts` (pure functions: skill fit with exact and transferable skills, demand trend, AI resilience, scenarios, ranking, `recommendMoves`). Transferable skills come from `data/derived/transferable-skills.json` (`scripts/build_transferable_skills.py`, threshold 0.85, half credit); tests in `src/scoring.test.ts`. Change the rule only together with its tests and `SIGNALS_AND_MATCHING.md`.
 

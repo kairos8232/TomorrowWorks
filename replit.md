@@ -12,15 +12,20 @@
 - Check types and create the production bundle with `npm run build`.
 - Local development remains available with `npm start` on port 5173.
 
-## Publish
+## Run and publish (server)
 
-`.replit` has a `[deployment]` section: **static** site. Replit runs
-`npm ci && npm run build` and serves the `dist/` folder. Press **Publish** in
-Replit; the app has no server code, so nothing else is needed.
+The app has a small Node server (`server/index.mjs`, no extra packages). It
+serves the built site from `dist/` and one API route, `POST /api/skill-search`,
+which calls the RunPod Serverless endpoint (Job B). Because the RunPod API key
+must stay on a server, publishing uses **Autoscale**, not static hosting.
 
-When RunPod Job B (free-text skill search) is connected, the RunPod API key
-must stay on a server, so the deployment will switch to an Autoscale server
-with the key in Replit Secrets. Never put the key in front-end code.
+- **Run button:** `npm run build && npm run serve` on port 5000.
+- **Publish:** `.replit` `[deployment]` builds with `npm ci && npm run build` and
+  runs `node server/index.mjs`.
+- **Secrets (Tools → Secrets):** `RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`. Without
+  them the app still works; the search box says it is not connected and the
+  skill list remains. Check `/api/health` → `"runpod": true`.
+- Never put the key in front-end code, a file, or a commit.
 
 ## Scope and services
 

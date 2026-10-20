@@ -24,7 +24,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev -- --port 5000 --strictPort"
+args = "npm run build && npm run serve"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
@@ -35,6 +35,6 @@ localPort = 5000
 externalPort = 80
 
 [deployment]
-deploymentTarget = "static"
+deploymentTarget = "autoscale"
 build = ["sh", "-c", "npm ci && npm run build"]
-publicDir = "dist"
+run = ["node", "server/index.mjs"]

@@ -93,6 +93,25 @@ export function RoleMatches() {
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
   const [query, setQuery] = useState('');
+  // Free-text skill search through the server and the RunPod endpoint (Job B).
+  const [description, setDescription] = useState('');
+  const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
+  const [searchState, setSearchState] = useState<{ busy: boolean; message: string }>({ busy: false, message: '' });
+  async function findSkills(e: React.FormEvent) {
+    e.preventDefault();
+    setSearchState({ busy: true, message: 'Searching… the first search after a pause can take up to a minute.' });
+    try {
+      const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: description }) });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error ?? 'Skill search is unavailable right now. Pick skills from the list instead.');
+      setFound(body.results);
+      setSearchState({ busy: false, message: body.results.length ? `${body.results.length} ESCO skills match. Add the ones that are true for you.` : 'No close ESCO skills found. Try other words.' });
+    } catch (err) {
+      setFound([]);
+      setSearchState({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Skill search is unavailable right now. Pick skills from the list instead.' });
+    }
+  }
+  const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
 
@@ -126,7 +145,13 @@ export function RoleMatches() {
   }
   const needle = query.trim().toLowerCase();
   const searchHits = needle.length >= 2 ? allSkills.filter((s) => s.label.toLowerCase().includes(needle)).slice(0, 12) : [];
-  const heldSkills = allSkills.filter((s) => held.has(s.uri));
+  // Skills found by search may be any ESCO skill, not only those in the role set.
+  const [extraSkills, setExtraSkills] = useState<Map<string, Skill>>(new Map());
+  const heldSkills = [...held].map((uri) => skillByUri.get(uri) ?? extraSkills.get(uri)).filter((s): s is Skill => Boolean(s)).sort((a, b) => a.label.localeCompare(b.label));
+  function addFound(skill: Skill) {
+    if (!skillByUri.has(skill.uri)) setExtraSkills((prev) => new Map(prev).set(skill.uri, skill));
+    toggle(skill.uri);
+  }
 
   return <section className="ledger" aria-label="Role matches">
     <div className="ledger-controls">
@@ -150,9 +175,15 @@ export function RoleMatches() {
     <details className="skill-editor">
       <summary>Edit your skills ({held.size} ESCO skills)</summary>
       <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s.uri)} aria-label={`Remove ${s.label}`}>{s.label} ✕</button>)}</div>
-      <label>Add a skill<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try data, budget or sustainability" /></label>
+      <form className="skill-search" onSubmit={findSkills}>
+        <label>Describe your work in your own words<textarea value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder="e.g. I reconcile bank statements and prepare monthly reports in Excel" /></label>
+        <button type="submit" className="primary-button" disabled={searchState.busy || !description.trim()}>{searchState.busy ? 'Searching…' : 'Find matching skills'}</button>
+      </form>
+      {searchState.message && <p className="note" aria-live="polite">{searchState.message}</p>}
+      {found.length > 0 && <div className="tag-row">{found.map((s) => <button type="button" key={s.uri} className={`skill-tag${held.has(s.uri) ? '' : ' skill-gap'}`} onClick={() => addFound(s)}>{held.has(s.uri) ? 'Remove ' : 'Add '}{s.label}<small>similarity {s.similarity.toFixed(2)}</small></button>)}</div>}
+      <p className="note">Works in English, Bahasa Malaysia or Chinese. The BAAI/bge-m3 model on RunPod only finds existing ESCO skills; you decide which are true.</p>
+      <label>Or pick from the list<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try data, budget or sustainability" /></label>
       {searchHits.length > 0 && <div className="tag-row">{searchHits.map((s) => <button type="button" key={s.uri} className={`skill-tag${held.has(s.uri) ? '' : ' skill-gap'}`} onClick={() => toggle(s.uri)}>{held.has(s.uri) ? 'Remove ' : 'Add '}{s.label}</button>)}</div>}
-      <p className="note">Searching in your own words (English, Bahasa Malaysia or Chinese) through the RunPod model is being connected. Until then, pick skills from this list.</p>
     </details>
   </section>;
 }
