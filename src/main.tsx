@@ -3,15 +3,16 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 type Screen = 'market' | 'signin' | 'profile' | 'roles' | 'pathway';
-type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string };
-type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[] };
+type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string; workPreferences: string };
+type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[]; workPreferences: string };
 
-const emptyProfile: ProfileDraft = { currentRole: '', skills: '', experience: '', interests: '' };
+const emptyProfile: ProfileDraft = { currentRole: '', skills: '', experience: '', interests: '', workPreferences: '' };
 const sampleProfile: ProfileDraft = {
   currentRole: 'Junior Accountant',
   skills: 'Excel, bookkeeping, financial reporting',
   experience: '2 years supporting monthly reports and reconciliations',
   interests: 'data analysis, dashboards',
+  workPreferences: 'I enjoy finding patterns and explaining them clearly to a team.',
 };
 
 function splitEntries(value: string) {
@@ -82,7 +83,7 @@ function App() {
       setProfileError('Complete every field and separate multiple skills or interests with commas.');
       return;
     }
-    setProfile({ currentRole: draft.currentRole.trim(), skills, experience: draft.experience.trim(), interests });
+    setProfile({ currentRole: draft.currentRole.trim(), skills, experience: draft.experience.trim(), interests, workPreferences: draft.workPreferences.trim() });
     setProfileError('');
   }
 
@@ -149,10 +150,11 @@ function App() {
                 </div>
                 <label>Experience<textarea value={draft.experience} onChange={(event) => updateDraft('experience', event.target.value)} placeholder="Describe the work you have done" rows={3} /></label>
                 <label>Interests<input value={draft.interests} onChange={(event) => updateDraft('interests', event.target.value)} placeholder="e.g. data analysis, dashboards" autoComplete="off" /><small>Separate interests with commas.</small></label>
+                <label>Work preferences or strengths (optional)<textarea value={draft.workPreferences} onChange={(event) => updateDraft('workPreferences', event.target.value)} placeholder="e.g. I enjoy explaining data and working with a team" rows={2} /><small>Describe tasks or ways of working you prefer. This does not affect matching yet.</small></label>
                 {profileError && <p className="form-error" role="alert">{profileError}</p>}
                 <button type="submit" className="primary-button">Review profile</button>
               </form>
-              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p><button type="button" className="text-button" onClick={() => setScreen('roles')}>Continue to role matches →</button></div>}
+              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<button type="button" className="text-button" onClick={() => setScreen('roles')}>Continue to role matches →</button></div>}
             </section>
           ) : (
             <section className="work-card" aria-label={`${screens[activeIndex].label} status`}>

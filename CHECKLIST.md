@@ -83,9 +83,9 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Start the app on the public market screen and offer an action to begin personalised guidance.
 - [x] Add a clearly labelled sign-in entry screen; the preliminary demo continues with a fictional profile and creates no account.
-- [ ] Add an optional work-preferences or strengths field; do not infer personality or request protected traits.
-- [ ] Keep a real account flow and résumé upload as separate unchecked work until the team decides consent, storage, review, and deletion behaviour.
-- [ ] Verify that the visitor can browse first, continue through the demo entry, review the profile, and reach matches without a misleading sign-in claim.
+- [x] Add an optional work-preferences or strengths field; do not infer personality or request protected traits.
+- [x] Record real accounts and résumé upload as future work requiring decisions on consent, storage, review, and deletion.
+- [x] Verify that the visitor can browse first, continue through the demo entry, review the profile, and reach matches without a misleading sign-in claim.
 
 **Done when:** The public-first demo flow works and states plainly that sign-in and résumé upload are not implemented.
 **Commit focus:** Split the market-first navigation, demo sign-in entry, and optional profile field into separate commits.

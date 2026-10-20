@@ -51,11 +51,11 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Capture the person's starting skills and relevant preferences for matching.
 
-**Current:** A fictional Junior Accountant example, form for role, skills, experience, and interests, validation, review, and in-memory handoff. Refreshing clears the profile.
+**Current:** A fictional Junior Accountant example, form for role, skills, experience, interests, and optional work preferences or strengths, validation, review, and in-memory handoff. Refreshing clears the profile. The optional field is displayed in the review and does not affect matching yet.
 
 **Planned:**
 
-- Add an optional free-text field for **work preferences or strengths** such as preferred tasks, working style, or motivations. Let the person edit it; do not infer personality or sensitive traits.
+- Keep **work preferences or strengths** editable and job-relevant; do not infer personality or sensitive traits.
 - In the real account flow, allow a résumé as an optional starting point. Show extracted skills for correction before using them.
 - Keep match inputs limited to job-relevant information and explain how each affects results. Avoid protected traits and unsupported personality scores.
 - Require review before personalised matching, and preserve the reviewed profile while navigating or switching scenarios.

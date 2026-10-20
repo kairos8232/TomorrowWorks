@@ -122,7 +122,7 @@ TomorrowWorks/
 ## MVP Priorities
 
 - [x] Create a synthetic sample profile and a working intake form
-- [ ] Open on a public market view with an honest demo sign-in entry
+- [x] Open on a public market view with an honest demo sign-in entry
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
