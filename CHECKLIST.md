@@ -94,9 +94,10 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Remove screen numbers, the journey counter, progress bar, and generic Next/Back controls.
 - [x] Give Explore, Demand, Skills, and Outlook independent public destinations reachable in any order.
-- [ ] Put My career and the demo sign-in entry apart from public browsing; do not make sign-in a numbered destination.
-- [ ] Keep profile, role matches, and pathway available as personal destinations after demo entry, with task-specific links where helpful.
-- [ ] Check desktop and mobile navigation, including a visitor switching public topics and returning from the personal area.
+- [x] Put My career and the demo sign-in entry apart from public browsing; do not make sign-in a numbered destination.
+- [x] Keep profile, role matches, and pathway available as personal destinations after demo entry, with task-specific links where helpful.
+- [x] Check browser navigation: switch public topics in any order, enter the fictional profile, and return to public browsing.
+- [ ] Check the navigation and market cards at a narrow mobile viewport.
 
 **Done when:** The app feels like a market dashboard with optional personal guidance rather than a five-step form.
 **Commit focus:** Navigation structure and public destinations; keep sourced content for Stages 5–6.

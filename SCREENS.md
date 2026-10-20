@@ -47,7 +47,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Mark the transition from public browsing to a saved personal profile.
 
-**Current:** The sign-in entry states that sign-in is unavailable and offers a fictional sample profile. No account or personal-data storage exists. Navigation to personalised screens leads here until the visitor enters the demo.
+**Current:** The My career action opens a demo entry that states sign-in is unavailable and offers a fictional sample profile. No account or personal-data storage exists. Personal navigation appears after the visitor enters the demo.
 
 **Planned:**
 

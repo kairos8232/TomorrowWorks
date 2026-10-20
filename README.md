@@ -118,7 +118,7 @@ TomorrowWorks/
 
 - [x] Create a synthetic sample profile and a working intake form
 - [x] Open on a public market view with an honest demo sign-in entry
-- [ ] Replace the numbered journey with freely browsable market destinations
+- [x] Replace the numbered journey with freely browsable market destinations
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills

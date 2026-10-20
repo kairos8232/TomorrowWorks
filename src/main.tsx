@@ -29,6 +29,8 @@ const screens: { id: Screen; label: string; description: string }[] = [
   { id: 'roles', label: 'Role matches', description: 'Scores, reasons and skills gaps' },
   { id: 'pathway', label: 'My pathway', description: 'Learning steps and SDG links' },
 ];
+const publicScreens = screens.filter((item) => item.id === 'market' || item.id === 'demand' || item.id === 'skills' || item.id === 'outlook');
+const personalScreens = screens.filter((item) => item.id === 'profile' || item.id === 'roles' || item.id === 'pathway');
 
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
   market: {
@@ -87,7 +89,7 @@ function App() {
   const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileError, setProfileError] = useState('');
-  const activeIndex = screens.findIndex((item) => item.id === screen);
+  const activeScreen = screens.find((item) => item.id === screen)!;
   const content = screenCopy[screen];
 
   function updateDraft(field: keyof ProfileDraft, value: string) {
@@ -123,24 +125,31 @@ function App() {
       <aside className="sidebar" aria-label="Project navigation">
         <div className="brand"><span className="brand-mark" aria-hidden="true">✦</span><span>Tomorrow<span className="brand-accent">Works</span></span></div>
         <p className="sidebar-kicker">Your career, mapped forward.</p>
-        <nav className="journey" aria-label="Career journey">
-          {screens.map((item) => (
-            <button
-              className={`journey-step${screen === item.id ? ' active' : ''}`}
-              key={item.id}
-              onClick={() => setScreen(!demoEntered && !['market', 'demand', 'skills', 'outlook', 'signin'].includes(item.id) ? 'signin' : item.id)}
-              type="button"
-              aria-current={screen === item.id ? 'step' : undefined}
-            >
-              <span><strong>{item.label}</strong><small>{item.description}</small></span>
-            </button>
-          ))}
-        </nav>
-        <div className="sidebar-note">Prototype in progress<br /><span>Public evidence and clear explanations at every step.</span></div>
+        <div className="nav-group">
+          <p className="nav-group-label">BROWSE</p>
+          <nav className="nav-list" aria-label="Browse the market">
+            {publicScreens.map((item) => (
+              <button className={`nav-item${screen === item.id ? ' active' : ''}`} key={item.id} onClick={() => setScreen(item.id)} type="button" aria-current={screen === item.id ? 'page' : undefined}>
+                <strong>{item.label}</strong><small>{item.description}</small>
+              </button>
+            ))}
+          </nav>
+        </div>
+        {demoEntered && <div className="nav-group personal-group">
+          <p className="nav-group-label">MY CAREER</p>
+          <nav className="nav-list" aria-label="My career">
+            {personalScreens.map((item) => (
+              <button className={`nav-item${screen === item.id ? ' active' : ''}`} key={item.id} onClick={() => setScreen(item.id)} type="button" aria-current={screen === item.id ? 'page' : undefined}>
+                <strong>{item.label}</strong><small>{item.description}</small>
+              </button>
+            ))}
+          </nav>
+        </div>}
+        <div className="sidebar-note">Prototype in progress<br /><span>Public evidence and clear explanations for each insight.</span></div>
       </aside>
 
       <main className="main-content">
-        <header className="topbar"><span>Career navigation workspace</span><span className="status-pill">Prototype build</span></header>
+        <header className="topbar"><span>Career market explorer</span><button type="button" className="career-button" onClick={() => setScreen(demoEntered ? 'profile' : 'signin')}>{demoEntered ? 'My profile' : 'My career'}</button></header>
         <div className="content-wrap">
           <section className="hero" aria-labelledby="screen-title">
             <span className="eyebrow">{content.eyebrow}</span>
@@ -157,7 +166,7 @@ function App() {
               <div className="market-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Get personalised guidance</button></div>
             </>
           ) : screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
-            <section className="topic-panel" aria-label={`${screens[activeIndex].label} information`}>
+            <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
               <span className="market-label">SOURCE STATUS</span>
               <h2>Evidence is being connected</h2>
               <p>{content.next}</p>
@@ -185,9 +194,9 @@ function App() {
               {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<button type="button" className="text-button" onClick={() => setScreen('roles')}>Continue to role matches →</button></div>}
             </section>
           ) : (
-            <section className="work-card" aria-label={`${screens[activeIndex].label} status`}>
+            <section className="work-card" aria-label={`${activeScreen.label} status`}>
               <div className="card-icon" aria-hidden="true">✦</div>
-              <div><h2>{screens[activeIndex].label}</h2><p>{content.next}</p>{screen === 'roles' && profile && <p className="profile-context">Profile ready: {profile.currentRole} · {profile.skills.length} skills entered</p>}</div>
+              <div><h2>{activeScreen.label}</h2><p>{content.next}</p>{screen === 'roles' && profile && <p className="profile-context">Profile ready: {profile.currentRole} · {profile.skills.length} skills entered</p>}</div>
             </section>
           )}
         </div>
