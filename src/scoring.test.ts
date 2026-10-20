@@ -3,15 +3,17 @@ import rolesFile from '../data/roles.json';
 import dosmQ1 from '../data/sources/dosm-jmi-2026-q1.json';
 import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
 import iloFile from '../data/sources/ilo-genai-exposure-2025.json';
+import transferableFile from '../data/derived/transferable-skills.json';
 import {
-  demandTrend, previousQuarter, rankRoles, scenarios, scoreRole, skillFit,
-  type DosmSnapshot, type IloExposure, type Role,
+  demandTrend, previousQuarter, rankRoles, recommendMoves, scenarios, scoreRole, skillFit,
+  type DosmSnapshot, type IloExposure, type Role, type TransferableSkills,
 } from './scoring';
 
 const roles = rolesFile.roles as Role[];
 const q1 = dosmQ1 as DosmSnapshot;
 const q2 = dosmQ2 as DosmSnapshot;
 const ilo = iloFile as IloExposure;
+const transferable = transferableFile as TransferableSkills;
 
 // --- Worked example from SIGNALS_AND_MATCHING.md (synthetic inputs) ---------
 const skill = (n: number) => ({ uri: `s${n}`, label: `skill ${n}`, type: 'skill/competence', green: false, digital: false });
@@ -67,6 +69,25 @@ describe('rules', () => {
   });
 });
 
+describe('transferable skills', () => {
+  const related: TransferableSkills = {
+    method: { threshold: 0.85, credit: 0.5, model: 'test' },
+    neededSkills: { s4: { label: 'skill 4', transferableFrom: [{ uri: 'held-x', label: 'held x', similarity: 0.9 }] } },
+  };
+  it('a related held skill gives half credit and names the pair', () => {
+    const f = skillFit(exampleRole, new Set(['s1', 's2', 's3', 'held-x']), related);
+    expect(f.matched).toHaveLength(3);
+    expect(f.transferable).toEqual([{ need: exampleRole.essentialSkills[3], have: { uri: 'held-x', label: 'held x' }, similarity: 0.9 }]);
+    expect(f.missing).toHaveLength(2);
+    expect(f.F).toBeCloseTo((3 + 0.5) / 6, 10);
+  });
+  it('an exact match is never also counted as transferable', () => {
+    const f = skillFit(exampleRole, new Set(['s4', 'held-x']), related);
+    expect(f.matched.map((s) => s.uri)).toEqual(['s4']);
+    expect(f.transferable).toEqual([]);
+  });
+});
+
 describe('real data', () => {
   it('every role has a DOSM demand row and an ILO exposure score', () => {
     for (const role of roles) {
@@ -89,5 +110,21 @@ describe('real data', () => {
     const ranked = rankRoles(roles, new Set(), q2, ilo, scenarios.fast);
     expect(ranked).toHaveLength(roles.length);
     for (let i = 1; i < ranked.length; i++) expect(ranked[i - 1].score).toBeGreaterThanOrEqual(ranked[i].score);
+  });
+  it('accounting assistant → financial analyst: "accounting" is transferable from "accounting techniques" (0.86)', () => {
+    const aa = roles.find((r) => r.id === 'accounting-assistant')!;
+    const fa = roles.find((r) => r.id === 'financial-analyst')!;
+    const f = skillFit(fa, new Set(aa.essentialSkills.map((s) => s.uri)), transferable);
+    const pair = f.transferable.find((t) => t.need.label === 'accounting');
+    expect(pair?.have.label).toBe('accounting techniques');
+    expect(pair?.similarity).toBeCloseTo(0.86, 2);
+  });
+  it('the current job is shown separately and not ranked as a move', () => {
+    const aa = roles.find((r) => r.id === 'accounting-assistant')!;
+    const { current, moves } = recommendMoves(roles, aa.id, new Set(aa.essentialSkills.map((s) => s.uri)), q2, ilo, scenarios.moderate, transferable);
+    expect(current?.role.id).toBe('accounting-assistant');
+    expect(current?.fit.F).toBe(1);
+    expect(moves.map((m) => m.role.id)).not.toContain('accounting-assistant');
+    expect(moves).toHaveLength(roles.length - 1);
   });
 });

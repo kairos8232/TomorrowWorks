@@ -125,7 +125,7 @@ ESCO occupation codes follow ISCO-08; checking them against the MASCO 2020 list 
 
 For a profile *p* and role *r*:
 
-- **Skill fit** `F = matched essential skills / all essential skills of r` (0–1). Matching uses normalised exact names plus a small reviewed synonym list.
+- **Skill fit** `F = (exact + 0.5 × transferable) / essential skills of r` (0–1). *Exact* = the person confirmed that ESCO skill. *Transferable* = the person holds a different ESCO skill whose RunPod embedding is **≥ 0.85** cosine-similar (precomputed in `data/derived/transferable-skills.json` by `scripts/build_transferable_skills.py`); the screen shows the pair and its similarity.
 - **Demand trend** `D = clamp(0.5 + Δ, 0, 1)`, where `Δ` is the quarter-on-quarter change for the role's **major group** (first digit of its ISCO code). +10% → 0.60; −20% → 0.30. Roles in the same group share `D`, so `D` mostly separates clerical (group 4), associate (group 3) and professional (group 2) moves. No DOSM row → `D` omitted and its weight redistributed, with a visible note.
 - **AI resilience** `R = 1 − E`, where `E` is the ILO mean exposure score for the occupation.
 
@@ -145,6 +145,39 @@ Moderate: 0.6·0.50 + 0.25·0.58 + 0.15·0.55 = 0.300 + 0.145 + 0.0825 = **0.527
 Fast: 0.5·0.50 + 0.2·0.58 + 0.3·0.55 = 0.250 + 0.116 + 0.165 = **0.531 → 53**.
 
 Write a unit test with this case before wiring the UI.
+
+### Why transferable skills, and why 0.85 (decided 21 Oct 2026)
+
+With exact matching only, the demo user's current job scored F = 1.00 and every move F ≈ 0, because ESCO occupations rarely share skill records; moves were then ranked only by D and R. Transferable skills use the RunPod ESCO embeddings so related experience counts, while staying explainable.
+
+The threshold was chosen from real pairs for the demo user (needed ← held):
+
+| Similarity | Pair | Sensible? |
+| --- | --- | --- |
+| 0.87 | perform business analysis ← perform business research | yes |
+| 0.86 | accounting ← accounting techniques | yes |
+| 0.84 | explain accounting records ← check accounting records | yes, but below the line |
+| 0.81 | use databases ← use accounting systems | partly |
+| 0.80 | perform scientific research ← perform business research | **no** |
+
+At ≥ 0.85 every inspected pair was sensible, so 0.85 is used, at half credit. Result: 185 needed skills, 61 with at least one transferable ESCO skill, 99 pairs. Data analyst and software developer get no transferable credit from accounting skills — an honest "new skills needed".
+
+**The current job is shown separately** (`recommendMoves` in `src/scoring.ts`): it always wins on skill fit, so it is displayed as "where you are" and only the other roles are ranked.
+
+### Demo result with real data (accounting assistant's 20 ESCO skills)
+
+| Move | F (exact, transferable / needed) | Q2 moderate | Q2 fast |
+| --- | --- | --- | --- |
+| bookkeeper | 0.67 (12, 0 / 18) | 58 | 57 |
+| accountant | 0.46 (11, 2 / 26) | 45 | 46 |
+| billing clerk | 0.38 (4, 1 / 12) | 36 | 36 |
+| financial analyst | 0.09 (1, 2 / 23) | 21 | 24 |
+| business analyst | 0.02 (0, 1 / 26) | 19 | 25 |
+| sustainability manager | 0.00 (0, 0 / 48) | 19 | **27** |
+| data analyst | 0.00 (0, 0 / 36) | 18 | 23 |
+| software developer | 0.00 (0, 0 / 24) | 17 | 22 |
+
+Switching to the fast scenario moves sustainability manager from 6th to 4th (resilience weighs more); switching DOSM Q1 → Q2 lowers the accountant from 51 to 45 (Professionals +15.8% → −9.5%). Scores are estimates.
 
 ## Proving "trend data changes the result"
 

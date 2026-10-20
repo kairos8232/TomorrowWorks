@@ -2,7 +2,9 @@
 // ("Scoring rule (hand-checkable)") and tested in src/scoring.test.ts.
 //
 //   score = wF·F + wD·D + wR·R
-//   F  skill fit       = confirmed essential skills / all essential skills of the role
+//   F  skill fit       = (exact matches + 0.5 × transferable) / essential skills of the role
+//                        transferable = the person holds a different ESCO skill whose RunPod
+//                        embedding is ≥ 0.85 similar (data/derived/transferable-skills.json)
 //   D  demand trend    = clamp(0.5 + Δ, 0, 1), Δ = quarter-on-quarter change in DOSM
 //                        online job offerings for the role's ISCO major group
 //   R  AI resilience   = 1 − ILO mean GenAI exposure of the role's ISCO code
@@ -32,6 +34,14 @@ export type IloExposure = {
   occupations: { isco: string; mean: number; sd: number; gradient: string }[];
 };
 
+/** Needed-skill URI → ESCO skills that make it transferable (from scripts/build_transferable_skills.py). */
+export type TransferableSkills = {
+  method: { threshold: number; credit: number; model: string };
+  neededSkills: Record<string, { label: string; transferableFrom: { uri: string; label: string; similarity: number }[] }>;
+};
+
+export const noTransferableSkills: TransferableSkills = { method: { threshold: 1, credit: 0, model: 'none' }, neededSkills: {} };
+
 export type ScenarioId = 'moderate' | 'fast';
 
 export type Scenario = { id: ScenarioId; label: string; assumption: string; weights: { F: number; D: number; R: number } };
@@ -59,12 +69,28 @@ export function previousQuarter(quarter: string) {
   return q === 1 ? `${year - 1}-Q4` : `${year}-Q${q - 1}`;
 }
 
-/** Skill fit: which essential skills the person has confirmed (matched by ESCO URI). */
-export function skillFit(role: Role, confirmedSkillUris: ReadonlySet<string>) {
-  const matched = role.essentialSkills.filter((s) => confirmedSkillUris.has(s.uri));
-  const missing = role.essentialSkills.filter((s) => !confirmedSkillUris.has(s.uri));
-  const F = role.essentialSkills.length ? matched.length / role.essentialSkills.length : 0;
-  return { F, matched, missing };
+/**
+ * Skill fit. Each essential skill of the role is one of:
+ *   matched      – the person confirmed this exact ESCO skill (full credit)
+ *   transferable – the person holds a closely related ESCO skill (partial credit, pair shown)
+ *   missing      – neither
+ */
+export function skillFit(role: Role, confirmedSkillUris: ReadonlySet<string>, transferable: TransferableSkills = noTransferableSkills) {
+  const matched: Skill[] = [];
+  const related: { need: Skill; have: { uri: string; label: string }; similarity: number }[] = [];
+  const missing: Skill[] = [];
+  for (const need of role.essentialSkills) {
+    if (confirmedSkillUris.has(need.uri)) {
+      matched.push(need);
+      continue;
+    }
+    const best = (transferable.neededSkills[need.uri]?.transferableFrom ?? []).find((c) => confirmedSkillUris.has(c.uri));
+    if (best) related.push({ need, have: { uri: best.uri, label: best.label }, similarity: best.similarity });
+    else missing.push(need);
+  }
+  const total = role.essentialSkills.length;
+  const F = total ? (matched.length + transferable.method.credit * related.length) / total : 0;
+  return { F, matched, transferable: related, missing };
 }
 
 /** Demand trend for an ISCO major group from one DOSM snapshot, or null if DOSM has no usable row. */
@@ -90,8 +116,11 @@ export function aiResilience(ilo: IloExposure, isco: string) {
  * Score one role. If a signal is missing, its weight is shared between the
  * remaining parts in proportion to their weights, and the result says so.
  */
-export function scoreRole(role: Role, confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot, ilo: IloExposure, scenario: Scenario) {
-  const fit = skillFit(role, confirmedSkillUris);
+export function scoreRole(
+  role: Role, confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot, ilo: IloExposure, scenario: Scenario,
+  transferable: TransferableSkills = noTransferableSkills,
+) {
+  const fit = skillFit(role, confirmedSkillUris, transferable);
   const demand = demandTrend(snapshot, role.iscoMajorGroup);
   const resilience = aiResilience(ilo, role.isco);
 
@@ -121,9 +150,28 @@ export function scoreRole(role: Role, confirmedSkillUris: ReadonlySet<string>, s
 export type RoleScore = ReturnType<typeof scoreRole>;
 
 /** Rank roles by score, highest first; ties keep role-set order. */
-export function rankRoles(roles: Role[], confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot, ilo: IloExposure, scenario: Scenario) {
+export function rankRoles(
+  roles: Role[], confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot, ilo: IloExposure, scenario: Scenario,
+  transferable: TransferableSkills = noTransferableSkills,
+) {
   return roles
-    .map((role, index) => ({ index, result: scoreRole(role, confirmedSkillUris, snapshot, ilo, scenario) }))
+    .map((role, index) => ({ index, result: scoreRole(role, confirmedSkillUris, snapshot, ilo, scenario, transferable) }))
     .sort((a, b) => b.result.score - a.result.score || a.index - b.index)
     .map((x) => x.result);
+}
+
+/**
+ * Split the person's current job ("where you are") from the ranked moves.
+ * The current job would always win on skill fit, so it is shown for
+ * comparison and never recommended.
+ */
+export function recommendMoves(
+  roles: Role[], currentRoleId: string | null, confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot,
+  ilo: IloExposure, scenario: Scenario, transferable: TransferableSkills = noTransferableSkills,
+) {
+  const current = roles.find((r) => r.id === currentRoleId) ?? null;
+  return {
+    current: current ? scoreRole(current, confirmedSkillUris, snapshot, ilo, scenario, transferable) : null,
+    moves: rankRoles(roles.filter((r) => r !== current), confirmedSkillUris, snapshot, ilo, scenario, transferable),
+  };
 }

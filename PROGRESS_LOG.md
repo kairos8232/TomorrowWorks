@@ -4,6 +4,18 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:43–01:55 MYT) — Transferable skills via RunPod embeddings; current job separated
+
+**Decision (Carson):** go ahead with both fixes from the previous entry.
+
+- **Calibrated the threshold on real pairs** (table in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#why-transferable-skills-and-why-085-decided-21-oct-2026)): ≥ 0.85 all sensible; 0.80 lets in "perform scientific research ← perform business research". Chosen: **0.85, half credit**.
+- **New `scripts/build_transferable_skills.py` → `data/derived/transferable-skills.json` (45 KB):** for each of the 185 essential skills in the role set, the ESCO skills at ≥ 0.85 similarity (61 skills have at least one; 99 pairs). The app never loads the 28 MB vectors.
+- **`src/scoring.ts`:** `skillFit` now returns exact, transferable (with the pair and similarity) and missing skills; `recommendMoves` shows the current job separately and ranks the rest.
+- **Tests:** 15 passing (new: half credit, no double counting, real pair *accounting ← accounting techniques* 0.86, current job excluded from moves).
+- **Real result:** Q2 moderate — bookkeeper 58, accountant 45, billing clerk 36, financial analyst 21 …; fast scenario lifts sustainability manager from 6th to 4th; Q1 → Q2 lowers accountant 51 → 45. RunPod now directly drives the skill-fit part of every recommendation.
+
+---
+
 ## 21 Oct 2026 (01:39–01:50 MYT) — README refreshed; scoring module built
 
 - **README:** project stage, data-source table with verified counts, role set, scoring formula and scenarios, RunPod section, rebuild commands, Replit notes, and the ESCO acknowledgement plus source citations.

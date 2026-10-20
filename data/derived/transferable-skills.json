@@ -1,0 +1,1312 @@
+{
+ "method": {
+  "description": "Cosine similarity between ESCO skill embeddings; a held skill at or above the threshold makes a needed skill transferable (half credit).",
+  "threshold": 0.85,
+  "credit": 0.5,
+  "model": "BAAI/bge-m3",
+  "embeddingRun": {
+   "gpu": "NVIDIA RTX A5000",
+   "skills": 13960,
+   "seconds": 92.5
+  },
+  "source": "ESCO v1.2.1 (European Commission); adapted."
+ },
+ "neededSkills": {
+  "http://data.europa.eu/esco/skill/6014921e-1d25-4039-adc2-04852d61880e": {
+   "label": "ICT debugging tools",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/ecc18804-a466-40d9-98b4-fba5cd67dd4b": {
+   "label": "accounting",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/880c54f9-866e-4f37-b5fa-25ef8a7d49b6",
+     "label": "accounting techniques",
+     "similarity": 0.86
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/08371fe9-c658-4f6a-966f-71dbb0ab683d": {
+   "label": "accounting department processes",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/39e43f7c-a95e-4583-be76-bb134ccce1ae",
+     "label": "financial department processes",
+     "similarity": 0.871
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/99b163e8-7815-43e2-83f3-a47f3076354c": {
+   "label": "accounting entries",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/880c54f9-866e-4f37-b5fa-25ef8a7d49b6": {
+   "label": "accounting techniques",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/ecc18804-a466-40d9-98b4-fba5cd67dd4b",
+     "label": "accounting",
+     "similarity": 0.86
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/c8b4b02c-d9ce-4e24-ab43-5dd52c6dff48": {
+   "label": "advise on carbon emissions reduction",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/dbef5042-4b99-4e6f-b2ed-1d33b07b3ed6",
+     "label": "advise on sustainability solutions",
+     "similarity": 0.855
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b2f05068-c409-43ec-ba58-b5dfe991ca5e": {
+   "label": "advise on corporate social responsibility",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/8bc75dce-beba-40f9-93fc-66c9708ed74b": {
+   "label": "advise on efficiency improvements",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/79c36c91-28a5-44b7-ab9b-7093b2d4b21e": {
+   "label": "advise on financial matters",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/161a6c5a-593a-4977-b7b7-49c6a2a2f2a3",
+     "label": "advise on tax planning",
+     "similarity": 0.875
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/58d8e348-8bbc-4827-9214-822b1ee0007a",
+     "label": "advise on investment",
+     "similarity": 0.874
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/10f04ffe-7435-44d4-9f6f-6bf6e87b9a0e",
+     "label": "advise on acquisitions",
+     "similarity": 0.862
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/a9640376-8d72-4a70-a4a3-7a18e2e8f3c0",
+     "label": "advise on public finance",
+     "similarity": 0.86
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/dbef5042-4b99-4e6f-b2ed-1d33b07b3ed6": {
+   "label": "advise on sustainability solutions",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/d84326c9-a3d3-4e22-a6a1-1ad42a356f10",
+     "label": "sustainability consulting",
+     "similarity": 0.859
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/c8b4b02c-d9ce-4e24-ab43-5dd52c6dff48",
+     "label": "advise on carbon emissions reduction",
+     "similarity": 0.855
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6742977a-aa00-4c8c-9861-898b0373907e": {
+   "label": "advise on sustainable management policies",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/ee7f90cc-922e-4da7-a7ae-83c2688fed10": {
+   "label": "align efforts towards business development",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/28a2ff4b-5f99-448e-8bd7-fb836166e95f": {
+   "label": "allocate bills",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/8f585def-6ade-41b3-b897-3d71fba4151d": {
+   "label": "alternative energy",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/47a49cd6-097d-457a-9f7b-c290c14930d5": {
+   "label": "analyse big data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/5da3c765-10a3-49eb-934c-ec401ceb1a34": {
+   "label": "analyse business plans",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/b04f377b-ee80-4b38-aca1-19d266a23b17": {
+   "label": "analyse business requirements",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/ce5b1446-b5e3-4f05-a5ac-83f2ee142a44": {
+   "label": "analyse external factors of companies",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/91816e1a-d026-4d21-9b1c-59ca5cf488de",
+     "label": "analyse internal factors of companies",
+     "similarity": 0.903
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8a43795b-bb38-4f29-91df-a6c92ad4643c": {
+   "label": "analyse financial performance of a company",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/99571e68-801f-49af-a897-5f75996642e1",
+     "label": "financial analysis",
+     "similarity": 0.854
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/91816e1a-d026-4d21-9b1c-59ca5cf488de": {
+   "label": "analyse internal factors of companies",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/ce5b1446-b5e3-4f05-a5ac-83f2ee142a44",
+     "label": "analyse external factors of companies",
+     "similarity": 0.903
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f28617ad-afdd-4041-814c-216153a38998": {
+   "label": "analyse software specifications",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/96d549bb-3e62-4c45-92a7-f114df089581": {
+   "label": "analyse supply chain strategies",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/b7e57889-a84f-440c-9e60-459aa69979e9",
+     "label": "analyse supply chain trends",
+     "similarity": 0.895
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/020b3c27-bae1-4b85-9d6f-eccee0f5ed99",
+     "label": "manage supplies",
+     "similarity": 0.85
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/3c03ee71-4a23-448f-b79e-81fd75d27dca": {
+   "label": "apply change management",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/382c11ed-20d5-4ae7-b60e-15fec527fa6c": {
+   "label": "apply statistical analysis techniques",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e541c69c-ea80-4b17-87cb-4001d0b9d303": {
+   "label": "assess environmental impact",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/d86babea-bf8b-4552-81a8-daf706066ad6",
+     "label": "manage environmental impact of operations",
+     "similarity": 0.898
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/192e12e7-6bf0-42e6-bfc3-70c08551f12a",
+     "label": "assess environmental plans against financial costs",
+     "similarity": 0.854
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/60ab2bf7-c812-4a88-86c0-7c81a9b2f77c",
+     "label": "carry out environmental audits",
+     "similarity": 0.85
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4e87c852-602a-4a0e-b8d8-20709ce14ac5": {
+   "label": "assess the life cycle of resources",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/b02b38c4-d46d-44da-9479-1310060bd74d": {
+   "label": "asset management",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e9030465-13c5-46d2-bdae-c2c1a9dbec86": {
+   "label": "attach accounting certificates to accounting transactions",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/2ff405ec-f59c-4a7b-84b6-9776a49582c4": {
+   "label": "bookkeeping regulations",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/dc72ad0a-c5dc-4abd-bc0d-ca43e82162e1": {
+   "label": "build business relationships",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/633a3637-2c6b-40ae-ac38-289eb2a62aa6": {
+   "label": "business analysis",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/27ed854c-15b8-4ba2-90e9-ae888a219703",
+     "label": "perform business analysis",
+     "similarity": 0.883
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/98a1dec3-8138-4f46-a596-5e2a83b884b9",
+     "label": "business analytics",
+     "similarity": 0.863
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/98a1dec3-8138-4f46-a596-5e2a83b884b9": {
+   "label": "business analytics",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/633a3637-2c6b-40ae-ac38-289eb2a62aa6",
+     "label": "business analysis",
+     "similarity": 0.863
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b17f4305-741a-4a1c-8fe8-6f11cb3d5c0a": {
+   "label": "business communication",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/143769cb-b61e-47d8-a61e-eedfbec1016c": {
+   "label": "business intelligence",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/9e84a506-df06-4be3-874a-fa01293e3dd5": {
+   "label": "business processes",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/75b30aeb-34c0-40f4-b77d-271d75a98b14",
+     "label": "improve business processes",
+     "similarity": 0.899
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/56042303-972b-41be-9310-58467599ff7e",
+     "label": "analyse business processes",
+     "similarity": 0.864
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2ecf90f1-c511-464b-b26f-598d69182c70": {
+   "label": "calculate tax",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/7c86c1b1-4a06-4804-afbc-7e857145b6a5",
+     "label": "collect tax",
+     "similarity": 0.886
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2cb27e30-2be7-4a09-9502-fdd2102c046b": {
+   "label": "carry out training in environmental matters",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/5f1ebff6-98ec-411f-a1d4-0bf04bd03bdf": {
+   "label": "check accounting records",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/22c45bf7-e52b-475f-847b-c32a87f65a5d": {
+   "label": "circular economy",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/1565b401-1754-4b07-8f1a-eb5869e64d95": {
+   "label": "climate change impact",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/79e29b8b-47d1-470d-b7b1-32506bfe7d9a": {
+   "label": "collect ICT data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/d63c2bad-817d-4116-b4d8-b927cb01212d": {
+   "label": "commercial law",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/9db1c890-581b-4ca0-bce4-7f3f7540ea99",
+     "label": "trading law",
+     "similarity": 0.894
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/341c4478-c976-4ff0-a102-cfd92174d873",
+     "label": "business law",
+     "similarity": 0.863
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f75b740c-b36c-495e-bc67-efe347bbc6b5": {
+   "label": "company policies",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/0a43729f-2a79-4dae-9faa-95520daae79f",
+     "label": "apply company policies",
+     "similarity": 0.88
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/3a5231a0-8c30-48ee-b671-08e2debd4441",
+     "label": "organisational policies",
+     "similarity": 0.861
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/21d2f96d-35f7-4e3f-9745-c533d2dd6e97": {
+   "label": "computer programming",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/fa465db3-56e8-4b5d-a781-e2a313a4ed2d": {
+   "label": "conduct qualitative research",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/8316979b-df5a-4dc7-98ef-61ec6a10df84",
+     "label": "conduct quantitative research",
+     "similarity": 0.891
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8316979b-df5a-4dc7-98ef-61ec6a10df84": {
+   "label": "conduct quantitative research",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/fa465db3-56e8-4b5d-a781-e2a313a4ed2d",
+     "label": "conduct qualitative research",
+     "similarity": 0.891
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d41262ae-eca1-4ede-89a8-46d2d99a7a31": {
+   "label": "consider economic criteria in decision making",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/bd70f004-e1d6-43f0-96f1-59c014a4ea01": {
+   "label": "coordinate environmental efforts",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/66db424f-2abe-420d-8e5b-186607266b61": {
+   "label": "corporate social responsibility",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/f5bf985b-ac78-4d23-881a-18a359234528": {
+   "label": "corporate sustainability",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/dd7c9dfd-6e2c-46fd-aefc-369402d0200c": {
+   "label": "create a financial report",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/3e9b580d-811b-48df-a5d1-a7bdd26f901f",
+     "label": "prepare financial auditing reports",
+     "similarity": 0.889
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/901105f8-3a08-453e-b1dc-23619e317fd3": {
+   "label": "create flowchart diagram",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/48db96bf-3314-45c6-bad8-fdb6e20e5639": {
+   "label": "data engineering",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e9575f7f-053a-439e-8074-f93df3334e92": {
+   "label": "data ethics",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/25f0ea33-b4a2-4f31-b7b4-7d20e827b180": {
+   "label": "data mining",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/4216e465-7baa-4884-a241-54b197bb9278",
+     "label": "perform data mining",
+     "similarity": 0.861
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/fecf8a0d-62c4-4e71-9b03-0f4fc2ad7bf5": {
+   "label": "data models",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/cc7370dd-69fa-4c67-a96f-d4d135d38700": {
+   "label": "data quality assessment",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/edebd83d-35f6-4ed5-a940-6c203d178c01": {
+   "label": "data science",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/65e58886-bd1e-4c5b-8ca5-8d9b353c8aa1": {
+   "label": "data visualisation software",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/c3e36d05-8ae8-447f-bb2b-6f9409f85389",
+     "label": "deliver visual presentation of data",
+     "similarity": 0.874
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2522a6ce-3202-4ac8-9f5b-b9cb5a3a83a1": {
+   "label": "debug software",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/54c9c155-9293-4329-8ed2-2e76e8b519d4": {
+   "label": "define data quality criteria",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/46e1b714-94f4-462d-88e6-31f442708812",
+     "label": "define manufacturing quality criteria",
+     "similarity": 0.865
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d9e5349e-8791-49c2-8ba4-839fdd1606c2": {
+   "label": "define technical requirements",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/3d64b8fd-bb09-4d13-a3cf-300ed8909088",
+     "label": "write specifications",
+     "similarity": 0.864
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/54660948-b811-49a9-874c-bf2be5f280a2",
+     "label": "satisfy technical requirements",
+     "similarity": 0.859
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/64be6a06-52e8-4f5c-b64d-caa516cfa291": {
+   "label": "depreciation",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/0b0335f3-0aa1-491e-895e-81fc8774a300": {
+   "label": "develop automated migration methods",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/797a4416-0b8d-44f3-8fcd-eb10bd0be6b4": {
+   "label": "develop software prototype",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/629685b8-5f9e-4522-8cff-b3e2c4ec625a": {
+   "label": "digital data processing",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/f2d57f41-43b4-4f5b-8100-3df5c21eda50",
+     "label": "process data",
+     "similarity": 0.869
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/327d15c8-29ff-4ad4-a4fe-6536d777a45f": {
+   "label": "documentation types",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/b5cb259e-83e7-48f5-950e-245d5b5fd6d0": {
+   "label": "draft accounting procedures",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/88af9294-b697-4687-ae19-aefbb6234dfa": {
+   "label": "economics",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/2bdc2f65-b42f-4963-abff-d7214ca4caae": {
+   "label": "emission standards",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/f6ac6241-adb2-4ce2-b35f-09832cbb11ea": {
+   "label": "empirical analysis",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/ddce2912-bc0f-4a47-aa2b-c1de48bc4b44": {
+   "label": "energy conservation",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/83fc0b2b-6cd2-46af-b1ff-d3fc83604c26": {
+   "label": "energy efficiency",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/209a5498-3449-4689-8ed9-bd08cab4fd78": {
+   "label": "engineering principles",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/8bc1c7da-c832-4896-a441-30d087c46aad",
+     "label": "examine engineering principles",
+     "similarity": 0.884
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/72a74f69-5cf1-43c5-99b9-62a444578919": {
+   "label": "engineering processes",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/d6e78d9a-deca-4bcb-b08d-011b2616758d": {
+   "label": "ensure compliance with accounting conventions",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/089ee650-297e-4716-87d1-440743b70a0d": {
+   "label": "ensure compliance with environmental legislation",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/233be639-bdb5-4099-ab40-96d537d6c1f3",
+     "label": "ensure compliance with safety legislation",
+     "similarity": 0.868
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/f66b2fc3-2952-41e5-89bf-a9157ea29420",
+     "label": "ensure compliance with environmental legislation in food production",
+     "similarity": 0.865
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/27273605-2400-4392-a6d6-cc8161a2d445",
+     "label": "ensure compliance with waste legislative regulations",
+     "similarity": 0.859
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/dab7c301-2a33-454e-8fed-23218fa28eee": {
+   "label": "environmental design",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/6f5850ea-5785-4e2c-b062-743066fd5bdb": {
+   "label": "environmental legislation",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e3f2c37f-e484-4b4c-ad82-f565a2b98f89": {
+   "label": "environmental management monitors",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/95bff246-c3ce-4181-a11b-e4363453c2f8": {
+   "label": "environmental management standards",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/081d7679-5070-4777-bece-a28c49f15636": {
+   "label": "environmental policy",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/2daec0e6-f0c1-43e8-8178-aedba99130ec": {
+   "label": "establish data processes",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/f9670490-8aa4-4540-b121-d440a8294aab",
+     "label": "develop data processing applications",
+     "similarity": 0.86
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/969ebc5a-e486-41b7-9a3d-15f9aa61680d": {
+   "label": "evaluate company needs",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/31c69100-b612-4a61-8db5-fd314318854c": {
+   "label": "execute analytical mathematical calculations",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/cb059032-dd34-4761-a786-98cfb9d0efe3": {
+   "label": "explain accounting records",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/3d427a49-4f85-42cd-8a92-62d4a34f41a1": {
+   "label": "file documents",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/8d49f760-3765-4612-8d40-a2bdd50738fe": {
+   "label": "fill out forms",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/811bdb9d-5bf7-4b5a-a3f5-4fc2002f6d57": {
+   "label": "financial capability",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/39e43f7c-a95e-4583-be76-bb134ccce1ae": {
+   "label": "financial department processes",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/08371fe9-c658-4f6a-966f-71dbb0ab683d",
+     "label": "accounting department processes",
+     "similarity": 0.871
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/848b5879-10af-4e3a-bfbf-263956b4ebf3",
+     "label": "management department processes",
+     "similarity": 0.86
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/52e53619-fa77-4f72-b237-5e4aae784dc2": {
+   "label": "financial management",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1": {
+   "label": "financial statements",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580",
+     "label": "prepare financial statements",
+     "similarity": 0.915
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/83e97138-899a-4af8-9187-47823e875841": {
+   "label": "follow the statutory obligations",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/68b51538-b056-4cb3-bb15-ab8c3e576cc9": {
+   "label": "follow up accounts receivables",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/1c08d63d-1c5e-4b9b-ad3e-f7ba7debb2d1": {
+   "label": "forecast organisational risks",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/541cdc23-1eec-4520-81fc-3392eaf538ed": {
+   "label": "fraud detection",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/1781b399-9559-4cec-9bd0-9d007216d4b7",
+     "label": "prevent fraudulent activities",
+     "similarity": 0.861
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9c6974e1-8d8b-43e9-b6b0-75da7634bfc9": {
+   "label": "fundamental analysis",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/4300b453-9bcf-474c-9ee3-92ec2229720c": {
+   "label": "global standards for sustainability reporting",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/7f4d1dee-bc5a-495a-926b-17b383b8d8fd": {
+   "label": "green building standards",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/0e78d9c9-7c3c-4c5c-82cb-205c16edbcb8": {
+   "label": "green computing",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e": {
+   "label": "handle data samples",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/f7e7ccb6-fadc-4c35-935d-e1040be40dfe": {
+   "label": "handle financial transactions",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/bdcac0c8-b77a-4640-9eaf-c0cf3efd1e23",
+     "label": "process payments",
+     "similarity": 0.858
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/5944cee9-763e-4b08-99e4-f514bdde14a6": {
+   "label": "hazardous waste types",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/8a326ee1-169c-4c44-b38b-8f1bb20ec79b": {
+   "label": "identify accounting errors",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/0e0c9c11-b39e-43cf-ba95-2fe646f5de64": {
+   "label": "identify customer requirements",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/a8797f21-1af0-4c5e-98ca-bf1442929363",
+     "label": "interact with users to gather requirements",
+     "similarity": 0.859
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/43d1d56b-ce62-4fe8-8f18-35d92ec73023": {
+   "label": "identify undetected organisational needs",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/713fb616-118e-40bc-9366-4a69879a49d5": {
+   "label": "implement data quality processes",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/93aaf65c-5aad-4e6f-a7ba-ce9bf7c0e6e6": {
+   "label": "information categorisation",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/a56dec32-05ef-45de-a256-ee6741f356db": {
+   "label": "information confidentiality",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/696e3b5b-8b61-45af-ae4c-3ab700f197ec": {
+   "label": "information extraction",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/03ff0d53-573a-47a0-a0ad-1995815a4339": {
+   "label": "information structure",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/46ec0033-3c71-415e-bcff-b065675ba2dc": {
+   "label": "integrate ICT data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/925463a7-d51f-4d5b-9f79-4d28cf30acde": {
+   "label": "integrated development environment software",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/1e77e42a-181f-4b48-8e74-201ce50ffc29": {
+   "label": "interpret current data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b": {
+   "label": "interpret financial statements",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/be48353d-25c7-4f86-bea9-7b9e248fbc6e": {
+   "label": "interpret technical requirements",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/54660948-b811-49a9-874c-bf2be5f280a2",
+     "label": "satisfy technical requirements",
+     "similarity": 0.875
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/85c11255-469f-41bd-a6d1-382bc4a87783",
+     "label": "interpret technical texts",
+     "similarity": 0.851
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/49047409-9307-4b41-9b04-a9615f049044": {
+   "label": "investment banking",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e3e42d54-78bd-4337-aa87-bb31a7670c9a": {
+   "label": "issue sales invoices",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/bbcc7e1b-3d4d-4422-9fac-efd636eb9de4": {
+   "label": "lead the sustainability reporting process",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97e": {
+   "label": "liaise with managers",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/9d5521f9-44d7-4db4-b7ac-0ba7d389f44d",
+     "label": "liaise with colleagues",
+     "similarity": 0.874
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/fe0bd9ea-9334-43f8-8eee-3390a259f117",
+     "label": "liaise with distribution channel managers",
+     "similarity": 0.867
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/8f9e8842-94f3-48d5-8d09-c43829bcabc5",
+     "label": "liaise with shareholders",
+     "similarity": 0.858
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d1910ad7-0c87-4f38-8a41-7c193e5dc16d": {
+   "label": "macroeconomics",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/95fc86de-8e74-4753-9344-281179aa74b0": {
+   "label": "maintain credit history of clients",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/24016006-c963-4135-a2c5-b1f7740782e2",
+     "label": "maintain client debt records",
+     "similarity": 0.886
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/c753a3b5-d5cc-406d-adfe-3372bb267f4b": {
+   "label": "maintain customer records",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/8b7409b0-e18e-4dfc-9ad9-8ddbcce38849",
+     "label": "keep records of customer interaction",
+     "similarity": 0.859
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/faf8943c-72ff-4736-a587-25508695d6f0": {
+   "label": "maintain financial records",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/648782e0-b5e5-4e59-bed0-627aa8ac29f0",
+     "label": "maintain records of financial transactions",
+     "similarity": 0.928
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022",
+     "label": "manage accounts",
+     "similarity": 0.888
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f60c9e52-95fc-4ca1-a73c-18a491153b63": {
+   "label": "make strategic business decisions",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022": {
+   "label": "manage accounts",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/faf8943c-72ff-4736-a587-25508695d6f0",
+     "label": "maintain financial records",
+     "similarity": 0.888
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/658a38bd-6954-4a2a-945c-42330c5d13b9",
+     "label": "manage corporate bank accounts",
+     "similarity": 0.881
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/2ada2f9d-77f7-4ba0-9096-89ae285a65c5",
+     "label": "monitor financial accounts",
+     "similarity": 0.874
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/f5652e8e-7e25-4f3a-bd31-509c8406213f",
+     "label": "supervise accounting operations",
+     "similarity": 0.863
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/2d008d5a-b7bd-46f7-bbb1-5d70a0af9c84",
+     "label": "control financial resources",
+     "similarity": 0.856
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/648782e0-b5e5-4e59-bed0-627aa8ac29f0",
+     "label": "maintain records of financial transactions",
+     "similarity": 0.853
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/658a38bd-6954-4a2a-945c-42330c5d13b9": {
+   "label": "manage corporate bank accounts",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022",
+     "label": "manage accounts",
+     "similarity": 0.881
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9ff9db9d-d14b-426e-83f3-e7449af6c79f": {
+   "label": "manage data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/6a899482-8bcf-40ca-ae67-579a1cc467ab": {
+   "label": "manage engineering project",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/7af6e9e8-1e11-4c0b-b7c6-ac96bbbbc674",
+     "label": "coordinate engineering teams",
+     "similarity": 0.886
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/1de548e0-9535-4d2e-9d20-d4474c1ea813",
+     "label": "oversee construction project",
+     "similarity": 0.86
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/cd5efa8c-e44d-4cbc-91c6-796018dbed68",
+     "label": "perform project management",
+     "similarity": 0.857
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/8b9d609a-6d62-4d5c-9133-01d41979cfac",
+     "label": "manage all process engineering activities",
+     "similarity": 0.856
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/267b9417-9d05-4731-a877-bfb978fb50eb",
+     "label": "plan engineering activities",
+     "similarity": 0.852
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b13e0689-636d-42d0-86c3-df9d6f85a882": {
+   "label": "manage environmental management system",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/77e7cb08-2c6f-42ab-881b-b34b2318acbe",
+     "label": "manage administrative systems",
+     "similarity": 0.853
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d9d3eb78-a7c6-4076-9e19-df225af2ec62": {
+   "label": "manage recycling program budget",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/dc417e19-edb4-4401-883a-2375f67a162f": {
+   "label": "manage the general ledger",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/c2617b44-886a-485e-8393-bc0fc6339539": {
+   "label": "management consulting",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/ff599c4c-f7bc-44fc-b75f-eea4b7178692": {
+   "label": "management systems standards",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/8770350e-746f-4adb-9556-18ca68104be6": {
+   "label": "market research",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/b011c8b4-76e1-4bbc-8bb9-1d205e7b618a",
+     "label": "market analysis",
+     "similarity": 0.872
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d53eab76-e8ff-4e28-af26-7e012951c763": {
+   "label": "measure company's sustainability performance",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/7cacd304-996d-47d1-88ef-4ddb9ce102bd": {
+   "label": "microeconomics",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/d2c81ad1-2439-43cf-9c63-204187b8f771": {
+   "label": "mitigate waste of resources",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/696e604d-53d2-4243-a6cb-a99663caa119": {
+   "label": "monitor social impact",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/2cc30e4e-2139-411a-9fa9-f0d616b64c57",
+     "label": "monitor sociological trends",
+     "similarity": 0.852
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/07889c08-7220-47c8-96f7-6068fbea00dc": {
+   "label": "normalise data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e3c7bd87-edc1-4d9a-a3d5-36415de1aac6": {
+   "label": "offer financial services",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/e92f4673-1dec-41ec-b6ec-36fef226359c",
+     "label": "provide financial product information",
+     "similarity": 0.893
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/3e04e39d-9eb6-4167-ad2d-e3413f647e4e": {
+   "label": "organise business documents",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/e717b036-2c0c-4c11-99e9-0cb4ce084fed": {
+   "label": "perform account allocation",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/585ed991-fdab-4f3c-9187-a32bfb7ab822": {
+   "label": "perform balance sheet operations",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/27ed854c-15b8-4ba2-90e9-ae888a219703": {
+   "label": "perform business analysis",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/633a3637-2c6b-40ae-ac38-289eb2a62aa6",
+     "label": "business analysis",
+     "similarity": 0.883
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88",
+     "label": "perform business research",
+     "similarity": 0.872
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/0fbaceff-df05-4ef7-b735-188dc183b56b",
+     "label": "carry out job analysis",
+     "similarity": 0.864
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/56042303-972b-41be-9310-58467599ff7e",
+     "label": "analyse business processes",
+     "similarity": 0.86
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/97b23993-8836-4e66-9092-19c7b3324e5f",
+     "label": "perform brand analysis",
+     "similarity": 0.851
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88": {
+   "label": "perform business research",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/27ed854c-15b8-4ba2-90e9-ae888a219703",
+     "label": "perform business analysis",
+     "similarity": 0.872
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/50b100ea-74fd-4706-99db-3e4ca55e51b8": {
+   "label": "perform data cleansing",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/4216e465-7baa-4884-a241-54b197bb9278": {
+   "label": "perform data mining",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/25f0ea33-b4a2-4f31-b7b4-7d20e827b180",
+     "label": "data mining",
+     "similarity": 0.861
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/1dd23dba-dd00-45ab-abf4-642902538317": {
+   "label": "perform risk analysis",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/4fabca9a-7435-4f33-b1da-3cdb00340fdc": {
+   "label": "perform scientific research",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/7a34b3d9-bd3b-4f4e-a0f6-f97439901cb7",
+     "label": "apply scientific methods",
+     "similarity": 0.869
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d37bc902-f640-48d7-9db4-544db9aa65fa": {
+   "label": "prepare financial projections",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580": {
+   "label": "prepare financial statements",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1",
+     "label": "financial statements",
+     "similarity": 0.915
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/3e9b580d-811b-48df-a5d1-a7bdd26f901f",
+     "label": "prepare financial auditing reports",
+     "similarity": 0.855
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/22a173f5-868c-4d82-87e6-beed500ce070": {
+   "label": "prepare tax returns forms",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/eaa9727c-df1e-407a-85d3-48cc71508bc2": {
+   "label": "prepare trial accounting balances",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/97725325-5287-4ebb-9f83-1ba2c38f465c": {
+   "label": "produce sustainable products",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/28ad7c97-9fb3-4b1d-846a-654e529ab8ac",
+     "label": "sustainable manufacturing",
+     "similarity": 0.893
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/7111b95d-0ce3-441a-9d92-4c75d05c4388": {
+   "label": "project management",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/237db40b-4600-47c0-837f-4a2c4f3014ab",
+     "label": "project management principles",
+     "similarity": 0.87
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8abdc43c-2bfd-417c-97c2-27fcdaf53171": {
+   "label": "promote environmental awareness",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/7f321b88-3d16-4e30-8163-5494ca8ce978",
+     "label": "engage others in environment friendly behaviours",
+     "similarity": 0.858
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/469e19ed-a0bd-445a-ae2d-4ba9430e296b",
+     "label": "promote sustainability",
+     "similarity": 0.851
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6360a934-cc87-4954-9656-b32db20592e3": {
+   "label": "quantitative analysis",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/9cf681c7-89ec-470c-b651-7fe03786f586": {
+   "label": "query languages",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/99207709-d076-4cce-ba38-e90d3bb28806": {
+   "label": "resource description framework query language",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/d1f73ae9-d348-4aac-b5d5-9b6d508401d3": {
+   "label": "resource-efficient technologies",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/6eff134b-e34f-4d6e-a6e8-5e47cf2228d0": {
+   "label": "risk management",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/ed3f3dba-3a35-4ed5-b113-67f4d10ef4c8": {
+   "label": "scientific research methodology",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833": {
+   "label": "statistics",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/d84326c9-a3d3-4e22-a6a1-1ad42a356f10": {
+   "label": "sustainability consulting",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/dbef5042-4b99-4e6f-b2ed-1d33b07b3ed6",
+     "label": "advise on sustainability solutions",
+     "similarity": 0.859
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/203083ca-b051-4c28-8986-fc8731bacee5": {
+   "label": "sustainable finance",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/103f7814-d262-4df6-a1b6-759bc51f76cb": {
+   "label": "sustainable technologies",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/bf4779c9-ce55-4110-a996-a7014ca3f1f9",
+     "label": "green automotive technologies",
+     "similarity": 0.852
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d669af41-756c-48d9-a286-1443253f54b1": {
+   "label": "tax legislation",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/59ea80e1-463a-4dba-82c6-d0b6d577d532": {
+   "label": "technical drawings",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/3c333552-8d89-43f5-90bd-856e15bec433",
+     "label": "design drawings",
+     "similarity": 0.869
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/541561bc-510c-4a99-881c-2d8bf5a85462",
+     "label": "use technical drawing software",
+     "similarity": 0.855
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9d2e926f-53d9-41f5-98f3-19dfaa687f3f": {
+   "label": "tools for software configuration management",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/c5e8abde-d2ba-4e8e-a65e-720b71180666": {
+   "label": "unstructured data",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/a0d79341-8398-4019-ad1b-27888ec35aaa": {
+   "label": "use accounting systems",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/04fe962b-4017-4eb7-9139-7d69b6922bc9": {
+   "label": "use an application-specific interface",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/4b3ae518-6746-4487-8d3b-4cfc063a43d0": {
+   "label": "use business simulation tools",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/1b70a55d-b8a4-49fc-96c6-15ab4cff2522": {
+   "label": "use data processing techniques",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/f2d57f41-43b4-4f5b-8100-3df5c21eda50",
+     "label": "process data",
+     "similarity": 0.863
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4463a721-69f3-413d-8321-43e3af13a4f1": {
+   "label": "use databases",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/29fb0fb5-dfc4-4098-ac9b-3a712000f48f",
+     "label": "manage database",
+     "similarity": 0.858
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/71dde84c-0058-4c52-a556-523369333db8": {
+   "label": "use office systems",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/2b7a79e5-84d8-4880-be66-3d9bb05bea17": {
+   "label": "use software design patterns",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/1019423b-3368-4f83-b24f-19e5fa23e816",
+     "label": "software UI design patterns",
+     "similarity": 0.873
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8b94aa1e-89c9-459d-b3b4-1dfab8dec2df": {
+   "label": "use software libraries",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/73576419-31c2-4e45-8e30-ab1afec3db4e": {
+   "label": "use sustainable materials and components",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/541561bc-510c-4a99-881c-2d8bf5a85462": {
+   "label": "use technical drawing software",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/3c1af34b-4562-4c39-a30e-0812b84a147e",
+     "label": "use specialised design software",
+     "similarity": 0.892
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/59ea80e1-463a-4dba-82c6-d0b6d577d532",
+     "label": "technical drawings",
+     "similarity": 0.855
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/172020d1-e151-445b-8173-e2a5fb16fe51": {
+   "label": "utilise computer-aided software engineering tools",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/348b74cd-49ce-4844-8bdf-ec188b497213": {
+   "label": "visual presentation techniques",
+   "transferableFrom": []
+  },
+  "http://data.europa.eu/esco/skill/40f65a56-ccbe-4601-9f32-1cc6cdd24f28": {
+   "label": "waste management",
+   "transferableFrom": [
+    {
+     "uri": "http://data.europa.eu/esco/skill/73a9561d-112c-4d8a-9d5f-b2c11c5bbd5f",
+     "label": "manage waste",
+     "similarity": 0.876
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/9349f502-9c11-476c-957d-2e016790a2ee",
+     "label": "coordinate waste management procedures",
+     "similarity": 0.874
+    },
+    {
+     "uri": "http://data.europa.eu/esco/skill/47f14289-3bcd-4575-9cc1-15c582d1da29",
+     "label": "manage waste treatment facility",
+     "similarity": 0.87
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f84a433f-34f1-4083-b0a3-24802623509c": {
+   "label": "web services",
+   "transferableFrom": []
+  }
+ }
+}

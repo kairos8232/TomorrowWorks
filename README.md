@@ -105,7 +105,7 @@ Details, data shapes, findings and the worked example are in [SIGNALS_AND_MATCHI
 
 `score = wF·F + wD·D + wR·R`, every part shown on screen:
 
-- **F, skill fit:** share of the role's ESCO essential skills the person has confirmed.
+- **F, skill fit:** `(exact + 0.5 × transferable) / essential skills`. *Transferable* means the person holds a different ESCO skill whose RunPod embedding is ≥ 0.85 similar; the pair is shown. The person's current job is listed separately and only other roles are ranked.
 - **D, demand trend:** `clamp(0.5 + quarter-on-quarter change, 0, 1)` for the role's DOSM major group.
 - **R, AI resilience:** `1 − ILO mean exposure`.
 
@@ -113,6 +113,8 @@ Details, data shapes, findings and the worked example are in [SIGNALS_AND_MATCHI
 | --- | --- | --- | --- |
 | Moderate AI change | 0.60 | 0.25 | 0.15 |
 | Fast AI change | 0.50 | 0.20 | 0.30 |
+
+**Real result for the demo user (Q2 2026):** bookkeeper 58, accountant 45, billing clerk 36, financial analyst 21 under moderate change; under fast change sustainability manager rises from 6th to 4th. Details in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#demo-result-with-real-data-accounting-assistants-20-esco-skills).
 
 **Proof that trends matter:** a *Data snapshot* switch (DOSM Q1 ↔ Q2 2026) changes D for the same profile. Real example: Professionals +15.8% → −9.5% (D 0.66 → 0.41); Clerical support −1.8% → −17.2% (D 0.48 → 0.33). A future DOSM release is added by running the importer on the new file, with no code change.
 
@@ -174,7 +176,8 @@ TomorrowWorks/
 ├── scripts/
 │   ├── import_dosm_jmi.py      # DOSM xlsx → data/sources/dosm-jmi-<quarter>.json
 │   ├── import_ilo_exposure.py  # ILO WP140 PDF → data/sources/ilo-genai-exposure-2025.json
-│   └── build_roles.py          # ESCO CSV → data/roles.json
+│   ├── build_roles.py          # ESCO CSV → data/roles.json
+│   └── build_transferable_skills.py # RunPod vectors → data/derived/transferable-skills.json
 ├── data/
 │   ├── sources/            # Converted, attributed source snapshots (DOSM, ILO)
 │   ├── roles.json          # Nine ESCO roles with skills (adapted ESCO selection)
@@ -230,6 +233,7 @@ brew install poppler                       # pdftotext, for the ILO importer (ma
 python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx 2026-08-18 <download date>
 python3 scripts/import_ilo_exposure.py "data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf" <download date>
 python3 scripts/build_roles.py "data/raw/ESCO dataset - v1.2.1 - classification - en - csv"
+python3 scripts/build_transferable_skills.py   # needs numpy; uses data/derived/esco/
 ```
 
 The ESCO embedding runs on a RunPod GPU Pod; see [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required).

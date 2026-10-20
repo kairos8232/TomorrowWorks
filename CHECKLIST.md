@@ -197,7 +197,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Define a small, verified set of roles and required skills: 9 ESCO occupations with essential and optional skills in `data/roles.json`, built by `scripts/build_roles.py`.
 - [x] Document the scoring formula and its assumptions (SIGNALS_AND_MATCHING.md; implemented in `src/scoring.ts`).
-- [ ] Rank roles for the sample profile.
+- [x] Rank roles for the sample profile (`recommendMoves`: current job shown separately; moves ranked with exact and transferable skills).
 - [ ] Show existing skills, missing skills, and the reason for each score.
 - [ ] Let the user select a role to inspect its skills gap and later open its learning pathway.
 - [ ] Link every recommendation to its supporting source and date; do not invent jobs, courses, or statistics.

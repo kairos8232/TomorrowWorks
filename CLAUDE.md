@@ -49,7 +49,7 @@ Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Tab
 
 `scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
 
-Scoring: `src/scoring.ts` (pure functions: skill fit, demand trend, AI resilience, scenarios, ranking); tests in `src/scoring.test.ts`. Change the rule only together with its tests and `SIGNALS_AND_MATCHING.md`.
+Scoring: `src/scoring.ts` (pure functions: skill fit with exact and transferable skills, demand trend, AI resilience, scenarios, ranking, `recommendMoves`). Transferable skills come from `data/derived/transferable-skills.json` (`scripts/build_transferable_skills.py`, threshold 0.85, half credit); tests in `src/scoring.test.ts`. Change the rule only together with its tests and `SIGNALS_AND_MATCHING.md`.
 
 ## Git
 
