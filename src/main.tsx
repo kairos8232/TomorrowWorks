@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-type Screen = 'market' | 'profile' | 'roles' | 'pathway';
+type Screen = 'market' | 'signin' | 'profile' | 'roles' | 'pathway';
 type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string };
 type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[] };
 
@@ -20,9 +20,10 @@ function splitEntries(value: string) {
 
 const screens: { id: Screen; label: string; number: string; description: string }[] = [
   { id: 'market', label: 'Explore market', number: '01', description: 'Demand now and future outlook' },
-  { id: 'profile', label: 'My profile', number: '02', description: 'Skills, experience and interests' },
-  { id: 'roles', label: 'Role matches', number: '03', description: 'Scores, reasons and skills gaps' },
-  { id: 'pathway', label: 'My pathway', number: '04', description: 'Learning steps and SDG links' },
+  { id: 'signin', label: 'Sign in', number: '02', description: 'Demo entry for personal guidance' },
+  { id: 'profile', label: 'My profile', number: '03', description: 'Skills, experience and interests' },
+  { id: 'roles', label: 'Role matches', number: '04', description: 'Scores, reasons and skills gaps' },
+  { id: 'pathway', label: 'My pathway', number: '05', description: 'Learning steps and SDG links' },
 ];
 
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
@@ -31,6 +32,12 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
     title: 'What does work need next?',
     body: 'Explore today’s demand and the skills employers need. Future outlooks will be shown separately as estimates, with dates and sources.',
     next: 'No public market source has been connected yet.',
+  },
+  signin: {
+    eyebrow: 'Personal guidance',
+    title: 'Make it yours',
+    body: 'A future account will let you save your profile and return to your plan. Sign-in is not available in this prototype.',
+    next: 'No account is created in the demo.',
   },
   profile: {
     eyebrow: 'Personal guidance',
@@ -54,6 +61,7 @@ const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string;
 
 function App() {
   const [screen, setScreen] = useState<Screen>('market');
+  const [demoEntered, setDemoEntered] = useState(false);
   const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileError, setProfileError] = useState('');
@@ -78,6 +86,16 @@ function App() {
     setProfileError('');
   }
 
+  function enterDemo() {
+    if (!demoEntered) {
+      setDraft(sampleProfile);
+      setProfile(null);
+      setProfileError('');
+    }
+    setDemoEntered(true);
+    setScreen('profile');
+  }
+
   return (
     <div className="app-shell">
       <aside className="sidebar" aria-label="Project navigation">
@@ -88,7 +106,7 @@ function App() {
             <button
               className={`journey-step${screen === item.id ? ' active' : ''}`}
               key={item.id}
-              onClick={() => setScreen(item.id)}
+              onClick={() => setScreen(!demoEntered && item.id !== 'market' && item.id !== 'signin' ? 'signin' : item.id)}
               type="button"
               aria-current={screen === item.id ? 'step' : undefined}
             >
@@ -103,7 +121,7 @@ function App() {
       <main className="main-content">
         <header className="topbar"><span>Career navigation workspace</span><span className="status-pill">Prototype build</span></header>
         <div className="content-wrap">
-          <div className="progress-row"><span>YOUR JOURNEY</span><span>{String(activeIndex + 1).padStart(2, '0')} / 04</span></div>
+          <div className="progress-row"><span>YOUR JOURNEY</span><span>{String(activeIndex + 1).padStart(2, '0')} / 05</span></div>
           <div className="progress-track"><div style={{ width: `${((activeIndex + 1) / screens.length) * 100}%` }} /></div>
           <section className="hero" aria-labelledby="screen-title">
             <span className="eyebrow">{content.eyebrow}</span>
@@ -115,6 +133,11 @@ function App() {
               <div className="market-card"><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p></div>
               <div className="market-card"><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p></div>
               <div className="market-card"><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p></div>
+            </section>
+          ) : screen === 'signin' ? (
+            <section className="work-card" aria-label="Demo entry">
+              <div className="card-icon" aria-hidden="true">✦</div>
+              <div><h2>Continue with a fictional profile</h2><p>This demo skips real sign-in and uses sample information. It does not create an account, store a résumé, or save your details.</p><button type="button" className="primary-button demo-entry" onClick={enterDemo}>{demoEntered ? 'Continue to profile' : 'Continue with sample profile'}</button></div>
             </section>
           ) : screen === 'profile' ? (
             <section className="profile-panel" aria-label="Skills profile">
@@ -139,7 +162,7 @@ function App() {
           )}
           <div className="page-actions">
             {activeIndex > 0 && <button type="button" className="secondary-button" onClick={() => setScreen(screens[activeIndex - 1].id)}>Back</button>}
-            {activeIndex < screens.length - 1 && <button type="button" className="primary-button" onClick={() => setScreen(screens[activeIndex + 1].id)}>Explore next <span aria-hidden="true">→</span></button>}
+            {activeIndex < screens.length - 1 && (screen !== 'signin' || demoEntered) && <button type="button" className="primary-button" onClick={() => setScreen(screens[activeIndex + 1].id)}>{screen === 'market' ? 'Get personalised guidance' : 'Explore next'} <span aria-hidden="true">→</span></button>}
           </div>
         </div>
       </main>

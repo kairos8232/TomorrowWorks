@@ -36,6 +36,7 @@ h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spa
 .card-icon { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: #e5f8f4; color: #0b9283; font: 800 19px 'Manrope', sans-serif; }
 .work-card h2 { margin: 0 0 6px; font-size: 17px; }
 .work-card p { margin: 0; color: #6d7f91; font-size: 13px; line-height: 1.6; }
+.demo-entry { margin-top: 18px; }
 .market-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .market-card { background: white; border: 1px solid #e2eaf0; border-radius: 20px; padding: 24px; box-shadow: 0 14px 35px rgba(29, 64, 90, .045); }
 .market-label { color: #0f9c8d; font: 800 10px 'Manrope', sans-serif; letter-spacing: .12em; }
