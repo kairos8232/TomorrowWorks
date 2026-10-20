@@ -4,6 +4,16 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 — Imported app running on Replit
+
+- Installed the existing React, TypeScript and Vite dependencies, preserving their pinned versions and the repository structure.
+- Added a Replit Run workflow: `npm run dev -- --port 5000 --strictPort`.
+- Allowed proxied development hosts in `vite.config.ts`; documented setup and current service limitations in `replit.md`.
+- Verified `npm run build` (type check and production bundle), HTTP 200 through the Replit development URL, and a rendered home-page screenshot. The browser reported one resource 404; no JavaScript exception was reported.
+- No sign-in, market-data or RunPod integration was added. The combined Stage 3 evidence item remains unchecked because declaration evidence has not been retained by the team.
+
+---
+
 ## 21 Oct 2026 (01:00–) — RunPod Job A in progress
 
 - **Credit:** US$25.00 sponsor credit on the team RunPod account.
