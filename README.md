@@ -36,28 +36,23 @@ Instead of offering generic chatbot career advice, TomorrowWorks is designed to 
 - HR and learning-and-development teams
 - TVET and university career centres
 
-## Core User Journey
+## How People Use the App
 
 ```mermaid
 flowchart TD
-    A[Browse current demand and skills needed] --> B[Review separately labelled future outlook]
-    C[Updateable public sources] --> A
-    C --> B
-    B --> D[Sign-in entry]
-    D --> E[Review skills, experience, interests and work preferences]
-    E --> F[Explainable role matches and skills gaps]
-    A --> F
-    F --> G[Personalised learning pathway]
-    F --> H[Future scenarios]
-    G --> I[SDG explanations]
-    H --> I
+    A[Explore market] --- B[Demand now]
+    A --- C[Skills needed now]
+    A --- D[Future outlook]
+    B --- C
+    C --- D
+    A --> E[My career action]
+    E --> F[Demo entry or future sign-in]
+    F --> G[My profile]
+    G --> H[Role matches]
+    H --> I[My pathway]
 ```
 
-1. **Explore the market:** Browse supported current demand and skills needed, with source names, dates, and a separately labelled future outlook.
-2. **Start personal guidance:** Enter through sign-in, then add skills, experience, interests, and optional work preferences or strengths. The first demo uses a fictional profile and clearly labels sign-in as planned. Résumé upload is a later optional method.
-3. **Find suitable roles:** Review ranked recommendations, understandable match scores, and missing skills.
-4. **Follow a pathway:** Receive an ordered learning plan with estimated time and free or low-cost learning resources.
-5. **Understand impact and uncertainty:** See relevant SDGs and compare more than one plausible AI-adoption scenario.
+The public area has independent Explore, Demand, Skills, and Outlook views. Visitors can move among them freely and see source names, dates, and the distinction between present-day measures and future estimates. **My career** is a separate action for personal guidance. The first demo uses a fictional profile and labels sign-in as planned; résumé upload is a later optional method. Role matches, pathways, SDG explanations, and scenario comparisons appear as their features are built.
 
 ## Required Features
 
@@ -123,6 +118,7 @@ TomorrowWorks/
 
 - [x] Create a synthetic sample profile and a working intake form
 - [x] Open on a public market view with an honest demo sign-in entry
+- [ ] Replace the numbered journey with freely browsable market destinations
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills

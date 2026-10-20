@@ -2,25 +2,28 @@
 
 This guide describes the intended user journey. **Current** says what works today; **Planned** says what still needs building. `CHECKLIST.md` tracks verified progress, and `BUILD_STAGES.md` keeps changes in small commits. Update this guide with any screen change.
 
-## Journey at a glance
+## Places in the app
 
-| Screen | User's question | Access | Build stages |
+| Area | User's question | Access | Build stages |
 | --- | --- | --- | --- |
-| 01 Explore market | Which roles and skills are in demand now, and what could change? | Public | 5–6, 12 |
-| 02 Sign in | How do I save a profile and get personal guidance? | Planned; demo continues without an account | 4b |
-| 03 My profile | Which skills, experience, interests, and work preferences describe me? | Personalised flow | 4, 4b |
-| 04 Role matches | Which roles fit me, and why? | Reviewed profile | 7–8, 12 |
-| 05 My pathway | What should I learn next? | Selected role | 10–12 |
+| Explore | What can I find in the market? | Public landing page | 4c, 6 |
+| Demand | Which roles have supported demand signals now? | Public browsing | 5–6 |
+| Skills | Which skills are requested now? | Public browsing | 5–6 |
+| Outlook | What could change under stated assumptions? | Public browsing; estimates | 6, 12 |
+| My profile | What skills, experience, interests, and work preferences describe me? | Personal area | 4, 4b |
+| Role matches | Which roles fit me, and why? | Personal area after profile review | 7–8, 12 |
+| My pathway | What should I learn next? | Personal area after role selection | 10–12 |
+| Demo entry | How do I try personal guidance? | Action from personal area; real sign-in planned | 4b, 4c |
 
-The product starts with a browseable market view, similar in purpose to a job discovery site. Users can explore before creating an account. When they ask for personalised advice, the intended flow is **sign in → fill or upload profile → review → role matches → learning pathway**. The preliminary demo uses a clearly labelled fictional profile in place of real sign-in and résumé upload. It must not pretend to create an account or parse a résumé.
+The product behaves like a browseable market app. **Explore, Demand, Skills, and Outlook are destinations**, not numbered steps. Visitors can move among them in any order, without an account. A separate **My career** action opens the personal area. The preliminary demo uses a clearly labelled fictional profile in place of real sign-in and résumé upload. It must not pretend to create an account or parse a résumé.
 
-The preliminary working slice should prove **public, dated signal → changed role recommendation or explanation**. The final product adds the full pathway, SDG connections, and scenario comparison. A screen with missing data explains the gap instead of inventing a result.
+The preliminary working slice should prove **public, dated signal → changed role recommendation or explanation**. The final product adds the full pathway, SDG connections, and scenario comparison. A screen with missing data explains the gap instead of inventing a result. Do not show a journey counter, progress bar, or generic Next/Back controls; use navigation and task-specific actions instead.
 
-## 01 Explore market
+## Explore
 
 **Purpose:** Help a visitor discover the labour market before sharing personal details.
 
-**Current:** The app opens on a public market shell with separate current-demand, skills-needed, and future-outlook placeholders. No source, demand figures, or trends are connected yet. Its next action leads to the labelled demo sign-in entry.
+**Current:** The app opens on a public market shell with three placeholders. No source, demand figures, or trends are connected yet. Its numbered navigation and progress controls still need removal.
 
 **Planned:**
 
@@ -28,11 +31,19 @@ The preliminary working slice should prove **public, dated signal → changed ro
 - Show a small set of roles or skills with useful filters only when the selected source supports the claim. State the geography, period, measure, source link, publication date, and snapshot retrieval date.
 - Define what “rising” or “declining” means for that source. Do not turn research activity into a Malaysian hiring claim.
 - Show a dated snapshot label, its refresh method, and useful empty, stale, and unavailable states.
-- Offer a clear action to start personalised guidance, leading to Sign in.
+- Make current demand, skills, and future outlook browsable destinations. Offer a separate action for personalised guidance.
 
 **Ready when:** A visitor can understand what is needed now, what might change, and the evidence and uncertainty behind each claim. Stages 5–6 supply the public view; Stage 12 adds scenario comparison.
 
-## 02 Sign in
+## Demand, Skills, and Outlook
+
+**Purpose:** Let a visitor choose what to explore and switch topics freely.
+
+**Current:** These topics are sections of Explore. Dedicated views are planned in Stage 4c; each must show an honest empty state until sourced data is ready.
+
+**Planned:** Demand describes the exact present-day measure and geography. Skills shows requested skills supported by the source. Outlook shows dated scenarios and assumptions, never current job counts. Each view links back to evidence once connected.
+
+## Demo entry
 
 **Purpose:** Mark the transition from public browsing to a saved personal profile.
 
@@ -47,7 +58,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Ready when:** The demo route is honest and functional; actual sign-in remains unchecked until real account and session behaviour is verified.
 
-## 03 My profile
+## My profile
 
 **Purpose:** Capture the person's starting skills and relevant preferences for matching.
 
@@ -62,7 +73,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Ready when:** A teammate can load, edit, review, and carry the fictional profile into matching. Real account storage and résumé parsing are separate future work.
 
-## 04 Role matches
+## Role matches
 
 **Purpose:** Explain which candidate roles fit the reviewed profile and which skills are missing.
 
@@ -78,7 +89,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Ready when:** A teammate can hand-check the ranking and change a sourced signal to produce a visible difference. Recommendations support a career decision; they do not make a hiring decision.
 
-## 05 My pathway
+## My pathway
 
 **Purpose:** Turn a selected role's missing skills into practical learning steps.
 

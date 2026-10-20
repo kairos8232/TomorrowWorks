@@ -12,7 +12,7 @@ Completed in local commit `e4d623a`.
 
 ## App functions to build
 
-The user journey is **public market discovery → sign-in entry → skills profile → matched roles → learning plan → SDG impact and scenarios**. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
+The product has a public market area where visitors choose Explore, Demand, Skills, or Outlook in any order. A separate My career action enters the personal area: profile, role matches, and pathway. The preliminary demo uses a fictional profile after a clearly labelled sign-in placeholder. The trend signal must affect a recommendation or its explanation. The final product must cover all six required functions below.
 
 | Required function | User action and visible result | Data and behaviour to implement | Stage |
 | --- | --- | --- | --- |
@@ -89,6 +89,17 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 **Done when:** The public-first demo flow works and states plainly that sign-in and résumé upload are not implemented.
 **Commit focus:** Split the market-first navigation, demo sign-in entry, and optional profile field into separate commits.
+
+## Stage 4c — Replace the guided journey with browsing
+
+- [ ] Remove screen numbers, the journey counter, progress bar, and generic Next/Back controls.
+- [ ] Give Explore, Demand, Skills, and Outlook independent public destinations reachable in any order.
+- [ ] Put My career and the demo sign-in entry apart from public browsing; do not make sign-in a numbered destination.
+- [ ] Keep profile, role matches, and pathway available as personal destinations after demo entry, with task-specific links where helpful.
+- [ ] Check desktop and mobile navigation, including a visitor switching public topics and returning from the personal area.
+
+**Done when:** The app feels like a market dashboard with optional personal guidance rather than a five-step form.
+**Commit focus:** Navigation structure and public destinations; keep sourced content for Stages 5–6.
 
 ## Stage 5 — Add trend signals
 
