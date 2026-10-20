@@ -128,7 +128,8 @@ TomorrowWorks/
 ├── PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
 ├── UI_UX.md                # Screen layout and usability decisions
 ├── DESIGN.md               # Visual and component consistency rules
-├── RUNPOD_SETUP.md         # Agent connection status and remaining account step
+├── RUNPOD_SETUP.md         # RunPod GPU jobs, evidence, and agent tooling status
+├── runpod/                 # Scripts that run on RunPod (ESCO skill embedding)
 ├── SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
 ├── CLAUDE.md               # Context and rules for coding agents
 ├── PROGRESS_LOG.md         # What was done, findings, and open items
@@ -138,7 +139,7 @@ TomorrowWorks/
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
 
-**Current stack:** React, TypeScript and Vite. [Runpod agent tooling](RUNPOD_SETUP.md) is installed locally but awaits account sign-in; the GPU inference task and Replit integration remain separate build stages.
+**Current stack:** React, TypeScript and Vite. **RunPod is a required part of the build:** a GPU Pod embeds the ESCO skill taxonomy with `BAAI/bge-m3` and a Serverless endpoint serves skill search ([RUNPOD_SETUP.md](RUNPOD_SETUP.md)). Replit hosts the app.
 
 ## MVP Priorities
 
@@ -147,7 +148,7 @@ TomorrowWorks/
 - [x] Replace the numbered journey with freely browsable market destinations
 - [x] Add public industry and search controls and a workplace-changes view
 - [x] Add an illustrative personal skill-gap comparison for a chosen target
-- [ ] Connect one updateable trend source and display its date/citation
+- [ ] Connect one updateable trend source and display its date/citation *(DOSM imported with dates; display pending)*
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
 - [ ] Demonstrate that updated trend data affects matching

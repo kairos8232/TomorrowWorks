@@ -30,15 +30,15 @@ The product serves people across ages, industries, and career stages. Its public
 - [x] Define the intended audience across ages, industries, and career stages; keep Malaysia-first source coverage explicit in [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md).
 - [ ] Choose a few industries for the first sourced demo and one synthetic profile case to test matching; do not frame them as the only intended users.
 - [ ] Keep the development repository private during the hacking period and plan judge access before submission.
-- [ ] Decide what runs in Replit and what GPU task runs in RunPod.
-- [ ] Choose one public, updatable trend source and verify its data, date, and reuse terms.
+- [x] Decide what runs in Replit and what GPU task runs in RunPod. Replit hosts the app; RunPod embeds the ESCO skill taxonomy and serves skill search ([SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md)).
+- [ ] Choose one public, updatable trend source and verify its data, date, and reuse terms. *Chosen: DOSM Job Market Insights; data and release dates verified (Q2 2026 matches the release page). DOSM reuse terms still to check.*
 - [ ] Evaluate a news or official-announcement source for workplace issues separately from job-demand evidence.
-- [ ] Import a small attributed sample and define a repeatable way to refresh it; a live API call is optional.
+- [x] Import a small attributed sample and define a repeatable way to refresh it; a live API call is optional. `scripts/import_dosm_jmi.py` → `data/sources/dosm-jmi-2026-q1.json`, `-q2.json`.
 - [ ] Review the optional Jooble Malaysia, OpenDOSM, and ESCO uses in [API_PLAN.md](API_PLAN.md) only if they improve the demo.
-- [ ] Check whether the source measures research activity, actual job demand, or another signal; label it accurately.
+- [x] Check whether the source measures research activity, actual job demand, or another signal; label it accurately. It measures job offerings advertised online, by occupation major group only; year-on-year change is unreliable, so use quarter-on-quarter.
 - [ ] Draw the exact preliminary demo journey and identify which of the six functions are working now versus described in the proposal.
 - [ ] Decide whether real sign-in and résumé upload belong after the preliminary demo; document account, consent, storage, and deletion requirements before implementing them.
-- [ ] Record prototype assumptions, limits, the hardest technical risk, and a demo fallback.
+- [x] Record prototype assumptions, limits, the hardest technical risk, and a demo fallback (risk table in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md)).
 
 **Done when:** A teammate can explain who the demo serves, what it shows, and which source supports it.  
 **Commit focus:** MVP scope and source decision.
@@ -49,8 +49,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Install the official Runpod Codex skills and plugin; record the local tool status in [RUNPOD_SETUP.md](RUNPOD_SETUP.md).
 - [ ] Complete Runpod OAuth in Codex Desktop and verify the connection by listing Pods.
-- [ ] Choose one small GPU inference task that affects a visible demo result.
-- [ ] Create a RunPod Pod or Serverless endpoint and run a minimal request.
+- [x] Choose one small GPU inference task that affects a visible demo result: embed ESCO skills with a multilingual model and return the nearest real skills for a user's own description.
+- [ ] Create a RunPod Pod or Serverless endpoint and run a minimal request. *Job A script ready and dry-run verified (`runpod/embed_esco_skills.py`); see [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required).*
 - [ ] Record the model, input, output, runtime, and approximate cost.
 - [ ] Keep credentials in service secrets; add no keys to the repository.
 - [ ] Save the required RunPod evidence for the tools declaration.
@@ -172,11 +172,11 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 5 — Add trend signals
 
-- [ ] Fetch or import the chosen public source through a repeatable process.
-- [ ] Store its name, link, publication date, and refresh date.
-- [ ] Convert the source into a small set of skill or role signals using documented rules.
+- [x] Fetch or import the chosen public source through a repeatable process (DOSM done; ILO and ESCO importers next).
+- [x] Store its name, link, publication date, and refresh date (DOSM: `publishedAt` 2026-06-25 for Q1 and 2026-08-18 for Q2, `retrievedAt` 2026-10-21).
+- [ ] Convert the source into a small set of skill or role signals using documented rules. *ILO exposure imported (`scripts/import_ilo_exposure.py`, 427 occupations, counts match the paper); rules for D and R are documented, code pending.*
 - [ ] Use only public, open, or synthetic data; keep real CVs and personal records out of the demo.
-- [ ] Add a refresh command or workflow.
+- [x] Add a refresh command or workflow: download the new DOSM data file, then run `python3 scripts/import_dosm_jmi.py <file> <release date> <download date>`.
 - [ ] Verify that changed source data changes the stored signals.
 
 **Done when:** The source can be refreshed and the app can trace each signal to it.  

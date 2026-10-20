@@ -1,6 +1,6 @@
 # Trend signals and role matching
 
-**Status:** decision proposed on 21 Oct 2026. DOSM Q1 and Q2 2026 imported (`data/sources/`); ILO scores and ESCO skills still to import. This document chooses the minimum source set for the preliminary demo and defines a scoring rule a teammate can check by hand. It replaces the open source choice in [API_PLAN.md](API_PLAN.md) Stage 1. Check items in [CHECKLIST.md](CHECKLIST.md) only after the work is verified.
+**Status:** decision proposed on 21 Oct 2026. DOSM Q1 and Q2 2026 imported (`data/sources/`). ILO Table A1 imported (`data/sources/ilo-genai-exposure-2025.json`, 427 occupations). ESCO v1.2.1 downloaded; role importer and RunPod embedding are next. Day-by-day plan: [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026). This document chooses the minimum source set for the preliminary demo and defines a scoring rule a teammate can check by hand. It replaces the open source choice in [API_PLAN.md](API_PLAN.md) Stage 1. Check items in [CHECKLIST.md](CHECKLIST.md) only after the work is verified.
 
 ## Demo user (sharp slice for the rubric)
 
@@ -22,7 +22,7 @@ Why this person: accounting and bookkeeping clerks are in the ILO's **highest ge
 
 ## DOSM import (done)
 
-`python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx <download date>` writes `data/sources/dosm-jmi-2026-q2.json` (needs `pip install openpyxl`). Raw files live in `data/raw/` and are gitignored; the JSON records where to download them. Each data file holds the **full quarterly series from 2019 Q3**, so one file is enough for trend history; the Q1 and Q2 releases are kept separately to demonstrate a refresh.
+`python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx <release date> <download date>` writes `data/sources/dosm-jmi-2026-q2.json` (needs `pip install openpyxl`). Raw files live in `data/raw/` and are gitignored; the JSON records where to download them. Each data file holds the **full quarterly series from 2019 Q3**, so one file is enough for trend history; the Q1 and Q2 releases are kept separately to demonstrate a refresh.
 
 Checked against the Q2 2026 release page: total 555,509; Professionals 285,907 (Q1: 315,768). The importer stops with an error if DOSM changes the table layout or adds an unknown occupation group.
 
@@ -36,10 +36,18 @@ Checked against the Q2 2026 release page: total 555,509; Professionals 285,907 (
 
 **Use quarter-on-quarter change only.** Year-on-year changes are above +80% for almost every group, which most likely reflects DOSM widening the set of job sites it collects from, not real demand doubling. Say this in the PRD as a known limitation.
 
-## Files still to obtain by hand
+## ILO import (done)
 
-1. ILO WP140 PDF (Annex **Table A1**, page 48: ISCO-08 4-digit occupations by exposure gradient, with mean and SD). The paper's web page does not include the table rows, and the linked task-score site offers no download.
-2. ESCO classification download from the [ESCO download page](https://esco.ec.europa.eu/en/use-esco/download). Needed for both role skills and the RunPod step. Unzip into `data/raw/esco/` (gitignored).
+`python3 scripts/import_ilo_exposure.py "data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf" <download date>` (needs `pdftotext`: `brew install poppler`) writes `data/sources/ilo-genai-exposure-2025.json`.
+
+- **427 occupations**; **112 exposed** (Gradients 1–4) and **13 in Gradient 4** — both match the counts stated in the paper.
+- Gradient = the label printed in Table A1; where it cannot be read from the PDF layout (91 rows), the paper's threshold rule is used. Where both are readable they agree, except 4 rows whose rounded mean + SD sits exactly on 0.40; the printed label is kept.
+- Some names break in PDF extraction (e.g. "Tra"c" for "Traffic"); the app shows the ESCO ISCO label instead.
+
+## Source files obtained by hand
+
+1. **Done** (`data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf`, 53 pages; Table A1 extracts cleanly with `pdftotext -layout`). ILO WP140 PDF (Annex **Table A1**, page 48: ISCO-08 4-digit occupations by exposure gradient, with mean and SD). The paper's web page does not include the table rows, and the linked task-score site offers no download.
+2. **Done.** ESCO classification download from the [ESCO download page](https://esco.ec.europa.eu/en/use-esco/download). Needed for both role skills and the RunPod step. Unzip into `data/raw/esco/` (gitignored).
 
 ### ESCO download settings and licence (requested 21 Oct 2026)
 
@@ -89,18 +97,20 @@ Every source JSON carries metadata, then rows. The DOSM snapshot looks like this
 
 Job-level counts (e.g. Accountants and Auditors 22,067 in Q2 2026) appear only in DOSM's press statement, not the data file. They may be shown as a cited fact but do not feed the score.
 
-## Candidate roles (verify every code against MASCO 2020 before use)
+## Candidate roles
 
-| ISCO-08 | Role | Why it is in the set |
-| --- | --- | --- |
-| 4311 | Accounting and bookkeeping clerk | The demo user's current role (high exposure). |
-| 3313 | Accounting associate professional | Adjacent step up. |
-| 2411 | Accountant / auditor | Promotion path; high DOSM demand. |
-| 2413 | Financial analyst | Analytics move; ILO lists as high exposure — a useful contrast. |
-| 2421 | Management and organisation analyst | Process / transformation move. |
-| 2120 | Statistician / data analyst | Data move. |
-| 2512 | Software developer | High DOSM demand; long reskilling path. |
-| 2133 | Environmental protection professional (ESG reporting) | Sustainability move; strong SDG link. |
+Codes checked on 21 Oct 2026 against ESCO v1.2.1 `ISCOGroups_en.csv` and ILO WP140 Table A1 (both present for all eight). Still to check against the MASCO 2020 list. ILO mean = average GenAI exposure of the occupation's tasks (0–1); SD = spread across tasks.
+
+| ISCO-08 | Role (ESCO label) | ILO mean / SD | Why it is in the set |
+| --- | --- | --- | --- |
+| 4311 | Accounting and bookkeeping clerks | 0.64 / 0.07 | The demo user's current role; Gradient 4 (highest exposure). |
+| 3313 | Accounting associate professionals | 0.49 / 0.13 | Adjacent step up. |
+| 2411 | Accountants | 0.51 / 0.08 | Promotion path; top-five advertised job in DOSM's Q2 2026 press statement. |
+| 2413 | Financial analysts | 0.62 / 0.06 | Analytics move; high exposure — a useful contrast. |
+| 2421 | Management and organisation analysts | 0.46 / 0.10 | Process / transformation move. |
+| 2120 | Mathematicians, actuaries and statisticians | 0.56 / 0.09 | Data move. |
+| 2512 | Software developers | 0.53 / 0.07 | Top-five advertised job in Q2 2026; long reskilling path. |
+| 2133 | Environmental protection professionals | 0.38 / 0.04 | Sustainability (ESG) move; lowest exposure in the set; strong SDG link. |
 
 Eight roles are enough for the preliminary demo. Do not add a role without a code, an ESCO URI and a DOSM row (or a visible "no demand data" note).
 
@@ -139,15 +149,15 @@ A skill's trend is derived, not invented: average `D` and average `R` across the
 
 ## Where AI is used: RunPod skill search over a real taxonomy
 
-**Decision (21 Oct): use RunPod.** The GPU work runs on a real, official dataset, so the model only ever *retrieves* existing records and never writes them.
+**Decision (21 Oct): RunPod is required and stays in scope.** The GPU work runs on a real, official dataset, so the model only ever *retrieves* existing records and never writes them. Step-by-step jobs, evidence and fallback: [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required). Script: `runpod/embed_esco_skills.py`.
 
 - **Dataset:** ESCO v1.2 (European Commission; about 13,900 skills and 3,000 occupations, each occupation linked to an ISCO-08 code). Official, free, and documented.
 - **Model:** an open-weights multilingual embedding model such as `BAAI/bge-m3` (handles English, Bahasa Malaysia and Chinese, which also covers the brief's multi-language good-to-have). Confirm the exact model and record it in the Tools Declaration.
-- **Batch job on a RunPod GPU Pod:** embed every ESCO skill label and its alternative labels once; save the vectors (e.g. `data/derived/esco-skill-embeddings.npy` + an id list). Record Pod ID, GPU type and runtime for the declaration screenshot.
+- **Batch job on a RunPod GPU Pod:** embed all 13,960 released ESCO skills (label, up to 8 alternative labels, description) once; save `data/derived/esco/esco-skill-vectors.f16.npy` (≈ 28.6 MB) + `esco-skill-index.json`. About 100,000 label strings in the source make this a real GPU job. Record Pod ID, GPU type and runtime for the declaration screenshot.
 - **Runtime on RunPod Serverless:** embed the user's free-text description ("I reconcile bank statements and prepare monthly reports in Excel"), return the nearest ESCO skills with similarity scores. The user ticks which ones are true before matching.
 - **Also usable:** map each DOSM/MASCO role title to its nearest ESCO occupation as a check on the hand-made role list.
 - **Never:** the model does not create roles, courses, statistics or scores. Every suggested skill is an ESCO record with its URI; scores come only from the rule above.
-- **Fallback:** if the endpoint is down, the user picks skills from a searchable ESCO list; the demo still works.
+- **Fallback:** if the Serverless endpoint is down, the user picks skills from a searchable ESCO list; the demo still works, and the batch Pod run already shows RunPod's role.
 
 **Kaggle and other mirrors:** use a Kaggle dataset only if it names its original source and licence, and prefer downloading from that original publisher (ESCO, O*NET, DOSM). A scraped job-postings dataset with unclear terms or origin is not acceptable evidence under the brief's "no invented statistics" rule.
 

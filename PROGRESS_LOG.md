@@ -4,6 +4,43 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (00:44–01:00 MYT) — ILO import; RunPod made a required part of the build
+
+**Decision (Carson):** RunPod must be used and stays in scope, with trustworthy data only. Docs updated so RunPod is never on the drop list.
+
+**ILO importer — `scripts/import_ilo_exposure.py`:**
+- Reads Annex Table A1 from the downloaded PDF with `pdftotext -layout` and writes `data/sources/ilo-genai-exposure-2025.json` with full source metadata.
+- Result: **427 occupations, 112 exposed, 13 in Gradient 4**, matching the paper's own counts.
+- First attempts were wrong and fixed: (1) rows with a label prefix or an SD of exactly 0 were skipped; (2) carrying labels over from the previous row mislabelled 187 rows, because each label is stacked around its own row. Final method reads the label from the row's own three lines and uses the paper's threshold rule only where the label cannot be read (91 rows). Where both exist they agree except 4 boundary rows (rounded mean + SD = 0.40); the printed label is kept.
+- Our eight roles: 4311 Gradient 4 (0.64), 2413 Gradient 4 (0.62), 2120 Gradient 3 (0.56), 2512 Gradient 3 (0.53), 2411 Gradient 3 (0.51), 3313 Gradient 2 (0.49), 2421 Gradient 2 (0.46), 2133 Minimal exposure (0.38).
+
+**RunPod — `runpod/embed_esco_skills.py` and [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required) Part 2:**
+- ESCO `skills_en.csv`: 13,960 released skills, 86,690 alternative labels; `occupationSkillRelations_en.csv`: 67,600 essential and 58,451 optional links.
+- **Job A (GPU Pod):** embed each skill (label, up to 8 alternative labels, description) with `BAAI/bge-m3`; output ≈ 28.6 MB of vectors plus an index and `run-info.json` (model, GPU, runtime). Dry run verified locally; GPU run not done yet.
+- **Job B (Serverless):** same model embeds the user's description; the Replit backend returns the nearest real ESCO skills for the user to confirm.
+- Evidence checklist (Pod ID, GPU type, runtime screenshot; endpoint URL) and a searchable-list fallback are written down.
+- Plan moved Job A to **Wednesday** so RunPod evidence exists early.
+
+**Files:** new `scripts/import_ilo_exposure.py`, `data/sources/ilo-genai-exposure-2025.json`, `runpod/embed_esco_skills.py`; updated `RUNPOD_SETUP.md`, `SIGNALS_AND_MATCHING.md`, `BUILD_STAGES.md`, `CHECKLIST.md`, `CLAUDE.md`, `README.md`.
+
+**Next:** run Job A on a RunPod Pod (Carson, needs the team account) · ESCO role importer → `data/roles.json` · scoring module + unit test · Replit import.
+
+---
+
+## 21 Oct 2026 (00:42–00:50 MYT) — Inputs complete, plan to the deadline
+
+**Status:** all three source files are in `data/raw/` (DOSM Q1/Q2 2026 xlsx, ILO WP140 PDF, ESCO v1.2.1 CSV). Next work is code, not research.
+
+**Done in this entry:**
+- **Verified the eight candidate role codes** against ESCO `ISCOGroups_en.csv` and ILO Table A1; all present. ILO scores added to the role table in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#candidate-roles). The demo user's current job (4311, 0.64) is the most exposed; Environmental protection professionals (2133, 0.38) the least. MASCO 2020 check still open.
+- **Fixed the DOSM importer** to store the release date (`publishedAt`), which the brief requires on every source. It now takes three arguments: file, release date, download date. Regenerated both snapshots: Q1 published 2026-06-25 (date of DOSM's Q1 release file and press coverage; confirm on the release page), Q2 2026-08-18 (release page).
+- **Ticked verified checklist items** in [CHECKLIST.md](CHECKLIST.md): Stage 1 (Replit/RunPod split, sample import, measure label, risks), Stage 2 (GPU task chosen), Stage 5 (repeatable import, metadata, refresh command). DOSM reuse terms remain unchecked.
+- **Wrote the day-by-day plan** in [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026), with a drop order if time runs short.
+
+**Next step (Wed 21):** ILO importer → ESCO roles importer → scoring module with the worked-example unit test → import the repo into Replit.
+
+---
+
 ## 21 Oct 2026 (00:18–00:35 MYT) — Review, source decision, DOSM import
 
 Work done with Claude. Committed by Carson in `09cd1ce` (docs and source decision) and `977d59c` (DOSM importer and snapshots); this log and its README/CLAUDE.md links are the remaining uncommitted change.
