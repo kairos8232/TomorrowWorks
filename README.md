@@ -110,6 +110,8 @@ TomorrowWorks/
 │   └── styles.css          # Responsive styles
 ├── package.json            # Scripts and pinned dependencies
 ├── CHECKLIST.md            # Staged build and submission tasks
+├── BUILD_STAGES.md         # Small commit slices for each stage
+├── SCREENS.md              # Purpose and behaviour of each screen
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
 
@@ -117,7 +119,7 @@ TomorrowWorks/
 
 ## MVP Priorities
 
-- [ ] Create a synthetic sample profile and a working intake form
+- [x] Create a synthetic sample profile and a working intake form
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills

@@ -1,6 +1,6 @@
 # TomorrowWorks build checklist
 
-This checklist tracks the hackathon prototype. Complete one stage at a time. Check an item only after the work is present and verified. Commit the stage's implementation and its checklist updates together; split a stage into smaller commits if needed. The ChatGPT reference PDFs stay outside this repository.
+This checklist tracks the hackathon prototype. Complete one stage at a time. Check an item only after the work is present and verified. Commit the stage's implementation and its checklist updates together; split a stage into smaller commits if needed. [SCREENS.md](SCREENS.md) explains each screen, and [BUILD_STAGES.md](BUILD_STAGES.md) lists small commit slices. The ChatGPT reference PDFs stay outside this repository.
 
 ## Stage 0 — Repository documents
 
