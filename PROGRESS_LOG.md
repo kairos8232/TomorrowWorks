@@ -4,6 +4,13 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:12 MYT) — Full-width notes; no tabular figures
+
+- Notes, reasons and empty-state text no longer stop at a fixed width (they left an odd gap inside full-width tables); page intros may run to 960 px.
+- Removed tabular figures entirely: Safari still showed widened commas ("99 , 447") in the number columns. Right-aligned numbers stay readable.
+
+---
+
 ## 21 Oct 2026 (02:08–02:20 MYT) — Fewer words; tables instead of repeated cards
 
 **Feedback (Carson):** descriptions repeated on every card; too many words; odd spacing ("87 , 950", "0 . 64").
