@@ -12,6 +12,7 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 
 - Put the main question and useful action in the first view. Avoid large empty hero space that pushes content below the fold.
 - Keep public navigation and My career visibly separate. On narrower screens, use a compact horizontal navigation and full-width content rather than squeezing a desktop sidebar beside the page.
+- Use the width a visitor has: balance overview cards across columns, pair related form fields where readable, and place a target editor beside its result on wide screens. Stack these groups before text or controls become cramped.
 - Use plain labels: **Workplace changes** for reports, **Demand** for supported present measures, **Skills** for public role-skill evidence, and **My skill gaps** for an individual's comparison.
 - Explain an empty state with **what is missing** and **what the visitor can do now**. Do not show fake cards or numbers to fill space.
 - Show evidence, dates, and uncertainty near any sourced claim. Mark the current role target as illustrative and credentials as unverified until a relevant source is checked.
@@ -24,5 +25,8 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 | 4f-a — Done | The fixed sidebar squeezes content in medium-width windows. | Switch to a compact, scrollable top navigation at 980 CSS pixels and below; stack form columns at 620 pixels and below. | At a 765-pixel window, the page has full width and no horizontal page overflow. |
 | 4f-b — Done | The public landing page spends too much space on introduction while the working personal demo action sits below empty topic cards. | Tighten the introduction, place the fictional-demo action near it, show topic cards before overview filters, and shorten card copy. | The action and topic choices are visible before the source-status controls; the no-source message remains explicit. |
 | 4f-c — In progress | Keyboard and small-screen behaviour need a focused pass. | Visible focus and keyboard submission were checked through the fictional profile-to-gap flow. The phone-width layout check remains open. | A keyboard user can complete the fictional profile-to-gap flow; no control is clipped at phone width. |
+| 4g-a — Planned | Content width is capped and the medium-screen header pushes cards below the first view. | Widen the content, balance overview card columns, and compact the header and intro. | Public choices appear sooner; wide screens use their width without a single leftover card. |
+| 4g-b — Planned | Profile fields all stack after the first pair. | Put related fields in readable pairs. | The form is shorter on roomy screens and stacks at phone width. |
+| 4g-c — Planned | The skill-gap result appears below its editor. | Place the result beside the target editor when enough width exists. | Both parts stay readable and the narrow layout stacks without page overflow. |
 
 Keep these as separate small commits. Update this file if the design choice changes, and mark checklist items only after the interface is verified.
