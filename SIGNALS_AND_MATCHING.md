@@ -20,6 +20,10 @@ Why this person: the clerical accounting work around this job (ISCO 4311, *accou
 
 **Stretch (Phase 2, if shortlisted):** the [Anthropic Economic Index](https://huggingface.co/datasets/Anthropic/EconomicIndex) (CC-BY data, releases every few months since Feb 2025) maps real AI usage to O*NET tasks with automation vs augmentation. It shows "AI advancement over time" better than the ILO index, but needs an O*NET-SOC ↔ ISCO crosswalk, so it is not in the preliminary build.
 
+## Planned additions (21 Oct 2026)
+
+News (GDELT) and the monthly Labour Force Survey (OpenDOSM `lfs_month`) will make the public views more current, and NOSS/SKM will add the Malaysian certification route to pathways. **None of them changes the scoring rule:** news is reported context, the LFS is a different measure from job ads, and NOSS is a learning route. Details and boundaries: [API_PLAN.md](API_PLAN.md#next-sources-decided-21-oct-2026-0224).
+
 ## DOSM import (done)
 
 `python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx <release date> <download date>` writes `data/sources/dosm-jmi-2026-q2.json` (needs `pip install openpyxl`). Raw files live in `data/raw/` and are gitignored; the JSON records where to download them. Each data file holds the **full quarterly series from 2019 Q3**, so one file is enough for trend history; the Q1 and Q2 releases are kept separately to demonstrate a refresh.

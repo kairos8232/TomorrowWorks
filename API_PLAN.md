@@ -4,6 +4,20 @@
 
 This is a menu of proposed sources, not a requirement to integrate every API. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the public claims each source must support. The Domain 1 brief requires at least one **updatable** AI or job-market trend source, with its name and date; hard-coded lists alone do not count. It does not require a live API call during the demo. The preliminary demo needs a rough, working feature, preferably trend evidence feeding role matching. Stage 1 of [CHECKLIST.md](CHECKLIST.md) chooses the minimum source and verifies that changed input changes the output.
 
+## Next sources (decided 21 Oct 2026, 02:24)
+
+DOSM Job Market Insights is quarterly and lags (Q2 2026 was released on 18 Aug 2026). Three additions make the app more current and more Malaysian, each in its own role:
+
+| Source | Where it shows | What it may say | What it must not do | Access |
+| --- | --- | --- | --- | --- |
+| **GDELT DOC 2.0 API** (news index) | *Workplace changes* view | "This Malaysian outlet reported this on this date" — headline, outlet, date, link, topic tag (AI adoption, layoffs, hiring, reskilling) | Change any score; count articles as job demand or severity; copy article text | Free, no key; filter to Malaysian sources and a recent window; cite GDELT and link each original article ([terms](https://gdeltproject.org/about.html)). Store a dated snapshot with a refresh script; show "retrieved" date. |
+| **OpenDOSM `lfs_month`** (monthly Labour Force Survey) | *Demand* view, as context above the job-ad table | The published monthly unemployment rate (and labour force) for the latest month, with the month | Be mixed into the role score; be compared with job-ad counts as if the same measure | [Data catalogue](https://open.dosm.gov.my/data-catalogue/lfs_month); free API, no key, published rate limit 4 requests/min. Check fields and the latest month before display. |
+| **NOSS** (National Occupational Skills Standards, Department of Skills Development / JPK) | *My pathway*, per role | "Malaysian certification route: SKM level n under NOSS <code>", with the official link | Claim a certificate is required for a job or promotion; invent a NOSS code | [JPK NOSS page](https://web.dsd.gov.my/index.php/en/tender/9-explore/1720-noss-eng-new). Look up each of the nine roles by hand; record code, title, level and link, or "no matching NOSS found". |
+
+**Why ESCO still fits Malaysia:** ESCO, ILO WP140 and DOSM all use ISCO-08 occupation codes, and MASCO 2020 is built on ISCO-08, so the codes join directly. ESCO's skill descriptions come from an EU context and contain no Malaysian qualifications; NOSS/SKM and HRD Corp-claimable courses fill that local layer. Pitch line: *ESCO gives the shared skills vocabulary; DOSM and ILO give Malaysian demand and AI exposure; NOSS/SKM and HRD Corp give the local learning route.*
+
+Background for the PRD: PERKESO's report [*Employment Outlook: Leveraging Artificial Intelligence in Bridging Occupations Qualifications*](https://lmx.perkeso.gov.my/bm/storage/2024/02/Employment-Outlook-Leveraging-Artificial-Intelligence-in-Bridging-Occupations-Qualifications.pdf) (2024).
+
 ## Cross-industry source map
 
 | Signal type | Possible source | What the app may say | What it must not infer |

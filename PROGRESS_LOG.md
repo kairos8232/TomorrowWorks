@@ -4,6 +4,17 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:22–02:30 MYT) — Plan: news, monthly labour data, NOSS
+
+**Questions (Carson):** DOSM job-ad data lags; can news add the latest? Can a Malaysian product use ESCO (European)?
+
+- **News: yes, as context, not demand.** GDELT DOC API (free, no key, Malaysian sources) on *Workplace changes*: dated headlines with links and topic tags. It never changes scores — news volume is not job demand.
+- **Fresher official figure:** OpenDOSM monthly Labour Force Survey (`lfs_month`) as context on *Demand*.
+- **ESCO in Malaysia: yes.** ESCO, ILO and DOSM share ISCO-08 codes and MASCO 2020 follows ISCO-08, so codes join directly. ESCO lacks Malaysian qualifications, so **NOSS/SKM** (JPK) is added to the pathway as the local certification route.
+- **Plan updated:** [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026-0230) (Wed: Job B live, 6d news, 6e LFS; Thu: pathway 10a–10d with NOSS, SDG 11; Fri: buffer, PRD and slides drafts; Sat: finalise and submit), [API_PLAN.md](API_PLAN.md#next-sources-decided-21-oct-2026-0224) (roles and boundaries of each source), [CHECKLIST.md](CHECKLIST.md) (6d, 6e, 10d) and [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#planned-additions-21-oct-2026).
+
+---
+
 ## 21 Oct 2026 (02:16–02:45 MYT) — RunPod Job B: server and search box built (endpoint tomorrow)
 
 **Decision (Carson):** do Job B for real; Carson creates the RunPod endpoint tomorrow, code finished tonight.

@@ -190,6 +190,9 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Explain what “rising” and “declining” mean for the chosen source; label future claims as estimates.
 - [ ] Show a clear state for missing or stale data.
 
+- [ ] **6d** Import a dated snapshot of Malaysian workplace news from the GDELT DOC API (headline, outlet, date, link, topic tag) with a refresh script; show it on Workplace changes, labelled as reported issues that do not affect scores.
+- [ ] **6e** Show the latest OpenDOSM monthly Labour Force Survey figures (`lfs_month`) as context on Demand, with the month and source.
+
 **Done when:** A visitor can browse before profiling and see the evidence behind each displayed claim.
 **Commit focus:** Public market display and source context.
 
@@ -241,6 +244,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Check each learning-resource link and its price or free-access claim.
 - [ ] Display the ordered pathway in the app.
 - [ ] Link each learning step back to the missing skill it addresses.
+
+- [ ] **10d** For each role, look up a matching NOSS (JPK) by hand and record code, title, SKM level and link, or "no matching NOSS found"; show it as the Malaysian certification route without claiming it is required.
 
 **Done when:** The sample user can follow a practical plan with working resources.  
 **Commit focus:** Learning-plan logic and display.
