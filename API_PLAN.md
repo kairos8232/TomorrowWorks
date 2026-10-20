@@ -1,5 +1,7 @@
 # API plan for TomorrowWorks
 
+> **Proposed decision (21 Oct 2026):** DOSM Job Market Insights (demand) + ILO GenAI exposure index (AI exposure) + ESCO role skills. See [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md). The rest of this file remains the wider candidate menu.
+
 This is a menu of proposed sources, not a requirement to integrate every API. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the public claims each source must support. The Domain 1 brief requires at least one **updatable** AI or job-market trend source, with its name and date; hard-coded lists alone do not count. It does not require a live API call during the demo. The preliminary demo needs a rough, working feature, preferably trend evidence feeding role matching. Stage 1 of [CHECKLIST.md](CHECKLIST.md) chooses the minimum source and verifies that changed input changes the output.
 
 ## Cross-industry source map

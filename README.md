@@ -70,6 +70,18 @@ The public area has independent Explore, Workplace changes, Demand, Skills, and 
 
 The key prototype goal is to show that **changing trend evidence changes a career recommendation or its explanation**. This distinguishes TomorrowWorks from a static list of jobs or a generic CV chatbot.
 
+## Chosen Signals and Matching (Preliminary Build)
+
+Details, data shapes, and the worked example are in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md).
+
+- **Demo user:** a junior accounting or bookkeeping worker in the Klang Valley whose routine tasks are increasingly done by AI tools.
+- **Demand signal (updatable):** DOSM *Job Market Insights*, quarterly online vacancies by occupation (Q1 and Q2 2026 snapshots; Q3 2026 is a real future refresh).
+- **AI-exposure signal:** ILO *Generative AI and Jobs* refined index (2025), per ISCO-08 occupation, which aligns with MASCO.
+- **Role skills:** a small curated role set with ESCO-linked essential skills.
+- **Score:** `wF·skill fit + wD·demand trend + wR·(1 − AI exposure)`, with every part shown. Moderate and fast AI-change scenarios use different weights, labelled as estimates.
+- **Proof that trends matter:** a Q1 vs Q2 2026 data-snapshot switch changes scores for the same profile.
+- **AI use:** optional open-weights LLM on RunPod that maps free text to known skills only; it never creates roles, courses, or scores.
+
 ## Example Demo (Illustrative Only)
 
 **Sample profile:** Junior Accountant; skills in Excel, bookkeeping and financial reporting; interested in analytics.
@@ -117,6 +129,8 @@ TomorrowWorks/
 ├── UI_UX.md                # Screen layout and usability decisions
 ├── DESIGN.md               # Visual and component consistency rules
 ├── RUNPOD_SETUP.md         # Agent connection status and remaining account step
+├── SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
+├── CLAUDE.md               # Context and rules for coding agents
 ├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
