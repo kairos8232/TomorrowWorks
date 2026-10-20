@@ -162,8 +162,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Install Impeccable for Codex in the project and document how to repeat the local install without committing generated tool files.
 - [x] Run its rendered design scan at desktop and phone widths; fix verified, focused issues without inventing market evidence.
-- [ ] Record the observed palette, type hierarchy, layout breakpoints, component states, and content rules in [DESIGN.md](DESIGN.md), with links to the product and screen guides.
-- [ ] Build the app and verify the public landing page after the change; keep a separate list of untested screens or improvements.
+- [x] Record the observed palette, type hierarchy, layout breakpoints, component states, and content rules in [DESIGN.md](DESIGN.md), with links to the product and screen guides.
+- [x] Build the app and verify the public landing page after the change; keep a separate list of untested screens or improvements.
 
 **Done when:** The installed skill can be used locally, the design rules are clear enough to guide another small UI commit, and the documented checks match the rendered site.
 **Commit focus:** Tool setup, focused UI fix, and design reference in separate small commits.

@@ -115,6 +115,7 @@ TomorrowWorks/
 ├── PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
 ├── PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
 ├── UI_UX.md                # Screen layout and usability decisions
+├── DESIGN.md               # Visual and component consistency rules
 ├── skills/                 # Project-specific Codex UX skill
 └── API_PLAN.md             # Proposed sources and validation steps
 ```
@@ -150,7 +151,7 @@ Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) after the server starts. `
 
 ## UI design workflow
 
-[UI_UX.md](UI_UX.md) records screen and usability decisions. The optional [Impeccable](https://impeccable.style/docs/) skill can be installed locally for Codex from this repository:
+[DESIGN.md](DESIGN.md) records visual consistency rules; [UI_UX.md](UI_UX.md) records screen and usability decisions. The optional [Impeccable](https://impeccable.style/docs/) skill can be installed locally for Codex from this repository:
 
 ```bash
 npx impeccable install -y --providers=codex --scope=project

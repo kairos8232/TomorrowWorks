@@ -1,6 +1,6 @@
 # TomorrowWorks UI and UX guide
 
-This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the product, [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines private-area questions, and [SCREENS.md](SCREENS.md) records each screen's actual behaviour. The reusable project skill is [tomorrowworks-web-ux](skills/tomorrowworks-web-ux/SKILL.md).
+This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the product, [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines private-area questions, [SCREENS.md](SCREENS.md) records each screen's actual behaviour, and [DESIGN.md](DESIGN.md) records visual consistency rules. The reusable project skill is [tomorrowworks-web-ux](skills/tomorrowworks-web-ux/SKILL.md).
 
 ## Visitor priorities
 
