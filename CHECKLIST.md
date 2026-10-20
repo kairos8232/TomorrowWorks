@@ -50,8 +50,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Install the official Runpod Codex skills and plugin; record the local tool status in [RUNPOD_SETUP.md](RUNPOD_SETUP.md).
 - [ ] Complete Runpod OAuth in Codex Desktop and verify the connection by listing Pods.
 - [x] Choose one small GPU inference task that affects a visible demo result: embed ESCO skills with a multilingual model and return the nearest real skills for a user's own description.
-- [ ] Create a RunPod Pod or Serverless endpoint and run a minimal request. *Job A script ready and dry-run verified (`runpod/embed_esco_skills.py`); see [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required).*
-- [ ] Record the model, input, output, runtime, and approximate cost.
+- [x] Create a RunPod Pod or Serverless endpoint and run a minimal request. Job A ran on Pod `40jrr8aulh76tb` (RTX A5000, 92.5 s); output in `data/derived/esco/`. Job B (Serverless) is next.
+- [x] Record the model, input, output, runtime, and approximate cost: `BAAI/bge-m3`; ESCO v1.2.1 `skills_en.csv`; 13,960 × 1024 float16 vectors; 92.5 s embedding; Pod at US$0.27/hr for a few minutes, well under US$1.
 - [ ] Keep credentials in service secrets; add no keys to the repository.
 - [ ] Save the required RunPod evidence for the tools declaration.
 

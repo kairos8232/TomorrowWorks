@@ -66,8 +66,8 @@ If the endpoint is down, the profile screen offers a searchable list of ESCO ski
 
 ### Evidence checklist for the Technical & Tools Declaration
 
-- [ ] Job A dashboard screenshot: Pod ID, GPU type, runtime, from the team's own account.
-- [ ] `data/derived/esco/run-info.json` committed.
+- [ ] Job A dashboard screenshot: Pod ID, GPU type, runtime, from the team's own account. *Run done 21 Oct on Pod `rear_amethyst_gull` (`40jrr8aulh76tb`), RTX A5000; screenshots kept outside the repo.*
+- [x] `data/derived/esco/run-info.json` committed (model `BAAI/bge-m3`, NVIDIA RTX A5000, 13,960 skills, 1024 dims, 92.5 s).
 - [ ] Job B Serverless endpoint URL, from the team's own account.
-- [ ] Model named: `BAAI/bge-m3` (open weights), purpose: retrieve ESCO skills; generates no content.
+- [x] Model named: `BAAI/bge-m3` (open weights), purpose: retrieve ESCO skills; generates no content.
 - [ ] Approximate credit used, out of US$25.

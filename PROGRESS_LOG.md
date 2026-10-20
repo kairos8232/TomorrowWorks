@@ -4,6 +4,18 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:00–) — RunPod Job A in progress
+
+- **Credit:** US$25.00 sponsor credit on the team RunPod account.
+- **Attempt 1 failed (RunPod host fault):** Pod `embarrassed_rose_loon` (`adddib7tt6cxi9`), RTX 4000 Ada, template Runpod PyTorch 2.8 (`runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404`). The container never started: the host could not resolve `registry-1.docker.io` (DNS i/o timeout). None of our code ran. Pod terminated; no credit used.
+- **Attempt 2 running:** Pod `rear_amethyst_gull` (`40jrr8aulh76tb`), **RTX A5000**, US$0.27/hr, same template. Next: Jupyter → run `embed_esco_skills.py` → download `out/` to `data/derived/esco/` → dashboard screenshot → terminate.
+- **Job A done (01:11):** on the RTX A5000, `embed_esco_skills.py` embedded **13,960 ESCO skills in 92.5 s** (`Device: cuda NVIDIA RTX A5000`). Output unzipped into `data/derived/esco/`: `esco-skill-vectors.f16.npy` (13,960 × 1024, 28.6 MB), `esco-skill-index.json`, `run-info.json`.
+- **Checked:** row count matches the index; all vectors unit length; no NaN. Nearest neighbours make sense, e.g. *manage budgets* → *budget for financial needs* (0.87); *use spreadsheets software* → *use word processing software* (0.81). ESCO's CSV repeats 21 skills (13,939 unique URIs); the app must de-duplicate by URI when loading.
+- **Evidence:** terminal screenshot (GPU name, "Done in 92.5s") and Pods-page screenshot (name, ID, GPU, runtime) kept outside the repo for the Tools Declaration. Pod to be terminated after download.
+- **Repo safety:** `.gitignore` now also excludes `*.pem`, `*.key`, `secrets*`, `.runpod/`, `evidence/` (dashboard screenshots belong in the Tools Declaration, not the repo) and `*.zip`. Pod IDs and GPU types are not secrets; API keys are, and live only in Replit Secrets.
+
+---
+
 ## 21 Oct 2026 (00:44–01:00 MYT) — ILO import; RunPod made a required part of the build
 
 **Decision (Carson):** RunPod must be used and stays in scope, with trustworthy data only. Docs updated so RunPod is never on the drop list.
