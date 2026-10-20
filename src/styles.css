@@ -14,7 +14,6 @@ button { font: inherit; cursor: pointer; }
 .journey-step { width: 100%; border: 1px solid transparent; border-radius: 14px; background: transparent; color: #aebcd0; padding: 14px 12px; display: flex; align-items: flex-start; text-align: left; gap: 13px; }
 .journey-step:hover, .journey-step:focus-visible { border-color: #355168; outline: none; }
 .journey-step.active { background: #1c3145; color: #fff; border-color: #2c5260; }
-.journey-number { color: #46d2c2; font: 700 12px 'Manrope', sans-serif; padding-top: 2px; }
 .journey-step strong, .journey-step small { display: block; }
 .journey-step strong { font-size: 14px; margin-bottom: 4px; }
 .journey-step small { font-size: 11px; line-height: 1.4; color: #91a8b9; }
@@ -24,10 +23,7 @@ button { font: inherit; cursor: pointer; }
 .topbar { min-height: 74px; padding: 20px clamp(28px, 5vw, 76px); display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid #e4ebf1; background: white; color: #53647a; font-size: 13px; font-weight: 700; }
 .status-pill { border-radius: 99px; background: #e9f7f3; color: #0d796d; padding: 8px 12px; white-space: nowrap; font-size: 11px; }
 .content-wrap { max-width: 990px; margin: 0 auto; padding: clamp(32px, 6vw, 74px) clamp(24px, 5vw, 76px); }
-.progress-row { display: flex; justify-content: space-between; color: #75879b; font: 800 11px 'Manrope', sans-serif; letter-spacing: .14em; }
-.progress-track { height: 5px; border-radius: 99px; background: #e0e9ed; margin-top: 14px; overflow: hidden; }
-.progress-track > div { height: 100%; background: #25baa8; border-radius: inherit; transition: width .2s ease; }
-.hero { padding: clamp(45px, 8vw, 88px) 0 38px; }
+.hero { padding: clamp(28px, 5vw, 56px) 0 38px; }
 .eyebrow { display: inline-block; color: #0f9c8d; font: 800 11px 'Manrope', sans-serif; text-transform: uppercase; letter-spacing: .16em; margin-bottom: 17px; }
 h1, h2 { font-family: 'Manrope', sans-serif; }
 h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spacing: -.055em; }
@@ -42,6 +38,7 @@ h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spa
 .market-label { color: #0f9c8d; font: 800 10px 'Manrope', sans-serif; letter-spacing: .12em; }
 .market-card h2 { font-size: 17px; margin: 15px 0 10px; }
 .market-card p { color: #6d7f91; font-size: 13px; line-height: 1.6; margin: 0; }
+.market-actions { margin-top: 24px; }
 .profile-panel { background: white; border: 1px solid #e2eaf0; border-radius: 20px; box-shadow: 0 14px 35px rgba(29, 64, 90, .045); padding: clamp(22px, 4vw, 34px); }
 .panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 28px; }
 .panel-heading h2 { font-size: 19px; margin: 0 0 7px; }
@@ -64,7 +61,6 @@ h1 { margin: 0; font-size: clamp(35px, 5vw, 57px); line-height: 1.13; letter-spa
 .skill-tag { padding: 6px 9px; border-radius: 7px; background: #edf7f5; color: #0b766c; font-size: 11px; font-weight: 700; }
 .profile-review .review-interests { margin-bottom: 16px; }
 .profile-context { margin-top: 9px !important; color: #0a887a !important; }
-.page-actions { margin-top: 26px; display: flex; justify-content: flex-end; gap: 12px; }
 .primary-button, .secondary-button { border-radius: 11px; padding: 12px 18px; font-size: 13px; font-weight: 700; }
 .primary-button { background: #0e8176; border: 1px solid #0e8176; color: white; }
 .primary-button:hover { background: #08695f; }

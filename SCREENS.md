@@ -23,7 +23,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Help a visitor discover the labour market before sharing personal details.
 
-**Current:** The app opens on a public market shell with three placeholders. No source, demand figures, or trends are connected yet. Its numbered navigation and progress controls still need removal.
+**Current:** The app opens on a public market shell with three placeholders. No source, demand figures, or trends are connected yet. The step counter and generic Next/Back controls have been removed; independent public destinations are next.
 
 **Planned:**
 

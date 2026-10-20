@@ -19,12 +19,12 @@ function splitEntries(value: string) {
   return [...new Set(value.split(',').map((entry) => entry.trim()).filter(Boolean))];
 }
 
-const screens: { id: Screen; label: string; number: string; description: string }[] = [
-  { id: 'market', label: 'Explore market', number: '01', description: 'Demand now and future outlook' },
-  { id: 'signin', label: 'Sign in', number: '02', description: 'Demo entry for personal guidance' },
-  { id: 'profile', label: 'My profile', number: '03', description: 'Skills, experience and interests' },
-  { id: 'roles', label: 'Role matches', number: '04', description: 'Scores, reasons and skills gaps' },
-  { id: 'pathway', label: 'My pathway', number: '05', description: 'Learning steps and SDG links' },
+const screens: { id: Screen; label: string; description: string }[] = [
+  { id: 'market', label: 'Explore market', description: 'Demand now and future outlook' },
+  { id: 'signin', label: 'Sign in', description: 'Demo entry for personal guidance' },
+  { id: 'profile', label: 'My profile', description: 'Skills, experience and interests' },
+  { id: 'roles', label: 'Role matches', description: 'Scores, reasons and skills gaps' },
+  { id: 'pathway', label: 'My pathway', description: 'Learning steps and SDG links' },
 ];
 
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
@@ -111,7 +111,6 @@ function App() {
               type="button"
               aria-current={screen === item.id ? 'step' : undefined}
             >
-              <span className="journey-number">{item.number}</span>
               <span><strong>{item.label}</strong><small>{item.description}</small></span>
             </button>
           ))}
@@ -122,19 +121,20 @@ function App() {
       <main className="main-content">
         <header className="topbar"><span>Career navigation workspace</span><span className="status-pill">Prototype build</span></header>
         <div className="content-wrap">
-          <div className="progress-row"><span>YOUR JOURNEY</span><span>{String(activeIndex + 1).padStart(2, '0')} / 05</span></div>
-          <div className="progress-track"><div style={{ width: `${((activeIndex + 1) / screens.length) * 100}%` }} /></div>
           <section className="hero" aria-labelledby="screen-title">
             <span className="eyebrow">{content.eyebrow}</span>
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
           </section>
           {screen === 'market' ? (
-            <section className="market-grid" aria-label="Public market overview">
-              <div className="market-card"><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p></div>
-              <div className="market-card"><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p></div>
-              <div className="market-card"><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p></div>
-            </section>
+            <>
+              <section className="market-grid" aria-label="Public market overview">
+                <div className="market-card"><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p></div>
+                <div className="market-card"><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p></div>
+                <div className="market-card"><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p></div>
+              </section>
+              <div className="market-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Get personalised guidance</button></div>
+            </>
           ) : screen === 'signin' ? (
             <section className="work-card" aria-label="Demo entry">
               <div className="card-icon" aria-hidden="true">✦</div>
@@ -158,14 +158,10 @@ function App() {
             </section>
           ) : (
             <section className="work-card" aria-label={`${screens[activeIndex].label} status`}>
-              <div className="card-icon" aria-hidden="true">{activeIndex + 1}</div>
+              <div className="card-icon" aria-hidden="true">✦</div>
               <div><h2>{screens[activeIndex].label}</h2><p>{content.next}</p>{screen === 'roles' && profile && <p className="profile-context">Profile ready: {profile.currentRole} · {profile.skills.length} skills entered</p>}</div>
             </section>
           )}
-          <div className="page-actions">
-            {activeIndex > 0 && <button type="button" className="secondary-button" onClick={() => setScreen(screens[activeIndex - 1].id)}>Back</button>}
-            {activeIndex < screens.length - 1 && (screen !== 'signin' || demoEntered) && <button type="button" className="primary-button" onClick={() => setScreen(screens[activeIndex + 1].id)}>{screen === 'market' ? 'Get personalised guidance' : 'Explore next'} <span aria-hidden="true">→</span></button>}
-          </div>
         </div>
       </main>
     </div>
