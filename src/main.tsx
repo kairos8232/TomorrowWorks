@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { filterMarketSignals, industries, marketSignals, type IndustryId, type MarketSignal, type SignalKind } from './market';
 import './styles.css';
 
 type Screen = 'market' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'roles' | 'pathway';
@@ -17,6 +18,19 @@ const sampleProfile: ProfileDraft = {
 
 function splitEntries(value: string) {
   return [...new Set(value.split(',').map((entry) => entry.trim()).filter(Boolean))];
+}
+
+const viewKind: Partial<Record<Screen, SignalKind | 'all'>> = { market: 'all', demand: 'demand', skills: 'skill', outlook: 'outlook' };
+
+function SignalCard({ signal }: { signal: MarketSignal }) {
+  return <article className="signal-card">
+    <span className="market-label">{signal.kind === 'change' ? 'REPORTED CHANGE' : signal.kind.toUpperCase()}</span>
+    <h2>{signal.title}</h2>
+    <p>{signal.summary}</p>
+    <p className="signal-source">{signal.source.name} · {signal.source.publishedAt} · {signal.source.geography}</p>
+    <p className="signal-source">Coverage: {signal.source.coverage}{signal.source.measure ? ` · Measure: ${signal.source.measure}` : ''}</p>
+    <a href={signal.source.url} target="_blank" rel="noreferrer">Open original source ↗</a>
+  </article>;
 }
 
 const screens: { id: Screen; label: string; description: string }[] = [
@@ -89,8 +103,14 @@ function App() {
   const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileError, setProfileError] = useState('');
+  const [industry, setIndustry] = useState<IndustryId>('all');
+  const [search, setSearch] = useState('');
   const activeScreen = screens.find((item) => item.id === screen)!;
   const content = screenCopy[screen];
+  const currentKind = viewKind[screen];
+  const visibleSignals = currentKind ? filterMarketSignals(marketSignals, currentKind, industry, search) : [];
+  const hasViewSource = currentKind ? marketSignals.some((signal) => currentKind === 'all' || signal.kind === currentKind) : false;
+  const industryLabel = industries.find((item) => item.id === industry)!.label;
 
   function updateDraft(field: keyof ProfileDraft, value: string) {
     setDraft((current) => ({ ...current, [field]: value }));
@@ -156,6 +176,13 @@ function App() {
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
           </section>
+          {currentKind && <section className="browse-controls" aria-label="Filter public evidence">
+            <div className="browse-fields">
+              <label>Industry<select value={industry} onChange={(event) => setIndustry(event.target.value as IndustryId)}>{industries.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
+              <label>Search available evidence<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Topic, role, or skill" /></label>
+            </div>
+            <p className="scope-status" aria-live="polite">{industryLabel} · {search.trim() ? `search: “${search.trim()}” · ` : ''}{visibleSignals.length} verified {visibleSignals.length === 1 ? 'signal' : 'signals'} in this view. {marketSignals.length === 0 ? 'No source has been imported yet.' : ''}</p>
+          </section>}
           {screen === 'market' ? (
             <>
               <section className="market-grid" aria-label="Public market overview">
@@ -163,13 +190,14 @@ function App() {
                 <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p><span className="card-link">Explore skills →</span></button>
                 <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p><span className="card-link">Explore outlook →</span></button>
               </section>
+              {visibleSignals.length > 0 && <section className="signal-list" aria-label="Available market evidence">{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section>}
               <div className="market-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Get personalised guidance</button></div>
             </>
           ) : screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
-            <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
+            visibleSignals.length > 0 ? <section className="signal-list" aria-label={`${activeScreen.label} evidence`}>{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section> : <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
               <span className="market-label">SOURCE STATUS</span>
-              <h2>Evidence is being connected</h2>
-              <p>{content.next}</p>
+              <h2>{hasViewSource ? 'No evidence matches this scope' : 'Evidence is being connected'}</h2>
+              <p>{hasViewSource ? 'Try another industry or search term. Only verified records are shown.' : content.next}</p>
               <button type="button" className="text-button" onClick={() => setScreen('market')}>Browse market overview →</button>
             </section>
           ) : screen === 'signin' ? (

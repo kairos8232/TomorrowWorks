@@ -24,7 +24,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Help a visitor discover the labour market before sharing personal details.
 
-**Current:** The app opens on a public market shell with cards that open independent Demand, Skills, and Outlook destinations. No source, demand figures, or trends are connected yet.
+**Current:** The app opens on a public market shell with cards that open independent Demand, Skills, and Outlook destinations. Industry and keyword controls work across public views and report the selected scope. The sourced evidence list is intentionally empty, so no demand figures or trends are shown yet.
 
 **Planned:**
 
@@ -41,7 +41,7 @@ The preliminary working slice should prove **public, dated signal → changed ro
 
 **Purpose:** Let a visitor choose what to explore and switch topics freely.
 
-**Current:** Demand, Skills, and Outlook each have a dedicated view with an honest empty state. Visitors can switch topics without entering the demo. Workplace changes and shared industry/search controls are planned in Stage 4d. Sourced content remains future work.
+**Current:** Demand, Skills, and Outlook each have a dedicated view with an honest empty state. Visitors can switch topics and filter by industry or keyword without entering the demo. Workplace changes is the next Stage 4d slice. Sourced content remains future work.
 
 **Planned:** Workplace changes shows attributed news or official announcements, tagged by industry and issue type; a report is not proof of the issue's scale. Demand describes the exact present-day measure and geography. Skills shows requested skills supported by the source. Outlook shows dated scenarios and assumptions, never current job counts. Each view links back to evidence once connected.
 
