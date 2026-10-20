@@ -97,7 +97,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Remove screen numbers, the journey counter, progress bar, and generic Next/Back controls.
 - [x] Give Explore, Demand, Skills, and Outlook independent public destinations reachable in any order.
 - [x] Put My career and the demo sign-in entry apart from public browsing; do not make sign-in a numbered destination.
-- [x] Keep profile, role matches, and pathway available as personal destinations after demo entry, with task-specific links where helpful.
+- [x] Keep profile, skill gaps, role matches, and pathway available as personal destinations after demo entry, with task-specific links where helpful.
 - [x] Check browser navigation: switch public topics in any order, enter the fictional profile, and return to public browsing.
 - [ ] Check the navigation and market cards at a narrow mobile viewport.
 
