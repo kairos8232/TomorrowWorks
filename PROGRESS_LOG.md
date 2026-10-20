@@ -4,6 +4,18 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:10–02:30 MYT) — "Career ledger" restyle to remove the generic AI look
+
+**Request (Carson):** the UI felt AI-generated. Used the `frontend-design` skill (design guidance) rather than installing a new tool; the repo's optional Impeccable setup is unchanged.
+
+- **Direction:** an account-book look grounded in the subject (accounting user, official statistics). Palette: paper #f7f8f6, ink #1c2430, ledger green #1e6b4f, deficit red #a8402b, rule #d9ded9. One typeface, Schibsted Grotesk, with tabular figures.
+- **Removed generic tells:** navy sidebar + teal, tracked ALL-CAPS eyebrows ("MOVE #1", "WORKPLACE CHANGES"), → on links, ✦ sparkle icons, card shadows, "A · B · C" strings, single-word colour accent in the logo.
+- **Role matches rebuilt as a ranked ledger:** columns Rank, Role, Skill fit, Demand, AI resilience, Score; current job pinned above a double rule; rows expand for reasons, transferable pairs and skills. **After a data or scenario switch, each score shows ▲/▼ and the change** — the visible proof that trend data moves the ranking. Motion only on that user action and respects reduced-motion.
+- **Home cards rewritten** to describe what is actually connected (DOSM job ads, ILO exposure; news and skills views not yet connected).
+- **Checked in a browser** at 1440 px and 390 px: no horizontal overflow; phone layout stacks each row. Build passes; 15 tests pass. `DESIGN.md` updated with the new tokens and rules.
+
+---
+
 ## 21 Oct 2026 (02:00–02:10 MYT) — Home page points to real data
 
 - Home button is now **"See ranked career moves"** and opens Role matches directly; the old "no verified source connected" notice is gone because public views now have sources.

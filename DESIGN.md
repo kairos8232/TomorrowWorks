@@ -1,41 +1,31 @@
 ---
 name: TomorrowWorks
-description: Current visual and interaction rules for the workforce discovery website
+description: Current visual and interaction rules for the workforce discovery website ("career ledger", 21 Oct 2026)
 colors:
-  action: "#0e8176"
-  action-hover: "#08695f"
-  action-link: "#087568"
-  sidebar: "#0d1728"
-  canvas: "#f3f6f9"
+  paper: "#f7f8f6"
   surface: "#ffffff"
-  text: "#14233a"
-  supporting-text: "#526b7c"
-  border: "#e2eaf0"
-  focus: "#4ac9ba"
+  ink: "#1c2430"
+  muted: "#5d6873"
+  ledger-green: "#1e6b4f"
+  ledger-green-hover: "#17563f"
+  deficit-red: "#a8402b"
+  rule: "#d9ded9"
+  control-border: "#c5ccc6"
+  focus: "#2f8a66"
 typography:
-  display:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(36px, 4.2vw, 56px)"
-    fontWeight: 800
-    lineHeight: 1.13
-    letterSpacing: "-0.03em"
-  body:
-    fontFamily: "DM Sans, sans-serif"
-    fontSize: "clamp(16px, 1.05vw, 18px)"
-    fontWeight: 400
-    lineHeight: 1.6
+  family: "Schibsted Grotesk, sans-serif (one family; tabular figures)"
+  display: { fontSize: "clamp(36px, 4.2vw, 56px)", fontWeight: 800, lineHeight: 1.13, letterSpacing: "-0.03em" }
+  body: { fontSize: "clamp(16px, 1.05vw, 18px)", fontWeight: 400, lineHeight: 1.6 }
 rounded:
-  control: "10px"
-  button: "11px"
-  panel: "16px"
-  card: "20px"
-spacing:
-  card-gap: "16px"
-  field-gap: "18px"
-  card-padding: "24px"
+  control: "6px"
+  panel: "10–12px"
+  tag: "4px"
 ---
 
 # TomorrowWorks design system
+
+> **21 Oct 2026 — "career ledger" restyle.** The demo user is an accounting assistant and the data is official labour statistics, so the interface reads like a well-kept account book instead of a generic dashboard. Changes: light paper sidebar instead of navy; one typeface (Schibsted Grotesk) with tabular figures; colour only for meaning (**ledger green** = held skills, rising, actions; **deficit red** = skills to build, falling); sentence-case labels instead of tracked ALL-CAPS eyebrows; no arrows appended to links, no sparkle icons, no decorative shadows, no "A · B · C" strings. Role matches is a ranked ledger table (current job pinned above a double rule, then moves), and after a data or scenario switch each score shows its change (▲/▼). The sections below keep the original rules where still true; colour values above supersede the old palette.
+
 
 This file records the **current website design**, not a rebrand. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) owns the audience and evidence rules; [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) owns personal-data boundaries; [SCREENS.md](SCREENS.md) owns screen behaviour; [UI_UX.md](UI_UX.md) records UX decisions. Check the rendered site and `src/styles.css` when changing a value here.
 

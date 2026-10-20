@@ -27,14 +27,14 @@ const viewKind: Partial<Record<Screen, SignalKind | 'all'>> = { market: 'all', c
 
 function SignalCard({ signal }: { signal: MarketSignal }) {
   return <article className="signal-card">
-    <span className="market-label">{signal.kind === 'change' ? 'REPORTED CHANGE' : signal.kind.toUpperCase()}</span>
+    <span className="market-label">{{ change: 'Reported change', demand: 'Demand now', skill: 'Skills requested', outlook: 'Possible change' }[signal.kind]}</span>
     <h2>{signal.title}</h2>
     <p>{signal.summary}</p>
-    <p className="signal-source">{signal.source.name} · Published {signal.source.publishedAt} · Retrieved {signal.source.retrievedAt}</p>
-    <p className="signal-source">{signal.source.geography} · {signal.industries.length >= industries.length - 1 ? 'All industries combined' : signal.industries.map((id) => industries.find((item) => item.id === id)!.label).join(', ')}</p>
-    <p className="signal-source">Coverage: {signal.source.coverage}{signal.source.measure ? ` · Measure: ${signal.source.measure}` : ''}</p>
+    <p className="signal-source">{signal.source.name}, published {signal.source.publishedAt}, retrieved {signal.source.retrievedAt}</p>
+    <p className="signal-source">{signal.source.geography}, {signal.industries.length >= industries.length - 1 ? 'All industries combined' : signal.industries.map((id) => industries.find((item) => item.id === id)!.label).join(', ')}</p>
+    <p className="signal-source">Coverage: {signal.source.coverage}{signal.source.measure ? ` Measure: ${signal.source.measure}.` : ''}</p>
     {signal.assumptions && <p className="signal-source">Assumptions: {signal.assumptions.join('; ')}</p>}
-    <a href={signal.source.url} target="_blank" rel="noreferrer">Open original source ↗</a>
+    <a href={signal.source.url} target="_blank" rel="noreferrer">Open the original source</a>
   </article>;
 }
 
@@ -129,7 +129,7 @@ function App() {
       <label>Industry<select value={industry} onChange={(event) => setIndustry(event.target.value as IndustryId)}>{industries.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
       <label>Search available evidence<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Topic, role, or skill" /></label>
     </div>
-    <p className="scope-status" aria-live="polite">{industryLabel} · {search.trim() ? `search: “${search.trim()}” · ` : ''}{visibleSignals.length} verified {visibleSignals.length === 1 ? 'signal' : 'signals'} in this view. {marketSignals.length === 0 ? 'No source has been imported yet.' : ''}</p>
+    <p className="scope-status" aria-live="polite">{industryLabel}{search.trim() ? `, search “${search.trim()}”` : ''}: {visibleSignals.length} verified {visibleSignals.length === 1 ? 'signal' : 'signals'} in this view. {marketSignals.length === 0 ? 'No source has been imported yet.' : ''}</p>
   </section> : null;
 
   function updateDraft(field: keyof ProfileDraft, value: string) {
@@ -188,10 +188,10 @@ function App() {
   return (
     <div className="app-shell">
       <aside className="sidebar" aria-label="Project navigation">
-        <div className="brand"><span className="brand-mark" aria-hidden="true">✦</span><span>Tomorrow<span className="brand-accent">Works</span></span></div>
+        <div className="brand">TomorrowWorks</div>
         <p className="sidebar-kicker">Your career, mapped forward.</p>
         <div className="nav-group">
-          <p className="nav-group-label">BROWSE</p>
+          <p className="nav-group-label">Browse the market</p>
           <nav className="nav-list" aria-label="Browse the market">
             {publicScreens.map((item) => (
               <button className={`nav-item${screen === item.id ? ' active' : ''}`} key={item.id} onClick={() => setScreen(item.id)} type="button" aria-current={screen === item.id ? 'page' : undefined}>
@@ -201,7 +201,7 @@ function App() {
           </nav>
         </div>
         {demoEntered && <div className="nav-group personal-group">
-          <p className="nav-group-label">MY CAREER</p>
+          <p className="nav-group-label">My career</p>
           <nav className="nav-list" aria-label="My career">
             {personalScreens.map((item) => (
               <button className={`nav-item${screen === item.id ? ' active' : ''}`} key={item.id} onClick={() => setScreen(item.id)} type="button" aria-current={screen === item.id ? 'page' : undefined}>
@@ -210,40 +210,40 @@ function App() {
             ))}
           </nav>
         </div>}
-        <div className="sidebar-note">Prototype in progress<br /><span>Public evidence and clear explanations for each insight.</span></div>
+        <div className="sidebar-note">Prototype for SDC Hackathon 2026<br /><span>Every figure links to its source.</span></div>
       </aside>
 
       <main className="main-content">
-        <header className="topbar"><span>Career market explorer</span><button type="button" className="career-button" onClick={() => setScreen(demoEntered ? 'profile' : 'signin')}>{demoEntered ? 'My profile' : 'My career'}</button></header>
+        <header className="topbar"><span>Careers and the Malaysian job market</span><button type="button" className="career-button" onClick={() => setScreen(demoEntered ? 'profile' : 'signin')}>{demoEntered ? 'My profile' : 'My career'}</button></header>
         <div className="content-wrap">
           <section className="hero" aria-labelledby="screen-title">
             <h1 id="screen-title">{content.title}</h1>
             <p>{content.body}</p>
-            {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => { setDemoEntered(true); setScreen('roles'); }}>See ranked career moves</button><span>Fictional profile · real DOSM, ILO and ESCO data · no account needed</span></div>}
+            {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => { setDemoEntered(true); setScreen('roles'); }}>See ranked career moves</button><span>Uses a fictional profile and real DOSM, ILO and ESCO data. No account needed.</span></div>}
             {screen === 'market' && marketSignals.length === 0 && <div className="hero-source-status">Public evidence: no verified source connected yet.</div>}
           </section>
           {screen !== 'market' && browseControls}
           {screen === 'market' ? (
             <>
               <section className="market-grid" aria-label="Public market overview">
-                <button type="button" className="market-card" onClick={() => setScreen('changes')}><span className="market-label">WORKPLACE CHANGES</span><h2>Reported workplace issues</h2><p>Dated reports and announcements about work, linked to their source when connected.</p><span className="card-link">Explore reported changes →</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Present-day vacancy or labour measures, with their exact coverage once sourced.</p><span className="card-link">Explore demand →</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Skills requested for covered roles, with source and date when verified.</p><span className="card-link">Explore skills →</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Possible scenarios with assumptions, separate from today's demand.</p><span className="card-link">Explore outlook →</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('changes')}><span className="market-label">Workplace changes</span><h2>Reported workplace issues</h2><p>News and announcements about work. No news source is connected yet, so this view is empty.</p><span className="card-link">Reported changes</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">Demand now</span><h2>Job ads by occupation</h2><p>DOSM counts of online job ads in Malaysia for nine occupation groups, Q1 and Q2 2026.</p><span className="card-link">Job ads by occupation</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">Skills requested</span><h2>Skills employers request</h2><p>Not connected yet. Role skills come from ESCO and are shown in Role matches.</p><span className="card-link">Requested skills</span></button>
+                <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">Possible change</span><h2>AI exposure by role</h2><p>ILO estimates of how much of each role's work generative AI could change.</p><span className="card-link">AI exposure by role</span></button>
               </section>
               {browseControls}
               {visibleSignals.length > 0 && <section className="signal-list" aria-label="Available market evidence">{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section>}
             </>
           ) : screen === 'changes' || screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
             visibleSignals.length > 0 ? <section className="signal-list" aria-label={`${activeScreen.label} evidence`}>{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section> : <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
-              <span className="market-label">SOURCE STATUS</span>
+              
               <h2>{hasViewSource ? 'No evidence matches this scope' : 'Evidence is being connected'}</h2>
               <p>{hasViewSource ? 'Try another industry or search term. Only verified records are shown.' : content.next}</p>
-              <button type="button" className="text-button" onClick={() => setScreen('market')}>Browse market overview →</button>
+              <button type="button" className="text-button" onClick={() => setScreen('market')}>Back to the overview</button>
             </section>
           ) : screen === 'signin' ? (
             <section className="work-card" aria-label="Demo entry">
-              <div className="card-icon" aria-hidden="true">✦</div>
+              
               <div><h2>Continue with a fictional profile</h2><p>This demo skips real sign-in and uses sample information. It does not create an account, store a résumé, or save your details.</p><button type="button" className="primary-button demo-entry" onClick={enterDemo}>{demoEntered ? 'Continue to profile' : 'Continue with sample profile'}</button></div>
             </section>
           ) : screen === 'profile' ? (
@@ -265,12 +265,12 @@ function App() {
                 {profileError && <p className="form-error" role="alert">{profileError}</p>}
                 <button type="submit" className="primary-button">Review profile</button>
               </form>
-              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">PROFILE READY</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<p><strong>Current certificates or qualifications:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None entered for this fictional profile'}</p><button type="button" className="text-button" onClick={() => setScreen('gaps')}>Compare skills for a target →</button></div>}
+              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">Profile ready</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<p><strong>Current certificates or qualifications:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None entered for this fictional profile'}</p><button type="button" className="text-button" onClick={() => setScreen('gaps')}>Compare skills for a target</button></div>}
             </section>
           ) : screen === 'gaps' ? (
             profile ? <section className="profile-panel" aria-label="Personal skill-gap preview">
               <div className="panel-heading"><div><h2>Compare with a chosen target</h2><p>Fictional demo. The target list is editable and illustrative, not a verified employer requirement.</p></div><button type="button" className="text-button" onClick={() => setScreen('profile')}>Edit profile</button></div>
-              <p className="profile-context">Reviewed profile: {profile.currentRole} · {profile.skills.length} current skills</p>
+              <p className="profile-context">Reviewed profile: {profile.currentRole}, {profile.skills.length} current skills</p>
               <div className={`gap-workspace${target && comparison ? ' has-results' : ''}`}>
               <form onSubmit={saveTarget} noValidate>
                 <div className="field-grid">
@@ -282,7 +282,7 @@ function App() {
                 <button type="submit" className="primary-button">Compare with my profile</button>
               </form>
               {target && comparison && <div className="gap-results" aria-live="polite">
-                <span className="review-label">ILLUSTRATIVE COMPARISON</span>
+                <span className="review-label">Illustrative comparison</span>
                 <h3>{target.moveType === 'promotion' ? 'Promotion target' : 'Career-move target'}: {target.role}</h3>
                 <p>Exact skill names are compared after ignoring case and extra spaces. This does not assess proficiency, experience, eligibility, or promotion readiness.</p>
                 <div className="gap-grid">
@@ -292,12 +292,12 @@ function App() {
                 <div className="credential-note"><h4>Certificates or qualifications</h4><p><strong>You entered:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None for this fictional profile.'}</p><p><strong>Target requirement:</strong> No applicable certificate requirement has been verified yet. We cannot say which certificate is needed for this role or promotion.</p></div>
               </div>}
               </div>
-            </section> : <section className="work-card" aria-label="Profile needed"><div className="card-icon" aria-hidden="true">✦</div><div><h2>Review your fictional profile first</h2><p>{content.next}</p><button type="button" className="primary-button demo-entry" onClick={() => setScreen('profile')}>Open my profile</button></div></section>
+            </section> : <section className="work-card" aria-label="Profile needed"><div><h2>Review your fictional profile first</h2><p>{content.next}</p><button type="button" className="primary-button demo-entry" onClick={() => setScreen('profile')}>Open my profile</button></div></section>
           ) : screen === 'roles' ? (
             <RoleMatches />
           ) : (
             <section className="work-card" aria-label={`${activeScreen.label} status`}>
-              <div className="card-icon" aria-hidden="true">✦</div>
+              
               <div><h2>{activeScreen.label}</h2><p>{content.next}</p></div>
             </section>
           )}
