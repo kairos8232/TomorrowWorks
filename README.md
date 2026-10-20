@@ -134,10 +134,10 @@ Use Node.js 20 or newer. From this repository:
 
 ```bash
 npm install
-npm run dev
+npm start
 ```
 
-Open the local URL shown by Vite. To check a production build, run `npm run build`. The app accepts a synthetic profile and shows honest placeholders for the remaining steps; it does not yet make career recommendations.
+Open [http://localhost:5173/](http://localhost:5173/) after the server starts. `npm run dev` works too. To check a production build, run `npm run build`. The app accepts a synthetic profile and shows honest placeholders for the remaining steps; it does not yet make career recommendations.
 
 ## Hackathon Submission Requirements
 
