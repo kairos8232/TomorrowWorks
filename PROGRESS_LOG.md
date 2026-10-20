@@ -4,6 +4,16 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:33–01:45 MYT) — Role set built from ESCO
+
+- **New `scripts/build_roles.py` → `data/roles.json`.** Nine ESCO occupations, each chosen by URI; everything else copied from ESCO v1.2.1. Skills carry `green`/`digital` flags from ESCO's own collections. File states the ESCO acknowledgement, licence and that it is an adapted selection.
+- **Roles:** billing clerk (4311), accounting assistant (3313, the demo user's current job), bookkeeper (3313), accountant (2411), financial analyst (2413), business analyst (2421), data analyst (2511), software developer (2512), sustainability manager (1213). All ISCO codes have ILO scores.
+- **Findings that changed the list** (details in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#role-set-built-datarolesjson)): ESCO puts bookkeeper and accounting assistant under 3313, not 4311, so the pitch line becomes "the clerical tasks around this job are the most exposed"; statistician → data analyst; environmental protection professional → sustainability manager (39 green skills).
+- **Checked:** three roles have equal essential and optional counts (12/12, 20/20, 18/18); verified against the raw relations file — different skills, no overlap, so it is ESCO's data, not a bug.
+- **Decision for Carson to confirm:** the new demo-user framing (accounting assistant) and the two role swaps.
+
+---
+
 ## 21 Oct 2026 (01:25–01:40 MYT) — Replit import reviewed; GitHub linked to Claude
 
 - **Replit:** repo imported from GitHub branch `dev`; Replit Agent configured it and pushed two commits ("Save agent progress", `f3c5e4e`, `205d9f1`). Its own notes are in the entry below. **Replit Agent is an AI tool and must be listed in the Tools Declaration** (purpose: Replit run setup only).

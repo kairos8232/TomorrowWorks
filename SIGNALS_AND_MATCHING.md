@@ -1,14 +1,14 @@
 # Trend signals and role matching
 
-**Status:** decision proposed on 21 Oct 2026. DOSM Q1 and Q2 2026 imported (`data/sources/`). ILO Table A1 imported (`data/sources/ilo-genai-exposure-2025.json`, 427 occupations). ESCO v1.2.1 downloaded; role importer and RunPod embedding are next. Day-by-day plan: [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026). This document chooses the minimum source set for the preliminary demo and defines a scoring rule a teammate can check by hand. It replaces the open source choice in [API_PLAN.md](API_PLAN.md) Stage 1. Check items in [CHECKLIST.md](CHECKLIST.md) only after the work is verified.
+**Status:** decision proposed on 21 Oct 2026. DOSM Q1 and Q2 2026 imported (`data/sources/`). ILO Table A1 imported (`data/sources/ilo-genai-exposure-2025.json`, 427 occupations). ESCO skills embedded on RunPod (`data/derived/esco/`). Role set built (`data/roles.json`, 9 roles). Scoring module is next. Day-by-day plan: [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026). This document chooses the minimum source set for the preliminary demo and defines a scoring rule a teammate can check by hand. It replaces the open source choice in [API_PLAN.md](API_PLAN.md) Stage 1. Check items in [CHECKLIST.md](CHECKLIST.md) only after the work is verified.
 
 ## Demo user (sharp slice for the rubric)
 
 The product can serve many users, but the preliminary pitch follows **one person at one moment**:
 
-> A junior accounting or bookkeeping worker in the Klang Valley, 1–5 years in, whose routine tasks (data entry, reconciliation, reports) are increasingly done by AI tools, deciding what to learn next.
+> A junior accounting assistant in the Klang Valley, 1–5 years in, whose routine tasks (data entry, billing, reconciliation, reports) are increasingly done by AI tools, deciding what to learn next.
 
-Why this person: accounting and bookkeeping clerks are in the ILO's **highest generative-AI exposure gradient**, and "Accountants and Auditors" is one of DOSM's top advertised occupations. That gives a real tension between AI exposure and demand, and the existing synthetic sample profile already fits it. Profiles remain synthetic.
+Why this person: the clerical accounting work around this job (ISCO 4311, *accounting and bookkeeping clerks*) is in the ILO's **highest generative-AI exposure gradient**, and "Accountants and Auditors" is one of DOSM's top advertised occupations. That gives a real tension between AI exposure and demand, and the existing synthetic sample profile already fits it. Profiles remain synthetic.
 
 ## Sources (both public, dated, attributable)
 
@@ -97,22 +97,29 @@ Every source JSON carries metadata, then rows. The DOSM snapshot looks like this
 
 Job-level counts (e.g. Accountants and Auditors 22,067 in Q2 2026) appear only in DOSM's press statement, not the data file. They may be shown as a cited fact but do not feed the score.
 
-## Candidate roles
+## Role set (built: `data/roles.json`)
 
-Codes checked on 21 Oct 2026 against ESCO v1.2.1 `ISCOGroups_en.csv` and ILO WP140 Table A1 (both present for all eight). Still to check against the MASCO 2020 list. ILO mean = average GenAI exposure of the occupation's tasks (0–1); SD = spread across tasks.
+Built on 21 Oct 2026 by `scripts/build_roles.py` from ESCO v1.2.1. **Each role is one ESCO occupation**, selected by its URI; title, ISCO group, description, essential and optional skills are copied from ESCO unchanged. Skills carry `green` and `digital` flags from ESCO's own green-skills and digital-skills collections. The file is labelled as an adapted ESCO selection. ILO mean = average GenAI exposure of the occupation's tasks (0–1).
 
-| ISCO-08 | Role (ESCO label) | ILO mean / SD | Why it is in the set |
-| --- | --- | --- | --- |
-| 4311 | Accounting and bookkeeping clerks | 0.64 / 0.07 | The demo user's current role; Gradient 4 (highest exposure). |
-| 3313 | Accounting associate professionals | 0.49 / 0.13 | Adjacent step up. |
-| 2411 | Accountants | 0.51 / 0.08 | Promotion path; top-five advertised job in DOSM's Q2 2026 press statement. |
-| 2413 | Financial analysts | 0.62 / 0.06 | Analytics move; high exposure — a useful contrast. |
-| 2421 | Management and organisation analysts | 0.46 / 0.10 | Process / transformation move. |
-| 2120 | Mathematicians, actuaries and statisticians | 0.56 / 0.09 | Data move. |
-| 2512 | Software developers | 0.53 / 0.07 | Top-five advertised job in Q2 2026; long reskilling path. |
-| 2133 | Environmental protection professionals | 0.38 / 0.04 | Sustainability (ESG) move; lowest exposure in the set; strong SDG link. |
+| ESCO occupation (code) | ISCO / DOSM group | ILO mean, gradient | Essential / optional skills | Why it is in the set |
+| --- | --- | --- | --- | --- |
+| billing clerk (4311.1) | 4311 / Clerical | 0.64, Gradient 4 | 12 / 12 | Clerical end of the path; highest exposure. |
+| **accounting assistant** (3313.1) | 3313 / Technicians & associates | 0.49, Gradient 2 | 20 / 20 | **The demo user's current job.** |
+| bookkeeper (3313.2) | 3313 / Technicians & associates | 0.49, Gradient 2 | 18 / 18 | Sibling role. |
+| accountant (2411.1) | 2411 / Professionals | 0.51, Gradient 3 | 26 / 31 | Promotion path; top-five advertised job in DOSM Q2 2026. |
+| financial analyst (2413.1) | 2413 / Professionals | 0.62, Gradient 4 | 23 / 24 | Analytics move with high exposure. |
+| business analyst (2421.1) | 2421 / Professionals | 0.46, Gradient 2 | 26 / 27 | Process and transformation move. |
+| data analyst (2511.3) | 2511 / Professionals | 0.49, Gradient 2 | 36 / 31 | Data move (28 essential skills are ESCO digital skills). |
+| software developer (2512.4) | 2512 / Professionals | 0.53, Gradient 3 | 24 / 84 | Top-five advertised job in DOSM Q2 2026; long path. |
+| sustainability manager (1213.8) | 1213 / Managers | 0.36, Not exposed | 48 / 40 | ESG move; 39 essential skills are ESCO green skills. |
 
-Eight roles are enough for the preliminary demo. Do not add a role without a code, an ESCO URI and a DOSM row (or a visible "no demand data" note).
+**Changes from the first candidate list, and why:**
+- ESCO places *bookkeeper* and *accounting assistant* under ISCO **3313**, not 4311; 4311 holds only *billing clerk* and *sales support assistant*. The demo user's current job is therefore *accounting assistant* (3313, Gradient 2), and *billing clerk* (4311, Gradient 4) shows the most-exposed clerical work next to it. The pitch should say "the clerical tasks around this job are the most exposed", not "this job is the most exposed".
+- *Statistician* (2120) replaced by *data analyst* (2511): ESCO lists 50 essential skills for statistician, and data analyst is the realistic move from accounting.
+- *Environmental protection professional* (2133) replaced by *sustainability manager* (1213): the ESG path an accountant can take, with 39 ESCO green skills that support a sourced SDG link.
+- The set now spans four DOSM major groups (Managers, Professionals, Technicians and associates, Clerical), so the Q1 ↔ Q2 snapshot switch moves roles by different amounts.
+
+ESCO occupation codes follow ISCO-08; checking them against the MASCO 2020 list is still open.
 
 ## Scoring rule (hand-checkable)
 

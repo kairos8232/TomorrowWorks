@@ -46,7 +46,9 @@ Key code: `src/main.tsx` (app shell and screens), `src/market.ts` (evidence reco
 
 Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Table A1 via `pdftotext -layout`), ESCO v1.2.1 CSV folder. `scripts/import_ilo_exposure.py <pdf> <download date>` (needs pdftotext) writes `data/sources/ilo-genai-exposure-2025.json`. `runpod/embed_esco_skills.py` runs on a RunPod GPU Pod (`--dry-run` locally). `scripts/import_dosm_jmi.py <file> <release date> <download date>` (needs openpyxl) converts a DOSM JMI xlsx in `data/raw/` (gitignored) into `data/sources/dosm-jmi-<quarter>.json`. DOSM occupation data is by **major group only**; use quarter-on-quarter change, not year-on-year.
 
-Planned: ILO exposure JSON, `data/roles.json`, ESCO skill embeddings from RunPod, and a scoring module with a unit test for the worked example in `SIGNALS_AND_MATCHING.md`.
+`scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
+
+Planned: a scoring module with a unit test for the worked example in `SIGNALS_AND_MATCHING.md`.
 
 ## Git
 

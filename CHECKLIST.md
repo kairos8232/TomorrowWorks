@@ -195,7 +195,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 7 — Add explainable role matching
 
-- [ ] Define a small, verified set of roles and required skills.
+- [x] Define a small, verified set of roles and required skills: 9 ESCO occupations with essential and optional skills in `data/roles.json`, built by `scripts/build_roles.py`.
 - [ ] Document the scoring formula and its assumptions.
 - [ ] Rank roles for the sample profile.
 - [ ] Show existing skills, missing skills, and the reason for each score.
