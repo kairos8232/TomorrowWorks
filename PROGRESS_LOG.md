@@ -4,6 +4,18 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (02:08–02:20 MYT) — Fewer words; tables instead of repeated cards
+
+**Feedback (Carson):** descriptions repeated on every card; too many words; odd spacing ("87 , 950", "0 . 64").
+
+- **Demand** and **Outlook** are now one table each (`src/PublicTables.tsx`) with the source stated once underneath, instead of nine cards each repeating a four-line source block. Filters are hidden on these two views (all data is combined across industries).
+- **Spacing bug:** tabular figures had been applied to the whole page; in Schibsted Grotesk they also widen commas, full stops and colons. Now applied only to number columns.
+- **Shorter copy:** screen intros cut to one line; Role matches explanation cut to the assumption, the formula and "Estimates only".
+- Overview page no longer lists all signals below the cards.
+- Checked in a browser at 1440 px and 390 px (no horizontal overflow). Build passes; 15 tests pass.
+
+---
+
 ## 21 Oct 2026 (02:10–02:30 MYT) — "Career ledger" restyle to remove the generic AI look
 
 **Request (Carson):** the UI felt AI-generated. Used the `frontend-design` skill (design guidance) rather than installing a new tool; the repo's optional Impeccable setup is unchanged.

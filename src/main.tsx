@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { filterMarketSignals, industries, marketSignals, type IndustryId, type MarketSignal, type SignalKind } from './market';
 import { compareSkills, samplePromotionTarget, type Target, type TargetDraft } from './personal';
 import { RoleMatches, SourcesFooter } from './RoleMatches';
+import { DemandTable, OutlookTable } from './PublicTables';
 import './styles.css';
 
 type Screen = 'market' | 'changes' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'gaps' | 'roles' | 'pathway';
@@ -56,7 +57,7 @@ const personalScreens = screens.filter((item) => item.id === 'profile' || item.i
 const screenCopy: Record<Screen, { title: string; body: string; next: string }> = {
   market: {
     title: 'Explore work. Plan what comes next.',
-    body: 'See where Malaysian job ads are moving, how exposed roles are to generative AI, and which career moves fit your skills. Every number links to its source.',
+    body: 'See where Malaysian job ads are moving, how exposed roles are to AI, and which moves fit your skills.',
     next: 'No public market source has been connected yet.',
   },
   changes: {
@@ -66,7 +67,7 @@ const screenCopy: Record<Screen, { title: string; body: string; next: string }> 
   },
   demand: {
     title: 'Where is demand now?',
-    body: 'Online job ads in Malaysia by occupation group, from DOSM Job Market Insights (Q1 and Q2 2026). Job ads are not all vacancies.',
+    body: 'Online job ads in Malaysia by occupation group, Q1 to Q2 2026.',
     next: 'No verified demand source is connected yet. Counts, rankings, and trends will appear with the measure, geography, and date.',
   },
   skills: {
@@ -76,7 +77,7 @@ const screenCopy: Record<Screen, { title: string; body: string; next: string }> 
   },
   outlook: {
     title: 'What could change?',
-    body: 'How exposed each role is to generative AI, from the ILO global index (2025). Exposure means tasks could change; it is not a job-loss forecast. Compare scenarios in Role matches.',
+    body: 'How much of each role’s work generative AI could change.',
     next: 'Future scenarios are not available yet. This view will show estimates and assumptions, not guaranteed job forecasts.',
   },
   signin: {
@@ -96,7 +97,7 @@ const screenCopy: Record<Screen, { title: string; body: string; next: string }> 
   },
   roles: {
     title: 'Find your next role',
-    body: 'Nine ESCO roles ranked by your skills, DOSM job-ad demand and ILO AI exposure. Switch the data snapshot or the scenario to see how the ranking changes.',
+    body: 'Nine roles ranked by your skills, job-ad demand and AI exposure.',
     next: 'No roles have been ranked yet.',
   },
   pathway: {
@@ -222,7 +223,7 @@ function App() {
             {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => { setDemoEntered(true); setScreen('roles'); }}>See ranked career moves</button><span>Uses a fictional profile and real DOSM, ILO and ESCO data. No account needed.</span></div>}
             {screen === 'market' && marketSignals.length === 0 && <div className="hero-source-status">Public evidence: no verified source connected yet.</div>}
           </section>
-          {screen !== 'market' && browseControls}
+          {screen !== 'market' && screen !== 'demand' && screen !== 'outlook' && browseControls}
           {screen === 'market' ? (
             <>
               <section className="market-grid" aria-label="Public market overview">
@@ -231,10 +232,12 @@ function App() {
                 <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">Skills requested</span><h2>Skills employers request</h2><p>Not connected yet. Role skills come from ESCO and are shown in Role matches.</p><span className="card-link">Requested skills</span></button>
                 <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">Possible change</span><h2>AI exposure by role</h2><p>ILO estimates of how much of each role's work generative AI could change.</p><span className="card-link">AI exposure by role</span></button>
               </section>
-              {browseControls}
-              {visibleSignals.length > 0 && <section className="signal-list" aria-label="Available market evidence">{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section>}
             </>
-          ) : screen === 'changes' || screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
+          ) : screen === 'demand' ? (
+            <DemandTable />
+          ) : screen === 'outlook' ? (
+            <OutlookTable />
+          ) : screen === 'changes' || screen === 'skills' ? (
             visibleSignals.length > 0 ? <section className="signal-list" aria-label={`${activeScreen.label} evidence`}>{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section> : <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
               
               <h2>{hasViewSource ? 'No evidence matches this scope' : 'Evidence is being connected'}</h2>

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap');
 
-:root { font-family: 'Schibsted Grotesk', sans-serif; font-variant-numeric: tabular-nums; font-size: 16px; color: #1c2430; background: #f7f8f6; font-synthesis: none; }
+:root { font-family: 'Schibsted Grotesk', sans-serif; font-size: 16px; color: #1c2430; background: #f7f8f6; font-synthesis: none; }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
 button { font: inherit; cursor: pointer; }
@@ -194,3 +194,16 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .part::before { content: attr(data-label); font-size: 13px; color: #5d6873; grid-column: 1 / -1; }
   .ledger-detail { padding-left: 12px; }
 }
+
+/* Figures line up only where numbers sit in columns (tabular figures also widen punctuation in this font). */
+.part-num, .score, .rank, .data-table .num { font-variant-numeric: tabular-nums; }
+.data-table { background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(16px, 3vw, 28px); overflow-x: auto; }
+.data-table table { width: 100%; border-collapse: collapse; border-top: 2px solid #1c2430; font-size: 16px; }
+.data-table th { text-align: left; font-size: 13px; font-weight: 600; color: #5d6873; padding: 10px 12px; border-bottom: 1px solid #1c2430; }
+.data-table td { padding: 12px; border-bottom: 1px solid #d9ded9; }
+.data-table .num { text-align: right; white-space: nowrap; }
+.data-table .up { color: #1e6b4f; font-weight: 700; }
+.data-table .down { color: #a8402b; font-weight: 700; }
+.data-table .cap { text-transform: capitalize; font-weight: 600; }
+.data-table .note { margin: 14px 0 0; }
+.data-table a { color: #1e6b4f; }

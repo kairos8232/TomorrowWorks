@@ -119,14 +119,14 @@ export function RoleMatches() {
         {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{scenarios[id].label}</label>)}
       </fieldset>
     </div>
-    <p className="note">{scenario.label}: {scenario.assumption} Score = skill fit × {scenario.weights.F} + demand × {scenario.weights.D} + AI resilience × {scenario.weights.R}, out of 100. Demand comes from {snapshot.source.name}, published {snapshot.source.publishedAt}. Scores are estimates to support your decision, not a hiring decision.</p>
+    <p className="note">{scenario.assumption} Score = {scenario.weights.F} × skill fit + {scenario.weights.D} × demand + {scenario.weights.R} × AI resilience. Estimates only.</p>
 
     <ol className="ledger-table">
       <li className="ledger-head" aria-hidden="true"><span className="rank">Rank</span><span>Role</span><span>Skill fit</span><span>Demand</span><span>AI resilience</span><span className="score">Score</span></li>
       {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} />}
       {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} />)}
     </ol>
-    <p className="note">Select a row to see the reasons and skills. Arrows show how a score moved after you changed the data or scenario.</p>
+    <p className="note">Select a row for reasons and skills. ▲▼ show how a score moved after a switch.</p>
 
     <details className="skill-editor">
       <summary>Edit your skills ({held.size} ESCO skills)</summary>
