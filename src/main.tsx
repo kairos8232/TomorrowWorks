@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { filterMarketSignals, industries, marketSignals, type IndustryId, type MarketSignal, type SignalKind } from './market';
 import './styles.css';
 
-type Screen = 'market' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'roles' | 'pathway';
+type Screen = 'market' | 'changes' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'roles' | 'pathway';
 type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string; workPreferences: string };
 type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[]; workPreferences: string };
 
@@ -20,21 +20,24 @@ function splitEntries(value: string) {
   return [...new Set(value.split(',').map((entry) => entry.trim()).filter(Boolean))];
 }
 
-const viewKind: Partial<Record<Screen, SignalKind | 'all'>> = { market: 'all', demand: 'demand', skills: 'skill', outlook: 'outlook' };
+const viewKind: Partial<Record<Screen, SignalKind | 'all'>> = { market: 'all', changes: 'change', demand: 'demand', skills: 'skill', outlook: 'outlook' };
 
 function SignalCard({ signal }: { signal: MarketSignal }) {
   return <article className="signal-card">
     <span className="market-label">{signal.kind === 'change' ? 'REPORTED CHANGE' : signal.kind.toUpperCase()}</span>
     <h2>{signal.title}</h2>
     <p>{signal.summary}</p>
-    <p className="signal-source">{signal.source.name} · {signal.source.publishedAt} · {signal.source.geography}</p>
+    <p className="signal-source">{signal.source.name} · Published {signal.source.publishedAt} · Retrieved {signal.source.retrievedAt}</p>
+    <p className="signal-source">{signal.source.geography} · {signal.industries.map((id) => industries.find((item) => item.id === id)!.label).join(', ')}</p>
     <p className="signal-source">Coverage: {signal.source.coverage}{signal.source.measure ? ` · Measure: ${signal.source.measure}` : ''}</p>
+    {signal.assumptions && <p className="signal-source">Assumptions: {signal.assumptions.join('; ')}</p>}
     <a href={signal.source.url} target="_blank" rel="noreferrer">Open original source ↗</a>
   </article>;
 }
 
 const screens: { id: Screen; label: string; description: string }[] = [
   { id: 'market', label: 'Explore', description: 'Market overview' },
+  { id: 'changes', label: 'Workplace changes', description: 'Reported industry issues' },
   { id: 'demand', label: 'Demand', description: 'Roles in demand now' },
   { id: 'skills', label: 'Skills', description: 'Skills requested now' },
   { id: 'outlook', label: 'Outlook', description: 'Possible future change' },
@@ -43,15 +46,21 @@ const screens: { id: Screen; label: string; description: string }[] = [
   { id: 'roles', label: 'Role matches', description: 'Scores, reasons and skills gaps' },
   { id: 'pathway', label: 'My pathway', description: 'Learning steps and SDG links' },
 ];
-const publicScreens = screens.filter((item) => item.id === 'market' || item.id === 'demand' || item.id === 'skills' || item.id === 'outlook');
+const publicScreens = screens.filter((item) => item.id === 'market' || item.id === 'changes' || item.id === 'demand' || item.id === 'skills' || item.id === 'outlook');
 const personalScreens = screens.filter((item) => item.id === 'profile' || item.id === 'roles' || item.id === 'pathway');
 
 const screenCopy: Record<Screen, { eyebrow: string; title: string; body: string; next: string }> = {
   market: {
     eyebrow: 'Start exploring',
     title: 'What does work need next?',
-    body: 'Explore today’s demand and the skills employers need. Future outlooks will be shown separately as estimates, with dates and sources.',
+    body: 'Explore reported workplace changes, today’s demand, and requested skills across industries. Future outlooks will be shown separately as estimates, with dates and sources.',
     next: 'No public market source has been connected yet.',
+  },
+  changes: {
+    eyebrow: 'Explore the market',
+    title: 'What is changing at work?',
+    body: 'Browse dated reports and announcements about workplace issues across the covered industries. Each item will link to its original source.',
+    next: 'No verified news or announcement feed is connected yet. Reported issues will appear here with source, date, industry tag, and coverage limits.',
   },
   demand: {
     eyebrow: 'Explore the market',
@@ -186,6 +195,7 @@ function App() {
           {screen === 'market' ? (
             <>
               <section className="market-grid" aria-label="Public market overview">
+                <button type="button" className="market-card" onClick={() => setScreen('changes')}><span className="market-label">WORKPLACE CHANGES</span><h2>Reported workplace issues</h2><p>Browse dated reports about automation, skills, wages, and other work topics once a permitted feed is verified.</p><span className="card-link">Explore reported changes →</span></button>
                 <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">CURRENT DEMAND</span><h2>Roles in demand now</h2><p>Demand evidence will appear here after we connect and verify a public source. No job counts are available yet.</p><span className="card-link">Explore demand →</span></button>
                 <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">SKILLS NEEDED NOW</span><h2>Skills employers request</h2><p>Requested skills will appear here with the source, location, and date behind each claim.</p><span className="card-link">Explore skills →</span></button>
                 <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">FUTURE OUTLOOK</span><h2>What could change</h2><p>Future scenarios will appear here as estimates with their assumptions. They are not current hiring facts.</p><span className="card-link">Explore outlook →</span></button>
@@ -193,7 +203,7 @@ function App() {
               {visibleSignals.length > 0 && <section className="signal-list" aria-label="Available market evidence">{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section>}
               <div className="market-actions"><button type="button" className="primary-button" onClick={() => setScreen('signin')}>Get personalised guidance</button></div>
             </>
-          ) : screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
+          ) : screen === 'changes' || screen === 'demand' || screen === 'skills' || screen === 'outlook' ? (
             visibleSignals.length > 0 ? <section className="signal-list" aria-label={`${activeScreen.label} evidence`}>{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section> : <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
               <span className="market-label">SOURCE STATUS</span>
               <h2>{hasViewSource ? 'No evidence matches this scope' : 'Evidence is being connected'}</h2>

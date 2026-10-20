@@ -106,11 +106,11 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 4d — Support cross-industry discovery
 
-- [ ] Add Workplace changes as a public destination, with an honest empty state until a source is validated.
+- [x] Add Workplace changes as a public destination, with an honest empty state until a source is validated.
 - [x] Add industry and keyword controls across public views without requiring a profile or age input.
 - [x] Define a reusable evidence record carrying type, industry, title, source link, dates, geography, measure, and coverage.
-- [ ] Show the selected scope and a useful no-results or no-source state; never treat news coverage as job demand.
-- [ ] Verify public navigation and filters, then update the screen guide with actual behaviour.
+- [x] Show the selected scope and a useful no-results or no-source state; keep news coverage separate from job demand.
+- [x] Verify public navigation and filters, then update the screen guide with actual behaviour.
 
 **Done when:** Anyone can explore the public areas by industry and search term, and unsupported claims remain visibly unavailable.
 **Commit focus:** Separate evidence model, browsing controls, and Workplace changes view into small commits.

@@ -18,7 +18,7 @@ AI and other industry changes affect people across ages, occupations, and career
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage:** The React and TypeScript app has public browsing placeholders and synthetic profile intake. Cross-industry issue discovery, sourced market data, matching, pathways, sign-in, and external integrations are still being built.
+> **Project stage:** The React and TypeScript app has cross-industry public browsing, honest no-source states, and synthetic profile intake. News and market feeds, matching, pathways, sign-in, and external integrations are still being built.
 
 ## The Problem
 
@@ -121,7 +121,7 @@ TomorrowWorks/
 - [x] Create a synthetic sample profile and a working intake form
 - [x] Open on a public market view with an honest demo sign-in entry
 - [x] Replace the numbered journey with freely browsable market destinations
-- [ ] Add public industry and search controls and a workplace-changes view
+- [x] Add public industry and search controls and a workplace-changes view
 - [ ] Connect one updateable trend source and display its date/citation
 - [ ] Build a transparent skill-to-role matching function
 - [ ] Show ranked roles and missing skills
