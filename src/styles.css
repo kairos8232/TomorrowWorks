@@ -132,3 +132,41 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .panel-heading { display: block; }
   .panel-heading .text-button { margin-top: 14px; }
 }
+
+/* Role matches */
+.match-controls { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: flex-end; margin: 8px 0 12px; }
+.match-controls label, .match-controls fieldset { font-weight: 600; font-size: 15px; }
+.match-controls select { display: block; margin-top: 6px; padding: 9px 10px; border: 1px solid #c9d5e0; border-radius: 10px; font: inherit; }
+.match-controls fieldset { border: 1px solid #dbe4ec; border-radius: 12px; padding: 8px 14px; margin: 0; }
+.match-controls legend { font-size: 13px; color: #53647a; padding: 0 4px; }
+.choice { display: inline-flex; align-items: center; gap: 6px; margin-right: 14px; font-weight: 500; }
+.note { color: #53647a; font-size: 14px; line-height: 1.55; }
+.skill-editor { border: 1px solid #dbe4ec; border-radius: 12px; padding: 12px 16px; margin: 12px 0 20px; background: #fafcfd; }
+.skill-editor summary { cursor: pointer; font-weight: 700; }
+.skill-editor label { display: block; margin-top: 12px; font-weight: 600; }
+.skill-editor input { display: block; width: 100%; max-width: 420px; margin-top: 6px; padding: 9px 10px; border: 1px solid #c9d5e0; border-radius: 10px; font: inherit; }
+.skill-tag.removable, .skill-editor .tag-row button { cursor: pointer; border: 0; font: inherit; }
+.role-list { display: grid; gap: 14px; }
+.role-card { border: 1px solid #dbe4ec; border-radius: 14px; padding: 16px 18px; background: white; }
+.role-card.current { background: #f2faf9; border-color: #a7ddd5; }
+.role-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.role-head h3 { margin: 4px 0 2px; font: 800 20px 'Manrope', sans-serif; text-transform: capitalize; }
+.role-meta { margin: 0; color: #53647a; font-size: 14px; }
+.role-score { text-align: right; min-width: 72px; }
+.role-score strong { font: 800 32px 'Manrope', sans-serif; color: #0e8176; }
+.role-score small { display: block; color: #53647a; font-size: 12px; }
+.breakdown { display: grid; gap: 6px; margin: 12px 0; max-width: 560px; }
+.breakdown-row { display: grid; grid-template-columns: 110px 1fr 92px; gap: 10px; align-items: center; font-size: 14px; }
+.bar { height: 8px; border-radius: 99px; background: #e6edf3; overflow: hidden; }
+.bar span { display: block; height: 100%; background: #24c8b5; }
+.breakdown-num { font-variant-numeric: tabular-nums; color: #53647a; text-align: right; }
+.reasons { margin: 8px 0; padding-left: 18px; font-size: 14px; line-height: 1.6; }
+.skill-detail { display: grid; gap: 10px; margin-top: 10px; }
+.skill-detail h4 { margin: 4px 0 6px; font-size: 14px; }
+.pairs { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 14px; }
+.pairs small { color: #53647a; }
+.sources-footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #dbe4ec; color: #53647a; font-size: 13px; line-height: 1.6; }
+@media (max-width: 640px) { .breakdown-row { grid-template-columns: 90px 1fr 80px; } .role-head { flex-direction: column; } .role-score { text-align: left; } }
+.match-controls fieldset { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.match-controls .choice { display: inline-flex; flex-direction: row; align-items: center; gap: 6px; margin: 0; white-space: nowrap; }
+.match-controls .choice input { width: auto; margin: 0; }

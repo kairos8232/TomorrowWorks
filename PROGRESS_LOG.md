@@ -4,6 +4,17 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (01:46–02:00 MYT) — Role matches screen built
+
+- **New `src/RoleMatches.tsx`**, shown on **My career → Role matches** (after the fictional-profile entry). Controls: current ESCO job, **Data snapshot** (DOSM 2026 Q1 / Q2), **AI-change scenario** (moderate / fast). The scenario's assumption, weights and the DOSM source with its release date are stated under the controls.
+- **Cards:** the current job as "Where you are", then the 8 moves ranked. Each shows the estimated score, F/D/R bars with value × weight, the skill counts, the DOSM group counts and quarter-on-quarter change, the ILO score with "not a job-loss forecast", an ESCO link, and on demand the transferable pairs (e.g. *manage accounts ← your maintain financial records, 0.89*), held skills and skills to build (🌱 marks ESCO green skills).
+- **Skill editor:** tick or search the ESCO skills used by the role set. This is also the fallback until RunPod Job B (free-text search) is connected; the screen says so.
+- **Footer on every screen:** sources (DOSM, ILO, ESCO, bge-m3 on RunPod) and the ESCO acknowledgement.
+- **Verified in a headless browser:** Q2 moderate #1 bookkeeper 58; fast order puts sustainability manager 4th; Q1 fast scores 75, 59, 51, 39, 32, 30, 29, 28, 27 (match the tests); no horizontal overflow at 390 px; radio layout fixed. `npm test` 15 passing; `npm run build` passes.
+- **Checklist:** Stages 7c, 8a–8c and 12 items ticked. Thursday's UI work is done early; next is RunPod Job B (Serverless skill search).
+
+---
+
 ## 21 Oct 2026 (01:43–01:55 MYT) — Transferable skills via RunPod embeddings; current job separated
 
 **Decision (Carson):** go ahead with both fixes from the previous entry.

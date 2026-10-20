@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { filterMarketSignals, industries, marketSignals, type IndustryId, type MarketSignal, type SignalKind } from './market';
 import { compareSkills, samplePromotionTarget, type Target, type TargetDraft } from './personal';
+import { RoleMatches, SourcesFooter } from './RoleMatches';
 import './styles.css';
 
 type Screen = 'market' | 'changes' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'gaps' | 'roles' | 'pathway';
@@ -95,7 +96,7 @@ const screenCopy: Record<Screen, { title: string; body: string; next: string }> 
   },
   roles: {
     title: 'Find your next role',
-    body: 'Role cards will show a match score, supporting evidence, existing skills and the skills to build next.',
+    body: 'Nine ESCO roles ranked by your skills, DOSM job-ad demand and ILO AI exposure. Switch the data snapshot or the scenario to see how the ranking changes.',
     next: 'No roles have been ranked yet.',
   },
   pathway: {
@@ -292,12 +293,15 @@ function App() {
               </div>}
               </div>
             </section> : <section className="work-card" aria-label="Profile needed"><div className="card-icon" aria-hidden="true">✦</div><div><h2>Review your fictional profile first</h2><p>{content.next}</p><button type="button" className="primary-button demo-entry" onClick={() => setScreen('profile')}>Open my profile</button></div></section>
+          ) : screen === 'roles' ? (
+            <RoleMatches />
           ) : (
             <section className="work-card" aria-label={`${activeScreen.label} status`}>
               <div className="card-icon" aria-hidden="true">✦</div>
-              <div><h2>{activeScreen.label}</h2><p>{content.next}</p>{screen === 'roles' && profile && <p className="profile-context">Profile ready: {profile.currentRole} · {profile.skills.length} skills entered</p>}</div>
+              <div><h2>{activeScreen.label}</h2><p>{content.next}</p></div>
             </section>
           )}
+          <SourcesFooter />
         </div>
       </main>
     </div>

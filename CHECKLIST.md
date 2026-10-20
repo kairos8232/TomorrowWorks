@@ -198,7 +198,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Define a small, verified set of roles and required skills: 9 ESCO occupations with essential and optional skills in `data/roles.json`, built by `scripts/build_roles.py`.
 - [x] Document the scoring formula and its assumptions (SIGNALS_AND_MATCHING.md; implemented in `src/scoring.ts`).
 - [x] Rank roles for the sample profile (`recommendMoves`: current job shown separately; moves ranked with exact and transferable skills).
-- [ ] Show existing skills, missing skills, and the reason for each score.
+- [x] Show existing skills, missing skills, and the reason for each score (Role matches screen: breakdown bars, held / transferable / missing skills, DOSM and ILO reasons).
 - [ ] Let the user select a role to inspect its skills gap and later open its learning pathway.
 - [ ] Link every recommendation to its supporting source and date; do not invent jobs, courses, or statistics.
 - [ ] Verify any role-specific certificate or qualification requirement, including jurisdiction, source date, and required/preferred status; keep unknowns visible.
@@ -210,9 +210,9 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 8 — Connect trends to recommendations
 
-- [ ] Feed trend signals into the matching logic.
-- [ ] Show which signal influenced each recommendation.
-- [ ] Change one signal and verify that a score, rank, or explanation changes.
+- [x] Feed trend signals into the matching logic.
+- [x] Show which signal influenced each recommendation (DOSM group counts and change, ILO score on every card).
+- [x] Change one signal and verify that a score, rank, or explanation changes (Q1 ↔ Q2 switch: accountant 51 → 45 fast; verified in a browser).
 - [ ] Prepare a repeatable before-and-after demo case.
 
 **Done when:** Judges can see that changing trend evidence changes the recommendation or its explanation.  
@@ -258,9 +258,9 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 ## Stage 12 — Compare future scenarios
 
 - [ ] Define assumptions for moderate and rapid AI-change scenarios.
-- [ ] Let the user switch between scenarios.
+- [x] Let the user switch between scenarios (moderate / fast; fast lifts sustainability manager from 6th to 4th).
 - [ ] Show how the recommendations or pathways change.
-- [ ] Keep the same profile when switching scenarios so the comparison is understandable.
+- [x] Keep the same profile when switching scenarios so the comparison is understandable.
 - [ ] Label forecasts as estimates and explain the uncertainty.
 
 **Done when:** A user can compare at least two plausible outcomes.  

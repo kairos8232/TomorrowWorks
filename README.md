@@ -204,11 +204,11 @@ TomorrowWorks/
 - [ ] Connect one updateable trend source and display its date/citation *(DOSM imported with dates; display pending)*
 - [ ] Serve skill search from a RunPod Serverless endpoint (Job B)
 - [x] Build a transparent skill-to-role matching function (`src/scoring.ts`, tested with `npm test`)
-- [ ] Show ranked roles and missing skills
-- [ ] Demonstrate that updated trend data affects matching
+- [x] Show ranked roles and missing skills (Role matches screen)
+- [x] Demonstrate that updated trend data affects matching (DOSM Q1 ↔ Q2 switch)
 - [ ] Generate a time-estimated learning pathway with verified resources
 - [ ] Explain SDG links for each suggested role and skill
-- [ ] Show moderate and rapid AI-change scenarios
+- [x] Show moderate and rapid AI-change scenarios (scenario switch, labelled estimates)
 - [ ] Prepare a reproducible live demo and document known limitations
 
 ## Running Locally
