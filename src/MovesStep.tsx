@@ -189,21 +189,26 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         <fieldset><legend>{t('If AI changes work')}</legend>
           {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
         </fieldset>
-        <fieldset><legend>{t('Your interests')}</legend>
-          <label className={`toggle${picks.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />
-            {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
-        </fieldset>
       </div>
-      <div className="goal-pick" role="group" aria-label={t('Goals you care about')}>
-        <span>{t('Goals you care about')}</span>
-        {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
-          const on = goals.includes(g);
-          return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }}
-            onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)}>{g}</button>;
-        })}
-        <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
-      </div>
-      {goals.length > 0 && <p className="note">{goals.map((g) => `${g}. ${t(sdgData.goals[g].name)}`).join(' · ')}{useGoals ? '' : ` — ${t('highlighted only; switch on to count them in the ranking.')}`}</p>}
+      <details className="ranking-options">
+        <summary>{t('Personalise with interests and goals')}{extrasOn > 0 && <span className="option-count">{extrasOn}</span>}</summary>
+        <div className="ranking-options-body">
+          <fieldset><legend>{t('Your interests')}</legend>
+            <label className={`toggle${picks.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />
+              {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
+          </fieldset>
+          <div className="goal-pick" role="group" aria-label={t('Goals you care about')}>
+            <span>{t('Goals you care about')}</span>
+            {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
+              const on = goals.includes(g);
+              return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }}
+                onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)}>{g}</button>;
+            })}
+            <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
+          </div>
+          {goals.length > 0 && <p className="note">{goals.map((g) => `${g}. ${t(sdgData.goals[g].name)}`).join(' · ')}{useGoals ? '' : ` — ${t('highlighted only; switch on to count them in the ranking.')}`}</p>}
+        </div>
+      </details>
       <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>

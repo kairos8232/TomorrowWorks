@@ -330,6 +330,7 @@ const dict: Record<string, Entry> = {
   'related occupation': { ms: 'pekerjaan berkaitan', zh: '相关职业' },
   'Open': { ms: 'Buka', zh: '打开' },
   'Your interests': { ms: 'Minat anda', zh: '你的兴趣' },
+  'Personalise with interests and goals': { ms: 'Sesuaikan dengan minat dan matlamat', zh: '按兴趣和目标调整' },
   'Pick them in Your skills first': { ms: 'Pilih dahulu dalam Kemahiran anda', zh: '请先在“你的技能”中选择' },
   'Include in ranking ({list})': { ms: 'Masukkan dalam susunan ({list})', zh: '计入排名（{list}）' },
   'Your interests count for one sixth of each score.': { ms: 'Minat anda dikira satu perenam daripada setiap skor.', zh: '你的兴趣占每个分数的六分之一。' },
