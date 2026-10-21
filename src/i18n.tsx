@@ -14,6 +14,23 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  "Change course": { ms: "Tukar kursus", zh: "更换课程" },
+  "Change your learning course?": { ms: "Tukar kursus pembelajaran anda?", zh: "要更换当前学习课程吗？" },
+  "Confirming will replace the highlighted learning course and its Start or Continue link. Your existing evidence and opened-course history will be kept. Switching does not mark either course complete.": { ms: "Pengesahan akan menggantikan kursus yang diserlahkan serta pautan Mula atau Teruskan. Bukti dan sejarah kursus yang dibuka akan dikekalkan. Pertukaran tidak menandakan mana-mana kursus selesai.", zh: "确认后将更换突出显示的学习课程及其开始或继续链接。已有证明与课程打开记录会保留。更换不会将任何课程标记为完成。" },
+  "Choose a course from this plan": { ms: "Pilih kursus daripada pelan ini", zh: "从此计划中选择课程" },
+  "AI suggestion": { ms: "Cadangan AI", zh: "AI 建议" },
+  "Confirm course change": { ms: "Sahkan pertukaran kursus", zh: "确认更换课程" },
+  "Learning course for {role}": { ms: "Kursus pembelajaran untuk {role}", zh: "面向 {role} 的学习课程" },
+  "You chose this course for this role. Continue reopens the provider page; lesson position and completion are not tracked.": { ms: "Anda memilih kursus ini untuk peranan ini. Teruskan membuka semula halaman penyedia; kedudukan pelajaran dan penyelesaian tidak dijejaki.", zh: "你为此职位选择了这门课程。“继续学习”会重新打开提供方页面，不会跟踪课时位置或完成情况。" },
+  "Your next learning step": { ms: "Langkah pembelajaran anda seterusnya", zh: "你的下一步学习" },
+  "AI suggestion · not checked by hand": { ms: "Cadangan AI · belum disemak secara manual", zh: "AI 建议 · 未经人工核查" },
+  "Start learning": { ms: "Mulakan pembelajaran", zh: "开始学习" },
+  "Continue learning": { ms: "Teruskan pembelajaran", zh: "继续学习" },
+  "Start learning: {name}": { ms: "Mulakan pembelajaran: {name}", zh: "开始学习：{name}" },
+  "Continue learning: {name}": { ms: "Teruskan pembelajaran: {name}", zh: "继续学习：{name}" },
+  "First course in your plan without submitted evidence. Continue reopens the provider page; lesson position and completion are not tracked.": { ms: "Kursus pertama dalam pelan anda tanpa bukti dihantar. Teruskan membuka semula halaman penyedia; kedudukan pelajaran dan penyelesaian tidak dijejaki.", zh: "此计划中尚未提交证明的第一门课程。“继续学习”会重新打开提供方页面，不会跟踪课时位置或完成情况。" },
+  "Evidence submitted for every course in this plan": { ms: "Bukti dihantar untuk setiap kursus dalam pelan ini", zh: "此计划的所有课程均已提交证明" },
+  "Completion is still unverified. You can reopen any course below to keep learning, or edit its evidence.": { ms: "Penyelesaian masih belum disahkan. Anda boleh membuka semula mana-mana kursus di bawah untuk terus belajar atau menyunting buktinya.", zh: "完成情况仍未经验证。你可以重新打开下方任何课程继续学习，或编辑其证明。" },
   "Your course progress": { ms: "Kemajuan kursus anda", zh: "你的课程进度" },
   "{completed} of {total} courses verified complete": { ms: "{completed} daripada {total} kursus disahkan selesai", zh: "已验证完成 {completed} 门课程，共 {total} 门" },
   "Counts include checked courses and AI suggestions in this plan. Optional certification routes are excluded.": { ms: "Kiraan merangkumi kursus yang disemak dan cadangan AI dalam pelan ini. Laluan pensijilan pilihan tidak dikira.", zh: "统计包括此计划中已核查的课程及 AI 建议课程，不包括可选认证途径。" },

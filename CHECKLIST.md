@@ -24,7 +24,9 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] Show accessible evidence-submission bar; keep it separate from verified completion and skills. Preserve memory-only privacy and viewer separation; no files or reviewer integration.
 - [x] Build and 84 tests pass. Desktop/phone Edge checks cover invalid URLs, checked/AI submissions, editing/removal, counts, navigation, role/learner separation, refresh, translated fit and Team/NOSS exclusions.
 - [x] Step 2: clear verified-course completion count and accessible progress bar, separate from submitted evidence; explain course completion versus skill mastery. Build and 84 tests pass; Edge desktop/phone, translated fit, evidence changes and unchanged completion bar checked.
-- [ ] User review of step 2 summary. Actual completion verification is still not connected.
+- [x] Step 3: next-course Start/Continue action using existing plan order, visible provider, AI provenance and session-only visited-link tracking. Completion verification remains disconnected; clicks give no completion credit. Build, 84 tests and desktop/phone browser checks pass.
+- [x] Add Change course with warning and explicit confirmation; preserve evidence and link history. Choices are learner/role-specific, in-memory only. Build, 84 tests and desktop/mobile browser interaction checks pass.
+- [ ] User review of step 3 next-action and course-switch preview.
 - [ ] Team review of new translations.
 - [ ] Decide real evidence storage, consent, access and deletion before file uploads or real credentials.
 - [ ] Provider/authorised-reviewer verification before completion claims or badges.

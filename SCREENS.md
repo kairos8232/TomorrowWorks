@@ -71,6 +71,21 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
+## Changing the highlighted course — step 3 refinement (22 Oct 2026)
+
+- Change course opens a native modal dialog with courses from the selected role's actual plan (including collapsed AI suggestions, identified as suggestions). A warning states the highlighted course and Start/Continue link will change; evidence and visited-link history are retained; switching does not complete a course.
+- Selecting a draft does not apply it. Confirm course change updates the highlighted title, provider and action URL; Cancel or Escape preserves the previous course. Same-course confirmation is disabled. Browser modal focus and focus restoration are retained.
+- Choices persist in memory per learner and target role across page/role changes, clear on refresh, and are used only while the course remains in the current plan. Explicitly chosen courses can be revisited even with submitted evidence. Default next-course behaviour applies when no valid choice exists. The heading names the selected role to distinguish occupation from course title.
+- Build and 84 tests pass. Edge desktop/phone checks cover warning/draft/confirm/cancel/Escape/focus, Start/Continue, evidence preservation, unchanged completion, navigation, learner/role isolation, refresh and EN/MS/ZH dialog fit. No page errors; team translation review pending.
+
+## Next learning action — step 3 (22 Oct 2026)
+
+- A compact Your next learning step panel below the progress summary highlights the first course in the existing plan order without submitted evidence. Checked courses come before AI suggestions; the panel labels suggestions as not hand-checked. No independent claim that a course is unfinished: completion remains unverified.
+- Start learning opens the provider in a new tab; Continue learning reopens that same provider URL after a link was clicked this session. It does not restore lesson position. The provider name and each course's existing View course link remain visible; both actions record the visited URL only.
+- Visited links are in memory per profile owner, survive navigation/role changes and clear on refresh. They give no evidence or completion credit and do not alter skills, recommendations or SDG claims. Team cards do not get the next-action panel.
+- Submitting evidence advances the next-course selection without implying completion; removing it makes the earlier course eligible again. With evidence for every course, show an unverified-completion notice and retain every course link below; with no courses, omit the panel.
+- Build and 84 tests pass. Edge desktop 1440 × 1000 / phone 390 × 844 checks cover provider URL and label, Start/Continue, navigation, learner separation, translated fit and action size, AI fallback, all-evidence state, removal, target changes, Team exclusion and refresh. No page errors; team translation review remains pending.
+
 ## Completion evidence — credential-link prototype (22 Oct 2026)
 
 - Supersedes reflection/activity tracking and the earlier course quiz. Each individual-plan checked course and AI suggestion accepts a fictional public HTTPS credential link. Real certificates and personal information are prohibited in this demo; file uploads are not enabled.

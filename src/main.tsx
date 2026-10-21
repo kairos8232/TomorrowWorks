@@ -151,6 +151,15 @@ function App() {
   // Use the actual profile owner because editing a sample makes it the visitor's profile.
   const [courseProgress, setCourseProgress] = useState<Record<string, CourseProgress>>({});
   const progressOwner = profile.persona ?? 'me';
+  const [learningChoices, setLearningChoices] = useState<Record<string, Record<string, string>>>({});
+  function chooseLearningCourse(role: string, url: string) {
+    setLearningChoices(previous => ({ ...previous, [progressOwner]: { ...previous[progressOwner], [role]: url } }));
+  }
+  // A visited provider link only changes Start to Continue, never learning/completion scores.
+  const [openedCourses, setOpenedCourses] = useState<Record<string, Set<string>>>({});
+  function openCourse(url: string) {
+    setOpenedCourses(previous => ({ ...previous, [progressOwner]: new Set([...(previous[progressOwner] ?? []), url]) }));
+  }
   function updateCourseStatus(course: string, action: LearningAction) {
     setCourseProgress((previous) => {
       const next = advanceLearning(previous[progressOwner]?.[course], action);
@@ -200,7 +209,7 @@ function App() {
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
         {screen === 'plan' && (profile.held.size > 0
-          ? <PlanStep progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
+          ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}

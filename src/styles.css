@@ -728,3 +728,19 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .evidence-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 
 .course-completion-count { font-weight: 700; font-size: 18px; }
+
+/* One next action, following the existing plan order. */
+.next-learning { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; margin-block: 18px; padding: 16px; border: 1px solid #c5ccc6; border-left: 3px solid #1e6b4f; border-radius: 6px; }
+.next-learning > div { flex: 1 1 240px; min-width: 0; }
+.next-learning h3 { margin: 0 0 8px; font-size: 16px; }
+.next-course-title { margin: 4px 0; font-weight: 700; overflow-wrap: anywhere; }
+.next-learning .note { margin: 4px 0; }
+.next-learning-note { flex-basis: 100%; }
+.next-learning a.primary-button { min-height: 44px; }
+
+.change-course-dialog { width: min(520px, calc(100vw - 40px)); max-height: calc(100dvh - 40px); box-sizing: border-box; overflow: auto; padding: 24px; border: 1px solid #c5ccc6; border-radius: 10px; background: #fff; color: #1c2430; }
+.change-course-dialog::backdrop { background: rgb(28 36 48 / 45%); }
+.change-course-dialog h2 { margin-top: 0; font-size: 22px; }
+.change-course-dialog select { box-sizing: border-box; width: 100%; min-height: 44px; padding: 8px; font: inherit; border: 1px solid #c5ccc6; border-radius: 6px; }
+.change-course-dialog button, .change-course-button { min-height: 44px; }
+.change-course-dialog .evidence-actions { margin-top: 18px; }

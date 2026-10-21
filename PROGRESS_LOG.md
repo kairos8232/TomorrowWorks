@@ -1,5 +1,24 @@
 # Progress log
 
+## 22 Oct 2026 — Course switching with a confirmation warning
+
+- User requested a course-change button and warning before replacing current/next learning. Added native dialog with actual selected-plan courses, a warning, Cancel and Confirm. Draft selection does not change the panel until confirmed. Same-course confirmation is disabled; Escape cancels and browser focus returns to the trigger.
+- Confirm updates course title/provider/Start-Continue URL. Choices are per profile owner and role, survive navigation/role switching and clear on refresh. Valid explicit selection takes priority over default first-without-evidence rule, allowing revisit; stale choices fall back to the current plan. Header now names the role. Existing evidence, visits, ranking and completion remain unchanged.
+- Build and 84 tests pass. Edge desktop 1440 × 1000 / phone 390 × 844: warning, draft/cancel/Escape/confirm, modal focus restoration, provider URL, Start/Continue, evidence retention, completion zero, navigation, role/viewer separation, refresh, EN/MS/ZH modal fit and no page errors checked. No new packages. Translation team review pending. Screenshots outside repo; not committed/pushed; awaiting preview.
+
+---
+
+
+## 22 Oct 2026 — Step 3: useful next learning action
+
+- User requested Start/Continue guidance with visible provider links. Panel follows existing checked-first plan order and selects the first course without submitted evidence. This is a transparent proxy, not a claim to know external course completion. Course/provider links remain visible and AI suggestions retain their unverified label.
+- Start changes to Continue only after opening a provider link this session (also through a card's View course action). Continue reopens the provider page, not a saved lesson position. Visited URLs stay in memory per learner, survive navigation and role changes, clear on refresh, and never change completion/evidence counts, skills, ranking or SDG claims.
+- Evidence for all courses produces a clear unverified-completion notice; removing evidence restores the earlier next course. No next card with zero courses; Team view unchanged. EN/MS/ZH added, team review pending.
+- Build and 84 tests pass. Existing Edge via puppeteer-core, desktop 1440 × 1000 / phone 390 × 844: correct URL/label, Start→Continue, no credit from clicks, navigation, learner separation, translated fit and 44px action size, AI fallback, all-evidence state, removal, target changes, Team exclusion and refresh pass. No page errors; screenshots outside repo. Work on kit-yiu, not committed or pushed; await preview feedback.
+
+---
+
+
 ## 22 Oct 2026 — Step 2: clear course-progress summary
 
 - User clarified step 2 is the completed-course count and accessible progress bar, with mastery kept separate. Added Your course progress: 0 of N courses verified complete, plus a distinct evidence-submission count. Completion is explicitly zero until provider/reviewer verification exists; no fabricated completed state or user-set completion. Course total includes checked/AI courses and hidden suggestions, deduplicated by URL; excludes optional certification.
@@ -491,3 +510,5 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 - `09cd1ce` — `CLAUDE.md`, `SIGNALS_AND_MATCHING.md`, README section, `API_PLAN.md` pointer.
 - `977d59c` — DOSM importer, Q1/Q2 2026 snapshots, `.gitignore`, updated plan after the DOSM findings.
 - Next: `Add progress log` — `PROGRESS_LOG.md` plus its links in `README.md` and `CLAUDE.md`.
+
+- Step 3 placement correction (22 Oct): user requested the next-action panel beneath course progress; moved it below the summary.
