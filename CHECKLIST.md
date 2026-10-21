@@ -210,7 +210,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Document the scoring formula and its assumptions (SIGNALS_AND_MATCHING.md; implemented in `src/scoring.ts`).
 - [x] Rank roles for the sample profile (`recommendMoves`: current job shown separately; moves ranked with exact and transferable skills).
 - [x] Show existing skills, missing skills, and the reason for each score (Role matches screen: breakdown bars, held / transferable / missing skills, DOSM and ILO reasons).
-- [ ] Let the user select a role to inspect its skills gap and later open its learning pathway.
+- [x] Let the user select a role to inspect its skills gap and later open its learning pathway. (*Plan this move*.)
 - [ ] Link every recommendation to its supporting source and date; do not invent jobs, courses, or statistics.
 - [ ] Verify any role-specific certificate or qualification requirement, including jurisdiction, source date, and required/preferred status; keep unknowns visible.
 - [ ] Explain that recommendations support a person's career decision and do not make a final hiring decision.
@@ -250,8 +250,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Order missing skills into learning steps for a selected role. (`src/pathway.ts`: greedy, most gaps closed first; tested)
 - [x] Estimate the time for each step and explain the basis for the estimate. (Provider-stated study time only; no stated hours is shown as such.)
 - [x] Check each learning-resource link and its price or free-access claim. (11 free courses opened on the provider page, 21 Oct 2026.)
-- [ ] Display the ordered pathway in the app.
-- [ ] Link each learning step back to the missing skill it addresses.
+- [x] Display the ordered pathway in the app. (3. Your plan; checked at 1280 px and 390 px.)
+- [x] Link each learning step back to the missing skill it addresses. (*Builds* tags on each step.)
 
 - [ ] **10d** For each role, look up a matching NOSS (JPK) by hand and record code, title, SKM level and link, or "no matching NOSS found"; show it as the Malaysian certification route without claiming it is required.
 

@@ -183,7 +183,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .skill-list .tag-row { margin: 0; gap: 6px; align-items: center; }
 .skill-tag.related { background: #ffffff; border: 1px dashed #1e6b4f; }
 .skill-tag small { display: block; font-weight: 400; font-size: 12px; color: #5d6873; }
-.esco-link { margin-left: 64px; font-size: 14px; color: #1e6b4f; }
+.detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-left: 64px; }
+.esco-link { font-size: 14px; color: #1e6b4f; }
 .skill-tag { border-radius: 4px; font-weight: 600; }
 .skill-editor { border-top: 1px solid #d9ded9; padding: 14px 0 0; margin-top: 18px; }
 .skill-editor summary { cursor: pointer; font-weight: 700; }
@@ -201,7 +202,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .part::before { content: attr(data-label); font-size: 13px; color: #5d6873; grid-column: 1 / -1; }
   .ledger-detail { padding-left: 12px; }
   .detail-facts { grid-template-columns: 1fr; gap: 8px; } .fact-f, .fact-d, .fact-r { grid-column: auto; }
-  .detail-skills { grid-template-columns: 1fr; margin-left: 0; } .esco-link { margin-left: 0; }
+  .detail-skills { grid-template-columns: 1fr; margin-left: 0; } .detail-actions { margin-left: 0; }
 }
 
 /* No tabular figures: in Schibsted Grotesk they widen commas and full stops ("99 , 447"). Right alignment keeps columns readable. */
@@ -287,3 +288,28 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .news-list a { color: #1c2430; font-weight: 600; line-height: 1.45; text-decoration: none; }
 .news-list a:hover { text-decoration: underline; }
 .news-list .note { margin: 0; }
+
+/* Step 3: learning plan. Numbered steps read like a ledger; green = what you build. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.who.plan-who { justify-content: flex-start; }
+.who.plan-who .text-button { margin-left: auto; }
+.plan-pick select { padding: 7px 9px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 16px; color: #1c2430; background: #ffffff; text-transform: capitalize; }
+.plan-summary { margin: 0; font-size: 17px; line-height: 1.6; }
+.plan-steps { list-style: none; margin: 0; padding: 0; border-top: 2px solid #1c2430; background: #ffffff; }
+.plan-steps > li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 18px 12px; border-bottom: 1px solid #d9ded9; }
+.plan-num { font-size: 22px; font-weight: 700; color: #1e6b4f; }
+.plan-steps h3 { margin: 0 0 4px; font-size: 17px; }
+.plan-steps h3 a { color: #1c2430; }
+.plan-meta, .plan-time { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.5; }
+.plan-steps .tag-row { margin: 10px 0 0; gap: 6px; align-items: center; }
+.plan-closes { font-size: 14px; font-weight: 600; color: #3a4450; margin-right: 4px; }
+.plan-left { background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 14px 16px; }
+.plan-left .note { margin: 10px 0 0; }
+.noss-list { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 10px; }
+.noss-list li { display: grid; gap: 2px; }
+.noss-list span { color: #5d6873; font-size: 14px; }
+.noss-list a, .plan-noss a { color: #1e6b4f; }
+@media (max-width: 640px) {
+  .who.plan-who .text-button { margin-left: 0; }
+  .plan-steps > li { grid-template-columns: 32px 1fr; gap: 10px; }
+}

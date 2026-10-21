@@ -32,9 +32,14 @@ My career (guided, step bar on top)      The job market (browse any time)
 - **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; **How to read this** (Score, Skill fit, Demand, AI resilience, Now — in plain words, DOSM/ILO as abbreviations with full names); controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now"; ▲▼ after a switch; expandable rows (facts under columns, *You have* / *To build*, ESCO link).
 - If there are no skills: a short prompt to add skills or try Aina.
 
-## 3. Your plan — Soon
+## 3. Your plan
 
-Ordered missing skills for a chosen move, free or low-cost courses, and the Malaysian SKM route where a NOSS exists (stages 10a–10d).
+- **Entry:** *Plan this move* in an expanded row of Your moves, or the step bar (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.
+- **Summary line:** n essential skills to build (m partly there); k free courses cover x of them, about h hours as the providers state it.
+- **Numbered steps:** course title (link to the provider page), provider · level · cost, the provider's stated time, and *Builds* with the gap skills it closes (≈ marks a skill the person partly has).
+- **No checked course yet:** leftover gaps, with a line saying courses are only listed after their page was checked.
+- **How this plan is made:** Skills, Order, Time, Courses in plain words. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
+- If there are no skills: a short prompt to add skills or try Aina. If nothing is missing: "Nothing to build".
 
 ## Job ads / AI exposure
 

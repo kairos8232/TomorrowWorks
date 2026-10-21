@@ -5,6 +5,7 @@ import { MovesStep, SourcesFooter } from './MovesStep';
 import { DemandTable, OutlookTable } from './PublicTables';
 import { recommendMoves, scenarios } from './scoring';
 import { NewsView } from './NewsView';
+import { PlanStep } from './PlanStep';
 import { SkillsStep } from './SkillsStep';
 import './styles.css';
 
@@ -14,7 +15,7 @@ type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
   { id: 'skills', label: '1. Your skills', hint: 'Describe your work' },
   { id: 'moves', label: '2. Your moves', hint: 'Roles ranked for you' },
-  { id: 'plan', label: '3. Your plan', hint: 'What to learn next', soon: true },
+  { id: 'plan', label: '3. Your plan', hint: 'What to learn next' },
 ];
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
@@ -26,7 +27,7 @@ const marketNav: NavItem[] = [
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
   moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
-  plan: { title: 'Your plan', intro: 'The skills to learn next for a move you choose.' },
+  plan: { title: 'Your plan', intro: 'Free courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
@@ -34,7 +35,6 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
 };
 
 const comingSoon: Partial<Record<Screen, string>> = {
-  plan: 'Pick a move and get the missing skills in a sensible order, each with a free or low-cost course and, where one exists, the Malaysian SKM certification route. Being built this week.',
   trending: 'Not connected yet. For now, each role’s skills come from ESCO and appear when you open a role in Your moves.',
 };
 
@@ -60,7 +60,7 @@ function Home({ start }: { start: (who: 'aina' | 'me') => void }) {
       <ol>
         <li><strong>Your skills.</strong> Describe your work in your own words. An AI model finds the matching skills, and you confirm them.</li>
         <li><strong>Your moves.</strong> Nine roles ranked by skill fit, job-ad demand and AI exposure. Every score shows its reasons.</li>
-        <li><strong>Your plan.</strong> The skills to learn next, with courses and Malaysian certification routes. <em>Coming this week.</em></li>
+        <li><strong>Your plan.</strong> Pick a move and get free courses for the skills it needs, plus the Malaysian SKM route where one exists.</li>
       </ol>
     </section>
 
@@ -111,9 +111,11 @@ function NavGroup({ label, items, screen, go }: { label: string; items: NavItem[
 function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [profile, setProfile] = useState<Profile>(ainaProfile);
+  const [planRoleId, setPlanRoleId] = useState<string | null>(null);
   const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: 'aina' | 'me') {
     setProfile(who === 'aina' ? ainaProfile() : emptyProfile());
+    setPlanRoleId(null);
     go(who === 'aina' ? 'moves' : 'skills');
   }
   const isCareer = screen === 'skills' || screen === 'moves' || screen === 'plan';
@@ -138,12 +140,15 @@ function App() {
         {screen === 'home' && <Home start={start} />}
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
-          ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) setProfile(emptyProfile()); go('skills'); }} />
+          ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) setProfile(emptyProfile()); go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
           : <section className="panel"><h2>Add your skills first</h2><p className="note">Your moves are ranked from your skills.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or try it as Aina</button></section>)}
+        {screen === 'plan' && (profile.held.size > 0
+          ? <PlanStep profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
+          : <section className="panel"><h2>Add your skills first</h2><p className="note">Your plan is built from the skills a move needs that you don’t have yet.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or try it as Aina</button></section>)}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
-        {comingSoon[screen] && <section className="panel soon-panel"><h2>Coming soon</h2><p>{comingSoon[screen]}</p>{screen === 'plan' && <button type="button" className="text-button" onClick={() => go('moves')}>Back to your moves</button>}</section>}
+        {comingSoon[screen] && <section className="panel soon-panel"><h2>Coming soon</h2><p>{comingSoon[screen]}</p></section>}
         <SourcesFooter />
       </div>
     </main>

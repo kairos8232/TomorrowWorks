@@ -34,7 +34,7 @@ function SkillList({ title, empty, children }: { title: string; empty: string; c
   </div>;
 }
 
-function LedgerRow({ result, rank, delta }: { result: RoleScore; rank: number | null; delta?: number }) {
+function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void }) {
   const { role, fit, demand, resilience } = result;
   const [open, setOpen] = useState(false);
   const part = (k: 'F' | 'D' | 'R') => result.contributions.find((c) => c.key === k)?.value ?? null;
@@ -62,12 +62,15 @@ function LedgerRow({ result, rank, delta }: { result: RoleScore; rank: number | 
           {fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri}>{s.label}</span>)}
         </SkillList>
       </div>
-      <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">ESCO occupation {role.isco}</a>
+      <div className="detail-actions">
+        {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>Plan this move</button>}
+        <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">ESCO occupation {role.isco}</a>
+      </div>
     </div>}
   </li>;
 }
 
-export function MovesStep({ profile, onEditSkills }: { profile: Profile; onEditSkills: () => void }) {
+export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
   const snapshot = snapshots[snapshotId];
@@ -120,9 +123,9 @@ export function MovesStep({ profile, onEditSkills }: { profile: Profile; onEditS
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">Rank</span><span>Role</span><span>Skill fit</span><span>Demand</span><span>AI resilience</span><span className="score">Score</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} />}
-        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} />)}
+        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} />)}
       </ol>
-      <p className="note">Select a role to see the skills you have and the skills to build.</p>
+      <p className="note">Select a role to see the skills you have and the skills to build, then plan the move.</p>
     </section>
   </div>;
 }
