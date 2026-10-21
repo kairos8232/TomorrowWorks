@@ -1,7 +1,7 @@
 {
   "about": "Review of the RunPod SDG matches (data/derived/sdg-skill-matches.json). Strong links = similarity at or above the provisional threshold and not rejected or marked uncertain here. Uncertain matches are shown with the possible links, never used for ranking or tags.",
   "status": "draft",
-  "reviewedBy": "Draft review by Claude on 21 Oct 2026 of the 73 matches at or above 0.60; team validation pending (data/derived/sdg-validation.csv).",
+  "reviewedBy": "Draft review by Claude on 21 Oct 2026 of the 73 matches at or above 0.60; team validation pending (blind review kit in data/sdg/review/).",
   "threshold": 0.6,
   "thresholdReason": "Provisional. Chosen by exploratory inspection of the matches on 21 Oct 2026 (data/derived/sdg-spotcheck.md), not a validated standard; to be confirmed by the team's validation, which will give the acceptance rate.",
   "possibleFrom": 0.55,

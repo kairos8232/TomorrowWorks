@@ -9,13 +9,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 - **Why:** the 0.60 SDG threshold came from looking at examples; Carson asked whether an existing labelled dataset could help. A dataset cannot replace the team check of our own 73 matches, but it can measure the matcher.
 - **Prepared:** `scripts/calibrate_sdg_osdg.py` on the OSDG Community Dataset (Zenodo, CC BY 4.0, volunteer-labelled SDG texts): same model and targets, fixed sample per SDG, accuracy overall, per similarity band and per threshold, with its limits written into the report. Tested offline with `--fake`. Carson runs it on his Mac; results go into SIGNALS_AND_MATCHING.md, RUNPOD_SETUP.md and the PRD.
 - **Docs:** README status brought up to date.
+- **Then (team feedback, 23:30):** prove our own links rather than the model in general. Built a blind review kit (`data/sdg/review/`, 145 pairs, two independent reviewers, written definitions) and a TF-IDF keyword baseline on the same ESCO text; `scripts/evaluate_sdg_review.py` gives agreement (kappa) and precision for embedding only, embedding + rules (in-sample) and keyword baseline. OSDG becomes optional. No RunPod needed for this step.
 
 ---
 
 ## 21 Oct 2026 (22:45–23:20 MYT) — Plan time, HRD Corp, SDG links by RunPod
 
 - **Plan:** total stated time of checked courses; HRD Corp note with official sources (Claimable Courses scheme via employers; e-LATiH free courses), none of our courses claimed as claimable.
-- **SDG:** skill links now come from RunPod (bge-m3) similarity between ESCO skills and the official UN target texts (UNSD SDG API), threshold 0.60 from the spot-check, 34 of 73 matches rejected by a human check with reasons; role links from those matches plus team-written links, each labelled. Then (Carson's hybrid): team-written links removed; levels strong (≥0.60, checked), possible (0.55–0.59, not checked, display only), 4.4 baseline; goal picker disables goals with no strong match (7, 13, 16); Aina's goal now 12. Then (Carson's review): 0.60 called provisional, 0.55 a display choice; target-wide rejection only for clearly unrelated targets, per-match rejected/uncertain otherwise (32 kept, 34 rejected, 7 uncertain); screen says "draft review" until the team validates `data/derived/sdg-validation.csv`.
+- **SDG:** skill links now come from RunPod (bge-m3) similarity between ESCO skills and the official UN target texts (UNSD SDG API), threshold 0.60 from the spot-check, 34 of 73 matches rejected by a human check with reasons; role links from those matches plus team-written links, each labelled. Then (Carson's hybrid): team-written links removed; levels strong (≥0.60, checked), possible (0.55–0.59, not checked, display only), 4.4 baseline; goal picker disables goals with no strong match (7, 13, 16); Aina's goal now 12. Then (Carson's review): 0.60 called provisional, 0.55 a display choice; target-wide rejection only for clearly unrelated targets, per-match rejected/uncertain otherwise (32 kept, 34 rejected, 7 uncertain); screen says "draft review" until the team validates the matches (now via the blind review kit in `data/sdg/review/`).
 
 ---
 

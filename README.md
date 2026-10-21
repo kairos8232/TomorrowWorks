@@ -189,7 +189,8 @@ TomorrowWorks/
 │   ├── import_lfs_month.py     # OpenDOSM monthly labour context
 │   ├── import_gdelt_news.py    # Malaysian workplace news metadata
 │   ├── import_coursera_catalog.py, match_courses_runpod.py # Coursera courses matched to skills on RunPod
-│   └── match_sdg_runpod.py, calibrate_sdg_osdg.py # UN SDG targets matched to skills on RunPod; accuracy check on OSDG
+│   ├── match_sdg_runpod.py, calibrate_sdg_osdg.py # UN SDG targets matched to skills on RunPod; optional OSDG check
+│   └── build_sdg_review.py, evaluate_sdg_review.py # Blind SDG review kit and keyword-baseline comparison
 ├── data/
 │   ├── sources/            # Attributed DOSM, ILO, OpenDOSM and empty GDELT snapshots
 │   ├── roles.json          # Nine ESCO roles with skills (adapted ESCO selection)
@@ -210,7 +211,7 @@ TomorrowWorks/
 ## Current Status and Next Work
 
 - **Working (21 Oct):** fictional individual and team views ("View as"); ESCO skill intake with RunPod skill search, interests and SDG goals; nine-role ranking with DOSM Q1/Q2 and gradual/fast switches and "what changed"; learning plans (21 checked courses plus RunPod-matched Coursera suggestions, estimated time, HRD Corp note, NOSS/SKM step); Future Skills Radar; Team view with heatmap and group course plan; SDG links from RunPod matches with strong/possible levels and a 4.4 baseline; Workplace news (GDELT, refreshed daily until 1 Nov, key headlines picked by RunPod); English, Bahasa Malaysia and Chinese.
-- **Review pending (team):** translations (`translation-review.csv`), SDG matches (`data/derived/sdg-validation.csv`), checked courses and NOSS codes, Coursera spot-check; DOSM reuse terms; live, mobile and link checks; Replit and RunPod evidence for the Tools Declaration. Optional: run `scripts/calibrate_sdg_osdg.py` for a measured SDG matcher accuracy.
+- **Review pending (team):** translations (`translation-review.csv`), SDG matches (blind review kit in `data/sdg/review/`, two reviewers), checked courses and NOSS codes, Coursera spot-check; DOSM reuse terms; live, mobile and link checks; Replit and RunPod evidence for the Tools Declaration. Optional: `scripts/calibrate_sdg_osdg.py` (OSDG) for goal-level accuracy.
 - **Submission pending:** PRD in the official template, pitch slides, declaration, 5–7 minute video, public repository and judge access. Follow [CHECKLIST.md](CHECKLIST.md) for verified status and [PROGRESS_LOG.md](PROGRESS_LOG.md) for recent decisions.
 
 ## Running Locally
