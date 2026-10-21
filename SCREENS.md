@@ -98,7 +98,7 @@ Footer with sources and the ESCO acknowledgement. Layout checked at 1440 px and 
 
 ## Future skills radar (The job market)
 
-- Plain view first: "Of your n skills that these jobs use: x growing in value, y holding steady, z at risk" (if the viewer has skills).
-- Switches: *All skills / Only my skills*, and *If AI changes work: Gradually / Quickly*.
-- Three columns, **Growing in value · Holding steady · At risk** (top, middle and bottom third of skill groups), each with a one-line plain reason; inside, skills under "Used by: <roles>", the viewer's own skills ticked and listed first, first 6 then *+n more*. Stacks on phones.
-- *How this is worked out* (collapsed): the method note, the Q1/Q2 data switch, and the ranked list of 24 groups with outlook out of 100, job-ad change, AI exposure and ▲▼ rank moves, plus the "estimate, not measured demand" note.
+- Simplified 21 Oct after feedback ("too many tags, users don't know what to do"). Switch: *If AI changes work: Gradually / Quickly*.
+- **Your skills:** three cards, **Growing in value · Holding steady · At risk** (top, middle and bottom third of skill groups), listing only the viewer's own skills (first 5, then *+n more*), a one-line reason, and one next step: *Build on these in Your plan*, *See roles that use them*, *See moves that reuse them*. With no skills: a button to add them.
+- **The jobs behind these signals:** the nine roles as plain rows, best outlook first: job-ad change, AI exposure, ▲▼ move since the previous quarter, a band label, and *Show its n skills (you have m)*; skill tags appear only when opened. If job ads fell for all nine, a note says the labels compare the jobs with each other.
+- *How this is worked out* (collapsed): the method note, the Q1/Q2 data switch and the "estimate, not measured demand" note.

@@ -611,3 +611,25 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .news-brief-topic a { color: #1c2430; }
 .news-brief-topic small { color: #5d6873; margin-left: 4px; }
 .news-brief > .note { margin: 8px 0 0; }
+/* Radar (simplified 21 Oct): your skills first, jobs as plain rows, skills on demand. */
+.radar-section { margin: 8px 0 0; font-size: 20px; }
+.radar-section span { font-size: 15px; font-weight: 400; color: #5d6873; margin-left: 8px; }
+.you-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.you-band { background: #ffffff; border: 1px solid #d9ded9; border-top: 5px solid #8a96a3; border-radius: 12px; padding: 16px; display: grid; gap: 8px; justify-items: start; }
+.you-band.strong { border-top-color: #1e6b4f; } .you-band.risk { border-top-color: #a8402b; }
+.you-band h2 { margin: 0; font-size: 18px; display: flex; align-items: baseline; gap: 8px; }
+.you-band h2 strong { font-size: 28px; }
+.you-band.strong h2 strong { color: #1e6b4f; } .you-band.risk h2 strong { color: #a8402b; }
+.you-band .note { margin: 0; }
+.you-band ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 15px; }
+.you-band-go { margin-top: 4px; }
+.job-list { list-style: none; margin: 0; padding: 0; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; }
+.job-row { padding: 12px 16px; border-top: 1px solid #e3e7e3; display: grid; gap: 6px; justify-items: start; }
+.job-row:first-child { border-top: 0; }
+.job-row-head { display: flex; justify-content: space-between; gap: 12px; width: 100%; align-items: center; }
+.job-row-head small { display: block; color: #5d6873; font-size: 13px; margin-top: 2px; }
+.band-label { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #eef0f2; color: #3a4450; white-space: nowrap; }
+.band-label.strong { background: #e6f0ea; color: #1e6b4f; } .band-label.risk { background: #f6e7e3; color: #a8402b; }
+.job-row-skills { gap: 6px; margin: 0; }
+@media (max-width: 900px) { .you-grid { grid-template-columns: 1fr; } }
+.job-title { display: block; } .job-title::first-letter { text-transform: uppercase; }

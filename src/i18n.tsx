@@ -526,6 +526,18 @@ const dict: Record<string, Entry> = {
   'English': { ms: 'Inggeris', zh: '英文' },
   'Malay': { ms: 'Melayu', zh: '马来文' },
   'Chinese': { ms: 'Cina', zh: '中文' },
+  'Build on these in Your plan': { ms: 'Bina daripada ini dalam Pelan anda', zh: '在“你的计划”中以此为基础' },
+  'See roles that use them': { ms: 'Lihat peranan yang menggunakannya', zh: '查看使用这些技能的职位' },
+  'See moves that reuse them': { ms: 'Lihat langkah yang menggunakannya semula', zh: '查看能继续用上这些技能的转岗方向' },
+  'since last quarter': { ms: 'sejak suku lepas', zh: '自上一季度' },
+  'Hide skills': { ms: 'Sembunyikan kemahiran', zh: '隐藏技能' },
+  'Show its {n} skills (you have {m})': { ms: 'Tunjuk {n} kemahirannya (anda ada {m})', zh: '显示其 {n} 项技能（你已有 {m} 项）' },
+  'Show its {n} skills': { ms: 'Tunjuk {n} kemahirannya', zh: '显示其 {n} 项技能' },
+  '{n} of your skills are used in these jobs': { ms: '{n} daripada kemahiran anda digunakan dalam pekerjaan ini', zh: '你有 {n} 项技能用于这些职位' },
+  'The jobs behind these signals': { ms: 'Pekerjaan di sebalik isyarat ini', zh: '这些信号背后的职位' },
+  'Best outlook first': { ms: 'Prospek terbaik dahulu', zh: '前景最好的排在前面' },
+  'Each skill gets the signals of the jobs that need it: the change in online job ads (DOSM, quarter on quarter) and how much generative AI could change those jobs (ILO). The top third of skill groups is “growing in value”, the bottom third “at risk”.': { ms: 'Setiap kemahiran mengambil isyarat pekerjaan yang memerlukannya: perubahan iklan kerja dalam talian (DOSM, suku ke suku) dan sejauh mana AI generatif boleh mengubah pekerjaan itu (ILO). Satu pertiga teratas kumpulan kemahiran ialah “semakin bernilai”, satu pertiga terbawah “berisiko”.', zh: '每项技能沿用需要它的职位的信号：网络招聘广告的变化（DOSM，按季度环比）以及生成式 AI 可能改变这些职位的程度（ILO）。排名前三分之一的技能组为“价值上升”，后三分之一为“有风险”。' },
+  'Job ads fell for all nine jobs in this quarter, so the labels compare the jobs with each other.': { ms: 'Iklan kerja jatuh bagi kesemua sembilan pekerjaan pada suku ini, jadi label ini membandingkan pekerjaan antara satu sama lain.', zh: '本季度九个职位的招聘广告全部下降，因此这些标签是职位之间的相互比较。' },
 };
 
 const LangContext = createContext<Lang>('en');

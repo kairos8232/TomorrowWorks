@@ -192,7 +192,7 @@ function App() {
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
-        {screen === 'trending' && <RadarView profile={profile} />}
+        {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
         <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending'].includes(screen)} />
       </div>
