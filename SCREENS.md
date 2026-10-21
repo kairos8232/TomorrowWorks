@@ -64,7 +64,7 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Summary line:** n skills to build (m partly held), x covered by k checked courses, and h provider-stated hours where available.
 - **Numbered steps:** course title (link to the provider page), one compact provider · level · cost · stated-time line, and *Builds* with the gap skills it closes (≈ marks a skill the person partly has).
 - **Skills without a checked course:** one row per leftover gap, beside its best AI suggested Coursera match or an explicit no-suggestion state. These matches are unverified text similarities, not quality ratings; the list starts with 4 rows and can show all. The catalogue date and Rakyat Digital note remain below it.
-- **Method note:** checked date, course ordering and the basis for skill links appear in one visible line. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
+- **Method note:** checked date, course ordering and the basis for skill links appear directly after the checked courses. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 

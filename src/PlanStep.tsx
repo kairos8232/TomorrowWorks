@@ -103,9 +103,9 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
         </p>)}
 
-        {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
+        {plan.steps.length > 0 && <p className="plan-method note">{t('Checked {date}. Ordered by gap coverage, then price and stated hours. Course-to-skill links are our interpretation.', { date: resourcesFile.checkedAt })}</p>}
 
-        {plan.steps.length > 0 && <p className="plan-method note">{t('Checked {date}. Courses cover the most missing skills first; ties favour free courses, then shorter stated hours. Skill links reflect our reading of course outcomes.', { date: resourcesFile.checkedAt })}</p>}
+        {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
       </>}
 
     <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('This move and the SDGs')} compact />
