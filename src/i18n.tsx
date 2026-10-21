@@ -235,6 +235,7 @@ const dict: Record<string, Entry> = {
   '{n} thousand people employed.': { ms: '{n} ribu orang bekerja.', zh: '就业人数 {n} 千人。' },
   'Labour Force Survey, a different measure from job ads below. Source: {src}, retrieved {date}, CC BY 4.0.': { ms: 'Survei Tenaga Buruh, ukuran berbeza daripada iklan kerja di bawah. Sumber: {src}, diambil {date}, CC BY 4.0.', zh: '劳动力调查，与下方招聘广告是不同的指标。来源：{src}，获取于 {date}，CC BY 4.0。' },
   'Occupation group': { ms: 'Kumpulan pekerjaan', zh: '职业类别' },
+  'Swipe sideways to see all columns.': { ms: 'Leret ke sisi untuk melihat semua lajur.', zh: '左右滑动查看所有列。' },
   'Change': { ms: 'Perubahan', zh: '变化' },
   'Source: {src}, published {date} (Q1 data: {q1}). Counts online job ads across all industries, not every vacancy in Malaysia.': { ms: 'Sumber: {src}, diterbitkan {date} (data S1: {q1}). Mengira iklan kerja dalam talian merentas semua industri, bukan setiap kekosongan di Malaysia.', zh: '来源：{src}，发布于 {date}（第一季度数据：{q1}）。统计所有行业的网上招聘广告，并非马来西亚所有空缺。' },
   'Exposure': { ms: 'Pendedahan', zh: '影响程度' },

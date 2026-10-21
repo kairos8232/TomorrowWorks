@@ -38,6 +38,7 @@ export function DemandTable() {
   const src = dosmQ2.source;
   return <section className="data-table" aria-label="Online job ads by occupation group">
     <LabourContext />
+    <p className="table-scroll-hint">{t('Swipe sideways to see all columns.')}</p>
     <table>
       <thead><tr><th>{t('Occupation group')}</th><th className="num">Q1 2026</th><th className="num">Q2 2026</th><th className="num">{t('Change')}</th></tr></thead>
       <tbody>{rows.map((g) => {
@@ -56,6 +57,7 @@ export function OutlookTable() {
   const occ = new Map(iloFile.occupations.map((o) => [o.isco, o]));
   const rows = rolesFile.roles.map((r) => ({ role: r, ilo: occ.get(r.isco) })).filter((r) => r.ilo).sort((a, b) => b.ilo!.mean - a.ilo!.mean);
   return <section className="data-table" aria-label="Generative AI exposure by role">
+    <p className="table-scroll-hint">{t('Swipe sideways to see all columns.')}</p>
     <table>
       <thead><tr><th>{t('Role')}</th><th className="num">ISCO</th><th className="num">{t('Exposure')}</th><th>{t('ILO gradient')}</th></tr></thead>
       <tbody>{rows.map(({ role, ilo }) => <tr key={role.id}><td className="cap">{role.title}</td><td className="num">{role.isco}</td><td className="num">{ilo!.mean.toFixed(2)}</td><td>{ilo!.gradient}</td></tr>)}</tbody>
