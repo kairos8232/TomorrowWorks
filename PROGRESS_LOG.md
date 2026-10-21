@@ -4,6 +4,15 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (15:00–16:10 MYT) — Requirements re-check; interests; SDG links
+
+- **Re-read the Domain 1 brief and handbooks.** Gaps found: SDG mapping (must-have 5) not started; interests missing from intake; no skill-level "Future Skills Radar"; HRD Corp courses not covered; all submission documents outstanding (PRD in the official template from the organisers' Drive, slides, Tools Declaration with Replit proof and RunPod screenshots, video, public repo + collaborators). Risk noted: handbook §8.5.3–8.5.4, every member must be able to explain the code.
+- **Interests (RIASEC):** Carson preferred an Asian source. Role profiles from **job tag** (Japan MHLW / JILPT survey of workers) for eight roles, O\*NET for sustainability manager; no Malaysian per-occupation interest data exists. Optional picks on Your skills; *Include in ranking* switch on Your moves, off by default (1/6 of the score when on). 16Personalities rejected (proprietary, personality not interests).
+- **SDG links:** roles by hand with reasons, skills by fixed rules, shown in moves, plan and Team view; highlight-by-goal never changes scores. Team review of `data/sdg/sdg-links.json` pending.
+- 58 tests pass. **Next:** Future Skills Radar (skills rising or declining), then PRD, slides, declaration, video.
+
+---
+
 ## 21 Oct 2026 (14:50–15:40 MYT) — Full BM / Chinese interface
 
 - Carson saw pages only partly translated and asked whether AI should translate on every visit. Decided: **fixed translations written once** (reviewable, no API cost or delay, cannot change numbers or claims). Now 288 phrases cover every screen. English on purpose: course titles, ESCO skill and role names, source names, and the ESCO licence sentence. Review sheet `translation-review.csv` sent to Carson for teammates.
