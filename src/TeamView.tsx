@@ -1,9 +1,9 @@
 // Team view for HR / L&D managers and career centres: a skills heatmap for a
 // whole group and the gaps they share for one target role.
 // Rule: src/team.ts (same scoring as Your moves). People are fictional.
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
-import { ilo, memberSkills, roleTitle, roles, snapshots, teams, transferable } from './data';
+import { ilo, memberSkills, roleTitle, roles, snapshots, teams, transferable, type Viewer } from './data';
 import type { Resource } from './pathway';
 import { scenarios } from './scoring';
 import { sharedGaps, teamGrid } from './team';
@@ -14,24 +14,19 @@ const resources = resourcesFile.resources as Resource[];
 /** Cell shade: darker green = higher score. Text always carries the number. */
 const shade = (score: number) => `rgba(30, 107, 79, ${Math.min(0.9, 0.08 + score / 110)})`;
 
-export function TeamView() {
+export function TeamView({ viewer }: { viewer: Viewer }) {
   const t = useT();
-  const [teamId, setTeamId] = useState(teams[0].id);
-  const team = teams.find((t) => t.id === teamId)!;
+  const team = teams.find((x) => x.id === viewer.teamId) ?? teams[0];
   const members = useMemo(() => team.members.map((m) => ({ name: m.name, roleId: m.roleId, held: memberSkills(m) })), [team]);
   const grid = useMemo(() => teamGrid(members, roles, snapshots.q2, ilo, scenarios.moderate, transferable), [members]);
   const ranked = [...grid.averages].filter((a) => a.average !== null).sort((a, b) => b.average! - a.average!);
   const [targetId, setTargetId] = useState<string | null>(null);
+  useEffect(() => setTargetId(null), [team]);
   const target = roles.find((r) => r.id === targetId) ?? ranked[0].role;
   const shared = useMemo(() => sharedGaps(members, target, transferable, resources), [members, target]);
 
   return <div className="step-body team-view">
-    <div className="ledger-controls team-pick">
-      <fieldset><legend>{t('Group')}</legend>
-        {teams.map((t) => <label key={t.id} className="choice"><input type="radio" name="team" checked={teamId === t.id} onChange={() => { setTeamId(t.id); setTargetId(null); }} />{t.name}</label>)}
-      </fieldset>
-    </div>
-    <div className="who"><p><strong>{team.viewer}.</strong> {team.description}</p></div>
+    <div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {team.description}</p></div>
 
     <section className="ledger" aria-labelledby="heat">
       <h2 id="heat" className="section-title">{t('Who fits which role')}</h2>

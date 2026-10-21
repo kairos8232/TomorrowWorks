@@ -132,6 +132,20 @@ const dict: Record<string, Entry> = {
   Person: { ms: 'Orang', zh: '人员' },
   Average: { ms: 'Purata', zh: '平均' },
   'Shared gaps for {role}': { ms: 'Jurang bersama untuk {role}', zh: '{role} 的共同技能缺口' },
+  // Viewer switch
+  'My team': { ms: 'Pasukan saya', zh: '我的团队' },
+  'Who fits which role, shared gaps': { ms: 'Siapa sesuai, jurang bersama', zh: '谁适合哪个职位、共同缺口' },
+  'One tool, four kinds of user': { ms: 'Satu alat, empat jenis pengguna', zh: '一个工具，四类用户' },
+  'Demo people are fictional. Pick one to see the app from their side; there is no sign-in in this prototype.': { ms: 'Orang demo adalah rekaan. Pilih seorang untuk melihat aplikasi dari sudut mereka; prototaip ini tiada log masuk.', zh: '示例人物均为虚构。选择一位，从他们的角度查看应用；此原型无需登录。' },
+  'Team view: {n} fictional people': { ms: 'Paparan pasukan: {n} orang rekaan', zh: '团队视图：{n} 位虚构人物' },
+  'View as {name}': { ms: 'Lihat sebagai {name}', zh: '以 {name} 身份查看' },
+  'Viewing as': { ms: 'Melihat sebagai', zh: '当前身份' },
+  'Viewing as {name}': { ms: 'Melihat sebagai {name}', zh: '当前身份：{name}' },
+  'Me (my own skills)': { ms: 'Saya (kemahiran sendiri)', zh: '我（自己的技能）' },
+  'Demo people are fictional. No sign-in in this prototype.': { ms: 'Orang demo adalah rekaan. Prototaip ini tiada log masuk.', zh: '示例人物均为虚构。此原型无需登录。' },
+  'HR and learning manager': { ms: 'Pengurus HR dan latihan', zh: '人力资源与培训经理' },
+  'University career adviser': { ms: 'Penasihat kerjaya universiti', zh: '大学就业顾问' },
+  'Your own skills': { ms: 'Kemahiran anda sendiri', zh: '你自己的技能' },
 };
 
 const LangContext = createContext<Lang>('en');

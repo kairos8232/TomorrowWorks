@@ -31,10 +31,12 @@ My career (guided, step bar on top)      The job market (browse any time)
 
 - English / Bahasa Malaysia / 中文 select under the brand, remembered in the browser (localStorage, with fallback). Covers navigation, page titles, Home, step headings, buttons, controls and table headers (`src/i18n.tsx`; drafted with Claude, **team must review the Malay and Chinese**). ESCO skill labels and role titles stay in English (ESCO has no Malay or Chinese version). Longer sentences with numbers are still English.
 
-## Home: sample people
+## View as (sidebar) and Home: one tool, four kinds of user
 
-- Hero: *Start with my own skills* (primary) and *Try a sample person*.
-- *Try it as someone else*: one card per fictional persona with the brief's target group, a short story, live top 3 moves and *See …'s moves*. Aina = working adult whose job AI is changing; Hakim = fresh statistics graduate with no current job (moves are ranked without a "Now" row).
+- No sign-in. A **View as** chip under the language select works like an account menu but only swaps fictional demo data: **Aina** (working adult whose job AI is changing), **Hakim** (fresh graduate), **Puan Rosnah** (HR and learning manager → Team view, finance team), **Encik Lim** (university career adviser → Team view, graduating class), **Me (my own skills)**. Label: "Demo people are fictional. No sign-in in this prototype."
+- The sidebar follows the viewer: individuals see *My career* (Your skills / moves / plan); HR and the adviser see *My team* (Team view). Everyone sees *The job market*.
+- Home: hero (*Start with my own skills*, *Try a sample person*) and *One tool, four kinds of user*: one card per demo viewer with the brief's group, a story, live top 3 moves (people) or team size (teams), and *View as …*.
+- *Edit skills* while viewing a sample person switches the viewer to Me.
 
 ## 2. Your moves
 

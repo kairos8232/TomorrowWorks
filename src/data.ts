@@ -114,3 +114,24 @@ export function memberSkills(m: TeamMember): Set<string> {
     ? new Set(m.skillLabels.map((label) => allSkills.find((s) => s.label === label)!.uri))
     : new Set(roleById(m.roleId)!.essentialSkills.map((s) => s.uri));
 }
+
+/**
+ * Demo "View as" choices: one fictional person per target group in the brief.
+ * No sign-in exists; switching only changes which sample data and screens show.
+ */
+export type ViewerId = PersonaId | 'hr' | 'adviser' | 'me';
+export type Viewer = { id: ViewerId; name: string; group: string; summary: string; kind: 'person' | 'team' | 'me'; teamId?: string };
+export const viewers: Viewer[] = [
+  { id: 'aina', name: 'Aina', group: personas[0].group, summary: personas[0].summary, kind: 'person' },
+  { id: 'hakim', name: 'Hakim', group: personas[1].group, summary: personas[1].summary, kind: 'person' },
+  {
+    id: 'hr', name: 'Puan Rosnah', group: 'HR and learning manager', kind: 'team', teamId: 'finance-team',
+    summary: 'Fictional HR and learning manager at a mid-sized firm. She decides where the finance team’s training budget goes as AI takes over routine accounting work.',
+  },
+  {
+    id: 'adviser', name: 'Encik Lim', group: 'University career adviser', kind: 'team', teamId: 'graduating-class',
+    summary: 'Fictional career adviser at a university career centre, preparing advice for three graduating students who ask which jobs their skills lead to.',
+  },
+  { id: 'me', name: 'Me', group: 'Your own skills', summary: 'Describe your own work and see your own moves. Nothing is saved.', kind: 'me' },
+];
+export const viewerById = (id: ViewerId) => viewers.find((v) => v.id === id)!;
