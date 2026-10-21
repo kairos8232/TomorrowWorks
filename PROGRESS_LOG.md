@@ -4,6 +4,17 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (14:30–15:30 MYT) — Four target groups, what changed, fairness, languages, Coursera at scale
+
+- **Feedback applied** (product should work for all four groups in the brief): **Hakim**, a fictional fresh statistics graduate with no current job (group 2), joins Aina (group 1) on Home; **Team view** for HR / L&D managers (fictional five-person finance team) and career centres (fictional class of three graduates), groups 3 and 4: a score heatmap per person and role, and the gaps shared by most movers for a chosen role with a course for each.
+- **What changed** panel on Your moves: same skills scored with the Q1 and Q2 snapshots, with the job-ad reason. Real finding: job ads fell in every occupation group in 2026 Q2; for Hakim, software developer drops #6 → #8 while accounting assistant rises because its group fell less.
+- **Is this fair?** panel backed by `src/fairness.test.ts` (no personal attributes exist; same skills → same scores).
+- **Language switch** English / Bahasa Malaysia / 中文 for the screen chrome; translations drafted with Claude — **Carson to review the Malay and Chinese**. ESCO labels stay English.
+- **Courses:** 10 Coursera courses hand-checked, marked paid with the Rakyat Digital Global Learning Pass free route. Coursera's public catalogue API works from Carson's Mac (25,052 courses); `scripts/import_coursera_catalog.py` and `scripts/match_courses_runpod.py` (RunPod Job B embeddings vs Job A ESCO vectors) are ready for Carson to run; the app section for AI-matched courses comes after the spot-check.
+- Brief good-to-haves now covered: team heatmap, re-planning on new data, multi-language, fairness. 46 tests pass.
+
+---
+
 ## 21 Oct 2026 (14:10–14:40 MYT) — Current NOSS register; GDELT one request; feedback on target groups
 
 - **NOSS:** Carson supplied the current JPK register (Daftar Standard, 22 Jan 2025, 191 pages; read with `pdftotext`, not committed). `data/pathway/noss.json` now cites it with page numbers. Eight of nine roles have a close or related standard; business analyst has none.
