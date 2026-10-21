@@ -276,7 +276,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 }
 
 /* Labour context and news (21 Oct 2026) */
-.labour-context { border-left: 3px solid #1e6b4f; padding: 4px 0 4px 14px; margin-bottom: 20px; }
+.labour-context { border-bottom: 1px solid #d9ded9; padding-bottom: 14px; margin-bottom: 20px; }
 .labour-context p { margin: 0; }
 .labour-context strong { font-size: 22px; }
 .labour-context .note { margin-top: 4px; }
@@ -389,8 +389,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .fits { display: inline-block; margin-left: 6px; font-style: normal; color: #1e6b4f; font-weight: 700; }
 .interest-line { margin: 0 0 0 64px; }
 @media (max-width: 640px) { .interest-line { margin-left: 0; } }
-/* SDG badges: goal colour as a left stripe; text carries the meaning. */
-.sdg-badge { display: inline-block; padding: 2px 8px; border: 1px solid #d9ded9; border-left: 5px solid; border-radius: 4px; background: #ffffff; color: #1c2430; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+/* SDG badges: a thin goal-colour outline; text carries the meaning. */
+.sdg-badge { display: inline-block; padding: 2px 8px; border: 1px solid #d9ded9; border-radius: 4px; background: #ffffff; color: #1c2430; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .sdg-badge:hover { text-decoration: underline; }
 .sdg-line { margin-left: 64px; display: grid; gap: 6px; }
 .sdg-line p { margin: 0; font-size: 14px; line-height: 1.5; color: #3a4450; }

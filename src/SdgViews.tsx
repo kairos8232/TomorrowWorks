@@ -8,7 +8,7 @@ export function SdgBadge({ target }: { target: string }) {
   const t = useT();
   const info = sdgData.targets[target];
   const goal = sdgData.goals[info.goal];
-  return <a className="sdg-badge" style={{ borderLeftColor: goal.colour }} href={goalUrl(info.goal)} target="_blank" rel="noreferrer" title={`${t(goal.name)}: ${t(info.title)}`}>
+  return <a className="sdg-badge" style={{ borderColor: goal.colour }} href={goalUrl(info.goal)} target="_blank" rel="noreferrer" title={`${t(goal.name)}: ${t(info.title)}`}>
     {target.includes('.') ? t('SDG target {n}', { n: target }) : t('SDG {n}', { n: target })}
   </a>;
 }
