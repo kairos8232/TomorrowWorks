@@ -4,12 +4,12 @@ import { useT } from './i18n';
 import { goalUrl, roleSdgs, sdgData, sdgTotals } from './sdg';
 import type { Skill } from './scoring';
 
-export function SdgBadge({ target }: { target: string }) {
+export function SdgBadge({ target, short = false }: { target: string; short?: boolean }) {
   const t = useT();
   const info = sdgData.targets[target];
   const goal = sdgData.goals[info.goal];
   return <a className="sdg-badge" style={{ borderColor: goal.colour }} href={goalUrl(info.goal)} target="_blank" rel="noreferrer" title={`${t(goal.name)}: ${t(info.title)}`}>
-    {target.includes('.') ? t('SDG target {n}', { n: target }) : t('SDG {n}', { n: target })}
+    {short || !target.includes('.') ? t('SDG {n}', { n: target }) : t('SDG target {n}', { n: target })}
   </a>;
 }
 
@@ -22,9 +22,26 @@ export function RoleSdgLine({ roleId }: { roleId: string }) {
 }
 
 /** "How this move connects to the SDGs": the role's targets and the targets of the skills to build. */
-export function SdgContribution({ roleId, skills, heading }: { roleId: string | null; skills: Skill[]; heading: string }) {
+export function SdgContribution({ roleId, skills, heading, compact = false }: { roleId: string | null; skills: Skill[]; heading: string; compact?: boolean }) {
   const t = useT();
   const totals = sdgTotals(skills);
+  const roleLinks = roleId ? roleSdgs(roleId) : [];
+  if (compact) {
+    const targets = [...new Set([...roleLinks.map((link) => link.target), ...totals.map((total) => total.target)])];
+    return <section className="panel sdg-panel" aria-label={heading}>
+      <h2>{heading}</h2>
+      <ul className="sdg-summary-list">{targets.map((target) => {
+        const roleLink = roleLinks.find((link) => link.target === target);
+        const skillCount = totals.find((total) => total.target === target)?.skills.length ?? 0;
+        return <li key={target}>
+          <div className="sdg-summary-heading"><SdgBadge target={target} short /><strong>{t(sdgData.targets[target].title)}</strong></div>
+          {roleLink && <p>{t(roleLink.reason)}</p>}
+          {skillCount > 0 && <small>{t('Linked gap skills: {n}', { n: skillCount })}</small>}
+        </li>;
+      })}</ul>
+      <p className="note sdg-summary-note">{t('All gap skills also link to SDG 4.4. Role links are written by hand; skill links use ESCO wording and flags. These are connections, not measured impact.')}</p>
+    </section>;
+  }
   return <section className="panel sdg-panel" aria-label={heading}>
     <h2>{heading}</h2>
     {roleId && <RoleSdgLine roleId={roleId} />}
