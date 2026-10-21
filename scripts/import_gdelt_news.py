@@ -1,6 +1,6 @@
 """Fetch recent Malaysian workplace headlines from the GDELT DOC 2.0 API.
 
-Usage (needs internet; standard library only; takes about 30 seconds):
+Usage (needs internet; standard library only; about a minute, longer if GDELT asks it to wait):
     python3 scripts/import_gdelt_news.py
 
 Writes data/sources/gdelt-news.json: headline, link, outlet, language, the
@@ -11,11 +11,14 @@ Rules (see API_PLAN.md):
 - Topic tags come from the query that matched, not from reading the article.
 - News shows what was reported. It is not a count of jobs and never changes
   any score in the app.
-- GDELT asks for at most one request every 5 seconds; this script waits 6.
+- GDELT asks for at most one request every 5 seconds; this script waits 10
+  between topics, and on "429 Too Many Requests" waits 30, 60, then 120 s
+  and tries again. If it still fails, wait 10 minutes and run it again.
 - Cite GDELT and link each original article (https://gdeltproject.org/about.html).
 """
 import json
 import sys
+import urllib.error
 import time
 import urllib.parse
 import urllib.request
@@ -40,8 +43,16 @@ def fetch(query):
               "maxrecords": str(PER_TOPIC), "timespan": WINDOW, "sort": "datedesc"}
     url = f"{API}?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(url, headers={"User-Agent": "TomorrowWorks hackathon prototype"})
-    with urllib.request.urlopen(req, timeout=60) as res:
-        raw = res.read().decode("utf-8", errors="replace")
+    for wait in (30, 60, 120, None):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as res:
+                raw = res.read().decode("utf-8", errors="replace")
+            break
+        except urllib.error.HTTPError as err:
+            if err.code != 429 or wait is None:
+                sys.exit(f"GDELT error {err.code} for {query!r}. If it is 429, wait 10 minutes and run again.")
+            print(f"  GDELT says too many requests; waiting {wait} s and trying again...")
+            time.sleep(wait)
     try:
         body = json.loads(raw) if raw.strip() else {}
     except json.JSONDecodeError:
@@ -58,7 +69,7 @@ def main():
     articles, queries = {}, []
     for i, (topic, query) in enumerate(TOPICS.items()):
         if i:
-            time.sleep(6)
+            time.sleep(10)
         url, found = fetch(query)
         queries.append({"topic": topic, "query": f"sourcecountry:MY {query}", "url": url, "results": len(found)})
         for a in found:

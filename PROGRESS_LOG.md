@@ -4,6 +4,13 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (13:47 MYT) — RunPod Job B live; GDELT rate limit
+
+- **Job B verified live** on the published Replit app with Replit Secrets set: the Chinese description "我负责每月的财务报表" returned real ESCO skills at 58–60% similarity, including *prepare financial statements*, *interpret financial statements*, *maintain financial records*, *monitor financial accounts*. Some matches are sector-specific ESCO skills (e.g. *manage financial transactions of fuel station*); the person only adds what is true. English and Bahasa Malaysia checks to record next.
+- **GDELT 429 Too Many Requests** on Carson's Mac after two quick runs. `scripts/import_gdelt_news.py` now waits 10 s between topics and retries a 429 after 30, 60 and 120 s, then stops with advice to wait 10 minutes.
+
+---
+
 ## 21 Oct 2026 (13:32–13:45 MYT) — RunPod Job B endpoint created
 
 - Endpoint **`j6ssjfy9z074hp`** from the RunPod Hub *Infinity Embedding* 1.1.4 worker, `MODEL_NAMES=BAAI/bge-m3`, 16 GB GPU pool (24 GB suggested as backup), Active 0 / Max 1 workers, idle 5 s, FlashBoot on. Details in [RUNPOD_SETUP.md](RUNPOD_SETUP.md#job-b-endpoint-created-21-oct-2026-1340-myt).
