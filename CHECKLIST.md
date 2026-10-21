@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## UI refinement — 21 Oct 2026
 
+- [x] Trim Your plan: combine uncovered skills and unverified AI suggestions, show four rows initially with all gaps available, shorten checked-course details and method, use the compact SDG summary, and condense certification titles and copy. Check Hakim's plan at desktop and 390 px, verify *Show all 13*, build and all 62 tests.
 - [x] Clarify SDG 4.4 in Team view: show the count of all gap skills separately from the ESCO digital subset, and let the method note use the full panel width. Check Puan Rosnah and Encik Lim at desktop plus Encik Lim at 390 px; build and tests pass.
 - [x] Condense Team view's SDG section: merge repeated targets, show linked gap counts, and keep full skill names in Shared gaps. Check the Accountant target at desktop and 390 px; build, tests and CSS scan pass.
 - [x] Keep empty Your moves and Your plan states focused on adding the visitor's skills; remove the Aina detour while leaving sample profiles in View as. Check both pages and the Add skills destination in the live browser, including the 390 px Malay layout; build and all 62 tests pass.
