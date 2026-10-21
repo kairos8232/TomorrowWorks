@@ -4,6 +4,16 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (14:00–14:40 MYT) — 3. Your plan (stages 10a–10d)
+
+- **Rule** (`src/pathway.ts`, documented in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#learning-plan-rule-stage-10-added-21-oct-2026)): gaps = missing + transferable essential skills; steps chosen greedily (the course closing the most remaining gaps first); time = the provider's stated study hours only; uncovered gaps listed as "No checked course yet".
+- **Courses:** 11 free courses opened on the provider page today (9 OpenLearn, CS50x, UN CC:Learn). Coverage is partial (e.g. bookkeeper 4 of 6 gaps, software developer 3 of 24) and shown honestly. Kaggle Learn was considered but its pages state no duration we could read, so it is not listed.
+- **NOSS/SKM:** the full JPK register PDF is blocked for download here and only its first sections could be read, so codes come from the JPA SKPK list (1 Dec 2024) and the JPK register (Nov 2015). Accounting roles → FB-100-3:2012 Perakaunan L3; software developer → IT-010-3:2016 / IT-010-4:2013; data analyst → IT-121-4:2011 (related only); four roles have none.
+- **UI:** *Plan this move* in Your moves; the plan has a move selector, numbered steps with *Builds* tags, leftovers, "How this plan is made" and the certification route. Checked at 1280 px and 390 px. 29 tests pass.
+- **Open (Carson):** check pages ~110–153 (and D/E) of the [2025 JPK register](https://www.myspike.my/lampiran/manual/DaftarStandardVersi22Januari2025.pdf) for newer codes; add more courses only after opening their pages. Next build step: 11 SDG links.
+
+---
+
 ## 21 Oct 2026 (13:47 MYT) — RunPod Job B live; GDELT rate limit
 
 - **Job B verified live** on the published Replit app with Replit Secrets set: the Chinese description "我负责每月的财务报表" returned real ESCO skills at 58–60% similarity, including *prepare financial statements*, *interpret financial statements*, *maintain financial records*, *monitor financial accounts*. Some matches are sector-specific ESCO skills (e.g. *manage financial transactions of fuel station*); the person only adds what is true. English and Bahasa Malaysia checks to record next.
