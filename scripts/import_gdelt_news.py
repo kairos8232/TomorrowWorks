@@ -2,6 +2,7 @@
 
 Usage (needs internet; standard library only; one request, a few seconds):
     python3 scripts/import_gdelt_news.py
+    python3 scripts/import_gdelt_news.py --retag data/sources/gdelt-news.json   # re-tag only, no network
 
 Writes data/sources/gdelt-news.json: headline, link, outlet, language, the
 date GDELT first saw it, and topic tags.
@@ -39,16 +40,48 @@ TOPICS = {
     "Hiring": ["hiring", "job openings", "recruitment", "talent shortage"],
     "Reskilling": ["reskilling", "upskilling", "HRD Corp", "TVET"],
 }
+# Extra words used only to tag headlines (not sent to GDELT): Malay and Chinese
+# outlets make up about 40% of results, and wages are part of workplace change.
+TAG_ONLY = {
+    "AI and automation": ["kecerdasan buatan", "automasi", "人工智能", "自动化"],
+    "Layoffs": ["buang kerja", "diberhentikan", "pemberhentian", "裁员", "裁减"],
+    "Hiring": ["peluang pekerjaan", "pengambilan pekerja", "招聘", "职位空缺"],
+    "Reskilling": ["latihan semula", "peningkatan kemahiran", "upskill", "技能提升", "再培训"],
+    "Pay and wages": ["minimum wage", "wages", "salary", "gaji", "最低薪金", "薪金", "工资"],
+}
 # "AI" alone is too short for GDELT's query, so it is only used for tagging.
 QUERY = "(" + " OR ".join(
     f'"{t}"' if " " in t else t for terms in TOPICS.values() for t in terms if t != "AI") + ")"
 
 
+def has_term(title, term):
+    """Whole-word match for Latin script; plain substring for Chinese (no spaces between words)."""
+    if re.search(r"[\u4e00-\u9fff]", term):
+        return term in title
+    return re.search(rf"\b{re.escape(term)}\b", title, re.IGNORECASE) is not None
+
+
 def topics_for(title):
-    """Topics whose terms appear in the headline as whole words (case-insensitive)."""
-    found = [topic for topic, terms in TOPICS.items()
-             if any(re.search(rf"\b{re.escape(t)}\b", title, re.IGNORECASE) for t in terms)]
+    """Topics whose terms appear in the headline; "Other" if none (not shown by default)."""
+    names = list(dict.fromkeys([*TOPICS, *TAG_ONLY]))
+    found = [n for n in names if any(has_term(title, t) for t in TOPICS.get(n, []) + TAG_ONLY.get(n, []))]
     return found or ["Other"]
+
+
+def dedupe(articles):
+    """Drop a headline already seen from another URL (outlets syndicate the same story)."""
+    seen, kept = set(), []
+    for a in articles:
+        key = " ".join(a["title"].lower().split())
+        if key not in seen:
+            seen.add(key)
+            kept.append(a)
+    return kept
+
+
+def coverage(articles):
+    seen = sorted(a["seenAt"] for a in articles)
+    return {"from": seen[0][:10], "to": seen[-1][:10]} if seen else None
 
 
 def fetch(query):
@@ -78,7 +111,29 @@ def seen_iso(value):
     return datetime.strptime(value, "%Y%m%dT%H%M%SZ").isoformat() + "Z"
 
 
+def retag(path):
+    """Re-tag an existing snapshot with the current topic words (no network)."""
+    snap = json.loads(Path(path).read_text(encoding="utf-8"))
+    seen = set()
+    kept = []
+    for a in snap["articles"]:  # newest first; the same headline from a second URL is dropped
+        key = " ".join(a["title"].lower().split())
+        if key in seen:
+            continue
+        seen.add(key)
+        a["topics"] = topics_for(a["title"])
+        kept.append(a)
+    snap["articles"] = kept
+    snap["source"]["covered"] = coverage(snap["articles"])
+    snap["source"]["measure"] = "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline; 'Other' = none."
+    Path("data/sources/gdelt-news.json").write_text(json.dumps(snap, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    for topic in [*dict.fromkeys([*TOPICS, *TAG_ONLY]), "Other"]:
+        print(f"{topic}: {sum(topic in a['topics'] for a in snap['articles'])} headlines")
+
+
 def main():
+    if len(sys.argv) == 3 and sys.argv[1] == "--retag":
+        return retag(sys.argv[2])
     url, found = fetch(QUERY)
     articles = {}
     for a in found:
@@ -95,7 +150,7 @@ def main():
             "topics": topics_for(title),
         })
     queries = [{"topic": "All topics (tagged by headline terms)", "query": f"sourcecountry:MY {QUERY}", "url": url, "results": len(found)}]
-    for topic in [*TOPICS, "Other"]:
+    for topic in [*dict.fromkeys([*TOPICS, *TAG_ONLY]), "Other"]:
         print(f"{topic}: {sum(topic in a['topics'] for a in articles.values())} headlines")
 
     snapshot = {
@@ -107,10 +162,11 @@ def main():
             "retrievedAt": date.today().isoformat(),
             "window": "last 4 weeks before retrieval",
             "geography": "News outlets located in Malaysia (GDELT sourcecountry:MY)",
-            "measure": "Headlines reported; not job counts. Topic = search terms found in the headline.",
+            "measure": "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline; 'Other' = none.",
+            "covered": coverage(list(articles.values())),
         },
         "queries": queries,
-        "articles": sorted(articles.values(), key=lambda a: a["seenAt"], reverse=True),
+        "articles": dedupe(sorted(articles.values(), key=lambda a: a["seenAt"], reverse=True)),
     }
     out = Path("data/sources/gdelt-news.json")
     out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
