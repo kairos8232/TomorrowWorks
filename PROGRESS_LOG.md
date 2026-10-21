@@ -4,6 +4,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (21:30–22:15 MYT) — Plan touch-ups; Future Skills Radar
+
+- **Plan:** checked courses and AI suggestions in one numbered list of identical cards (AI suggestions use the same greedy rule over RunPod matches); certification as one compact optional card under the courses.
+- **Future Skills Radar:** 24 skill groups ranked by outlook (DOSM trend + ILO resilience of the roles that need them), scenario switch, Q1→Q2 rank arrows, the viewer's skills ticked. Closes the last gap from the brief's journey ("skills rising or declining").
+- **Remaining before Sunday:** team review of SDG links and translations; PRD (official template), slides, Tools Declaration (Replit proof, RunPod screenshots), 5–7 min video; repo public + committee collaborators.
+
+---
+
 ## 21 Oct 2026 (16:10–20:40 MYT) — Goals switch; Coursera matched on RunPod
 
 - **Goals switch:** *Goals you care about* + *Count in ranking* (G = 1 role link, 0.5 skill link, 0 none). Carson then reworked Your moves on his Mac into focused views (role detail, changes, method; commits 2650b37–eda905c); his uncommitted *Personalise ranking* edit was left untouched.
