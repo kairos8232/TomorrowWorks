@@ -4,6 +4,12 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (14:50–15:40 MYT) — Full BM / Chinese interface
+
+- Carson saw pages only partly translated and asked whether AI should translate on every visit. Decided: **fixed translations written once** (reviewable, no API cost or delay, cannot change numbers or claims). Now 288 phrases cover every screen. English on purpose: course titles, ESCO skill and role names, source names, and the ESCO licence sentence. Review sheet `translation-review.csv` sent to Carson for teammates.
+
+---
+
 ## 21 Oct 2026 (14:40–15:10 MYT) — "View as" instead of a fake login
 
 - Carson asked whether to add fake login accounts per point of view. Decided against passwords (friction for judges, implies accounts and storage that do not exist). Built a **View as** switcher: Aina, Hakim, Puan Rosnah (HR, finance team), Encik Lim (career adviser, graduating class), Me. The sidebar changes per viewer. Pitch line: "Same engine, four users."
