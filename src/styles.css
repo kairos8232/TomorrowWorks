@@ -488,3 +488,13 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .sidebar { grid-template-columns: minmax(0, 1fr); }
   .sidebar .lang-pick, .sidebar .viewer-switch { grid-column: 1; }
 }
+/* AI-matched courses: clearly labelled as machine-found, not checked by hand. */
+.ai-courses { background: #ffffff; border: 1px dashed #8a96a3; border-radius: 10px; padding: 14px 16px; }
+.ai-courses h4 { margin: 0 0 6px; font-size: 15px; }
+.ai-label { margin-left: 6px; padding: 2px 6px; border-radius: 4px; background: #eef0f3; color: #3a4450; font-size: 12px; font-weight: 600; }
+.ai-courses ul { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 8px; }
+.ai-courses li { display: grid; grid-template-columns: minmax(140px, 0.8fr) 1.6fr; gap: 12px; align-items: baseline; }
+.ai-courses li small { display: block; color: #5d6873; font-size: 12px; }
+.ai-courses a { color: #1e6b4f; }
+.ai-skill { font-size: 14px; font-weight: 600; color: #a8402b; }
+@media (max-width: 640px) { .ai-courses li { grid-template-columns: 1fr; gap: 2px; } }

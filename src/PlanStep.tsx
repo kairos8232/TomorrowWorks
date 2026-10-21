@@ -9,6 +9,7 @@ import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 import { useT, useTx } from './i18n';
 import { SdgContribution } from './SdgViews';
+import { AiCourses } from './AiCourses';
 
 const resources = resourcesFile.resources as Resource[];
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
@@ -109,6 +110,8 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           <div className="tag-row">{plan.uncovered.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
           <p className="note">{t('We list a course only after checking its page against the skill.')}</p>
         </section>}
+
+        {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
 
         <details className="how-to-read">
           <summary>{t('How this plan is made')}</summary>

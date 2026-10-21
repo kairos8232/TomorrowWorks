@@ -431,6 +431,11 @@ const dict: Record<string, Entry> = {
   'Your interests and goals together count for two sevenths of each score.': { ms: 'Minat dan matlamat anda bersama dikira dua pertujuh daripada setiap skor.', zh: '你的兴趣和目标合计占每个分数的七分之二。' },
   'Goals': { ms: 'Matlamat', zh: '目标' },
   'Optional. Pick the SDGs you care about to highlight linked roles. When counted, a role linked to your goal through its own work scores 1, through some of its skills 0.5, otherwise 0; this counts for one sixth of the score.': { ms: 'Pilihan. Pilih SDG yang anda pedulikan untuk menyerlahkan peranan berkaitan. Apabila dikira, peranan yang berkait dengan matlamat anda melalui kerjanya sendiri mendapat 1, melalui sebahagian kemahirannya 0.5, selain itu 0; ini dikira satu perenam daripada skor.', zh: '可选。选择你关心的可持续发展目标以突出相关职位。计入排名时，职位本身与目标相关得 1 分，仅部分技能相关得 0.5 分，否则 0 分；占分数的六分之一。' },
+  // AI-matched courses (added 21 Oct 2026)
+  'Found by AI on Coursera': { ms: 'Ditemui oleh AI di Coursera', zh: 'AI 在 Coursera 上找到的课程' },
+  'not checked by hand': { ms: 'belum disemak secara manual', zh: '未经人工核实' },
+  'RunPod compared {n} Coursera course descriptions with these skills (BAAI/bge-m3). The match is text similarity, not a quality rating; open the course to judge it.': { ms: 'RunPod membandingkan {n} penerangan kursus Coursera dengan kemahiran ini (BAAI/bge-m3). Padanan ialah persamaan teks, bukan penilaian kualiti; buka kursus untuk menilainya.', zh: 'RunPod 将 {n} 门 Coursera 课程介绍与这些技能进行比较（BAAI/bge-m3）。匹配度是文本相似度，不是质量评分；请打开课程自行判断。' },
+  'Catalogue retrieved {date}. Coursera is paid; eligible Malaysians can get 3 months free through Rakyat Digital.': { ms: 'Katalog diambil pada {date}. Coursera berbayar; rakyat Malaysia yang layak boleh mendapat 3 bulan percuma melalui Rakyat Digital.', zh: '课程目录获取于 {date}。Coursera 需付费；符合资格的马来西亚人可通过 Rakyat Digital 免费使用 3 个月。' },
 };
 
 const LangContext = createContext<Lang>('en');
