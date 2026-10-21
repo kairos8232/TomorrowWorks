@@ -38,10 +38,51 @@ function GroupRow({ group, change, band, held }: { group: RadarGroup; change: nu
   </li>;
 }
 
+type Band = 'strong' | 'middle' | 'risk';
+
+/** Plain heading for a group: "Used by sustainability managers and business analysts". */
+function usedBy(group: RadarGroup, t: ReturnType<typeof useT>) {
+  const names = group.roles.map((r) => r.title);
+  const list = names.length <= 2 ? names.join(` ${t('and')} `) : `${names.slice(0, -1).join(', ')} ${t('and')} ${names[names.length - 1]}`;
+  return t('Used by: {roles}', { roles: list });
+}
+
+function BandColumn({ band, groups, held, onlyMine }: { band: Band; groups: RadarGroup[]; held: ReadonlySet<string>; onlyMine: boolean }) {
+  const t = useT();
+  const [open, setOpen] = useState<Record<string, boolean>>({});
+  const title = { strong: t('Growing in value'), middle: t('Holding steady'), risk: t('At risk') }[band];
+  const why = {
+    strong: t('Used in jobs where hiring held up better and AI is likely to change less of the work.'),
+    middle: t('Used in jobs in the middle on both hiring and AI change.'),
+    risk: t('Used in jobs where hiring fell most and AI could change more of the work.'),
+  }[band];
+  const visible = groups
+    .map((g) => ({ g, skills: [...g.skills].sort((a, b) => Number(held.has(b.uri)) - Number(held.has(a.uri))).filter((s) => !onlyMine || held.has(s.uri)) }))
+    .filter((x) => x.skills.length > 0);
+  const count = visible.reduce((n, x) => n + x.skills.length, 0);
+  return <section className={`band-col ${band}`} aria-labelledby={`band-${band}`}>
+    <h2 id={`band-${band}`}>{title} <span>{count}</span></h2>
+    <p className="note">{why}</p>
+    {visible.length === 0 && <p className="note">{onlyMine ? t('None of your skills here.') : t('No skills here.')}</p>}
+    {visible.map(({ g, skills }) => {
+      const shown = open[g.key] ? skills : skills.slice(0, 6);
+      return <div key={g.key} className="band-group">
+        <h3 className="cap-first">{usedBy(g, t)}</h3>
+        <div className="tag-row">
+          {shown.map((s) => <span key={s.uri} className={`skill-tag${held.has(s.uri) ? ' mine' : ' radar-skill'}`}>{held.has(s.uri) ? '✓ ' : ''}{s.label}</span>)}
+          {skills.length > 6 && <button type="button" className="text-button" onClick={() => setOpen({ ...open, [g.key]: !open[g.key] })}>{open[g.key] ? t('Show fewer') : t('+{n} more', { n: skills.length - 6 })}</button>}
+        </div>
+      </div>;
+    })}
+  </section>;
+}
+
 export function RadarView({ profile }: { profile: Profile }) {
   const t = useT();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
+  const held = profile.held;
+  const [onlyMine, setOnlyMine] = useState(false);
   const { groups, changes } = useMemo(() => {
     const now = radarGroups(skillRadar(roles, snapshots[snapshotId], ilo, scenarios[scenarioId]));
     const other: SnapshotId = snapshotId === 'q2' ? 'q1' : 'q2';
@@ -49,31 +90,47 @@ export function RadarView({ profile }: { profile: Profile }) {
     return { groups: now, changes: snapshotId === 'q2' ? groupRankChanges(before, now) : new Map<string, number>() };
   }, [snapshotId, scenarioId]);
   const third = Math.ceil(groups.length / 3);
-  const band = (i: number) => (i < third ? 'strong' : i >= groups.length - third ? 'risk' : 'middle') as 'strong' | 'middle' | 'risk';
-  const held = profile.held;
-  const mineIn = (b: 'strong' | 'risk') => groups.filter((_, i) => band(i) === b).reduce((n, g) => n + g.skills.filter((s) => held.has(s.uri)).length, 0);
-  const top = groups[0];
-  const bottom = groups[groups.length - 1];
+  const band = (i: number): Band => (i < third ? 'strong' : i >= groups.length - third ? 'risk' : 'middle');
+  const inBand = (b: Band) => groups.filter((_, i) => band(i) === b);
+  const mine = (b: Band) => inBand(b).reduce((n, g) => n + g.skills.filter((s) => held.has(s.uri)).length, 0);
+  const myTotal = mine('strong') + mine('middle') + mine('risk');
 
   return <div className="step-body radar">
-    <section className="radar-summary">
-      <div className="radar-card strong"><small>{t('Strongest outlook')}</small><strong className="cap">{top.roles.map((r) => r.title).join(' + ')}</strong><span>{t('{n} skills', { n: top.skills.length })} · {Math.round(top.outlook * 100)}</span></div>
-      <div className="radar-card risk"><small>{t('Most at risk')}</small><strong className="cap">{bottom.roles.map((r) => r.title).join(' + ')}</strong><span>{t('{n} skills', { n: bottom.skills.length })} · {Math.round(bottom.outlook * 100)}</span></div>
-      {held.size > 0 && <div className="radar-card mine"><small>{t('Your skills')}</small><strong>{t('{a} in the top third, {b} in the bottom third', { a: mineIn('strong'), b: mineIn('risk') })}</strong><span>{t('of {n} you have in these roles', { n: groups.reduce((n, g) => n + g.skills.filter((s) => held.has(s.uri)).length, 0) })}</span></div>}
-    </section>
+    {myTotal > 0
+      ? <section className="radar-you">
+        <p>{t('Of your {n} skills that these jobs use:', { n: myTotal })}</p>
+        <div className="radar-you-counts">
+          <span className="strong"><strong>{mine('strong')}</strong> {t('growing in value')}</span>
+          <span className="middle"><strong>{mine('middle')}</strong> {t('holding steady')}</span>
+          <span className="risk"><strong>{mine('risk')}</strong> {t('at risk')}</span>
+        </div>
+      </section>
+      : <p className="note">{t('Add your skills in Your skills to see where yours fall.')}</p>}
 
-    <section className="ledger" aria-label={t('Future skills radar')}>
+    <div className="radar-controls">
+      {held.size > 0 && <fieldset><legend className="visually-hidden">{t('Show')}</legend>
+        <label className="choice"><input type="radio" name="radar-mine" checked={!onlyMine} onChange={() => setOnlyMine(false)} />{t('All skills')}</label>
+        <label className="choice"><input type="radio" name="radar-mine" checked={onlyMine} onChange={() => setOnlyMine(true)} />{t('Only my skills')}</label>
+      </fieldset>}
+      <fieldset><legend>{t('If AI changes work')}</legend>
+        {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="radar-scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
+      </fieldset>
+    </div>
+
+    <div className="band-grid">
+      {(['strong', 'middle', 'risk'] as const).map((b) => <BandColumn key={b} band={b} groups={inBand(b)} held={held} onlyMine={onlyMine} />)}
+    </div>
+
+    <details className="how-to-read">
+      <summary>{t('How this is worked out')}</summary>
+      <p className="note">{t('Skills needed by the same roles share the same signals, so they are shown together. Outlook out of 100 combines the job-ad trend and AI resilience of those roles; arrows show the move since {q} data.', { q: quarter(snapshots.q1.source.latestQuarter) })} {t('The top third of groups is “growing in value”, the bottom third “at risk”.')}</p>
       <div className="ledger-controls">
         <fieldset><legend>{t('Job-ad data')}</legend>
           {(['q1', 'q2'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="radar-snapshot" checked={snapshotId === id} onChange={() => setSnapshotId(id)} />{quarter(snapshots[id].source.latestQuarter)}</label>)}
         </fieldset>
-        <fieldset><legend>{t('If AI changes work')}</legend>
-          {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="radar-scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
-        </fieldset>
       </div>
-      <p className="note">{t('Skills needed by the same roles share the same signals, so they are shown together. Outlook out of 100 combines the job-ad trend and AI resilience of those roles; arrows show the move since {q} data.', { q: quarter(snapshots.q1.source.latestQuarter) })}</p>
       <ol className="radar-list">{groups.map((g, i) => <GroupRow key={g.key} group={g} change={changes.get(g.key) ?? 0} band={band(i)} held={held} />)}</ol>
       <p className="note">{t('An estimate derived from roles, not a measured demand for each skill: DOSM online job ads by occupation group (quarter on quarter) and ILO generative AI exposure, for the essential ESCO skills of the nine roles. It supports your decision; it does not predict hiring.')}</p>
-    </section>
+    </details>
   </div>;
 }

@@ -38,7 +38,7 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
-  trending: { title: 'Future skills radar', intro: 'Which skills have the strongest outlook as AI changes work, estimated from Malaysian job ads and AI exposure of the roles that need them.' },
+  trending: { title: 'Future skills radar', intro: 'Which skills are gaining value as AI changes work, and where yours stand.' },
 };
 
 const comingSoon: Partial<Record<Screen, string>> = {

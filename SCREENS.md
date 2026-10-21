@@ -98,7 +98,7 @@ Footer with sources and the ESCO acknowledgement. Layout checked at 1440 px and 
 
 ## Future skills radar (The job market)
 
-- Summary cards: strongest outlook group, most at risk group, and (if the viewer has skills) how many of them fall in the top and bottom thirds.
-- Controls: Job-ad data (2026 Q1 / Q2) and If AI changes work (Gradually / Quickly).
-- Ranked list of 24 skill groups (skills needed by the same roles): rank, roles, skill count, "shared by n roles", "you have n", outlook bar out of 100, job-ad change and AI exposure, ▲▼ rank move since Q1 data; skill chips (first 8, +more) with ✓ for held skills and green/digital flags; green/red left border for top/bottom third.
-- Method note: estimate derived from roles, not measured skill demand; supports the decision, does not predict hiring.
+- Plain view first: "Of your n skills that these jobs use: x growing in value, y holding steady, z at risk" (if the viewer has skills).
+- Switches: *All skills / Only my skills*, and *If AI changes work: Gradually / Quickly*.
+- Three columns, **Growing in value · Holding steady · At risk** (top, middle and bottom third of skill groups), each with a one-line plain reason; inside, skills under "Used by: <roles>", the viewer's own skills ticked and listed first, first 6 then *+n more*. Stacks on phones.
+- *How this is worked out* (collapsed): the method note, the Q1/Q2 data switch, and the ranked list of 24 groups with outlook out of 100, job-ad change, AI exposure and ▲▼ rank moves, plus the "estimate, not measured demand" note.

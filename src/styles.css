@@ -580,3 +580,25 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .radar-rank { grid-area: rank; } .radar-who { grid-area: who; } .radar-score { grid-area: score; } .radar-facts { grid-area: facts; } .radar-move { grid-area: move; }
   .radar-skills { margin-left: 0; }
 }
+/* Radar, plain view: three columns a person can read at a glance. */
+.radar-you { background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: 16px 18px; }
+.radar-you p { margin: 0 0 10px; font-size: 16px; }
+.radar-you-counts { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 16px; }
+.radar-you-counts strong { font-size: 26px; margin-right: 4px; }
+.radar-you-counts .strong strong { color: #1e6b4f; } .radar-you-counts .risk strong { color: #a8402b; }
+.radar-controls { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end; }
+.radar-controls fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; }
+.radar-controls legend { font-size: 14px; font-weight: 600; color: #3a4450; margin-bottom: 6px; padding: 0; }
+.band-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.band-col { background: #ffffff; border: 1px solid #d9ded9; border-top: 5px solid #8a96a3; border-radius: 12px; padding: 16px; }
+.band-col.strong { border-top-color: #1e6b4f; } .band-col.risk { border-top-color: #a8402b; }
+.band-col h2 { margin: 0 0 4px; font-size: 19px; }
+.band-col h2 span { color: #5d6873; font-weight: 400; font-size: 16px; }
+.band-col > .note { margin: 0 0 12px; }
+.band-group { padding: 10px 0; border-top: 1px solid #e3e7e3; }
+.band-group h3 { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: #3a4450; }
+.band-group .tag-row { margin: 0; gap: 6px; }
+.skill-tag.mine { background: #e6f0ea; color: #1e6b4f; }
+.cap-first::first-letter { text-transform: uppercase; }
+.radar details .radar-list { margin-top: 12px; }
+@media (max-width: 900px) { .band-grid { grid-template-columns: 1fr; } }

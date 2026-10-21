@@ -479,7 +479,7 @@ const dict: Record<string, Entry> = {
   // Future skills radar (added 21 Oct 2026)
   'Future skills radar': { ms: 'Radar kemahiran masa depan', zh: '未来技能雷达' },
   'Skills rising or at risk': { ms: 'Kemahiran meningkat atau berisiko', zh: '上升或面临风险的技能' },
-  'Which skills have the strongest outlook as AI changes work, estimated from Malaysian job ads and AI exposure of the roles that need them.': { ms: 'Kemahiran mana yang mempunyai prospek paling kukuh apabila AI mengubah kerja, dianggarkan daripada iklan kerja Malaysia dan pendedahan AI peranan yang memerlukannya.', zh: '随着 AI 改变工作，哪些技能前景最好——根据需要这些技能的职位的马来西亚招聘广告和 AI 影响程度估算。' },
+  'Which skills are gaining value as AI changes work, and where yours stand.': { ms: 'Kemahiran mana yang semakin bernilai apabila AI mengubah kerja, dan di mana kedudukan kemahiran anda.', zh: '随着 AI 改变工作，哪些技能在增值，以及你的技能处于什么位置。' },
   'shared by {n} roles': { ms: 'dikongsi oleh {n} peranan', zh: '{n} 个职位共有' },
   'you have {n}': { ms: 'anda ada {n}', zh: '你已具备 {n} 项' },
   'Outlook {n} of 100': { ms: 'Prospek {n} daripada 100', zh: '前景 {n}/100' },
@@ -493,6 +493,27 @@ const dict: Record<string, Entry> = {
   'of {n} you have in these roles': { ms: 'daripada {n} yang anda ada dalam peranan ini', zh: '（你在这些职位中具备的 {n} 项技能中）' },
   'Skills needed by the same roles share the same signals, so they are shown together. Outlook out of 100 combines the job-ad trend and AI resilience of those roles; arrows show the move since {q} data.': { ms: 'Kemahiran yang diperlukan oleh peranan yang sama berkongsi isyarat yang sama, jadi ia ditunjukkan bersama. Prospek daripada 100 menggabungkan trend iklan kerja dan ketahanan AI peranan tersebut; anak panah menunjukkan perubahan sejak data {q}.', zh: '由相同职位需要的技能共享相同信号，因此一起显示。前景（满分 100）结合这些职位的招聘趋势和 AI 抗性；箭头显示自 {q} 数据以来的变化。' },
   'An estimate derived from roles, not a measured demand for each skill: DOSM online job ads by occupation group (quarter on quarter) and ILO generative AI exposure, for the essential ESCO skills of the nine roles. It supports your decision; it does not predict hiring.': { ms: 'Anggaran yang diperoleh daripada peranan, bukan permintaan yang diukur bagi setiap kemahiran: iklan kerja dalam talian DOSM mengikut kumpulan pekerjaan (suku ke suku) dan pendedahan AI generatif ILO, untuk kemahiran penting ESCO sembilan peranan. Ia menyokong keputusan anda; ia tidak meramal pengambilan pekerja.', zh: '这是根据职位推算的估计，而非每项技能的实测需求：采用 DOSM 按职业类别的网上招聘广告（季度环比）和 ILO 生成式 AI 影响程度，覆盖九个职位的 ESCO 核心技能。它辅助你决策，并不预测招聘。' },
+  // Radar plain view (added 21 Oct 2026)
+  'and': { ms: 'dan', zh: '和' },
+  'Used by: {roles}': { ms: 'Digunakan oleh: {roles}', zh: '使用者：{roles}' },
+  'Growing in value': { ms: 'Semakin bernilai', zh: '价值上升' },
+  'Holding steady': { ms: 'Kekal stabil', zh: '保持稳定' },
+  'At risk': { ms: 'Berisiko', zh: '有风险' },
+  'Used in jobs where hiring held up better and AI is likely to change less of the work.': { ms: 'Digunakan dalam kerja yang pengambilannya lebih bertahan dan AI berkemungkinan kurang mengubah kerja itu.', zh: '用于招聘较稳定、且 AI 较少改变工作内容的职位。' },
+  'Used in jobs in the middle on both hiring and AI change.': { ms: 'Digunakan dalam kerja yang berada di tengah dari segi pengambilan dan perubahan AI.', zh: '用于招聘和 AI 影响都处于中等的职位。' },
+  'Used in jobs where hiring fell most and AI could change more of the work.': { ms: 'Digunakan dalam kerja yang pengambilannya paling banyak jatuh dan AI boleh mengubah lebih banyak kerja.', zh: '用于招聘下降最多、且 AI 可能改变更多工作内容的职位。' },
+  'None of your skills here.': { ms: 'Tiada kemahiran anda di sini.', zh: '这里没有你的技能。' },
+  'No skills here.': { ms: 'Tiada kemahiran di sini.', zh: '这里没有技能。' },
+  'Of your {n} skills that these jobs use:': { ms: 'Daripada {n} kemahiran anda yang digunakan oleh kerja ini:', zh: '在这些职位用到的你的 {n} 项技能中：' },
+  'growing in value': { ms: 'semakin bernilai', zh: '价值上升' },
+  'holding steady': { ms: 'kekal stabil', zh: '保持稳定' },
+  'at risk': { ms: 'berisiko', zh: '有风险' },
+  'Add your skills in Your skills to see where yours fall.': { ms: 'Tambah kemahiran anda dalam Kemahiran anda untuk melihat kedudukannya.', zh: '在“你的技能”中添加技能，即可查看你的技能位于哪里。' },
+  'Show': { ms: 'Tunjuk', zh: '显示' },
+  'All skills': { ms: 'Semua kemahiran', zh: '所有技能' },
+  'Only my skills': { ms: 'Kemahiran saya sahaja', zh: '只看我的技能' },
+  'How this is worked out': { ms: 'Bagaimana ini dikira', zh: '计算方法' },
+  'The top third of groups is “growing in value”, the bottom third “at risk”.': { ms: 'Satu pertiga teratas kumpulan ialah “semakin bernilai”, satu pertiga terbawah “berisiko”.', zh: '排名前三分之一的组为“价值上升”，后三分之一为“有风险”。' },
 };
 
 const LangContext = createContext<Lang>('en');
