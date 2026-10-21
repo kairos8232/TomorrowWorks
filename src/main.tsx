@@ -1,314 +1,152 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { filterMarketSignals, industries, marketSignals, type IndustryId, type MarketSignal, type SignalKind } from './market';
-import { compareSkills, samplePromotionTarget, type Target, type TargetDraft } from './personal';
-import { RoleMatches, SourcesFooter } from './RoleMatches';
+import { aina, ainaProfile, emptyProfile, ilo, roles, snapshots, sourceLinks, transferable, type Profile } from './data';
+import { MovesStep, SourcesFooter } from './MovesStep';
 import { DemandTable, OutlookTable } from './PublicTables';
+import { recommendMoves, scenarios } from './scoring';
+import { SkillsStep } from './SkillsStep';
 import './styles.css';
 
-type Screen = 'market' | 'changes' | 'demand' | 'skills' | 'outlook' | 'signin' | 'profile' | 'gaps' | 'roles' | 'pathway';
-type ProfileDraft = { currentRole: string; skills: string; experience: string; interests: string; workPreferences: string; qualifications: string };
-type Profile = { currentRole: string; skills: string[]; experience: string; interests: string[]; workPreferences: string; qualifications: string[] };
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'demand' | 'outlook' | 'news' | 'trending';
 
-const emptyProfile: ProfileDraft = { currentRole: '', skills: '', experience: '', interests: '', workPreferences: '', qualifications: '' };
-const sampleProfile: ProfileDraft = {
-  currentRole: 'Junior Accountant',
-  skills: 'Excel, bookkeeping, financial reporting',
-  experience: '2 years supporting monthly reports and reconciliations',
-  interests: 'data analysis, dashboards',
-  workPreferences: 'I enjoy finding patterns and explaining them clearly to a team.',
-  qualifications: '',
-};
-
-function splitEntries(value: string) {
-  return [...new Set(value.split(',').map((entry) => entry.trim()).filter(Boolean))];
-}
-
-const viewKind: Partial<Record<Screen, SignalKind | 'all'>> = { market: 'all', changes: 'change', demand: 'demand', skills: 'skill', outlook: 'outlook' };
-
-function SignalCard({ signal }: { signal: MarketSignal }) {
-  return <article className="signal-card">
-    <span className="market-label">{{ change: 'Reported change', demand: 'Demand now', skill: 'Skills requested', outlook: 'Possible change' }[signal.kind]}</span>
-    <h2>{signal.title}</h2>
-    <p>{signal.summary}</p>
-    <p className="signal-source">{signal.source.name}, published {signal.source.publishedAt}, retrieved {signal.source.retrievedAt}</p>
-    <p className="signal-source">{signal.source.geography}, {signal.industries.length >= industries.length - 1 ? 'All industries combined' : signal.industries.map((id) => industries.find((item) => item.id === id)!.label).join(', ')}</p>
-    <p className="signal-source">Coverage: {signal.source.coverage}{signal.source.measure ? ` Measure: ${signal.source.measure}.` : ''}</p>
-    {signal.assumptions && <p className="signal-source">Assumptions: {signal.assumptions.join('; ')}</p>}
-    <a href={signal.source.url} target="_blank" rel="noreferrer">Open the original source</a>
-  </article>;
-}
-
-const screens: { id: Screen; label: string; description: string }[] = [
-  { id: 'market', label: 'Explore', description: 'Market overview' },
-  { id: 'changes', label: 'Workplace changes', description: 'Reported industry issues' },
-  { id: 'demand', label: 'Demand', description: 'Roles in demand now' },
-  { id: 'skills', label: 'Skills', description: 'Skills requested now' },
-  { id: 'outlook', label: 'Outlook', description: 'Possible future change' },
-  { id: 'signin', label: 'Sign in', description: 'Demo entry for personal guidance' },
-  { id: 'profile', label: 'My profile', description: 'Skills, experience and interests' },
-  { id: 'gaps', label: 'My skill gaps', description: 'Compare a chosen target' },
-  { id: 'roles', label: 'Role matches', description: 'Scores, reasons and skills gaps' },
-  { id: 'pathway', label: 'My pathway', description: 'Learning steps and SDG links' },
+type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
+const careerNav: NavItem[] = [
+  { id: 'skills', label: '1. Your skills', hint: 'Describe your work' },
+  { id: 'moves', label: '2. Your moves', hint: 'Roles ranked for you' },
+  { id: 'plan', label: '3. Your plan', hint: 'What to learn next', soon: true },
 ];
-const publicScreens = screens.filter((item) => item.id === 'market' || item.id === 'changes' || item.id === 'demand' || item.id === 'skills' || item.id === 'outlook');
-const personalScreens = screens.filter((item) => item.id === 'profile' || item.id === 'gaps' || item.id === 'roles' || item.id === 'pathway');
+const marketNav: NavItem[] = [
+  { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
+  { id: 'outlook', label: 'AI exposure', hint: 'How much AI could change' },
+  { id: 'news', label: 'Workplace news', hint: 'Latest reported changes', soon: true },
+  { id: 'trending', label: 'Skills in demand', hint: 'Skills employers ask for', soon: true },
+];
 
-const screenCopy: Record<Screen, { title: string; body: string; next: string }> = {
-  market: {
-    title: 'Explore work. Plan what comes next.',
-    body: 'See where Malaysian job ads are moving, how exposed roles are to AI, and which moves fit your skills.',
-    next: 'No public market source has been connected yet.',
-  },
-  changes: {
-    title: 'What is changing at work?',
-    body: 'Browse dated reports and announcements about workplace issues across the covered industries. Each item will link to its original source.',
-    next: 'No verified news or announcement feed is connected yet. Reported issues will appear here with source, date, industry tag, and coverage limits.',
-  },
-  demand: {
-    title: 'Where is demand now?',
-    body: 'Online job ads in Malaysia by occupation group, Q1 to Q2 2026.',
-    next: 'No verified demand source is connected yet. Counts, rankings, and trends will appear with the measure, geography, and date.',
-  },
-  skills: {
-    title: 'Which skills are needed now?',
-    body: 'See requested skills from dated public evidence once the source and extraction method are verified.',
-    next: 'No verified skills source is connected yet. This view will explain which roles request each skill and where the evidence comes from.',
-  },
-  outlook: {
-    title: 'What could change?',
-    body: 'How much of each role’s work generative AI could change.',
-    next: 'Future scenarios are not available yet. This view will show estimates and assumptions, not guaranteed job forecasts.',
-  },
-  signin: {
-    title: 'Make it yours',
-    body: 'A future account will let you save your profile and return to your plan. Sign-in is not available in this prototype.',
-    next: 'No account is created in the demo.',
-  },
-  profile: {
-    title: 'Where are you today?',
-    body: 'Add your current skills, experience and interests. This will become the starting point for explainable career matches.',
-    next: 'Enter a profile to begin.',
-  },
-  gaps: {
-    title: 'What should I build next?',
-    body: 'Choose a promotion or career-move target and compare its illustrative skill list with your reviewed profile. This preview does not claim employer requirements.',
-    next: 'Review a fictional profile before comparing your skills with a target.',
-  },
-  roles: {
-    title: 'Find your next role',
-    body: 'Nine roles ranked by your skills, job-ad demand and AI exposure.',
-    next: 'No roles have been ranked yet.',
-  },
-  pathway: {
-    title: 'Make your next move',
-    body: 'Choose a role to see ordered learning steps, time estimates, verified resources and its SDG connection.',
-    next: 'The learning pathway is not available yet.',
-  },
+const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
+  skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
+  moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
+  plan: { title: 'Your plan', intro: 'The skills to learn next for a move you choose.' },
+  demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
+  outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
+  news: { title: 'Workplace news', intro: 'Dated news about AI, hiring and layoffs in Malaysia.' },
+  trending: { title: 'Skills in demand', intro: 'Skills that Malaysian employers ask for.' },
 };
+
+const comingSoon: Partial<Record<Screen, string>> = {
+  plan: 'Pick a move and get the missing skills in a sensible order, each with a free or low-cost course and, where one exists, the Malaysian SKM certification route. Being built this week.',
+  news: 'Headlines from Malaysian news outlets with dates and links, so you can see what is changing now. News is shown as context only and never changes your scores. Being built this week.',
+  trending: 'Not connected yet. For now, each role’s skills come from ESCO and appear when you open a role in Your moves.',
+};
+
+function Home({ start }: { start: (who: 'aina' | 'me') => void }) {
+  // Aina's live result, computed from the same data and rule as the Moves step.
+  const preview = useMemo(() => {
+    const p = ainaProfile();
+    return recommendMoves(roles, p.currentRoleId, p.held, snapshots.q2, ilo, scenarios.moderate, transferable).moves.slice(0, 3);
+  }, []);
+  return <div className="home">
+    <section className="home-hero">
+      <h1>AI is changing your job. See where you can move next.</h1>
+      <p>For Malaysian workers whose everyday tasks are starting to be done by AI. TomorrowWorks compares your skills with nine real roles, using official Malaysian job-ad figures and international research on AI.</p>
+      <div className="hero-actions">
+        <button type="button" className="primary-button" onClick={() => start('aina')}>Try it as Aina</button>
+        <button type="button" className="secondary-button" onClick={() => start('me')}>Start with my own skills</button>
+      </div>
+      <p className="note">No account, no CV. Nothing you enter leaves your browser tab except the words you send to the skill search.</p>
+    </section>
+
+    <section className="home-how" aria-labelledby="how">
+      <h2 id="how">How it works</h2>
+      <ol>
+        <li><strong>Your skills.</strong> Describe your work in your own words. An AI model finds the matching skills, and you confirm them.</li>
+        <li><strong>Your moves.</strong> Nine roles ranked by skill fit, job-ad demand and AI exposure. Every score shows its reasons.</li>
+        <li><strong>Your plan.</strong> The skills to learn next, with courses and Malaysian certification routes. <em>Coming this week.</em></li>
+      </ol>
+    </section>
+
+    <section className="home-aina" aria-labelledby="meet">
+      <div>
+        <h2 id="meet">Meet {aina.name}</h2>
+        <p>{aina.summary}</p>
+      </div>
+      <div>
+        <p className="note">Her top moves with Q2 2026 data</p>
+        <ol className="mini-ledger">{preview.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol>
+        <button type="button" className="text-button" onClick={() => start('aina')}>See why</button>
+      </div>
+    </section>
+
+    <section className="home-sources" aria-labelledby="data">
+      <h2 id="data">Where the numbers come from</h2>
+      <dl>
+        <div><dt><a href={sourceLinks.dosm} target="_blank" rel="noreferrer">DOSM</a></dt><dd>Department of Statistics Malaysia. Online job ads by occupation, every quarter.</dd></div>
+        <div><dt><a href={sourceLinks.ilo} target="_blank" rel="noreferrer">ILO</a></dt><dd>International Labour Organization. How much of each job’s tasks generative AI could change.</dd></div>
+        <div><dt><a href={sourceLinks.esco} target="_blank" rel="noreferrer">ESCO</a></dt><dd>The European Commission’s list of skills and occupations. It uses the same job codes as Malaysia’s MASCO.</dd></div>
+      </dl>
+    </section>
+  </div>;
+}
+
+function Steps({ screen, go }: { screen: Screen; go: (s: Screen) => void }) {
+  return <ol className="steps" aria-label="Steps">
+    {careerNav.map((item) => <li key={item.id}>
+      <button type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'step' : undefined} onClick={() => go(item.id)}>
+        {item.label}{item.soon && <span className="soon">Soon</span>}
+      </button>
+    </li>)}
+  </ol>;
+}
+
+function NavGroup({ label, items, screen, go }: { label: string; items: NavItem[]; screen: Screen; go: (s: Screen) => void }) {
+  return <div className="nav-group">
+    <p className="nav-group-label">{label}</p>
+    <nav className="nav-list" aria-label={label}>
+      {items.map((item) => <button key={item.id} type="button" className={`nav-item${screen === item.id ? ' active' : ''}${item.soon ? ' is-soon' : ''}`} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>
+        <strong>{item.label}{item.soon && <span className="soon">Soon</span>}</strong><small>{item.hint}</small>
+      </button>)}
+    </nav>
+  </div>;
+}
 
 function App() {
-  const [screen, setScreen] = useState<Screen>('market');
-  const [demoEntered, setDemoEntered] = useState(false);
-  const [draft, setDraft] = useState<ProfileDraft>(emptyProfile);
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [profileError, setProfileError] = useState('');
-  const [targetDraft, setTargetDraft] = useState<TargetDraft>(samplePromotionTarget);
-  const [target, setTarget] = useState<Target | null>(null);
-  const [targetError, setTargetError] = useState('');
-  const [industry, setIndustry] = useState<IndustryId>('all');
-  const [search, setSearch] = useState('');
-  const activeScreen = screens.find((item) => item.id === screen)!;
-  const content = screenCopy[screen];
-  const currentKind = viewKind[screen];
-  const visibleSignals = currentKind ? filterMarketSignals(marketSignals, currentKind, industry, search) : [];
-  const hasViewSource = currentKind ? marketSignals.some((signal) => currentKind === 'all' || signal.kind === currentKind) : false;
-  const industryLabel = industries.find((item) => item.id === industry)!.label;
-  const comparison = profile && target ? compareSkills(profile.skills, target.skills) : null;
-  const browseControls = currentKind ? <section className="browse-controls" aria-label="Filter public evidence">
-    <div className="browse-fields">
-      <label>Industry<select value={industry} onChange={(event) => setIndustry(event.target.value as IndustryId)}>{industries.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
-      <label>Search available evidence<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Topic, role, or skill" /></label>
-    </div>
-    <p className="scope-status" aria-live="polite">{industryLabel}{search.trim() ? `, search “${search.trim()}”` : ''}: {visibleSignals.length} verified {visibleSignals.length === 1 ? 'signal' : 'signals'} in this view. {marketSignals.length === 0 ? 'No source has been imported yet.' : ''}</p>
-  </section> : null;
-
-  function updateDraft(field: keyof ProfileDraft, value: string) {
-    setDraft((current) => ({ ...current, [field]: value }));
-    setProfile(null);
-    setProfileError('');
-    setTarget(null);
+  const [screen, setScreen] = useState<Screen>('home');
+  const [profile, setProfile] = useState<Profile>(ainaProfile);
+  const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
+  function start(who: 'aina' | 'me') {
+    setProfile(who === 'aina' ? ainaProfile() : emptyProfile());
+    go(who === 'aina' ? 'moves' : 'skills');
   }
+  const isCareer = screen === 'skills' || screen === 'moves' || screen === 'plan';
+  const page = screen === 'home' ? null : titles[screen];
 
-  function saveProfile(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const skills = splitEntries(draft.skills);
-    const interests = splitEntries(draft.interests);
-    if (!draft.currentRole.trim() || !draft.experience.trim() || skills.length === 0 || interests.length === 0) {
-      setProfileError('Complete every field and separate multiple skills or interests with commas.');
-      return;
-    }
-    setProfile({ currentRole: draft.currentRole.trim(), skills, experience: draft.experience.trim(), interests, workPreferences: draft.workPreferences.trim(), qualifications: splitEntries(draft.qualifications) });
-    setProfileError('');
-  }
+  return <div className="app-shell">
+    <aside className="sidebar" aria-label="Navigation">
+      <button type="button" className="brand" onClick={() => go('home')}>TomorrowWorks</button>
+      <p className="sidebar-kicker">Your career, mapped forward.</p>
+      <NavGroup label="My career" items={careerNav} screen={screen} go={go} />
+      <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
+      <div className="sidebar-note">Prototype for SDC Hackathon 2026<br /><span>Profiles are fictional or stay in your browser.</span></div>
+    </aside>
 
-  function updateTarget(field: 'role' | 'skills', value: string) {
-    setTargetDraft((current) => ({ ...current, [field]: value }));
-    setTarget(null);
-    setTargetError('');
-  }
-
-  function updateMoveType(value: TargetDraft['moveType']) {
-    setTargetDraft((current) => ({ ...current, moveType: value }));
-    setTarget(null);
-    setTargetError('');
-  }
-
-  function saveTarget(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const skills = splitEntries(targetDraft.skills);
-    if (!targetDraft.role.trim() || skills.length === 0) {
-      setTargetError('Enter a target role and at least one illustrative target skill.');
-      return;
-    }
-    setTarget({ moveType: targetDraft.moveType, role: targetDraft.role.trim(), skills });
-    setTargetError('');
-  }
-
-  function enterDemo() {
-    if (!demoEntered) {
-      setDraft(sampleProfile);
-      setProfile(null);
-      setProfileError('');
-      setTarget(null);
-    }
-    setDemoEntered(true);
-    setScreen('profile');
-  }
-
-  return (
-    <div className="app-shell">
-      <aside className="sidebar" aria-label="Project navigation">
-        <div className="brand">TomorrowWorks</div>
-        <p className="sidebar-kicker">Your career, mapped forward.</p>
-        <div className="nav-group">
-          <p className="nav-group-label">Browse the market</p>
-          <nav className="nav-list" aria-label="Browse the market">
-            {publicScreens.map((item) => (
-              <button className={`nav-item${screen === item.id ? ' active' : ''}`} key={item.id} onClick={() => setScreen(item.id)} type="button" aria-current={screen === item.id ? 'page' : undefined}>
-                <strong>{item.label}</strong><small>{item.description}</small>
-              </button>
-            ))}
-          </nav>
-        </div>
-        {demoEntered && <div className="nav-group personal-group">
-          <p className="nav-group-label">My career</p>
-          <nav className="nav-list" aria-label="My career">
-            {personalScreens.map((item) => (
-              <button className={`nav-item${screen === item.id ? ' active' : ''}`} key={item.id} onClick={() => setScreen(item.id)} type="button" aria-current={screen === item.id ? 'page' : undefined}>
-                <strong>{item.label}</strong><small>{item.description}</small>
-              </button>
-            ))}
-          </nav>
-        </div>}
-        <div className="sidebar-note">Prototype for SDC Hackathon 2026<br /><span>Every figure links to its source.</span></div>
-      </aside>
-
-      <main className="main-content">
-        <header className="topbar"><span>Careers and the Malaysian job market</span><button type="button" className="career-button" onClick={() => setScreen(demoEntered ? 'profile' : 'signin')}>{demoEntered ? 'My profile' : 'My career'}</button></header>
-        <div className="content-wrap">
-          <section className="hero" aria-labelledby="screen-title">
-            <h1 id="screen-title">{content.title}</h1>
-            <p>{content.body}</p>
-            {screen === 'market' && <div className="hero-actions"><button type="button" className="primary-button" onClick={() => { setDemoEntered(true); setScreen('roles'); }}>See ranked career moves</button><span>Uses a fictional profile and real DOSM, ILO and ESCO data. No account needed.</span></div>}
-            {screen === 'market' && marketSignals.length === 0 && <div className="hero-source-status">Public evidence: no verified source connected yet.</div>}
-          </section>
-          {screen !== 'market' && screen !== 'demand' && screen !== 'outlook' && browseControls}
-          {screen === 'market' ? (
-            <>
-              <section className="market-grid" aria-label="Public market overview">
-                <button type="button" className="market-card" onClick={() => setScreen('changes')}><span className="market-label">Workplace changes</span><h2>Reported workplace issues</h2><p>News and announcements about work. No news source is connected yet, so this view is empty.</p><span className="card-link">Reported changes</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('demand')}><span className="market-label">Demand now</span><h2>Job ads by occupation</h2><p>DOSM counts of online job ads in Malaysia for nine occupation groups, Q1 and Q2 2026.</p><span className="card-link">Job ads by occupation</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('skills')}><span className="market-label">Skills requested</span><h2>Skills employers request</h2><p>Not connected yet. Role skills come from ESCO and are shown in Role matches.</p><span className="card-link">Requested skills</span></button>
-                <button type="button" className="market-card" onClick={() => setScreen('outlook')}><span className="market-label">Possible change</span><h2>AI exposure by role</h2><p>ILO estimates of how much of each role's work generative AI could change.</p><span className="card-link">AI exposure by role</span></button>
-              </section>
-            </>
-          ) : screen === 'demand' ? (
-            <DemandTable />
-          ) : screen === 'outlook' ? (
-            <OutlookTable />
-          ) : screen === 'changes' || screen === 'skills' ? (
-            visibleSignals.length > 0 ? <section className="signal-list" aria-label={`${activeScreen.label} evidence`}>{visibleSignals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}</section> : <section className="topic-panel" aria-label={`${activeScreen.label} information`}>
-              
-              <h2>{hasViewSource ? 'No evidence matches this scope' : 'Evidence is being connected'}</h2>
-              <p>{hasViewSource ? 'Try another industry or search term. Only verified records are shown.' : content.next}</p>
-              <button type="button" className="text-button" onClick={() => setScreen('market')}>Back to the overview</button>
-            </section>
-          ) : screen === 'signin' ? (
-            <section className="work-card" aria-label="Demo entry">
-              
-              <div><h2>Continue with a fictional profile</h2><p>This demo skips real sign-in and uses sample information. It does not create an account, store a résumé, or save your details.</p><button type="button" className="primary-button demo-entry" onClick={enterDemo}>{demoEntered ? 'Continue to profile' : 'Continue with sample profile'}</button></div>
-            </section>
-          ) : screen === 'profile' ? (
-            <section className="profile-panel" aria-label="Skills profile">
-              <div className="panel-heading"><div><h2>Build your skills profile</h2><p>Use a fictional example for the demo. No CV upload or personal details are needed.</p></div><button type="button" className="text-button" onClick={() => { setDraft(sampleProfile); setProfile(null); setProfileError(''); }}>Load sample profile</button></div>
-              <form onSubmit={saveProfile} noValidate>
-                <div className="field-grid">
-                  <label>Current role<input value={draft.currentRole} onChange={(event) => updateDraft('currentRole', event.target.value)} placeholder="e.g. Junior Accountant" autoComplete="off" /></label>
-                  <label>Current skills<input value={draft.skills} onChange={(event) => updateDraft('skills', event.target.value)} placeholder="e.g. Excel, reporting" autoComplete="off" /><small>Separate skills with commas.</small></label>
-                </div>
-                <div className="field-grid">
-                  <label>Experience<textarea value={draft.experience} onChange={(event) => updateDraft('experience', event.target.value)} placeholder="Describe the work you have done" rows={3} /></label>
-                  <label>Interests<input value={draft.interests} onChange={(event) => updateDraft('interests', event.target.value)} placeholder="e.g. data analysis, dashboards" autoComplete="off" /><small>Separate interests with commas.</small></label>
-                </div>
-                <div className="field-grid">
-                  <label>Work preferences or strengths (optional)<textarea value={draft.workPreferences} onChange={(event) => updateDraft('workPreferences', event.target.value)} placeholder="e.g. I enjoy explaining data and working with a team" rows={2} /><small>Describe tasks or ways of working you prefer. This does not affect matching yet.</small></label>
-                  <label>Current certificates or qualifications (optional)<input value={draft.qualifications} onChange={(event) => updateDraft('qualifications', event.target.value)} placeholder="Use the fictional demo only" autoComplete="off" /><small>Separate entries with commas. No certificate is assumed from your job title.</small></label>
-                </div>
-                {profileError && <p className="form-error" role="alert">{profileError}</p>}
-                <button type="submit" className="primary-button">Review profile</button>
-              </form>
-              {profile && <div className="profile-review" aria-live="polite"><span className="review-label">Profile ready</span><h3>{profile.currentRole}</h3><p>{profile.experience}</p><div className="tag-row">{profile.skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div><p className="review-interests"><strong>Interested in:</strong> {profile.interests.join(', ')}</p>{profile.workPreferences && <p><strong>Work preferences or strengths:</strong> {profile.workPreferences}</p>}<p><strong>Current certificates or qualifications:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None entered for this fictional profile'}</p><button type="button" className="text-button" onClick={() => setScreen('gaps')}>Compare skills for a target</button></div>}
-            </section>
-          ) : screen === 'gaps' ? (
-            profile ? <section className="profile-panel" aria-label="Personal skill-gap preview">
-              <div className="panel-heading"><div><h2>Compare with a chosen target</h2><p>Fictional demo. The target list is editable and illustrative, not a verified employer requirement.</p></div><button type="button" className="text-button" onClick={() => setScreen('profile')}>Edit profile</button></div>
-              <p className="profile-context">Reviewed profile: {profile.currentRole}, {profile.skills.length} current skills</p>
-              <div className={`gap-workspace${target && comparison ? ' has-results' : ''}`}>
-              <form onSubmit={saveTarget} noValidate>
-                <div className="field-grid">
-                  <label>Next move<select value={targetDraft.moveType} onChange={(event) => updateMoveType(event.target.value as TargetDraft['moveType'])}><option value="promotion">Promotion in my field</option><option value="career move">Move to another role</option></select></label>
-                  <label>Target role<input value={targetDraft.role} onChange={(event) => updateTarget('role', event.target.value)} placeholder="Role you want to explore" autoComplete="off" /></label>
-                </div>
-                <label>Illustrative target skills<input value={targetDraft.skills} onChange={(event) => updateTarget('skills', event.target.value)} placeholder="e.g. Excel, budgeting, team leadership" autoComplete="off" /><small>Separate skills with commas. These are example inputs, not sourced requirements.</small></label>
-                {targetError && <p className="form-error" role="alert">{targetError}</p>}
-                <button type="submit" className="primary-button">Compare with my profile</button>
-              </form>
-              {target && comparison && <div className="gap-results" aria-live="polite">
-                <span className="review-label">Illustrative comparison</span>
-                <h3>{target.moveType === 'promotion' ? 'Promotion target' : 'Career-move target'}: {target.role}</h3>
-                <p>Exact skill names are compared after ignoring case and extra spaces. This does not assess proficiency, experience, eligibility, or promotion readiness.</p>
-                <div className="gap-grid">
-                  <div><h4>Skills you listed already</h4><div className="tag-row">{comparison.matched.length ? comparison.matched.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>) : <p>No exact matches in this illustrative target list.</p>}</div></div>
-                  <div><h4>Skills to work on for this target</h4><div className="tag-row">{comparison.missing.length ? comparison.missing.map((skill) => <span className="skill-tag skill-gap" key={skill}>{skill}</span>) : <p>All entered target skill names match. Proficiency is still unassessed.</p>}</div></div>
-                </div>
-                <div className="credential-note"><h4>Certificates or qualifications</h4><p><strong>You entered:</strong> {profile.qualifications.length ? profile.qualifications.join(', ') : 'None for this fictional profile.'}</p><p><strong>Target requirement:</strong> No applicable certificate requirement has been verified yet. We cannot say which certificate is needed for this role or promotion.</p></div>
-              </div>}
-              </div>
-            </section> : <section className="work-card" aria-label="Profile needed"><div><h2>Review your fictional profile first</h2><p>{content.next}</p><button type="button" className="primary-button demo-entry" onClick={() => setScreen('profile')}>Open my profile</button></div></section>
-          ) : screen === 'roles' ? (
-            <RoleMatches />
-          ) : (
-            <section className="work-card" aria-label={`${activeScreen.label} status`}>
-              
-              <div><h2>{activeScreen.label}</h2><p>{content.next}</p></div>
-            </section>
-          )}
-          <SourcesFooter />
-        </div>
-      </main>
-    </div>
-  );
+    <main className="main-content">
+      <div className="content-wrap">
+        {page && <header className="page-head">
+          {isCareer && <Steps screen={screen} go={go} />}
+          <h1>{page.title}</h1>
+          <p>{page.intro}</p>
+        </header>}
+        {screen === 'home' && <Home start={start} />}
+        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
+        {screen === 'moves' && (profile.held.size > 0
+          ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) setProfile(emptyProfile()); go('skills'); }} />
+          : <section className="panel"><h2>Add your skills first</h2><p className="note">Your moves are ranked from your skills.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or try it as Aina</button></section>)}
+        {screen === 'demand' && <DemandTable />}
+        {screen === 'outlook' && <OutlookTable />}
+        {comingSoon[screen] && <section className="panel soon-panel"><h2>Coming soon</h2><p>{comingSoon[screen]}</p>{screen === 'plan' && <button type="button" className="text-button" onClick={() => go('moves')}>Back to your moves</button>}</section>}
+        <SourcesFooter />
+      </div>
+    </main>
+  </div>;
 }
 
 createRoot(document.getElementById('root')!).render(<App />);

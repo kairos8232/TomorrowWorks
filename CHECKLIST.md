@@ -170,6 +170,14 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 **Done when:** The installed skill can be used locally, the design rules are clear enough to guide another small UI commit, and the documented checks match the rendered site.
 **Commit focus:** Tool setup, focused UI fix, and design reference in separate small commits.
 
+## Stage 4j — First-visit clarity (21 Oct 2026)
+
+- [x] Home says who the app is for, what it does and how it works (3 steps), with two clear starts: *Try it as Aina* (fictional sample) and *Start with my own skills*.
+- [x] One guided flow: 1. Your skills (RunPod search + list, current job) → 2. Your moves → 3. Your plan (soon), with a step bar; the old free-text profile, skill-gap and sign-in screens removed.
+- [x] Plain-language "How to read this" on Your moves; DOSM, ILO, ESCO explained in a sentence each.
+- [x] Empty views marked "Soon" with a short note.
+- [x] Checked at 1440 px and 390 px in a browser; no horizontal scroll; no page errors.
+
 ## Stage 5 — Add trend signals
 
 - [x] Fetch or import the chosen public source through a repeatable process (DOSM done; ILO and ESCO importers next).
