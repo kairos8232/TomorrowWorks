@@ -1,4 +1,5 @@
 // TomorrowWorks server: serves the built app (dist/) and one API route,
+// GET /api/news (daily GDELT refresh until 1 Nov 2026, memory only; see news.mjs) and
 // POST /api/skill-search, which embeds the person's own words with the
 // RunPod Serverless endpoint (Job B, BAAI/bge-m3) and returns the nearest
 // real ESCO skills. The RunPod API key stays here, in environment variables
@@ -13,6 +14,8 @@ import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSkillIndex, nearestSkills } from './search.mjs';
+import { readFileSync } from 'node:fs';
+import { newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -21,7 +24,12 @@ const { RUNPOD_API_KEY, RUNPOD_ENDPOINT_ID } = process.env;
 const PORT = Number(process.env.PORT) || 5000;
 const RUNPOD_BASE_URL = process.env.RUNPOD_BASE_URL ?? 'https://api.runpod.ai/v2';
 const MAX_TEXT = 500;
+const news = newsService({
+  snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'gdelt-news.json'), 'utf8')),
+  topics: JSON.parse(readFileSync(join(root, 'data', 'sources', 'news-topics.json'), 'utf8')),
+});
 
+console.log(`News: daily GDELT refresh until ${new Date(NEWS_REFRESH_UNTIL).toISOString()}, snapshot fallback.`);
 console.log(`Loaded ${index.items.length} ESCO skill vectors (${index.dim} dims, ${index.model}). RunPod ${RUNPOD_API_KEY && RUNPOD_ENDPOINT_ID ? 'configured' : 'NOT configured'}.`);
 
 /** Ask the RunPod endpoint for one embedding (OpenAI-compatible route of the Infinity worker). */
@@ -81,6 +89,9 @@ createServer(async (req, res) => {
   try {
     if (req.url === '/api/health') {
       return send(res, 200, { skills: index.items.length, model: index.model, runpod: Boolean(RUNPOD_API_KEY && RUNPOD_ENDPOINT_ID) });
+    }
+    if (req.url === '/api/news') {
+      return send(res, 200, await news.get());
     }
     if (req.url === '/api/skill-search') {
       if (req.method !== 'POST') return send(res, 405, { error: 'Use POST' });

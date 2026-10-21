@@ -33,25 +33,11 @@ WINDOW = "4w"            # last four weeks
 MAX_RECORDS = 100     # one request for all topics
 
 # sourcecountry:MY = outlets GDELT locates in Malaysia (FIPS country code MY).
-# Each topic's terms are used in the single query and again to tag headlines.
-TOPICS = {
-    "AI and automation": ["artificial intelligence", "generative AI", "automation", "AI"],
-    "Layoffs": ["layoff", "layoffs", "retrenchment", "job cuts"],
-    "Hiring": ["hiring", "job openings", "recruitment", "talent shortage"],
-    "Reskilling": ["reskilling", "upskilling", "HRD Corp", "TVET"],
-}
-# Extra words used only to tag headlines (not sent to GDELT): Malay and Chinese
-# outlets make up about 40% of results, and wages are part of workplace change.
-TAG_ONLY = {
-    "AI and automation": ["kecerdasan buatan", "automasi", "人工智能", "自动化"],
-    "Layoffs": ["buang kerja", "diberhentikan", "pemberhentian", "裁员", "裁减"],
-    "Hiring": ["peluang pekerjaan", "pengambilan pekerja", "招聘", "职位空缺"],
-    "Reskilling": ["latihan semula", "peningkatan kemahiran", "upskill", "技能提升", "再培训"],
-    "Pay and wages": ["minimum wage", "wages", "salary", "gaji", "最低薪金", "薪金", "工资"],
-}
-# "AI" alone is too short for GDELT's query, so it is only used for tagging.
-QUERY = "(" + " OR ".join(
-    f'"{t}"' if " " in t else t for terms in TOPICS.values() for t in terms if t != "AI") + ")"
+# Topic words live in data/sources/news-topics.json, shared with server/news.mjs.
+_TOPIC_FILE = json.loads(Path(__file__).resolve().parent.parent.joinpath("data/sources/news-topics.json").read_text(encoding="utf-8"))
+TOPICS = _TOPIC_FILE["query"]
+TAG_ONLY = _TOPIC_FILE["tagOnly"]
+QUERY = "(" + " OR ".join(f'"{t}"' if " " in t else t for terms in TOPICS.values() for t in terms) + ")"
 
 
 def has_term(title, term):

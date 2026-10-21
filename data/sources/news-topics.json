@@ -1,0 +1,16 @@
+{
+  "about": "Topic words for workplace news, shared by scripts/import_gdelt_news.py and server/news.mjs. 'query' words are sent to GDELT (and tag headlines); 'tagOnly' words only tag headlines (Malay and Chinese outlets, and wages). 'AI' alone is too short for the GDELT query, so it is tag-only.",
+  "query": {
+    "AI and automation": ["artificial intelligence", "generative AI", "automation"],
+    "Layoffs": ["layoff", "layoffs", "retrenchment", "job cuts"],
+    "Hiring": ["hiring", "job openings", "recruitment", "talent shortage"],
+    "Reskilling": ["reskilling", "upskilling", "HRD Corp", "TVET"]
+  },
+  "tagOnly": {
+    "AI and automation": ["AI", "kecerdasan buatan", "automasi", "人工智能", "自动化"],
+    "Layoffs": ["buang kerja", "diberhentikan", "pemberhentian", "裁员", "裁减"],
+    "Hiring": ["peluang pekerjaan", "pengambilan pekerja", "招聘", "职位空缺"],
+    "Reskilling": ["latihan semula", "peningkatan kemahiran", "upskill", "技能提升", "再培训"],
+    "Pay and wages": ["minimum wage", "wages", "salary", "gaji", "最低薪金", "薪金", "工资"]
+  }
+}
