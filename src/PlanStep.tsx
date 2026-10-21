@@ -79,15 +79,13 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
       ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
       : <>
         <p className="plan-summary">
-          {tx('{n} essential skills to build.', { n: <strong>{plan.gaps.length}</strong> })}{' '}
-          {partly > 0 && <>{t('{n} of them are partly there.', { n: partly })}{' '}</>}
-          {plan.steps.length > 0
-            ? <>
-              {plan.steps.length === 1 ? t('1 course covers {k} of them.', { k: closed }) : t('{n} courses cover {k} of them.', { n: plan.steps.length, k: closed })}{' '}
-              {plan.statedHours > 0 && <>{tx('About {h} of study, as the providers state it.', { h: <strong>{t('{n} hours', { n: plan.statedHours })}</strong> })}{' '}</>}
-              {plan.stepsWithoutHours > 0 && t('{n} more with no stated hours.', { n: plan.stepsWithoutHours })}
-            </>
-            : t('None of the courses we have checked covers them yet.')}
+          <strong>{plan.gaps.length}</strong> {t('skills to build')}
+          {partly > 0 && <> · {t('{n} partly held', { n: partly })}</>}
+          {plan.steps.length > 0 ? <>
+            {' · '}{t('{k} covered by {n} checked courses', { k: closed, n: plan.steps.length })}
+            {plan.statedHours > 0 && <> · {t('{n} provider-stated hours', { n: plan.statedHours })}</>}
+            {plan.stepsWithoutHours > 0 && <> · {t('{n} courses without stated hours', { n: plan.stepsWithoutHours })}</>}
+          </> : <> · {t('No checked course yet')}</>}
         </p>
 
         {plan.steps.length > 0 && <ol className="plan-steps">
