@@ -65,6 +65,21 @@ Check locally first, without a GPU: `python3 runpod/embed_esco_skills.py "data/r
 6. Replit → **Git → Pull**, then **Run**; open `/api/health` and check `"runpod": true`. Try a search in English, Bahasa Malaysia and Chinese; send Claude the results.
 7. **Publish** (Autoscale). Record the endpoint URL for the Tools Declaration.
 
+### Job B endpoint (created 21 Oct 2026, 13:40 MYT)
+
+| Setting | Value |
+| --- | --- |
+| Endpoint ID | `j6ssjfy9z074hp` |
+| URL used by the server | `https://api.runpod.ai/v2/j6ssjfy9z074hp/openai/v1/embeddings` |
+| Template | RunPod Hub **Infinity Embedding** 1.1.4 (runpod-workers) |
+| Model | `MODEL_NAMES=BAAI/bge-m3`; batch 32; backend torch; dtype auto |
+| GPUs | 16 GB pool (RTX 2000 Ada, RTX 4000 Ada, RTX A4000, RTX A4500); 24 GB pool recommended as backup |
+| Workers | Active 0, Max 1, idle timeout 5 s, execution timeout 600 s, FlashBoot on |
+
+The API key is **not** recorded here; it lives only in Replit Secrets (`RUNPOD_API_KEY`). The endpoint ID goes in Replit Secrets as `RUNPOD_ENDPOINT_ID`.
+
+**Cost note:** the Job A Pod (`rear_amethyst_gull`) was left running for about 12 hours after the job finished, using about US$3.40 of the credit. It was stopped on 21 Oct 13:35 (idle disk cost US$0.000/h). Stop Pods as soon as a job's output is downloaded.
+
 ### Fallback (the demo never depends on a live call)
 
 If the endpoint is down, the profile screen offers a searchable list of ESCO skill labels instead. Job A's vectors are already in the repo, so RunPod's role in the project is shown even when Job B is unavailable.
@@ -73,6 +88,6 @@ If the endpoint is down, the profile screen offers a searchable list of ESCO ski
 
 - [ ] Job A dashboard screenshot: Pod ID, GPU type, runtime, from the team's own account. *Run done 21 Oct on Pod `rear_amethyst_gull` (`40jrr8aulh76tb`), RTX A5000; screenshots kept outside the repo.*
 - [x] `data/derived/esco/run-info.json` committed (model `BAAI/bge-m3`, NVIDIA RTX A5000, 13,960 skills, 1024 dims, 92.5 s).
-- [ ] Job B Serverless endpoint URL, from the team's own account.
+- [x] Job B Serverless endpoint URL, from the team's own account: `https://api.runpod.ai/v2/j6ssjfy9z074hp` (screenshot the endpoint page for the declaration).
 - [x] Model named: `BAAI/bge-m3` (open weights), purpose: retrieve ESCO skills; generates no content.
 - [ ] Approximate credit used, out of US$25.
