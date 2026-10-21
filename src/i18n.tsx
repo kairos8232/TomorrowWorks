@@ -123,6 +123,8 @@ const dict: Record<string, Entry> = {
   'Back to your moves': { ms: 'Kembali ke langkah anda', zh: '返回职业选择' },
   'Malaysian certification route': { ms: 'Laluan pensijilan Malaysia', zh: '马来西亚认证途径' },
   'No checked course yet': { ms: 'Belum ada kursus yang disemak', zh: '尚无已核实课程' },
+  'Skills without a checked course': { ms: 'Kemahiran tanpa kursus yang disemak', zh: '尚无已核实课程的技能' },
+  'We list a course only after checking its page against the skill.': { ms: 'Kami hanya menyenaraikan kursus selepas menyemak halamannya dengan kemahiran tersebut.', zh: '我们核对课程页面与技能后才会列出课程。' },
   'How this plan is made': { ms: 'Bagaimana pelan ini dibuat', zh: '计划如何制定' },
   Builds: { ms: 'Membina', zh: '培养' },
 
@@ -220,7 +222,6 @@ const dict: Record<string, Entry> = {
   'None of the courses we have checked covers them yet.': { ms: 'Belum ada kursus yang kami semak merangkuminya.', zh: '我们核实过的课程尚未涵盖这些技能。' },
   '{n} hours of study, as stated on the course page.': { ms: '{n} jam pembelajaran, seperti dinyatakan di halaman kursus.', zh: '课程页面注明需学习 {n} 小时。' },
   'Source': { ms: 'Sumber', zh: '来源' },
-  'We only list a course after opening its page and matching its stated outcomes to the skill. These skills have no match yet.': { ms: 'Kami hanya menyenaraikan kursus selepas membuka halamannya dan memadankan hasil pembelajarannya dengan kemahiran. Kemahiran ini belum ada padanan.', zh: '我们只在打开课程页面并把其学习成果与技能对应后才列出课程。这些技能尚无匹配课程。' },
   'Skills': { ms: 'Kemahiran', zh: '技能' },
   'The role’s essential ESCO skills you don’t have yet. A skill you partly have (≈) is included because it only counts half.': { ms: 'Kemahiran penting ESCO peranan itu yang anda belum ada. Kemahiran yang anda separuh miliki (≈) disertakan kerana ia hanya dikira separuh.', zh: '该职位你尚未具备的 ESCO 核心技能。部分具备的技能（≈）也包括在内，因为它只算一半。' },
   'Order': { ms: 'Urutan', zh: '顺序' },

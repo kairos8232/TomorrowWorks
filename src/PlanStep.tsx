@@ -105,9 +105,9 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         </p>)}
 
         {plan.uncovered.length > 0 && <section className="skill-list plan-left">
-          <h4>{t('No checked course yet')} <span>{plan.uncovered.length}</span></h4>
+          <h4>{t('Skills without a checked course')} <span>({plan.uncovered.length})</span></h4>
           <div className="tag-row">{plan.uncovered.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
-          <p className="note">{t('We only list a course after opening its page and matching its stated outcomes to the skill. These skills have no match yet.')}</p>
+          <p className="note">{t('We list a course only after checking its page against the skill.')}</p>
         </section>}
 
         <details className="how-to-read">
