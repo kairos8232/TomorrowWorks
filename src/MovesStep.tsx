@@ -56,43 +56,53 @@ function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[]
   </p>;
 }
 
-function LedgerRow({ result, rank, delta, onPlan, picks, goals }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void; picks: InterestType[]; goals: string[] }) {
+function LedgerRow({ result, rank, delta, onInspect, picks, goals }: { result: RoleScore; rank: number | null; delta?: number; onInspect: () => void; picks: InterestType[]; goals: string[] }) {
   const t = useT();
-  const { role, fit, demand, resilience } = result;
-  const [open, setOpen] = useState(false);
+  const { role, fit } = result;
   const part = (k: 'F' | 'D' | 'R') => result.contributions.find((c) => c.key === k)?.value ?? null;
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
-    <button type="button" className="ledger-line" onClick={() => setOpen(!open)} aria-expanded={open}>
+    <button type="button" className="ledger-line" onClick={onInspect}>
       <span className="rank">{rank === null ? t('Now') : rank}</span>
       <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="fits goal" style={{ color: sdgData.goals[g].colour }}>{roleGoalLink(role, g) === 'role' ? t('linked to SDG {n}', { n: g }) : t('skills linked to SDG {n}', { n: g })}</em>)}</small></span>
       <Part value={part('F')} label={t('Skill fit')} area="f" />
       <Part value={part('D')} label={t('Demand')} area="d" />
       <Part value={part('R')} label={t('AI resilience')} area="r" />
       <span className="score"><Delta value={delta} />{result.score100}</span>
+      <span className="visually-hidden">{t('View details')}</span>
     </button>
-    {open && <div className="ledger-detail">
-      <div className="detail-facts">
-        <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}<small>{t('transferable count half')}</small></span>
-        <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small>{t('DOSM {a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
-        <span className="fact-r">{resilience ? <>{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}<small>{resilience.gradient}</small></> : t('No ILO data')}</span>
-      </div>
-      <div className="detail-actions">
-        {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
-        <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
-      </div>
-      <div className="detail-skills">
-        <SkillList title={t('You have')} empty={t('None of this role’s essential skills yet.')}>
-          {[...fit.transferable.map((t) => <span className="skill-tag related" key={t.need.uri} title={`≈ ${t.have.label} (${t.similarity.toFixed(2)})`}>{t.need.label}<small>≈ {t.have.label}</small></span>),
-            ...fit.matched.map((s) => <span className="skill-tag" key={s.uri}>{s.label}</span>)]}
-        </SkillList>
-        <SkillList title={t('To build')} empty={t('Nothing missing.')}>
-          {fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri}>{s.label}</span>)}
-        </SkillList>
-      </div>
-      <RoleSdgLine roleId={role.id} />
-      <InterestLine roleId={role.id} picks={picks} />
-    </div>}
   </li>;
+}
+
+function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void }) {
+  const t = useT();
+  const { role, fit, demand, resilience } = result;
+  return <section className="role-focus" aria-label={t('View {role} details', { role: role.title })}>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
+    <div className="role-focus-heading">
+      <div><span className="role-focus-rank">{rank === null ? t('Now') : t('Rank {n}', { n: rank })}</span><h2>{role.title}</h2>
+        <p className="note">{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''} · {t('{n} to build', { n: fit.missing.length })}</p></div>
+      <strong className="focus-score">{result.score100}<small>{t('Score')}</small></strong>
+    </div>
+    <div className="detail-actions">
+      {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
+      <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
+    </div>
+    <div className="detail-facts">
+      <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}<small>{t('transferable count half')}</small></span>
+      <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small>{t('DOSM {a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
+      <span className="fact-r">{resilience ? <>{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}<small>{resilience.gradient}</small></> : t('No ILO data')}</span>
+    </div>
+    <div className="detail-skills">
+      <SkillList title={t('You have')} empty={t('None of this role’s essential skills yet.')}>
+        {[...fit.transferable.map((item) => <span className="skill-tag related" key={item.need.uri} title={item.have.label}>{item.need.label}<small>≈ {item.have.label}</small></span>),
+          ...fit.matched.map((skill) => <span className="skill-tag" key={skill.uri}>{skill.label}</span>)]}
+      </SkillList>
+      <SkillList title={t('To build')} empty={t('Nothing missing.')}>
+        {fit.missing.map((skill) => <span className="skill-tag skill-gap" key={skill.uri}>{skill.label}</span>)}
+      </SkillList>
+    </div>
+    <div className="detail-evidence"><RoleSdgLine roleId={role.id} /><InterestLine roleId={role.id} picks={picks} /></div>
+  </section>;
 }
 
 const signed = (x: number | null) => (x === null ? 'no data' : `${x >= 0 ? '+' : '−'}${Math.abs(x * 100).toFixed(1)}%`);
@@ -132,6 +142,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const [useInterests, setUseInterests] = useState(false);
   const [goals, setGoals] = useState<string[]>([]);
   const [useGoals, setUseGoals] = useState(false);
+  const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null);
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
   const picks = profile.interests;
@@ -157,6 +168,14 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
     previous.current = now;
     lastSwitch.current = switchKey;
   }, [current, moves, switchKey]);
+
+  const selectedResult = selectedRoleId ? [current, ...moves].find((result) => result?.role.id === selectedRoleId) : null;
+  if (selectedResult) {
+    const rank = moves.findIndex((result) => result.role.id === selectedRoleId);
+    return <div className="step-body"><RoleDetail result={selectedResult} rank={rank < 0 ? null : rank + 1} picks={picks}
+      onBack={() => { setSelectedRoleId(null); window.scrollTo({ top: 0 }); }}
+      onPlan={rank < 0 ? undefined : () => onPlan(selectedResult.role.id)} /></div>;
+  }
 
   const persona = personaById(profile.persona);
   return <div className="step-body">
@@ -212,8 +231,8 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
-        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} picks={picks} goals={goals} />}
-        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} picks={picks} goals={goals} />)}
+        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => { setSelectedRoleId(current.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />}
+        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onInspect={() => { setSelectedRoleId(m.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />)}
       </ol>
     </section>
     <details className="how-to-read fairness">
