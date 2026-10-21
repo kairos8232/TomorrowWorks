@@ -184,10 +184,10 @@ function App() {
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
-          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button> <button type="button" className="text-button" onClick={() => start('aina')}>{t('Or view as Aina')}</button></section>)}
+          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button><button type="button" className="text-button" onClick={() => start('aina')}>{t('Or view as Aina')}</button></div></section>)}
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
-          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button> <button type="button" className="text-button" onClick={() => start('aina')}>{t('Or view as Aina')}</button></section>)}
+          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button><button type="button" className="text-button" onClick={() => start('aina')}>{t('Or view as Aina')}</button></div></section>)}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
