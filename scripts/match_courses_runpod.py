@@ -87,8 +87,9 @@ def normalise(m):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--batch", type=int, default=32)
-    ap.add_argument("--threshold", type=float, default=0.55, help="minimum cosine similarity to keep a match")
-    ap.add_argument("--top", type=int, default=8, help="courses kept per skill")
+    ap.add_argument("--threshold", type=float, default=0.66, help="minimum cosine similarity to keep a match (set from the spot-check, 21 Oct 2026)")
+    ap.add_argument("--top", type=int, default=3, help="courses kept per skill")
+    ap.add_argument("--lang", default="en", help="only keep courses whose first language is this (all languages are embedded)")
     ap.add_argument("--fake", type=int, default=0, help="test with N courses and random vectors, no RunPod")
     args = ap.parse_args()
 
@@ -127,6 +128,9 @@ def main():
     uris = [u for u in needed if u in row]
     skills = normalise(esco[[row[u] for u in uris]].astype(np.float32))
     sims = skills @ normalise(done.astype(np.float32)).T  # skills x courses
+    if args.lang:
+        keep = np.array([(c.get("primaryLanguages") or [""])[0] == args.lang for c in courses])
+        sims[:, ~keep] = -1  # never pick a course in another language
 
     # 3. Best courses per skill above the threshold.
     matches = {}
@@ -134,7 +138,7 @@ def main():
         best = np.argsort(-sims[i])[:args.top]
         kept = [{"slug": courses[j]["slug"], "name": courses[j]["name"],
                  "url": f"https://www.coursera.org/learn/{courses[j]['slug']}",
-                 "workload": courses[j].get("workload") or None,
+                 "workload": (courses[j].get("workload") or "").strip() or None,
                  "similarity": round(float(sims[i, j]), 3)}
                 for j in best if sims[i, j] >= args.threshold]
         if kept:
@@ -148,9 +152,11 @@ def main():
             "coursesEmbedded": len(courses),
             "skillsCompared": len(uris),
             "threshold": args.threshold,
+            "language": args.lang or "any",
             "topPerSkill": args.top,
             "matchedAt": date.today().isoformat(),
             "embedSecondsLastRun": seconds,
+            "spotCheck": "21 Oct 2026, random samples per similarity band: 0.62-0.66 about half relevant; 0.66-0.70 about 10 in 12; 0.70+ nearly all. Threshold set to 0.66.",
             "note": "Similarity between Coursera's own course text and ESCO skill text. Not checked by hand; spot-check sample in coursera-spotcheck.md.",
         },
         "skills": matches,

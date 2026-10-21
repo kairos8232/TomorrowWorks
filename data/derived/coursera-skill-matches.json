@@ -1,0 +1,3896 @@
+{
+ "method": {
+  "model": "BAAI/bge-m3",
+  "where": "RunPod Serverless endpoint j6ssjfy9z074hp (Job B)",
+  "catalogue": {
+   "name": "Coursera course catalogue API (courses.v1)",
+   "url": "https://api.coursera.org/api/courses.v1",
+   "retrievedAt": "2026-10-21",
+   "total": 25051
+  },
+  "coursesEmbedded": 25051,
+  "skillsCompared": 185,
+  "threshold": 0.66,
+  "language": "en",
+  "topPerSkill": 3,
+  "matchedAt": "2026-10-21",
+  "spotCheck": "21 Oct 2026, random samples per similarity band: 0.62-0.66 about half relevant; 0.66-0.70 about 10 in 12; 0.70+ nearly all. Threshold set to 0.66.",
+  "note": "Similarity between Coursera's own course text and ESCO skill text. Not checked by hand; spot-check sample in coursera-spotcheck.md.",
+  "embeddingRun": {
+   "date": "2026-10-21",
+   "requests": 783,
+   "seconds": 13322.7,
+   "by": "Carson's Mac calling RunPod Serverless endpoint j6ssjfy9z074hp; this file was re-ranked from the saved vectors with the settings above"
+  }
+ },
+ "skills": {
+  "http://data.europa.eu/esco/skill/3d427a49-4f85-42cd-8a92-62d4a34f41a1": {
+   "label": "file documents",
+   "courses": [
+    {
+     "slug": "google-docs",
+     "name": "Google Docs",
+     "url": "https://www.coursera.org/learn/google-docs",
+     "workload": "3 weeks of study, 6-8 hours/week",
+     "similarity": 0.688
+    },
+    {
+     "slug": "google-organizing-communication-and-documentation",
+     "name": "Organizing Communication and Documentation",
+     "url": "https://www.coursera.org/learn/google-organizing-communication-and-documentation",
+     "workload": null,
+     "similarity": 0.679
+    },
+    {
+     "slug": "make-table-contents-footnotes-more-word",
+     "name": "Make a Table of Contents, Footnotes, and more with Word",
+     "url": "https://www.coursera.org/learn/make-table-contents-footnotes-more-word",
+     "workload": "2 hours",
+     "similarity": 0.667
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/811bdb9d-5bf7-4b5a-a3f5-4fc2002f6d57": {
+   "label": "financial capability",
+   "courses": [
+    {
+     "slug": "management-accounting",
+     "name": "Management and financial accounting: Know your numbers 1",
+     "url": "https://www.coursera.org/learn/management-accounting",
+     "workload": null,
+     "similarity": 0.723
+    },
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.713
+    },
+    {
+     "slug": "financial-accounting",
+     "name": "Accounting: Principles of Financial Accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting",
+     "workload": "4 weeks of study, 2-4 hours/week",
+     "similarity": 0.711
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/39e43f7c-a95e-4583-be76-bb134ccce1ae": {
+   "label": "financial department processes",
+   "courses": [
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.709
+    },
+    {
+     "slug": "finance-for-non-financial-managers",
+     "name": "Finance for Non-Financial Managers",
+     "url": "https://www.coursera.org/learn/finance-for-non-financial-managers",
+     "workload": "9 weeks of study, 2-3 hours/week",
+     "similarity": 0.686
+    },
+    {
+     "slug": "cfi-financial-planning-principles",
+     "name": "Financial Planning Principles",
+     "url": "https://www.coursera.org/learn/cfi-financial-planning-principles",
+     "workload": null,
+     "similarity": 0.685
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/68b51538-b056-4cb3-bb15-ab8c3e576cc9": {
+   "label": "follow up accounts receivables",
+   "courses": [
+    {
+     "slug": "profitability-in-financial-accounting",
+     "name": "Profitability in Financial Accounting",
+     "url": "https://www.coursera.org/learn/profitability-in-financial-accounting",
+     "workload": "40 minutes",
+     "similarity": 0.692
+    },
+    {
+     "slug": "wharton-financial-accounting",
+     "name": "More Introduction to Financial Accounting",
+     "url": "https://www.coursera.org/learn/wharton-financial-accounting",
+     "workload": "6 weeks of study, 6-8 hours/week",
+     "similarity": 0.69
+    },
+    {
+     "slug": "financial-accounting-polimi",
+     "name": "Fundamentals of financial and management accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting-polimi",
+     "workload": "4-6 hours/week",
+     "similarity": 0.683
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f7e7ccb6-fadc-4c35-935d-e1040be40dfe": {
+   "label": "handle financial transactions",
+   "courses": [
+    {
+     "slug": "mastering-business-essentials-finance",
+     "name": "Mastering Business Essentials: Finance",
+     "url": "https://www.coursera.org/learn/mastering-business-essentials-finance",
+     "workload": null,
+     "similarity": 0.671
+    },
+    {
+     "slug": "managing-cash-and-credit",
+     "name": "Managing Cash and Credit",
+     "url": "https://www.coursera.org/learn/managing-cash-and-credit",
+     "workload": null,
+     "similarity": 0.67
+    },
+    {
+     "slug": "mastering-hotel-financials",
+     "name": "Mastering Hotel Financials",
+     "url": "https://www.coursera.org/learn/mastering-hotel-financials",
+     "workload": "4 Hours",
+     "similarity": 0.665
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/95fc86de-8e74-4753-9344-281179aa74b0": {
+   "label": "maintain credit history of clients",
+   "courses": [
+    {
+     "slug": "customer-experience-client-servicing",
+     "name": "Customer Experience and Client Servicing",
+     "url": "https://www.coursera.org/learn/customer-experience-client-servicing",
+     "workload": null,
+     "similarity": 0.703
+    },
+    {
+     "slug": "improving-customer-retention",
+     "name": "Improving Customer Retention",
+     "url": "https://www.coursera.org/learn/improving-customer-retention",
+     "workload": "1 Hour",
+     "similarity": 0.665
+    },
+    {
+     "slug": "customer-experience-delight-customers",
+     "name": "Customer Experience: How To Delight Customers",
+     "url": "https://www.coursera.org/learn/customer-experience-delight-customers",
+     "workload": null,
+     "similarity": 0.661
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/c753a3b5-d5cc-406d-adfe-3372bb267f4b": {
+   "label": "maintain customer records",
+   "courses": [
+    {
+     "slug": "improving-customer-retention",
+     "name": "Improving Customer Retention",
+     "url": "https://www.coursera.org/learn/improving-customer-retention",
+     "workload": "1 Hour",
+     "similarity": 0.673
+    },
+    {
+     "slug": "customer-experience-client-servicing",
+     "name": "Customer Experience and Client Servicing",
+     "url": "https://www.coursera.org/learn/customer-experience-client-servicing",
+     "workload": null,
+     "similarity": 0.663
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/faf8943c-72ff-4736-a587-25508695d6f0": {
+   "label": "maintain financial records",
+   "courses": [
+    {
+     "slug": "mastering-business-essentials-finance",
+     "name": "Mastering Business Essentials: Finance",
+     "url": "https://www.coursera.org/learn/mastering-business-essentials-finance",
+     "workload": null,
+     "similarity": 0.675
+    },
+    {
+     "slug": "financial-accounting",
+     "name": "Accounting: Principles of Financial Accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting",
+     "workload": "4 weeks of study, 2-4 hours/week",
+     "similarity": 0.67
+    },
+    {
+     "slug": "corporate-finance-know-your-numbers-2",
+     "name": "Corporate finance: Know your numbers 2",
+     "url": "https://www.coursera.org/learn/corporate-finance-know-your-numbers-2",
+     "workload": null,
+     "similarity": 0.669
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/71dde84c-0058-4c52-a556-523369333db8": {
+   "label": "use office systems",
+   "courses": [
+    {
+     "slug": "enterprise-systems",
+     "name": "Enterprise Systems",
+     "url": "https://www.coursera.org/learn/enterprise-systems",
+     "workload": "5 weeks of study, 1-2 hours/week",
+     "similarity": 0.693
+    },
+    {
+     "slug": "effective-interpersonal-communication-business-lo097012",
+     "name": "Effective Interpersonal Communication for Business",
+     "url": "https://www.coursera.org/learn/effective-interpersonal-communication-business-lo097012",
+     "workload": null,
+     "similarity": 0.676
+    },
+    {
+     "slug": "wiley-enterprise-systems-erp-crm-supply-chain",
+     "name": "Enterprise Systems: ERP, CRM, and Supply Chain Management",
+     "url": "https://www.coursera.org/learn/wiley-enterprise-systems-erp-crm-supply-chain",
+     "workload": "2 weeks/3 hours per week",
+     "similarity": 0.666
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/08371fe9-c658-4f6a-966f-71dbb0ab683d": {
+   "label": "accounting department processes",
+   "courses": [
+    {
+     "slug": "bookkeeping-basics",
+     "name": "Bookkeeping basics",
+     "url": "https://www.coursera.org/learn/bookkeeping-basics",
+     "workload": null,
+     "similarity": 0.701
+    },
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.699
+    },
+    {
+     "slug": "accounting-1",
+     "name": "Accounting 1",
+     "url": "https://www.coursera.org/learn/accounting-1",
+     "workload": "6 weeks of study, 3-4 hours/week",
+     "similarity": 0.69
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/99b163e8-7815-43e2-83f3-a47f3076354c": {
+   "label": "accounting entries",
+   "courses": [
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.728
+    },
+    {
+     "slug": "recording-business-transactions",
+     "name": "Recording in Journals & Posting in Ledgers",
+     "url": "https://www.coursera.org/learn/recording-business-transactions",
+     "workload": null,
+     "similarity": 0.707
+    },
+    {
+     "slug": "wharton-financial-accounting",
+     "name": "More Introduction to Financial Accounting",
+     "url": "https://www.coursera.org/learn/wharton-financial-accounting",
+     "workload": "6 weeks of study, 6-8 hours/week",
+     "similarity": 0.693
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/880c54f9-866e-4f37-b5fa-25ef8a7d49b6": {
+   "label": "accounting techniques",
+   "courses": [
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.725
+    },
+    {
+     "slug": "accounting-1",
+     "name": "Accounting 1",
+     "url": "https://www.coursera.org/learn/accounting-1",
+     "workload": "6 weeks of study, 3-4 hours/week",
+     "similarity": 0.715
+    },
+    {
+     "slug": "mastering-business-essentials-accounting",
+     "name": "Mastering Business Essentials: Accounting",
+     "url": "https://www.coursera.org/learn/mastering-business-essentials-accounting",
+     "workload": null,
+     "similarity": 0.709
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2ff405ec-f59c-4a7b-84b6-9776a49582c4": {
+   "label": "bookkeeping regulations",
+   "courses": [
+    {
+     "slug": "bookkeeping-basics",
+     "name": "Bookkeeping basics",
+     "url": "https://www.coursera.org/learn/bookkeeping-basics",
+     "workload": null,
+     "similarity": 0.697
+    },
+    {
+     "slug": "precision-bookkeeping-records-reconciliation-reporting",
+     "name": "Precision Bookkeeping: Records, Reconciliation, Reporting",
+     "url": "https://www.coursera.org/learn/precision-bookkeeping-records-reconciliation-reporting",
+     "workload": "1 Hour",
+     "similarity": 0.696
+    },
+    {
+     "slug": "apply-bookkeeping-accounting-for-financial-reporting",
+     "name": "Apply Bookkeeping & Accounting for Financial Reporting",
+     "url": "https://www.coursera.org/learn/apply-bookkeeping-accounting-for-financial-reporting",
+     "workload": null,
+     "similarity": 0.669
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/5f1ebff6-98ec-411f-a1d4-0bf04bd03bdf": {
+   "label": "check accounting records",
+   "courses": [
+    {
+     "slug": "wharton-financial-accounting",
+     "name": "More Introduction to Financial Accounting",
+     "url": "https://www.coursera.org/learn/wharton-financial-accounting",
+     "workload": "6 weeks of study, 6-8 hours/week",
+     "similarity": 0.671
+    },
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.665
+    },
+    {
+     "slug": "accounting-1",
+     "name": "Accounting 1",
+     "url": "https://www.coursera.org/learn/accounting-1",
+     "workload": "6 weeks of study, 3-4 hours/week",
+     "similarity": 0.664
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/64be6a06-52e8-4f5c-b64d-caa516cfa291": {
+   "label": "depreciation",
+   "courses": [
+    {
+     "slug": "master-depreciation-accounting-analyze-apply-methods",
+     "name": "Master Depreciation Accounting: Analyze & Apply Methods",
+     "url": "https://www.coursera.org/learn/master-depreciation-accounting-analyze-apply-methods",
+     "workload": null,
+     "similarity": 0.689
+    },
+    {
+     "slug": "cost-accounting-profit-and-loss-calculation",
+     "name": "Cost Accounting: Profit and Loss Calculation",
+     "url": "https://www.coursera.org/learn/cost-accounting-profit-and-loss-calculation",
+     "workload": "3 weeks of study, 1.5 hours per week",
+     "similarity": 0.665
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8a326ee1-169c-4c44-b38b-8f1bb20ec79b": {
+   "label": "identify accounting errors",
+   "courses": [
+    {
+     "slug": "reconcile-accounts-detect-fraud--resolve-discrepancies",
+     "name": "Reconcile Accounts: Detect Fraud & Resolve Discrepancies",
+     "url": "https://www.coursera.org/learn/reconcile-accounts-detect-fraud--resolve-discrepancies",
+     "workload": "87 minutes",
+     "similarity": 0.68
+    },
+    {
+     "slug": "reconcile-and-analyze-financial-records-effectively",
+     "name": "Reconcile and Analyze Financial Records Effectively",
+     "url": "https://www.coursera.org/learn/reconcile-and-analyze-financial-records-effectively",
+     "workload": "100 minutes",
+     "similarity": 0.661
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/658a38bd-6954-4a2a-945c-42330c5d13b9": {
+   "label": "manage corporate bank accounts",
+   "courses": [
+    {
+     "slug": "financial-management-cost-control-basics",
+     "name": "Financial Management and Cost Control Basics",
+     "url": "https://www.coursera.org/learn/financial-management-cost-control-basics",
+     "workload": null,
+     "similarity": 0.699
+    },
+    {
+     "slug": "managerial-and-cost-accounting",
+     "name": "Managerial and Cost Accounting",
+     "url": "https://www.coursera.org/learn/managerial-and-cost-accounting",
+     "workload": null,
+     "similarity": 0.687
+    },
+    {
+     "slug": "management-accounting",
+     "name": "Management and financial accounting: Know your numbers 1",
+     "url": "https://www.coursera.org/learn/management-accounting",
+     "workload": null,
+     "similarity": 0.685
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88": {
+   "label": "perform business research",
+   "courses": [
+    {
+     "slug": "research-proposal-initiating-research",
+     "name": "Research Proposal: Initiating Research",
+     "url": "https://www.coursera.org/learn/research-proposal-initiating-research",
+     "workload": "4 weeks of study, 2-5 hours/week",
+     "similarity": 0.685
+    },
+    {
+     "slug": "operations-research-modeling",
+     "name": "Operations Research (1): Models and Applications",
+     "url": "https://www.coursera.org/learn/operations-research-modeling",
+     "workload": null,
+     "similarity": 0.681
+    },
+    {
+     "slug": "business-analysis-mastery",
+     "name": "Business Analysis: Key Definitions & Strategy Analysis",
+     "url": "https://www.coursera.org/learn/business-analysis-mastery",
+     "workload": "16 hours 55 minutes",
+     "similarity": 0.665
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/eaa9727c-df1e-407a-85d3-48cc71508bc2": {
+   "label": "prepare trial accounting balances",
+   "courses": [
+    {
+     "slug": "packt-trial-balance-to-financial-reporting-my58a",
+     "name": "Trial Balance to Financial Reporting",
+     "url": "https://www.coursera.org/learn/packt-trial-balance-to-financial-reporting-my58a",
+     "workload": null,
+     "similarity": 0.742
+    },
+    {
+     "slug": "accounting-cycle",
+     "name": "Completing the Accounting Cycle",
+     "url": "https://www.coursera.org/learn/accounting-cycle",
+     "workload": null,
+     "similarity": 0.688
+    },
+    {
+     "slug": "double-entry-balance-your-books-fast",
+     "name": "Double-Entry: Balance Your Books Fast",
+     "url": "https://www.coursera.org/learn/double-entry-balance-your-books-fast",
+     "workload": null,
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d669af41-756c-48d9-a286-1443253f54b1": {
+   "label": "tax legislation",
+   "courses": [
+    {
+     "slug": "taxation-business-entities-part-1",
+     "name": "Taxation of Business Entities I: Corporations",
+     "url": "https://www.coursera.org/learn/taxation-business-entities-part-1",
+     "workload": "8 weeks of study, 6-8 hours/week",
+     "similarity": 0.666
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/a0d79341-8398-4019-ad1b-27888ec35aaa": {
+   "label": "use accounting systems",
+   "courses": [
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.702
+    },
+    {
+     "slug": "financial-accounting",
+     "name": "Accounting: Principles of Financial Accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting",
+     "workload": "4 weeks of study, 2-4 hours/week",
+     "similarity": 0.701
+    },
+    {
+     "slug": "management-accounting-cost-optimization",
+     "name": "Management Accounting & Cost Optimization",
+     "url": "https://www.coursera.org/learn/management-accounting-cost-optimization",
+     "workload": null,
+     "similarity": 0.695
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d63c2bad-817d-4116-b4d8-b927cb01212d": {
+   "label": "commercial law",
+   "courses": [
+    {
+     "slug": "business-law-commercial-transactions-and-organizations",
+     "name": "Business Law: Commercial Transactions and Organizations",
+     "url": "https://www.coursera.org/learn/business-law-commercial-transactions-and-organizations",
+     "workload": null,
+     "similarity": 0.722
+    },
+    {
+     "slug": "international-law-and-global-business",
+     "name": "International Law and Global Business",
+     "url": "https://www.coursera.org/learn/international-law-and-global-business",
+     "workload": null,
+     "similarity": 0.688
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f75b740c-b36c-495e-bc67-efe347bbc6b5": {
+   "label": "company policies",
+   "courses": [
+    {
+     "slug": "corporatestrategy",
+     "name": "Corporate Strategy ",
+     "url": "https://www.coursera.org/learn/corporatestrategy",
+     "workload": "4 weeks of study, 3-5 hours/week",
+     "similarity": 0.684
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1": {
+   "label": "financial statements",
+   "courses": [
+    {
+     "slug": "financial-accounting-fia",
+     "name": "Financial Accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting-fia",
+     "workload": "5 weeks of study, 25 hours (total)",
+     "similarity": 0.765
+    },
+    {
+     "slug": "pre-mba-quant-skills-accounting",
+     "name": "Accounting for Non-Finance Professionals",
+     "url": "https://www.coursera.org/learn/pre-mba-quant-skills-accounting",
+     "workload": "4 weeks of study, 3-4 hours a week",
+     "similarity": 0.76
+    },
+    {
+     "slug": "foundations-of-financial-statement",
+     "name": "Financial Statements for Business Decision-Making",
+     "url": "https://www.coursera.org/learn/foundations-of-financial-statement",
+     "workload": "4 Hours",
+     "similarity": 0.755
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/585ed991-fdab-4f3c-9187-a32bfb7ab822": {
+   "label": "perform balance sheet operations",
+   "courses": [
+    {
+     "slug": "financial-analysis-of-organizations",
+     "name": "Financial Analysis of Organizations",
+     "url": "https://www.coursera.org/learn/financial-analysis-of-organizations",
+     "workload": null,
+     "similarity": 0.713
+    },
+    {
+     "slug": "create-financial-statement-using-microsoft-excel",
+     "name": "Create a Financial Statement using Microsoft Excel",
+     "url": "https://www.coursera.org/learn/create-financial-statement-using-microsoft-excel",
+     "workload": "2 hours",
+     "similarity": 0.706
+    },
+    {
+     "slug": "balance-sheet-business-cases",
+     "name": "Balance Sheet and Business Cases",
+     "url": "https://www.coursera.org/learn/balance-sheet-business-cases",
+     "workload": "2 weeks of study, 1-3 hours/week",
+     "similarity": 0.705
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580": {
+   "label": "prepare financial statements",
+   "courses": [
+    {
+     "slug": "foundations-of-financial-statement",
+     "name": "Financial Statements for Business Decision-Making",
+     "url": "https://www.coursera.org/learn/foundations-of-financial-statement",
+     "workload": "4 Hours",
+     "similarity": 0.752
+    },
+    {
+     "slug": "pre-mba-quant-skills-accounting",
+     "name": "Accounting for Non-Finance Professionals",
+     "url": "https://www.coursera.org/learn/pre-mba-quant-skills-accounting",
+     "workload": "4 weeks of study, 3-4 hours a week",
+     "similarity": 0.743
+    },
+    {
+     "slug": "create-financial-statement-using-microsoft-excel",
+     "name": "Create a Financial Statement using Microsoft Excel",
+     "url": "https://www.coursera.org/learn/create-financial-statement-using-microsoft-excel",
+     "workload": "2 hours",
+     "similarity": 0.738
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8a43795b-bb38-4f29-91df-a6c92ad4643c": {
+   "label": "analyse financial performance of a company",
+   "courses": [
+    {
+     "slug": "analyze-financial-statements-performance",
+     "name": "Analyze Financial Statements and Performance",
+     "url": "https://www.coursera.org/learn/analyze-financial-statements-performance",
+     "workload": null,
+     "similarity": 0.762
+    },
+    {
+     "slug": "financial-analysis-of-organizations",
+     "name": "Financial Analysis of Organizations",
+     "url": "https://www.coursera.org/learn/financial-analysis-of-organizations",
+     "workload": null,
+     "similarity": 0.754
+    },
+    {
+     "slug": "company-financial-analysis-investment-decisions",
+     "name": "Company Financial Analysis for Investment Decisions",
+     "url": "https://www.coursera.org/learn/company-financial-analysis-investment-decisions",
+     "workload": null,
+     "similarity": 0.751
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b5cb259e-83e7-48f5-950e-245d5b5fd6d0": {
+   "label": "draft accounting procedures",
+   "courses": [
+    {
+     "slug": "apply-bookkeeping-accounting-for-financial-reporting",
+     "name": "Apply Bookkeeping & Accounting for Financial Reporting",
+     "url": "https://www.coursera.org/learn/apply-bookkeeping-accounting-for-financial-reporting",
+     "workload": null,
+     "similarity": 0.682
+    },
+    {
+     "slug": "recording-business-transactions",
+     "name": "Recording in Journals & Posting in Ledgers",
+     "url": "https://www.coursera.org/learn/recording-business-transactions",
+     "workload": null,
+     "similarity": 0.668
+    },
+    {
+     "slug": "bookkeeping-basics",
+     "name": "Bookkeeping basics",
+     "url": "https://www.coursera.org/learn/bookkeeping-basics",
+     "workload": null,
+     "similarity": 0.662
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d6e78d9a-deca-4bcb-b08d-011b2616758d": {
+   "label": "ensure compliance with accounting conventions",
+   "courses": [
+    {
+     "slug": "accounting-principles-compliance-and-audit-readiness",
+     "name": "Accounting Principles, Compliance, and Audit Readiness",
+     "url": "https://www.coursera.org/learn/accounting-principles-compliance-and-audit-readiness",
+     "workload": null,
+     "similarity": 0.693
+    },
+    {
+     "slug": "audit-readiness-payment-controls-and-sap-transactions",
+     "name": "Audit Readiness, Payment Controls, and SAP Transactions",
+     "url": "https://www.coursera.org/learn/audit-readiness-payment-controls-and-sap-transactions",
+     "workload": null,
+     "similarity": 0.676
+    },
+    {
+     "slug": "financial-accounting-polimi",
+     "name": "Fundamentals of financial and management accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting-polimi",
+     "workload": "4-6 hours/week",
+     "similarity": 0.671
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/cb059032-dd34-4761-a786-98cfb9d0efe3": {
+   "label": "explain accounting records",
+   "courses": [
+    {
+     "slug": "wharton-financial-accounting",
+     "name": "More Introduction to Financial Accounting",
+     "url": "https://www.coursera.org/learn/wharton-financial-accounting",
+     "workload": "6 weeks of study, 6-8 hours/week",
+     "similarity": 0.683
+    },
+    {
+     "slug": "income-statement-reporting-earnings-analysis",
+     "name": "Income Statement Reporting and Earnings Analysis",
+     "url": "https://www.coursera.org/learn/income-statement-reporting-earnings-analysis",
+     "workload": null,
+     "similarity": 0.677
+    },
+    {
+     "slug": "mastering-business-essentials-accounting",
+     "name": "Mastering Business Essentials: Accounting",
+     "url": "https://www.coursera.org/learn/mastering-business-essentials-accounting",
+     "workload": null,
+     "similarity": 0.673
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/541cdc23-1eec-4520-81fc-3392eaf538ed": {
+   "label": "fraud detection",
+   "courses": [
+    {
+     "slug": "forensic-accounting-detect-investigate-prevent-fraud",
+     "name": "Forensic Accounting: Detect, Investigate & Prevent Fraud",
+     "url": "https://www.coursera.org/learn/forensic-accounting-detect-investigate-prevent-fraud",
+     "workload": null,
+     "similarity": 0.704
+    },
+    {
+     "slug": "forensic-accounting",
+     "name": "Forensic Accounting and Fraud Examination",
+     "url": "https://www.coursera.org/learn/forensic-accounting",
+     "workload": "5 weeks of study, 3-5 hours/week",
+     "similarity": 0.672
+    },
+    {
+     "slug": "analyze-financial-fraud-machine-learning-analytics",
+     "name": "Analyze Financial Fraud Using Machine Learning Analytics",
+     "url": "https://www.coursera.org/learn/analyze-financial-fraud-machine-learning-analytics",
+     "workload": null,
+     "similarity": 0.671
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b": {
+   "label": "interpret financial statements",
+   "courses": [
+    {
+     "slug": "financial-accounting-fia",
+     "name": "Financial Accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting-fia",
+     "workload": "5 weeks of study, 25 hours (total)",
+     "similarity": 0.762
+    },
+    {
+     "slug": "master-financial-analysis-reporting-techniques",
+     "name": "Master Financial Analysis & Reporting Techniques",
+     "url": "https://www.coursera.org/learn/master-financial-analysis-reporting-techniques",
+     "workload": null,
+     "similarity": 0.762
+    },
+    {
+     "slug": "analyze-financial-statements-performance",
+     "name": "Analyze Financial Statements and Performance",
+     "url": "https://www.coursera.org/learn/analyze-financial-statements-performance",
+     "workload": null,
+     "similarity": 0.754
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022": {
+   "label": "manage accounts",
+   "courses": [
+    {
+     "slug": "management-accounting",
+     "name": "Management and financial accounting: Know your numbers 1",
+     "url": "https://www.coursera.org/learn/management-accounting",
+     "workload": null,
+     "similarity": 0.695
+    },
+    {
+     "slug": "financial-accounting-polimi",
+     "name": "Fundamentals of financial and management accounting",
+     "url": "https://www.coursera.org/learn/financial-accounting-polimi",
+     "workload": "4-6 hours/week",
+     "similarity": 0.692
+    },
+    {
+     "slug": "financial-management-cost-control-basics",
+     "name": "Financial Management and Cost Control Basics",
+     "url": "https://www.coursera.org/learn/financial-management-cost-control-basics",
+     "workload": null,
+     "similarity": 0.69
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/22a173f5-868c-4d82-87e6-beed500ce070": {
+   "label": "prepare tax returns forms",
+   "courses": [
+    {
+     "slug": "manage-tax-filing-and-submission",
+     "name": "Manage Tax Filing and Submission",
+     "url": "https://www.coursera.org/learn/manage-tax-filing-and-submission",
+     "workload": "1 wk/ 1.5 hrs",
+     "similarity": 0.689
+    },
+    {
+     "slug": "corporate-tax-fundamentals",
+     "name": "Corporate Tax Fundamentals",
+     "url": "https://www.coursera.org/learn/corporate-tax-fundamentals",
+     "workload": null,
+     "similarity": 0.667
+    },
+    {
+     "slug": "wiley-personal-taxation-and-strategy",
+     "name": "Personal Taxation and Strategy",
+     "url": "https://www.coursera.org/learn/wiley-personal-taxation-and-strategy",
+     "workload": "2 weeks of study, 3 hours/week",
+     "similarity": 0.66
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833": {
+   "label": "statistics",
+   "courses": [
+    {
+     "slug": "statistics-data-science",
+     "name": "Statistics For Data Science",
+     "url": "https://www.coursera.org/learn/statistics-data-science",
+     "workload": "2 Hour",
+     "similarity": 0.761
+    },
+    {
+     "slug": "statistical-inference",
+     "name": "Statistical Inference",
+     "url": "https://www.coursera.org/learn/statistical-inference",
+     "workload": null,
+     "similarity": 0.749
+    },
+    {
+     "slug": "summary-statistics",
+     "name": "Summary Statistics in Public Health ",
+     "url": "https://www.coursera.org/learn/summary-statistics",
+     "workload": "4 weeks of study, 3-4 hours/week",
+     "similarity": 0.744
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/ecc18804-a466-40d9-98b4-fba5cd67dd4b": {
+   "label": "accounting",
+   "courses": [
+    {
+     "slug": "financialaccounting",
+     "name": "What is Financial Accounting?",
+     "url": "https://www.coursera.org/learn/financialaccounting",
+     "workload": null,
+     "similarity": 0.72
+    },
+    {
+     "slug": "mastering-business-essentials-accounting",
+     "name": "Mastering Business Essentials: Accounting",
+     "url": "https://www.coursera.org/learn/mastering-business-essentials-accounting",
+     "workload": null,
+     "similarity": 0.708
+    },
+    {
+     "slug": "bookkeeping-basics",
+     "name": "Bookkeeping basics",
+     "url": "https://www.coursera.org/learn/bookkeeping-basics",
+     "workload": null,
+     "similarity": 0.707
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/79c36c91-28a5-44b7-ab9b-7093b2d4b21e": {
+   "label": "advise on financial matters",
+   "courses": [
+    {
+     "slug": "mastering-business-essentials-finance",
+     "name": "Mastering Business Essentials: Finance",
+     "url": "https://www.coursera.org/learn/mastering-business-essentials-finance",
+     "workload": null,
+     "similarity": 0.664
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b02b38c4-d46d-44da-9479-1310060bd74d": {
+   "label": "asset management",
+   "courses": [
+    {
+     "slug": "wealth-management-and-financial-planning-essentials",
+     "name": "Wealth Management and Financial Planning Essentials",
+     "url": "https://www.coursera.org/learn/wealth-management-and-financial-planning-essentials",
+     "workload": null,
+     "similarity": 0.682
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/98a1dec3-8138-4f46-a596-5e2a83b884b9": {
+   "label": "business analytics",
+   "courses": [
+    {
+     "slug": "business-analytics-executive-overview",
+     "name": "Business Analytics Executive Overview",
+     "url": "https://www.coursera.org/learn/business-analytics-executive-overview",
+     "workload": "4-6 hours/week",
+     "similarity": 0.79
+    },
+    {
+     "slug": "business-analytics-and-data-driven-decision-making",
+     "name": "Business Analytics and Data-Driven Decision Making",
+     "url": "https://www.coursera.org/learn/business-analytics-and-data-driven-decision-making",
+     "workload": "2 weeks/2-3 hours per week",
+     "similarity": 0.762
+    },
+    {
+     "slug": "data-analysis-for-business",
+     "name": "Data Analysis for Business",
+     "url": "https://www.coursera.org/learn/data-analysis-for-business",
+     "workload": "5 weeks",
+     "similarity": 0.752
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9e84a506-df06-4be3-874a-fa01293e3dd5": {
+   "label": "business processes",
+   "courses": [
+    {
+     "slug": "illinois-tech-operations-process-management",
+     "name": "Operations and Process Management",
+     "url": "https://www.coursera.org/learn/illinois-tech-operations-process-management",
+     "workload": null,
+     "similarity": 0.734
+    },
+    {
+     "slug": "agile-business-processes-system-operational-success",
+     "name": "Agile Business Processes: Systems for Operational Success",
+     "url": "https://www.coursera.org/learn/agile-business-processes-system-operational-success",
+     "workload": "3-4 hours/week",
+     "similarity": 0.713
+    },
+    {
+     "slug": "business-process-engineering-part-1",
+     "name": "Business Process Engineering Part 1",
+     "url": "https://www.coursera.org/learn/business-process-engineering-part-1",
+     "workload": null,
+     "similarity": 0.712
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d41262ae-eca1-4ede-89a8-46d2d99a7a31": {
+   "label": "consider economic criteria in decision making",
+   "courses": [
+    {
+     "slug": "economic-decision-making-part-1",
+     "name": "Economic Decision Making Part 1",
+     "url": "https://www.coursera.org/learn/economic-decision-making-part-1",
+     "workload": null,
+     "similarity": 0.743
+    },
+    {
+     "slug": "economic-decision-making-part-2",
+     "name": "Economic Decision Making Part 2",
+     "url": "https://www.coursera.org/learn/economic-decision-making-part-2",
+     "workload": null,
+     "similarity": 0.729
+    },
+    {
+     "slug": "the-economic-way-of-thinking",
+     "name": "The Economic Way of Thinking",
+     "url": "https://www.coursera.org/learn/the-economic-way-of-thinking",
+     "workload": null,
+     "similarity": 0.704
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/dd7c9dfd-6e2c-46fd-aefc-369402d0200c": {
+   "label": "create a financial report",
+   "courses": [
+    {
+     "slug": "financial-accounting-explained",
+     "name": "Financial Accounting Explained",
+     "url": "https://www.coursera.org/learn/financial-accounting-explained",
+     "workload": "About one hour",
+     "similarity": 0.72
+    },
+    {
+     "slug": "create-financial-statement-using-microsoft-excel",
+     "name": "Create a Financial Statement using Microsoft Excel",
+     "url": "https://www.coursera.org/learn/create-financial-statement-using-microsoft-excel",
+     "workload": "2 hours",
+     "similarity": 0.714
+    },
+    {
+     "slug": "present-compelling-financial-reports-with-confidence",
+     "name": "Present Compelling Financial Reports with Confidence",
+     "url": "https://www.coursera.org/learn/present-compelling-financial-reports-with-confidence",
+     "workload": null,
+     "similarity": 0.711
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/629685b8-5f9e-4522-8cff-b3e2c4ec625a": {
+   "label": "digital data processing",
+   "courses": [
+    {
+     "slug": "data-processing-with-excel",
+     "name": "Data Processing with Excel",
+     "url": "https://www.coursera.org/learn/data-processing-with-excel",
+     "workload": null,
+     "similarity": 0.7
+    },
+    {
+     "slug": "process-mining",
+     "name": "Process Mining: Data science in Action",
+     "url": "https://www.coursera.org/learn/process-mining",
+     "workload": "6 weeks of study, 3 to 5 hours/week of material + self study",
+     "similarity": 0.694
+    },
+    {
+     "slug": "data-processing-and-manipulation",
+     "name": "Data Processing and Manipulation",
+     "url": "https://www.coursera.org/learn/data-processing-and-manipulation",
+     "workload": "3-5 hours/week",
+     "similarity": 0.689
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/88af9294-b697-4687-ae19-aefbb6234dfa": {
+   "label": "economics",
+   "courses": [
+    {
+     "slug": "introduction-to-economics-ie",
+     "name": "Introduction to Economics",
+     "url": "https://www.coursera.org/learn/introduction-to-economics-ie",
+     "workload": "10 weeks of study, 8-10 hours/week",
+     "similarity": 0.737
+    },
+    {
+     "slug": "economics-currency-markets",
+     "name": "Economics and Currency Markets",
+     "url": "https://www.coursera.org/learn/economics-currency-markets",
+     "workload": null,
+     "similarity": 0.721
+    },
+    {
+     "slug": "principles-of-economics-intro",
+     "name": "Principles of Economics: Introduction - Getting to Know You",
+     "url": "https://www.coursera.org/learn/principles-of-economics-intro",
+     "workload": "6 Weeks of study, approximately 3-5 hours/week",
+     "similarity": 0.719
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f6ac6241-adb2-4ce2-b35f-09832cbb11ea": {
+   "label": "empirical analysis",
+   "courses": [
+    {
+     "slug": "statistical-inference",
+     "name": "Statistical Inference",
+     "url": "https://www.coursera.org/learn/statistical-inference",
+     "workload": null,
+     "similarity": 0.709
+    },
+    {
+     "slug": "empirical-reasoning-and-final-argument",
+     "name": "Empirical Reasoning and Final Argument",
+     "url": "https://www.coursera.org/learn/empirical-reasoning-and-final-argument",
+     "workload": null,
+     "similarity": 0.682
+    },
+    {
+     "slug": "conducting-exploratory-data-analysis",
+     "name": "Conducting Exploratory Data Analysis",
+     "url": "https://www.coursera.org/learn/conducting-exploratory-data-analysis",
+     "workload": "1.5 hours",
+     "similarity": 0.676
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/52e53619-fa77-4f72-b237-5e4aae784dc2": {
+   "label": "financial management",
+   "courses": [
+    {
+     "slug": "financial-management-cost-control-basics",
+     "name": "Financial Management and Cost Control Basics",
+     "url": "https://www.coursera.org/learn/financial-management-cost-control-basics",
+     "workload": null,
+     "similarity": 0.763
+    },
+    {
+     "slug": "financial-management-project-managers",
+     "name": "Financial Management for Project Managers",
+     "url": "https://www.coursera.org/learn/financial-management-project-managers",
+     "workload": null,
+     "similarity": 0.735
+    },
+    {
+     "slug": "finance-for-non-financial-managers",
+     "name": "Finance for Non-Financial Managers",
+     "url": "https://www.coursera.org/learn/finance-for-non-financial-managers",
+     "workload": "9 weeks of study, 2-3 hours/week",
+     "similarity": 0.719
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9c6974e1-8d8b-43e9-b6b0-75da7634bfc9": {
+   "label": "fundamental analysis",
+   "courses": [
+    {
+     "slug": "fundamentals-of-financial-analysis",
+     "name": "Fundamentals of Financial Analysis ",
+     "url": "https://www.coursera.org/learn/fundamentals-of-financial-analysis",
+     "workload": "4 hours and 15 minutes",
+     "similarity": 0.743
+    },
+    {
+     "slug": "cfi-financial-analysis-fundamentals",
+     "name": "Financial Analysis Fundamentals",
+     "url": "https://www.coursera.org/learn/cfi-financial-analysis-fundamentals",
+     "workload": null,
+     "similarity": 0.735
+    },
+    {
+     "slug": "introduction-to-financial-analysis-the-why",
+     "name": "Introduction to Financial Analysis - The \"Why?\"",
+     "url": "https://www.coursera.org/learn/introduction-to-financial-analysis-the-why",
+     "workload": null,
+     "similarity": 0.734
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/49047409-9307-4b41-9b04-a9615f049044": {
+   "label": "investment banking",
+   "courses": [
+    {
+     "slug": "investment-banking-mergers-acquisitions-ipos",
+     "name": "Investment Banking: M&A and Initial Public Offerings",
+     "url": "https://www.coursera.org/learn/investment-banking-mergers-acquisitions-ipos",
+     "workload": null,
+     "similarity": 0.694
+    },
+    {
+     "slug": "analyze-investment-banking-operations",
+     "name": "Analyze Investment Banking Operations",
+     "url": "https://www.coursera.org/learn/analyze-investment-banking-operations",
+     "workload": null,
+     "similarity": 0.682
+    },
+    {
+     "slug": "evaluate-capital-markets-underwriting",
+     "name": "Evaluate Capital Markets and Underwriting",
+     "url": "https://www.coursera.org/learn/evaluate-capital-markets-underwriting",
+     "workload": null,
+     "similarity": 0.677
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d1910ad7-0c87-4f38-8a41-7c193e5dc16d": {
+   "label": "macroeconomics",
+   "courses": [
+    {
+     "slug": "global-trade-macroeconomic-analysis",
+     "name": "Global Trade and Macroeconomic Analysis",
+     "url": "https://www.coursera.org/learn/global-trade-macroeconomic-analysis",
+     "workload": null,
+     "similarity": 0.775
+    },
+    {
+     "slug": "principles-of-economics-macroeconomics",
+     "name": "Principles of Economics: Macroeconomics - The Big Picture",
+     "url": "https://www.coursera.org/learn/principles-of-economics-macroeconomics",
+     "workload": "8 weeks of study, 3-4 hours/week",
+     "similarity": 0.771
+    },
+    {
+     "slug": "business-economics-1",
+     "name": "Business Economics",
+     "url": "https://www.coursera.org/learn/business-economics-1",
+     "workload": "5 weeks of study,5 hours per week",
+     "similarity": 0.755
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/7cacd304-996d-47d1-88ef-4ddb9ce102bd": {
+   "label": "microeconomics",
+   "courses": [
+    {
+     "slug": "microeconomics-part1",
+     "name": "Microeconomics: The Power of Markets",
+     "url": "https://www.coursera.org/learn/microeconomics-part1",
+     "workload": "5 weeks of study, 4-7 hours/week",
+     "similarity": 0.784
+    },
+    {
+     "slug": "markets-firm-decisions-economics",
+     "name": "Markets and Firm Decisions in Economics",
+     "url": "https://www.coursera.org/learn/markets-firm-decisions-economics",
+     "workload": null,
+     "similarity": 0.764
+    },
+    {
+     "slug": "principles-of-economics-intro",
+     "name": "Principles of Economics: Introduction - Getting to Know You",
+     "url": "https://www.coursera.org/learn/principles-of-economics-intro",
+     "workload": "6 Weeks of study, approximately 3-5 hours/week",
+     "similarity": 0.76
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/e3c7bd87-edc1-4d9a-a3d5-36415de1aac6": {
+   "label": "offer financial services",
+   "courses": [
+    {
+     "slug": "introduction-to-banking",
+     "name": "Introduction to Banking",
+     "url": "https://www.coursera.org/learn/introduction-to-banking",
+     "workload": null,
+     "similarity": 0.697
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/27ed854c-15b8-4ba2-90e9-ae888a219703": {
+   "label": "perform business analysis",
+   "courses": [
+    {
+     "slug": "business-analysis-mastery",
+     "name": "Business Analysis: Key Definitions & Strategy Analysis",
+     "url": "https://www.coursera.org/learn/business-analysis-mastery",
+     "workload": "16 hours 55 minutes",
+     "similarity": 0.751
+    },
+    {
+     "slug": "business-analysis-process",
+     "name": "Business Analysis Process",
+     "url": "https://www.coursera.org/learn/business-analysis-process",
+     "workload": "4 Weeks of Study, 3-5 hours/week",
+     "similarity": 0.729
+    },
+    {
+     "slug": "packt-the-business-analysts-career-master-plan",
+     "name": "The Business Analyst's Career Master Plan",
+     "url": "https://www.coursera.org/learn/packt-the-business-analysts-career-master-plan",
+     "workload": null,
+     "similarity": 0.725
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d37bc902-f640-48d7-9db4-544db9aa65fa": {
+   "label": "prepare financial projections",
+   "courses": [
+    {
+     "slug": "master-financial-budgeting-forecasting",
+     "name": "Master Financial Budgeting and Forecasting",
+     "url": "https://www.coursera.org/learn/master-financial-budgeting-forecasting",
+     "workload": null,
+     "similarity": 0.688
+    },
+    {
+     "slug": "financial-analysis-portfolios-risks-strategic-decisions",
+     "name": "Financial Analysis: Portfolios, Risks, Strategic Decisions",
+     "url": "https://www.coursera.org/learn/financial-analysis-portfolios-risks-strategic-decisions",
+     "workload": "1 Hour",
+     "similarity": 0.679
+    },
+    {
+     "slug": "master-banking-budgets-analyze-forecast-optimize",
+     "name": "Master Banking Budgets: Analyze, Forecast & Optimize",
+     "url": "https://www.coursera.org/learn/master-banking-budgets-analyze-forecast-optimize",
+     "workload": null,
+     "similarity": 0.678
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6360a934-cc87-4954-9656-b32db20592e3": {
+   "label": "quantitative analysis",
+   "courses": [
+    {
+     "slug": "analyzing-and-interpreting-quantitative-data",
+     "name": "Analyzing and Interpreting Quantitative Data",
+     "url": "https://www.coursera.org/learn/analyzing-and-interpreting-quantitative-data",
+     "workload": null,
+     "similarity": 0.816
+    },
+    {
+     "slug": "quantitative-methods-financial-analysis",
+     "name": "Quantitative Methods for Financial Analysis",
+     "url": "https://www.coursera.org/learn/quantitative-methods-financial-analysis",
+     "workload": null,
+     "similarity": 0.729
+    },
+    {
+     "slug": "analyze-qualitative-data",
+     "name": "Analyze Qualitative Data",
+     "url": "https://www.coursera.org/learn/analyze-qualitative-data",
+     "workload": null,
+     "similarity": 0.697
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4b3ae518-6746-4487-8d3b-4cfc063a43d0": {
+   "label": "use business simulation tools",
+   "courses": [
+    {
+     "slug": "excel-simulation-forecasting-techniques",
+     "name": "Excel Simulation & Forecasting Techniques",
+     "url": "https://www.coursera.org/learn/excel-simulation-forecasting-techniques",
+     "workload": null,
+     "similarity": 0.717
+    },
+    {
+     "slug": "simulation-models-for-decision-making",
+     "name": "Simulation Models for Decision Making",
+     "url": "https://www.coursera.org/learn/simulation-models-for-decision-making",
+     "workload": "4 weeks of study, 3-5 hours/week",
+     "similarity": 0.697
+    },
+    {
+     "slug": "business-modeling-tools",
+     "name": "Business Modeling Tools",
+     "url": "https://www.coursera.org/learn/business-modeling-tools",
+     "workload": null,
+     "similarity": 0.683
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/ee7f90cc-922e-4da7-a7ae-83c2688fed10": {
+   "label": "align efforts towards business development",
+   "courses": [
+    {
+     "slug": "business-development",
+     "name": "Business Development To Grow Through Strategic Relationships",
+     "url": "https://www.coursera.org/learn/business-development",
+     "workload": null,
+     "similarity": 0.714
+    },
+    {
+     "slug": "managing-business-through-operations",
+     "name": "Managing Business through Operations",
+     "url": "https://www.coursera.org/learn/managing-business-through-operations",
+     "workload": null,
+     "similarity": 0.71
+    },
+    {
+     "slug": "aws-develop-ai-strategies-that-align-with-business",
+     "name": "AI Business - Develop AI strategies that Align with Business",
+     "url": "https://www.coursera.org/learn/aws-develop-ai-strategies-that-align-with-business",
+     "workload": "1 week of study, 1-2 hours/week",
+     "similarity": 0.692
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/5da3c765-10a3-49eb-934c-ec401ceb1a34": {
+   "label": "analyse business plans",
+   "courses": [
+    {
+     "slug": "business-analysis-mastery",
+     "name": "Business Analysis: Key Definitions & Strategy Analysis",
+     "url": "https://www.coursera.org/learn/business-analysis-mastery",
+     "workload": "16 hours 55 minutes",
+     "similarity": 0.747
+    },
+    {
+     "slug": "analyze-financial-statements-performance",
+     "name": "Analyze Financial Statements and Performance",
+     "url": "https://www.coursera.org/learn/analyze-financial-statements-performance",
+     "workload": null,
+     "similarity": 0.725
+    },
+    {
+     "slug": "financial-analysis-of-organizations",
+     "name": "Financial Analysis of Organizations",
+     "url": "https://www.coursera.org/learn/financial-analysis-of-organizations",
+     "workload": null,
+     "similarity": 0.725
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/ce5b1446-b5e3-4f05-a5ac-83f2ee142a44": {
+   "label": "analyse external factors of companies",
+   "courses": [
+    {
+     "slug": "analyzing-the-business-environment",
+     "name": "Analyzing the Business Environment",
+     "url": "https://www.coursera.org/learn/analyzing-the-business-environment",
+     "workload": null,
+     "similarity": 0.72
+    },
+    {
+     "slug": "risk-analysis-business-financial-decisions",
+     "name": "Risk Analysis for Business and Financial Decisions",
+     "url": "https://www.coursera.org/learn/risk-analysis-business-financial-decisions",
+     "workload": null,
+     "similarity": 0.677
+    },
+    {
+     "slug": "company-financial-analysis-investment-decisions",
+     "name": "Company Financial Analysis for Investment Decisions",
+     "url": "https://www.coursera.org/learn/company-financial-analysis-investment-decisions",
+     "workload": null,
+     "similarity": 0.676
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/91816e1a-d026-4d21-9b1c-59ca5cf488de": {
+   "label": "analyse internal factors of companies",
+   "courses": [
+    {
+     "slug": "analyzing-the-business-environment",
+     "name": "Analyzing the Business Environment",
+     "url": "https://www.coursera.org/learn/analyzing-the-business-environment",
+     "workload": null,
+     "similarity": 0.742
+    },
+    {
+     "slug": "company-financial-analysis-investment-decisions",
+     "name": "Company Financial Analysis for Investment Decisions",
+     "url": "https://www.coursera.org/learn/company-financial-analysis-investment-decisions",
+     "workload": null,
+     "similarity": 0.717
+    },
+    {
+     "slug": "analyze-investment-banking-operations",
+     "name": "Analyze Investment Banking Operations",
+     "url": "https://www.coursera.org/learn/analyze-investment-banking-operations",
+     "workload": null,
+     "similarity": 0.694
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/3c03ee71-4a23-448f-b79e-81fd75d27dca": {
+   "label": "apply change management",
+   "courses": [
+    {
+     "slug": "change-management",
+     "name": "Leading transformations: Manage change",
+     "url": "https://www.coursera.org/learn/change-management",
+     "workload": "6 weeks of study, 3-5 hours/week",
+     "similarity": 0.744
+    },
+    {
+     "slug": "introduction-to-change-management-practical-strategies",
+     "name": "Introduction to Change Management: Practical Strategies",
+     "url": "https://www.coursera.org/learn/introduction-to-change-management-practical-strategies",
+     "workload": "5 weeks of study, 2-3 hours/week",
+     "similarity": 0.715
+    },
+    {
+     "slug": "leading-organizational-change",
+     "name": "Leading Organizational Change",
+     "url": "https://www.coursera.org/learn/leading-organizational-change",
+     "workload": null,
+     "similarity": 0.711
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/dc72ad0a-c5dc-4abd-bc0d-ca43e82162e1": {
+   "label": "build business relationships",
+   "courses": [
+    {
+     "slug": "relationship-management-and-business-development",
+     "name": "Relationship Management and Business Development ",
+     "url": "https://www.coursera.org/learn/relationship-management-and-business-development",
+     "workload": "90 minutes",
+     "similarity": 0.722
+    },
+    {
+     "slug": "business-development",
+     "name": "Business Development To Grow Through Strategic Relationships",
+     "url": "https://www.coursera.org/learn/business-development",
+     "workload": null,
+     "similarity": 0.709
+    },
+    {
+     "slug": "relationship-management",
+     "name": "Relationship Management ",
+     "url": "https://www.coursera.org/learn/relationship-management",
+     "workload": "4 weeks of study, 3-5 hours/week",
+     "similarity": 0.666
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/633a3637-2c6b-40ae-ac38-289eb2a62aa6": {
+   "label": "business analysis",
+   "courses": [
+    {
+     "slug": "business-analysis-mastery",
+     "name": "Business Analysis: Key Definitions & Strategy Analysis",
+     "url": "https://www.coursera.org/learn/business-analysis-mastery",
+     "workload": "16 hours 55 minutes",
+     "similarity": 0.797
+    },
+    {
+     "slug": "fundamentals-of-business-analysis",
+     "name": "Fundamentals of Business Analysis ",
+     "url": "https://www.coursera.org/learn/fundamentals-of-business-analysis",
+     "workload": "132 min",
+     "similarity": 0.771
+    },
+    {
+     "slug": "automation-business-analyst",
+     "name": "Automation Business Analysis - Concepts and Principles",
+     "url": "https://www.coursera.org/learn/automation-business-analyst",
+     "workload": null,
+     "similarity": 0.747
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b17f4305-741a-4a1c-8fe8-6f11cb3d5c0a": {
+   "label": "business communication",
+   "courses": [
+    {
+     "slug": "understanding-corporate-communications",
+     "name": "Understanding Corporate Communications",
+     "url": "https://www.coursera.org/learn/understanding-corporate-communications",
+     "workload": "90 minutes",
+     "similarity": 0.752
+    },
+    {
+     "slug": "effective-communication-for-todays-leader",
+     "name": "Effective Communication for Today’s Leader",
+     "url": "https://www.coursera.org/learn/effective-communication-for-todays-leader",
+     "workload": "4 weeks of study, 5-8 hours/week",
+     "similarity": 0.724
+    },
+    {
+     "slug": "business-communication-career-growth",
+     "name": "Business Communication for Career Growth",
+     "url": "https://www.coursera.org/learn/business-communication-career-growth",
+     "workload": null,
+     "similarity": 0.723
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/fa465db3-56e8-4b5d-a781-e2a313a4ed2d": {
+   "label": "conduct qualitative research",
+   "courses": [
+    {
+     "slug": "qualitative-methods",
+     "name": "Qualitative Research Methods",
+     "url": "https://www.coursera.org/learn/qualitative-methods",
+     "workload": "8 weeks of study, 4-6 hours/week",
+     "similarity": 0.776
+    },
+    {
+     "slug": "qualitative-research-methods-capturing-rich-insights",
+     "name": "Qualitative Research Methods: Capturing Rich Insights",
+     "url": "https://www.coursera.org/learn/qualitative-research-methods-capturing-rich-insights",
+     "workload": "4 Hours",
+     "similarity": 0.733
+    },
+    {
+     "slug": "what-is-qualitative-research",
+     "name": "What is Qualitative Research?",
+     "url": "https://www.coursera.org/learn/what-is-qualitative-research",
+     "workload": "5 weeks, 6-8 hours/week",
+     "similarity": 0.728
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8316979b-df5a-4dc7-98ef-61ec6a10df84": {
+   "label": "conduct quantitative research",
+   "courses": [
+    {
+     "slug": "analyzing-and-interpreting-quantitative-data",
+     "name": "Analyzing and Interpreting Quantitative Data",
+     "url": "https://www.coursera.org/learn/analyzing-and-interpreting-quantitative-data",
+     "workload": null,
+     "similarity": 0.72
+    },
+    {
+     "slug": "qualitative-methods",
+     "name": "Qualitative Research Methods",
+     "url": "https://www.coursera.org/learn/qualitative-methods",
+     "workload": "8 weeks of study, 4-6 hours/week",
+     "similarity": 0.715
+    },
+    {
+     "slug": "quantitative-research",
+     "name": "Quantitative Research",
+     "url": "https://www.coursera.org/learn/quantitative-research",
+     "workload": "4 weeks of study, 4-7 hours/week",
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/65e58886-bd1e-4c5b-8ca5-8d9b353c8aa1": {
+   "label": "data visualisation software",
+   "courses": [
+    {
+     "slug": "chart-smarter-mastering-data-visualization",
+     "name": "Chart Smarter: Mastering Data Visualization",
+     "url": "https://www.coursera.org/learn/chart-smarter-mastering-data-visualization",
+     "workload": null,
+     "similarity": 0.744
+    },
+    {
+     "slug": "business-data-visualization",
+     "name": "Business Data Visualization",
+     "url": "https://www.coursera.org/learn/business-data-visualization",
+     "workload": "2 weeks of study, 3 hours/week",
+     "similarity": 0.74
+    },
+    {
+     "slug": "datavisualization",
+     "name": "Data Visualization",
+     "url": "https://www.coursera.org/learn/datavisualization",
+     "workload": null,
+     "similarity": 0.738
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/43d1d56b-ce62-4fe8-8f18-35d92ec73023": {
+   "label": "identify undetected organisational needs",
+   "courses": [
+    {
+     "slug": "organizational-diagnosis-change-management",
+     "name": "Organizational Diagnosis and Change Management",
+     "url": "https://www.coursera.org/learn/organizational-diagnosis-change-management",
+     "workload": null,
+     "similarity": 0.692
+    },
+    {
+     "slug": "need-opportunity-identification",
+     "name": "Healthcare Innovation: Need/Opportunity Identification",
+     "url": "https://www.coursera.org/learn/need-opportunity-identification",
+     "workload": "4–7 hours/week for 4 weeks",
+     "similarity": 0.691
+    },
+    {
+     "slug": "organizational-development-change-strategies",
+     "name": "Organizational Development and Change Strategies",
+     "url": "https://www.coursera.org/learn/organizational-development-change-strategies",
+     "workload": null,
+     "similarity": 0.679
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97e": {
+   "label": "liaise with managers",
+   "courses": [
+    {
+     "slug": "effective-communication-for-todays-leader",
+     "name": "Effective Communication for Today’s Leader",
+     "url": "https://www.coursera.org/learn/effective-communication-for-todays-leader",
+     "workload": "4 weeks of study, 5-8 hours/week",
+     "similarity": 0.706
+    },
+    {
+     "slug": "management-leadership-english",
+     "name": "Business English: Management and Leadership",
+     "url": "https://www.coursera.org/learn/management-leadership-english",
+     "workload": "6 weeks of study, 1-2 hours per week",
+     "similarity": 0.665
+    },
+    {
+     "slug": "effective-interpersonal-communication-business-lo097012",
+     "name": "Effective Interpersonal Communication for Business",
+     "url": "https://www.coursera.org/learn/effective-interpersonal-communication-business-lo097012",
+     "workload": null,
+     "similarity": 0.665
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f60c9e52-95fc-4ca1-a73c-18a491153b63": {
+   "label": "make strategic business decisions",
+   "courses": [
+    {
+     "slug": "corporatestrategy",
+     "name": "Corporate Strategy ",
+     "url": "https://www.coursera.org/learn/corporatestrategy",
+     "workload": "4 weeks of study, 3-5 hours/week",
+     "similarity": 0.713
+    },
+    {
+     "slug": "critical-thinking-reasoned-decision-making",
+     "name": "Critical thinking: reasoned decision making",
+     "url": "https://www.coursera.org/learn/critical-thinking-reasoned-decision-making",
+     "workload": "4 weeks of study, 5-8 hours/week",
+     "similarity": 0.705
+    },
+    {
+     "slug": "cfi-corporate-business-strategy",
+     "name": "Corporate & Business Strategy",
+     "url": "https://www.coursera.org/learn/cfi-corporate-business-strategy",
+     "workload": null,
+     "similarity": 0.699
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/c2617b44-886a-485e-8393-bc0fc6339539": {
+   "label": "management consulting",
+   "courses": [
+    {
+     "slug": "introduction-to-management-consulting",
+     "name": "Introduction to Management Consulting",
+     "url": "https://www.coursera.org/learn/introduction-to-management-consulting",
+     "workload": null,
+     "similarity": 0.717
+    },
+    {
+     "slug": "intro-to-management-consulting",
+     "name": "Introduction to Management Consulting",
+     "url": "https://www.coursera.org/learn/intro-to-management-consulting",
+     "workload": "10 Hours",
+     "similarity": 0.712
+    },
+    {
+     "slug": "consulting-problem-solving",
+     "name": "Consulting Approach to Problem Solving",
+     "url": "https://www.coursera.org/learn/consulting-problem-solving",
+     "workload": null,
+     "similarity": 0.699
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/ff599c4c-f7bc-44fc-b75f-eea4b7178692": {
+   "label": "management systems standards",
+   "courses": [
+    {
+     "slug": "operations-systems-excellence",
+     "name": "Operations Systems Excellence",
+     "url": "https://www.coursera.org/learn/operations-systems-excellence",
+     "workload": null,
+     "similarity": 0.736
+    },
+    {
+     "slug": "monitoring-and-controlling",
+     "name": "Monitoring and Controlling",
+     "url": "https://www.coursera.org/learn/monitoring-and-controlling",
+     "workload": null,
+     "similarity": 0.719
+    },
+    {
+     "slug": "principlesofmanagement",
+     "name": "Principles of Management",
+     "url": "https://www.coursera.org/learn/principlesofmanagement",
+     "workload": "4 Weeks of study, 5-6 hours/week",
+     "similarity": 0.717
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8770350e-746f-4adb-9556-18ca68104be6": {
+   "label": "market research",
+   "courses": [
+    {
+     "slug": "research-proposal-initiating-research",
+     "name": "Research Proposal: Initiating Research",
+     "url": "https://www.coursera.org/learn/research-proposal-initiating-research",
+     "workload": "4 weeks of study, 2-5 hours/week",
+     "similarity": 0.783
+    },
+    {
+     "slug": "introduction-to-market-research",
+     "name": "Introduction to Market Research",
+     "url": "https://www.coursera.org/learn/introduction-to-market-research",
+     "workload": "120 minutes",
+     "similarity": 0.766
+    },
+    {
+     "slug": "market-research",
+     "name": "Market Research and Consumer Behavior",
+     "url": "https://www.coursera.org/learn/market-research",
+     "workload": "4 weeks of study, 1-2 hours/week",
+     "similarity": 0.759
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6eff134b-e34f-4d6e-a6e8-5e47cf2228d0": {
+   "label": "risk management",
+   "courses": [
+    {
+     "slug": "introduction-to-risk-management",
+     "name": "Introduction to Risk Management",
+     "url": "https://www.coursera.org/learn/introduction-to-risk-management",
+     "workload": "4 weeks of study, 2-3 hours per week",
+     "similarity": 0.784
+    },
+    {
+     "slug": "risk-management-threat-modeling",
+     "name": "Introduction to Risk Management",
+     "url": "https://www.coursera.org/learn/risk-management-threat-modeling",
+     "workload": null,
+     "similarity": 0.745
+    },
+    {
+     "slug": "a-general-approach-to-risk-management",
+     "name": "A General Approach to Risk Management",
+     "url": "https://www.coursera.org/learn/a-general-approach-to-risk-management",
+     "workload": "5 weeks with a module per week. Each module is 1 to 2 hours of study.",
+     "similarity": 0.744
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/ed3f3dba-3a35-4ed5-b113-67f4d10ef4c8": {
+   "label": "scientific research methodology",
+   "courses": [
+    {
+     "slug": "uncertainty-and-research",
+     "name": "Fundamentals of Scientific Research Under Uncertainty",
+     "url": "https://www.coursera.org/learn/uncertainty-and-research",
+     "workload": null,
+     "similarity": 0.728
+    },
+    {
+     "slug": "being-researcher",
+     "name": "Being a researcher (in Information Science and Technology)",
+     "url": "https://www.coursera.org/learn/being-researcher",
+     "workload": "4-5 hours/week",
+     "similarity": 0.694
+    },
+    {
+     "slug": "academic-research-types-and-methods",
+     "name": "Academic Research Types and Methods",
+     "url": "https://www.coursera.org/learn/academic-research-types-and-methods",
+     "workload": "3 modules of study, 1-2 hours/week",
+     "similarity": 0.672
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/47a49cd6-097d-457a-9f7b-c290c14930d5": {
+   "label": "analyse big data",
+   "courses": [
+    {
+     "slug": "using-large-datasets-for-research",
+     "name": "Using Large Datasets for Research",
+     "url": "https://www.coursera.org/learn/using-large-datasets-for-research",
+     "workload": null,
+     "similarity": 0.708
+    },
+    {
+     "slug": "analyze-data-cdsp",
+     "name": "Analyze Data",
+     "url": "https://www.coursera.org/learn/analyze-data-cdsp",
+     "workload": "4 weeks of study, 1–3 hours per week",
+     "similarity": 0.697
+    },
+    {
+     "slug": "big-data-graph-analytics",
+     "name": "Graph Analytics for Big Data",
+     "url": "https://www.coursera.org/learn/big-data-graph-analytics",
+     "workload": "4 Weeks, 3-5 hours/week",
+     "similarity": 0.696
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/382c11ed-20d5-4ae7-b60e-15fec527fa6c": {
+   "label": "apply statistical analysis techniques",
+   "courses": [
+    {
+     "slug": "machine-learning-essentials",
+     "name": "Machine Learning Essentials",
+     "url": "https://www.coursera.org/learn/machine-learning-essentials",
+     "workload": "4 weeks of study, 8-12 hours/week",
+     "similarity": 0.733
+    },
+    {
+     "slug": "statistical-methods-and-data-analysis-1",
+     "name": "Statistical Methods and Data Analysis ",
+     "url": "https://www.coursera.org/learn/statistical-methods-and-data-analysis-1",
+     "workload": "6 weeks, 3.5 hours / week",
+     "similarity": 0.732
+    },
+    {
+     "slug": "analyze-data-cdsp",
+     "name": "Analyze Data",
+     "url": "https://www.coursera.org/learn/analyze-data-cdsp",
+     "workload": "4 weeks of study, 1–3 hours per week",
+     "similarity": 0.714
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/143769cb-b61e-47d8-a61e-eedfbec1016c": {
+   "label": "business intelligence",
+   "courses": [
+    {
+     "slug": "business-intelligence-essentials",
+     "name": "Business Intelligence (BI) Essentials",
+     "url": "https://www.coursera.org/learn/business-intelligence-essentials",
+     "workload": "6 weeks of study, 2 to 4 hours/week",
+     "similarity": 0.712
+    },
+    {
+     "slug": "business-analytics-and-data-driven-decision-making",
+     "name": "Business Analytics and Data-Driven Decision Making",
+     "url": "https://www.coursera.org/learn/business-analytics-and-data-driven-decision-making",
+     "workload": "2 weeks/2-3 hours per week",
+     "similarity": 0.706
+    },
+    {
+     "slug": "business-intelligence-data-visualization-excel",
+     "name": "Business Intelligence & Data Visualization in Excel",
+     "url": "https://www.coursera.org/learn/business-intelligence-data-visualization-excel",
+     "workload": null,
+     "similarity": 0.706
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/79e29b8b-47d1-470d-b7b1-32506bfe7d9a": {
+   "label": "collect ICT data",
+   "courses": [
+    {
+     "slug": "gather-your-data-online",
+     "name": "Gather Your Data Online",
+     "url": "https://www.coursera.org/learn/gather-your-data-online",
+     "workload": null,
+     "similarity": 0.709
+    },
+    {
+     "slug": "data-collection-and-integration",
+     "name": "Data Collection and Integration",
+     "url": "https://www.coursera.org/learn/data-collection-and-integration",
+     "workload": "3-5 hours/week",
+     "similarity": 0.666
+    },
+    {
+     "slug": "data-cleaning",
+     "name": "Getting and Cleaning Data",
+     "url": "https://www.coursera.org/learn/data-cleaning",
+     "workload": null,
+     "similarity": 0.661
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/48db96bf-3314-45c6-bad8-fdb6e20e5639": {
+   "label": "data engineering",
+   "courses": [
+    {
+     "slug": "data-engineering-career-guide-and-interview-preparation",
+     "name": "Data Engineering Career Guide and Interview Preparation",
+     "url": "https://www.coursera.org/learn/data-engineering-career-guide-and-interview-preparation",
+     "workload": "3 weeks of study, 1-2 hours/week",
+     "similarity": 0.73
+    },
+    {
+     "slug": "introduction-to-data-engineering",
+     "name": "Introduction to Data Engineering",
+     "url": "https://www.coursera.org/learn/introduction-to-data-engineering",
+     "workload": null,
+     "similarity": 0.727
+    },
+    {
+     "slug": "intro-to-data-engineering",
+     "name": "Introduction to Data Engineering",
+     "url": "https://www.coursera.org/learn/intro-to-data-engineering",
+     "workload": "This is a 4-week course with an estimate of 4-6 hours of learning activities per week",
+     "similarity": 0.718
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/e9575f7f-053a-439e-8074-f93df3334e92": {
+   "label": "data ethics",
+   "courses": [
+    {
+     "slug": "data-science-ethics",
+     "name": "Data Science Ethics",
+     "url": "https://www.coursera.org/learn/data-science-ethics",
+     "workload": "4 weeks, 3-4 hours/week",
+     "similarity": 0.767
+    },
+    {
+     "slug": "ethical-use-of-technology",
+     "name": "Ethics of Technology",
+     "url": "https://www.coursera.org/learn/ethical-use-of-technology",
+     "workload": "4 weeks of study, 20-25 hours/week",
+     "similarity": 0.757
+    },
+    {
+     "slug": "data-science-ethical-decision-making-in-practice",
+     "name": "Data Science: Ethical decision-making in practice",
+     "url": "https://www.coursera.org/learn/data-science-ethical-decision-making-in-practice",
+     "workload": "2 weeks, 5 h/week",
+     "similarity": 0.751
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/25f0ea33-b4a2-4f31-b7b4-7d20e827b180": {
+   "label": "data mining",
+   "courses": [
+    {
+     "slug": "process-mining",
+     "name": "Process Mining: Data science in Action",
+     "url": "https://www.coursera.org/learn/process-mining",
+     "workload": "6 weeks of study, 3 to 5 hours/week of material + self study",
+     "similarity": 0.724
+    },
+    {
+     "slug": "text-mining",
+     "name": "Text Mining and Analytics",
+     "url": "https://www.coursera.org/learn/text-mining",
+     "workload": null,
+     "similarity": 0.705
+    },
+    {
+     "slug": "machine-learning-and-data-analytics-part-1",
+     "name": "Machine Learning and Data Analytics Part 1",
+     "url": "https://www.coursera.org/learn/machine-learning-and-data-analytics-part-1",
+     "workload": "2-4 hours per week",
+     "similarity": 0.692
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/fecf8a0d-62c4-4e71-9b03-0f4fc2ad7bf5": {
+   "label": "data models",
+   "courses": [
+    {
+     "slug": "data-modeling-fundamentals",
+     "name": "Data Modeling Fundamentals",
+     "url": "https://www.coursera.org/learn/data-modeling-fundamentals",
+     "workload": null,
+     "similarity": 0.712
+    },
+    {
+     "slug": "data-modeling-scheme",
+     "name": "Data Modeling Scheme",
+     "url": "https://www.coursera.org/learn/data-modeling-scheme",
+     "workload": null,
+     "similarity": 0.704
+    },
+    {
+     "slug": "clinical-data-models-and-data-quality-assessments",
+     "name": "Clinical Data Models and Data Quality Assessments",
+     "url": "https://www.coursera.org/learn/clinical-data-models-and-data-quality-assessments",
+     "workload": "5 weeks of study, 2-4 hours/week",
+     "similarity": 0.688
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/cc7370dd-69fa-4c67-a96f-d4d135d38700": {
+   "label": "data quality assessment",
+   "courses": [
+    {
+     "slug": "vsp-data-quality-auditing-and-profiling",
+     "name": "Data Quality Auditing and Profiling",
+     "url": "https://www.coursera.org/learn/vsp-data-quality-auditing-and-profiling",
+     "workload": "9 hours of study",
+     "similarity": 0.741
+    },
+    {
+     "slug": "govern-and-evaluate-research-data-quality",
+     "name": "Govern and Evaluate Research Data Quality",
+     "url": "https://www.coursera.org/learn/govern-and-evaluate-research-data-quality",
+     "workload": "140 minutes",
+     "similarity": 0.719
+    },
+    {
+     "slug": "vsp-data-quality-check-profiling-and-debugging",
+     "name": "Data Quality Validation and Debugging",
+     "url": "https://www.coursera.org/learn/vsp-data-quality-check-profiling-and-debugging",
+     "workload": "14 hours of study",
+     "similarity": 0.712
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/edebd83d-35f6-4ed5-a940-6c203d178c01": {
+   "label": "data science",
+   "courses": [
+    {
+     "slug": "data-science-and-machine-learning",
+     "name": "Data Science & Machine Learning Fundamentals",
+     "url": "https://www.coursera.org/learn/data-science-and-machine-learning",
+     "workload": null,
+     "similarity": 0.779
+    },
+    {
+     "slug": "data-science-profession-student-view",
+     "name": "The Data Science Profession – Student View",
+     "url": "https://www.coursera.org/learn/data-science-profession-student-view",
+     "workload": "2 weeks of study",
+     "similarity": 0.774
+    },
+    {
+     "slug": "data-science-for-professionals",
+     "name": "Data Science for Professionals",
+     "url": "https://www.coursera.org/learn/data-science-for-professionals",
+     "workload": "1 Hour",
+     "similarity": 0.771
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/54c9c155-9293-4329-8ed2-2e76e8b519d4": {
+   "label": "define data quality criteria",
+   "courses": [
+    {
+     "slug": "measuring-total-data-quality",
+     "name": "Measuring Total Data Quality",
+     "url": "https://www.coursera.org/learn/measuring-total-data-quality",
+     "workload": "4 weeks of study, 1.5-3.5 hours/week",
+     "similarity": 0.701
+    },
+    {
+     "slug": "profile-data-quality",
+     "name": "Profile Data Quality",
+     "url": "https://www.coursera.org/learn/profile-data-quality",
+     "workload": null,
+     "similarity": 0.701
+    },
+    {
+     "slug": "using-data-for-healthcare-improvement",
+     "name": "Using Data for Healthcare Improvement",
+     "url": "https://www.coursera.org/learn/using-data-for-healthcare-improvement",
+     "workload": null,
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/31c69100-b612-4a61-8db5-fd314318854c": {
+   "label": "execute analytical mathematical calculations",
+   "courses": [
+    {
+     "slug": "applied-mathematical-methods-for-computing",
+     "name": "Applied Mathematical Methods for Computing",
+     "url": "https://www.coursera.org/learn/applied-mathematical-methods-for-computing",
+     "workload": null,
+     "similarity": 0.734
+    },
+    {
+     "slug": "mathematical-thinking-for-advanced-mathematics",
+     "name": "Mathematical Thinking for Advanced Mathematics",
+     "url": "https://www.coursera.org/learn/mathematical-thinking-for-advanced-mathematics",
+     "workload": "8 weeks of study, 3-4 hours per week",
+     "similarity": 0.691
+    },
+    {
+     "slug": "statistics-and-calculus-methods-for-data-analysis",
+     "name": "Statistics and Calculus Methods for Data Analysis",
+     "url": "https://www.coursera.org/learn/statistics-and-calculus-methods-for-data-analysis",
+     "workload": "15 weeks of study, 8-10 hours/week",
+     "similarity": 0.663
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e": {
+   "label": "handle data samples",
+   "courses": [
+    {
+     "slug": "sampling-methods",
+     "name": "Sampling People, Networks and Records",
+     "url": "https://www.coursera.org/learn/sampling-methods",
+     "workload": null,
+     "similarity": 0.719
+    },
+    {
+     "slug": "statistics-data-science",
+     "name": "Statistics For Data Science",
+     "url": "https://www.coursera.org/learn/statistics-data-science",
+     "workload": "2 Hour",
+     "similarity": 0.689
+    },
+    {
+     "slug": "responsible-data-analysis",
+     "name": "Population Health: Responsible Data Analysis",
+     "url": "https://www.coursera.org/learn/responsible-data-analysis",
+     "workload": null,
+     "similarity": 0.67
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/713fb616-118e-40bc-9366-4a69879a49d5": {
+   "label": "implement data quality processes",
+   "courses": [
+    {
+     "slug": "govern-and-evaluate-research-data-quality",
+     "name": "Govern and Evaluate Research Data Quality",
+     "url": "https://www.coursera.org/learn/govern-and-evaluate-research-data-quality",
+     "workload": "140 minutes",
+     "similarity": 0.713
+    },
+    {
+     "slug": "google-the-importance-of-integrity",
+     "name": "The Importance of Integrity",
+     "url": "https://www.coursera.org/learn/google-the-importance-of-integrity",
+     "workload": null,
+     "similarity": 0.712
+    },
+    {
+     "slug": "vsp-data-quality-check-profiling-and-debugging",
+     "name": "Data Quality Validation and Debugging",
+     "url": "https://www.coursera.org/learn/vsp-data-quality-check-profiling-and-debugging",
+     "workload": "14 hours of study",
+     "similarity": 0.691
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/a56dec32-05ef-45de-a256-ee6741f356db": {
+   "label": "information confidentiality",
+   "courses": [
+    {
+     "slug": "ibm-data-privacy",
+     "name": "IBM Data Privacy for Information Architecture",
+     "url": "https://www.coursera.org/learn/ibm-data-privacy",
+     "workload": null,
+     "similarity": 0.72
+    },
+    {
+     "slug": "introduction-to-data-protection-and-privacy",
+     "name": "Introduction to Data Protection and Privacy",
+     "url": "https://www.coursera.org/learn/introduction-to-data-protection-and-privacy",
+     "workload": "70 minutes",
+     "similarity": 0.708
+    },
+    {
+     "slug": "data-privacy-and-protection",
+     "name": "Data Privacy and Protection",
+     "url": "https://www.coursera.org/learn/data-privacy-and-protection",
+     "workload": "1 week of study, 1 hour/week",
+     "similarity": 0.701
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/696e3b5b-8b61-45af-ae4c-3ab700f197ec": {
+   "label": "information extraction",
+   "courses": [
+    {
+     "slug": "information-extraction-from-free-text-data-in-health-2",
+     "name": "Information Extraction from Free Text Data in Health",
+     "url": "https://www.coursera.org/learn/information-extraction-from-free-text-data-in-health-2",
+     "workload": null,
+     "similarity": 0.686
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/46ec0033-3c71-415e-bcff-b065675ba2dc": {
+   "label": "integrate ICT data",
+   "courses": [
+    {
+     "slug": "data-collection-and-integration",
+     "name": "Data Collection and Integration",
+     "url": "https://www.coursera.org/learn/data-collection-and-integration",
+     "workload": "3-5 hours/week",
+     "similarity": 0.666
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/1e77e42a-181f-4b48-8e74-201ce50ffc29": {
+   "label": "interpret current data",
+   "courses": [
+    {
+     "slug": "analyze-data-cdsp",
+     "name": "Analyze Data",
+     "url": "https://www.coursera.org/learn/analyze-data-cdsp",
+     "workload": "4 weeks of study, 1–3 hours per week",
+     "similarity": 0.687
+    },
+    {
+     "slug": "analyze-usage-data",
+     "name": "Analyze Usage Data",
+     "url": "https://www.coursera.org/learn/analyze-usage-data",
+     "workload": null,
+     "similarity": 0.682
+    },
+    {
+     "slug": "data-for-effective-policy-making-",
+     "name": "Data for Effective Policy Making",
+     "url": "https://www.coursera.org/learn/data-for-effective-policy-making-",
+     "workload": "10 weeks of study, 4 hours per week",
+     "similarity": 0.67
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9ff9db9d-d14b-426e-83f3-e7449af6c79f": {
+   "label": "manage data",
+   "courses": [
+    {
+     "slug": "data-management",
+     "name": "Research Data Management and Sharing",
+     "url": "https://www.coursera.org/learn/data-management",
+     "workload": null,
+     "similarity": 0.721
+    },
+    {
+     "slug": "wiley-data-management-databases-and-big-data",
+     "name": "Data Management, Databases, and Big Data ",
+     "url": "https://www.coursera.org/learn/wiley-data-management-databases-and-big-data",
+     "workload": "2 weeks/2 hours per week",
+     "similarity": 0.717
+    },
+    {
+     "slug": "introduction-to-data-management",
+     "name": "Introduction to Data Management",
+     "url": "https://www.coursera.org/learn/introduction-to-data-management",
+     "workload": "4 weeks of study, 5-6 hours/week",
+     "similarity": 0.716
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/07889c08-7220-47c8-96f7-6068fbea00dc": {
+   "label": "normalise data",
+   "courses": [
+    {
+     "slug": "normalize-relational-databases-for-peak-performance",
+     "name": "Normalize Relational Databases for Peak Performance",
+     "url": "https://www.coursera.org/learn/normalize-relational-databases-for-peak-performance",
+     "workload": "100 minutes",
+     "similarity": 0.677
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/50b100ea-74fd-4706-99db-3e4ca55e51b8": {
+   "label": "perform data cleansing",
+   "courses": [
+    {
+     "slug": "data-management-and-cleaning-for-research",
+     "name": "Data Management and Cleaning for Research",
+     "url": "https://www.coursera.org/learn/data-management-and-cleaning-for-research",
+     "workload": null,
+     "similarity": 0.732
+    },
+    {
+     "slug": "data-cleaning-excel-techniques-to-clean-messy-data",
+     "name": "Data Cleaning in Excel: Techniques to Clean Messy Data",
+     "url": "https://www.coursera.org/learn/data-cleaning-excel-techniques-to-clean-messy-data",
+     "workload": "90 minutes",
+     "similarity": 0.729
+    },
+    {
+     "slug": "data-cleaning",
+     "name": "Getting and Cleaning Data",
+     "url": "https://www.coursera.org/learn/data-cleaning",
+     "workload": null,
+     "similarity": 0.727
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4216e465-7baa-4884-a241-54b197bb9278": {
+   "label": "perform data mining",
+   "courses": [
+    {
+     "slug": "process-mining",
+     "name": "Process Mining: Data science in Action",
+     "url": "https://www.coursera.org/learn/process-mining",
+     "workload": "6 weeks of study, 3 to 5 hours/week of material + self study",
+     "similarity": 0.75
+    },
+    {
+     "slug": "data-patterns",
+     "name": "Pattern Discovery in Data Mining",
+     "url": "https://www.coursera.org/learn/data-patterns",
+     "workload": null,
+     "similarity": 0.743
+    },
+    {
+     "slug": "data-mining-techniques-and-uses",
+     "name": "Practical Engineering Data Mining: Techniques and Uses",
+     "url": "https://www.coursera.org/learn/data-mining-techniques-and-uses",
+     "workload": "4 weeks of study, 2-4 hours per week",
+     "similarity": 0.724
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/9cf681c7-89ec-470c-b651-7fe03786f586": {
+   "label": "query languages",
+   "courses": [
+    {
+     "slug": "sql-querying-fundamentals-lo094029",
+     "name": "SQL Querying: Fundamentals",
+     "url": "https://www.coursera.org/learn/sql-querying-fundamentals-lo094029",
+     "workload": null,
+     "similarity": 0.688
+    },
+    {
+     "slug": "sql-practical-introduction-for-querying-databases",
+     "name": "SQL: A Practical Introduction for Querying Databases",
+     "url": "https://www.coursera.org/learn/sql-practical-introduction-for-querying-databases",
+     "workload": "6 weeks of study, 2-4 hours/week.",
+     "similarity": 0.679
+    },
+    {
+     "slug": "the-structured-query-language-sql",
+     "name": "The Structured Query Language (SQL)",
+     "url": "https://www.coursera.org/learn/the-structured-query-language-sql",
+     "workload": "About 6 weeks of study, 2-4 hours/week",
+     "similarity": 0.67
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/c5e8abde-d2ba-4e8e-a65e-720b71180666": {
+   "label": "unstructured data",
+   "courses": [
+    {
+     "slug": "cs-fundamentals-3",
+     "name": "Unordered Data Structures",
+     "url": "https://www.coursera.org/learn/cs-fundamentals-3",
+     "workload": null,
+     "similarity": 0.673
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/1b70a55d-b8a4-49fc-96c6-15ab4cff2522": {
+   "label": "use data processing techniques",
+   "courses": [
+    {
+     "slug": "analyze-data-cdsp",
+     "name": "Analyze Data",
+     "url": "https://www.coursera.org/learn/analyze-data-cdsp",
+     "workload": "4 weeks of study, 1–3 hours per week",
+     "similarity": 0.708
+    },
+    {
+     "slug": "process-mining",
+     "name": "Process Mining: Data science in Action",
+     "url": "https://www.coursera.org/learn/process-mining",
+     "workload": "6 weeks of study, 3 to 5 hours/week of material + self study",
+     "similarity": 0.692
+    },
+    {
+     "slug": "data-analysis-python",
+     "name": "Data Analysis Using Python",
+     "url": "https://www.coursera.org/learn/data-analysis-python",
+     "workload": "3 weeks of study, 5-7 hours/week",
+     "similarity": 0.69
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4463a721-69f3-413d-8321-43e3af13a4f1": {
+   "label": "use databases",
+   "courses": [
+    {
+     "slug": "introduction-to-databases",
+     "name": "Introduction to Databases",
+     "url": "https://www.coursera.org/learn/introduction-to-databases",
+     "workload": "5 weeks of study, 1.5 - 3 hours/week.",
+     "similarity": 0.759
+    },
+    {
+     "slug": "fundamentals-database-systems",
+     "name": "Fundamentals of Database Systems",
+     "url": "https://www.coursera.org/learn/fundamentals-database-systems",
+     "workload": "2 hours",
+     "similarity": 0.752
+    },
+    {
+     "slug": "intro-to-databases-back-end-development",
+     "name": "Introduction to Databases for Back-End Development",
+     "url": "https://www.coursera.org/learn/intro-to-databases-back-end-development",
+     "workload": "5 weeks of study, 1.5 - 3 hours/week.",
+     "similarity": 0.74
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/348b74cd-49ce-4844-8bdf-ec188b497213": {
+   "label": "visual presentation techniques",
+   "courses": [
+    {
+     "slug": "data-visualization-in-microsoft-powerpoint",
+     "name": "Data Visualization in Microsoft PowerPoint",
+     "url": "https://www.coursera.org/learn/data-visualization-in-microsoft-powerpoint",
+     "workload": "2 hours",
+     "similarity": 0.704
+    },
+    {
+     "slug": "computation-and-visualization-for-analytics-part-1",
+     "name": "Computation and Visualization for Analytics Part 1",
+     "url": "https://www.coursera.org/learn/computation-and-visualization-for-analytics-part-1",
+     "workload": null,
+     "similarity": 0.704
+    },
+    {
+     "slug": "basics-of-data-visualization-analysis",
+     "name": "Basics of Data Visualization Analysis",
+     "url": "https://www.coursera.org/learn/basics-of-data-visualization-analysis",
+     "workload": null,
+     "similarity": 0.696
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f28617ad-afdd-4041-814c-216153a38998": {
+   "label": "analyse software specifications",
+   "courses": [
+    {
+     "slug": "agile-planning-for-software-products",
+     "name": "Agile Planning for Software Products",
+     "url": "https://www.coursera.org/learn/agile-planning-for-software-products",
+     "workload": "4 weeks of study, 1-2 hours/week",
+     "similarity": 0.685
+    },
+    {
+     "slug": "software-design-abstraction",
+     "name": "Software Design as an Abstraction",
+     "url": "https://www.coursera.org/learn/software-design-abstraction",
+     "workload": "4 weeks 2-3 hours/week",
+     "similarity": 0.684
+    },
+    {
+     "slug": "software-sales",
+     "name": "Software Sales",
+     "url": "https://www.coursera.org/learn/software-sales",
+     "workload": "1 Hour",
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/21d2f96d-35f7-4e3f-9745-c533d2dd6e97": {
+   "label": "computer programming",
+   "courses": [
+    {
+     "slug": "computer-science-foundations",
+     "name": "Foundations of Computer Science",
+     "url": "https://www.coursera.org/learn/computer-science-foundations",
+     "workload": "4 weeks of 3-4 hours/week",
+     "similarity": 0.722
+    },
+    {
+     "slug": "ibm-cobol-basics",
+     "name": "IBM COBOL Basics",
+     "url": "https://www.coursera.org/learn/ibm-cobol-basics",
+     "workload": "4 week, 2-5 hours per week",
+     "similarity": 0.712
+    },
+    {
+     "slug": "c-for-everyone",
+     "name": "C for Everyone, Part 1: Programming Fundamentals",
+     "url": "https://www.coursera.org/learn/c-for-everyone",
+     "workload": "Five weeks of study, five hours a week.",
+     "similarity": 0.709
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/901105f8-3a08-453e-b1dc-23619e317fd3": {
+   "label": "create flowchart diagram",
+   "courses": [
+    {
+     "slug": "how-to-build-a-product-flow-diagram",
+     "name": "How to Build a Product Flow Diagram",
+     "url": "https://www.coursera.org/learn/how-to-build-a-product-flow-diagram",
+     "workload": "2 Hour",
+     "similarity": 0.72
+    },
+    {
+     "slug": "create-it-diagrams-with-lucidchart",
+     "name": "Create IT Diagrams with Lucidchart",
+     "url": "https://www.coursera.org/learn/create-it-diagrams-with-lucidchart",
+     "workload": "1.5 hours",
+     "similarity": 0.693
+    },
+    {
+     "slug": "map-data-flows-fast",
+     "name": "Map Data Flows Fast",
+     "url": "https://www.coursera.org/learn/map-data-flows-fast",
+     "workload": "95 minutes",
+     "similarity": 0.692
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2522a6ce-3202-4ac8-9f5b-b9cb5a3a83a1": {
+   "label": "debug software",
+   "courses": [
+    {
+     "slug": "debugging-hunting-and-squashing-bugs",
+     "name": "Debugging: Hunting and Squashing Bugs",
+     "url": "https://www.coursera.org/learn/debugging-hunting-and-squashing-bugs",
+     "workload": null,
+     "similarity": 0.707
+    },
+    {
+     "slug": "debug-ml-code-fix-trace--evaluate",
+     "name": "Debug ML Code: Fix, Trace & Evaluate",
+     "url": "https://www.coursera.org/learn/debug-ml-code-fix-trace--evaluate",
+     "workload": null,
+     "similarity": 0.703
+    },
+    {
+     "slug": "troubleshooting-debugging-techniques",
+     "name": "Troubleshooting and Debugging Techniques",
+     "url": "https://www.coursera.org/learn/troubleshooting-debugging-techniques",
+     "workload": null,
+     "similarity": 0.683
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d9e5349e-8791-49c2-8ba4-839fdd1606c2": {
+   "label": "define technical requirements",
+   "courses": [
+    {
+     "slug": "srs-documents-requirements",
+     "name": "SRS Documents: Requirements and Diagrammatic Notations",
+     "url": "https://www.coursera.org/learn/srs-documents-requirements",
+     "workload": "4 weeks, 1-2 hours/week",
+     "similarity": 0.681
+    },
+    {
+     "slug": "packt-technical-writing-for-software-developers",
+     "name": "Technical Writing for Software Developers",
+     "url": "https://www.coursera.org/learn/packt-technical-writing-for-software-developers",
+     "workload": null,
+     "similarity": 0.677
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/797a4416-0b8d-44f3-8fcd-eb10bd0be6b4": {
+   "label": "develop software prototype",
+   "courses": [
+    {
+     "slug": "prototyping",
+     "name": "Prototyping",
+     "url": "https://www.coursera.org/learn/prototyping",
+     "workload": null,
+     "similarity": 0.667
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/209a5498-3449-4689-8ed9-bd08cab4fd78": {
+   "label": "engineering principles",
+   "courses": [
+    {
+     "slug": "fundamental-skills-in-engineering-design",
+     "name": "Fundamental Skills in Engineering Design",
+     "url": "https://www.coursera.org/learn/fundamental-skills-in-engineering-design",
+     "workload": "Two weeks of study, 2-4 hours per week.",
+     "similarity": 0.752
+    },
+    {
+     "slug": "introduction-to-engineering-design",
+     "name": "Introduction to Engineering Design ",
+     "url": "https://www.coursera.org/learn/introduction-to-engineering-design",
+     "workload": "4 Hours",
+     "similarity": 0.726
+    },
+    {
+     "slug": "engineering-project-management-part-1",
+     "name": "Engineering Project Management Part 1",
+     "url": "https://www.coursera.org/learn/engineering-project-management-part-1",
+     "workload": "2-4 hours per week",
+     "similarity": 0.722
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/72a74f69-5cf1-43c5-99b9-62a444578919": {
+   "label": "engineering processes",
+   "courses": [
+    {
+     "slug": "engineering-project-management-part-1",
+     "name": "Engineering Project Management Part 1",
+     "url": "https://www.coursera.org/learn/engineering-project-management-part-1",
+     "workload": "2-4 hours per week",
+     "similarity": 0.71
+    },
+    {
+     "slug": "systems-engineering-mathworks",
+     "name": "Systems Engineering",
+     "url": "https://www.coursera.org/learn/systems-engineering-mathworks",
+     "workload": "Less than 2 hours.",
+     "similarity": 0.707
+    },
+    {
+     "slug": "systems-engineering-fundamentals",
+     "name": "Systems Engineering Fundamentals",
+     "url": "https://www.coursera.org/learn/systems-engineering-fundamentals",
+     "workload": "4 weeks of study, 2 hours/week",
+     "similarity": 0.706
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/0e0c9c11-b39e-43cf-ba95-2fe646f5de64": {
+   "label": "identify customer requirements",
+   "courses": [
+    {
+     "slug": "client-needs-and-software-requirements",
+     "name": "Client Needs and Software Requirements ",
+     "url": "https://www.coursera.org/learn/client-needs-and-software-requirements",
+     "workload": "4 weeks of study, 3-4 hours/week",
+     "similarity": 0.709
+    },
+    {
+     "slug": "user-research-methods-and-practices-iitg",
+     "name": "User Research Methods and Practices",
+     "url": "https://www.coursera.org/learn/user-research-methods-and-practices-iitg",
+     "workload": "5 weeks of study, 4-5 hours/week",
+     "similarity": 0.703
+    },
+    {
+     "slug": "analyzing-user-data-in-google-forms",
+     "name": "Using Google Forms to Analyze User Research Data",
+     "url": "https://www.coursera.org/learn/analyzing-user-data-in-google-forms",
+     "workload": "1 hour",
+     "similarity": 0.701
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/925463a7-d51f-4d5b-9f79-4d28cf30acde": {
+   "label": "integrated development environment software",
+   "courses": [
+    {
+     "slug": "working-with-integrated-development-environments",
+     "name": "Working with Integrated Development Environments",
+     "url": "https://www.coursera.org/learn/working-with-integrated-development-environments",
+     "workload": "2 weeks of study, 3-4 hours per week",
+     "similarity": 0.682
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6a899482-8bcf-40ca-ae67-579a1cc467ab": {
+   "label": "manage engineering project",
+   "courses": [
+    {
+     "slug": "engineering-project-management-part-1",
+     "name": "Engineering Project Management Part 1",
+     "url": "https://www.coursera.org/learn/engineering-project-management-part-1",
+     "workload": "2-4 hours per week",
+     "similarity": 0.767
+    },
+    {
+     "slug": "engineering-project-management-part-2",
+     "name": "Engineering Project Management Part 2",
+     "url": "https://www.coursera.org/learn/engineering-project-management-part-2",
+     "workload": "2-4 hours per week",
+     "similarity": 0.757
+    },
+    {
+     "slug": "project-management-beyond-planning-and-control",
+     "name": "Project Management: Beyond planning and control",
+     "url": "https://www.coursera.org/learn/project-management-beyond-planning-and-control",
+     "workload": "2 weeks",
+     "similarity": 0.739
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4fabca9a-7435-4f33-b1da-3cdb00340fdc": {
+   "label": "perform scientific research",
+   "courses": [
+    {
+     "slug": "uncertainty-and-research",
+     "name": "Fundamentals of Scientific Research Under Uncertainty",
+     "url": "https://www.coursera.org/learn/uncertainty-and-research",
+     "workload": null,
+     "similarity": 0.683
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/7111b95d-0ce3-441a-9d92-4c75d05c4388": {
+   "label": "project management",
+   "courses": [
+    {
+     "slug": "project-management-beyond-planning-and-control",
+     "name": "Project Management: Beyond planning and control",
+     "url": "https://www.coursera.org/learn/project-management-beyond-planning-and-control",
+     "workload": "2 weeks",
+     "similarity": 0.815
+    },
+    {
+     "slug": "project-management-fundamentals-lo095015",
+     "name": "Project Management Fundamentals",
+     "url": "https://www.coursera.org/learn/project-management-fundamentals-lo095015",
+     "workload": null,
+     "similarity": 0.793
+    },
+    {
+     "slug": "engineering-project-management-part-1",
+     "name": "Engineering Project Management Part 1",
+     "url": "https://www.coursera.org/learn/engineering-project-management-part-1",
+     "workload": "2-4 hours per week",
+     "similarity": 0.787
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/59ea80e1-463a-4dba-82c6-d0b6d577d532": {
+   "label": "technical drawings",
+   "courses": [
+    {
+     "slug": "wiley-autocad-fundamentals-drawing-and-precision-tools",
+     "name": "AutoCAD Fundamentals: Drawing and Precision Tools",
+     "url": "https://www.coursera.org/learn/wiley-autocad-fundamentals-drawing-and-precision-tools",
+     "workload": null,
+     "similarity": 0.664
+    },
+    {
+     "slug": "software-design-threats-mitigations",
+     "name": "Software Design Threats and Mitigations",
+     "url": "https://www.coursera.org/learn/software-design-threats-mitigations",
+     "workload": "4 weeks, 3-4 hours/week",
+     "similarity": 0.661
+    },
+    {
+     "slug": "technical-editing",
+     "name": "Technical Editing",
+     "url": "https://www.coursera.org/learn/technical-editing",
+     "workload": "4 weeks of study, 3 hours/week",
+     "similarity": 0.661
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2b7a79e5-84d8-4880-be66-3d9bb05bea17": {
+   "label": "use software design patterns",
+   "courses": [
+    {
+     "slug": "software-design-principles-odc",
+     "name": "Software Design Principles",
+     "url": "https://www.coursera.org/learn/software-design-principles-odc",
+     "workload": null,
+     "similarity": 0.703
+    },
+    {
+     "slug": "design-patterns",
+     "name": "Design Patterns",
+     "url": "https://www.coursera.org/learn/design-patterns",
+     "workload": "Four weeks of study, 5 – 8 hours/week",
+     "similarity": 0.682
+    },
+    {
+     "slug": "core-java-design-patterns",
+     "name": "Core Java - Design Patterns",
+     "url": "https://www.coursera.org/learn/core-java-design-patterns",
+     "workload": "1 week of study, 5 hours/week",
+     "similarity": 0.68
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/541561bc-510c-4a99-881c-2d8bf5a85462": {
+   "label": "use technical drawing software",
+   "courses": [
+    {
+     "slug": "packt-technical-writing-for-software-developers",
+     "name": "Technical Writing for Software Developers",
+     "url": "https://www.coursera.org/learn/packt-technical-writing-for-software-developers",
+     "workload": null,
+     "similarity": 0.694
+    },
+    {
+     "slug": "software-design-threats-mitigations",
+     "name": "Software Design Threats and Mitigations",
+     "url": "https://www.coursera.org/learn/software-design-threats-mitigations",
+     "workload": "4 weeks, 3-4 hours/week",
+     "similarity": 0.675
+    },
+    {
+     "slug": "software-design-abstraction",
+     "name": "Software Design as an Abstraction",
+     "url": "https://www.coursera.org/learn/software-design-abstraction",
+     "workload": "4 weeks 2-3 hours/week",
+     "similarity": 0.673
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/172020d1-e151-445b-8173-e2a5fb16fe51": {
+   "label": "utilise computer-aided software engineering tools",
+   "courses": [
+    {
+     "slug": "introduction-to-software-development-and-applications",
+     "name": "Introduction to Software Development and Applications",
+     "url": "https://www.coursera.org/learn/introduction-to-software-development-and-applications",
+     "workload": null,
+     "similarity": 0.721
+    },
+    {
+     "slug": "software-processes",
+     "name": "Software Development Processes and Methodologies",
+     "url": "https://www.coursera.org/learn/software-processes",
+     "workload": "4 weeks of study, 3-4 hours a week",
+     "similarity": 0.707
+    },
+    {
+     "slug": "introduction-to-software-engineering",
+     "name": "Introduction to Software Engineering",
+     "url": "https://www.coursera.org/learn/introduction-to-software-engineering",
+     "workload": "6 weeks of study, 2-3 hours/week",
+     "similarity": 0.698
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/c8b4b02c-d9ce-4e24-ab43-5dd52c6dff48": {
+   "label": "advise on carbon emissions reduction",
+   "courses": [
+    {
+     "slug": "sustainability-consulting",
+     "name": "Sustainability Consulting",
+     "url": "https://www.coursera.org/learn/sustainability-consulting",
+     "workload": null,
+     "similarity": 0.683
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b2f05068-c409-43ec-ba58-b5dfe991ca5e": {
+   "label": "advise on corporate social responsibility",
+   "courses": [
+    {
+     "slug": "sustainability-consulting",
+     "name": "Sustainability Consulting",
+     "url": "https://www.coursera.org/learn/sustainability-consulting",
+     "workload": null,
+     "similarity": 0.717
+    },
+    {
+     "slug": "global-sustainability-be-sustainable",
+     "name": "Global sustainability and corporate social responsibility: Be sustainable",
+     "url": "https://www.coursera.org/learn/global-sustainability-be-sustainable",
+     "workload": null,
+     "similarity": 0.712
+    },
+    {
+     "slug": "business-ethics-and-social-responsibility",
+     "name": "Business Ethics and Social Responsibility",
+     "url": "https://www.coursera.org/learn/business-ethics-and-social-responsibility",
+     "workload": null,
+     "similarity": 0.694
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/dbef5042-4b99-4e6f-b2ed-1d33b07b3ed6": {
+   "label": "advise on sustainability solutions",
+   "courses": [
+    {
+     "slug": "sustainability-consulting",
+     "name": "Sustainability Consulting",
+     "url": "https://www.coursera.org/learn/sustainability-consulting",
+     "workload": null,
+     "similarity": 0.756
+    },
+    {
+     "slug": "global-sustainability-be-sustainable",
+     "name": "Global sustainability and corporate social responsibility: Be sustainable",
+     "url": "https://www.coursera.org/learn/global-sustainability-be-sustainable",
+     "workload": null,
+     "similarity": 0.669
+    },
+    {
+     "slug": "sustainability-proposal",
+     "name": "Capstone: Creating A Sustainability Proposal",
+     "url": "https://www.coursera.org/learn/sustainability-proposal",
+     "workload": "The Snowflake Ski Basin case - 8 to 12 hours.  Your own proposal - 10 to 20 hours (maybe more?).",
+     "similarity": 0.664
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6742977a-aa00-4c8c-9861-898b0373907e": {
+   "label": "advise on sustainable management policies",
+   "courses": [
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.696
+    },
+    {
+     "slug": "sustainability-consulting",
+     "name": "Sustainability Consulting",
+     "url": "https://www.coursera.org/learn/sustainability-consulting",
+     "workload": null,
+     "similarity": 0.691
+    },
+    {
+     "slug": "strategic-management-mba-fia",
+     "name": "Strategic Management",
+     "url": "https://www.coursera.org/learn/strategic-management-mba-fia",
+     "workload": "5 weeks",
+     "similarity": 0.686
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b04f377b-ee80-4b38-aca1-19d266a23b17": {
+   "label": "analyse business requirements",
+   "courses": [
+    {
+     "slug": "business-analysis-process",
+     "name": "Business Analysis Process",
+     "url": "https://www.coursera.org/learn/business-analysis-process",
+     "workload": "4 Weeks of Study, 3-5 hours/week",
+     "similarity": 0.739
+    },
+    {
+     "slug": "advanced-business-analysis-elicitation-analysis",
+     "name": "Advanced Business Analysis: Elicitation & Analysis",
+     "url": "https://www.coursera.org/learn/advanced-business-analysis-elicitation-analysis",
+     "workload": "16 hours 55 minutes",
+     "similarity": 0.734
+    },
+    {
+     "slug": "fundamentals-of-business-analysis",
+     "name": "Fundamentals of Business Analysis ",
+     "url": "https://www.coursera.org/learn/fundamentals-of-business-analysis",
+     "workload": "132 min",
+     "similarity": 0.731
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/96d549bb-3e62-4c45-92a7-f114df089581": {
+   "label": "analyse supply chain strategies",
+   "courses": [
+    {
+     "slug": "supply-chain-management-and-analytics",
+     "name": "Supply Chain Management and Analytics",
+     "url": "https://www.coursera.org/learn/supply-chain-management-and-analytics",
+     "workload": "4 weeks of study, 20 hours/week",
+     "similarity": 0.761
+    },
+    {
+     "slug": "analyze-global-logistics-strategic-supply-chain-case",
+     "name": "Analyze Global Logistics: A Strategic Supply Chain Case",
+     "url": "https://www.coursera.org/learn/analyze-global-logistics-strategic-supply-chain-case",
+     "workload": null,
+     "similarity": 0.757
+    },
+    {
+     "slug": "planning",
+     "name": "Supply Chain Planning",
+     "url": "https://www.coursera.org/learn/planning",
+     "workload": null,
+     "similarity": 0.743
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/e541c69c-ea80-4b17-87cb-4001d0b9d303": {
+   "label": "assess environmental impact",
+   "courses": [
+    {
+     "slug": "environmental-economics",
+     "name": "Environmental Economics",
+     "url": "https://www.coursera.org/learn/environmental-economics",
+     "workload": null,
+     "similarity": 0.708
+    },
+    {
+     "slug": "environmental-issues-policies-and-practice-1",
+     "name": "Environmental Issues, Policies, and Practice",
+     "url": "https://www.coursera.org/learn/environmental-issues-policies-and-practice-1",
+     "workload": "6 weeks, 6 hours / week",
+     "similarity": 0.697
+    },
+    {
+     "slug": "environmental-science",
+     "name": "Environmental Science",
+     "url": "https://www.coursera.org/learn/environmental-science",
+     "workload": null,
+     "similarity": 0.689
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4e87c852-602a-4a0e-b8d8-20709ce14ac5": {
+   "label": "assess the life cycle of resources",
+   "courses": [
+    {
+     "slug": "life-cycle-assessment",
+     "name": "Life Cycle Assessment",
+     "url": "https://www.coursera.org/learn/life-cycle-assessment",
+     "workload": "6 weeks of study, 12-15 hours/week",
+     "similarity": 0.736
+    },
+    {
+     "slug": "circular-economy",
+     "name": "Circular Economy - Sustainable Materials Management",
+     "url": "https://www.coursera.org/learn/circular-economy",
+     "workload": "5 weeks of study,  5-8 hours per week. You may transfer to later sessions to extend the course.",
+     "similarity": 0.694
+    },
+    {
+     "slug": "environmental-studies-odc",
+     "name": "Environmental Studies",
+     "url": "https://www.coursera.org/learn/environmental-studies-odc",
+     "workload": "10 weeks of Study, 8 hours/week",
+     "similarity": 0.687
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/2cb27e30-2be7-4a09-9502-fdd2102c046b": {
+   "label": "carry out training in environmental matters",
+   "courses": [
+    {
+     "slug": "environmental-leadership-climate",
+     "name": "Environmental Leadership",
+     "url": "https://www.coursera.org/learn/environmental-leadership-climate",
+     "workload": "4 weeks of study, 2 hours per week",
+     "similarity": 0.686
+    },
+    {
+     "slug": "environmental-sustainability",
+     "name": "Environmental sustainability",
+     "url": "https://www.coursera.org/learn/environmental-sustainability",
+     "workload": null,
+     "similarity": 0.67
+    },
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.665
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/22c45bf7-e52b-475f-847b-c32a87f65a5d": {
+   "label": "circular economy",
+   "courses": [
+    {
+     "slug": "circular-economy",
+     "name": "Circular Economy - Sustainable Materials Management",
+     "url": "https://www.coursera.org/learn/circular-economy",
+     "workload": "5 weeks of study,  5-8 hours per week. You may transfer to later sessions to extend the course.",
+     "similarity": 0.754
+    },
+    {
+     "slug": "the-circular-economy",
+     "name": "The Circular Economy",
+     "url": "https://www.coursera.org/learn/the-circular-economy",
+     "workload": "About 4 weeks",
+     "similarity": 0.732
+    },
+    {
+     "slug": "sustainability-and-the-circular-economy",
+     "name": "Sustainability and the Circular Economy",
+     "url": "https://www.coursera.org/learn/sustainability-and-the-circular-economy",
+     "workload": "6-10 hours per week, the entire course can be completed in 5-6 weeks",
+     "similarity": 0.725
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/1565b401-1754-4b07-8f1a-eb5869e64d95": {
+   "label": "climate change impact",
+   "courses": [
+    {
+     "slug": "climate-change-mitigation-and-adaptation",
+     "name": "Climate Change: Mitigation and Adaptation",
+     "url": "https://www.coursera.org/learn/climate-change-mitigation-and-adaptation",
+     "workload": "15 hours to complete. Six weeks at approximate two to three hours per week.",
+     "similarity": 0.725
+    },
+    {
+     "slug": "global-warming",
+     "name": "Global Warming I: The Science and Modeling of Climate Change",
+     "url": "https://www.coursera.org/learn/global-warming",
+     "workload": null,
+     "similarity": 0.718
+    },
+    {
+     "slug": "environmental-science",
+     "name": "Environmental Science",
+     "url": "https://www.coursera.org/learn/environmental-science",
+     "workload": null,
+     "similarity": 0.713
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/bd70f004-e1d6-43f0-96f1-59c014a4ea01": {
+   "label": "coordinate environmental efforts",
+   "courses": [
+    {
+     "slug": "environmental-leadership-climate",
+     "name": "Environmental Leadership",
+     "url": "https://www.coursera.org/learn/environmental-leadership-climate",
+     "workload": "4 weeks of study, 2 hours per week",
+     "similarity": 0.679
+    },
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.669
+    },
+    {
+     "slug": "environmental-project-management-stakeholder-collaboration",
+     "name": "Environmental Project Management: Stakeholder Collaboration",
+     "url": "https://www.coursera.org/learn/environmental-project-management-stakeholder-collaboration",
+     "workload": "5 weeks, 3-5 hours a week",
+     "similarity": 0.667
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/66db424f-2abe-420d-8e5b-186607266b61": {
+   "label": "corporate social responsibility",
+   "courses": [
+    {
+     "slug": "business-ethics-and-social-responsibility",
+     "name": "Business Ethics and Social Responsibility",
+     "url": "https://www.coursera.org/learn/business-ethics-and-social-responsibility",
+     "workload": null,
+     "similarity": 0.743
+    },
+    {
+     "slug": "introduction-to-corporate-sustainability",
+     "name": "Introduction to Corporate Sustainability",
+     "url": "https://www.coursera.org/learn/introduction-to-corporate-sustainability",
+     "workload": "3 weeks of study, 2 hours/week",
+     "similarity": 0.736
+    },
+    {
+     "slug": "sustainability-csr-scandinavia",
+     "name": "Sustainable Vikings:  Sustainability & Corporate Social Responsibility in Scandinavia  ",
+     "url": "https://www.coursera.org/learn/sustainability-csr-scandinavia",
+     "workload": null,
+     "similarity": 0.701
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/f5bf985b-ac78-4d23-881a-18a359234528": {
+   "label": "corporate sustainability",
+   "courses": [
+    {
+     "slug": "introduction-to-corporate-sustainability",
+     "name": "Introduction to Corporate Sustainability",
+     "url": "https://www.coursera.org/learn/introduction-to-corporate-sustainability",
+     "workload": "3 weeks of study, 2 hours/week",
+     "similarity": 0.777
+    },
+    {
+     "slug": "sustainable-business-practices",
+     "name": "Sustainable Business Practices",
+     "url": "https://www.coursera.org/learn/sustainable-business-practices",
+     "workload": "3 weeks of study, 3 hours per week",
+     "similarity": 0.755
+    },
+    {
+     "slug": "sustainability-in-business-building-a-greener-future",
+     "name": "Sustainability in Business: Building a Greener Future",
+     "url": "https://www.coursera.org/learn/sustainability-in-business-building-a-greener-future",
+     "workload": "4 weeks of study, 3-5 hours per week",
+     "similarity": 0.75
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/ddce2912-bc0f-4a47-aa2b-c1de48bc4b44": {
+   "label": "energy conservation",
+   "courses": [
+    {
+     "slug": "energy-harvesting",
+     "name": "Energy Harvesting",
+     "url": "https://www.coursera.org/learn/energy-harvesting",
+     "workload": null,
+     "similarity": 0.688
+    },
+    {
+     "slug": "energy-modeling-predicting--optimizing-consumption",
+     "name": "Energy Modeling: Predicting & Optimizing Consumption",
+     "url": "https://www.coursera.org/learn/energy-modeling-predicting--optimizing-consumption",
+     "workload": "3 Hours",
+     "similarity": 0.669
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/83fc0b2b-6cd2-46af-b1ff-d3fc83604c26": {
+   "label": "energy efficiency",
+   "courses": [
+    {
+     "slug": "energy-harvesting",
+     "name": "Energy Harvesting",
+     "url": "https://www.coursera.org/learn/energy-harvesting",
+     "workload": null,
+     "similarity": 0.702
+    },
+    {
+     "slug": "energy-modeling-predicting--optimizing-consumption",
+     "name": "Energy Modeling: Predicting & Optimizing Consumption",
+     "url": "https://www.coursera.org/learn/energy-modeling-predicting--optimizing-consumption",
+     "workload": "3 Hours",
+     "similarity": 0.673
+    },
+    {
+     "slug": "energy-industry-overview",
+     "name": "Energy: The Enterprise",
+     "url": "https://www.coursera.org/learn/energy-industry-overview",
+     "workload": null,
+     "similarity": 0.667
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/089ee650-297e-4716-87d1-440743b70a0d": {
+   "label": "ensure compliance with environmental legislation",
+   "courses": [
+    {
+     "slug": "course-3-environmental-protection-and-sustainability",
+     "name": "Environmental Protection and Sustainability",
+     "url": "https://www.coursera.org/learn/course-3-environmental-protection-and-sustainability",
+     "workload": null,
+     "similarity": 0.704
+    },
+    {
+     "slug": "environmental-leadership-climate",
+     "name": "Environmental Leadership",
+     "url": "https://www.coursera.org/learn/environmental-leadership-climate",
+     "workload": "4 weeks of study, 2 hours per week",
+     "similarity": 0.697
+    },
+    {
+     "slug": "environmental-issues-policies-and-practice-1",
+     "name": "Environmental Issues, Policies, and Practice",
+     "url": "https://www.coursera.org/learn/environmental-issues-policies-and-practice-1",
+     "workload": "6 weeks, 6 hours / week",
+     "similarity": 0.686
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/dab7c301-2a33-454e-8fed-23218fa28eee": {
+   "label": "environmental design",
+   "courses": [
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.679
+    },
+    {
+     "slug": "environmental-issues-policies-and-practice-1",
+     "name": "Environmental Issues, Policies, and Practice",
+     "url": "https://www.coursera.org/learn/environmental-issues-policies-and-practice-1",
+     "workload": "6 weeks, 6 hours / week",
+     "similarity": 0.678
+    },
+    {
+     "slug": "intro-to-environmental-science",
+     "name": "Introduction to Environmental Science",
+     "url": "https://www.coursera.org/learn/intro-to-environmental-science",
+     "workload": "4 weeks, 2 hours / week",
+     "similarity": 0.678
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/6f5850ea-5785-4e2c-b062-743066fd5bdb": {
+   "label": "environmental legislation",
+   "courses": [
+    {
+     "slug": "environmental-law",
+     "name": "Introduction to Environmental Law and Policy",
+     "url": "https://www.coursera.org/learn/environmental-law",
+     "workload": "4-6 hours/week",
+     "similarity": 0.682
+    },
+    {
+     "slug": "intro-to-environmental-science",
+     "name": "Introduction to Environmental Science",
+     "url": "https://www.coursera.org/learn/intro-to-environmental-science",
+     "workload": "4 weeks, 2 hours / week",
+     "similarity": 0.678
+    },
+    {
+     "slug": "environmental-issues-policies-and-practice-1",
+     "name": "Environmental Issues, Policies, and Practice",
+     "url": "https://www.coursera.org/learn/environmental-issues-policies-and-practice-1",
+     "workload": "6 weeks, 6 hours / week",
+     "similarity": 0.662
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/e3f2c37f-e484-4b4c-ad82-f565a2b98f89": {
+   "label": "environmental management monitors",
+   "courses": [
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.706
+    },
+    {
+     "slug": "monitoring-and-controlling",
+     "name": "Monitoring and Controlling",
+     "url": "https://www.coursera.org/learn/monitoring-and-controlling",
+     "workload": null,
+     "similarity": 0.66
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/95bff246-c3ce-4181-a11b-e4363453c2f8": {
+   "label": "environmental management standards",
+   "courses": [
+    {
+     "slug": "packt-iso-14001-step-by-step",
+     "name": "ISO 14001 Step by Step",
+     "url": "https://www.coursera.org/learn/packt-iso-14001-step-by-step",
+     "workload": null,
+     "similarity": 0.754
+    },
+    {
+     "slug": "course-3-environmental-protection-and-sustainability",
+     "name": "Environmental Protection and Sustainability",
+     "url": "https://www.coursera.org/learn/course-3-environmental-protection-and-sustainability",
+     "workload": null,
+     "similarity": 0.72
+    },
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.687
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/081d7679-5070-4777-bece-a28c49f15636": {
+   "label": "environmental policy",
+   "courses": [
+    {
+     "slug": "environmental-issues-policies-and-practice-1",
+     "name": "Environmental Issues, Policies, and Practice",
+     "url": "https://www.coursera.org/learn/environmental-issues-policies-and-practice-1",
+     "workload": "6 weeks, 6 hours / week",
+     "similarity": 0.731
+    },
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.702
+    },
+    {
+     "slug": "globalenergyandclimatepolicy",
+     "name": "Global Energy and Climate Policy",
+     "url": "https://www.coursera.org/learn/globalenergyandclimatepolicy",
+     "workload": null,
+     "similarity": 0.694
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/969ebc5a-e486-41b7-9a3d-15f9aa61680d": {
+   "label": "evaluate company needs",
+   "courses": [
+    {
+     "slug": "financial-analysis-and-company-valuation-basics",
+     "name": "Financial Analysis and Company Valuation Basics",
+     "url": "https://www.coursera.org/learn/financial-analysis-and-company-valuation-basics",
+     "workload": null,
+     "similarity": 0.673
+    },
+    {
+     "slug": "financial-statement-analysis-credit-decisions",
+     "name": "Financial Statement Analysis for Credit Decisions",
+     "url": "https://www.coursera.org/learn/financial-statement-analysis-credit-decisions",
+     "workload": null,
+     "similarity": 0.662
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/1c08d63d-1c5e-4b9b-ad3e-f7ba7debb2d1": {
+   "label": "forecast organisational risks",
+   "courses": [
+    {
+     "slug": "risk-analysis-business-financial-decisions",
+     "name": "Risk Analysis for Business and Financial Decisions",
+     "url": "https://www.coursera.org/learn/risk-analysis-business-financial-decisions",
+     "workload": null,
+     "similarity": 0.731
+    },
+    {
+     "slug": "corporate-foresight",
+     "name": "Corporate Foresight",
+     "url": "https://www.coursera.org/learn/corporate-foresight",
+     "workload": "5 weeks",
+     "similarity": 0.71
+    },
+    {
+     "slug": "agile-organisation-strategies-for-business-resilience",
+     "name": "Agile Organisation: Strategies for Business Resilience",
+     "url": "https://www.coursera.org/learn/agile-organisation-strategies-for-business-resilience",
+     "workload": null,
+     "similarity": 0.706
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/4300b453-9bcf-474c-9ee3-92ec2229720c": {
+   "label": "global standards for sustainability reporting",
+   "courses": [
+    {
+     "slug": "global-sustainability-be-sustainable",
+     "name": "Global sustainability and corporate social responsibility: Be sustainable",
+     "url": "https://www.coursera.org/learn/global-sustainability-be-sustainable",
+     "workload": null,
+     "similarity": 0.732
+    },
+    {
+     "slug": "sustainability-reporting-from-regulation-to-implementation",
+     "name": "Sustainability Reporting: From Regulation to Implementation",
+     "url": "https://www.coursera.org/learn/sustainability-reporting-from-regulation-to-implementation",
+     "workload": null,
+     "similarity": 0.692
+    },
+    {
+     "slug": "sustainable-finance",
+     "name": "Principles of Sustainable Finance ",
+     "url": "https://www.coursera.org/learn/sustainable-finance",
+     "workload": null,
+     "similarity": 0.677
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/7f4d1dee-bc5a-495a-926b-17b383b8d8fd": {
+   "label": "green building standards",
+   "courses": [
+    {
+     "slug": "sustainable-construction-management",
+     "name": "Sustainable Construction Management",
+     "url": "https://www.coursera.org/learn/sustainable-construction-management",
+     "workload": "4 weeks, 2-3 hours a week",
+     "similarity": 0.747
+    },
+    {
+     "slug": "green-building-assessment--certification",
+     "name": "Green Building Assessment & Certification",
+     "url": "https://www.coursera.org/learn/green-building-assessment--certification",
+     "workload": null,
+     "similarity": 0.734
+    },
+    {
+     "slug": "sustainable-building-design-and-specification",
+     "name": "Sustainable Building: Design and Specification",
+     "url": "https://www.coursera.org/learn/sustainable-building-design-and-specification",
+     "workload": null,
+     "similarity": 0.705
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/0e78d9c9-7c3c-4c5c-82cb-205c16edbcb8": {
+   "label": "green computing",
+   "courses": [
+    {
+     "slug": "eco-tech-exploring-its-impact-on-a-sustainable-future",
+     "name": "Eco-Tech: Exploring IT's Impact on a Sustainable Future",
+     "url": "https://www.coursera.org/learn/eco-tech-exploring-its-impact-on-a-sustainable-future",
+     "workload": "3-4 hours per week for 4 weeks",
+     "similarity": 0.712
+    },
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.683
+    },
+    {
+     "slug": "packt-sustainable-cloud-development",
+     "name": "Sustainable Cloud Development ",
+     "url": "https://www.coursera.org/learn/packt-sustainable-cloud-development",
+     "workload": null,
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/5944cee9-763e-4b08-99e4-f514bdde14a6": {
+   "label": "hazardous waste types",
+   "courses": [
+    {
+     "slug": "hazardous-waste-management",
+     "name": "Hazardous Waste Management",
+     "url": "https://www.coursera.org/learn/hazardous-waste-management",
+     "workload": null,
+     "similarity": 0.789
+    },
+    {
+     "slug": "environmental-hazards-and-global-public-health",
+     "name": "Environmental Hazards and Global Public Health",
+     "url": "https://www.coursera.org/learn/environmental-hazards-and-global-public-health",
+     "workload": null,
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/bbcc7e1b-3d4d-4422-9fac-efd636eb9de4": {
+   "label": "lead the sustainability reporting process",
+   "courses": [
+    {
+     "slug": "global-sustainability-be-sustainable",
+     "name": "Global sustainability and corporate social responsibility: Be sustainable",
+     "url": "https://www.coursera.org/learn/global-sustainability-be-sustainable",
+     "workload": null,
+     "similarity": 0.699
+    },
+    {
+     "slug": "leadership-and-change-management-for-sustainability-success",
+     "name": "Leadership and Change Management for Sustainability Success",
+     "url": "https://www.coursera.org/learn/leadership-and-change-management-for-sustainability-success",
+     "workload": "3 weeks of study, 3 hours/week",
+     "similarity": 0.693
+    },
+    {
+     "slug": "sustainability-consulting",
+     "name": "Sustainability Consulting",
+     "url": "https://www.coursera.org/learn/sustainability-consulting",
+     "workload": null,
+     "similarity": 0.686
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/b13e0689-636d-42d0-86c3-df9d6f85a882": {
+   "label": "manage environmental management system",
+   "courses": [
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.73
+    },
+    {
+     "slug": "environmental-management-ethics",
+     "name": "Environmental Management & Ethics",
+     "url": "https://www.coursera.org/learn/environmental-management-ethics",
+     "workload": null,
+     "similarity": 0.69
+    },
+    {
+     "slug": "planning-auditing-maintaining-enterprise-systems",
+     "name": "Planning, Auditing and Maintaining Enterprise Systems",
+     "url": "https://www.coursera.org/learn/planning-auditing-maintaining-enterprise-systems",
+     "workload": null,
+     "similarity": 0.681
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d53eab76-e8ff-4e28-af26-7e012951c763": {
+   "label": "measure company's sustainability performance",
+   "courses": [
+    {
+     "slug": "sustainable-business-practices",
+     "name": "Sustainable Business Practices",
+     "url": "https://www.coursera.org/learn/sustainable-business-practices",
+     "workload": "3 weeks of study, 3 hours per week",
+     "similarity": 0.748
+    },
+    {
+     "slug": "advanced-strategies-for-sustainable-business",
+     "name": " Advanced Strategies for Sustainable Business",
+     "url": "https://www.coursera.org/learn/advanced-strategies-for-sustainable-business",
+     "workload": "3 weeks of study, 2 hours per week",
+     "similarity": 0.736
+    },
+    {
+     "slug": "global-sustainability-be-sustainable",
+     "name": "Global sustainability and corporate social responsibility: Be sustainable",
+     "url": "https://www.coursera.org/learn/global-sustainability-be-sustainable",
+     "workload": null,
+     "similarity": 0.727
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d2c81ad1-2439-43cf-9c63-204187b8f771": {
+   "label": "mitigate waste of resources",
+   "courses": [
+    {
+     "slug": "effective-time-management-lo097003",
+     "name": "Effective Time Management",
+     "url": "https://www.coursera.org/learn/effective-time-management-lo097003",
+     "workload": null,
+     "similarity": 0.667
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/1dd23dba-dd00-45ab-abf4-642902538317": {
+   "label": "perform risk analysis",
+   "courses": [
+    {
+     "slug": "risk-analysis-business-financial-decisions",
+     "name": "Risk Analysis for Business and Financial Decisions",
+     "url": "https://www.coursera.org/learn/risk-analysis-business-financial-decisions",
+     "workload": null,
+     "similarity": 0.754
+    },
+    {
+     "slug": "risk-analysis-techniques",
+     "name": "Risk Analysis",
+     "url": "https://www.coursera.org/learn/risk-analysis-techniques",
+     "workload": null,
+     "similarity": 0.742
+    },
+    {
+     "slug": "introduction-to-risk-management",
+     "name": "Introduction to Risk Management",
+     "url": "https://www.coursera.org/learn/introduction-to-risk-management",
+     "workload": "4 weeks of study, 2-3 hours per week",
+     "similarity": 0.732
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/97725325-5287-4ebb-9f83-1ba2c38f465c": {
+   "label": "produce sustainable products",
+   "courses": [
+    {
+     "slug": "sustainable-product-design",
+     "name": "Sustainable Product Design",
+     "url": "https://www.coursera.org/learn/sustainable-product-design",
+     "workload": "About 5 hours per week of study and assignment. Total number of weeks = 4.",
+     "similarity": 0.701
+    },
+    {
+     "slug": "packaging-design-for-the-circular-economy",
+     "name": "Packaging Design for the Circular Economy",
+     "url": "https://www.coursera.org/learn/packaging-design-for-the-circular-economy",
+     "workload": "6-10 hours per week, the entire course can be completed in 5-6 weeks",
+     "similarity": 0.696
+    },
+    {
+     "slug": "sustainable-supply-chains",
+     "name": "Sustainable Supply Chains",
+     "url": "https://www.coursera.org/learn/sustainable-supply-chains",
+     "workload": "3 weeks of study, 1-1.5 hours per week.",
+     "similarity": 0.696
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/8abdc43c-2bfd-417c-97c2-27fcdaf53171": {
+   "label": "promote environmental awareness",
+   "courses": [
+    {
+     "slug": "environmental-sustainability",
+     "name": "Environmental sustainability",
+     "url": "https://www.coursera.org/learn/environmental-sustainability",
+     "workload": null,
+     "similarity": 0.703
+    },
+    {
+     "slug": "environmental-leadership-climate",
+     "name": "Environmental Leadership",
+     "url": "https://www.coursera.org/learn/environmental-leadership-climate",
+     "workload": "4 weeks of study, 2 hours per week",
+     "similarity": 0.689
+    },
+    {
+     "slug": "environmental-issues-policies-and-practice-1",
+     "name": "Environmental Issues, Policies, and Practice",
+     "url": "https://www.coursera.org/learn/environmental-issues-policies-and-practice-1",
+     "workload": "6 weeks, 6 hours / week",
+     "similarity": 0.683
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d1f73ae9-d348-4aac-b5d5-9b6d508401d3": {
+   "label": "resource-efficient technologies",
+   "courses": [
+    {
+     "slug": "sustainable-practices-in-high-tech-manufacturing",
+     "name": "Sustainable Practices in High-Tech Manufacturing",
+     "url": "https://www.coursera.org/learn/sustainable-practices-in-high-tech-manufacturing",
+     "workload": "80 Minutes",
+     "similarity": 0.671
+    },
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.668
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/d84326c9-a3d3-4e22-a6a1-1ad42a356f10": {
+   "label": "sustainability consulting",
+   "courses": [
+    {
+     "slug": "sustainability-consulting",
+     "name": "Sustainability Consulting",
+     "url": "https://www.coursera.org/learn/sustainability-consulting",
+     "workload": null,
+     "similarity": 0.841
+    },
+    {
+     "slug": "sustainable-business-practices",
+     "name": "Sustainable Business Practices",
+     "url": "https://www.coursera.org/learn/sustainable-business-practices",
+     "workload": "3 weeks of study, 3 hours per week",
+     "similarity": 0.736
+    },
+    {
+     "slug": "sustainability-in-business-building-a-greener-future",
+     "name": "Sustainability in Business: Building a Greener Future",
+     "url": "https://www.coursera.org/learn/sustainability-in-business-building-a-greener-future",
+     "workload": "4 weeks of study, 3-5 hours per week",
+     "similarity": 0.713
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/203083ca-b051-4c28-8986-fc8731bacee5": {
+   "label": "sustainable finance",
+   "courses": [
+    {
+     "slug": "sustainable-finance",
+     "name": "Principles of Sustainable Finance ",
+     "url": "https://www.coursera.org/learn/sustainable-finance",
+     "workload": null,
+     "similarity": 0.749
+    },
+    {
+     "slug": "sustainable-corporate-finance",
+     "name": "Sustainable Corporate Finance",
+     "url": "https://www.coursera.org/learn/sustainable-corporate-finance",
+     "workload": "10 weeks of study, 1.5 hours/week",
+     "similarity": 0.738
+    },
+    {
+     "slug": "introduction-to-sustainable-finance",
+     "name": "Foundations of Sustainability and ESG",
+     "url": "https://www.coursera.org/learn/introduction-to-sustainable-finance",
+     "workload": "2 weeks of study, 4 hours/week",
+     "similarity": 0.734
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/103f7814-d262-4df6-a1b6-759bc51f76cb": {
+   "label": "sustainable technologies",
+   "courses": [
+    {
+     "slug": "global-environmental-management",
+     "name": "Global Environmental Management",
+     "url": "https://www.coursera.org/learn/global-environmental-management",
+     "workload": null,
+     "similarity": 0.734
+    },
+    {
+     "slug": "sustainability",
+     "name": "Introduction to Sustainability",
+     "url": "https://www.coursera.org/learn/sustainability",
+     "workload": "8-10 hours/week",
+     "similarity": 0.695
+    },
+    {
+     "slug": "applied-sustainability-engineering",
+     "name": " Applied Sustainability Engineering",
+     "url": "https://www.coursera.org/learn/applied-sustainability-engineering",
+     "workload": "6-10 hours per week, the entire course can be completed in 5-6 weeks",
+     "similarity": 0.692
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/73576419-31c2-4e45-8e30-ab1afec3db4e": {
+   "label": "use sustainable materials and components",
+   "courses": [
+    {
+     "slug": "applied-sustainability-engineering",
+     "name": " Applied Sustainability Engineering",
+     "url": "https://www.coursera.org/learn/applied-sustainability-engineering",
+     "workload": "6-10 hours per week, the entire course can be completed in 5-6 weeks",
+     "similarity": 0.686
+    },
+    {
+     "slug": "sustainable-construction-management",
+     "name": "Sustainable Construction Management",
+     "url": "https://www.coursera.org/learn/sustainable-construction-management",
+     "workload": "4 weeks, 2-3 hours a week",
+     "similarity": 0.675
+    },
+    {
+     "slug": "sustainable-building-design-and-specification",
+     "name": "Sustainable Building: Design and Specification",
+     "url": "https://www.coursera.org/learn/sustainable-building-design-and-specification",
+     "workload": null,
+     "similarity": 0.668
+    }
+   ]
+  },
+  "http://data.europa.eu/esco/skill/40f65a56-ccbe-4601-9f32-1cc6cdd24f28": {
+   "label": "waste management",
+   "courses": [
+    {
+     "slug": "hazardous-waste-management",
+     "name": "Hazardous Waste Management",
+     "url": "https://www.coursera.org/learn/hazardous-waste-management",
+     "workload": null,
+     "similarity": 0.729
+    },
+    {
+     "slug": "solid-waste-processing-and-treatment",
+     "name": "Solid Waste Processing and Treatment",
+     "url": "https://www.coursera.org/learn/solid-waste-processing-and-treatment",
+     "workload": null,
+     "similarity": 0.692
+    },
+    {
+     "slug": "solid-waste-management",
+     "name": "Municipal Solid Waste Management in Developing Countries",
+     "url": "https://www.coursera.org/learn/solid-waste-management",
+     "workload": "5 weeks of study, 4-6 hours/week",
+     "similarity": 0.692
+    }
+   ]
+  }
+ }
+}
