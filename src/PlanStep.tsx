@@ -11,6 +11,8 @@ import { recommendMoves, scenarios } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 import { SdgContribution } from './SdgViews';
 import matchesFile from '../data/derived/coursera-skill-matches.json';
+import { CourseProgressControl, LearningProgress } from './CourseProgress';
+import { activityCount, type CourseProgress, type LearningAction } from './learningCheck';
 
 const resources = resourcesFile.resources as Resource[];
 // AI-matched Coursera courses (RunPod, bge-m3); see scripts/match_courses_runpod.py.
@@ -86,8 +88,9 @@ function NossRoute({ roleId, n }: { roleId: string; n?: number }) {
     : <li className="plan-noss-step">{n > 1 && <span className="plan-num">{n}</span>}<div>{body}</div></li>;
 }
 
-export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
+export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress, onCourseStatus }: {
   profile: Profile; roleId: string | null; onPickRole: (id: string) => void; onBackToMoves: () => void;
+  progress: CourseProgress; onCourseStatus: (course: string, action: LearningAction) => void;
 }) {
   const t = useT();
   const tx = useTx();
@@ -104,6 +107,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
   const [showAllAi, setShowAllAi] = useState(false);
   const aiShown = showAllAi ? suggested.steps : suggested.steps.slice(0, 4);
   const total = plan.steps.length + suggested.steps.length;
+  const activities = activityCount([...plan.steps.map(step => step.resource.url), ...suggested.steps.map(step => step.course.url)], progress);
 
   return <div className="step-body">
     <div className="who plan-who">
@@ -133,13 +137,16 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
             : t('Start with a checked course, then review suggestions for the remaining skills.')}</p>
         {plan.steps.length > 0 && <p className="plan-total"><strong>{t('Estimated time: {h} hours', { h: plan.statedHours })}</strong> {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}{plan.stepsWithoutHours > 0 ? ` (${t('{n} without a stated time', { n: plan.stepsWithoutHours })})` : ''}{suggested.steps.length > 0 ? `; ${t('AI suggestions show their own time')}` : ''}.</p>}
 
+        <LearningProgress total={activities.total} recorded={activities.recorded} />
         {total + Number(hasNoss(role.id)) > 0 && <ol className={`plan-steps${total + Number(hasNoss(role.id)) === 1 ? ' single' : ''}`}>
           {plan.steps.map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber={total + Number(hasNoss(role.id)) > 1} primary={i === 0}
             title={step.resource.title} url={step.resource.url} closes={step.closes}
+            extra={<CourseProgressControl key={(profile.persona ?? 'me') + step.resource.url} status={progress[step.resource.url]} onAction={(action) => onCourseStatus(step.resource.url, action)} />}
             label={<span className="course-kind checked">{t('Checked course')}</span>}
             meta={<span title={step.resource.timeBasis}>{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : step.resource.access === 'rakyat-digital' ? t('Paid; free 3 months via Rakyat Digital') : <span className="plan-paid">{t(step.resource.cost)}</span>} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</span>} />)}
           {aiShown.map((step, i) => <CourseCard key={step.course.slug} n={plan.steps.length + i + 1} showNumber={total + Number(hasNoss(role.id)) > 1} primary={plan.steps.length === 0 && i === 0}
             title={step.course.name} url={step.course.url} closes={step.closes}
+            extra={<CourseProgressControl key={(profile.persona ?? 'me') + step.course.url} status={progress[step.course.url]} onAction={(action) => onCourseStatus(step.course.url, action)} />}
             label={<span className="course-kind ai">{t('AI suggestion · match {n}%', { n: Math.round(step.bestMatch * 100) })}</span>}
             meta={<>Coursera · {t('Paid; free 3 months via Rakyat Digital')} · {step.course.workload ?? t('time not stated')}</>} />)}
           {hasNoss(role.id) && <NossRoute roleId={role.id} n={plan.steps.length + aiShown.length + 1} />}

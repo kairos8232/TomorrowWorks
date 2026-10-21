@@ -18,6 +18,16 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] Use wide Home columns and compact phone move rows; inspect Home and Your plan at 1440 px, Home, Your skills, Your moves and Your plan at 390 px, and the Malay Home header at 320 px. Check Malay and Chinese phone navigation.
 - [x] Run `npm run build` and `npm test` after the refinement (60 tests passed); run Impeccable layout detection (no findings).
 
+## Learner motivation — evidence-link preview (22 Oct 2026)
+
+- [x] Replace reflection/activity controls with fictional public credential-link submission on individual courses. Support format validation, edit/cancel/remove, and explicit unverified status.
+- [x] Show accessible evidence-submission bar; keep it separate from verified completion and skills. Preserve memory-only privacy and viewer separation; no files or reviewer integration.
+- [x] Build and 84 tests pass. Desktop/phone Edge checks cover invalid URLs, checked/AI submissions, editing/removal, counts, navigation, role/learner separation, refresh, translated fit and Team/NOSS exclusions.
+- [ ] User review of evidence-link prototype.
+- [ ] Team review of new translations.
+- [ ] Decide real evidence storage, consent, access and deletion before file uploads or real credentials.
+- [ ] Provider/authorised-reviewer verification before completion claims or badges.
+
 ## Stage 0 — Repository documents
 
 - [x] Write a README that identifies the project as a planned prototype.

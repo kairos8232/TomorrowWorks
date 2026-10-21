@@ -71,6 +71,14 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
+## Completion evidence — credential-link prototype (22 Oct 2026)
+
+- Supersedes reflection/activity tracking and the earlier course quiz. Each individual-plan checked course and AI suggestion accepts a fictional public HTTPS credential link. Real certificates and personal information are prohibited in this demo; file uploads are not enabled.
+- A submission shows Evidence submitted — not verified. Only URL syntax is checked: HTTPS, a dotted hostname, no embedded credentials and a maximum of 2,000 characters. The app does not fetch the link or confirm existence, issuer, learner identity or course relevance. It has no reviewer queue or provider integration.
+- Links can be edited, cancelled during editing, or removed. Removing evidence reduces the native, labelled bar. The bar counts submitted evidence per unique course URL in the current plan, including hidden suggestions, not completed courses. No skills, gaps, scores, badges or SDG claims change.
+- Links stay in App memory, separate for Aina, Hakim and Me; navigation and target changes preserve them, refresh clears them. Nothing is uploaded or sent to a reviewer. Team view and NOSS certification routes have no submission controls.
+- Build and 84 tests pass. Installed Edge desktop 1440 × 1000 and phone 390 × 844 checks cover malformed/unsafe URLs, submission/edit/cancel/remove, checked/AI course counts, navigation, role/learner separation, refresh and EN/MS/ZH phone fit. No page errors; existing favicon 404 excluded. New translations still need team review.
+
 ## Team view (For teams)
 
 For HR / L&D managers (a fictional five-person finance team) and career centres (a fictional class of three graduates); brief target groups 3 and 4.

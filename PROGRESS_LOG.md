@@ -1,5 +1,44 @@
 # Progress log
 
+## 22 Oct 2026 — Credential-link evidence prototype replaces reflections
+
+- User proposed certificates/proof after rejecting reflection usefulness, then approved trying a fictional public credential-link submission prototype. File uploads remain disabled; no real certificates or personal data. Previous activity and quiz entries are superseded.
+- Every individual checked/AI course supports submit/edit/cancel/remove. HTTPS URL syntax is checked, not existence, issuer, identity, authenticity or relevance. UI says Evidence submitted — not verified and explicitly states there is no reviewer delivery. Progress counts submitted links per unique current-plan course URL; removing reduces it. No completion badge or skill/scoring change.
+- Links remain memory-only per profile owner and clear on refresh. No link fetching, API, new dependencies, accounts or storage. Real uploads require separate consent/access/retention/deletion decisions; verification requires provider or authorised review integration.
+- Build and 84 tests pass (URL validation, edit/remove, unique-plan counting). Edge desktop 1440 × 1000 and phone 390 × 844: malformed/unsafe link rejection, submit/edit/cancel/remove, checked/AI courses, counts, navigation, role/learner isolation, refresh, EN/MS/ZH fit and Team/NOSS exclusion pass. No page errors; favicon remains a pre-existing 404. Screenshots outside repo. Team translation review pending. Branch kit-yiu; no commit or push; awaiting preview feedback.
+
+---
+
+## 22 Oct 2026 — Shared learning activity flow replaces the one-course quiz
+
+- User rejected bespoke quizzes per course as unscalable and authorised trying a shared guided flow. Replaced quiz/answer logic with three activities on every checked course and AI suggestion: open provider link, review mapped skills, save an ungraded reflection. Provider opening records a click only; reviewing and reflecting are learner-recorded actions, not independent verification.
+- Native progress sums activities on unique course URLs in the current plan, including collapsed suggestions; it never labels external courses completed. All cards state completion not verified. No badges, generated questions, automatic skill updates or provider integration.
+- Saved reflections can be edited without extra progress. State and notes stay in memory per profile owner and clear on refresh. Form prohibits personal/confidential information and asks for fictional examples; translated EN/MS/ZH UI; team language review pending.
+- Verified build and 84 tests, including sequential transitions, blank-note rejection, progress deduplication and edit/reopen handling. Edge browser at 1440 × 1000 / 390 × 844: checked and AI flows, blank rejection, notes, edit, bar, navigation, role changes, Aina/Hakim separation, languages, refresh and Team/NOSS exclusions pass. No page errors. Browser plugin absent; used already-installed Edge/puppeteer-core with screenshots outside the repo.
+- Work remains on kit-yiu, uncommitted and unpushed. Await user preview before further features. Prior quiz and manual-selector entries are historical and superseded.
+
+---
+
+## 22 Oct 2026 — User correction: guided assessment instead of manual completion
+
+- Supersedes the self-reported selector in the prior entry. User required guidance and a progress bar rather than choosing completion manually.
+- ol-bookkeeping now has three original synthetic practice questions, aligned with the learning outcomes on OpenLearn's course page (https://www.open.edu/openlearn/money-business/introduction-bookkeeping-and-accounting/content-section-0/, checked 22 Oct). Course outcomes cover accounting equations, double entry and trial balances. Question/answer content is drafted, pending team review; not a provider exam, not a validated competency instrument.
+- Pure advanceLearning transitions require learning → assessment → all three correct. Wrong/incomplete answers never pass; explanations and retry guide learning. Opening a provider link only starts learning. Native progress counts passed assessments in the selected plan, not completed external courses or resolved skill gaps. Plans with no assessment have an explicit empty state.
+- Browser checks: installed Edge via existing puppeteer-core (Browser plugin absent; no tooling download). Desktop 1440 × 1000 and phone 390 × 844; start/gating, incomplete submit, wrong-answer feedback/retry, pass, role changes, zero-assessment state, navigation, Aina/Hakim isolation, refresh reset, Team/NOSS exclusions and EN/MS/ZH phone fit passed. No application exceptions or failed assets except the pre-existing favicon 404. Build and 84 tests pass, including 3 assessment-rule tests. Screenshot review led to clearer vertical learning steps.
+- State remains memory-only; confirmed skills, scores and SDG claims unchanged. No manual completion control, generated claims, new dependencies, badges, commit or push. Await user preview feedback before extending.
+
+---
+
+## 22 Oct 2026 — Learner motivation, step 1: course status
+
+- User requested one step at a time, with a preview and check after every step. Work is on kit-yiu. No summary or badge has been added yet.
+- Individual courses now offer Not started / In progress / Completed through CourseProgressControl, passed via CourseCard's existing extra slot. State lives in App, separate for each actual profile owner and course URL; navigation and role switching preserve it, refresh clears it. No automatic skill or score changes. Labels and disclosure have Malay and Chinese translations (team language review remains applicable).
+- Verification: npm run build and npm test passed (81 tests). Existing Edge and puppeteer-core were used because Browser plugin was absent and downloading Playwright was declined. Checked desktop 1440 × 1000, phone 390 × 844, status changes and undo, keyboard interaction, page navigation, role switching, Aina/Hakim isolation, refresh reset, Team/NOSS exclusion and translated control fit. No page exceptions or application console errors; favicon.ico returns 404.
+- Dependencies installed at locked versions; Windows system certificates resolved the registry certificate failure. Screenshots and temporary preview scripts remain outside the TomorrowWorks repository. No commit or push; user review of step 1 comes next.
+
+---
+
+
 What was done, why, and what is still open. Newest entry first. Add an entry whenever a decision or finding changes the plan; keep the *how* in the linked documents.
 
 ---
