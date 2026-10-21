@@ -150,6 +150,8 @@ const dict: Record<string, Entry> = {
   'This move and the SDGs': { ms: 'Langkah ini dan SDG', zh: '这项职业选择与可持续发展目标' },
   'No checked course yet': { ms: 'Belum ada kursus yang disemak', zh: '尚无已核实课程' },
   'skills to build': { ms: 'kemahiran perlu dibina', zh: '项技能需要培养' },
+  'Start with a checked course, then review suggestions for the remaining skills.': { ms: 'Mulakan dengan kursus yang disemak, kemudian semak cadangan untuk kemahiran selebihnya.', zh: '先学习已核实的课程，再查看其余技能的课程建议。' },
+  'No checked course yet. Review the suggestions for these skills below.': { ms: 'Belum ada kursus yang disemak. Semak cadangan untuk kemahiran ini di bawah.', zh: '目前没有已核实的课程。请查看下方针对这些技能的建议。' },
   '{n} partly held': { ms: '{n} sebahagiannya dimiliki', zh: '{n} 项已部分具备' },
   '{k} covered by {n} checked courses': { ms: '{k} diliputi oleh {n} kursus yang disemak', zh: '{n} 门已核实课程涵盖 {k} 项' },
   '{n} provider-stated hours': { ms: '{n} jam menurut penyedia', zh: '课程提供方注明 {n} 小时' },

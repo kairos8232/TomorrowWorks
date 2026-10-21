@@ -56,9 +56,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
   const chosen = moves.find((m) => m.role.id === roleId) ?? moves[0];
   const plan = useMemo(() => learningPlan(chosen, resources), [chosen]);
   const role = chosen.role;
-  const closed = plan.gaps.length - plan.uncovered.length;
   const persona = personaById(profile.persona);
-  const partly = plan.gaps.filter((g) => g.partly).length;
 
   return <div className="step-body">
     <div className="who plan-who">
@@ -77,16 +75,11 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
 
     {plan.gaps.length === 0
       ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
-      : <>
-        <p className="plan-summary">
-          <strong>{plan.gaps.length}</strong> {t('skills to build')}
-          {partly > 0 && <> · {t('{n} partly held', { n: partly })}</>}
-          {plan.steps.length > 0 ? <>
-            {' · '}{t('{k} covered by {n} checked courses', { k: closed, n: plan.steps.length })}
-            {plan.statedHours > 0 && <> · {t('{n} provider-stated hours', { n: plan.statedHours })}</>}
-            {plan.stepsWithoutHours > 0 && <> · {t('{n} courses without stated hours', { n: plan.stepsWithoutHours })}</>}
-          </> : <> · {t('No checked course yet')}</>}
-        </p>
+      : <section className="panel plan-learning" aria-labelledby="plan-skills-heading">
+        <h2 id="plan-skills-heading">{plan.gaps.length} {t('skills to build')}</h2>
+        <p className="plan-learning-intro">{plan.steps.length > 0
+          ? t('Start with a checked course, then review suggestions for the remaining skills.')
+          : t('No checked course yet. Review the suggestions for these skills below.')}</p>
 
         {plan.steps.length > 0 && <ol className="plan-steps">
           {plan.steps.map((step, i) => <li key={step.resource.id}>
@@ -106,7 +99,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         {plan.steps.length > 0 && <p className="plan-method note">{t('Checked {date}. Ordered by gap coverage, then price and stated hours. Course-to-skill links are our interpretation.', { date: resourcesFile.checkedAt })}</p>}
 
         {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
-      </>}
+      </section>}
 
     <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('This move and the SDGs')} compact />
 

@@ -15,7 +15,7 @@ export function AiCourses({ skills }: { skills: Skill[] }) {
   const [all, setAll] = useState(false);
   const rows = skills.map((skill) => ({ skill, course: matches.skills[skill.uri]?.courses[0] as Match | undefined }));
   const shown = all ? rows : rows.slice(0, 4);
-  return <section className="ai-courses" aria-labelledby="ai-courses">
+  return <div className="ai-courses">
     <h4 id="ai-courses">{t('Skills without a checked course')} <span className="ai-count">{skills.length}</span></h4>
     <p className="note">{t('AI suggested Coursera matches below. They are unverified; match % is text similarity, not course quality.')}</p>
     <ul>{shown.map(({ skill, course }) => <li key={skill.uri}>
@@ -25,5 +25,5 @@ export function AiCourses({ skills }: { skills: Skill[] }) {
     </li>)}</ul>
     {rows.length > 4 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('Show all {n}', { n: rows.length })}</button>}
     <p className="note">{t('Catalogue retrieved {date}. Coursera is paid; eligible Malaysians can get 3 months free through Rakyat Digital.', { date: matches.method.catalogue.retrievedAt })}</p>
-  </section>;
+  </div>;
 }
