@@ -19,3 +19,4 @@ secrets*
 evidence/
 # Downloaded archives (unzip into data/derived/ instead)
 *.zip
+__pycache__/
