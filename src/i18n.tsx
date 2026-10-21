@@ -85,9 +85,9 @@ const dict: Record<string, Entry> = {
 
   // Skills step
   'Your current job': { ms: 'Kerja semasa anda', zh: '你目前的工作' },
-  'Shown as “Now” so you can compare. It is never recommended back to you.': { ms: 'Ditunjukkan sebagai “Kini” untuk perbandingan. Ia tidak akan dicadangkan semula kepada anda.', zh: '显示为“现在”以便比较，不会再推荐给你。' },
+  'Shown as “Now” for comparison, outside the ranking.': { ms: 'Ditunjukkan sebagai “Kini” untuk perbandingan, di luar kedudukan.', zh: '显示为“现在”供比较，不参与排名。' },
   'Not in this list': { ms: 'Tiada dalam senarai', zh: '不在此列表中' },
-  'In English, Bahasa Malaysia or Chinese. An AI model finds the closest skills in ESCO, the European Commission’s list of 13,960 skills. It only finds existing skills; you decide which are true.': { ms: 'Dalam Bahasa Inggeris, Bahasa Malaysia atau Cina. Model AI mencari kemahiran paling hampir dalam ESCO, senarai 13,960 kemahiran Suruhanjaya Eropah. Ia hanya mencari kemahiran sedia ada; anda tentukan yang benar.', zh: '可用英文、马来文或中文。AI 模型在欧盟委员会 ESCO 的 13,960 项技能中找出最接近的技能。它只查找已有技能，由你决定哪些属实。' },
+  'Write in English, Bahasa Malaysia or Chinese. AI suggests existing ESCO skills; you choose which to add.': { ms: 'Tulis dalam Bahasa Inggeris, Bahasa Malaysia atau Cina. AI mencadangkan kemahiran ESCO sedia ada; anda pilih yang hendak ditambah.', zh: '可用英文、马来文或中文描述。AI 推荐现有的 ESCO 技能，由你选择添加。' },
   'Find my skills': { ms: 'Cari kemahiran saya', zh: '查找我的技能' },
   'Searching…': { ms: 'Mencari…', zh: '搜索中…' },
   'Or search the skill list': { ms: 'Atau cari dalam senarai kemahiran', zh: '或搜索技能列表' },

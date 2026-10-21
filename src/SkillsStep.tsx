@@ -53,7 +53,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   return <div className="step-body skills-body">
     <section className="panel job-panel">
       <div><h2>{t('Your current job')}</h2>
-        <p className="note">{t('Shown as “Now” so you can compare. It is never recommended back to you.')}</p></div>
+        <p className="note">{t('Shown as “Now” for comparison, outside the ranking.')}</p></div>
       <select value={profile.currentRoleId ?? ''} onChange={(e) => update({ currentRoleId: e.target.value || null })} aria-label={t('Your current job')}>
         <option value="">{t('Not in this list')}</option>
         {roles.map((r) => <option key={r.id} value={r.id}>{roleTitle(r.title)}</option>)}
@@ -62,7 +62,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
 
     <section className="panel">
       <h2>{t('Describe your work')}</h2>
-      <p className="note">{t('In English, Bahasa Malaysia or Chinese. An AI model finds the closest skills in ESCO, the European Commission’s list of 13,960 skills. It only finds existing skills; you decide which are true.')}</p>
+      <p className="note">{t('Write in English, Bahasa Malaysia or Chinese. AI suggests existing ESCO skills; you choose which to add.')}</p>
       <form className="skill-search" onSubmit={findSkills}>
         <textarea aria-label={t('Describe your work')} value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder={t('e.g. I reconcile bank statements and prepare month-end reports')} />
         <button type="submit" className="primary-button" disabled={search.busy || !description.trim()}>{search.busy ? t('Searching…') : t('Find my skills')}</button>
