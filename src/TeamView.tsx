@@ -86,16 +86,21 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
         {course.ai.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{course.ai.unmatched.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>}
         <details className="how-to-read">
           <summary>{t('Who lacks each skill ({n} gaps)', { n: shared.gaps.length })}</summary>
-          <ol className="gap-table">
-            {shared.gaps.map((g) => {
-              const count = g.missing.length + g.partly.length;
-              return <li key={g.skill.uri}>
-                <span className="gap-name">{g.skill.label}</span>
-                <span className="gap-bar" aria-hidden="true"><span style={{ width: `${(count / shared.movers) * 100}%` }} /></span>
-                <span className="gap-count">{t('{n} of {m}', { n: count, m: shared.movers })}<small>{[...g.missing, ...g.partly.map((n) => t('{name} (partly)', { name: n }))].join(', ')}</small></span>
-              </li>;
-            })}
-          </ol>
+          {(() => {
+            // Group skills by exactly who lacks them, most people first.
+            const groups = new Map<string, { who: string[]; count: number; skills: typeof shared.gaps }>();
+            for (const g of shared.gaps) {
+              const who = [...g.missing, ...g.partly.map((n) => t('{name} (partly)', { name: n }))];
+              const key = who.join('|');
+              const entry = groups.get(key) ?? { who, count: g.missing.length + g.partly.length, skills: [] };
+              entry.skills.push(g);
+              groups.set(key, entry);
+            }
+            return <div className="lack-groups">{[...groups.values()].sort((x, y) => y.count - x.count).map((grp) => <div key={grp.who.join('|')} className="lack-group">
+              <h3>{grp.count === shared.movers ? t('All {n} lack', { n: shared.movers }) : t('{n} of {m} lack', { n: grp.count, m: shared.movers })} <span>{grp.who.join(', ')} · {grp.skills.length === 1 ? t('1 skill') : t('{n} skills', { n: grp.skills.length })}</span></h3>
+              <div className="tag-row">{grp.skills.map((g) => <span key={g.skill.uri} className="skill-tag skill-gap">{g.skill.label}</span>)}</div>
+            </div>)}</div>;
+          })()}
         </details>
       </>}
     </section>

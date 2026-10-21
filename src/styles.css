@@ -677,3 +677,10 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .team-needs { margin: 8px 0 0; font-size: 13px; color: #5d6873; }
 .team-plan .gap-table li { grid-template-columns: minmax(160px, 1.4fr) 100px minmax(110px, 1fr); }
 .team-view > .plan-layout { margin-top: 0; }
+.team-plan .plan-more { margin: 12px 0 4px; display: inline-block; }
+.team-plan .how-to-read { margin-top: 16px; }
+.lack-groups { display: grid; gap: 4px; margin-top: 10px; }
+.lack-group { padding: 10px 0; border-top: 1px solid #e3e7e3; }
+.lack-group h3 { margin: 0 0 8px; font-size: 15px; }
+.lack-group h3 span { font-weight: 400; color: #5d6873; font-size: 13px; margin-left: 6px; }
+.lack-group .tag-row { margin: 0; gap: 6px; }
