@@ -639,3 +639,13 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-mini { display: inline-flex; gap: 3px; } .sdg-mini .sdg-square { margin-right: 0; }
 .sdg-tag { display: inline-flex; align-items: center; margin-left: 8px; font-style: normal; font-weight: 700; color: #1c2430; font-size: 13px; }
 .sdg-tag .sdg-square { min-width: 18px; height: 18px; margin-right: 4px; }
+/* Interests and goals: two side-by-side panels, each a single column of choices (Carson, 21 Oct). */
+.prefs-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.prefs-pair > .panel { margin: 0; }
+.choice-list { display: grid; gap: 6px; margin-top: 12px; }
+.choice-list .interest-choice { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 12px; }
+.choice-list .interest-choice strong { display: block; font-size: 15px; }
+.choice-list .tick { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border: 1.5px solid #8a96a3; border-radius: 5px; font-size: 13px; font-weight: 800; color: #ffffff; }
+.choice-list .interest-choice.on .tick { background: #1e6b4f; border-color: #1e6b4f; }
+.choice-list .sdg-square { flex: none; margin-right: 0; min-width: 24px; height: 24px; font-size: 12px; }
+@media (max-width: 900px) { .prefs-pair { grid-template-columns: 1fr; } }

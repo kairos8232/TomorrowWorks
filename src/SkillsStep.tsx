@@ -80,15 +80,17 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
 
     </div>
 
+    <div className="prefs-pair">
     <section className="panel" aria-labelledby="enjoy">
       <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
       <p className="note">{t('Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
-      <div className="interest-grid">{interestTypes.map((type) => {
+      <div className="choice-list">{interestTypes.map((type) => {
         const on = profile.interests.includes(type);
         const full = !on && profile.interests.length >= 2;
         return <button type="button" key={type} className={`interest-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full}
           onClick={() => update({ interests: on ? profile.interests.filter((x) => x !== type) : [...profile.interests, type] as InterestType[] })}>
-          <strong>{t(interestData.types[type].plain)}</strong><small>{t(interestData.types[type].name)}</small>
+          <span className="tick" aria-hidden="true">{on ? '✓' : ''}</span>
+          <span><strong>{t(interestData.types[type].plain)}</strong><small>{t(interestData.types[type].name)}</small></span>
         </button>;
       })}</div>
     </section>
@@ -96,15 +98,18 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     <section className="panel" aria-labelledby="contribute">
       <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="count">{t('optional')}</span></h2>
       <p className="note">{t('UN Sustainable Development Goals. Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
-      <div className="interest-grid goal-grid">{Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
+      <div className="choice-list">{Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
         const on = profile.goals.includes(g);
         const full = !on && profile.goals.length >= 2;
         return <button type="button" key={g} className={`interest-choice goal-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full}
           onClick={() => update({ goals: on ? profile.goals.filter((x) => x !== g) : [...profile.goals, g] })}>
-          <strong><span className="sdg-square" style={{ background: info.colour }}>{g}</span>{t(info.short)}</strong>{info.short !== info.name && <small>{t(info.name)}</small>}
+          <span className="tick" aria-hidden="true">{on ? '✓' : ''}</span>
+          <span className="sdg-square" style={{ background: info.colour }}>{g}</span>
+          <span><strong>{t(info.short)}</strong>{info.short !== info.name && <small>{t(info.name)}</small>}</span>
         </button>;
       })}</div>
     </section>
+    </div>
 
     <section className="panel selected-skills">
       <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
