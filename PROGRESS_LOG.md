@@ -4,6 +4,12 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (14:40–15:10 MYT) — "View as" instead of a fake login
+
+- Carson asked whether to add fake login accounts per point of view. Decided against passwords (friction for judges, implies accounts and storage that do not exist). Built a **View as** switcher: Aina, Hakim, Puan Rosnah (HR, finance team), Encik Lim (career adviser, graduating class), Me. The sidebar changes per viewer. Pitch line: "Same engine, four users."
+
+---
+
 ## 21 Oct 2026 (14:30–15:30 MYT) — Four target groups, what changed, fairness, languages, Coursera at scale
 
 - **Feedback applied** (product should work for all four groups in the brief): **Hakim**, a fictional fresh statistics graduate with no current job (group 2), joins Aina (group 1) on Home; **Team view** for HR / L&D managers (fictional five-person finance team) and career centres (fictional class of three graduates), groups 3 and 4: a score heatmap per person and role, and the gaps shared by most movers for a chosen role with a course for each.
