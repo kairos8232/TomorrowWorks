@@ -8,6 +8,7 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 - Endpoint **`j6ssjfy9z074hp`** from the RunPod Hub *Infinity Embedding* 1.1.4 worker, `MODEL_NAMES=BAAI/bge-m3`, 16 GB GPU pool (24 GB suggested as backup), Active 0 / Max 1 workers, idle 5 s, FlashBoot on. Details in [RUNPOD_SETUP.md](RUNPOD_SETUP.md#job-b-endpoint-created-21-oct-2026-1340-myt).
 - **Credit:** balance US$21.56. The Job A Pod had been left running ~12 h (≈ US$3.40); stopped at 13:35, idle disk cost US$0.
+- **OpenDOSM imported:** Carson ran `scripts/import_lfs_month.py` on his Mac (retrieved 2026-10-21): 13 months to **Aug 2026, unemployment 2.9%** (Aug 2025: 3.0%). Checked against the earlier API read; committed. The Job ads page now shows it.
 - **Next (Carson):** create the RunPod API key → Replit Secrets `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID=j6ssjfy9z074hp` → Pull → Run → `/api/health` → test searches in English, Bahasa Malaysia and Chinese.
 
 ---

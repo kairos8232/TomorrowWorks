@@ -4,12 +4,143 @@
     "publisher": "Department of Statistics Malaysia (DOSM)",
     "url": "https://open.dosm.gov.my/data-catalogue/lfs_month",
     "api": "https://api.data.gov.my/data-catalogue?id=lfs_month&sort=-date&limit=13",
-    "retrievedAt": null,
-    "latestMonth": null,
+    "retrievedAt": "2026-10-21",
+    "latestMonth": "2026-08",
     "geography": "Malaysia",
     "measure": "Labour force counts in thousands of persons; unemployment and participation rates in %",
     "coverage": "Survey estimates. From 2025 the series uses 2020 Census population (trend break with earlier data).",
     "licence": "CC BY 4.0"
   },
-  "months": []
+  "months": [
+    {
+      "date": "2026-08-01",
+      "u_rate": 2.9,
+      "p_rate": 71.0,
+      "ep_ratio": 68.9,
+      "lf": 17386.0,
+      "lf_employed": 16874.4,
+      "lf_unemployed": 511.6,
+      "lf_outside": 7106.0
+    },
+    {
+      "date": "2026-07-01",
+      "u_rate": 3.0,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17365.9,
+      "lf_employed": 16845.6,
+      "lf_unemployed": 520.3,
+      "lf_outside": 7110.5
+    },
+    {
+      "date": "2026-06-01",
+      "u_rate": 3.0,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17344.9,
+      "lf_employed": 16827.1,
+      "lf_unemployed": 517.8,
+      "lf_outside": 7109.8
+    },
+    {
+      "date": "2026-05-01",
+      "u_rate": 3.0,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17338.2,
+      "lf_employed": 16824.8,
+      "lf_unemployed": 513.4,
+      "lf_outside": 7103.4
+    },
+    {
+      "date": "2026-04-01",
+      "u_rate": 3.0,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17327.6,
+      "lf_employed": 16815.8,
+      "lf_unemployed": 511.8,
+      "lf_outside": 7100.8
+    },
+    {
+      "date": "2026-03-01",
+      "u_rate": 2.9,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17313.0,
+      "lf_employed": 16804.0,
+      "lf_unemployed": 509.0,
+      "lf_outside": 7101.2
+    },
+    {
+      "date": "2026-02-01",
+      "u_rate": 2.9,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17297.6,
+      "lf_employed": 16790.9,
+      "lf_unemployed": 506.8,
+      "lf_outside": 7102.9
+    },
+    {
+      "date": "2026-01-01",
+      "u_rate": 2.9,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17281.0,
+      "lf_employed": 16771.4,
+      "lf_unemployed": 509.6,
+      "lf_outside": 7105.6
+    },
+    {
+      "date": "2025-12-01",
+      "u_rate": 2.9,
+      "p_rate": 70.8,
+      "ep_ratio": 68.7,
+      "lf": 17272.3,
+      "lf_employed": 16764.3,
+      "lf_unemployed": 508.0,
+      "lf_outside": 7132.6
+    },
+    {
+      "date": "2025-11-01",
+      "u_rate": 2.9,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17610.9,
+      "lf_employed": 17092.5,
+      "lf_unemployed": 518.4,
+      "lf_outside": 7218.9
+    },
+    {
+      "date": "2025-10-01",
+      "u_rate": 3.0,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17579.0,
+      "lf_employed": 17060.1,
+      "lf_unemployed": 518.9,
+      "lf_outside": 7218.2
+    },
+    {
+      "date": "2025-09-01",
+      "u_rate": 3.0,
+      "p_rate": 70.9,
+      "ep_ratio": 68.8,
+      "lf": 17544.8,
+      "lf_employed": 17026.3,
+      "lf_unemployed": 518.6,
+      "lf_outside": 7209.3
+    },
+    {
+      "date": "2025-08-01",
+      "u_rate": 3.0,
+      "p_rate": 70.8,
+      "ep_ratio": 68.6,
+      "lf": 17203.5,
+      "lf_employed": 16684.5,
+      "lf_unemployed": 519.0,
+      "lf_outside": 7106.3
+    }
+  ]
 }
