@@ -36,9 +36,9 @@ function NossRoute({ roleId }: { roleId: string }) {
           <strong>{t('SKM Level {n}', { n: n.level })}: {n.title}</strong>
           <span>NOSS {n.code} · <a href={`${nossSources[n.source].url}#page=${n.page}`} target="_blank" rel="noreferrer">{t('JPK register, Jan 2025, p. {n}', { n: n.page })}</a></span>
         </li>)}</ul>
-        <p className="note">{entry.match === 'related' ? `${t('A related standard, not the same job.')} ${entry.note ? t(entry.note) : ''}` : t('Closest standard by title.')} {t('An SKM is earned at a JPK-accredited centre (Jabatan Pembangunan Kemahiran) or through recognition of prior learning (PPT). It is one route, not a requirement for the job. Check the code’s current status with JPK before enrolling.')}</p>
+        <p className="note plan-noss-note">{entry.match === 'related' ? `${t('Related route, not the same job.')} ${entry.note ? t(entry.note) : ''}` : t('Closest standard by title.')} {t('Optional SKM route via a JPK-accredited centre or prior learning (PPT). Check the code with JPK before enrolling.')}</p>
       </>}
-    <p className="note">{t('Checked by hand on {date}.', { date: nossFile.checkedAt })}</p>
+    <p className="note plan-noss-date">{t('Checked by hand on {date}.', { date: nossFile.checkedAt })}</p>
   </section>;
 }
 

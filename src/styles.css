@@ -350,6 +350,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .noss-list li { display: grid; gap: 2px; }
 .noss-list span { color: #5d6873; font-size: 14px; }
 .noss-list a, .plan-noss a { color: #1e6b4f; }
+.plan-noss-note { margin-bottom: 0; }
+.plan-noss-date { margin: 6px 0 0; }
 @media (max-width: 640px) {
   .who.plan-who .text-button { margin-left: 0; }
   .plan-steps > li { grid-template-columns: 32px 1fr; gap: 10px; }
