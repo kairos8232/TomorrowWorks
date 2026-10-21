@@ -762,3 +762,19 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .milestone.earned { --badge-fill:#d8b052; --badge-inner:#fff3cd; --badge-line:#805814; --badge-ribbon:#1e6b4f; border-color:#1e6b4f; border-bottom-color:#1e6b4f; background:#edf6ef; }
 .milestone.earned .milestone-state { background:#1e6b4f; color:#fff; border-color:#1e6b4f; }
 @media(max-width:620px) { .milestone-grid { grid-template-columns:1fr; } }
+
+/* Keep the learning action close; details expand only when needed. */
+.plan-explainer summary,.plan-support summary,.milestone-rule summary { cursor:pointer; font-size:14px; font-weight:600; min-height:36px; padding-block:8px; }
+.plan-courses-heading { margin:24px 0 8px; font-size:18px; }
+details.course-check { padding-block:0; }
+.course-check>summary { display:flex; align-items:center; flex-wrap:wrap; gap:8px; min-height:44px; padding-block:10px; cursor:pointer; font-size:14px; font-weight:600; }
+.course-check>summary::before { content:'+'; color:#1e6b4f; font-size:20px; width:16px; }
+.course-check[open]>summary::before { content:'−'; }
+.evidence-optional { margin-left:auto; color:#5d6873; font-size:12px; font-weight:400; }
+.course-evidence-body { padding:4px 0 14px; }
+.plan-support { margin-top:12px; border-top:1px solid #d9ded9; }
+.learning-milestones { padding-top:20px; border-top:1px solid #d9ded9; }
+.milestone-art>svg { width:124px; height:104px; }
+.milestone-rule { text-align:left; }
+.milestone-rule summary { text-align:center; }
+.milestone-rule .note { margin:8px 0; }

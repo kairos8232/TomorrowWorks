@@ -71,6 +71,14 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
+## Your plan usability refinement (22 Oct 2026)
+
+- User selected the whole Your plan page for a usability pass. Main order is gaps/time → compact progress summary → next Start/Continue action → Your courses → milestone badges → optional access/funding and course-selection details. Keep the next action directly under progress.
+- Course evidence is optional and collapsed behind a keyboard-accessible summary. No evidence: Add completion evidence; submitted evidence: Evidence submitted — not verified, visible even while collapsed. Expanding reveals the fictional-only privacy notice before the form, validation, link and edit/remove controls. No evidence or verification behaviour changed.
+- Progress keeps the unavailable-verification notice visible. How progress works expands count coverage, mastery distinction and session/privacy limits. Funding, method and exact badge rules remain available in labelled native disclosures. Provider links, course-change warning and all gaps remain available.
+- Badges retain medal/trophy artwork at a more compact size and sit after courses. How to unlock reveals the exact rule and skill-mastery limit; lock state and verification availability remain visible.
+- Build and 88 tests pass. Edge 1440 × 1000 and 390 × 844 screenshots reviewed; order, collapsed evidence, keyboard expansion, bad/good URL, removal, unchanged completion/locked badges, modal, badge/funding disclosures, Accountant switch and EN/MS/ZH phone fit pass. No page errors; pre-existing favicon 404 excluded. Translation review remains pending.
+
 ## Learning milestone badges — step 4 (22 Oct 2026, corrected)
 
 - User removed self-reporting. No completion-report checkbox, report state or self-reported badge text remains in the current UI. First course completed requires at least one authoritative verified course completion. Selected plan’s courses completed requires verification for every unique current-plan course URL, including AI suggestions and excluding NOSS. Empty plans never earn.

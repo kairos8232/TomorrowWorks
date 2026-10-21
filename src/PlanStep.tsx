@@ -141,15 +141,10 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
       ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
       : <section className="panel plan-learning" aria-labelledby="plan-skills-heading">
         <h2 id="plan-skills-heading">{plan.gaps.length} {t('skills to build')}</h2>
-        <p className="plan-learning-intro">{plan.steps.length === 0
-          ? t('No checked course yet. Review the suggestions for these skills below.')
-          : plan.uncovered.length === 0
-            ? t('Start with the first checked course below.')
-            : t('Start with a checked course, then review suggestions for the remaining skills.')}</p>
+        <p className="plan-learning-intro">{t('Choose a course, learn with the provider, then add evidence if you have it.')}</p>
         {plan.steps.length > 0 && <p className="plan-total"><strong>{t('Estimated time: {h} hours', { h: plan.statedHours })}</strong> {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}{plan.stepsWithoutHours > 0 ? ` (${t('{n} without a stated time', { n: plan.stepsWithoutHours })})` : ''}{suggested.steps.length > 0 ? `; ${t('AI suggestions show their own time')}` : ''}.</p>}
 
         <LearningProgress total={activities.total} recorded={activities.recorded} />
-        <LearningMilestones courseUrls={courseChoices.map(course=>course.url)} />
         {nextCourse ? <section className="next-learning" aria-labelledby="next-learning-title">
           <div>
             <h3 id="next-learning-title">{t('Learning course for {role}', {role: role.title})}</h3>
@@ -158,12 +153,13 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
           </div>
           <a className="primary-button" href={nextCourse.url} target="_blank" rel="noreferrer" onClick={() => onOpenCourse(nextCourse.url)} aria-label={t(openedCourses?.has(nextCourse.url) ? 'Continue learning: {name}' : 'Start learning: {name}', { name: nextCourse.title })}>{t(openedCourses?.has(nextCourse.url) ? 'Continue learning' : 'Start learning')}</a>
           <ChangeCourse key={(profile.persona ?? 'me') + role.id} courses={courseChoices} currentUrl={nextCourse.url} onConfirm={url=>onChooseLearningCourse(role.id,url)} />
-          <p className="note next-learning-note">{t(selectedCourse ? 'You chose this course for this role. Continue reopens the provider page; lesson position and completion are not tracked.' : 'First course in your plan without submitted evidence. Continue reopens the provider page; lesson position and completion are not tracked.')}</p>
+          <p className="note next-learning-note">{t(selectedCourse ? 'Your chosen course. Opens the provider page; lesson progress is not tracked.' : 'Suggested from your plan. Opens the provider page; lesson progress is not tracked.')}</p>
         </section> : courseChoices.length > 0 ? <section className="next-learning" aria-labelledby="next-learning-title">
           <h3 id="next-learning-title">{t('Evidence submitted for every course in this plan')}</h3>
           <ChangeCourse key={(profile.persona ?? 'me') + role.id} courses={courseChoices} currentUrl={undefined} onConfirm={url=>onChooseLearningCourse(role.id,url)} />
           <p className="note next-learning-note">{t('Completion is still unverified. You can reopen any course below to keep learning, or edit its evidence.')}</p>
         </section> : null}
+        {total > 0 && <h3 className="plan-courses-heading">{t('Your courses')}</h3>}
         {total + Number(hasNoss(role.id)) > 0 && <ol className={`plan-steps${total + Number(hasNoss(role.id)) === 1 ? ' single' : ''}`}>
           {plan.steps.map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber={total + Number(hasNoss(role.id)) > 1} primary={i === 0}
             title={step.resource.title} url={step.resource.url} closes={step.closes} onOpen={() => onOpenCourse(step.resource.url)}
@@ -181,16 +177,21 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
 
         {suggested.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{suggested.unmatched.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>}
 
+        <LearningMilestones courseUrls={courseChoices.map(course=>course.url)} />
+        <details className="plan-support"><summary>{t('Access and funding options')}</summary>
         {[...new Set(plan.steps.map((s) => s.resource.access).filter((a): a is string => !!a))].map((id) => <p key={id} className="plan-access note">
           <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
         </p>)}
 
         <p className="plan-access note"><strong>HRD Corp:</strong> {t(hrd.claimable.note)} <a href={hrd.claimable.url} target="_blank" rel="noreferrer">{t(hrd.claimable.name)}</a>. {t(hrd.elatih.note)} <a href={hrd.elatih.url} target="_blank" rel="noreferrer">{t(hrd.elatih.name)}</a>. {t('Checked by hand on {date}.', { date: hrd.checkedAt })}</p>
 
+        </details>
+        <details className="plan-support"><summary>{t('How these courses were selected')}</summary>
         <p className="plan-method note">
           {plan.steps.length > 0 && t('Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.', { date: resourcesFile.checkedAt })}{' '}
           {suggested.steps.length > 0 && t('AI suggestions: RunPod compared {n} Coursera course descriptions with the remaining skills and ordered them the same way; not checked by hand, and match % is text similarity, not quality. Catalogue retrieved {date}; eligible Malaysians can get Coursera free for 3 months through Rakyat Digital.', { n: matches.method.coursesEmbedded.toLocaleString(), date: matches.method.catalogue.retrievedAt })}
         </p>
+        </details>
         {!hasNoss(role.id) && <NossRoute roleId={role.id} />}
       </section>}
 

@@ -1,5 +1,13 @@
 # Progress log
 
+## 22 Oct 2026 — Whole Your plan page usability pass
+
+- User requested friendlier UI and selected Whole Your plan page. Simplified visible intro/progress copy, kept progress then next Start/Continue action, added Your courses heading, moved compact medal/trophy badges after courses. Optional evidence, funding, selection method and badge earning rules use labelled native disclosures.
+- Evidence summary always identifies submission as unverified; expanded form retains fictional-only privacy note before input. Verification-unavailable notice remains visible in progress; deeper count/mastery/privacy limits remain under How progress works. Evidence validation/state, warning modal, provider links, plan data/scoring and locked badges unchanged. New EN/MS/ZH text requires team review.
+- Build and 88 tests pass. Existing Edge/puppeteer desktop 1440 × 1000 and phone 390 × 844: order, initially collapsed optional evidence, keyboard opening, bad/good URL, save/remove, completion stays zero, badges locked, change-course modal, badge/funding disclosures, Accountant plan and translated phone fit pass. Screenshot review complete. No page errors; existing favicon 404 excluded. Screenshots outside repo. No new packages; not committed/pushed; await user preview.
+
+---
+
 ## 22 Oct 2026 — More attractive milestone artwork
 
 - User requested more attractive badges. Replaced small shared emblems with distinct star-medal/ribbon and trophy SVG artwork, larger centred awards, green/gold card tints and lock chips. Locked status stays explicit; no earned-state data or verification behaviour changed.

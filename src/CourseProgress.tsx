@@ -12,18 +12,22 @@ export function LearningProgress({total,recorded}:{total:number;recorded:number}
     <p id={id+'-count'} className="course-completion-count" aria-live="polite">{t('{completed} of {total} courses verified complete',{completed,total})}</p>
     <progress value={completed} max={total} aria-labelledby={id+' '+id+'-count'} aria-describedby={id+'-method'} />
     <p className="note" aria-live="polite">{t('Evidence submitted for {recorded} of {total} courses',{recorded,total})}</p>
-    <p className="note">{t('Counts include checked courses and AI suggestions in this plan. Optional certification routes are excluded.')}</p>
+
   </> : <p>{t('No courses to track in this plan yet.')}</p>}
-  <p className="note" id={id+'-method'}>{t('Completion verification is not connected in this demo, so submitted evidence does not advance the bar. Verified course completion would not establish mastery of every linked skill.')}</p>
-  <p className="note">{t('Evidence links stay in this tab and clear on refresh. They are not sent to a reviewer.')}</p>
+  <p className="note" id={id+'-method'}>{t('Demo: completion verification is not connected. Submitting evidence will not fill this bar.')}</p>
+  <details className="plan-explainer"><summary>{t('How progress works')}</summary>
+    <p className="note">{t('Counts include checked courses and AI suggestions in this plan. Optional certification routes are excluded.')}</p>
+    <p className="note">{t('A completed course does not prove mastery of every linked skill. Evidence links stay in this tab, clear on refresh and are not sent to a reviewer.')}</p>
+  </details>
  </section>;
 }
 
 export function CourseProgressControl({status,onAction}:{status:CourseStatus|undefined;onAction:(action:LearningAction)=>void}) {
  const t=useT();const id=useId();const [text,setText]=useState(status?.url??'');const [editing,setEditing]=useState(false);const [error,setError]=useState(false);
  const showForm=!status||editing;
- return <section className="course-check" aria-labelledby={id}>
-  <h4 id={id}>{t('Completion evidence')}</h4>
+ return <details className="course-check">
+  <summary id={id}><span>{t(status ? 'Evidence submitted — not verified' : 'Add completion evidence')}</span><span className="evidence-optional">{t('Optional')}</span></summary>
+  <div className="course-evidence-body">
   <p className="note">{t('Prototype: use a fictional public credential link only. Do not submit a real certificate or personal information. File uploads are not enabled.')}</p>
   {status && <div role="status">
     <strong>{t('Evidence submitted — not verified')}</strong>
@@ -38,5 +42,6 @@ export function CourseProgressControl({status,onAction}:{status:CourseStatus|und
    {error && <p role="alert" id={id+'-error'}>{t('Enter a valid HTTPS link without a username or password.')}</p>}
    <div className="evidence-actions"><button className="secondary-button" type="submit">{t('Submit demo evidence')}</button>{editing && <button type="button" className="text-button" onClick={()=>{setEditing(false);setText(status?.url??'');setError(false);}}>{t('Cancel')}</button>}</div>
   </form>}
- </section>;
+  </div>
+ </details>;
 }

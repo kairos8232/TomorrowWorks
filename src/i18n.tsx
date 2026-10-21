@@ -14,6 +14,20 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  "Demo: completion verification is not connected. Submitting evidence will not fill this bar.": { ms: "Demo: pengesahan penyelesaian belum disambungkan. Menghantar bukti tidak akan memenuhi bar ini.", zh: "演示：尚未接入完成情况验证。提交证明不会增加此进度。" },
+  "How progress works": { ms: "Cara kemajuan dikira", zh: "进度如何计算" },
+  "A completed course does not prove mastery of every linked skill. Evidence links stay in this tab, clear on refresh and are not sent to a reviewer.": { ms: "Kursus yang selesai tidak membuktikan penguasaan semua kemahiran berkaitan. Pautan bukti kekal dalam tab ini, dipadam apabila halaman dimuat semula dan tidak dihantar kepada penyemak.", zh: "完成课程不代表掌握全部关联技能。证明链接仅保留在本标签页内，刷新后清除，不会发送给审核人。" },
+  "Add completion evidence": { ms: "Tambah bukti penyelesaian", zh: "添加完成证明" },
+  "Optional": { ms: "Pilihan", zh: "可选" },
+  "Choose a course, learn with the provider, then add evidence if you have it.": { ms: "Pilih kursus, belajar dengan penyedia, kemudian tambah bukti jika ada.", zh: "选择课程，前往提供方学习，有证明时再添加。" },
+  "Your chosen course. Opens the provider page; lesson progress is not tracked.": { ms: "Kursus pilihan anda. Membuka halaman penyedia; kemajuan pelajaran tidak dijejaki.", zh: "你选择的课程。打开提供方页面，不跟踪课时进度。" },
+  "Suggested from your plan. Opens the provider page; lesson progress is not tracked.": { ms: "Dicadangkan daripada pelan anda. Membuka halaman penyedia; kemajuan pelajaran tidak dijejaki.", zh: "根据你的计划推荐。打开提供方页面，不跟踪课时进度。" },
+  "Your courses": { ms: "Kursus anda", zh: "你的课程" },
+  "Access and funding options": { ms: "Pilihan akses dan pembiayaan", zh: "访问与资助选项" },
+  "How these courses were selected": { ms: "Cara kursus ini dipilih", zh: "课程如何选出" },
+  "Complete courses to work towards these milestones. Badges stay locked until completion can be verified; verification is not connected in this demo.": { ms: "Selesaikan kursus untuk menuju pencapaian ini. Lencana kekal terkunci sehingga penyelesaian boleh disahkan; pengesahan belum disambungkan dalam demo ini.", zh: "学习并完成课程，逐步达成这些里程碑。徽章在完成情况得到验证前保持锁定；此演示尚未接入验证。" },
+  "How to unlock": { ms: "Cara membuka", zh: "如何解锁" },
+  "Course badges do not certify skill mastery.": { ms: "Lencana kursus tidak mengesahkan penguasaan kemahiran.", zh: "课程徽章不认证技能掌握程度。" },
   "Learning milestones": { ms: "Pencapaian pembelajaran", zh: "学习里程碑" },
   "Badges light up only after course completion is verified. Verification is not connected yet; submitted links do not unlock badges. Course badges do not certify skill mastery.": { ms: "Lencana diaktifkan hanya selepas penyelesaian kursus disahkan. Pengesahan belum disambungkan; pautan yang dihantar tidak membuka lencana. Lencana kursus tidak mengesahkan penguasaan kemahiran.", zh: "课程完成情况经过验证后，徽章才会点亮。目前尚未接入验证，提交链接不会解锁徽章。课程徽章不认证技能掌握程度。" },
   "Unlocks after one course completion is verified.": { ms: "Dibuka selepas penyelesaian satu kursus disahkan.", zh: "验证完成一门课程后解锁。" },

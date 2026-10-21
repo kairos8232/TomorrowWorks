@@ -12,7 +12,7 @@ export function LearningMilestones({courseUrls}:{courseUrls:string[]}) {
  ];
  return <section className="learning-milestones" aria-labelledby={id}>
   <h3 id={id}>{t('Learning milestones')}</h3>
-  <p className="note">{t('Badges light up only after course completion is verified. Verification is not connected yet; submitted links do not unlock badges. Course badges do not certify skill mastery.')}</p>
+  <p className="note">{t('Complete courses to work towards these milestones. Badges stay locked until completion can be verified; verification is not connected in this demo.')}</p>
   <ul className="milestone-grid">{badges.map(badge=><li key={badge.name} className={'milestone milestone-'+badge.kind+(badge.earned?' earned':'')}>
    <div className="milestone-heading"><span className="milestone-state"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><rect x="3.5" y="7" width="9" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>{badge.earned?<path d="M6 7V4a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.5"/>:<path d="M5 7V4a3 3 0 0 1 6 0v3" stroke="currentColor" strokeWidth="1.5"/>}</svg>{t(badge.earned?'Unlocked':'Locked')}</span></div>
    <div className="milestone-art" aria-hidden="true"><svg viewBox="0 0 160 132" fill="none">
@@ -30,7 +30,7 @@ export function LearningMilestones({courseUrls}:{courseUrls:string[]}) {
      <path d="M49 120h62" stroke="var(--badge-line)" strokeWidth="2" strokeLinecap="round"/>
     </>}
    </svg></div>
-   <h4>{t(badge.name)}</h4><p className="note">{t(badge.rule)}</p>
+   <h4>{t(badge.name)}</h4><details className="milestone-rule"><summary>{t('How to unlock')}</summary><p className="note">{t(badge.rule)}</p><p className="note">{t('Course badges do not certify skill mastery.')}</p></details>
   </li>)}</ul>
  </section>;
 }
