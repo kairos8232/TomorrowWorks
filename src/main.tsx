@@ -74,7 +74,6 @@ function Home({ start }: { start: (who: ViewerId) => void }) {
 
     <section className="home-people" aria-labelledby="meet">
       <h2 id="meet">{t('One tool, four kinds of user')}</h2>
-      <p className="note">{t('Demo people are fictional. Pick one to see the app from their side; there is no sign-in in this prototype.')}</p>
       <div className="people-grid">
         {previews.map(({ viewer, moves }) => <article key={viewer.id} className={`person-card${viewer.kind === 'team' ? ' team-card' : ''}`}>
           <p className="person-group">{t(viewer.group)}</p>
@@ -98,17 +97,6 @@ function Home({ start }: { start: (who: ViewerId) => void }) {
       </dl>
     </section>
   </div>;
-}
-
-function Steps({ screen, go }: { screen: Screen; go: (s: Screen) => void }) {
-  const t = useT();
-  return <ol className="steps" aria-label="Steps">
-    {careerNav.map((item) => <li key={item.id}>
-      <button type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'step' : undefined} onClick={() => go(item.id)}>
-        {t(item.label)}{item.soon && <span className="soon">{t('Soon')}</span>}
-      </button>
-    </li>)}
-  </ol>;
 }
 
 function NavGroup({ label, items, screen, go }: { label: string; items: NavItem[]; screen: Screen; go: (s: Screen) => void }) {
@@ -157,7 +145,6 @@ function App() {
     else go('team');
   }
   const kind = viewerById(viewer).kind;
-  const isCareer = screen === 'skills' || screen === 'moves' || screen === 'plan';
   const page = screen === 'home' ? null : titles[screen];
 
   const t = translate(lang);
@@ -177,9 +164,8 @@ function App() {
     <main className="main-content">
       <div className="content-wrap">
         {page && <header className="page-head">
-          {isCareer && <Steps screen={screen} go={go} />}
           <h1>{t(page.title)}</h1>
-          <p>{t(page.intro)}</p>
+          {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
         </header>}
         {screen === 'home' && <Home start={start} />}
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
