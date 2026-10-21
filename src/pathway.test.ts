@@ -5,7 +5,7 @@ import iloFile from '../data/sources/ilo-genai-exposure-2025.json';
 import transferableFile from '../data/derived/transferable-skills.json';
 import resourcesFile from '../data/pathway/resources.json';
 import nossFile from '../data/pathway/noss.json';
-import { learningPlan, type Resource } from './pathway';
+import { learningPlan, suggestedSteps, type Resource } from './pathway';
 import { scenarios, scoreRole, type DosmSnapshot, type IloExposure, type Role, type TransferableSkills } from './scoring';
 
 const roles = rolesFile.roles as Role[];
@@ -98,5 +98,16 @@ describe('sample people (src/data.ts)', () => {
       const profile = personaProfile(p.id);
       expect(profile.held.size, p.id).toBe(p.skillLabels ? p.skillLabels.length : roles.find((r) => r.id === p.roleId)!.essentialSkills.length);
     }
+  });
+});
+
+describe('AI suggestions use the same greedy rule (suggestedSteps)', () => {
+  const gap = (n: number) => ({ skill: skill(n), partly: null });
+  const c = (slug: string, similarity: number) => ({ slug, name: slug, url: `https://www.coursera.org/learn/${slug}`, workload: null, similarity });
+  it('a course matched by several gaps becomes one step covering them; gaps without matches are listed', () => {
+    const matches = { s2: { courses: [c('x', 0.7), c('y', 0.69)] }, s3: { courses: [c('y', 0.72)] }, s4: { courses: [c('z', 0.8)] } };
+    const { steps, unmatched } = suggestedSteps([gap(2), gap(3), gap(4), gap(5)], matches);
+    expect(steps.map((s) => [s.course.slug, s.closes.map((g) => g.skill.uri)])).toEqual([['y', ['s2', 's3']], ['z', ['s4']]]);
+    expect(unmatched.map((g) => g.skill.uri)).toEqual(['s5']);
   });
 });

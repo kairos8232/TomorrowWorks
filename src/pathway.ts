@@ -72,3 +72,31 @@ export function learningPlan(result: RoleScore, resources: Resource[]) {
 }
 
 export type LearningPlan = ReturnType<typeof learningPlan>;
+
+/** One AI-matched course per step, from data/derived/coursera-skill-matches.json. */
+export type SuggestedCourse = { slug: string; name: string; url: string; workload: string | null; similarity: number };
+export type SuggestedStep = { course: SuggestedCourse; closes: Gap[]; bestMatch: number };
+
+/**
+ * Same greedy rule as the checked plan, for the gaps no checked course covers:
+ * each step is the AI-matched course that appears in the most remaining gaps'
+ * match lists (ties: higher best match). Gaps without any match are returned.
+ */
+export function suggestedSteps(gaps: Gap[], matchesByUri: Record<string, { courses: SuggestedCourse[] } | undefined>) {
+  let open = gaps.filter((g) => (matchesByUri[g.skill.uri]?.courses.length ?? 0) > 0);
+  const unmatched = gaps.filter((g) => !open.includes(g));
+  const steps: SuggestedStep[] = [];
+  while (open.length > 0) {
+    const bySlug = new Map<string, SuggestedStep>();
+    for (const g of open) for (const c of matchesByUri[g.skill.uri]!.courses) {
+      const step = bySlug.get(c.slug) ?? { course: c, closes: [], bestMatch: 0 };
+      step.closes.push(g);
+      step.bestMatch = Math.max(step.bestMatch, c.similarity);
+      bySlug.set(c.slug, step);
+    }
+    const pick = [...bySlug.values()].sort((a, b) => b.closes.length - a.closes.length || b.bestMatch - a.bestMatch)[0];
+    steps.push(pick);
+    open = open.filter((g) => !pick.closes.includes(g));
+  }
+  return { steps, unmatched };
+}

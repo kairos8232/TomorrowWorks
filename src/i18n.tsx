@@ -460,6 +460,15 @@ const dict: Record<string, Entry> = {
   'not checked by hand': { ms: 'belum disemak secara manual', zh: '未经人工核实' },
   'RunPod compared {n} Coursera course descriptions with these skills (BAAI/bge-m3). The match is text similarity, not a quality rating; open the course to judge it.': { ms: 'RunPod membandingkan {n} penerangan kursus Coursera dengan kemahiran ini (BAAI/bge-m3). Padanan ialah persamaan teks, bukan penilaian kualiti; buka kursus untuk menilainya.', zh: 'RunPod 将 {n} 门 Coursera 课程介绍与这些技能进行比较（BAAI/bge-m3）。匹配度是文本相似度，不是质量评分；请打开课程自行判断。' },
   'Catalogue retrieved {date}. Coursera is paid; eligible Malaysians can get 3 months free through Rakyat Digital.': { ms: 'Katalog diambil pada {date}. Coursera berbayar; rakyat Malaysia yang layak boleh mendapat 3 bulan percuma melalui Rakyat Digital.', zh: '课程目录获取于 {date}。Coursera 需付费；符合资格的马来西亚人可通过 Rakyat Digital 免费使用 3 个月。' },
+  // Unified course list (added 21 Oct 2026)
+  'Checked course': { ms: 'Kursus disemak', zh: '已核实课程' },
+  'AI suggestion · match {n}%': { ms: 'Cadangan AI · padanan {n}%', zh: 'AI 推荐 · 匹配 {n}%' },
+  'Paid; free 3 months via Rakyat Digital': { ms: 'Berbayar; percuma 3 bulan melalui Rakyat Digital', zh: '付费；可通过 Rakyat Digital 免费 3 个月' },
+  'time not stated': { ms: 'masa tidak dinyatakan', zh: '未注明时间' },
+  'Show all {n} suggestions': { ms: 'Tunjuk semua {n} cadangan', zh: '显示全部 {n} 个推荐' },
+  'No course found yet': { ms: 'Belum ada kursus ditemui', zh: '尚未找到课程' },
+  'Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.': { ms: 'Kursus disemak: dibuka secara manual pada {date}; disusun mengikut bilangan jurang yang diliputi, kemudian harga dan jam yang dinyatakan.', zh: '已核实课程：于 {date} 人工打开核实；按涵盖的技能缺口数量排序，其次是价格和注明的时数。' },
+  'AI suggestions: RunPod compared {n} Coursera course descriptions with the remaining skills and ordered them the same way; not checked by hand, and match % is text similarity, not quality. Catalogue retrieved {date}; eligible Malaysians can get Coursera free for 3 months through Rakyat Digital.': { ms: 'Cadangan AI: RunPod membandingkan {n} penerangan kursus Coursera dengan kemahiran yang tinggal dan menyusunnya dengan cara yang sama; belum disemak secara manual, dan padanan % ialah persamaan teks, bukan kualiti. Katalog diambil {date}; rakyat Malaysia yang layak boleh menggunakan Coursera percuma selama 3 bulan melalui Rakyat Digital.', zh: 'AI 推荐：RunPod 将 {n} 门 Coursera 课程介绍与剩余技能比较，并按同样方式排序；未经人工核实，匹配度是文本相似度，不代表质量。课程目录获取于 {date}；符合资格的马来西亚人可通过 Rakyat Digital 免费使用 Coursera 3 个月。' },
 };
 
 const LangContext = createContext<Lang>('en');

@@ -1,17 +1,20 @@
 // Step 3: a learning plan for one chosen move.
 // Rule: src/pathway.ts (documented in SIGNALS_AND_MATCHING.md, "Learning plan rule").
 // Courses: data/pathway/resources.json. NOSS: data/pathway/noss.json. Both checked by hand.
-import { useMemo } from 'react';
+import type React from 'react';
+import { useMemo, useState } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
 import nossFile from '../data/pathway/noss.json';
 import { ilo, personaById, roleById, roles, snapshots, transferable, type Profile } from './data';
-import { learningPlan, type Gap, type Resource } from './pathway';
+import { learningPlan, suggestedSteps, type Gap, type Resource, type SuggestedCourse } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 import { SdgContribution } from './SdgViews';
-import { AiCourses } from './AiCourses';
+import matchesFile from '../data/derived/coursera-skill-matches.json';
 
 const resources = resourcesFile.resources as Resource[];
+// AI-matched Coursera courses (RunPod, bge-m3); see scripts/match_courses_runpod.py.
+const matches = matchesFile as { method: { coursesEmbedded: number; catalogue: { retrievedAt: string } }; skills: Record<string, { courses: SuggestedCourse[] } | undefined> };
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
 type NossEntry = { code: string; title: string; level: number; source: string; page: number };
 type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
@@ -22,6 +25,27 @@ function GapTag({ gap }: { gap: Gap }) {
   return gap.partly
     ? <span className="skill-tag related" title={`≈ ${gap.partly}`}>{gap.skill.label}<small>≈ {gap.partly}</small></span>
     : <span className="skill-tag skill-gap">{gap.skill.label}</span>;
+}
+
+/** One course in the plan. Checked and AI-suggested courses share this layout; only the label differs. */
+function CourseCard({ n, title, url, meta, closes, label, primary, showNumber }: {
+  n: number; title: string; url: string; meta: React.ReactNode; closes: Gap[]; label: React.ReactNode; primary: boolean; showNumber: boolean;
+}) {
+  const t = useT();
+  return <li>
+    {showNumber && <span className="plan-num">{n}</span>}
+    <div>
+      <div className="plan-course-head">
+        <div>
+          {label}
+          <h3>{title}</h3>
+        </div>
+        <a className={`${primary ? 'primary-button' : 'secondary-button'} plan-course-action`} href={url} target="_blank" rel="noreferrer" aria-label={t('View {name}', { name: title })}>{t('View course')}</a>
+      </div>
+      <p className="plan-meta">{meta}</p>
+      <div className="tag-row"><span className="plan-closes">{t('Builds')}</span>{closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
+    </div>
+  </li>;
 }
 
 function NossRoute({ roleId }: { roleId: string }) {
@@ -57,6 +81,10 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
   const plan = useMemo(() => learningPlan(chosen, resources), [chosen]);
   const role = chosen.role;
   const persona = personaById(profile.persona);
+  const suggested = useMemo(() => suggestedSteps(plan.uncovered, matches.skills), [plan]);
+  const [showAllAi, setShowAllAi] = useState(false);
+  const aiShown = showAllAi ? suggested.steps : suggested.steps.slice(0, 4);
+  const total = plan.steps.length + suggested.steps.length;
 
   return <div className="step-body">
     <div className="who plan-who">
@@ -83,29 +111,28 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
             ? t('Start with the first checked course below.')
             : t('Start with a checked course, then review suggestions for the remaining skills.')}</p>
 
-        {plan.steps.length > 0 && <ol className={`plan-steps${plan.steps.length === 1 ? ' single' : ''}`}>
-          {plan.steps.map((step, i) => <li key={step.resource.id}>
-            {plan.steps.length > 1 && <span className="plan-num">{i + 1}</span>}
-            <div>
-              <div className="plan-course-head">
-                <h3>{step.resource.title}</h3>
-                <a className={`${i === 0 ? 'primary-button' : 'secondary-button'} plan-course-action`} href={step.resource.url} target="_blank" rel="noreferrer" aria-label={t('View {name}', { name: step.resource.title })}>{t('View course')}</a>
-              </div>
-              <p className="plan-meta" title={step.resource.timeBasis}>{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : <span className="plan-paid">{t(step.resource.cost)}</span>} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</p>
-              <div className="tag-row"><span className="plan-closes">{t('Builds')}</span>{step.closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
-            </div>
-          </li>)}
+        {total > 0 && <ol className={`plan-steps${total === 1 ? ' single' : ''}`}>
+          {plan.steps.map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber={total > 1} primary={i === 0}
+            title={step.resource.title} url={step.resource.url} closes={step.closes}
+            label={<span className="course-kind checked">{t('Checked course')}</span>}
+            meta={<span title={step.resource.timeBasis}>{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : step.resource.access === 'rakyat-digital' ? t('Paid; free 3 months via Rakyat Digital') : <span className="plan-paid">{t(step.resource.cost)}</span>} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</span>} />)}
+          {aiShown.map((step, i) => <CourseCard key={step.course.slug} n={plan.steps.length + i + 1} showNumber={total > 1} primary={plan.steps.length === 0 && i === 0}
+            title={step.course.name} url={step.course.url} closes={step.closes}
+            label={<span className="course-kind ai">{t('AI suggestion · match {n}%', { n: Math.round(step.bestMatch * 100) })}</span>}
+            meta={<>Coursera · {t('Paid; free 3 months via Rakyat Digital')} · {step.course.workload ?? t('time not stated')}</>} />)}
         </ol>}
+        {suggested.steps.length > 4 && <button type="button" className="text-button plan-more" onClick={() => setShowAllAi(!showAllAi)}>{showAllAi ? t('Show fewer') : t('Show all {n} suggestions', { n: suggested.steps.length })}</button>}
+
+        {suggested.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{suggested.unmatched.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>}
 
         {[...new Set(plan.steps.map((s) => s.resource.access).filter((a): a is string => !!a))].map((id) => <p key={id} className="plan-access note">
           <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
         </p>)}
 
-        {plan.steps.length > 0 && <p className="plan-method note">{plan.steps.length === 1
-          ? t('Course checked {date}; its skill coverage is our interpretation.', { date: resourcesFile.checkedAt })
-          : t('Checked {date}. Ordered by gap coverage, then price and stated hours. Course-to-skill links are our interpretation.', { date: resourcesFile.checkedAt })}</p>}
-
-        {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
+        <p className="plan-method note">
+          {plan.steps.length > 0 && t('Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.', { date: resourcesFile.checkedAt })}{' '}
+          {suggested.steps.length > 0 && t('AI suggestions: RunPod compared {n} Coursera course descriptions with the remaining skills and ordered them the same way; not checked by hand, and match % is text similarity, not quality. Catalogue retrieved {date}; eligible Malaysians can get Coursera free for 3 months through Rakyat Digital.', { n: matches.method.coursesEmbedded.toLocaleString(), date: matches.method.catalogue.retrievedAt })}
+        </p>
       </section>}
 
     <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('This move and the SDGs')} compact />

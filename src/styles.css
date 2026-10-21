@@ -539,3 +539,9 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .ai-courses a { color: #1e6b4f; }
 .ai-skill { font-size: 14px; font-weight: 600; color: #1c2430; }
 @media (max-width: 640px) { .ai-courses li { grid-template-columns: 1fr; gap: 2px; } }
+/* One course list: checked and AI-suggested courses share the card; the label tells them apart. */
+.course-kind { display: inline-block; margin-bottom: 4px; padding: 2px 7px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+.course-kind.checked { background: #e6f0ea; color: #1e6b4f; }
+.course-kind.ai { background: #eef0f3; color: #3a4450; border: 1px dashed #8a96a3; }
+.plan-more { margin-top: 10px; }
+.plan-unmatched { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; }
