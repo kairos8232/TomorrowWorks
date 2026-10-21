@@ -26,7 +26,9 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] Step 2: clear verified-course completion count and accessible progress bar, separate from submitted evidence; explain course completion versus skill mastery. Build and 84 tests pass; Edge desktop/phone, translated fit, evidence changes and unchanged completion bar checked.
 - [x] Step 3: next-course Start/Continue action using existing plan order, visible provider, AI provenance and session-only visited-link tracking. Completion verification remains disconnected; clicks give no completion credit. Build, 84 tests and desktop/phone browser checks pass.
 - [x] Add Change course with warning and explicit confirmation; preserve evidence and link history. Choices are learner/role-specific, in-memory only. Build, 84 tests and desktop/mobile browser interaction checks pass.
-- [ ] User review of step 3 next-action and course-switch preview.
+- [x] Step 4 corrected: remove self-report controls/state; badges unlock only from authoritative verified completion. Verification is not connected, so both remain locked. Distinct medal/trophy illustrations, richer green/gold cards and lock-status chips added; desktop/phone preview checked.
+- [x] Build, 88 tests and Edge desktop/phone checks pass; evidence cannot unlock badges, no self-report UI, role changes and translated fit checked.
+- [ ] User review of revised step 4 badge preview; team translation review; provider/reviewer integration before live unlocking.
 - [ ] Team review of new translations.
 - [ ] Decide real evidence storage, consent, access and deletion before file uploads or real credentials.
 - [ ] Provider/authorised-reviewer verification before completion claims or badges.

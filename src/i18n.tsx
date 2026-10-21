@@ -14,6 +14,15 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  "Learning milestones": { ms: "Pencapaian pembelajaran", zh: "学习里程碑" },
+  "Badges light up only after course completion is verified. Verification is not connected yet; submitted links do not unlock badges. Course badges do not certify skill mastery.": { ms: "Lencana diaktifkan hanya selepas penyelesaian kursus disahkan. Pengesahan belum disambungkan; pautan yang dihantar tidak membuka lencana. Lencana kursus tidak mengesahkan penguasaan kemahiran.", zh: "课程完成情况经过验证后，徽章才会点亮。目前尚未接入验证，提交链接不会解锁徽章。课程徽章不认证技能掌握程度。" },
+  "Unlocks after one course completion is verified.": { ms: "Dibuka selepas penyelesaian satu kursus disahkan.", zh: "验证完成一门课程后解锁。" },
+  "Unlocks when every unique course in this plan has verified completion, including AI suggestions. Optional certification routes are excluded. Empty plans do not qualify.": { ms: "Dibuka apabila penyelesaian setiap kursus unik dalam pelan ini disahkan, termasuk cadangan AI. Laluan pensijilan pilihan tidak dikira. Pelan kosong tidak layak.", zh: "此计划中所有不重复课程（包括 AI 建议课程）均验证完成后解锁。不包括可选认证途径，空计划不符合条件。" },
+  "Unlocked": { ms: "Dibuka", zh: "已解锁" },
+  "Locked": { ms: "Terkunci", zh: "未解锁" },
+  "These badges recognise your own completion reports. They are not official certificates, verified completion or skill assessments. Removing a report or changing the selected plan updates eligibility. Reports clear on refresh.": { ms: "Lencana ini mengiktiraf laporan penyelesaian anda sendiri. Ini bukan sijil rasmi, penyelesaian yang disahkan atau penilaian kemahiran. Membuang laporan atau menukar pelan mengemas kini kelayakan. Laporan dipadam apabila halaman dimuat semula.", zh: "这些徽章认可你自行报告的完成情况，不是官方证书、经过验证的完成记录或技能测评。移除报告或更换计划会更新获得资格，刷新页面后报告清除。" },
+  "First course completed": { ms: "Kursus pertama selesai", zh: "完成首门课程" },
+  "Selected plan’s courses completed": { ms: "Kursus dalam pelan terpilih selesai", zh: "完成所选计划的课程" },
   "Change course": { ms: "Tukar kursus", zh: "更换课程" },
   "Change your learning course?": { ms: "Tukar kursus pembelajaran anda?", zh: "要更换当前学习课程吗？" },
   "Confirming will replace the highlighted learning course and its Start or Continue link. Your existing evidence and opened-course history will be kept. Switching does not mark either course complete.": { ms: "Pengesahan akan menggantikan kursus yang diserlahkan serta pautan Mula atau Teruskan. Bukti dan sejarah kursus yang dibuka akan dikekalkan. Pertukaran tidak menandakan mana-mana kursus selesai.", zh: "确认后将更换突出显示的学习课程及其开始或继续链接。已有证明与课程打开记录会保留。更换不会将任何课程标记为完成。" },
@@ -105,7 +114,6 @@ const dict: Record<string, Entry> = {
   'Not started': { ms: 'Belum bermula', zh: '尚未开始' },
   'In progress': { ms: 'Sedang dipelajari', zh: '学习中' },
   'Completed': { ms: 'Selesai', zh: '已完成' },
-  'Course status is self-reported, not proof of a skill or qualification. You can change it at any time. It stays while you browse and clears on refresh.': { ms: 'Status kursus dilaporkan sendiri, bukan bukti kemahiran atau kelayakan. Anda boleh mengubahnya pada bila-bila masa. Status kekal semasa anda melayari aplikasi dan dipadam apabila halaman dimuat semula.', zh: '课程状态由你自行记录，不代表技能或资格认证。你可以随时更改。浏览应用期间会保留，刷新页面后清除。' },
   // Navigation and shell
   'Your career, mapped forward.': { ms: 'Kerjaya anda, dipetakan ke hadapan.', zh: '规划你的未来职业。' },
   'My career': { ms: 'Kerjaya saya', zh: '我的职业' },

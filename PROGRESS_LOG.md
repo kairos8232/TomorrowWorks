@@ -1,5 +1,30 @@
 # Progress log
 
+## 22 Oct 2026 — More attractive milestone artwork
+
+- User requested more attractive badges. Replaced small shared emblems with distinct star-medal/ribbon and trophy SVG artwork, larger centred awards, green/gold card tints and lock chips. Locked status stays explicit; no earned-state data or verification behaviour changed.
+- Build and 88 tests pass. Edge desktop/phone screenshots and EN/MS/ZH fit reviewed; locked state, no self-report UI, evidence not unlocking badges and unchanged verified progress checked. No new packages or image assets; not committed/pushed.
+
+---
+
+## 22 Oct 2026 — Remove self-reporting; sharper verified-only badges
+
+- User rejected self-report controls and requested badges light only from course detection/verification. Removed all completion-report state and controls, and active self-report copy. Badges now depend only on a verified-course set. No actual provider/reviewer detector exists: the current set is deliberately empty and UI explicitly says verification is not connected. No fake unlocks from links or clicks.
+- Stronger borders, angular medal emblems and textual Locked/Unlocked states; earned styling uses ledger green. Eligibility rule handles first verified course across plans and every unique selected-plan course, excluding empty plans and optional NOSS. Skill mastery remains separate.
+- Build passes. An over-broad field rename initially broke three test assertions; corrected their completed field, then all 88 tests pass. Edge desktop/phone checks confirm no self-report UI, both locked, evidence not unlocking/advancing verified progress, role changes and EN/MS/ZH fit; no page errors. Screenshots outside repo. Translation team review pending. Not committed/pushed; await review.
+
+---
+
+## 22 Oct 2026 — Step 4: self-reported learning milestones
+
+- User explicitly requested First course completed and Selected plan’s courses completed as self-reported milestones, with exact earning rules; skill badges require separate assessment and are not added. Added clearly labelled course-report checkboxes separate from evidence submission and the verified bar.
+- First badge needs at least one report by the current learner in the session; plan badge needs all unique current-plan course URLs, checked plus AI suggestions including hidden courses, excluding NOSS; empty plans never earn. Reversible reports and role changes recalculate eligibility; no generated claims, assessments, automatic skills, verified completion or ranking changes.
+- State stays in App memory per actual profile owner. Shared course URLs carry reports across roles; viewers stay separate; refresh clears reports. New EN/MS/ZH copy has the usual pending team review. Earned/not-earned text carries status as well as colour.
+- Production build and 88 tests pass, including four milestone rules. Edge at 1440 × 1000 / 390 × 844: evidence alone earns nothing; first report and all reports earn appropriate badges; removing reports revokes eligibility; verified bar stays zero; keyboard, navigation, learner/role changes, refresh, certification/Team exclusions and translated fit pass. No page errors. Screenshots and tooling outside repo; no new packages. Branch kit-yiu, not committed/pushed; await preview feedback.
+
+---
+
+
 ## 22 Oct 2026 — Course switching with a confirmation warning
 
 - User requested a course-change button and warning before replacing current/next learning. Added native dialog with actual selected-plan courses, a warning, Cancel and Confirm. Draft selection does not change the panel until confirmed. Same-course confirmation is disabled; Escape cancels and browser focus returns to the trigger.

@@ -71,6 +71,13 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
+## Learning milestone badges — step 4 (22 Oct 2026, corrected)
+
+- User removed self-reporting. No completion-report checkbox, report state or self-reported badge text remains in the current UI. First course completed requires at least one authoritative verified course completion. Selected plan’s courses completed requires verification for every unique current-plan course URL, including AI suggestions and excluding NOSS. Empty plans never earn.
+- Provider/reviewer verification is not connected, so the current verified-course set is deliberately empty: both badges stay Locked. The app does not detect external course completion. Evidence links and opened pages never unlock badges; verified progress remains zero. Future trusted verification can drive the pure eligibility rule; badges do not establish skill mastery.
+- Visuals use two distinct SVG awards: a star medal with ribbons and a trophy, larger centred artwork, green/gold tints, rounded cards and readable lock-status chips. Locked badges remain subdued; earned styling uses stronger gold and ledger green. No invented earned demo state is exposed.
+- Build and 88 tests pass. Edge desktop 1440 × 1000 and phone 390 × 844: no self-report controls/text, locked state, evidence not unlocking, unchanged verified bar, role changes and EN/MS/ZH fit pass. No page errors. New translations need team review.
+
 ## Changing the highlighted course — step 3 refinement (22 Oct 2026)
 
 - Change course opens a native modal dialog with courses from the selected role's actual plan (including collapsed AI suggestions, identified as suggestions). A warning states the highlighted course and Start/Continue link will change; evidence and visited-link history are retained; switching does not complete a course.

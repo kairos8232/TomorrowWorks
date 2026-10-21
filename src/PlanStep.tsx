@@ -13,6 +13,7 @@ import { SdgContribution } from './SdgViews';
 import matchesFile from '../data/derived/coursera-skill-matches.json';
 import { CourseProgressControl, LearningProgress } from './CourseProgress';
 import { ChangeCourse } from './ChangeCourse';
+import { LearningMilestones } from './LearningMilestones';
 import { activityCount, type CourseProgress, type LearningAction } from './learningCheck';
 
 const resources = resourcesFile.resources as Resource[];
@@ -148,6 +149,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
         {plan.steps.length > 0 && <p className="plan-total"><strong>{t('Estimated time: {h} hours', { h: plan.statedHours })}</strong> {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}{plan.stepsWithoutHours > 0 ? ` (${t('{n} without a stated time', { n: plan.stepsWithoutHours })})` : ''}{suggested.steps.length > 0 ? `; ${t('AI suggestions show their own time')}` : ''}.</p>}
 
         <LearningProgress total={activities.total} recorded={activities.recorded} />
+        <LearningMilestones courseUrls={courseChoices.map(course=>course.url)} />
         {nextCourse ? <section className="next-learning" aria-labelledby="next-learning-title">
           <div>
             <h3 id="next-learning-title">{t('Learning course for {role}', {role: role.title})}</h3>
