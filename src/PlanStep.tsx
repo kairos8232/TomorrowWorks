@@ -94,8 +94,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
             <span className="plan-num">{i + 1}</span>
             <div>
               <h3><a href={step.resource.url} target="_blank" rel="noreferrer">{step.resource.title}</a></h3>
-              <p className="plan-meta">{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : <span className="plan-paid">{t(step.resource.cost)}</span>}</p>
-              <p className="plan-time" title={step.resource.timeBasis}>{step.resource.hours !== null ? t('{n} hours of study, as stated on the course page.', { n: step.resource.hours }) : `${t(step.resource.timeBasis)}.`}</p>
+              <p className="plan-meta" title={step.resource.timeBasis}>{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : <span className="plan-paid">{t(step.resource.cost)}</span>} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</p>
               <div className="tag-row"><span className="plan-closes">{t('Builds')}</span>{step.closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
             </div>
           </li>)}
@@ -107,15 +106,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
 
         {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
 
-        <details className="how-to-read">
-          <summary>{t('How this plan is made')}</summary>
-          <dl>
-            <div><dt>{t('Skills')}</dt><dd>{t('The role’s essential ESCO skills you don’t have yet. A skill you partly have (≈) is included because it only counts half.')}</dd></div>
-            <div><dt>{t('Order')}</dt><dd>{t('Start with the course that builds the most of your missing skills, then the next. If two are equal, a free course comes before a paid one, then the one with fewer stated hours.')}</dd></div>
-            <div><dt>{t('Time')}</dt><dd>{t('The study time each provider states on its course page. We don’t estimate it ourselves.')}</dd></div>
-            <div><dt>{t('Courses')}</dt><dd>{t('OpenLearn, CS50x and UN CC:Learn (free) and Coursera (paid, or free for 3 months through Rakyat Digital), each checked by hand on its own page on {date}. The link to each skill is our reading of the course’s stated outcomes and skills.', { date: resourcesFile.checkedAt })}</dd></div>
-          </dl>
-        </details>
+        {plan.steps.length > 0 && <p className="plan-method note">{t('Checked {date}. Courses cover the most missing skills first; ties favour free courses, then shorter stated hours. Skill links reflect our reading of course outcomes.', { date: resourcesFile.checkedAt })}</p>}
       </>}
 
     <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('How this move connects to the SDGs')} />

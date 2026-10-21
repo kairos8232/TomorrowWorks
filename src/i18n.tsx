@@ -151,6 +151,7 @@ const dict: Record<string, Entry> = {
   'Skills without a checked course': { ms: 'Kemahiran tanpa kursus yang disemak', zh: '尚无已核实课程的技能' },
   'We list a course only after checking its page against the skill.': { ms: 'Kami hanya menyenaraikan kursus selepas menyemak halamannya dengan kemahiran tersebut.', zh: '我们核对课程页面与技能后才会列出课程。' },
   'How this plan is made': { ms: 'Bagaimana pelan ini dibuat', zh: '计划如何制定' },
+  'Checked {date}. Courses cover the most missing skills first; ties favour free courses, then shorter stated hours. Skill links reflect our reading of course outcomes.': { ms: 'Disemak pada {date}. Kursus yang meliputi paling banyak kemahiran kurang didahulukan; jika seri, kursus percuma lalu masa yang lebih singkat diutamakan. Pautan kemahiran berdasarkan tafsiran kami terhadap hasil kursus.', zh: '核实于 {date}。先列出涵盖最多缺少技能的课程；相同时优先免费课程，再按注明时数较短者排序。技能关联依据我们对课程学习成果的解读。' },
   Builds: { ms: 'Membina', zh: '培养' },
 
   // Team view

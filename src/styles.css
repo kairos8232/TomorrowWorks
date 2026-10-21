@@ -343,7 +343,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .plan-num { font-size: 22px; font-weight: 700; color: #1e6b4f; }
 .plan-steps h3 { margin: 0 0 4px; font-size: 17px; }
 .plan-steps h3 a { color: #1c2430; }
-.plan-meta, .plan-time { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.5; }
+.plan-meta { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.5; }
 .plan-steps .tag-row { margin: 10px 0 0; gap: 6px; align-items: center; }
 .plan-closes { font-size: 14px; font-weight: 600; color: #3a4450; margin-right: 4px; }
 .noss-list { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 10px; }
@@ -357,6 +357,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .plan-paid { color: #3a4450; }
 .plan-access { margin: 0; background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 12px 16px; }
 .plan-access a { color: #1e6b4f; }
+.plan-method { margin: 0; }
 .home-people h2 { margin: 0 0 14px; }
 .people-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .person-card { background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 2.5vw, 24px); display: flex; flex-direction: column; }
