@@ -1,0 +1,51 @@
+id,skill,target,reviewer A,reviewer B,final (relevant / not relevant / uncertain),reason
+P003,environmental policy,17.13,uncertain,not relevant,not relevant,"Target 17.13 concerns global macroeconomic stability, not environmental policy generally."
+P004,environmental policy,17.14,uncertain,not relevant,not relevant,"Target 17.14 specifically addresses national whole-of-government and inter-ministerial policy coherence, not single-organization environmental policies."
+P006,environmental policy,9.4,not relevant,relevant,not relevant,"Environmental policy alone does not directly establish industrial retrofitting, resource-efficient industrial processes, or clean-technology adoption under target 9.4."
+P008,accounting department processes,8.2,uncertain,not relevant,not relevant,Accounting processes do not directly establish higher economic productivity.
+P014,green computing,9.4,uncertain,relevant,relevant,Green computing can directly support upgrading IT infrastructure to be more resource-efficient and environmentally sound under target 9.4.
+P016,sustainable technologies,4.7,uncertain,not relevant,not relevant,"Target 4.7 concerns education for sustainable development, not technologies themselves."
+P018,climate change impact,13.2,uncertain,not relevant,uncertain,"Understanding climate impacts may inform integration into planning, but does not itself integrate policies."
+P019,climate change impact,13.3,not relevant,relevant,uncertain,"Knowledge of climate change impacts may support capacity-building, but target 13.3 specifically requires education, awareness, or human and institutional capacity development."
+P021,sustainable finance,17.16,uncertain,not relevant,not relevant,Sustainable finance alone does not establish the multistakeholder global partnerships in 17.16.
+P027,circular economy,9.4,uncertain,relevant,uncertain,"Circular economy approaches can improve industrial resource efficiency, but the skill does not necessarily involve the industrial infrastructure upgrades specified in 9.4."
+P041,waste management,11.6,uncertain,relevant,relevant,"Waste management directly supports target 11.6, which explicitly addresses municipal and other waste management to reduce cities’ environmental impacts."
+P045,global standards for sustainability reporting,17.16,not relevant,uncertain,not relevant,Reporting standards do not directly constitute global multistakeholder partnerships.
+P048,assess the life cycle of resources,12.4,uncertain,relevant,relevant,"Assessing the life cycle of resources supports environmentally sound management of chemicals and wastes throughout their life cycle under target 12.4, when applied to those materials."
+P050,hazardous waste types,3.9,uncertain,relevant,uncertain,"Knowing hazardous waste types can enable pollution prevention, but does not by itself demonstrate activities that reduce illness and deaths from hazardous chemicals or pollution."
+P052,business analysis,9.3,not relevant,uncertain,uncertain,Business analysis could support target 9.3 when specifically applied to small-scale enterprises’ access to finance or integration into markets and value chains.
+P058,advise on sustainable management policies,17.14,uncertain,not relevant,not relevant,"Target 17.14 refers to public policy coherence across government sectors, whereas advisory on sustainable management is an organizational/corporate management function."
+P060,advise on sustainable management policies,8.3,uncertain,not relevant,not relevant,Sustainable management policies do not directly promote entrepreneurship or small enterprise growth.
+P061,use sustainable materials and components,12.6,uncertain,relevant,relevant,"Using sustainable materials and components is a concrete sustainable business practice, as encouraged by target 12.6."
+P065,green building standards,4.7,uncertain,not relevant,not relevant,Green building standards are not themselves education for sustainable development.
+P067,follow the statutory obligations,17.4,uncertain,not relevant,not relevant,Following statutory obligations is not the debt assistance addressed by target 17.4.
+P068,energy efficiency,6.4,relevant,not relevant,not relevant,"Target 6.4 concerns water-use efficiency and water scarcity, not energy efficiency generally."
+P070,energy efficiency,7.2,relevant,not relevant,not relevant,"Target 7.2 is renewable energy share, not energy efficiency."
+P081,produce sustainable products,4.7,uncertain,not relevant,not relevant,Sustainable product production is not education under target 4.7.
+P084,business processes,8.2,uncertain,not relevant,not relevant,Generic business processes do not directly raise economic productivity.
+P087,asset management,8.2,uncertain,not relevant,not relevant,Asset management alone does not establish productivity gains.
+P093,coordinate environmental efforts,11.4,not relevant,uncertain,uncertain,Environmental coordination supports 11.4 only when focused on cultural or natural heritage protection.
+P094,coordinate environmental efforts,12.6,uncertain,relevant,uncertain,"Coordinating environmental efforts may help companies adopt sustainable practices, but the skill does not establish that corporate implementation is involved."
+P096,coordinate environmental efforts,17.16,uncertain,not relevant,not relevant,Environmental coordination does not necessarily create global multistakeholder partnerships.
+P098,advise on carbon emissions reduction,12.6,uncertain,relevant,uncertain,"Advising on carbon emissions reduction can help companies adopt sustainable practices, but the skill does not explicitly establish a corporate setting or reporting context."
+P101,analyse external factors of companies,12.6,not relevant,uncertain,uncertain,Analyzing companies’ external factors supports 12.6 only if the analysis addresses sustainability practices or reporting.
+P102,analyse external factors of companies,8.2,uncertain,not relevant,not relevant,General company analysis does not directly deliver higher economic productivity.
+P104,resource-efficient technologies,6.4,relevant,uncertain,uncertain,Resource-efficient technologies may improve water-use efficiency if designed for water use.
+P108,mitigate waste of resources,6.3,not relevant,uncertain,uncertain,Resource waste mitigation supports water quality only if it prevents water pollution or dumping.
+P111,prepare financial projections,8.3,uncertain,not relevant,not relevant,Financial projections alone do not promote entrepreneurship or MSME formalization.
+P116,measure company's sustainability performance,17.16,uncertain,not relevant,not relevant,Corporate sustainability measurement is not a global partnership mechanism.
+P117,measure company's sustainability performance,17.19,uncertain,not relevant,not relevant,Corporate metrics are not necessarily national statistical capacity or GDP-complementing measures.
+P120,sustainability consulting,17.16,uncertain,not relevant,not relevant,Sustainability consulting does not itself form the partnerships specified in 17.16.
+P121,advise on sustainability solutions,12.6,uncertain,relevant,relevant,Advising on sustainability solutions can directly support adoption of sustainable company practices under target 12.6.
+P122,advise on sustainability solutions,17.16,uncertain,not relevant,not relevant,Generic sustainability advice does not directly establish global partnerships.
+P123,advise on sustainability solutions,9.4,uncertain,relevant,relevant,"Advice on sustainability solutions can support clean technology and resource-efficient industrial processes under target 9.4, when focused on industrial implementation."
+P125,energy conservation,6.3,uncertain,not relevant,not relevant,Energy conservation does not directly reduce water pollution under target 6.3.
+P126,energy conservation,6.4,uncertain,not relevant,not relevant,Target 6.4 specifically concerns water-use efficiency and water scarcity; conserving energy does not directly satisfy it.
+P128,energy conservation,7.2,uncertain,not relevant,not relevant,"Energy conservation concerns efficiency, while 7.2 targets renewable energy share."
+P135,accounting,8.2,uncertain,not relevant,not relevant,Accounting is not directly the productivity improvements described by 8.2.
+P138,align efforts towards business development,8.2,uncertain,not relevant,not relevant,Business development coordination does not itself establish productivity improvement.
+P139,align efforts towards business development,8.3,uncertain,not relevant,not relevant,"Target 8.3 addresses public, development-oriented policies for entrepreneurship and MSME formalization, not internal business development coordination."
+P141,corporate sustainability,12.6,uncertain,relevant,relevant,"Corporate sustainability directly concerns companies adopting sustainable practices, the explicit focus of target 12.6."
+P143,corporate sustainability,9.4,uncertain,relevant,uncertain,"Corporate sustainability can involve clean technology and industrial retrofitting, but also covers broader activities unrelated to target 9.4."
+P144,company policies,10.3,not relevant,uncertain,uncertain,Company policies support 10.3 only if they explicitly address equal opportunity and discriminatory policies or practices.
+P145,company policies,10.4,not relevant,uncertain,uncertain,"Company policies support 10.4 only if they specifically concern fiscal, wage, or social-protection policies relevant to greater equality."
