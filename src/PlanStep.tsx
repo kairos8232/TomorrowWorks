@@ -81,11 +81,14 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           ? t('Start with a checked course, then review suggestions for the remaining skills.')
           : t('No checked course yet. Review the suggestions for these skills below.')}</p>
 
-        {plan.steps.length > 0 && <ol className="plan-steps">
+        {plan.steps.length > 0 && <ol className={`plan-steps${plan.steps.length === 1 ? ' single' : ''}`}>
           {plan.steps.map((step, i) => <li key={step.resource.id}>
-            <span className="plan-num">{i + 1}</span>
+            {plan.steps.length > 1 && <span className="plan-num">{i + 1}</span>}
             <div>
-              <h3><a href={step.resource.url} target="_blank" rel="noreferrer">{step.resource.title}</a></h3>
+              <div className="plan-course-head">
+                <h3>{step.resource.title}</h3>
+                <a className={`${i === 0 ? 'primary-button' : 'secondary-button'} plan-course-action`} href={step.resource.url} target="_blank" rel="noreferrer" aria-label={t('View {name}', { name: step.resource.title })}>{t('View course')}</a>
+              </div>
               <p className="plan-meta" title={step.resource.timeBasis}>{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : <span className="plan-paid">{t(step.resource.cost)}</span>} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</p>
               <div className="tag-row"><span className="plan-closes">{t('Builds')}</span>{step.closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
             </div>
