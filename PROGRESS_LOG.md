@@ -4,6 +4,15 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (14:10–14:40 MYT) — Current NOSS register; GDELT one request; feedback on target groups
+
+- **NOSS:** Carson supplied the current JPK register (Daftar Standard, 22 Jan 2025, 191 pages; read with `pdftotext`, not committed). `data/pathway/noss.json` now cites it with page numbers. Eight of nine roles have a close or related standard; business analyst has none.
+- **GDELT:** still 429 after the first topic with the four-request script. Now one request for all topics; headlines are tagged by the topic terms they contain, else "Other".
+- **Feedback (WhatsApp, shared by Carson):** a product that works well for all four target groups in the brief has the edge over one that fits two. Brief §2 groups: working adults at risk of displacement (Aina covers this), fresh graduates and career switchers, HR / L&D managers, TVET and university career centres. Proposal to Carson pending.
+- **Courses:** Carson asked to connect Coursera, LinkedIn, OpenLearn or Rakyat Digital. Found: Rakyat Digital's Global Learning Pass gives eligible Malaysians with MyDigital ID three months of free Coursera access (100,000 licences, from 16 Sep 2026; Business Today, 8 Oct 2026). Coursera's catalogue API cannot be fetched from Claude's workspace. Proposal to Carson pending.
+
+---
+
 ## 21 Oct 2026 (14:00–14:40 MYT) — 3. Your plan (stages 10a–10d)
 
 - **Rule** (`src/pathway.ts`, documented in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#learning-plan-rule-stage-10-added-21-oct-2026)): gaps = missing + transferable essential skills; steps chosen greedily (the course closing the most remaining gaps first); time = the provider's stated study hours only; uncovered gaps listed as "No checked course yet".
