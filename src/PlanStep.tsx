@@ -7,7 +7,7 @@ import nossFile from '../data/pathway/noss.json';
 import { ilo, personaById, roleById, roles, snapshots, transferable, type Profile } from './data';
 import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
-import { useT, useTx } from './i18n';
+import { useLang, useT, useTx } from './i18n';
 import { SdgContribution } from './SdgViews';
 import { AiCourses } from './AiCourses';
 
@@ -26,6 +26,7 @@ function GapTag({ gap }: { gap: Gap }) {
 
 function NossRoute({ roleId }: { roleId: string }) {
   const t = useT();
+  const lang = useLang();
   const entry = nossRoles[roleId];
   return <section className="panel plan-noss" aria-labelledby="noss">
     <h2 id="noss">{t('Malaysian certification route')}</h2>
@@ -33,7 +34,7 @@ function NossRoute({ roleId }: { roleId: string }) {
       ? <p>{t('No matching National Occupational Skills Standard (NOSS) in the current JPK register (January 2025).')}</p>
       : <>
         <ul className="noss-list">{entry.noss.map((n) => <li key={n.code}>
-          <strong>{t('SKM Level {n}', { n: n.level })}: {n.title}</strong>
+          <strong title={n.title}>{t('SKM Level {n}', { n: n.level })}: {lang === 'ms' ? n.title.replace(/ \([^)]*\)$/, '') : n.title.match(/\(([^)]*)\)$/)?.[1] ?? n.title}</strong>
           <span>NOSS {n.code} · <a href={`${nossSources[n.source].url}#page=${n.page}`} target="_blank" rel="noreferrer">{t('JPK register, Jan 2025, p. {n}', { n: n.page })}</a></span>
         </li>)}</ul>
         <p className="note plan-noss-note">{entry.match === 'related' ? `${t('Related route, not the same job.')} ${entry.note ? t(entry.note) : ''}` : t('Closest standard by title.')} {t('Optional SKM route via a JPK-accredited centre or prior learning (PPT). Check the code with JPK before enrolling.')}</p>
