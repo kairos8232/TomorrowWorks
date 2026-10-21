@@ -7,7 +7,7 @@ import type { Role } from './scoring';
 
 const roles = rolesFile.roles as Role[];
 
-describe('SDG links (RunPod matches: strong checked, possible not checked, 4.4 baseline)', () => {
+describe('SDG links (RunPod matches: strong kept by review, possible or uncertain not confirmed, 4.4 baseline)', () => {
   const byId = (id: string) => roles.find((r) => r.id === id)!;
   const sm = byId('sustainability-manager');
   const all = roles.flatMap((r) => r.essentialSkills);
@@ -18,14 +18,20 @@ describe('SDG links (RunPod matches: strong checked, possible not checked, 4.4 b
       expect(targetTitle(l.target)).not.toBe(l.target);
     }
   });
-  it('strong links are at or above the threshold and not rejected; possible ones sit between possibleFrom and the threshold', () => {
+  it('strong links are at or above the threshold and not rejected; possible ones sit between possibleFrom and the threshold unless marked uncertain', () => {
     for (const s of all) {
       for (const l of skillSdgs(s).filter((x) => x.source === 'ai')) expect(l.similarity!).toBeGreaterThanOrEqual(sdgReview.threshold);
-      for (const l of skillPossibleSdgs(s)) { expect(l.similarity!).toBeGreaterThanOrEqual(sdgReview.possibleFrom); expect(l.similarity!).toBeLessThan(sdgReview.threshold); }
+      for (const l of skillPossibleSdgs(s)) { expect(l.similarity!).toBeGreaterThanOrEqual(sdgReview.possibleFrom); if (!l.uncertain) expect(l.similarity!).toBeLessThan(sdgReview.threshold); }
       for (const l of [...skillSdgs(s), ...skillPossibleSdgs(s)]) expect(sdgReview.rejectTargets.map((x) => x.target)).not.toContain(l.target);
     }
     expect(reviewCounts.rejected).toBeGreaterThan(0);
     expect(reviewCounts.rejected).toBeLessThan(reviewCounts.proposed);
+  });
+  it('uncertain matches are never strong, only possible (offer financial services -> 9.3)', () => {
+    const s = find('offer financial services');
+    expect(skillSdgs(s).map((l) => l.target)).not.toContain('9.3');
+    expect(skillPossibleSdgs(s).find((l) => l.target === '9.3')?.uncertain).toBe(true);
+    expect(reviewCounts.kept + reviewCounts.rejected + reviewCounts.uncertain).toBe(reviewCounts.proposed);
   });
   it('rejected matches never show (data migration is not migration of people)', () => {
     expect(skillSdgs(find('develop automated migration methods')).map((l) => l.target)).not.toContain('10.7');

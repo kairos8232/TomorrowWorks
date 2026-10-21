@@ -608,6 +608,13 @@ const dict: Record<string, Entry> = {
   'Spread environmentally sound technologies to developing countries': { ms: 'Sebarkan teknologi mesra alam ke negara membangun', zh: '向发展中国家推广无害环境技术' },
   'Effective public, public-private and civil society partnerships': { ms: 'Perkongsian awam, awam-swasta dan masyarakat sivil yang berkesan', zh: '有效的公共、公私和民间社会伙伴关系' },
   'Recognise and value unpaid care and domestic work': { ms: 'Iktiraf dan hargai kerja penjagaan dan domestik tanpa gaji', zh: '承认并重视无偿护理和家务劳动' },
+  'Strong match · draft review': { ms: 'Padanan kukuh · semakan draf', zh: '强匹配 · 初步审核' },
+  'Strong match · reviewed': { ms: 'Padanan kukuh · disemak', zh: '强匹配 · 已审核' },
+  'Possible links ({n}), not confirmed': { ms: 'Pautan mungkin ({n}), belum disahkan', zh: '可能的关联（{n}），未确认' },
+  'How links are made: RunPod ({model}) compares each ESCO skill with the official UN target texts. Strong: similarity of at least {th}, a provisional threshold from exploratory inspection.': { ms: 'Cara pautan dibuat: RunPod ({model}) membandingkan setiap kemahiran ESCO dengan teks rasmi sasaran PBB. Kukuh: keserupaan sekurang-kurangnya {th}, ambang sementara daripada pemeriksaan awal.', zh: '关联方式：RunPod（{model}）将每项 ESCO 技能与联合国官方目标文本比较。强：相似度至少 {th}，这是通过初步检查确定的暂定阈值。' },
+  'A draft review of the {p} matches above it removed {r} and marked {u} uncertain; team validation is pending.': { ms: 'Semakan draf terhadap {p} padanan di atasnya membuang {r} dan menandakan {u} sebagai tidak pasti; pengesahan pasukan belum selesai.', zh: '对高于该阈值的 {p} 项匹配进行了初步审核，删除 {r} 项，标记 {u} 项为不确定；团队验证尚未完成。' },
+  'The team reviewed the {p} matches above it, removing {r} and marking {u} uncertain.': { ms: 'Pasukan menyemak {p} padanan di atasnya, membuang {r} dan menandakan {u} sebagai tidak pasti.', zh: '团队审核了高于该阈值的 {p} 项匹配，删除 {r} 项，标记 {u} 项为不确定。' },
+  'Possible: {lo} to {th} or uncertain, not confirmed, never used for ranking ({lo} is a display choice). Lower: not shown. Links show a connection, not a measured impact.': { ms: 'Mungkin: {lo} hingga {th} atau tidak pasti, belum disahkan, tidak digunakan untuk kedudukan ({lo} ialah pilihan paparan). Lebih rendah: tidak ditunjukkan. Pautan menunjukkan kaitan, bukan impak yang diukur.', zh: '可能：{lo} 至 {th} 或不确定，未确认，不用于排名（{lo} 是显示上的选择）。更低：不显示。关联表示联系，而非经测量的影响。' },
 };
 
 const LangContext = createContext<Lang>('en');

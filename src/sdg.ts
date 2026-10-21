@@ -3,10 +3,12 @@
 // Skill -> UN targets matched by RunPod (BAAI/bge-m3): cosine similarity between the
 //          ESCO skill text and the official UN target text (scripts/match_sdg_runpod.py,
 //          data/derived/sdg-skill-matches.json). Levels (data/sdg/sdg-review.json):
-//            strong   = similarity >= threshold (0.60) and not rejected by the human check;
+//            strong   = similarity >= threshold (0.60, provisional) and kept by the review:
 //                       used for tags, role links and the optional Goals ranking.
-//            possible = similarity from possibleFrom (0.55) up to the threshold, not rejected;
-//                       shown as "possible, not checked", never used for ranking or tags.
+//            possible = similarity from possibleFrom (0.55, a display choice) up to the threshold,
+//                       or above it but marked uncertain in the review; shown as "possible,
+//                       not confirmed", never used for ranking or tags.
+//            Rejected matches (whole targets, or single skill-target pairs) are never shown.
 //            below possibleFrom: not shown.
 //          ESCO digital skills also link to 4.4 (indicator 4.4.1 counts ICT skills).
 //          Baseline: every skill counts towards 4.4 (relevant skills for decent jobs), shown once.
@@ -18,7 +20,7 @@ import unFile from '../data/sources/un-sdg-targets.json';
 import type { Skill } from './scoring';
 
 /** source: 'ai' = RunPod match; 'esco' = ESCO digital flag. level: see the rule above. */
-export type SdgLink = { target: string; source: 'ai' | 'esco'; level: 'strong' | 'possible'; similarity?: number; skills?: Skill[] };
+export type SdgLink = { target: string; source: 'ai' | 'esco'; level: 'strong' | 'possible'; similarity?: number; uncertain?: boolean; skills?: Skill[] };
 export const sdgData = sdgFile as {
   goals: Record<string, { name: string; short: string; colour: string }>;
   targets: Record<string, { goal: string; title: string }>;
@@ -34,20 +36,27 @@ export const targetGoal = (code: string) => sdgData.targets[code]?.goal ?? code.
 export const targetTitle = (code: string) => sdgData.targets[code]?.title ?? unTitles.get(code) ?? code;
 
 const rejectedTargets = new Set(sdgReview.rejectTargets.map((r) => r.target));
-const rejectedPairs = new Set(sdgReview.rejectPairs.map((r) => `${r.skill}|${r.target}`));
-const rejected = (label: string, code: string) => rejectedTargets.has(code) || rejectedPairs.has(`${label}|${code}`);
+const decision = new Map(sdgReview.decisions.map((d) => [`${d.skill}|${d.target}`, d.status]));
+const rejected = (label: string, code: string) => rejectedTargets.has(code) || decision.get(`${label}|${code}`) === 'rejected';
+const uncertain = (label: string, code: string) => decision.get(`${label}|${code}`) === 'uncertain';
 
-/** RunPod matches at or above the threshold, before and after the human check (shown as counts). */
+/** RunPod matches at or above the threshold, and what the review did with them (shown as counts). */
 export const reviewCounts = (() => {
-  const all = Object.values(sdgMatches.skills).flatMap((s) => s.targets.filter((t) => t.similarity >= sdgReview.threshold).map((t) => rejected(s.label, t.code)));
-  return { proposed: all.length, rejected: all.filter(Boolean).length };
+  const all = Object.values(sdgMatches.skills).flatMap((s) => s.targets.filter((t) => t.similarity >= sdgReview.threshold).map((t) => [s.label, t.code]));
+  const rej = all.filter(([l, c]) => rejected(l, c)).length;
+  const unc = all.filter(([l, c]) => !rejected(l, c) && uncertain(l, c)).length;
+  return { proposed: all.length, rejected: rej, uncertain: unc, kept: all.length - rej - unc };
 })();
 
 function aiLinks(skill: Skill, level: 'strong' | 'possible'): SdgLink[] {
-  const [lo, hi] = level === 'strong' ? [sdgReview.threshold, Infinity] : [sdgReview.possibleFrom, sdgReview.threshold];
   return (sdgMatches.skills[skill.uri]?.targets ?? [])
-    .filter((t) => t.similarity >= lo && t.similarity < hi && !rejected(skill.label, t.code))
-    .map((t) => ({ target: t.code, source: 'ai', level, similarity: t.similarity }));
+    .filter((t) => !rejected(skill.label, t.code))
+    .filter((t) => {
+      const above = t.similarity >= sdgReview.threshold;
+      const unsure = uncertain(skill.label, t.code);
+      return level === 'strong' ? above && !unsure : (above && unsure) || (!above && t.similarity >= sdgReview.possibleFrom);
+    })
+    .map((t) => ({ target: t.code, source: 'ai', level, similarity: t.similarity, uncertain: uncertain(skill.label, t.code) || undefined }));
 }
 
 /** Strong SDG links for one skill (the 4.4 baseline for every skill is handled separately). */
