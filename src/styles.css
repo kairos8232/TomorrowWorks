@@ -532,8 +532,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 }
 /* AI-matched courses: clearly labelled as machine-found, not checked by hand. */
 .ai-courses { margin-top: 18px; border-top: 1px solid #d9ded9; padding-top: 18px; }
-.ai-courses h4 { margin: 0 0 6px; font-size: 15px; }
-.ai-count { margin-left: 5px; color: #5d6873; font-weight: 500; }
+.ai-courses h3 { margin: 0 0 6px; font-size: 17px; }
 .ai-courses ul { list-style: none; margin: 10px 0 6px; padding: 0; }
 .ai-courses li { display: grid; grid-template-columns: minmax(180px, 0.8fr) 1.6fr; gap: 12px; align-items: baseline; padding: 9px 0; border-top: 1px solid #e3e7e3; }
 .ai-courses li small { display: block; color: #5d6873; font-size: 14px; }

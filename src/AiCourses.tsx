@@ -16,8 +16,8 @@ export function AiCourses({ skills }: { skills: Skill[] }) {
   const rows = skills.map((skill) => ({ skill, course: matches.skills[skill.uri]?.courses[0] as Match | undefined }));
   const shown = all ? rows : rows.slice(0, 4);
   return <div className="ai-courses">
-    <h4 id="ai-courses">{t('Skills without a checked course')} <span className="ai-count">{skills.length}</span></h4>
-    <p className="note">{t('AI suggested Coursera matches below. They are unverified; match % is text similarity, not course quality.')}</p>
+    <h3 id="ai-courses">{t('{n} still need a checked course', { n: skills.length })}</h3>
+    <p className="note">{t('AI suggestions are unverified. Match % is text similarity, not course quality.')}</p>
     <ul>{shown.map(({ skill, course }) => <li key={skill.uri}>
       <span className="ai-skill">{skill.label}</span>
       <span>{course ? <><a href={course.url} target="_blank" rel="noreferrer">{course.name}</a>

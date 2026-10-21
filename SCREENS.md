@@ -61,8 +61,8 @@ My career (sidebar navigation)           The job market (browse any time)
 ## 3. Your plan
 
 - **Entry:** *Plan this move* in a focused role view of Your moves, or the sidebar career step (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.
-- **Skills to build:** one panel contains all target gaps. It starts with the total and a next-step cue, then ordered checked courses with a *View course* action and the skills they build, followed by gaps still without a checked course and their AI suggested matches. A single checked course does not show a step number. The matching rows are unverified text similarities, not quality ratings; they start with 4 rows and can show all.
-- **Method note:** checked date, course ordering and the basis for skill links appear directly after the checked courses. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
+- **Skills to build:** one panel contains all target gaps. It starts with the total and a next-step cue, then ordered checked courses with a *View course* action and the skills they build. A short "still need a checked course" subsection holds the remaining skills and their AI suggested matches. A single checked course does not show a step number. The matching rows are unverified text similarities, not quality ratings; they start with 4 rows and can show all.
+- **Method note:** checked date and the basis for skill links appear directly after the checked courses; ordering is explained when there is more than one course. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 

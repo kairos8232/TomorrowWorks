@@ -77,9 +77,11 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
       ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
       : <section className="panel plan-learning" aria-labelledby="plan-skills-heading">
         <h2 id="plan-skills-heading">{plan.gaps.length} {t('skills to build')}</h2>
-        <p className="plan-learning-intro">{plan.steps.length > 0
-          ? t('Start with a checked course, then review suggestions for the remaining skills.')
-          : t('No checked course yet. Review the suggestions for these skills below.')}</p>
+        <p className="plan-learning-intro">{plan.steps.length === 0
+          ? t('No checked course yet. Review the suggestions for these skills below.')
+          : plan.uncovered.length === 0
+            ? t('Start with the first checked course below.')
+            : t('Start with a checked course, then review suggestions for the remaining skills.')}</p>
 
         {plan.steps.length > 0 && <ol className={`plan-steps${plan.steps.length === 1 ? ' single' : ''}`}>
           {plan.steps.map((step, i) => <li key={step.resource.id}>
@@ -99,7 +101,9 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
         </p>)}
 
-        {plan.steps.length > 0 && <p className="plan-method note">{t('Checked {date}. Ordered by gap coverage, then price and stated hours. Course-to-skill links are our interpretation.', { date: resourcesFile.checkedAt })}</p>}
+        {plan.steps.length > 0 && <p className="plan-method note">{plan.steps.length === 1
+          ? t('Course checked {date}; its skill coverage is our interpretation.', { date: resourcesFile.checkedAt })
+          : t('Checked {date}. Ordered by gap coverage, then price and stated hours. Course-to-skill links are our interpretation.', { date: resourcesFile.checkedAt })}</p>}
 
         {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
       </section>}
