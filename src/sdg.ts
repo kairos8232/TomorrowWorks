@@ -2,25 +2,27 @@
 //
 // Skill -> UN targets matched by RunPod (BAAI/bge-m3): cosine similarity between the
 //          ESCO skill text and the official UN target text (scripts/match_sdg_runpod.py,
-//          data/derived/sdg-skill-matches.json). A match is shown if its similarity is at
-//          least the reviewed threshold and people did not reject it (data/sdg/sdg-review.json).
+//          data/derived/sdg-skill-matches.json). Levels (data/sdg/sdg-review.json):
+//            strong   = similarity >= threshold (0.60) and not rejected by the human check;
+//                       used for tags, role links and the optional Goals ranking.
+//            possible = similarity from possibleFrom (0.55) up to the threshold, not rejected;
+//                       shown as "possible, not checked", never used for ranking or tags.
+//            below possibleFrom: not shown.
 //          ESCO digital skills also link to 4.4 (indicator 4.4.1 counts ICT skills).
-//          Every skill counts towards 4.4 (relevant skills for decent jobs), shown once.
-// Role  -> the two targets matched by most of its essential skills (above), and the
-//          links written by the team in data/sdg/sdg-links.json, labelled as such.
+//          Baseline: every skill counts towards 4.4 (relevant skills for decent jobs), shown once.
+// Role  -> the two targets matched strongly by most of its essential skills (none is fine).
 import sdgFile from '../data/sdg/sdg-links.json';
 import reviewFile from '../data/sdg/sdg-review.json';
 import matchFile from '../data/derived/sdg-skill-matches.json';
 import unFile from '../data/sources/un-sdg-targets.json';
 import type { Skill } from './scoring';
 
-/** source: 'ai' = RunPod match kept after review; 'team' = written by the team; 'esco' = ESCO digital flag. */
-export type SdgLink = { target: string; source: 'ai' | 'team' | 'esco'; reason?: string; similarity?: number; skills?: Skill[] };
+/** source: 'ai' = RunPod match; 'esco' = ESCO digital flag. level: see the rule above. */
+export type SdgLink = { target: string; source: 'ai' | 'esco'; level: 'strong' | 'possible'; similarity?: number; skills?: Skill[] };
 export const sdgData = sdgFile as {
   goals: Record<string, { name: string; short: string; colour: string }>;
   targets: Record<string, { goal: string; title: string }>;
-  roles: Record<string, { target: string; reason: string }[]>;
-  review: string;
+  pickerGoals: string[];
 };
 export const sdgReview = reviewFile;
 export const sdgMatches = matchFile as { method: { model: string; where: string; matchedAt: string; targets: { name: string; url: string; retrievedAt: string } }; skills: Record<string, { label: string; targets: { code: string; similarity: number }[] }> };
@@ -35,37 +37,53 @@ const rejectedTargets = new Set(sdgReview.rejectTargets.map((r) => r.target));
 const rejectedPairs = new Set(sdgReview.rejectPairs.map((r) => `${r.skill}|${r.target}`));
 const rejected = (label: string, code: string) => rejectedTargets.has(code) || rejectedPairs.has(`${label}|${code}`);
 
-/** RunPod matches at or above the threshold, before and after the human review (shown as counts). */
+/** RunPod matches at or above the threshold, before and after the human check (shown as counts). */
 export const reviewCounts = (() => {
   const all = Object.values(sdgMatches.skills).flatMap((s) => s.targets.filter((t) => t.similarity >= sdgReview.threshold).map((t) => rejected(s.label, t.code)));
   return { proposed: all.length, rejected: all.filter(Boolean).length };
 })();
 
-/** Specific SDG links for one skill (4.4 for every skill is handled separately). */
-export function skillSdgs(skill: Skill): SdgLink[] {
-  const links: SdgLink[] = (sdgMatches.skills[skill.uri]?.targets ?? [])
-    .filter((t) => t.similarity >= sdgReview.threshold && !rejected(skill.label, t.code))
-    .map((t) => ({ target: t.code, source: 'ai', similarity: t.similarity }));
-  if (skill.digital) links.push({ target: '4.4', source: 'esco' });
-  return links;
+function aiLinks(skill: Skill, level: 'strong' | 'possible'): SdgLink[] {
+  const [lo, hi] = level === 'strong' ? [sdgReview.threshold, Infinity] : [sdgReview.possibleFrom, sdgReview.threshold];
+  return (sdgMatches.skills[skill.uri]?.targets ?? [])
+    .filter((t) => t.similarity >= lo && t.similarity < hi && !rejected(skill.label, t.code))
+    .map((t) => ({ target: t.code, source: 'ai', level, similarity: t.similarity }));
 }
 
-/** Totals per target for a set of skills, most skills first (for the plan and team views). */
-export function sdgTotals(skills: Skill[]) {
-  const byTarget = new Map<string, Skill[]>();
-  for (const s of skills) for (const l of skillSdgs(s)) byTarget.set(l.target, [...(byTarget.get(l.target) ?? []), s]);
-  return [...byTarget].map(([target, list]) => ({ target, skills: list })).sort((a, b) => b.skills.length - a.skills.length || a.target.localeCompare(b.target, undefined, { numeric: true }));
+/** Strong SDG links for one skill (the 4.4 baseline for every skill is handled separately). */
+export function skillSdgs(skill: Skill): SdgLink[] {
+  const links = aiLinks(skill, 'strong');
+  if (skill.digital) links.push({ target: '4.4', source: 'esco', level: 'strong' });
+  return links;
 }
+/** Possible links: just under the threshold and not checked. Display only. */
+export const skillPossibleSdgs = (skill: Skill) => aiLinks(skill, 'possible');
+
+function totals(skills: Skill[], links: (s: Skill) => SdgLink[]) {
+  const byTarget = new Map<string, { skills: Skill[]; best: number }>();
+  for (const s of skills) for (const l of links(s)) {
+    const e = byTarget.get(l.target) ?? { skills: [], best: 0 };
+    if (!e.skills.includes(s)) e.skills.push(s);
+    e.best = Math.max(e.best, l.similarity ?? 0);
+    byTarget.set(l.target, e);
+  }
+  return [...byTarget].map(([target, e]) => ({ target, skills: e.skills, best: e.best }))
+    .sort((a, b) => b.skills.length - a.skills.length || b.best - a.best || a.target.localeCompare(b.target, undefined, { numeric: true }));
+}
+/** Strong links per target for a set of skills, most skills first (plan and team views). */
+export const sdgTotals = (skills: Skill[]) => totals(skills, skillSdgs);
+/** Possible links per target, leaving out targets that already have a strong link. */
+export const sdgPossibleTotals = (skills: Skill[]) => {
+  const strong = new Set(sdgTotals(skills).map((t) => t.target));
+  return totals(skills, skillPossibleSdgs).filter((t) => !strong.has(t.target));
+};
 
 type RoleLike = { id: string; essentialSkills: Skill[] };
 
-/** A role's links: up to two targets matched by most of its essential skills, then the team's own links. */
+/** A role's links: up to two targets matched strongly by most of its essential skills. */
 export function roleSdgs(role: RoleLike): SdgLink[] {
-  const ai: SdgLink[] = sdgTotals(role.essentialSkills).filter((t) => t.target !== '4.4').slice(0, 2)
-    .map((t) => ({ target: t.target, source: 'ai', skills: t.skills }));
-  const team: SdgLink[] = (sdgData.roles[role.id] ?? []).filter((l) => !ai.some((a) => a.target === l.target))
-    .map((l) => ({ target: l.target, source: 'team', reason: l.reason }));
-  return [...ai, ...team];
+  return sdgTotals(role.essentialSkills).filter((t) => t.target !== '4.4').slice(0, 2)
+    .map((t) => ({ target: t.target, source: 'ai', level: 'strong', similarity: t.best, skills: t.skills }));
 }
 
 /** Goals (SDG numbers) a role is linked to: 'role' through its own links, 'skills' only through some essential skills. */
@@ -75,10 +93,18 @@ export function roleGoalLink(role: RoleLike, goal: string): 'role' | 'skills' | 
   return null;
 }
 
+/** Whether any of the given roles links to a goal strongly, only possibly, or not at all (for the goal picker). */
+export function goalStatus(roles: RoleLike[], goal: string): 'strong' | 'possible' | 'none' {
+  const skills = roles.flatMap((r) => r.essentialSkills);
+  if (skills.some((s) => skillSdgs(s).some((l) => targetGoal(l.target) === goal))) return 'strong';
+  if (skills.some((s) => skillPossibleSdgs(s).some((l) => targetGoal(l.target) === goal))) return 'possible';
+  return 'none';
+}
+
 /**
  * Goal fit (optional score part G): 1 if the role itself is linked to one of
  * the person's goals, 0.5 if only some of its essential skills are, else 0.
- * With no goals picked it is null and the score is unchanged.
+ * Strong links only. With no goals picked it is null and the score is unchanged.
  */
 export function goalFit(role: RoleLike, goals: string[]): number | null {
   if (goals.length === 0) return null;

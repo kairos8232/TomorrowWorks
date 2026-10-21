@@ -1,6 +1,5 @@
 {
-  "about": "SDG goals and short target titles (shortened from the UN 2030 Agenda) used on screen, plus role links written by the team. Skill-to-target links come from RunPod matches (data/derived/sdg-skill-matches.json) checked in data/sdg/sdg-review.json; rule in src/sdg.ts.",
-  "review": "Drafted with Claude on 21 Oct 2026 from the ESCO skills listed; to be reviewed by the team before submission.",
+  "about": "SDG goals (official colours, short names) and short target titles shortened from the UN 2030 Agenda, for display. Links come from RunPod matches (data/derived/sdg-skill-matches.json) checked in data/sdg/sdg-review.json; rule in src/sdg.ts.",
   "goals": {
     "4": {
       "name": "Quality education",
@@ -41,6 +40,21 @@
       "name": "Partnerships for the goals",
       "short": "Partnerships",
       "colour": "#19486A"
+    },
+    "5": {
+      "name": "Gender equality",
+      "short": "Gender equality",
+      "colour": "#FF3A21"
+    },
+    "10": {
+      "name": "Reduced inequalities",
+      "short": "Reduced inequalities",
+      "colour": "#DD1367"
+    },
+    "15": {
+      "name": "Life on land",
+      "short": "Life on land",
+      "colour": "#56C02B"
     }
   },
   "targets": {
@@ -127,74 +141,59 @@
     "17.19": {
       "goal": "17",
       "title": "Measure progress on sustainable development"
+    },
+    "13.3": {
+      "goal": "13",
+      "title": "Improve education, awareness and capacity on climate change"
+    },
+    "12.4": {
+      "goal": "12",
+      "title": "Sound management of chemicals and all wastes"
+    },
+    "10.5": {
+      "goal": "10",
+      "title": "Better regulation and monitoring of financial markets and institutions"
+    },
+    "16.10": {
+      "goal": "16",
+      "title": "Public access to information and protection of fundamental freedoms"
+    },
+    "17.13": {
+      "goal": "17",
+      "title": "Global macroeconomic stability"
+    },
+    "9.1": {
+      "goal": "9",
+      "title": "Quality, reliable, sustainable and resilient infrastructure"
+    },
+    "15.5": {
+      "goal": "15",
+      "title": "Reduce the degradation of natural habitats"
+    },
+    "17.6": {
+      "goal": "17",
+      "title": "International cooperation on science, technology and innovation"
+    },
+    "17.7": {
+      "goal": "17",
+      "title": "Spread environmentally sound technologies to developing countries"
+    },
+    "17.17": {
+      "goal": "17",
+      "title": "Effective public, public-private and civil society partnerships"
+    },
+    "5.4": {
+      "goal": "5",
+      "title": "Recognise and value unpaid care and domestic work"
     }
   },
-  "roles": {
-    "billing-clerk": [
-      {
-        "target": "8.5",
-        "reason": "Clerical accounting work is among the most exposed to generative AI in the ILO index. Helping people move from it into more resilient work is what full and productive employment asks for."
-      }
-    ],
-    "accounting-assistant": [
-      {
-        "target": "8.5",
-        "reason": "Clerical accounting work is among the most exposed to generative AI in the ILO index. Helping people move from it into more resilient work is what full and productive employment asks for."
-      }
-    ],
-    "bookkeeper": [
-      {
-        "target": "8.5",
-        "reason": "Routine bookkeeping is highly exposed to generative AI. Keeping bookkeepers in productive work as tasks change supports decent work for all."
-      }
-    ],
-    "accountant": [
-      {
-        "target": "16.6",
-        "reason": "Its essential skills include ensuring compliance with accounting conventions and explaining accounting records: reliable accounts make organisations accountable and transparent."
-      },
-      {
-        "target": "16.5",
-        "reason": "Fraud detection is one of its essential skills."
-      }
-    ],
-    "financial-analyst": [
-      {
-        "target": "8.10",
-        "reason": "Its essential skills include advising on financial matters and offering financial services."
-      }
-    ],
-    "business-analyst": [
-      {
-        "target": "8.2",
-        "reason": "Its essential skills include advising on efficiency improvements and analysing business plans: raising productivity through better processes."
-      }
-    ],
-    "data-analyst": [
-      {
-        "target": "17.18",
-        "reason": "Its essential skills include defining data quality criteria and implementing data quality processes."
-      },
-      {
-        "target": "9.5",
-        "reason": "Analysing big data and data mining build an organisation’s research and technological capability."
-      }
-    ],
-    "software-developer": [
-      {
-        "target": "9.5",
-        "reason": "Building and debugging software upgrades the technological capabilities of the organisations it serves."
-      }
-    ],
-    "sustainability-manager": [
-      {
-        "target": "12.6",
-        "reason": "It leads the sustainability reporting process and measures the company’s sustainability performance (essential skills)."
-      },
-      {
-        "target": "13.2",
-        "reason": "It advises on carbon emissions reduction and assesses climate change impact (essential skills)."
-      }
-    ]
-  }
+  "pickerGoals": [
+    "7",
+    "8",
+    "9",
+    "12",
+    "13",
+    "16",
+    "17"
+  ]
 }

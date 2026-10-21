@@ -6,7 +6,7 @@ import { allSkills, roles, roleTitle, type Profile } from './data';
 import type { Skill } from './scoring';
 import { useT } from './i18n';
 import { interestData, interestTypes, type InterestType } from './interests';
-import { sdgData } from './sdg';
+import { goalStatus, sdgData } from './sdg';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
@@ -104,14 +104,17 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     <div className="trio-col" role="group" aria-labelledby="contribute">
       <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="count">{t('optional')}</span></h2>
       <p className="note">{t('UN Sustainable Development Goals. Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
-      <div className="choice-list">{Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
+      <div className="choice-list">{sdgData.pickerGoals.map((g) => {
+        const info = sdgData.goals[g];
+        const status = goalStatus(roles, g);
         const on = profile.goals.includes(g);
         const full = !on && profile.goals.length >= 2;
-        return <button type="button" key={g} className={`interest-choice goal-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full}
+        return <button type="button" key={g} className={`interest-choice goal-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full || (status !== 'strong' && !on)}
+          title={status === 'strong' ? undefined : t('Matching depends on the skills of the nine roles; more roles or skills could add links.')}
           onClick={() => update({ goals: on ? profile.goals.filter((x) => x !== g) : [...profile.goals, g] })}>
           <span className="tick" aria-hidden="true">{on ? '✓' : ''}</span>
           <span className="sdg-square" style={{ background: info.colour }}>{g}</span>
-          <span><strong>{t(info.short)}</strong>{info.short !== info.name && <small>{t(info.name)}</small>}</span>
+          <span><strong>{t(info.short)}</strong>{status === 'strong' ? (info.short !== info.name && <small>{t(info.name)}</small>) : <small>{status === 'possible' ? t('Only possible matches so far') : t('No strong match yet')}</small>}</span>
         </button>;
       })}</div>
     </div>

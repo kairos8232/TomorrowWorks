@@ -280,7 +280,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Map each recommended role to at least one relevant SDG. (`data/sdg/sdg-links.json`: 1–2 targets per role, reason tied to its ESCO essential skills.)
 - [x] Map each recommended skill to at least one relevant SDG. (Rules in `src/sdg.ts`: wording + ESCO green/digital flags; every skill also counts towards 4.4.)
 - [x] Explain each connection in plain language. (Reason shown with every role link and every skill rule.)
-- [ ] Remove decorative or unsupported mappings. *Skill links now from RunPod matches ≥ 0.60 with 34 of 73 rejected in `data/sdg/sdg-review.json` (drafted with Claude 21 Oct); team to confirm the rejections and the team-written role links in `data/sdg/sdg-links.json`.*
+- [ ] Remove decorative or unsupported mappings. *Skill links now from RunPod matches ≥ 0.60 with 34 of 73 rejected in `data/sdg/sdg-review.json` (drafted with Claude 21 Oct); team-written role links removed; strong/possible/baseline levels added; team to confirm the rejections.*
 
 **Done when:** The user can understand how the chosen pathway relates to the SDGs.  
 **Commit focus:** SDG mappings and explanations.

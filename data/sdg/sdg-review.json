@@ -4,16 +4,46 @@
   "thresholdReason": "Spot-check 21 Oct 2026 (data/derived/sdg-spotcheck.md): below 0.60 most best matches were unrelated (e.g. 'use office systems' -> 12.6); at 0.60 and above most were fair.",
   "reviewedBy": "Drafted by Claude on 21 Oct 2026 from the 73 matches at or above 0.60; to be confirmed by the team before submission.",
   "rejectTargets": [
-    { "target": "2.4", "reason": "About food production and agriculture; none of the nine roles works in farming." },
-    { "target": "6.3", "reason": "About water quality; matched on the words 'waste' and 'efficiency', not on water work." },
-    { "target": "6.4", "reason": "About water-use efficiency; matched on 'efficiency', not on water work." },
-    { "target": "10.3", "reason": "About equal opportunity and discrimination; matched on 'policy' and 'legislation' wording only." },
-    { "target": "10.7", "reason": "About migration of people; 'automated migration methods' moves data, not people." },
-    { "target": "14.2", "reason": "About marine and coastal ecosystems; none of the matched skills is about the sea." },
-    { "target": "17.4", "reason": "About the debt of developing countries; matched on the word 'sustainability'." },
-    { "target": "17.16", "reason": "About the global partnership between countries; matched on the word 'sustainable' in many skills, not on partnership work." }
+    {
+      "target": "2.4",
+      "reason": "About food production and agriculture; none of the nine roles works in farming."
+    },
+    {
+      "target": "6.3",
+      "reason": "About water quality; matched on the words 'waste' and 'efficiency', not on water work."
+    },
+    {
+      "target": "6.4",
+      "reason": "About water-use efficiency; matched on 'efficiency', not on water work."
+    },
+    {
+      "target": "10.3",
+      "reason": "About equal opportunity and discrimination; matched on 'policy' and 'legislation' wording only."
+    },
+    {
+      "target": "10.7",
+      "reason": "About migration of people; 'automated migration methods' moves data, not people."
+    },
+    {
+      "target": "14.2",
+      "reason": "About marine and coastal ecosystems; none of the matched skills is about the sea."
+    },
+    {
+      "target": "17.4",
+      "reason": "About the debt of developing countries; matched on the word 'sustainability'."
+    },
+    {
+      "target": "17.16",
+      "reason": "About the global partnership between countries; matched on the word 'sustainable' in many skills, not on partnership work."
+    }
   ],
   "rejectPairs": [
-    { "skill": "information confidentiality", "target": "16.10", "reason": "16.10 is about public access to information; confidentiality is the opposite direction." }
-  ]
+    {
+      "skill": "information confidentiality",
+      "target": "16.10",
+      "reason": "16.10 is about public access to information; confidentiality is the opposite direction."
+    }
+  ],
+  "possibleFrom": 0.55,
+  "possibleReason": "Matches from 0.55 to just below the threshold are shown as 'possible, not checked' (some fair, e.g. carbon emissions reduction -> 13.3, calculate tax -> 17.1; some not). They never change rankings or tags. Below 0.55 nothing is shown."
 }

@@ -50,7 +50,7 @@ export const personas: Persona[] = [
     roleId: 'accounting-assistant',
     skillLabels: null, // all essential skills of her role
     interests: ['C', 'S'],
-    goals: ['13'],
+    goals: ['12'],
   },
   {
     id: 'hakim',

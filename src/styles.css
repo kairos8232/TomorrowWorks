@@ -689,3 +689,11 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-source.ai { background: #eef0f3; color: #3a4450; border: 1px dashed #8a96a3; }
 .sdg-source.team { background: #f3efe6; color: #5d4a1f; }
 .sdg-summary-note a { color: #1e6b4f; }
+.sdg-source.strong { background: #e6f0ea; color: #1e6b4f; }
+.sdg-source.baseline { background: #eef0f3; color: #3a4450; }
+.sdg-baseline { color: #3a4450; }
+.sdg-baseline-row { background: #fafbfa; }
+.sdg-possible { margin-top: 10px; font-size: 13px; color: #3a4450; }
+.sdg-possible summary { cursor: pointer; font-weight: 600; }
+.sdg-possible ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.sdg-possible small { color: #5d6873; }
