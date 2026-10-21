@@ -132,8 +132,8 @@ function ViewerSwitch({ viewer, choose }: { viewer: ViewerId; choose: (v: Viewer
   const ref = useRef<HTMLDetailsElement>(null);
   const current = viewerById(viewer);
   return <details className="viewer-switch" ref={ref}>
-    <summary><span className="avatar" aria-hidden="true">{current.name === 'Me' ? '·' : current.name.split(' ').pop()![0]}</span>
-      <span><small>{t('Viewing as')}</small><strong>{current.name === 'Me' ? t('Me (my own skills)') : current.name}</strong></span></summary>
+    <summary><span className="avatar" aria-hidden="true">{current.name === 'Me' ? t('Me')[0] : current.name.split(' ').pop()![0]}</span>
+      <span><small>{t('Viewing as')}</small><strong>{current.name === 'Me' ? t('Me') : current.name}</strong></span></summary>
     <ul>{viewers.map((v) => <li key={v.id}><button type="button" aria-current={v.id === viewer ? 'true' : undefined} onClick={() => { ref.current!.open = false; choose(v.id); }}>
       <strong>{v.id === 'me' ? t('Me (my own skills)') : v.name}</strong><small>{t(v.group)}</small>
     </button></li>)}</ul>
@@ -171,7 +171,7 @@ function App() {
         ? <NavGroup label="My team" items={teamNav} screen={screen} go={go} />
         : <NavGroup label="My career" items={careerNav} screen={screen} go={go} />}
       <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
-      <label className="lang-pick"><span>{t('Language')}</span><select value={lang} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
+      <label className="lang-pick"><svg className="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></svg><span>{t('Language')}</span><select value={lang} aria-label={t('Language')} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select><svg className="lang-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m2 4 4 4 4-4" /></svg></label>
     </aside>
 
     <main className="main-content">

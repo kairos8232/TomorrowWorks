@@ -169,6 +169,7 @@ const dict: Record<string, Entry> = {
   'Viewing as': { ms: 'Melihat sebagai', zh: '当前身份' },
   'Viewing as {name}': { ms: 'Melihat sebagai {name}', zh: '当前身份：{name}' },
   'Me (my own skills)': { ms: 'Saya (kemahiran sendiri)', zh: '我（自己的技能）' },
+  Me: { ms: 'Saya', zh: '我' },
   'Demo people are fictional. No sign-in in this prototype.': { ms: 'Orang demo adalah rekaan. Prototaip ini tiada log masuk.', zh: '示例人物均为虚构。此原型无需登录。' },
   'HR and learning manager': { ms: 'Pengurus HR dan latihan', zh: '人力资源与培训经理' },
   'University career adviser': { ms: 'Penasihat kerjaya universiti', zh: '大学就业顾问' },
