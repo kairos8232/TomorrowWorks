@@ -24,7 +24,7 @@ rounded:
 
 # TomorrowWorks design system
 
-> **21 Oct 2026 — "career ledger" restyle.** The demo user is an accounting assistant and the data is official labour statistics, so the interface reads like a well-kept account book instead of a generic dashboard. Changes: light paper sidebar instead of navy; one typeface (Schibsted Grotesk) with tabular figures; colour only for meaning (**ledger green** = held skills, rising, actions; **deficit red** = skills to build, falling); sentence-case labels instead of tracked ALL-CAPS eyebrows; no arrows appended to links, no sparkle icons, no decorative shadows, no "A · B · C" strings. Role matches is a ranked ledger table (current job pinned above a double rule, then moves), and after a data or scenario switch each score shows its change (▲/▼). The sections below keep the original rules where still true; colour values above supersede the old palette.
+> **21 Oct 2026 — "career ledger" restyle.** The demo user is an accounting assistant and the data is official labour statistics, so the interface reads like a well-kept account book instead of a generic dashboard. Changes: light paper sidebar instead of navy; one typeface (Schibsted Grotesk) with tabular figures; colour only for meaning (**ledger green** = held skills, rising, actions; **deficit red** = skills to build, falling); sentence-case labels instead of tracked ALL-CAPS eyebrows; no arrows appended to links, no sparkle icons, no decorative shadows, no "A · B · C" strings. Role matches is a ranked ledger table (current job pinned above a double rule, then moves), and after a data or scenario switch each score shows its change (▲/▼). The rail now uses compact icon-and-label destinations and a soft active fill; optional ranking controls remain visible beside the two data controls. The sections below keep the original rules where still true; colour values above supersede the old palette.
 
 
 This file records the **current website design**, not a rebrand. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) owns the audience and evidence rules; [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) owns personal-data boundaries; [SCREENS.md](SCREENS.md) owns screen behaviour; [UI_UX.md](UI_UX.md) records UX decisions. Check the rendered site and `src/styles.css` when changing a value here.
@@ -62,7 +62,7 @@ Use dark enough text for small copy on light surfaces. Do not reuse the brighter
 
 ## Layout
 
-- Above 980 CSS pixels, keep the 292px navigation rail. At 980px and below, move navigation to compact horizontal rows above the content.
+- Above 980 CSS pixels, keep the 264px navigation rail. At 980px and below, move navigation to compact horizontal rows above the content.
 - The main content can expand to 1600px, with fluid outer padding. Do not cap it at a narrow article width on a large display.
 - Explore cards use two balanced columns from 621–1379px and four columns from 1380px. At 620px and below, cards and form pairs stack in one column.
 - Related profile fields share rows when each remains readable. From 1380px, a saved target editor and its skill-gap result sit side by side; narrower screens stack them.
@@ -80,7 +80,7 @@ Inputs use roughly 10px corners, buttons 11px, evidence and control panels 16px,
 
 | Component | Consistent treatment | Important state |
 | --- | --- | --- |
-| Navigation | Public browse and My career remain visibly separate; selected item has a filled navy-teal treatment. | Show current page and visible keyboard focus. |
+| Navigation | Public browse and My career remain visibly separate; selected item has a soft green fill and a one-pixel border. | Show current page and visible keyboard focus. |
 | Primary button | Teal fill, white text, 15px bold label, 11px radius. | Darker teal on hover; focus outline remains visible. |
 | Text action | Dark teal on light backgrounds; name the destination or task. | Underline on hover; visible keyboard focus. |
 | Market card | White surface, light border, 20px radius, 24px padding, readable heading and summary. | Whole card is a button with hover and focus treatment. |

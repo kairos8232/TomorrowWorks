@@ -36,6 +36,7 @@ My career (sidebar navigation)           The job market (browse any time)
 
 - No sign-in. A **View as** chip under the language select works like an account menu but only swaps fictional demo data: **Aina** (working adult whose job AI is changing), **Hakim** (fresh graduate), **Puan Rosnah** (HR and learning manager → Team view, finance team), **Encik Lim** (university career adviser → Team view, graduating class), **Me (my own skills)**. Label: "Demo people are fictional. No sign-in in this prototype."
 - The sidebar follows the viewer: individuals see *My career* (Your skills / moves / plan); HR and the adviser see *My team* (Team view). Everyone sees *The job market*.
+- On wide screens a compact navigation rail keeps the viewer switcher near the top and language choice at the bottom. Destinations use icons and short labels; the selected page has a soft green fill. At 980 px and below, the same navigation moves above the content.
 - Home: hero (*Start with my own skills*, *Try a sample person*) and *One tool, four kinds of user*: one card per demo viewer with the brief's group, a story, live top 3 moves (people) or team size (teams), and *View as …*.
 - *Edit skills* while viewing a sample person switches the viewer to Me.
 
@@ -45,10 +46,10 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## 2. Your moves
 
-- **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; a short Q2 update with *Compare quarters* and *How ranking works*; controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now" and ▲▼ after a switch. Select a row for a focused role view with score facts, the full held and missing skill lists, evidence links, and *Plan this move* near the top. On phones the score parts stack under each role.
+- **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; a short Q2 update with *Compare quarters* and *How ranking works*; controls *Job-ad data* (2026 Q1 / Q2), *If AI changes work* (Gradually / Quickly), and *Personalise ranking* on the same control line where space allows; ranked ledger with the current job pinned as "Now" and ▲▼ after a switch. Select a row for a focused role view with score facts, the full held and missing skill lists, evidence links, and *Plan this move* near the top. On phones the score parts stack under each role.
 - **Compare quarters** shows all ranked moves with Q1 and Q2 rank, score, and occupation-group change, plus one DOSM source link. Logic: `src/changes.ts`.
 - **How ranking works** explains the three score parts, fairness and limits, and links DOSM, ILO and ESCO once. The fairness claim is backed by `src/fairness.test.ts`.
-- **Personalise ranking** is a focused optional view. Its interest switch is disabled until the person picks interests. Selected goals highlight linked roles; the separate switch adds them to the ranking. The note says how optional parts affect the score, and arrows show score changes. A role view shows its leading work interests, interest fit, and a job tag or O\*NET source link; rows with fit ≥ 75% show "fits your interests".
+- **Personalise ranking** is visible beside the data and scenario controls and wraps on narrower screens. Its interest switch is disabled until the person picks interests. Selected goals highlight linked roles; the separate switch adds them to the ranking. The note says how optional parts affect the score, and arrows show score changes. A role view shows its leading work interests, interest fit, and a job tag or O\*NET source link; rows with fit ≥ 75% show "fits your interests".
 - If there are no skills: a short prompt to add skills or try Aina.
 
 ## SDG links (all career screens)

@@ -22,6 +22,7 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 - Keep reading and control text at a comfortable size at normal browser zoom. Scale it with wider screens without shrinking key explanations, form fields, or evidence notes into fine print.
 - Let the screen heading carry the page hierarchy; avoid a repeated small label above each heading. Keep supporting text at readable contrast on the canvas and use calmer line wrapping for public summaries.
 - On Your moves, keep the ranking scannable and open a focused view for each role. Put the plan action beside the role decision, keep full skill lists in that view, and state DOSM and ILO sources as links next to their figures. Put scoring method, fairness and source explanations in one separate view rather than repeating them around the ledger.
+- Keep optional interests and goals visible with the job-ad and AI controls so people can see what changes a ranking. Use compact sidebar destinations with recognizable icons and a soft current-page state; keep the profile switcher distinct from navigation.
 
 ## Current UX debt and first slices
 

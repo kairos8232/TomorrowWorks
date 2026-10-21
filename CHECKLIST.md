@@ -4,7 +4,8 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## UI refinement — 21 Oct 2026
 
-- [x] Replace repeated Your moves disclosures and row expanders with focused role, comparison, method and preference views; keep source explanations in one method view and direct links beside role facts. Check desktop and 390 px layouts, then run build and tests.
+- [x] Replace repeated Your moves disclosures and row expanders with focused role, comparison and method views; keep source explanations in one method view and direct links beside role facts. Check desktop and 390 px layouts, then run build and tests.
+- [x] Show personalisation alongside the job-ad and AI controls; refresh the navigation rail with shorter labels and a soft active state. Build, tests and static CSS scan passed. A fresh rendered check is pending because browser approval review hit its usage limit.
 - [x] Use the sidebar as the career step navigation; remove the repeated step strip above the page.
 - [x] Shorten first-visit and skill-entry copy, bring the selected-skill action and expanded-role plan action next to their context, and collapse optional explanations and ranking preferences.
 - [x] Use wide Home columns and compact phone move rows; inspect Home and Your plan at 1440 px, Home, Your skills, Your moves and Your plan at 390 px, and the Malay Home header at 320 px. Check Malay and Chinese phone navigation.
