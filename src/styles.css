@@ -454,6 +454,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .job-panel select { width: 100%; }
 .skills-intake { display: grid; grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr); grid-template-areas: "job describe"; gap: 16px; align-items: start; }
 .skills-intake .job-panel { grid-area: job; grid-template-columns: 1fr; gap: 12px; align-content: start; }
+.skills-intake .job-panel select { min-width: 0; }
 .skills-intake .describe-panel { grid-area: describe; }
 .manual-search { border-top: 1px solid #d9ded9; padding-top: 14px; margin-top: 4px; }
 .manual-search h3 { margin: 0 0 8px; font-size: 16px; }
