@@ -24,22 +24,52 @@ export const roleById = (id: string | null) => roles.find((r) => r.id === id) ??
 
 /** The person whose matches are shown. Skills are ESCO skill URIs. */
 export type Profile = {
-  persona: 'aina' | null;          // null = the visitor's own (in-memory) skills
+  persona: PersonaId | null;       // null = the visitor's own (in-memory) skills
   currentRoleId: string | null;    // shown as "Now" for comparison; never ranked
   held: Set<string>;
   extra: Map<string, Skill>;       // skills found by search that are outside the role set
 };
 
-/** Fictional demo person. Her skills are the ESCO essential skills of "accounting assistant". */
-export const aina = {
-  name: 'Aina',
-  summary: 'Fictional accounting assistant, three years at a mid-sized firm in Shah Alam. Her days are invoices, bank reconciliations and month-end reports, the kind of routine work AI tools now speed up.',
-  roleId: 'accounting-assistant',
-};
+/**
+ * Fictional demo people, one per target group in the Domain 1 brief.
+ * Their skills are ESCO skills from data/roles.json, chosen by the team to
+ * fit the story; they are not real people or real CVs.
+ */
+export type PersonaId = 'aina' | 'hakim';
+export type Persona = { id: PersonaId; name: string; group: string; description: string; summary: string; roleId: string | null; skillLabels: string[] | null };
+export const personas: Persona[] = [
+  {
+    id: 'aina',
+    name: 'Aina',
+    group: 'Working adult whose job AI is changing',
+    description: 'a fictional accounting assistant',
+    summary: 'Fictional accounting assistant, three years at a mid-sized firm in Shah Alam. Her days are invoices, bank reconciliations and month-end reports, the kind of routine work AI tools now speed up.',
+    roleId: 'accounting-assistant',
+    skillLabels: null, // all essential skills of her role
+  },
+  {
+    id: 'hakim',
+    name: 'Hakim',
+    group: 'Fresh graduate choosing a first job',
+    description: 'a fictional statistics graduate',
+    summary: 'Fictional fresh graduate in statistics from a Malaysian public university, with a three-month internship cleaning survey data. No job yet; he wants to know which roles his degree skills lead to.',
+    roleId: null,
+    skillLabels: ['statistics', 'apply statistical analysis techniques', 'quantitative analysis', 'empirical analysis', 'conduct quantitative research',
+      'scientific research methodology', 'economics', 'microeconomics', 'macroeconomics', 'digital data processing', 'perform data cleansing',
+      'query languages', 'use databases', 'data visualisation software', 'visual presentation techniques', 'business communication'],
+  },
+];
+export const personaById = (id: PersonaId | null) => personas.find((p) => p.id === id) ?? null;
+export const aina = personas[0];
 
-export function ainaProfile(): Profile {
-  return { persona: 'aina', currentRoleId: aina.roleId, held: new Set(roleById(aina.roleId)!.essentialSkills.map((s) => s.uri)), extra: new Map() };
+export function personaProfile(id: PersonaId): Profile {
+  const p = personaById(id)!;
+  const held = p.skillLabels
+    ? new Set(p.skillLabels.map((label) => allSkills.find((s) => s.label === label)!.uri))
+    : new Set(roleById(p.roleId)!.essentialSkills.map((s) => s.uri));
+  return { persona: p.id, currentRoleId: p.roleId, held, extra: new Map() };
 }
+export const ainaProfile = () => personaProfile('aina');
 
 export const emptyProfile = (): Profile => ({ persona: null, currentRoleId: null, held: new Set(), extra: new Map() });
 

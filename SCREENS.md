@@ -27,6 +27,11 @@ My career (guided, step bar on top)      The job market (browse any time)
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
 
+## Home: sample people
+
+- Hero: *Start with my own skills* (primary) and *Try a sample person*.
+- *Try it as someone else*: one card per fictional persona with the brief's target group, a short story, live top 3 moves and *See …'s moves*. Aina = working adult whose job AI is changing; Hakim = fresh statistics graduate with no current job (moves are ranked without a "Now" row).
+
 ## 2. Your moves
 
 - **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; **How to read this** (Score, Skill fit, Demand, AI resilience, Now — in plain words, DOSM/ILO as abbreviations with full names); controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now"; ▲▼ after a switch; expandable rows (facts under columns, *You have* / *To build*, ESCO link).

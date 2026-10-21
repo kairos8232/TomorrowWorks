@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { aina, ainaProfile, emptyProfile, ilo, roles, snapshots, sourceLinks, transferable, type Profile } from './data';
+import { ainaProfile, emptyProfile, ilo, personaProfile, personas, roles, snapshots, sourceLinks, transferable, type PersonaId, type Profile } from './data';
 import { MovesStep, SourcesFooter } from './MovesStep';
 import { DemandTable, OutlookTable } from './PublicTables';
 import { recommendMoves, scenarios } from './scoring';
@@ -38,19 +38,21 @@ const comingSoon: Partial<Record<Screen, string>> = {
   trending: 'Not connected yet. For now, each role’s skills come from ESCO and appear when you open a role in Your moves.',
 };
 
-function Home({ start }: { start: (who: 'aina' | 'me') => void }) {
-  // Aina's live result, computed from the same data and rule as the Moves step.
-  const preview = useMemo(() => {
-    const p = ainaProfile();
-    return recommendMoves(roles, p.currentRoleId, p.held, snapshots.q2, ilo, scenarios.moderate, transferable).moves.slice(0, 3);
-  }, []);
+type Start = PersonaId | 'me';
+
+function Home({ start }: { start: (who: Start) => void }) {
+  // Each persona's live result, computed from the same data and rule as the Moves step.
+  const previews = useMemo(() => personas.map((persona) => {
+    const p = personaProfile(persona.id);
+    return { persona, moves: recommendMoves(roles, p.currentRoleId, p.held, snapshots.q2, ilo, scenarios.moderate, transferable).moves.slice(0, 3) };
+  }), []);
   return <div className="home">
     <section className="home-hero">
       <h1>AI is changing your job. See where you can move next.</h1>
-      <p>For Malaysian workers whose everyday tasks are starting to be done by AI. TomorrowWorks compares your skills with nine real roles, using official Malaysian job-ad figures and international research on AI.</p>
+      <p>For Malaysian workers, graduates, and the people who advise them. TomorrowWorks compares skills with nine real roles, using official Malaysian job-ad figures and international research on AI.</p>
       <div className="hero-actions">
-        <button type="button" className="primary-button" onClick={() => start('aina')}>Try it as Aina</button>
-        <button type="button" className="secondary-button" onClick={() => start('me')}>Start with my own skills</button>
+        <button type="button" className="primary-button" onClick={() => start('me')}>Start with my own skills</button>
+        <button type="button" className="secondary-button" onClick={() => start('aina')}>Try a sample person</button>
       </div>
       <p className="note">No account, no CV. Nothing you enter leaves your browser tab except the words you send to the skill search.</p>
     </section>
@@ -64,15 +66,17 @@ function Home({ start }: { start: (who: 'aina' | 'me') => void }) {
       </ol>
     </section>
 
-    <section className="home-aina" aria-labelledby="meet">
-      <div>
-        <h2 id="meet">Meet {aina.name}</h2>
-        <p>{aina.summary}</p>
-      </div>
-      <div>
-        <p className="note">Her top moves with Q2 2026 data</p>
-        <ol className="mini-ledger">{preview.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol>
-        <button type="button" className="text-button" onClick={() => start('aina')}>See why</button>
+    <section className="home-people" aria-labelledby="meet">
+      <h2 id="meet">Try it as someone else</h2>
+      <div className="people-grid">
+        {previews.map(({ persona, moves }) => <article key={persona.id} className="person-card">
+          <p className="person-group">{persona.group}</p>
+          <h3>{persona.name}</h3>
+          <p>{persona.summary}</p>
+          <p className="note">Top moves with Q2 2026 data</p>
+          <ol className="mini-ledger">{moves.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol>
+          <button type="button" className="text-button" onClick={() => start(persona.id)}>See {persona.name}’s moves</button>
+        </article>)}
       </div>
     </section>
 
@@ -113,10 +117,10 @@ function App() {
   const [profile, setProfile] = useState<Profile>(ainaProfile);
   const [planRoleId, setPlanRoleId] = useState<string | null>(null);
   const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
-  function start(who: 'aina' | 'me') {
-    setProfile(who === 'aina' ? ainaProfile() : emptyProfile());
+  function start(who: Start) {
+    setProfile(who === 'me' ? emptyProfile() : personaProfile(who));
     setPlanRoleId(null);
-    go(who === 'aina' ? 'moves' : 'skills');
+    go(who === 'me' ? 'skills' : 'moves');
   }
   const isCareer = screen === 'skills' || screen === 'moves' || screen === 'plan';
   const page = screen === 'home' ? null : titles[screen];

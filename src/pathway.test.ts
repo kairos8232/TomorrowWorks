@@ -90,3 +90,13 @@ describe('Malaysian certification route (data/pathway/noss.json)', () => {
     }
   });
 });
+
+describe('sample people (src/data.ts)', () => {
+  it('every persona skill resolves to a real ESCO skill in the role set', async () => {
+    const { personas, personaProfile } = await import('./data');
+    for (const p of personas) {
+      const profile = personaProfile(p.id);
+      expect(profile.held.size, p.id).toBe(p.skillLabels ? p.skillLabels.length : roles.find((r) => r.id === p.roleId)!.essentialSkills.length);
+    }
+  });
+});

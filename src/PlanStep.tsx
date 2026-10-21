@@ -4,7 +4,7 @@
 import { useMemo } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
 import nossFile from '../data/pathway/noss.json';
-import { aina, ilo, roleById, roles, snapshots, transferable, type Profile } from './data';
+import { ilo, personaById, roleById, roles, snapshots, transferable, type Profile } from './data';
 import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 
@@ -50,10 +50,11 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
   const plan = useMemo(() => learningPlan(chosen, resources), [chosen]);
   const role = chosen.role;
   const closed = plan.gaps.length - plan.uncovered.length;
+  const persona = personaById(profile.persona);
 
   return <div className="step-body">
     <div className="who plan-who">
-      <p>{profile.persona === 'aina' ? <><strong>Plan for {aina.name}</strong>, from {roleById(profile.currentRoleId)?.title}</> : <strong>Your plan</strong>} to</p>
+      <p>{persona ? <><strong>Plan for {persona.name}</strong>{profile.currentRoleId ? <>, from {roleById(profile.currentRoleId)?.title}</> : ''}</> : <strong>Your plan</strong>} to</p>
       <label className="plan-pick"><span className="visually-hidden">Move to plan</span>
         <select value={role.id} onChange={(e) => onPickRole(e.target.value)}>
           {moves.map((m, i) => <option key={m.role.id} value={m.role.id}>{i + 1}. {m.role.title}</option>)}

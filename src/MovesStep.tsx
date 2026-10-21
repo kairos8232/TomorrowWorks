@@ -2,7 +2,7 @@
 // Data: src/data.ts. Scoring rule: src/scoring.ts (documented in SIGNALS_AND_MATCHING.md).
 import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { aina, ilo, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
+import { ilo, personaById, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
 import { recommendMoves, scenarios, type RoleScore, type ScenarioId } from './scoring';
 
 const pct = (x: number) => `${x >= 0 ? '+' : ''}${(x * 100).toFixed(1)}%`;
@@ -93,10 +93,11 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
     lastSwitch.current = switchKey;
   }, [current, moves, switchKey]);
 
+  const persona = personaById(profile.persona);
   return <div className="step-body">
     <div className="who">
-      <p>{profile.persona === 'aina' ? <><strong>Viewing as {aina.name}</strong>, a fictional accounting assistant with {profile.held.size} skills.</> : <><strong>Your {profile.held.size} {profile.held.size === 1 ? 'skill' : 'skills'}</strong>{current ? `, current job ${current.role.title}` : ''}.</>}</p>
-      <button type="button" className="text-button" onClick={onEditSkills}>{profile.persona === 'aina' ? 'Use my own skills' : 'Edit skills'}</button>
+      <p>{persona ? <><strong>Viewing as {persona.name}</strong>, {persona.description} with {profile.held.size} skills.</> : <><strong>Your {profile.held.size} {profile.held.size === 1 ? 'skill' : 'skills'}</strong>{current ? `, current job ${current.role.title}` : ''}.</>}</p>
+      <button type="button" className="text-button" onClick={onEditSkills}>{persona ? 'Use my own skills' : 'Edit skills'}</button>
     </div>
 
     <details className="how-to-read">
