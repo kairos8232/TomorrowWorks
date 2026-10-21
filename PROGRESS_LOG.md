@@ -1,5 +1,14 @@
 # Progress log
 
+## 22 Oct 2026 — Step 2: clear course-progress summary
+
+- User clarified step 2 is the completed-course count and accessible progress bar, with mastery kept separate. Added Your course progress: 0 of N courses verified complete, plus a distinct evidence-submission count. Completion is explicitly zero until provider/reviewer verification exists; no fabricated completed state or user-set completion. Course total includes checked/AI courses and hidden suggestions, deduplicated by URL; excludes optional certification.
+- Native progress has a count label and method description; summary explains verified course completion is distinct from mastery of mapped skills. EN/MS/ZH text added; team translation review pending.
+- Build and all 84 tests pass. Existing Edge/puppeteer preview at 1440 × 1000 and 390 × 844: evidence submit/edit/cancel/remove counts update but completed count/bar stays zero; accessible label/description checked; navigation, role/viewer separation, translated phone fit, refresh and Team/NOSS exclusions pass. No page errors; pre-existing favicon excluded. Screenshots outside repo. No commit or push for this step; await user preview.
+
+---
+
+
 ## 22 Oct 2026 — Credential-link evidence prototype replaces reflections
 
 - User proposed certificates/proof after rejecting reflection usefulness, then approved trying a fictional public credential-link submission prototype. File uploads remain disabled; no real certificates or personal data. Previous activity and quiz entries are superseded.

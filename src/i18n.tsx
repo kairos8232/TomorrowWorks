@@ -14,6 +14,12 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  "Your course progress": { ms: "Kemajuan kursus anda", zh: "你的课程进度" },
+  "{completed} of {total} courses verified complete": { ms: "{completed} daripada {total} kursus disahkan selesai", zh: "已验证完成 {completed} 门课程，共 {total} 门" },
+  "Counts include checked courses and AI suggestions in this plan. Optional certification routes are excluded.": { ms: "Kiraan merangkumi kursus yang disemak dan cadangan AI dalam pelan ini. Laluan pensijilan pilihan tidak dikira.", zh: "统计包括此计划中已核查的课程及 AI 建议课程，不包括可选认证途径。" },
+  "No courses to track in this plan yet.": { ms: "Belum ada kursus untuk dijejaki dalam pelan ini.", zh: "此计划暂时没有可跟踪的课程。" },
+  "Completion verification is not connected in this demo, so submitted evidence does not advance the bar. Verified course completion would not establish mastery of every linked skill.": { ms: "Pengesahan penyelesaian belum disambungkan dalam demo ini, jadi bukti yang dihantar tidak menggerakkan bar. Penyelesaian kursus yang disahkan juga tidak membuktikan penguasaan semua kemahiran yang dikaitkan.", zh: "此演示尚未接入完成情况验证，因此提交证明不会增加进度。即使课程完成得到验证，也不代表掌握了所有关联技能。" },
+  "Evidence links stay in this tab and clear on refresh. They are not sent to a reviewer.": { ms: "Pautan bukti kekal dalam tab ini dan dipadam apabila halaman dimuat semula. Pautan tidak dihantar kepada penyemak.", zh: "证明链接仅保留在本标签页内，刷新后清除，不会发送给审核人。" },
   "Completion evidence · demo": { ms: "Bukti penyelesaian · demo", zh: "完成证明 · 演示" },
   "Evidence submitted for {recorded} of {total} courses": { ms: "Bukti dihantar untuk {recorded} daripada {total} kursus", zh: "已提交 {recorded} 门课程的证明，共 {total} 门" },
   "No courses in this plan need evidence yet.": { ms: "Belum ada kursus yang memerlukan bukti dalam pelan ini.", zh: "此计划暂时没有需要证明的课程。" },

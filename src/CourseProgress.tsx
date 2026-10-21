@@ -4,10 +4,18 @@ import { credentialUrl, type CourseStatus, type LearningAction } from './learnin
 
 export function LearningProgress({total,recorded}:{total:number;recorded:number}) {
  const t=useT();const id=useId();
+ // This prototype has no provider/reviewer verification. Never infer completion from a link.
+ const completed=0;
  return <section className="learning-progress" aria-labelledby={id}>
-  <h3 id={id}>{t('Completion evidence · demo')}</h3>
-  {total>0 ? <><p id={id+'-count'} aria-live="polite">{t('Evidence submitted for {recorded} of {total} courses',{recorded,total})}</p><progress value={recorded} max={total} aria-labelledby={id+' '+id+'-count'} /></> : <p>{t('No courses in this plan need evidence yet.')}</p>}
-  <p className="note">{t('This bar counts submissions only. No course completion has been verified. Links stay in this tab and clear on refresh; they are not sent to a reviewer.')}</p>
+  <h3 id={id}>{t('Your course progress')}</h3>
+  {total>0 ? <>
+    <p id={id+'-count'} className="course-completion-count" aria-live="polite">{t('{completed} of {total} courses verified complete',{completed,total})}</p>
+    <progress value={completed} max={total} aria-labelledby={id+' '+id+'-count'} aria-describedby={id+'-method'} />
+    <p className="note" aria-live="polite">{t('Evidence submitted for {recorded} of {total} courses',{recorded,total})}</p>
+    <p className="note">{t('Counts include checked courses and AI suggestions in this plan. Optional certification routes are excluded.')}</p>
+  </> : <p>{t('No courses to track in this plan yet.')}</p>}
+  <p className="note" id={id+'-method'}>{t('Completion verification is not connected in this demo, so submitted evidence does not advance the bar. Verified course completion would not establish mastery of every linked skill.')}</p>
+  <p className="note">{t('Evidence links stay in this tab and clear on refresh. They are not sent to a reviewer.')}</p>
  </section>;
 }
 

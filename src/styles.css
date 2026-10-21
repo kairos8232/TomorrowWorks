@@ -726,3 +726,5 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .evidence-url[aria-invalid=true] { border-color: #a8402b; }
 .evidence-link { display: block; overflow-wrap: anywhere; margin-block: 10px; }
 .evidence-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+.course-completion-count { font-weight: 700; font-size: 18px; }
