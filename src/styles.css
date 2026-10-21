@@ -664,3 +664,11 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 }
 .trio-col .skill-tag { text-align: left; }
 .plan-noss-step .note { margin: 6px 0 0; } .plan-noss-step h3 { margin: 0 0 4px; } .plan-noss-step .tag-row .note { margin: 0; }
+/* Your plan: courses left, SDG contribution as a sticky right column on wide screens (Carson, 21 Oct). */
+.plan-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 16px; align-items: start; }
+.plan-main { min-width: 0; display: grid; gap: 16px; }
+.plan-main > .panel { margin: 0; }
+.plan-layout > .sdg-panel { margin: 0; position: sticky; top: 16px; }
+.plan-layout .sdg-summary-list { grid-template-columns: 1fr; }
+.plan-layout .sdg-panel h2 { font-size: 18px; }
+@media (max-width: 1100px) { .plan-layout { grid-template-columns: 1fr; } .plan-layout > .sdg-panel { position: static; } }

@@ -118,6 +118,8 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
       <button type="button" className="text-button" onClick={onBackToMoves}>{t('Back to your moves')}</button>
     </div>
 
+    <div className="plan-layout">
+    <div className="plan-main">
     {plan.gaps.length === 0
       ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
       : <section className="panel plan-learning" aria-labelledby="plan-skills-heading">
@@ -156,7 +158,9 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
 
     {plan.gaps.length === 0 && <NossRoute roleId={role.id} />}
 
+    </div>
     <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('This move and the SDGs')} compact />
+    </div>
 
   </div>;
 }
