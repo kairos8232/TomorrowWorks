@@ -45,21 +45,21 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## 2. Your moves
 
-- **Personalise with interests and goals** is an optional disclosure below the data and scenario controls. Its interest switch is disabled until the person picks interests. When on, the note says interests count for one sixth, and arrows show the change. Each expanded row shows the role's top three work interests, the person's interest fit, and the job tag or O\*NET source with a link; rows with fit ≥ 75% show "fits your interests".
-- **What changed with <latest quarter> job-ad data** is a collapsed summary near the top; open it for the same skills and scenario scored with the previous and latest DOSM snapshots, the top three changes (rank, score, and occupation group), and *Show all*. Logic: `src/changes.ts`.
-- **Is this fair?** is a disclosure below the ledger: Used / Never asked / Checked / Limits. The "Checked" claim is backed by `src/fairness.test.ts`.
-- **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; **How to read this** disclosure; controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now"; ▲▼ after a switch; expandable rows with facts and *Plan this move* before the longer skill lists. On phones, each row puts the three score parts in one compact line.
+- **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; a short Q2 update with *Compare quarters* and *How ranking works*; controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now" and ▲▼ after a switch. Select a row for a focused role view with score facts, the full held and missing skill lists, evidence links, and *Plan this move* near the top. On phones the score parts stack under each role.
+- **Compare quarters** shows all ranked moves with Q1 and Q2 rank, score, and occupation-group change, plus one DOSM source link. Logic: `src/changes.ts`.
+- **How ranking works** explains the three score parts, fairness and limits, and links DOSM, ILO and ESCO once. The fairness claim is backed by `src/fairness.test.ts`.
+- **Personalise ranking** is a focused optional view. Its interest switch is disabled until the person picks interests. Selected goals highlight linked roles; the separate switch adds them to the ranking. The note says how optional parts affect the score, and arrows show score changes. A role view shows its leading work interests, interest fit, and a job tag or O\*NET source link; rows with fit ≥ 75% show "fits your interests".
 - If there are no skills: a short prompt to add skills or try Aina.
 
 ## SDG links (all career screens)
 
-- Your moves: each expanded row shows the role's SDG target badges (goal colour stripe, links to sdgs.un.org) with the reason; *Goals you care about* chips (7, 8, 9, 12, 13, 16, 17, several allowed) sit in **Personalise with interests and goals** and mark rows "linked to SDG n" (through the role) or "skills linked to SDG n"; the *Count in ranking* switch (off by default) adds goal fit to the score, and the arrows show the change.
+- Your moves: each focused role view shows its SDG target badges (links to sdgs.un.org) with the reason; *Goals you care about* chips (7, 8, 9, 12, 13, 16, 17, several allowed) sit in **Personalise ranking** and mark rows "linked to SDG n" (through the role) or "skills linked to SDG n"; the *Count in ranking* switch (off by default) adds goal fit to the score, and the arrows show the change.
 - Your plan: *How this move connects to the SDGs* panel: role targets with reasons, then *Skills you would build* grouped by target with counts and names; note on 4.4 and that links are connections, not measured impact.
 - Team view: the same panel for the selected role's shared gaps.
 
 ## 3. Your plan
 
-- **Entry:** *Plan this move* in an expanded row of Your moves, or the sidebar career step (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.
+- **Entry:** *Plan this move* in a focused role view of Your moves, or the sidebar career step (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.
 - **Summary line:** n essential skills to build (m partly there); k free courses cover x of them, about h hours as the providers state it.
 - **Numbered steps:** course title (link to the provider page), provider · level · cost, the provider's stated time, and *Builds* with the gap skills it closes (≈ marks a skill the person partly has).
 - **No checked course yet:** leftover gaps, with a line saying courses are only listed after their page was checked.

@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## UI refinement — 21 Oct 2026
 
+- [x] Replace repeated Your moves disclosures and row expanders with focused role, comparison, method and preference views; keep source explanations in one method view and direct links beside role facts. Check desktop and 390 px layouts, then run build and tests.
 - [x] Use the sidebar as the career step navigation; remove the repeated step strip above the page.
 - [x] Shorten first-visit and skill-entry copy, bring the selected-skill action and expanded-role plan action next to their context, and collapse optional explanations and ranking preferences.
 - [x] Use wide Home columns and compact phone move rows; inspect Home and Your plan at 1440 px, Home, Your skills, Your moves and Your plan at 390 px, and the Malay Home header at 320 px. Check Malay and Chinese phone navigation.
@@ -181,7 +182,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [x] Home says who the app is for, what it does and how it works (3 steps), with two clear starts: *Try it as Aina* (fictional sample) and *Start with my own skills*.
 - [x] One guided flow: 1. Your skills (RunPod search + list, current job) → 2. Your moves → 3. Your plan (soon), with a step bar; the old free-text profile, skill-gap and sign-in screens removed.
-- [x] Plain-language "How to read this" on Your moves; DOSM, ILO, ESCO explained in a sentence each.
+- [x] Plain-language "How ranking works" view on Your moves; DOSM, ILO and ESCO linked once.
 - [x] Empty views marked "Soon" with a short note.
 - [x] Checked at 1440 px and 390 px in a browser; no horizontal scroll; no page errors.
 
@@ -311,7 +312,7 @@ These are ideas from the Domain 1 brief, not submission blockers. Pick them only
 - [ ] Automatic re-planning when a refreshed trend signal changes a recommendation.
 - [ ] Additional language support and a low-bandwidth mode.
 - [ ] Learner progress tracking or skill badges.
-- [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; "Is this fair?" panel on Your moves.)
+- [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; the focused "How ranking works" view states the limits.)
 - [x] Aggregated SDG contribution view for a person, organisation, or region. (Your plan: per person; Team view: per team or class.)
 
 Additional APIs in [API_PLAN.md](API_PLAN.md) are also optional unless Stage 1 selects one as the required updatable source.
