@@ -8,6 +8,7 @@ import { NewsView } from './NewsView';
 import { PlanStep } from './PlanStep';
 import { SkillsStep } from './SkillsStep';
 import { TeamView } from './TeamView';
+import { LangProvider, languages, translate, useT, type Lang } from './i18n';
 import './styles.css';
 
 type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending';
@@ -51,73 +52,76 @@ function Home({ start, openTeam }: { start: (who: Start) => void; openTeam: () =
     const p = personaProfile(persona.id);
     return { persona, moves: recommendMoves(roles, p.currentRoleId, p.held, snapshots.q2, ilo, scenarios.moderate, transferable).moves.slice(0, 3) };
   }), []);
+  const t = useT();
   return <div className="home">
     <section className="home-hero">
-      <h1>AI is changing your job. See where you can move next.</h1>
-      <p>For Malaysian workers, graduates, and the people who advise them. TomorrowWorks compares skills with nine real roles, using official Malaysian job-ad figures and international research on AI.</p>
+      <h1>{t('AI is changing your job. See where you can move next.')}</h1>
+      <p>{t('For Malaysian workers, graduates, and the people who advise them. TomorrowWorks compares skills with nine real roles, using official Malaysian job-ad figures and international research on AI.')}</p>
       <div className="hero-actions">
-        <button type="button" className="primary-button" onClick={() => start('me')}>Start with my own skills</button>
-        <button type="button" className="secondary-button" onClick={() => start('aina')}>Try a sample person</button>
+        <button type="button" className="primary-button" onClick={() => start('me')}>{t('Start with my own skills')}</button>
+        <button type="button" className="secondary-button" onClick={() => start('aina')}>{t('Try a sample person')}</button>
       </div>
-      <p className="note">No account, no CV. Nothing you enter leaves your browser tab except the words you send to the skill search.</p>
+      <p className="note">{t('No account, no CV. Nothing you enter leaves your browser tab except the words you send to the skill search.')}</p>
     </section>
 
     <section className="home-how" aria-labelledby="how">
-      <h2 id="how">How it works</h2>
+      <h2 id="how">{t('How it works')}</h2>
       <ol>
-        <li><strong>Your skills.</strong> Describe your work in your own words. An AI model finds the matching skills, and you confirm them.</li>
-        <li><strong>Your moves.</strong> Nine roles ranked by skill fit, job-ad demand and AI exposure. Every score shows its reasons.</li>
-        <li><strong>Your plan.</strong> Pick a move and get courses for the skills it needs, free first, plus the Malaysian SKM route where one exists.</li>
+        <li><strong>{t('Your skills.')}</strong> {t('Describe your work in your own words. An AI model finds the matching skills, and you confirm them.')}</li>
+        <li><strong>{t('Your moves.')}</strong> {t('Nine roles ranked by skill fit, job-ad demand and AI exposure. Every score shows its reasons.')}</li>
+        <li><strong>{t('Your plan.')}</strong> {t('Pick a move and get courses for the skills it needs, free first, plus the Malaysian SKM route where one exists.')}</li>
       </ol>
     </section>
 
     <section className="home-people" aria-labelledby="meet">
-      <h2 id="meet">Try it as someone else</h2>
+      <h2 id="meet">{t('Try it as someone else')}</h2>
       <div className="people-grid">
         {previews.map(({ persona, moves }) => <article key={persona.id} className="person-card">
-          <p className="person-group">{persona.group}</p>
+          <p className="person-group">{t(persona.group)}</p>
           <h3>{persona.name}</h3>
           <p>{persona.summary}</p>
-          <p className="note">Top moves with Q2 2026 data</p>
+          <p className="note">{t('Top moves with Q2 2026 data')}</p>
           <ol className="mini-ledger">{moves.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol>
-          <button type="button" className="text-button" onClick={() => start(persona.id)}>See {persona.name}’s moves</button>
+          <button type="button" className="text-button" onClick={() => start(persona.id)}>{t('See {name}’s moves', { name: persona.name })}</button>
         </article>)}
         <article className="person-card team-card">
-          <p className="person-group">HR managers and career centres</p>
-          <h3>A whole team or class</h3>
-          <p>See which roles fit each person, and which skills the group lacks most for a move, with a course for each.</p>
-          <button type="button" className="text-button" onClick={openTeam}>Open the Team view</button>
+          <p className="person-group">{t('HR managers and career centres')}</p>
+          <h3>{t('A whole team or class')}</h3>
+          <p>{t('See which roles fit each person, and which skills the group lacks most for a move, with a course for each.')}</p>
+          <button type="button" className="text-button" onClick={openTeam}>{t('Open the Team view')}</button>
         </article>
       </div>
     </section>
 
     <section className="home-sources" aria-labelledby="data">
-      <h2 id="data">Where the numbers come from</h2>
+      <h2 id="data">{t('Where the numbers come from')}</h2>
       <dl>
-        <div><dt><a href={sourceLinks.dosm} target="_blank" rel="noreferrer">DOSM</a></dt><dd>Department of Statistics Malaysia. Online job ads by occupation, every quarter.</dd></div>
-        <div><dt><a href={sourceLinks.ilo} target="_blank" rel="noreferrer">ILO</a></dt><dd>International Labour Organization. How much of each job’s tasks generative AI could change.</dd></div>
-        <div><dt><a href={sourceLinks.esco} target="_blank" rel="noreferrer">ESCO</a></dt><dd>The European Commission’s list of skills and occupations. It uses the same job codes as Malaysia’s MASCO.</dd></div>
+        <div><dt><a href={sourceLinks.dosm} target="_blank" rel="noreferrer">DOSM</a></dt><dd>{t('Department of Statistics Malaysia. Online job ads by occupation, every quarter.')}</dd></div>
+        <div><dt><a href={sourceLinks.ilo} target="_blank" rel="noreferrer">ILO</a></dt><dd>{t('International Labour Organization. How much of each job’s tasks generative AI could change.')}</dd></div>
+        <div><dt><a href={sourceLinks.esco} target="_blank" rel="noreferrer">ESCO</a></dt><dd>{t('The European Commission’s list of skills and occupations. It uses the same job codes as Malaysia’s MASCO.')}</dd></div>
       </dl>
     </section>
   </div>;
 }
 
 function Steps({ screen, go }: { screen: Screen; go: (s: Screen) => void }) {
+  const t = useT();
   return <ol className="steps" aria-label="Steps">
     {careerNav.map((item) => <li key={item.id}>
       <button type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'step' : undefined} onClick={() => go(item.id)}>
-        {item.label}{item.soon && <span className="soon">Soon</span>}
+        {t(item.label)}{item.soon && <span className="soon">{t('Soon')}</span>}
       </button>
     </li>)}
   </ol>;
 }
 
 function NavGroup({ label, items, screen, go }: { label: string; items: NavItem[]; screen: Screen; go: (s: Screen) => void }) {
+  const t = useT();
   return <div className="nav-group">
-    <p className="nav-group-label">{label}</p>
+    <p className="nav-group-label">{t(label)}</p>
     <nav className="nav-list" aria-label={label}>
       {items.map((item) => <button key={item.id} type="button" className={`nav-item${screen === item.id ? ' active' : ''}${item.soon ? ' is-soon' : ''}`} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>
-        <strong>{item.label}{item.soon && <span className="soon">Soon</span>}</strong><small>{item.hint}</small>
+        <strong>{t(item.label)}{item.soon && <span className="soon">{t('Soon')}</span>}</strong><small>{t(item.hint)}</small>
       </button>)}
     </nav>
   </div>;
@@ -127,6 +131,10 @@ function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [profile, setProfile] = useState<Profile>(ainaProfile);
   const [planRoleId, setPlanRoleId] = useState<string | null>(null);
+  const [lang, setLangState] = useState<Lang>(() => {
+    try { const saved = localStorage.getItem('tw-lang'); return saved === 'ms' || saved === 'zh' ? saved : 'en'; } catch { return 'en'; }
+  });
+  const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem('tw-lang', l); } catch { /* storage unavailable */ } };
   const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: Start) {
     setProfile(who === 'me' ? emptyProfile() : personaProfile(who));
@@ -136,22 +144,24 @@ function App() {
   const isCareer = screen === 'skills' || screen === 'moves' || screen === 'plan';
   const page = screen === 'home' ? null : titles[screen];
 
-  return <div className="app-shell">
+  const t = translate(lang);
+  return <LangProvider value={lang}><div className="app-shell">
     <aside className="sidebar" aria-label="Navigation">
       <button type="button" className="brand" onClick={() => go('home')}>TomorrowWorks</button>
-      <p className="sidebar-kicker">Your career, mapped forward.</p>
+      <p className="sidebar-kicker">{t('Your career, mapped forward.')}</p>
+      <label className="lang-pick"><span>{t('Language')}</span><select value={lang} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
       <NavGroup label="My career" items={careerNav} screen={screen} go={go} />
       <NavGroup label="For teams" items={teamNav} screen={screen} go={go} />
       <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
-      <div className="sidebar-note">Prototype for SDC Hackathon 2026<br /><span>Profiles are fictional or stay in your browser.</span></div>
+      <div className="sidebar-note">{t('Prototype for SDC Hackathon 2026')}<br /><span>{t('Profiles are fictional or stay in your browser.')}</span></div>
     </aside>
 
     <main className="main-content">
       <div className="content-wrap">
         {page && <header className="page-head">
           {isCareer && <Steps screen={screen} go={go} />}
-          <h1>{page.title}</h1>
-          <p>{page.intro}</p>
+          <h1>{t(page.title)}</h1>
+          <p>{t(page.intro)}</p>
         </header>}
         {screen === 'home' && <Home start={start} openTeam={() => go('team')} />}
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
@@ -165,11 +175,11 @@ function App() {
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
-        {comingSoon[screen] && <section className="panel soon-panel"><h2>Coming soon</h2><p>{comingSoon[screen]}</p></section>}
+        {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{comingSoon[screen]}</p></section>}
         <SourcesFooter />
       </div>
     </main>
-  </div>;
+  </div></LangProvider>;
 }
 
 createRoot(document.getElementById('root')!).render(<App />);

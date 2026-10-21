@@ -360,3 +360,5 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .what-changed .up { color: #1e6b4f; font-weight: 700; }
 .what-changed .down { color: #a8402b; font-weight: 700; }
 .cap { text-transform: capitalize; }
+.lang-pick { display: grid; gap: 4px; margin: 0 12px 18px; font-size: 13px; font-weight: 600; color: #5d6873; }
+.lang-pick select { padding: 6px 8px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 14px; color: #1c2430; background: #ffffff; }

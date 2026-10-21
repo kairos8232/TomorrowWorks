@@ -7,6 +7,7 @@ import nossFile from '../data/pathway/noss.json';
 import { ilo, personaById, roleById, roles, snapshots, transferable, type Profile } from './data';
 import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
+import { useT } from './i18n';
 
 const resources = resourcesFile.resources as Resource[];
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
@@ -22,9 +23,10 @@ function GapTag({ gap }: { gap: Gap }) {
 }
 
 function NossRoute({ roleId }: { roleId: string }) {
+  const t = useT();
   const entry = nossRoles[roleId];
   return <section className="panel plan-noss" aria-labelledby="noss">
-    <h2 id="noss">Malaysian certification route</h2>
+    <h2 id="noss">{t('Malaysian certification route')}</h2>
     {!entry || entry.noss.length === 0
       ? <p>No matching National Occupational Skills Standard (NOSS) in the current JPK register (January 2025).</p>
       : <>
@@ -41,6 +43,7 @@ function NossRoute({ roleId }: { roleId: string }) {
 export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
   profile: Profile; roleId: string | null; onPickRole: (id: string) => void; onBackToMoves: () => void;
 }) {
+  const t = useT();
   // Only the skill-fit part matters here; demand and scenario do not change the gaps.
   const { moves } = useMemo(
     () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots.q2, ilo, scenarios.moderate, transferable),
@@ -60,7 +63,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           {moves.map((m, i) => <option key={m.role.id} value={m.role.id}>{i + 1}. {m.role.title}</option>)}
         </select>
       </label>
-      <button type="button" className="text-button" onClick={onBackToMoves}>Back to your moves</button>
+      <button type="button" className="text-button" onClick={onBackToMoves}>{t('Back to your moves')}</button>
     </div>
 
     {plan.gaps.length === 0
@@ -80,7 +83,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
               <h3><a href={step.resource.url} target="_blank" rel="noreferrer">{step.resource.title}</a></h3>
               <p className="plan-meta">{step.resource.provider} · {step.resource.level} · {step.resource.free ? step.resource.cost : <span className="plan-paid">{step.resource.cost}</span>}</p>
               <p className="plan-time">{step.resource.timeBasis}.</p>
-              <div className="tag-row"><span className="plan-closes">Builds</span>{step.closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
+              <div className="tag-row"><span className="plan-closes">{t('Builds')}</span>{step.closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
             </div>
           </li>)}
         </ol>}
@@ -90,13 +93,13 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         </p>)}
 
         {plan.uncovered.length > 0 && <section className="skill-list plan-left">
-          <h4>No checked course yet <span>{plan.uncovered.length}</span></h4>
+          <h4>{t('No checked course yet')} <span>{plan.uncovered.length}</span></h4>
           <div className="tag-row">{plan.uncovered.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
           <p className="note">We only list a course after opening its page and matching its stated outcomes to the skill. These skills have no match yet.</p>
         </section>}
 
         <details className="how-to-read">
-          <summary>How this plan is made</summary>
+          <summary>{t('How this plan is made')}</summary>
           <dl>
             <div><dt>Skills</dt><dd>The role’s essential ESCO skills you don’t have yet. A skill you partly have (≈) is included because it only counts half.</dd></div>
             <div><dt>Order</dt><dd>Start with the course that builds the most of your missing skills, then the next. If two are equal, a free course comes before a paid one, then the one with fewer stated hours.</dd></div>

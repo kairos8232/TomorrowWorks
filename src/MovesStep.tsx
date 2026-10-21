@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ilo, personaById, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
 import { whatChanged } from './changes';
 import { recommendMoves, scenarios, type RoleScore, type ScenarioId } from './scoring';
+import { useT } from './i18n';
 
 const pct = (x: number) => `${x >= 0 ? '+' : ''}${(x * 100).toFixed(1)}%`;
 
@@ -36,12 +37,13 @@ function SkillList({ title, empty, children }: { title: string; empty: string; c
 }
 
 function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void }) {
+  const t = useT();
   const { role, fit, demand, resilience } = result;
   const [open, setOpen] = useState(false);
   const part = (k: 'F' | 'D' | 'R') => result.contributions.find((c) => c.key === k)?.value ?? null;
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
     <button type="button" className="ledger-line" onClick={() => setOpen(!open)} aria-expanded={open}>
-      <span className="rank">{rank === null ? 'Now' : rank}</span>
+      <span className="rank">{rank === null ? t('Now') : rank}</span>
       <span className="role-name">{role.title}<small>{fit.matched.length} held{fit.transferable.length ? `, ${fit.transferable.length} transferable` : ''}, {fit.missing.length} to build</small></span>
       <Part value={part('F')} label="Skill fit" area="f" />
       <Part value={part('D')} label="Demand trend" area="d" />
@@ -55,16 +57,16 @@ function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: n
         <span className="fact-r">{resilience ? <>ILO exposure {resilience.exposure.toFixed(2)}<small>{resilience.gradient}</small></> : 'No ILO data'}</span>
       </div>
       <div className="detail-skills">
-        <SkillList title="You have" empty="None of this role's essential skills yet.">
+        <SkillList title={t('You have')} empty="None of this role's essential skills yet.">
           {[...fit.transferable.map((t) => <span className="skill-tag related" key={t.need.uri} title={`Transferable from your ${t.have.label} (similarity ${t.similarity.toFixed(2)})`}>{t.need.label}<small>≈ {t.have.label}</small></span>),
             ...fit.matched.map((s) => <span className="skill-tag" key={s.uri}>{s.label}</span>)]}
         </SkillList>
-        <SkillList title="To build" empty="Nothing missing.">
+        <SkillList title={t('To build')} empty="Nothing missing.">
           {fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri}>{s.label}</span>)}
         </SkillList>
       </div>
       <div className="detail-actions">
-        {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>Plan this move</button>}
+        {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
         <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">ESCO occupation {role.isco}</a>
       </div>
     </div>}
@@ -76,6 +78,7 @@ const quarter = (q: string) => q.replace('-', ' ');
 
 /** Latest vs previous DOSM snapshot for the same skills and scenario: what moved, and why. */
 function WhatChanged({ profile, scenarioId }: { profile: Profile; scenarioId: ScenarioId }) {
+  const t = useT();
   const [all, setAll] = useState(false);
   const changes = useMemo(() => {
     const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable).moves;
@@ -88,19 +91,20 @@ function WhatChanged({ profile, scenarioId }: { profile: Profile; scenarioId: Sc
   const allDown = changes.every((c) => c.scoreAfter < c.scoreBefore);
   const shown = all ? changes : changes.slice(0, 3);
   return <section className="what-changed" aria-labelledby="changed">
-    <h2 id="changed">What changed with {latest} job-ad data</h2>
+    <h2 id="changed">{t('What changed with {q} job-ad data', { q: latest })}</h2>
     <p>{allDown ? `Online job ads fell in every occupation group in ${latest}, so every score dropped. ` : ''}{rankMoves === 0 ? 'Your order of moves stayed the same.' : `${rankMoves} ${rankMoves === 1 ? 'move changed' : 'moves changed'} place.`}</p>
     <ul>{shown.map((c) => <li key={c.role.id}>
       <strong className="cap">{c.role.title}</strong>{' '}
       {c.rankBefore !== c.rankAfter ? <span className={c.rankAfter < c.rankBefore ? 'up' : 'down'}>#{c.rankBefore} to #{c.rankAfter}</span> : <span>stays #{c.rankAfter}</span>}, score {c.scoreBefore} to {c.scoreAfter}.{' '}
       <span className="note">Job ads for {c.group}: {signed(c.changeAfter)} in {latest}, after {signed(c.changeBefore)} in {earlier}.</span>
     </li>)}</ul>
-    {changes.length > 3 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? 'Show fewer' : `Show all ${changes.length}`}</button>}
+    {changes.length > 3 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('Show all {n}', { n: changes.length })}</button>}
     <p className="note">Same skills and assumption, only the DOSM data differs. When a new quarter is imported, this compares it with the one before.</p>
   </section>;
 }
 
 export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
+  const t = useT();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
   const snapshot = snapshots[snapshotId];
@@ -127,13 +131,13 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   return <div className="step-body">
     <div className="who">
       <p>{persona ? <><strong>Viewing as {persona.name}</strong>, {persona.description} with {profile.held.size} skills.</> : <><strong>Your {profile.held.size} {profile.held.size === 1 ? 'skill' : 'skills'}</strong>{current ? `, current job ${current.role.title}` : ''}.</>}</p>
-      <button type="button" className="text-button" onClick={onEditSkills}>{persona ? 'Use my own skills' : 'Edit skills'}</button>
+      <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
     </div>
 
     <WhatChanged profile={profile} scenarioId={scenarioId} />
 
     <details className="how-to-read">
-      <summary>How to read this</summary>
+      <summary>{t('How to read this')}</summary>
       <dl>
         <div><dt>Score</dt><dd>A mix of the three parts below, out of 100. It is an estimate to help you compare, not a hiring decision.</dd></div>
         <div><dt>Skill fit</dt><dd>How many of the role’s essential skills you already have. A closely related skill counts half.</dd></div>
@@ -144,7 +148,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
     </details>
 
     <details className="how-to-read fairness">
-      <summary>Is this fair?</summary>
+      <summary>{t('Is this fair?')}</summary>
       <dl>
         <div><dt>Used</dt><dd>Only the skills you confirmed, each role’s ESCO skills, DOSM job ads for the role’s occupation group, and ILO’s AI exposure for the role.</dd></div>
         <div><dt>Never asked</dt><dd>Age, gender, ethnicity, religion, name, where you live or which school you went to. The app has no place to store them.</dd></div>
@@ -155,20 +159,20 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
 
     <section className="ledger" aria-label="Ranked moves">
       <div className="ledger-controls">
-        <fieldset><legend>Job-ad data</legend>
+        <fieldset><legend>{t('Job-ad data')}</legend>
           {(['q1', 'q2'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="snapshot" checked={snapshotId === id} onChange={() => setSnapshotId(id)} />{snapshots[id].source.latestQuarter.replace('-', ' ')}</label>)}
         </fieldset>
-        <fieldset><legend>If AI changes work</legend>
-          {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? 'Gradually' : 'Quickly'}</label>)}
+        <fieldset><legend>{t('If AI changes work')}</legend>
+          {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
         </fieldset>
       </div>
       <p className="note">{scenario.assumption} Try switching: the arrows show how each score moves.</p>
       <ol className="ledger-table">
-        <li className="ledger-head" aria-hidden="true"><span className="rank">Rank</span><span>Role</span><span>Skill fit</span><span>Demand</span><span>AI resilience</span><span className="score">Score</span></li>
+        <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} />}
         {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} />)}
       </ol>
-      <p className="note">Select a role to see the skills you have and the skills to build, then plan the move.</p>
+      <p className="note">{t('Select a role to see the skills you have and the skills to build, then plan the move.')}</p>
     </section>
   </div>;
 }

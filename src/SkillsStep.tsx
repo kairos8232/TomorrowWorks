@@ -4,10 +4,12 @@ import type React from 'react';
 import { useState } from 'react';
 import { allSkills, roles, roleTitle, type Profile } from './data';
 import type { Skill } from './scoring';
+import { useT } from './i18n';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
 export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void }) {
+  const t = useT();
   const [description, setDescription] = useState('');
   const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
   const [search, setSearch] = useState<{ busy: boolean; message: string }>({ busy: false, message: '' });
@@ -47,36 +49,36 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
 
   return <div className="step-body">
     <section className="panel">
-      <h2>Your current job</h2>
-      <p className="note">Shown as “Now” so you can compare. It is never recommended back to you.</p>
+      <h2>{t('Your current job')}</h2>
+      <p className="note">{t('Shown as “Now” so you can compare. It is never recommended back to you.')}</p>
       <select value={profile.currentRoleId ?? ''} onChange={(e) => update({ currentRoleId: e.target.value || null })} aria-label="Your current job">
-        <option value="">Not in this list</option>
+        <option value="">{t('Not in this list')}</option>
         {roles.map((r) => <option key={r.id} value={r.id}>{roleTitle(r.title)}</option>)}
       </select>
     </section>
 
     <section className="panel">
-      <h2>Describe your work</h2>
-      <p className="note">In English, Bahasa Malaysia or Chinese. An AI model finds the closest skills in ESCO, the European Commission’s list of 13,960 skills. It only finds existing skills; you decide which are true.</p>
+      <h2>{t('Describe your work')}</h2>
+      <p className="note">{t('In English, Bahasa Malaysia or Chinese. An AI model finds the closest skills in ESCO, the European Commission’s list of 13,960 skills. It only finds existing skills; you decide which are true.')}</p>
       <form className="skill-search" onSubmit={findSkills}>
         <textarea aria-label="Describe your work" value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder="e.g. I reconcile bank statements and prepare month-end reports" />
-        <button type="submit" className="primary-button" disabled={search.busy || !description.trim()}>{search.busy ? 'Searching…' : 'Find my skills'}</button>
+        <button type="submit" className="primary-button" disabled={search.busy || !description.trim()}>{search.busy ? t('Searching…') : t('Find my skills')}</button>
       </form>
       {search.message && <p className="note" aria-live="polite">{search.message}</p>}
       {found.length > 0 && <div className="tag-row">{found.map((s) => pick(s, <small>match {Math.round(s.similarity * 100)}%</small>))}</div>}
-      <label className="list-search">Or search the skill list<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try budget, data or sustainability" /></label>
+      <label className="list-search">{t('Or search the skill list')}<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try budget, data or sustainability" /></label>
       {listHits.length > 0 && <div className="tag-row">{listHits.map((s) => pick(s))}</div>}
     </section>
 
     <section className="panel">
-      <h2>Your skills <span className="count">{heldSkills.length}</span></h2>
-      {heldSkills.length === 0 ? <p className="note">No skills yet. Describe your work or search the list above.</p>
+      <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
+      {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
         : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={`Remove ${s.label}`}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
     </section>
 
     <div className="step-actions">
-      <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>See my moves</button>
-      {heldSkills.length === 0 && <span className="note">Add at least one skill first.</span>}
+      <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t('See my moves')}</button>
+      {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
     </div>
   </div>;
 }

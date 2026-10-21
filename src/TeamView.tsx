@@ -7,6 +7,7 @@ import { ilo, memberSkills, roleTitle, roles, snapshots, teams, transferable } f
 import type { Resource } from './pathway';
 import { scenarios } from './scoring';
 import { sharedGaps, teamGrid } from './team';
+import { useT } from './i18n';
 
 const resources = resourcesFile.resources as Resource[];
 
@@ -14,6 +15,7 @@ const resources = resourcesFile.resources as Resource[];
 const shade = (score: number) => `rgba(30, 107, 79, ${Math.min(0.9, 0.08 + score / 110)})`;
 
 export function TeamView() {
+  const t = useT();
   const [teamId, setTeamId] = useState(teams[0].id);
   const team = teams.find((t) => t.id === teamId)!;
   const members = useMemo(() => team.members.map((m) => ({ name: m.name, roleId: m.roleId, held: memberSkills(m) })), [team]);
@@ -25,26 +27,26 @@ export function TeamView() {
 
   return <div className="step-body team-view">
     <div className="ledger-controls team-pick">
-      <fieldset><legend>Group</legend>
+      <fieldset><legend>{t('Group')}</legend>
         {teams.map((t) => <label key={t.id} className="choice"><input type="radio" name="team" checked={teamId === t.id} onChange={() => { setTeamId(t.id); setTargetId(null); }} />{t.name}</label>)}
       </fieldset>
     </div>
     <div className="who"><p><strong>{team.viewer}.</strong> {team.description}</p></div>
 
     <section className="ledger" aria-labelledby="heat">
-      <h2 id="heat" className="section-title">Who fits which role</h2>
+      <h2 id="heat" className="section-title">{t('Who fits which role')}</h2>
       <p className="note">Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually). “Now” marks their current job.</p>
       <div className="heat-scroll">
         <table className="heatmap">
-          <thead><tr><th scope="col">Person</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => setTargetId(r.id)}>{roleTitle(r.title)}</button></th>)}</tr></thead>
+          <thead><tr><th scope="col">{t('Person')}</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => setTargetId(r.id)}>{roleTitle(r.title)}</button></th>)}</tr></thead>
           <tbody>
             {grid.rows.map((row) => <tr key={row.member.name}>
               <th scope="row">{row.member.name}<small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : 'No job yet'}</small></th>
               {row.cells.map((c) => <td key={c.role.id} className={c.current ? 'now' : ''} style={c.current ? undefined : { background: shade(c.result.score100), color: c.result.score100 > 45 ? '#ffffff' : '#1c2430' }}>
-                {c.current ? 'Now' : c.result.score100}
+                {c.current ? t('Now') : c.result.score100}
               </td>)}
             </tr>)}
-            <tr className="heat-avg"><th scope="row">Average<small>moves only</small></th>
+            <tr className="heat-avg"><th scope="row">{t('Average')}<small>moves only</small></th>
               {grid.averages.map((a) => <td key={a.role.id}>{a.average ?? '–'}</td>)}</tr>
           </tbody>
         </table>
@@ -53,7 +55,7 @@ export function TeamView() {
     </section>
 
     <section className="ledger" aria-labelledby="shared">
-      <h2 id="shared" className="section-title">Shared gaps for {roleTitle(target.title)}</h2>
+      <h2 id="shared" className="section-title">{t('Shared gaps for {role}', { role: roleTitle(target.title) })}</h2>
       <p className="note">{shared.movers} of {members.length} people would be moving into this role. Skills most of them lack come first, with the first checked course that covers each (free before paid).</p>
       {shared.gaps.length === 0 ? <p>No gaps: everyone already has these skills.</p> : <ol className="gap-table">
         {shared.gaps.slice(0, 12).map((g) => {
@@ -62,7 +64,7 @@ export function TeamView() {
             <span className="gap-name">{g.skill.label}</span>
             <span className="gap-bar" aria-hidden="true"><span style={{ width: `${(count / shared.movers) * 100}%` }} /></span>
             <span className="gap-count">{count} of {shared.movers}<small>{[...g.missing, ...g.partly.map((n) => `${n} (partly)`)].join(', ')}</small></span>
-            <span className="gap-course">{g.course ? <a href={g.course.url} target="_blank" rel="noreferrer">{g.course.title}</a> : <span className="note">No checked course yet</span>}</span>
+            <span className="gap-course">{g.course ? <a href={g.course.url} target="_blank" rel="noreferrer">{g.course.title}</a> : <span className="note">{t('No checked course yet')}</span>}</span>
           </li>;
         })}
       </ol>}

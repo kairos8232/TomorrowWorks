@@ -27,6 +27,10 @@ My career (guided, step bar on top)      The job market (browse any time)
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
 
+## Language (sidebar)
+
+- English / Bahasa Malaysia / 中文 select under the brand, remembered in the browser (localStorage, with fallback). Covers navigation, page titles, Home, step headings, buttons, controls and table headers (`src/i18n.tsx`; drafted with Claude, **team must review the Malay and Chinese**). ESCO skill labels and role titles stay in English (ESCO has no Malay or Chinese version). Longer sentences with numbers are still English.
+
 ## Home: sample people
 
 - Hero: *Start with my own skills* (primary) and *Try a sample person*.
