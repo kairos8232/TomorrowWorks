@@ -27,7 +27,8 @@ export function SdgContribution({ roleId, skills, heading, compact = false }: { 
   const totals = sdgTotals(skills);
   const roleLinks = roleId ? roleSdgs(roleId) : [];
   if (compact) {
-    const targets = [...new Set([...roleLinks.map((link) => link.target), ...totals.map((total) => total.target)])];
+    const targets = [...new Set([...roleLinks.map((link) => link.target), ...totals.map((total) => total.target), ...(skills.length > 0 ? ['4.4'] : [])])];
+    const gapCount = new Set(skills.map((skill) => skill.uri)).size;
     return <section className="panel sdg-panel" aria-label={heading}>
       <h2>{heading}</h2>
       <ul className="sdg-summary-list">{targets.map((target) => {
@@ -36,10 +37,13 @@ export function SdgContribution({ roleId, skills, heading, compact = false }: { 
         return <li key={target}>
           <div className="sdg-summary-heading"><SdgBadge target={target} short /><strong>{t(sdgData.targets[target].title)}</strong></div>
           {roleLink && <p>{t(roleLink.reason)}</p>}
-          {skillCount > 0 && <small>{t('Linked gap skills: {n}', { n: skillCount })}</small>}
+          {target === '4.4' ? <>
+            <small>{t('Broad skills link: all {n} gap skills', { n: gapCount })}</small>
+            {skillCount > 0 && <small>{t('Specific ICT link: {n} ESCO digital skills', { n: skillCount })}</small>}
+          </> : skillCount > 0 && <small>{t('Linked gap skills: {n}', { n: skillCount })}</small>}
         </li>;
       })}</ul>
-      <p className="note sdg-summary-note">{t('All gap skills also link to SDG 4.4. Role links are written by hand; skill links use ESCO wording and flags. These are connections, not measured impact.')}</p>
+      <p className="note sdg-summary-note">{t('Role links are written by hand; skill links use ESCO wording and flags. These are connections, not measured impact.')}</p>
     </section>;
   }
   return <section className="panel sdg-panel" aria-label={heading}>
