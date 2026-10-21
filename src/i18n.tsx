@@ -147,6 +147,7 @@ const dict: Record<string, Entry> = {
   // Plan step
   'Back to your moves': { ms: 'Kembali ke langkah anda', zh: '返回职业选择' },
   'Malaysian certification route': { ms: 'Laluan pensijilan Malaysia', zh: '马来西亚认证途径' },
+  'This move and the SDGs': { ms: 'Langkah ini dan SDG', zh: '这项职业选择与可持续发展目标' },
   'No checked course yet': { ms: 'Belum ada kursus yang disemak', zh: '尚无已核实课程' },
   'Skills without a checked course': { ms: 'Kemahiran tanpa kursus yang disemak', zh: '尚无已核实课程的技能' },
   'We list a course only after checking its page against the skill.': { ms: 'Kami hanya menyenaraikan kursus selepas menyemak halamannya dengan kemahiran tersebut.', zh: '我们核对课程页面与技能后才会列出课程。' },

@@ -55,7 +55,7 @@ My career (sidebar navigation)           The job market (browse any time)
 ## SDG links (all career screens)
 
 - Your moves: each focused role view shows its SDG target badges (links to sdgs.un.org) with the reason; *Goals you care about* chips (7, 8, 9, 12, 13, 16, 17, several allowed) sit in **Personalise ranking** and mark rows "linked to SDG n" (through the role) or "skills linked to SDG n"; the *Count in ranking* switch (off by default) adds goal fit to the score, and the arrows show the change.
-- Your plan: *How this move connects to the SDGs* panel: role targets with reasons, then *Skills you would build* grouped by target with counts and names; note on 4.4 and that links are connections, not measured impact.
+- Your plan: one compact row per linked SDG target combines the selected role's reason with the count of linked gap skills. SDG 4.4 separates the broad link for all gaps from the specific ESCO digital subset; these links indicate connections, not measured impact. Full gap names stay in the course and uncovered-skill sections above.
 - Team view: one compact row per linked target combines the selected role's reason with a count of linked gap skills. SDG 4.4 shows both the broad link for all gap skills and the smaller count with a specific ESCO digital flag. Full skill names stay in *Shared gaps* above, and the method note still distinguishes connections from measured impact.
 
 ## 3. Your plan

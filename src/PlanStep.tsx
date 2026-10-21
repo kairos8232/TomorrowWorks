@@ -109,7 +109,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         {plan.steps.length > 0 && <p className="plan-method note">{t('Checked {date}. Courses cover the most missing skills first; ties favour free courses, then shorter stated hours. Skill links reflect our reading of course outcomes.', { date: resourcesFile.checkedAt })}</p>}
       </>}
 
-    <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('How this move connects to the SDGs')} />
+    <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('This move and the SDGs')} compact />
 
     <NossRoute roleId={role.id} />
   </div>;
