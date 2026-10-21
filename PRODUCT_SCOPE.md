@@ -1,5 +1,7 @@
 # TomorrowWorks product scope
 
+> **21 Oct 2026:** the app now uses a guided flow (Home → 1. Your skills → 2. Your moves → 3. Your plan) with Aina as a fictional sample; the old *My profile* form, *My skill gaps* and *Sign in* screens were removed. [SCREENS.md](SCREENS.md) is the current reference; older screen names below are historical.
+
 This is the reference for **who the product serves and what each public claim means**. `SCREENS.md` defines screen behaviour, `API_PLAN.md` tracks candidate data sources, and `CHECKLIST.md` records verified progress. Update these files together when a product decision changes.
 
 ## Product promise

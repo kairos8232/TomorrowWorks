@@ -44,7 +44,7 @@ npm test           # vitest: scoring rules, worked example, search, real-data ch
 npm run serve      # server/index.mjs on :5000: dist/ + POST /api/skill-search (RunPod Job B)
 ```
 
-Key code: `src/main.tsx` (app shell and screens), `src/market.ts` (evidence record type and filters; `marketSignals` is empty until a source is imported), `src/personal.ts` (exact-name skill comparison).
+Key code: `src/main.tsx` (home, navigation, step bar, coming-soon pages), `src/data.ts` (imported data, profile type, Aina the fictional sample), `src/SkillsStep.tsx` (1. Your skills), `src/MovesStep.tsx` (2. Your moves ledger), `src/PublicTables.tsx` (Job ads, AI exposure). Screen behaviour: `SCREENS.md`.
 
 Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Table A1 via `pdftotext -layout`), ESCO v1.2.1 CSV folder. `scripts/import_ilo_exposure.py <pdf> <download date>` (needs pdftotext) writes `data/sources/ilo-genai-exposure-2025.json`. `runpod/embed_esco_skills.py` runs on a RunPod GPU Pod (`--dry-run` locally). `scripts/import_dosm_jmi.py <file> <release date> <download date>` (needs openpyxl) converts a DOSM JMI xlsx in `data/raw/` (gitignored) into `data/sources/dosm-jmi-<quarter>.json`. DOSM occupation data is by **major group only**; use quarter-on-quarter change, not year-on-year.
 

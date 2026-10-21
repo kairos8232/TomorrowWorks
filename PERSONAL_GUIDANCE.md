@@ -1,5 +1,7 @@
 # Personal guidance contract
 
+> **21 Oct 2026:** the app now uses a guided flow (Home → 1. Your skills → 2. Your moves → 3. Your plan) with Aina as a fictional sample; the old *My profile* form, *My skill gaps* and *Sign in* screens were removed. [SCREENS.md](SCREENS.md) is the current reference; older screen names below are historical.
+
 This file defines the **My career** area. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the public product and evidence rules; [SCREENS.md](SCREENS.md) describes navigation; [CHECKLIST.md](CHECKLIST.md) records implementation status. The product follows **Domain 1: Aiversecity Future-Ready Workforce**. Its personal work must connect a reviewed skills profile to future roles, visible skill gaps, a reskilling pathway, SDG explanations, and more than one future scenario.
 
 ## Boundary between public and personal

@@ -4,6 +4,19 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (13:10–13:45 MYT) — First-visit clarity: home, guided flow, Aina
+
+**Feedback (Carson):** new visitors would not understand what the app is for or why it jumps into a table. Agreed choices: replace the old profile/gap screens, use a fictional persona "Aina", show empty pages as "Soon".
+
+- **Problems found on a first-visit walk-through:** generic home; two profile flows that did not feed the ranking; Role matches opened on an unexplained "Accounting Assistant"; jargon (DOSM, ILO, ESCO, ISCO, gradient); empty pages in the menu.
+- **Home:** clear headline and audience, two starts (*Try it as Aina* / *Start with my own skills*), privacy line, 3-step *How it works*, *Meet Aina* with her live top three moves, *Where the numbers come from*.
+- **Guided flow:** `src/SkillsStep.tsx` (current job, RunPod description search, list search, skill chips) and `src/MovesStep.tsx` (who-banner, *How to read this*, plain switch labels *Gradually / Quickly*, ledger) share one profile in `src/main.tsx`; data and Aina in `src/data.ts`. Step bar on career pages; menu split into *My career* and *The job market* with "Soon" labels.
+- **Removed:** free-text *My profile*, *My skill gaps*, *Sign in*, `src/personal.ts`, `src/market.ts` (no longer used).
+- **Checked:** build passes, 21 tests pass; browser walk-through at 1440 px and 390 px (Aina path, own-skills path, coming-soon page), no overflow, no page errors.
+- **Docs:** `SCREENS.md` rewritten; README flow and file tree, `CLAUDE.md` key code, `CHECKLIST.md` stage 4j; dated notes in `UI_UX.md`, `PERSONAL_GUIDANCE.md`, `PRODUCT_SCOPE.md`.
+
+---
+
 ## 21 Oct 2026 (02:22–02:30 MYT) — Plan: news, monthly labour data, NOSS
 
 **Questions (Carson):** DOSM job-ad data lags; can news add the latest? Can a Malaysian product use ESCO (European)?

@@ -36,22 +36,16 @@ Anyone interested in work and skills, including students, employed or unemployed
 ## How People Use the App
 
 ```mermaid
-flowchart TD
-    A[Explore market] --- B[Demand now]
-    A --- C[Skills needed now]
-    A --- D[Future outlook]
-    A --- J[Workplace changes and issues]
-    B --- C
-    C --- D
-    A --> E[My career action]
-    E --> F[Demo entry or future sign-in]
-    F --> G[My profile]
-    G --> K[My skill gaps for a chosen target]
-    K --> H[Role matches]
-    H --> I[My pathway]
+flowchart LR
+    H[Home] -->|Try it as Aina| M[2. Your moves]
+    H -->|Start with my own skills| S[1. Your skills]
+    S --> M
+    M --> P[3. Your plan - soon]
+    H --- J[Job ads]
+    H --- A[AI exposure]
 ```
 
-The public area has independent Explore, Workplace changes, Demand, Skills, and Outlook views, plus industry and search controls. Visitors can move among them freely and see the distinction between reported issues, present-day measures, and future estimates. **My career** is a separate action for personal guidance: review the person's skills and qualifications, compare them with an explicit promotion or career-move target, then explore role matches and a pathway as those Domain 1 features are built. The first demo uses a fictional profile and labels sign-in as planned; résumé upload is a later optional method. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the personal flow and evidence boundary.
+New visitors start on **Home**, which says who the app is for and how it works, then either **try it as Aina** (a fictional accounting assistant) or **start with their own skills**. *My career* is a guided three-step flow: **1. Your skills** (describe your work for the RunPod skill search, or pick from the list), **2. Your moves** (ranked roles with reasons and switches), **3. Your plan** (coming). *The job market* holds the Job ads and AI exposure tables. See [SCREENS.md](SCREENS.md).
 
 ## Required Features
 
@@ -156,8 +150,11 @@ TomorrowWorks/
 ├── index.html              # Browser entry point
 ├── src/
 │   ├── main.tsx            # Public and personal navigation and app shell
-│   ├── market.ts           # Industry and sourced-evidence contract
-│   ├── personal.ts         # Illustrative target and exact skill comparison
+│   ├── data.ts             # Imported data, Aina (fictional sample), profile type
+│   ├── SkillsStep.tsx      # 1. Your skills: RunPod search and skill list
+│   ├── MovesStep.tsx       # 2. Your moves: ranked ledger, switches, how to read
+│   ├── PublicTables.tsx    # Job ads (DOSM) and AI exposure (ILO) tables
+│   ├── scoring.ts          # Explainable score (tested in scoring.test.ts)
 │   └── styles.css          # Responsive styles
 ├── package.json            # Scripts and pinned dependencies
 ├── CHECKLIST.md            # Staged build and submission tasks
