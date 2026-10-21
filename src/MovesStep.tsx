@@ -56,7 +56,7 @@ function LedgerRow({ result, rank, delta, onInspect, picks, goals }: { result: R
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
     <button type="button" className="ledger-line" onClick={onInspect}>
       <span className="rank">{rank === null ? t('Now') : rank}</span>
-      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="fits goal" style={{ color: sdgData.goals[g].colour }}>{roleGoalLink(role, g) === 'role' ? t('linked to SDG {n}', { n: g }) : t('skills linked to SDG {n}', { n: g })}</em>)}</small></span>
+      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="sdg-tag" title={roleGoalLink(role, g) === 'role' ? t('This role is linked to SDG {n}', { n: g }) : t('Some skills of this role are linked to SDG {n}', { n: g })}><span className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>{t(sdgData.goals[g].short)}{roleGoalLink(role, g) === 'skills' ? ` · ${t('via skills')}` : ''}</em>)}</small></span>
       <Part value={part('F')} label={t('Skill fit')} area="f" />
       <Part value={part('D')} label={t('Demand')} area="d" />
       <Part value={part('R')} label={t('AI resilience')} area="r" />
@@ -150,13 +150,13 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
   const [useInterests, setUseInterests] = useState(false);
-  const [goals, setGoals] = useState<string[]>([]);
   const [useGoals, setUseGoals] = useState(false);
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null);
   const [panel, setPanel] = useState<'ranking' | 'changes' | 'method'>('ranking');
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
   const picks = profile.interests;
+  const goals = profile.goals;
   const extras = useMemo<Extras>(() => ({
     I: useInterests && picks.length > 0 ? (role) => interestFit(role.id, picks) : null,
     G: useGoals && goals.length > 0 ? (role) => goalFit(role, goals) : null,
@@ -221,14 +221,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         </fieldset>
         <fieldset className="ranking-personalise"><legend>{t('Personalise ranking')}</legend>
           <label className={`toggle${picks.length === 0 ? ' off' : ''}`} title={picks.length ? picks.map((x) => t(interestData.types[x].plain)).join(', ') : t('Pick them in Your skills first')}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />{t('Interests')}{picks.length > 0 && <small>{picks.length}</small>}</label>
-          <div className="ranking-goals" role="group" aria-label={t('Goals you care about')}>
-            <span>{t('Goals')}</span>
-            {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
-              const on = goals.includes(g);
-              return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }} onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)} aria-label={`${g}: ${t(info.name)}`}>{g}</button>;
-            })}
-            <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
-          </div>
+          <label className={`toggle${goals.length === 0 ? ' off' : ''}`} title={goals.length ? goals.map((g) => `SDG ${g} ${t(sdgData.goals[g].short)}`).join(', ') : t('Pick them in Your skills first')}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Goals')}{goals.length > 0 && <span className="sdg-mini">{goals.map((g) => <span key={g} className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>)}</span>}</label>
         </fieldset>
       </div>
       <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>

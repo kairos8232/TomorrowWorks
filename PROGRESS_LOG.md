@@ -4,6 +4,13 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (22:00–22:40 MYT) — Simpler radar; SDG goals woven into the journey
+
+- **Radar:** your own skills first in three bands with one next step each; the nine jobs as rows, skills behind a button (feedback: "too much pill-bar").
+- **SDG goals:** picked in Your skills next to interests (up to two, plain names with official colour squares); one Goals switch in Your moves; a row tag only for a picked goal. Feedback: bare numbers and repeated "linked to SDG 8" tags were confusing. Scoring unchanged.
+
+---
+
 ## 21 Oct 2026 (late) — Daily news refresh; key headlines per topic
 
 - **Daily refresh:** `/api/news` fetches GDELT at most once a day until 1 Nov 2026, memory only (no commits after the deadline), committed snapshot as fallback, retry 6 h after a failure.

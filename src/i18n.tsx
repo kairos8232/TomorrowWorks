@@ -538,6 +538,17 @@ const dict: Record<string, Entry> = {
   'Best outlook first': { ms: 'Prospek terbaik dahulu', zh: '前景最好的排在前面' },
   'Each skill gets the signals of the jobs that need it: the change in online job ads (DOSM, quarter on quarter) and how much generative AI could change those jobs (ILO). The top third of skill groups is “growing in value”, the bottom third “at risk”.': { ms: 'Setiap kemahiran mengambil isyarat pekerjaan yang memerlukannya: perubahan iklan kerja dalam talian (DOSM, suku ke suku) dan sejauh mana AI generatif boleh mengubah pekerjaan itu (ILO). Satu pertiga teratas kumpulan kemahiran ialah “semakin bernilai”, satu pertiga terbawah “berisiko”.', zh: '每项技能沿用需要它的职位的信号：网络招聘广告的变化（DOSM，按季度环比）以及生成式 AI 可能改变这些职位的程度（ILO）。排名前三分之一的技能组为“价值上升”，后三分之一为“有风险”。' },
   'Job ads fell for all nine jobs in this quarter, so the labels compare the jobs with each other.': { ms: 'Iklan kerja jatuh bagi kesemua sembilan pekerjaan pada suku ini, jadi label ini membandingkan pekerjaan antara satu sama lain.', zh: '本季度九个职位的招聘广告全部下降，因此这些标签是职位之间的相互比较。' },
+  'What do you want your work to contribute to?': { ms: 'Apakah yang anda mahu kerja anda menyumbang?', zh: '你希望你的工作为什么做出贡献？' },
+  'UN Sustainable Development Goals. Pick up to two. They only change your ranking if you switch them on in Your moves.': { ms: 'Matlamat Pembangunan Mampan PBB. Pilih sehingga dua. Ia hanya mengubah kedudukan anda jika anda menghidupkannya dalam Langkah anda.', zh: '联合国可持续发展目标。最多选两个。只有在“你的转岗方向”中打开后才会影响排名。' },
+  'This role is linked to SDG {n}': { ms: 'Peranan ini dikaitkan dengan SDG {n}', zh: '此职位与 SDG {n} 相关' },
+  'Some skills of this role are linked to SDG {n}': { ms: 'Sebahagian kemahiran peranan ini dikaitkan dengan SDG {n}', zh: '此职位的部分技能与 SDG {n} 相关' },
+  'via skills': { ms: 'melalui kemahiran', zh: '通过技能' },
+  'Clean energy': { ms: 'Tenaga bersih', zh: '清洁能源' },
+  'Decent work': { ms: 'Pekerjaan wajar', zh: '体面工作' },
+  'Innovation': { ms: 'Inovasi', zh: '创新' },
+  'Responsible consumption': { ms: 'Penggunaan bertanggungjawab', zh: '负责任消费' },
+  'Strong institutions': { ms: 'Institusi yang kukuh', zh: '强有力的机构' },
+  'Partnerships': { ms: 'Perkongsian', zh: '伙伴关系' },
 };
 
 const LangContext = createContext<Lang>('en');

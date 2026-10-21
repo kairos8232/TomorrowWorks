@@ -6,6 +6,7 @@ import { allSkills, roles, roleTitle, type Profile } from './data';
 import type { Skill } from './scoring';
 import { useT } from './i18n';
 import { interestData, interestTypes, type InterestType } from './interests';
+import { sdgData } from './sdg';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
@@ -88,6 +89,19 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
         return <button type="button" key={type} className={`interest-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full}
           onClick={() => update({ interests: on ? profile.interests.filter((x) => x !== type) : [...profile.interests, type] as InterestType[] })}>
           <strong>{t(interestData.types[type].plain)}</strong><small>{t(interestData.types[type].name)}</small>
+        </button>;
+      })}</div>
+    </section>
+
+    <section className="panel" aria-labelledby="contribute">
+      <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="count">{t('optional')}</span></h2>
+      <p className="note">{t('UN Sustainable Development Goals. Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
+      <div className="interest-grid goal-grid">{Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
+        const on = profile.goals.includes(g);
+        const full = !on && profile.goals.length >= 2;
+        return <button type="button" key={g} className={`interest-choice goal-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full}
+          onClick={() => update({ goals: on ? profile.goals.filter((x) => x !== g) : [...profile.goals, g] })}>
+          <strong><span className="sdg-square" style={{ background: info.colour }}>{g}</span>{t(info.short)}</strong>{info.short !== info.name && <small>{t(info.name)}</small>}
         </button>;
       })}</div>
     </section>

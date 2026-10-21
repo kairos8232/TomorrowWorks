@@ -11,7 +11,7 @@ import type { Skill } from './scoring';
 
 export type SdgLink = { target: string; reason: string };
 export const sdgData = sdgFile as {
-  goals: Record<string, { name: string; colour: string }>;
+  goals: Record<string, { name: string; short: string; colour: string }>;
   targets: Record<string, { goal: string; title: string }>;
   roles: Record<string, SdgLink[]>;
   skillRules: { target: string; pattern: string; reason: string }[];

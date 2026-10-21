@@ -30,6 +30,7 @@ export type Profile = {
   held: Set<string>;
   extra: Map<string, Skill>;       // skills found by search that are outside the role set
   interests: InterestType[];       // kinds of work the person enjoys (Holland RIASEC), optional, up to two
+  goals: string[];                 // SDG goal numbers the person wants their work to contribute to, optional, up to two
 };
 
 /**
@@ -38,7 +39,7 @@ export type Profile = {
  * fit the story; they are not real people or real CVs.
  */
 export type PersonaId = 'aina' | 'hakim';
-export type Persona = { id: PersonaId; name: string; group: string; description: string; summary: string; roleId: string | null; skillLabels: string[] | null; interests: InterestType[] };
+export type Persona = { id: PersonaId; name: string; group: string; description: string; summary: string; roleId: string | null; skillLabels: string[] | null; interests: InterestType[]; goals: string[] };
 export const personas: Persona[] = [
   {
     id: 'aina',
@@ -49,6 +50,7 @@ export const personas: Persona[] = [
     roleId: 'accounting-assistant',
     skillLabels: null, // all essential skills of her role
     interests: ['C', 'S'],
+    goals: ['13'],
   },
   {
     id: 'hakim',
@@ -61,6 +63,7 @@ export const personas: Persona[] = [
       'scientific research methodology', 'economics', 'microeconomics', 'macroeconomics', 'digital data processing', 'perform data cleansing',
       'query languages', 'use databases', 'data visualisation software', 'visual presentation techniques', 'business communication'],
     interests: ['I', 'C'],
+    goals: ['9'],
   },
 ];
 export const personaById = (id: PersonaId | null) => personas.find((p) => p.id === id) ?? null;
@@ -71,11 +74,11 @@ export function personaProfile(id: PersonaId): Profile {
   const held = p.skillLabels
     ? new Set(p.skillLabels.map((label) => allSkills.find((s) => s.label === label)!.uri))
     : new Set(roleById(p.roleId)!.essentialSkills.map((s) => s.uri));
-  return { persona: p.id, currentRoleId: p.roleId, held, extra: new Map(), interests: [...p.interests] };
+  return { persona: p.id, currentRoleId: p.roleId, held, extra: new Map(), interests: [...p.interests], goals: [...p.goals] };
 }
 export const ainaProfile = () => personaProfile('aina');
 
-export const emptyProfile = (): Profile => ({ persona: null, currentRoleId: null, held: new Set(), extra: new Map(), interests: [] });
+export const emptyProfile = (): Profile => ({ persona: null, currentRoleId: null, held: new Set(), extra: new Map(), interests: [], goals: [] });
 
 export const sourceLinks = { dosm: dosmQ2.source.url, ilo: iloFile.source.url, esco: 'https://esco.ec.europa.eu/' };
 

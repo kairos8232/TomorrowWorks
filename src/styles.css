@@ -633,3 +633,9 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .job-row-skills { gap: 6px; margin: 0; }
 @media (max-width: 900px) { .you-grid { grid-template-columns: 1fr; } }
 .job-title { display: block; } .job-title::first-letter { text-transform: uppercase; }
+/* SDG goals: picked in Your skills, one switch in Your moves, tags with colour square + short name. */
+.sdg-square { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 3px; border-radius: 4px; color: #ffffff; font-size: 11px; font-weight: 800; margin-right: 6px; }
+.goal-choice strong { display: flex; align-items: center; }
+.sdg-mini { display: inline-flex; gap: 3px; } .sdg-mini .sdg-square { margin-right: 0; }
+.sdg-tag { display: inline-flex; align-items: center; margin-left: 8px; font-style: normal; font-weight: 700; color: #1c2430; font-size: 13px; }
+.sdg-tag .sdg-square { min-width: 18px; height: 18px; margin-right: 4px; }
