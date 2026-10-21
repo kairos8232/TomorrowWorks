@@ -1,0 +1,27 @@
+{
+  "about": "Interest profile (Holland RIASEC) for each of the nine roles, matched by hand to the closest occupation by job content. Main source: job tag, Japan's Ministry of Health, Labour and Welfare occupation site, whose interest scores (1 to 5) come from JILPT's survey of Japanese workers. Fallback when job tag has no matching occupation: O*NET (US Department of Labor), which gives the top three interest letters. No Malaysian per-occupation interest data exists. 'match' is 'close' when the occupation is the same work, 'related' when it overlaps.",
+  "checkedAt": "2026-10-21",
+  "types": {
+    "R": { "name": "Realistic", "plain": "Hands-on, practical work" },
+    "I": { "name": "Investigative", "plain": "Solving problems and analysing" },
+    "A": { "name": "Artistic", "plain": "Creating and designing" },
+    "S": { "name": "Social", "plain": "Helping, teaching and advising people" },
+    "E": { "name": "Enterprising", "plain": "Leading, persuading and doing business" },
+    "C": { "name": "Conventional", "plain": "Working with data, details and rules" }
+  },
+  "sources": {
+    "jobtag": { "name": "job tag (職業情報提供サイト), Ministry of Health, Labour and Welfare, Japan; data: JILPT 職業情報データベース", "citation": "出典：job tag（厚生労働省職業情報提供サイト）", "terms": "https://shigoto.mhlw.go.jp/user/tos" },
+    "onet": { "name": "O*NET OnLine, US Department of Labor, Employment and Training Administration", "citation": "O*NET OnLine, CC BY 4.0", "terms": "https://www.onetcenter.org/license_db.html" }
+  },
+  "roles": {
+    "billing-clerk": { "source": "jobtag", "match": "close", "occupation": "経理事務 (accounting clerk)", "code": "038-03", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/430", "scores": { "R": 2.9, "I": 2.7, "A": 2.2, "S": 2.8, "E": 3.0, "C": 3.2 } },
+    "accounting-assistant": { "source": "jobtag", "match": "close", "occupation": "経理事務 (accounting clerk)", "code": "038-03", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/430", "scores": { "R": 2.9, "I": 2.7, "A": 2.2, "S": 2.8, "E": 3.0, "C": 3.2 } },
+    "bookkeeper": { "source": "jobtag", "match": "close", "occupation": "経理事務 (accounting clerk)", "code": "038-03", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/430", "scores": { "R": 2.9, "I": 2.7, "A": 2.2, "S": 2.8, "E": 3.0, "C": 3.2 } },
+    "accountant": { "source": "jobtag", "match": "close", "occupation": "公認会計士 (certified public accountant)", "code": "013-01", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/90", "scores": { "R": 2.9, "I": 3.8, "A": 2.3, "S": 4.2, "E": 3.8, "C": 3.5 } },
+    "financial-analyst": { "source": "jobtag", "match": "close", "occupation": "証券アナリスト (securities analyst)", "code": "013-99", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/457", "scores": { "R": 3.4, "I": 3.8, "A": 2.5, "S": 3.2, "E": 3.3, "C": 2.8 } },
+    "business-analyst": { "source": "jobtag", "match": "related", "occupation": "経営コンサルタント (management consultant)", "code": "013-99", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/81", "scores": { "R": 3.0, "I": 3.5, "A": 2.7, "S": 3.7, "E": 3.9, "C": 2.7 } },
+    "data-analyst": { "source": "jobtag", "match": "close", "occupation": "データサイエンティスト (data scientist)", "code": "011-99", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/323", "scores": { "R": 3.4, "I": 3.8, "A": 2.7, "S": 3.0, "E": 3.2, "C": 2.7 } },
+    "software-developer": { "source": "jobtag", "match": "close", "occupation": "システムエンジニア（受託開発） (systems engineer, software development)", "code": "009-01", "url": "https://shigoto.mhlw.go.jp/User/Occupation/Detail/312", "scores": { "R": 3.3, "I": 3.1, "A": 2.7, "S": 3.2, "E": 3.2, "C": 3.0 } },
+    "sustainability-manager": { "source": "onet", "match": "close", "occupation": "Chief Sustainability Officers", "code": "11-1011.03", "url": "https://www.onetonline.org/link/summary/11-1011.03", "letters": "EIC" }
+  }
+}

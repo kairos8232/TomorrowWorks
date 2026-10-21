@@ -4,7 +4,8 @@ import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ilo, personaById, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
 import { whatChanged } from './changes';
-import { recommendMoves, scenarios, type RoleScore, type ScenarioId } from './scoring';
+import { interestData, interestFit, topTypes, type InterestType } from './interests';
+import { recommendMoves, scenarios, type InterestFn, type RoleScore, type ScenarioId } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 
 const pct = (x: number) => `${x >= 0 ? '+' : ''}${(x * 100).toFixed(1)}%`;
@@ -38,7 +39,22 @@ function SkillList({ title, empty, children }: { title: string; empty: string; c
   </div>;
 }
 
-function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void }) {
+/** Which kinds of work this role involves (job tag / O*NET), and how that meets the person's picks. */
+function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[] }) {
+  const t = useT();
+  const p = interestData.roles[roleId];
+  if (!p) return null;
+  const tops = topTypes(roleId).map((x) => t(interestData.types[x].plain).toLowerCase());
+  const fit = interestFit(roleId, picks);
+  return <p className="interest-line note">
+    {t('Work interests: mostly {a} and {b}, then {c}.', { a: tops[0], b: tops[1], c: tops[2] })}{' '}
+    {fit !== null && <strong>{t('Your interest fit: {n}%.', { n: Math.round(fit * 100) })}</strong>}{' '}
+    {t('Source: {src}, {occ} ({match}).', { src: p.source === 'jobtag' ? 'job tag (MHLW Japan)' : 'O*NET (US DOL)', occ: p.occupation, match: p.match === 'close' ? t('close match') : t('related occupation') })}{' '}
+    <a href={p.url} target="_blank" rel="noreferrer">{t('Open')}</a>
+  </p>;
+}
+
+function LedgerRow({ result, rank, delta, onPlan, picks }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void; picks: InterestType[] }) {
   const t = useT();
   const { role, fit, demand, resilience } = result;
   const [open, setOpen] = useState(false);
@@ -46,7 +62,7 @@ function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: n
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
     <button type="button" className="ledger-line" onClick={() => setOpen(!open)} aria-expanded={open}>
       <span className="rank">{rank === null ? t('Now') : rank}</span>
-      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}</small></span>
+      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}</small></span>
       <Part value={part('F')} label={t('Skill fit')} area="f" />
       <Part value={part('D')} label={t('Demand')} area="d" />
       <Part value={part('R')} label={t('AI resilience')} area="r" />
@@ -67,6 +83,7 @@ function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: n
           {fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri}>{s.label}</span>)}
         </SkillList>
       </div>
+      <InterestLine roleId={role.id} picks={picks} />
       <div className="detail-actions">
         {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
         <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
@@ -79,13 +96,13 @@ const signed = (x: number | null) => (x === null ? 'no data' : `${x >= 0 ? '+' :
 const quarter = (q: string) => q.replace('-', ' ');
 
 /** Latest vs previous DOSM snapshot for the same skills and scenario: what moved, and why. */
-function WhatChanged({ profile, scenarioId }: { profile: Profile; scenarioId: ScenarioId }) {
+function WhatChanged({ profile, scenarioId, interest }: { profile: Profile; scenarioId: ScenarioId; interest: InterestFn | null }) {
   const t = useT();
   const [all, setAll] = useState(false);
   const changes = useMemo(() => {
-    const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable).moves;
+    const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable, interest).moves;
     return whatChanged(run('q1'), run('q2'));
-  }, [profile, scenarioId]);
+  }, [profile, scenarioId, interest]);
   const latest = quarter(snapshots.q2.source.latestQuarter);
   const earlier = quarter(snapshots.q1.source.latestQuarter);
   if (changes.length === 0) return <section className="what-changed"><h2>{t('What changed with {q} job-ad data', { q: latest })}</h2><p className="note">{t('Nothing moved compared with {q} data.', { q: earlier })}</p></section>;
@@ -110,17 +127,20 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const tx = useTx();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
+  const [useInterests, setUseInterests] = useState(false);
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
+  const picks = profile.interests;
+  const interest = useMemo<InterestFn | null>(() => (useInterests && picks.length > 0 ? (role) => interestFit(role.id, picks) : null), [useInterests, picks]);
   const { current, moves } = useMemo(
-    () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshot, ilo, scenario, transferable),
-    [profile, snapshot, scenario],
+    () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshot, ilo, scenario, transferable, interest),
+    [profile, snapshot, scenario, interest],
   );
 
   // Remember the previous scores so a data or scenario switch can show what changed.
   const previous = useRef<Map<string, number> | null>(null);
   const [deltas, setDeltas] = useState<Map<string, number>>(new Map());
-  const switchKey = `${snapshotId}|${scenarioId}`;
+  const switchKey = `${snapshotId}|${scenarioId}|${interest ? 'i' : ''}`;
   const lastSwitch = useRef(switchKey);
   useEffect(() => {
     const now = new Map([current, ...moves].filter((r): r is RoleScore => r !== null).map((r) => [r.role.id, r.score100]));
@@ -138,7 +158,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
     </div>
 
-    <WhatChanged profile={profile} scenarioId={scenarioId} />
+    <WhatChanged profile={profile} scenarioId={scenarioId} interest={interest} />
 
     <details className="how-to-read">
       <summary>{t('How to read this')}</summary>
@@ -147,6 +167,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         <div><dt>{t('Skill fit')}</dt><dd>{t('How many of the role’s essential skills you already have. A closely related skill counts half.')}</dd></div>
         <div><dt>{t('Demand')}</dt><dd>{t('Whether online job ads for this kind of work rose or fell last quarter in Malaysia (DOSM, Department of Statistics Malaysia).')}</dd></div>
         <div><dt>{t('AI resilience')}</dt><dd>{t('How much of the work generative AI is unlikely to change, from the ILO (International Labour Organization). Higher is safer.')}</dd></div>
+        <div><dt>{t('Interests')}</dt><dd>{t('Optional. When switched on, how well the work matches what you enjoy counts for one sixth of the score. Interest profiles of each kind of work come from job tag (Japan’s Ministry of Health, Labour and Welfare); no Malaysian data exists yet.')}</dd></div>
         <div><dt>{t('Now')}</dt><dd>{t('Your current job, for comparison.')}</dd></div>
       </dl>
     </details>
@@ -169,12 +190,16 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         <fieldset><legend>{t('If AI changes work')}</legend>
           {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
         </fieldset>
+        <fieldset><legend>{t('Your interests')}</legend>
+          <label className={`toggle${picks.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />
+            {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
+        </fieldset>
       </div>
-      <p className="note">{t(scenario.assumption)} {t('Try switching: the arrows show how each score moves.')}</p>
+      <p className="note">{t(scenario.assumption)} {interest ? `${t('Your interests count for one sixth of each score.')} ` : ''}{t('Try switching: the arrows show how each score moves.')}</p>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
-        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} />}
-        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} />)}
+        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} picks={picks} />}
+        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} picks={picks} />)}
       </ol>
       <p className="note">{t('Select a role to see the skills you have and the skills to build, then plan the move.')}</p>
     </section>

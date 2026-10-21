@@ -9,7 +9,8 @@ const scores = (p: Profile) => recommendMoves(roles, p.currentRoleId, p.held, sn
 
 describe('fairness: only skills decide the scores', () => {
   it('a profile has no field for age, gender, ethnicity, religion, name or location', () => {
-    expect(Object.keys(emptyProfile()).sort()).toEqual(['currentRoleId', 'extra', 'held', 'persona']);
+    // interests = kinds of work the person says they enjoy; only used when they switch it on
+    expect(Object.keys(emptyProfile()).sort()).toEqual(['currentRoleId', 'extra', 'held', 'interests', 'persona']);
   });
   it('the same skills give the same scores whoever holds them (named sample person vs anonymous visitor)', () => {
     const aina = personaProfile('aina');

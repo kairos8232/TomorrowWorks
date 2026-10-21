@@ -375,3 +375,14 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .viewer-switch li button:hover, .viewer-switch li button[aria-current] { background: #eef4ef; }
 .viewer-switch li small { display: block; font-size: 12px; color: #5d6873; }
 .viewer-switch > .note { font-size: 12px; margin: 6px 2px 0; }
+.interest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 12px; }
+.interest-choice { text-align: left; padding: 10px 12px; border: 1px solid #c5ccc6; border-radius: 8px; background: #ffffff; font: inherit; color: #1c2430; cursor: pointer; }
+.interest-choice small { display: block; color: #5d6873; font-size: 12px; }
+.interest-choice.on { border-color: #1e6b4f; background: #eef4ef; box-shadow: inset 0 0 0 1px #1e6b4f; }
+.interest-choice:disabled { opacity: .5; cursor: not-allowed; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #c5ccc6; border-radius: 6px; background: #ffffff; font-size: 15px; cursor: pointer; }
+.toggle.off { color: #5d6873; cursor: not-allowed; }
+.toggle input { accent-color: #1e6b4f; width: 16px; height: 16px; }
+.fits { display: inline-block; margin-left: 6px; font-style: normal; color: #1e6b4f; font-weight: 700; }
+.interest-line { margin: 0 0 0 64px; }
+@media (max-width: 640px) { .interest-line { margin-left: 0; } }

@@ -203,6 +203,15 @@ Why greedy: it is the simplest rule a person can check by hand ("this course bui
 
 Current coverage with Aina's skills (21 courses): bookkeeper 4 of 6 gaps, billing clerk 1 of 8, accountant 6 of 15, financial analyst 6 of 22, business analyst 8 of 26, data analyst 11 of 36, software developer 5 of 24, sustainability manager 10 of 48. Low coverage is shown honestly; more courses can be added to the JSON after checking their pages.
 
+## Interest fit (optional fourth part, added 21 Oct 2026)
+
+The brief's intake asks for "skills, experience and interests". Interests use Holland's RIASEC types (Realistic, Investigative, Artistic, Social, Enterprising, Conventional), which Malaysian career guidance and research also use (e.g. Hamzah, *Jurnal Psikologi Malaysia* 40(1), 2026: RIASEC inventory with 338 Malaysian undergraduates).
+
+- **Person:** picks up to two types on *Your skills* ("What kind of work do you enjoy?"). Self-reported, optional, not a personality test.
+- **Role profiles:** `data/interests/role-interests.json`, matched by hand by job content. Main source **job tag** (Japan, Ministry of Health, Labour and Welfare; data from JILPT's survey of Japanese workers, 1–5 scores; cite 「出典：job tag（厚生労働省職業情報提供サイト）」). Fallback **O\*NET** (US DOL, top-three letters) for sustainability manager, which has no job tag match. No Malaysian per-occupation interest data exists; this is a stated limit.
+- **Rule** (`src/interests.ts`): per pick, 1 if it is one of the role's two highest types (ties count), 0.5 if third, else 0; interest fit = average over picks.
+- **Score:** only when the person turns on *Include in ranking* on Your moves. Then `I` joins F, D, R with weight 0.2 before rescaling (so 1/6 of the score). Off by default, so the main score stays skills + market data. Tests: `src/interests.test.ts`.
+
 ## Skills radar (rising / declining skills)
 
 A skill's trend is derived, not invented: average `D` and average `R` across the roles in `roles.json` that list it. A skill shows as **rising** when both averages are above 0.5, **at risk** when both are below. Each skill links to the roles and source rows behind it.

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { allSkills, roles, roleTitle, type Profile } from './data';
 import type { Skill } from './scoring';
 import { useT } from './i18n';
+import { interestData, interestTypes, type InterestType } from './interests';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
@@ -74,6 +75,19 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
       {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
         : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
+    </section>
+
+    <section className="panel" aria-labelledby="enjoy">
+      <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
+      <p className="note">{t('Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
+      <div className="interest-grid">{interestTypes.map((type) => {
+        const on = profile.interests.includes(type);
+        const full = !on && profile.interests.length >= 2;
+        return <button type="button" key={type} className={`interest-choice${on ? ' on' : ''}`} aria-pressed={on} disabled={full}
+          onClick={() => update({ interests: on ? profile.interests.filter((x) => x !== type) : [...profile.interests, type] as InterestType[] })}>
+          <strong>{t(interestData.types[type].plain)}</strong><small>{t(interestData.types[type].name)}</small>
+        </button>;
+      })}</div>
     </section>
 
     <div className="step-actions">

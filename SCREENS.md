@@ -38,8 +38,13 @@ My career (guided, step bar on top)      The job market (browse any time)
 - Home: hero (*Start with my own skills*, *Try a sample person*) and *One tool, four kinds of user*: one card per demo viewer with the brief's group, a story, live top 3 moves (people) or team size (teams), and *View as …*.
 - *Edit skills* while viewing a sample person switches the viewer to Me.
 
+## 1. Your skills: interests
+
+- Optional panel *What kind of work do you enjoy?*: six RIASEC choices in plain words, up to two. Sample people have picks (Aina: data and details, helping people; Hakim: solving problems, data and details).
+
 ## 2. Your moves
 
+- **Your interests** switch beside the data and scenario controls: *Include in ranking (…)*, disabled until the person picks interests. When on, the note says interests count for one sixth, and arrows show the change. Each expanded row shows the role's top three work interests, the person's interest fit, and the job tag or O\*NET source with a link; rows with fit ≥ 75% show "fits your interests".
 - **What changed with <latest quarter> job-ad data** (top of the page): the same skills and scenario scored with the previous and latest DOSM snapshots; summary line (e.g. job ads fell in every group, n moves changed place), the top 3 changes (rank, score, and the occupation group's job-ad change in both quarters), *Show all*. Logic: `src/changes.ts`.
 - **Is this fair?** (collapsible, below the ledger controls' intro): Used / Never asked / Checked / Limits. The "Checked" claim is backed by `src/fairness.test.ts`.
 - **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; **How to read this** (Score, Skill fit, Demand, AI resilience, Now — in plain words, DOSM/ILO as abbreviations with full names); controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now"; ▲▼ after a switch; expandable rows (facts under columns, *You have* / *To build*, ESCO link).

@@ -5,6 +5,7 @@ import dosmQ1 from '../data/sources/dosm-jmi-2026-q1.json';
 import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
 import iloFile from '../data/sources/ilo-genai-exposure-2025.json';
 import transferableFile from '../data/derived/transferable-skills.json';
+import type { InterestType } from './interests';
 import type { DosmSnapshot, IloExposure, Role, Skill, TransferableSkills } from './scoring';
 
 export const roles = rolesFile.roles as Role[];
@@ -28,6 +29,7 @@ export type Profile = {
   currentRoleId: string | null;    // shown as "Now" for comparison; never ranked
   held: Set<string>;
   extra: Map<string, Skill>;       // skills found by search that are outside the role set
+  interests: InterestType[];       // kinds of work the person enjoys (Holland RIASEC), optional, up to two
 };
 
 /**
@@ -36,7 +38,7 @@ export type Profile = {
  * fit the story; they are not real people or real CVs.
  */
 export type PersonaId = 'aina' | 'hakim';
-export type Persona = { id: PersonaId; name: string; group: string; description: string; summary: string; roleId: string | null; skillLabels: string[] | null };
+export type Persona = { id: PersonaId; name: string; group: string; description: string; summary: string; roleId: string | null; skillLabels: string[] | null; interests: InterestType[] };
 export const personas: Persona[] = [
   {
     id: 'aina',
@@ -46,6 +48,7 @@ export const personas: Persona[] = [
     summary: 'Fictional accounting assistant, three years at a mid-sized firm in Shah Alam. Her days are invoices, bank reconciliations and month-end reports, the kind of routine work AI tools now speed up.',
     roleId: 'accounting-assistant',
     skillLabels: null, // all essential skills of her role
+    interests: ['C', 'S'],
   },
   {
     id: 'hakim',
@@ -57,6 +60,7 @@ export const personas: Persona[] = [
     skillLabels: ['statistics', 'apply statistical analysis techniques', 'quantitative analysis', 'empirical analysis', 'conduct quantitative research',
       'scientific research methodology', 'economics', 'microeconomics', 'macroeconomics', 'digital data processing', 'perform data cleansing',
       'query languages', 'use databases', 'data visualisation software', 'visual presentation techniques', 'business communication'],
+    interests: ['I', 'C'],
   },
 ];
 export const personaById = (id: PersonaId | null) => personas.find((p) => p.id === id) ?? null;
@@ -67,11 +71,11 @@ export function personaProfile(id: PersonaId): Profile {
   const held = p.skillLabels
     ? new Set(p.skillLabels.map((label) => allSkills.find((s) => s.label === label)!.uri))
     : new Set(roleById(p.roleId)!.essentialSkills.map((s) => s.uri));
-  return { persona: p.id, currentRoleId: p.roleId, held, extra: new Map() };
+  return { persona: p.id, currentRoleId: p.roleId, held, extra: new Map(), interests: [...p.interests] };
 }
 export const ainaProfile = () => personaProfile('aina');
 
-export const emptyProfile = (): Profile => ({ persona: null, currentRoleId: null, held: new Set(), extra: new Map() });
+export const emptyProfile = (): Profile => ({ persona: null, currentRoleId: null, held: new Set(), extra: new Map(), interests: [] });
 
 export const sourceLinks = { dosm: dosmQ2.source.url, ilo: iloFile.source.url, esco: 'https://esco.ec.europa.eu/' };
 
