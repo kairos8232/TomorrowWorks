@@ -514,6 +514,10 @@ const dict: Record<string, Entry> = {
   'Only my skills': { ms: 'Kemahiran saya sahaja', zh: '只看我的技能' },
   'How this is worked out': { ms: 'Bagaimana ini dikira', zh: '计算方法' },
   'The top third of groups is “growing in value”, the bottom third “at risk”.': { ms: 'Satu pertiga teratas kumpulan ialah “semakin bernilai”, satu pertiga terbawah “berisiko”.', zh: '排名前三分之一的组为“价值上升”，后三分之一为“有风险”。' },
+  // News tidy-up (added 21 Oct 2026)
+  'All topics': { ms: 'Semua topik', zh: '所有主题' },
+  'Pay and wages': { ms: 'Gaji dan upah', zh: '薪资' },
+  'Reported news, not job counts: it never changes your scores. {n} headlines from outlets in Malaysia found by {gdelt}, seen {from} to {to}, retrieved {date}. Topics come from topic words in each headline (English, Malay, Chinese); “Other” headlines matched the search only in the article text and are often off-topic.': { ms: 'Berita yang dilaporkan, bukan bilangan kerja: ia tidak mengubah skor anda. {n} tajuk daripada media di Malaysia yang ditemui oleh {gdelt}, dilihat dari {from} hingga {to}, diambil pada {date}. Topik berdasarkan kata topik dalam setiap tajuk (Inggeris, Melayu, Cina); tajuk “Lain-lain” hanya sepadan dalam teks artikel dan selalunya tidak berkaitan.', zh: '这些是新闻报道，不是职位数量，不会改变你的分数。{gdelt} 找到的 {n} 条马来西亚媒体标题，时间为 {from} 至 {to}，获取于 {date}。主题根据标题中的主题词判断（英文、马来文、中文）；“其他”标题只在正文中匹配搜索，常与主题无关。' },
 };
 
 const LangContext = createContext<Lang>('en');
