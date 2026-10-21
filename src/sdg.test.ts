@@ -1,36 +1,48 @@
 import { describe, expect, it } from 'vitest';
 import rolesFile from '../data/roles.json';
-import { goalFit, roleSdgs, sdgData, sdgTotals, skillSdgs } from './sdg';
+import { goalFit, reviewCounts, roleSdgs, sdgData, sdgReview, sdgTotals, skillSdgs, targetGoal, targetTitle } from './sdg';
 import { recommendMoves, scenarios } from './scoring';
 import { ilo, personaProfile, snapshots, transferable } from './data';
 import type { Role } from './scoring';
 
 const roles = rolesFile.roles as Role[];
-const skill = (label: string, green = false, digital = false) => ({ uri: label, label, type: 'skill/competence', green, digital });
 
-describe('SDG links', () => {
-  it('every role has at least one target with a reason, and every target exists', () => {
+describe('SDG links (RunPod matches checked by people)', () => {
+  const byId = (id: string) => roles.find((r) => r.id === id)!;
+  const sm = byId('sustainability-manager');
+  it('every role has at least one link, and every linked target has a goal and a title', () => {
     for (const r of roles) {
-      const links = roleSdgs(r.id);
+      const links = roleSdgs(r);
       expect(links.length, r.id).toBeGreaterThan(0);
-      for (const l of links) { expect(sdgData.targets[l.target], l.target).toBeDefined(); expect(l.reason.length).toBeGreaterThan(20); }
+      for (const l of links) { expect(sdgData.goals[targetGoal(l.target)], l.target).toBeDefined(); expect(targetTitle(l.target)).not.toBe(l.target); }
     }
   });
-  it('every rule target exists and every target has a goal', () => {
-    for (const rule of sdgData.skillRules) expect(sdgData.targets[rule.target], rule.target).toBeDefined();
-    for (const t of Object.values(sdgData.targets)) expect(sdgData.goals[t.goal]).toBeDefined();
+  it('skill links are matches at or above the threshold that were not rejected', () => {
+    for (const r of roles) for (const s of r.essentialSkills) for (const l of skillSdgs(s).filter((x) => x.source === 'ai')) {
+      expect(l.similarity!).toBeGreaterThanOrEqual(sdgReview.threshold);
+      expect(sdgReview.rejectTargets.map((x) => x.target)).not.toContain(l.target);
+    }
+    expect(reviewCounts.rejected).toBeGreaterThan(0);
+    expect(reviewCounts.rejected).toBeLessThan(reviewCounts.proposed);
   });
-  it('skills get specific links from their wording and ESCO flags', () => {
-    expect(skillSdgs(skill('advise on carbon emissions reduction', true)).map((l) => l.target)).toEqual(['13.2']);
-    expect(skillSdgs(skill('fraud detection')).map((l) => l.target)).toEqual(['16.5']);
-    expect(skillSdgs(skill('environmental policy', true)).map((l) => l.target)).toEqual(['12']);
-    expect(skillSdgs(skill('use databases', false, true)).map((l) => l.target)).toEqual(['4.4']);
-    expect(skillSdgs(skill('file documents'))).toEqual([]);
+  it('rejected matches never show (data migration is not migration of people)', () => {
+    const skill = roles.flatMap((r) => r.essentialSkills).find((s) => s.label === 'develop automated migration methods')!;
+    expect(skillSdgs(skill).map((l) => l.target)).not.toContain('10.7');
   });
-  it('sustainability manager essential skills reach climate, waste and reporting targets', () => {
-    const sm = roles.find((r) => r.id === 'sustainability-manager')!;
-    const targets = sdgTotals(sm.essentialSkills).map((t) => t.target);
-    for (const t of ['13.2', '12.5', '12.6']) expect(targets).toContain(t);
+  it('sustainability manager: RunPod links its skills to 12.6 (sustainable company practices) and 9.4', () => {
+    const ai = roleSdgs(sm).filter((l) => l.source === 'ai');
+    expect(ai.map((l) => l.target)).toEqual(['12.6', '9.4']);
+    expect(ai[0].skills!.length).toBeGreaterThan(5);
+    expect(sdgTotals(sm.essentialSkills).map((t) => t.target)).toContain('12.6');
+  });
+  it('roles without a strong match keep the team-written link, labelled as such', () => {
+    const links = roleSdgs(byId('billing-clerk'));
+    expect(links.map((l) => [l.target, l.source])).toEqual([['8.5', 'team']]);
+    expect(links[0].reason!.length).toBeGreaterThan(20);
+  });
+  it('ESCO digital skills also link to 4.4', () => {
+    const s = { uri: 'x', label: 'use databases', type: 'skill/competence', green: false, digital: true };
+    expect(skillSdgs(s).map((l) => [l.target, l.source])).toEqual([['4.4', 'esco']]);
   });
 });
 

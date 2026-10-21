@@ -566,6 +566,21 @@ const dict: Record<string, Entry> = {
   'HRD Corp\'s e-learning platform is open to all individuals, with more than 1,000 free courses (HRD Corp FAQ). Not matched to these skills yet.': { ms: 'Platform e-pembelajaran HRD Corp terbuka kepada semua individu, dengan lebih 1,000 kursus percuma (Soalan Lazim HRD Corp). Belum dipadankan dengan kemahiran ini.', zh: 'HRD Corp 的在线学习平台向所有人开放，提供 1,000 多门免费课程（HRD Corp 常见问题）。尚未与这些技能匹配。' },
   'HRD Corp Claimable Courses': { ms: 'Kursus Boleh Tuntut HRD Corp', zh: 'HRD Corp 可申领课程' },
   'HRD Corp e-LATiH': { ms: 'HRD Corp e-LATiH', zh: 'HRD Corp e-LATiH' },
+  '{n} of its {m} essential skills match this target': { ms: '{n} daripada {m} kemahiran teras padan dengan sasaran ini', zh: '其 {m} 项核心技能中有 {n} 项与此目标相符' },
+  'and {n} more': { ms: 'dan {n} lagi', zh: '以及另外 {n} 项' },
+  'AI match, checked': { ms: 'Padanan AI, disemak', zh: 'AI 匹配，已核查' },
+  'Written by the team': { ms: 'Ditulis oleh pasukan', zh: '由团队撰写' },
+  'Skill links: RunPod ({model}) compared each ESCO skill with the official UN target texts; matches with similarity of at least {th} were checked by people, who removed {r} of {p}.': { ms: 'Pautan kemahiran: RunPod ({model}) membandingkan setiap kemahiran ESCO dengan teks rasmi sasaran PBB; padanan dengan keserupaan sekurang-kurangnya {th} disemak oleh manusia, yang membuang {r} daripada {p}.', zh: '技能关联：RunPod（{model}）将每项 ESCO 技能与联合国官方目标文本比较；相似度至少 {th} 的匹配由人工核查，删除了 {p} 项中的 {r} 项。' },
+  'Role links come from those matches, or are written by the team where none fit. They show a connection, not a measured impact.': { ms: 'Pautan peranan datang daripada padanan tersebut, atau ditulis oleh pasukan jika tiada yang sesuai. Ia menunjukkan kaitan, bukan impak yang diukur.', zh: '职位关联来自这些匹配；若无合适匹配，则由团队撰写。它们表示关联，而非经测量的影响。' },
+  'UN target list': { ms: 'Senarai sasaran PBB', zh: '联合国目标清单' },
+  'Gap skills you would build for it: {skills}': { ms: 'Kemahiran yang akan anda bina untuknya: {skills}', zh: '你将为此培养的缺口技能：{skills}' },
+  'Policies that support productive activities, decent jobs and small businesses': { ms: 'Dasar yang menyokong aktiviti produktif, pekerjaan wajar dan perniagaan kecil', zh: '支持生产性活动、体面工作和小企业的政策' },
+  'Use resources more efficiently in consumption and production': { ms: 'Gunakan sumber dengan lebih cekap dalam penggunaan dan pengeluaran', zh: '在消费和生产中更高效地利用资源' },
+  'More access for small enterprises to financial services': { ms: 'Lebih banyak akses perkhidmatan kewangan untuk perusahaan kecil', zh: '让小企业更多获得金融服务' },
+  'Upgrade industries to be sustainable and resource-efficient': { ms: 'Naik taraf industri supaya mampan dan cekap sumber', zh: '升级产业，使其可持续并高效利用资源' },
+  'Learners gain the knowledge and skills to promote sustainable development': { ms: 'Pelajar memperoleh pengetahuan dan kemahiran untuk menggalakkan pembangunan mampan', zh: '学习者获得促进可持续发展的知识和技能' },
+  'Measure progress on sustainable development': { ms: 'Mengukur kemajuan pembangunan mampan', zh: '衡量可持续发展的进展' },
+  'You would build {n} of them': { ms: 'Anda akan membina {n} daripadanya', zh: '你将培养其中 {n} 项' },
 };
 
 const LangContext = createContext<Lang>('en');

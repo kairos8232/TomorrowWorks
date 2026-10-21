@@ -4,6 +4,13 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (22:45–23:20 MYT) — Plan time, HRD Corp, SDG links by RunPod
+
+- **Plan:** total stated time of checked courses; HRD Corp note with official sources (Claimable Courses scheme via employers; e-LATiH free courses), none of our courses claimed as claimable.
+- **SDG:** skill links now come from RunPod (bge-m3) similarity between ESCO skills and the official UN target texts (UNSD SDG API), threshold 0.60 from the spot-check, 34 of 73 matches rejected by a human check with reasons; role links from those matches plus team-written links, each labelled. Open: team to confirm the rejections in `data/sdg/sdg-review.json`.
+
+---
+
 ## 21 Oct 2026 (22:00–22:40 MYT) — Simpler radar; SDG goals woven into the journey
 
 - **Radar:** your own skills first in three bands with one next step each; the nine jobs as rows, skills behind a button (feedback: "too much pill-bar").

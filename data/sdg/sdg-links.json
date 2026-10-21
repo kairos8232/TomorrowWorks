@@ -1,64 +1,200 @@
 {
-  "about": "SDG links for the nine roles and their ESCO skills. Roles: one or two targets each, with the reason tied to the role's own ESCO essential skills. Skills: rules in src/sdg.ts using ESCO's green and digital flags and the skill's wording; every skill also counts towards target 4.4 (relevant skills for decent jobs). Target wording is shortened from the UN 2030 Agenda. Drafted 21 Oct 2026; review status in 'review'.",
+  "about": "SDG goals and short target titles (shortened from the UN 2030 Agenda) used on screen, plus role links written by the team. Skill-to-target links come from RunPod matches (data/derived/sdg-skill-matches.json) checked in data/sdg/sdg-review.json; rule in src/sdg.ts.",
   "review": "Drafted with Claude on 21 Oct 2026 from the ESCO skills listed; to be reviewed by the team before submission.",
   "goals": {
-    "4": { "name": "Quality education", "short": "Quality education", "colour": "#C5192D" },
-    "7": { "name": "Affordable and clean energy", "short": "Clean energy", "colour": "#FCC30B" },
-    "8": { "name": "Decent work and economic growth", "short": "Decent work", "colour": "#A21942" },
-    "9": { "name": "Industry, innovation and infrastructure", "short": "Innovation", "colour": "#FD6925" },
-    "12": { "name": "Responsible consumption and production", "short": "Responsible consumption", "colour": "#BF8B2E" },
-    "13": { "name": "Climate action", "short": "Climate action", "colour": "#3F7E44" },
-    "16": { "name": "Peace, justice and strong institutions", "short": "Strong institutions", "colour": "#00689D" },
-    "17": { "name": "Partnerships for the goals", "short": "Partnerships", "colour": "#19486A" }
+    "4": {
+      "name": "Quality education",
+      "short": "Quality education",
+      "colour": "#C5192D"
+    },
+    "7": {
+      "name": "Affordable and clean energy",
+      "short": "Clean energy",
+      "colour": "#FCC30B"
+    },
+    "8": {
+      "name": "Decent work and economic growth",
+      "short": "Decent work",
+      "colour": "#A21942"
+    },
+    "9": {
+      "name": "Industry, innovation and infrastructure",
+      "short": "Innovation",
+      "colour": "#FD6925"
+    },
+    "12": {
+      "name": "Responsible consumption and production",
+      "short": "Responsible consumption",
+      "colour": "#BF8B2E"
+    },
+    "13": {
+      "name": "Climate action",
+      "short": "Climate action",
+      "colour": "#3F7E44"
+    },
+    "16": {
+      "name": "Peace, justice and strong institutions",
+      "short": "Strong institutions",
+      "colour": "#00689D"
+    },
+    "17": {
+      "name": "Partnerships for the goals",
+      "short": "Partnerships",
+      "colour": "#19486A"
+    }
   },
   "targets": {
-    "4.4": { "goal": "4", "title": "More youth and adults with relevant skills, including technical and ICT skills, for decent jobs" },
-    "7.2": { "goal": "7", "title": "Increase the share of renewable energy" },
-    "7.3": { "goal": "7", "title": "Double the rate of improvement in energy efficiency" },
-    "8.2": { "goal": "8", "title": "Higher productivity through technological upgrading and innovation" },
-    "8.5": { "goal": "8", "title": "Full and productive employment and decent work for all" },
-    "8.10": { "goal": "8", "title": "Expand access to banking, insurance and financial services" },
-    "9.5": { "goal": "9", "title": "Enhance research and upgrade technological capabilities" },
-    "12": { "goal": "12", "title": "Sustainable consumption and production (ESCO green skill)" },
-    "12.5": { "goal": "12", "title": "Reduce waste through prevention, reduction, recycling and reuse" },
-    "12.6": { "goal": "12", "title": "Companies adopt sustainable practices and report on sustainability" },
-    "12.8": { "goal": "12", "title": "People have the information and awareness for sustainable development" },
-    "13.2": { "goal": "13", "title": "Integrate climate change measures into policies and planning" },
-    "16.5": { "goal": "16", "title": "Substantially reduce corruption and bribery" },
-    "16.6": { "goal": "16", "title": "Effective, accountable and transparent institutions" },
-    "17.1": { "goal": "17", "title": "Strengthen domestic resource mobilisation, including tax collection" },
-    "17.18": { "goal": "17", "title": "More high-quality, timely and reliable data" }
+    "4.4": {
+      "goal": "4",
+      "title": "More youth and adults with relevant skills, including technical and ICT skills, for decent jobs"
+    },
+    "7.2": {
+      "goal": "7",
+      "title": "Increase the share of renewable energy"
+    },
+    "7.3": {
+      "goal": "7",
+      "title": "Double the rate of improvement in energy efficiency"
+    },
+    "8.2": {
+      "goal": "8",
+      "title": "Higher productivity through technological upgrading and innovation"
+    },
+    "8.5": {
+      "goal": "8",
+      "title": "Full and productive employment and decent work for all"
+    },
+    "8.10": {
+      "goal": "8",
+      "title": "Expand access to banking, insurance and financial services"
+    },
+    "9.5": {
+      "goal": "9",
+      "title": "Enhance research and upgrade technological capabilities"
+    },
+    "12.5": {
+      "goal": "12",
+      "title": "Reduce waste through prevention, reduction, recycling and reuse"
+    },
+    "12.6": {
+      "goal": "12",
+      "title": "Companies adopt sustainable practices and report on sustainability"
+    },
+    "12.8": {
+      "goal": "12",
+      "title": "People have the information and awareness for sustainable development"
+    },
+    "13.2": {
+      "goal": "13",
+      "title": "Integrate climate change measures into policies and planning"
+    },
+    "16.5": {
+      "goal": "16",
+      "title": "Substantially reduce corruption and bribery"
+    },
+    "16.6": {
+      "goal": "16",
+      "title": "Effective, accountable and transparent institutions"
+    },
+    "17.1": {
+      "goal": "17",
+      "title": "Strengthen domestic resource mobilisation, including tax collection"
+    },
+    "17.18": {
+      "goal": "17",
+      "title": "More high-quality, timely and reliable data"
+    },
+    "8.3": {
+      "goal": "8",
+      "title": "Policies that support productive activities, decent jobs and small businesses"
+    },
+    "8.4": {
+      "goal": "8",
+      "title": "Use resources more efficiently in consumption and production"
+    },
+    "9.3": {
+      "goal": "9",
+      "title": "More access for small enterprises to financial services"
+    },
+    "9.4": {
+      "goal": "9",
+      "title": "Upgrade industries to be sustainable and resource-efficient"
+    },
+    "4.7": {
+      "goal": "4",
+      "title": "Learners gain the knowledge and skills to promote sustainable development"
+    },
+    "17.19": {
+      "goal": "17",
+      "title": "Measure progress on sustainable development"
+    }
   },
   "roles": {
-    "billing-clerk": [{ "target": "8.5", "reason": "Clerical accounting work is among the most exposed to generative AI in the ILO index. Helping people move from it into more resilient work is what full and productive employment asks for." }],
-    "accounting-assistant": [{ "target": "8.5", "reason": "Clerical accounting work is among the most exposed to generative AI in the ILO index. Helping people move from it into more resilient work is what full and productive employment asks for." }],
-    "bookkeeper": [{ "target": "8.5", "reason": "Routine bookkeeping is highly exposed to generative AI. Keeping bookkeepers in productive work as tasks change supports decent work for all." }],
+    "billing-clerk": [
+      {
+        "target": "8.5",
+        "reason": "Clerical accounting work is among the most exposed to generative AI in the ILO index. Helping people move from it into more resilient work is what full and productive employment asks for."
+      }
+    ],
+    "accounting-assistant": [
+      {
+        "target": "8.5",
+        "reason": "Clerical accounting work is among the most exposed to generative AI in the ILO index. Helping people move from it into more resilient work is what full and productive employment asks for."
+      }
+    ],
+    "bookkeeper": [
+      {
+        "target": "8.5",
+        "reason": "Routine bookkeeping is highly exposed to generative AI. Keeping bookkeepers in productive work as tasks change supports decent work for all."
+      }
+    ],
     "accountant": [
-      { "target": "16.6", "reason": "Its essential skills include ensuring compliance with accounting conventions and explaining accounting records: reliable accounts make organisations accountable and transparent." },
-      { "target": "16.5", "reason": "Fraud detection is one of its essential skills." }
+      {
+        "target": "16.6",
+        "reason": "Its essential skills include ensuring compliance with accounting conventions and explaining accounting records: reliable accounts make organisations accountable and transparent."
+      },
+      {
+        "target": "16.5",
+        "reason": "Fraud detection is one of its essential skills."
+      }
     ],
-    "financial-analyst": [{ "target": "8.10", "reason": "Its essential skills include advising on financial matters and offering financial services." }],
-    "business-analyst": [{ "target": "8.2", "reason": "Its essential skills include advising on efficiency improvements and analysing business plans: raising productivity through better processes." }],
+    "financial-analyst": [
+      {
+        "target": "8.10",
+        "reason": "Its essential skills include advising on financial matters and offering financial services."
+      }
+    ],
+    "business-analyst": [
+      {
+        "target": "8.2",
+        "reason": "Its essential skills include advising on efficiency improvements and analysing business plans: raising productivity through better processes."
+      }
+    ],
     "data-analyst": [
-      { "target": "17.18", "reason": "Its essential skills include defining data quality criteria and implementing data quality processes." },
-      { "target": "9.5", "reason": "Analysing big data and data mining build an organisation’s research and technological capability." }
+      {
+        "target": "17.18",
+        "reason": "Its essential skills include defining data quality criteria and implementing data quality processes."
+      },
+      {
+        "target": "9.5",
+        "reason": "Analysing big data and data mining build an organisation’s research and technological capability."
+      }
     ],
-    "software-developer": [{ "target": "9.5", "reason": "Building and debugging software upgrades the technological capabilities of the organisations it serves." }],
+    "software-developer": [
+      {
+        "target": "9.5",
+        "reason": "Building and debugging software upgrades the technological capabilities of the organisations it serves."
+      }
+    ],
     "sustainability-manager": [
-      { "target": "12.6", "reason": "It leads the sustainability reporting process and measures the company’s sustainability performance (essential skills)." },
-      { "target": "13.2", "reason": "It advises on carbon emissions reduction and assesses climate change impact (essential skills)." }
+      {
+        "target": "12.6",
+        "reason": "It leads the sustainability reporting process and measures the company’s sustainability performance (essential skills)."
+      },
+      {
+        "target": "13.2",
+        "reason": "It advises on carbon emissions reduction and assesses climate change impact (essential skills)."
+      }
     ]
-  },
-  "skillRules": [
-    { "target": "7.2", "pattern": "alternative energy", "reason": "Knowledge of renewable and alternative energy." },
-    { "target": "7.3", "pattern": "energy efficiency|energy conservation|green building|green computing|resource-efficient", "reason": "Using less energy for the same work." },
-    { "target": "13.2", "pattern": "carbon|emission|climate", "reason": "Works directly on emissions or climate impact." },
-    { "target": "12.5", "pattern": "waste|recycl|circular|life cycle|sustainable materials|sustainable products", "reason": "Reduces or reuses waste and materials." },
-    { "target": "12.6", "pattern": "sustainability report|corporate social|corporate sustainability|sustainability performance|sustainable management|sustainability consulting|sustainability solutions", "reason": "Helps a company adopt and report sustainable practices." },
-    { "target": "12.8", "pattern": "environmental awareness|training in environmental", "reason": "Raises awareness of sustainable development." },
-    { "target": "16.5", "pattern": "fraud", "reason": "Detecting fraud reduces corruption." },
-    { "target": "16.6", "pattern": "statutory|accounting conventions|explain accounting records", "reason": "Supports accountable, transparent organisations." },
-    { "target": "17.1", "pattern": "tax", "reason": "Correct tax work supports tax collection." },
-    { "target": "17.18", "pattern": "data quality|statistic", "reason": "Produces high-quality, reliable data." }
-  ]
+  }
 }

@@ -685,3 +685,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .lack-group h3 span { font-weight: 400; color: #5d6873; font-size: 13px; margin-left: 6px; }
 .lack-group .tag-row { margin: 0; gap: 6px; }
 .plan-total { margin: 10px 0 0; padding: 8px 12px; background: #eef4ef; border-radius: 8px; font-size: 14px; color: #1c2430; }
+.sdg-source { display: inline-block; margin-left: 4px; padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: 700; vertical-align: 1px; }
+.sdg-source.ai { background: #eef0f3; color: #3a4450; border: 1px dashed #8a96a3; }
+.sdg-source.team { background: #f3efe6; color: #5d4a1f; }
+.sdg-summary-note a { color: #1e6b4f; }

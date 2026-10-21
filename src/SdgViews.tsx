@@ -1,61 +1,67 @@
 // SDG display pieces shared by Your moves, Your plan and Team view.
-// Data and rules: src/sdg.ts and data/sdg/sdg-links.json.
+// Rule: src/sdg.ts (RunPod matches checked by people, plus links written by the team).
+import { roleById } from './data';
 import { useT } from './i18n';
-import { goalUrl, roleSdgs, sdgData, sdgTotals } from './sdg';
+import { goalUrl, reviewCounts, roleSdgs, sdgData, sdgMatches, sdgReview, sdgTotals, targetGoal, targetTitle, type SdgLink } from './sdg';
 import type { Skill } from './scoring';
 
 export function SdgBadge({ target, short = false }: { target: string; short?: boolean }) {
   const t = useT();
-  const info = sdgData.targets[target];
-  const goal = sdgData.goals[info.goal];
-  return <a className="sdg-badge" style={{ borderColor: goal.colour }} href={goalUrl(info.goal)} target="_blank" rel="noreferrer" title={`${t(goal.name)}: ${t(info.title)}`}>
+  const goal = sdgData.goals[targetGoal(target)];
+  return <a className="sdg-badge" style={{ borderColor: goal.colour }} href={goalUrl(targetGoal(target))} target="_blank" rel="noreferrer" title={`${t(goal.name)}: ${t(targetTitle(target))}`}>
     {short || !target.includes('.') ? t('SDG {n}', { n: target }) : t('SDG target {n}', { n: target })}
   </a>;
 }
 
-/** Role SDG links with their reasons (expanded row in Your moves). */
+/** Why a role links to a target: how many of its skills RunPod matched, or the team's reason. */
+function LinkWhy({ link, total }: { link: SdgLink; total: number }) {
+  const t = useT();
+  if (link.source === 'ai') {
+    const names = link.skills!.map((s) => s.label);
+    return <p>{t('{n} of its {m} essential skills match this target', { n: names.length, m: total })}: {names.slice(0, 4).join(', ')}{names.length > 4 ? ` ${t('and {n} more', { n: names.length - 4 })}` : ''}. <span className="sdg-source ai">{t('AI match, checked')}</span></p>;
+  }
+  return <p>{t(link.reason ?? '')} <span className="sdg-source team">{t('Written by the team')}</span></p>;
+}
+
+/** Role SDG links with their evidence (role view in Your moves). */
 export function RoleSdgLine({ roleId }: { roleId: string }) {
   const t = useT();
+  const role = roleById(roleId)!;
   return <div className="sdg-line">
-    {roleSdgs(roleId).map((l) => <p key={l.target}><SdgBadge target={l.target} /> <strong>{t(sdgData.targets[l.target].title)}.</strong> {t(l.reason)}</p>)}
+    {roleSdgs(role).map((l) => <div key={l.target}><p><SdgBadge target={l.target} /> <strong>{t(targetTitle(l.target))}.</strong></p><LinkWhy link={l} total={role.essentialSkills.length} /></div>)}
   </div>;
 }
 
-/** "How this move connects to the SDGs": the role's targets and the targets of the skills to build. */
-export function SdgContribution({ roleId, skills, heading, compact = false }: { roleId: string | null; skills: Skill[]; heading: string; compact?: boolean }) {
+/** How the links were made, in one line, with the counts from the human check. */
+export function SdgMethodNote() {
+  const t = useT();
+  return <p className="note sdg-summary-note">{t('Skill links: RunPod ({model}) compared each ESCO skill with the official UN target texts; matches with similarity of at least {th} were checked by people, who removed {r} of {p}.', { model: sdgMatches.method.model, th: sdgReview.threshold.toFixed(2), r: reviewCounts.rejected, p: reviewCounts.proposed })} {t('Role links come from those matches, or are written by the team where none fit. They show a connection, not a measured impact.')} <a href={sdgMatches.method.targets.url} target="_blank" rel="noreferrer">{t('UN target list')}</a></p>;
+}
+
+/** "This move and the SDGs": the role's targets and the targets of the skills to build. */
+export function SdgContribution({ roleId, skills, heading }: { roleId: string | null; skills: Skill[]; heading: string; compact?: boolean }) {
   const t = useT();
   const totals = sdgTotals(skills);
-  const roleLinks = roleId ? roleSdgs(roleId) : [];
-  if (compact) {
-    const targets = [...new Set([...roleLinks.map((link) => link.target), ...totals.map((total) => total.target), ...(skills.length > 0 ? ['4.4'] : [])])];
-    const gapCount = new Set(skills.map((skill) => skill.uri)).size;
-    return <section className="panel sdg-panel" aria-label={heading}>
-      <h2>{heading}</h2>
-      <ul className="sdg-summary-list">{targets.map((target) => {
-        const roleLink = roleLinks.find((link) => link.target === target);
-        const skillCount = totals.find((total) => total.target === target)?.skills.length ?? 0;
-        return <li key={target}>
-          <div className="sdg-summary-heading"><SdgBadge target={target} short /><strong>{t(sdgData.targets[target].title)}</strong></div>
-          {roleLink && <p>{t(roleLink.reason)}</p>}
-          {target === '4.4' ? <>
-            <small>{t('Broad skills link: all {n} gap skills', { n: gapCount })}</small>
-            {skillCount > 0 && <small>{t('Specific ICT link: {n} ESCO digital skills', { n: skillCount })}</small>}
-          </> : skillCount > 0 && <small>{t('Linked gap skills: {n}', { n: skillCount })}</small>}
-        </li>;
-      })}</ul>
-      <p className="note sdg-summary-note">{t('Role links are written by hand; skill links use ESCO wording and flags. These are connections, not measured impact.')}</p>
-    </section>;
-  }
+  const role = roleId ? roleById(roleId) : null;
+  const roleLinks = role ? roleSdgs(role) : [];
+  const targets = [...new Set([...roleLinks.map((link) => link.target), ...totals.map((total) => total.target), ...(skills.length > 0 ? ['4.4'] : [])])];
+  const gapCount = new Set(skills.map((skill) => skill.uri)).size;
   return <section className="panel sdg-panel" aria-label={heading}>
     <h2>{heading}</h2>
-    {roleId && <RoleSdgLine roleId={roleId} />}
-    {totals.length > 0 && <>
-      <h3>{t('Skills you would build')}</h3>
-      <ul className="sdg-totals">{totals.map(({ target, skills: list }) => <li key={target}>
-        <SdgBadge target={target} /> <span>{t(sdgData.targets[target].title)}</span>
-        <small>{list.length === 1 ? t('1 skill') : t('{n} skills', { n: list.length })}: {list.map((s) => s.label).join(', ')}</small>
-      </li>)}</ul>
-    </>}
-    <p className="note">{t('Every skill you build also counts towards SDG target 4.4: relevant skills for decent jobs.')} {t('Role links are written by hand; skill links follow fixed rules on ESCO skill wording and ESCO’s green and digital flags. They show a connection, not a measured impact.')}</p>
+    <ul className="sdg-summary-list">{targets.map((target) => {
+      const roleLink = roleLinks.find((link) => link.target === target);
+      const linked = totals.find((total) => total.target === target)?.skills ?? [];
+      return <li key={target}>
+        <div className="sdg-summary-heading"><SdgBadge target={target} short /><strong>{t(targetTitle(target))}</strong></div>
+        {roleLink && role && <LinkWhy link={roleLink} total={role.essentialSkills.length} />}
+        {target === '4.4' ? <>
+          <small>{t('Broad skills link: all {n} gap skills', { n: gapCount })}</small>
+          {linked.length > 0 && <small>{t('Specific ICT link: {n} ESCO digital skills', { n: linked.length })}</small>}
+        </> : linked.length > 0 && <small>{roleLink?.source === 'ai'
+          ? t('You would build {n} of them', { n: linked.length })
+          : t('Gap skills you would build for it: {skills}', { skills: linked.length > 4 ? `${linked.slice(0, 4).map((s) => s.label).join(', ')} ${t('and {n} more', { n: linked.length - 4 })}` : linked.map((s) => s.label).join(', ') })}</small>}
+      </li>;
+    })}</ul>
+    <SdgMethodNote />
   </section>;
 }
