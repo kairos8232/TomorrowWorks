@@ -29,7 +29,7 @@ My career (guided, step bar on top)      The job market (browse any time)
 
 ## Language (sidebar)
 
-- English / Bahasa Malaysia / 中文 select under the brand, remembered in the browser (localStorage, with fallback). Covers navigation, page titles, Home, step headings, buttons, controls and table headers (`src/i18n.tsx`; drafted with Claude, **team must review the Malay and Chinese**). ESCO skill labels and role titles stay in English (ESCO has no Malay or Chinese version). Longer sentences with numbers are still English.
+- English / Bahasa Malaysia / 中文 select under the brand, remembered in the browser (localStorage, with fallback). Covers navigation, page titles, Home, step headings, buttons, controls and table headers (`src/i18n.tsx`; drafted with Claude, **team must review the Malay and Chinese**). ESCO skill labels and role titles stay in English (ESCO has no Malay or Chinese version). All screen text is translated except provider course titles, ESCO skill and role names, data-source names and the ESCO licence sentence (required in English); the footer says so in BM and Chinese.
 
 ## View as (sidebar) and Home: one tool, four kinds of user
 

@@ -12,7 +12,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   const t = useT();
   const [description, setDescription] = useState('');
   const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
-  const [search, setSearch] = useState<{ busy: boolean; message: string }>({ busy: false, message: '' });
+  const [search, setSearch] = useState<{ busy: boolean; message: string; vars: Record<string, string> }>({ busy: false, message: '', vars: {} });
   const [query, setQuery] = useState('');
 
   const update = (patch: Partial<Profile>) => setProfile({ ...profile, ...patch, persona: null });
@@ -27,16 +27,16 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   async function findSkills(e: React.FormEvent) {
     e.preventDefault();
     setFound([]); // clear the previous results so they are not mistaken for this search
-    setSearch({ busy: true, message: 'Searching. The first search after a pause can take up to a minute.' });
+    setSearch({ busy: true, message: 'Searching. The first search after a pause can take up to a minute.', vars: {} });
     try {
       const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: description }) });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error ?? 'Skill search is unavailable right now. Pick skills from the list below instead.');
       setFound(body.results);
-      setSearch({ busy: false, message: body.results.length ? `Closest ESCO skills for “${description.trim()}”. Add the ones that are true for you.` : 'No close ESCO skills found. Try describing a task you do often.' });
+      setSearch({ busy: false, message: body.results.length ? 'Closest ESCO skills for “{text}”. Add the ones that are true for you.' : 'No close ESCO skills found. Try describing a task you do often.', vars: { text: description.trim() } });
     } catch (err) {
       setFound([]);
-      setSearch({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Skill search is unavailable right now. Pick skills from the list below instead.' });
+      setSearch({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Skill search is unavailable right now. Pick skills from the list below instead.', vars: {} });
     }
   }
 
@@ -61,19 +61,19 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       <h2>{t('Describe your work')}</h2>
       <p className="note">{t('In English, Bahasa Malaysia or Chinese. An AI model finds the closest skills in ESCO, the European Commission’s list of 13,960 skills. It only finds existing skills; you decide which are true.')}</p>
       <form className="skill-search" onSubmit={findSkills}>
-        <textarea aria-label="Describe your work" value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder="e.g. I reconcile bank statements and prepare month-end reports" />
+        <textarea aria-label={t('Describe your work')} value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder={t('e.g. I reconcile bank statements and prepare month-end reports')} />
         <button type="submit" className="primary-button" disabled={search.busy || !description.trim()}>{search.busy ? t('Searching…') : t('Find my skills')}</button>
       </form>
-      {search.message && <p className="note" aria-live="polite">{search.message}</p>}
-      {found.length > 0 && <div className="tag-row">{found.map((s) => pick(s, <small>match {Math.round(s.similarity * 100)}%</small>))}</div>}
-      <label className="list-search">{t('Or search the skill list')}<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try budget, data or sustainability" /></label>
+      {search.message && <p className="note" aria-live="polite">{t(search.message, search.vars)}</p>}
+      {found.length > 0 && <div className="tag-row">{found.map((s) => pick(s, <small>{t('match {n}%', { n: Math.round(s.similarity * 100) })}</small>))}</div>}
+      <label className="list-search">{t('Or search the skill list')}<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t('Try budget, data or sustainability')} /></label>
       {listHits.length > 0 && <div className="tag-row">{listHits.map((s) => pick(s))}</div>}
     </section>
 
     <section className="panel">
       <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
       {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
-        : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={`Remove ${s.label}`}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
+        : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
     </section>
 
     <div className="step-actions">

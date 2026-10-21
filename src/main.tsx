@@ -79,7 +79,7 @@ function Home({ start }: { start: (who: ViewerId) => void }) {
         {previews.map(({ viewer, moves }) => <article key={viewer.id} className={`person-card${viewer.kind === 'team' ? ' team-card' : ''}`}>
           <p className="person-group">{t(viewer.group)}</p>
           <h3>{viewer.name}</h3>
-          <p>{viewer.summary}</p>
+          <p>{t(viewer.summary)}</p>
           {viewer.kind === 'person'
             ? <><p className="note">{t('Top moves with Q2 2026 data')}</p>
               <ol className="mini-ledger">{moves.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol></>
@@ -185,15 +185,15 @@ function App() {
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
-          : <section className="panel"><h2>Add your skills first</h2><p className="note">Your moves are ranked from your skills.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or view as Aina</button></section>)}
+          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button> <button type="button" className="text-button" onClick={() => start('aina')}>{t('Or view as Aina')}</button></section>)}
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
-          : <section className="panel"><h2>Add your skills first</h2><p className="note">Your plan is built from the skills a move needs that you don’t have yet.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or view as Aina</button></section>)}
+          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button> <button type="button" className="text-button" onClick={() => start('aina')}>{t('Or view as Aina')}</button></section>)}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
-        {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{comingSoon[screen]}</p></section>}
+        {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
         <SourcesFooter />
       </div>
     </main>
