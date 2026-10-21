@@ -58,6 +58,14 @@ Scoring: `src/scoring.ts` (pure functions: skill fit with exact and transferable
 
 Work happens on `dev`. `main` on GitHub was deleted. Before submission, make sure the repository's default branch shows the code that is demoed.
 
+**Commit identity (so GitHub shows Verified):** Claude's workspace signs commits with Claude's SSH key. Set only the **author** to Carson and leave the **committer** as Claude:
+
+```bash
+git commit --author="Yun Loong <wksl.yl36@gmail.com>" -m "..."
+```
+
+Do **not** override `user.name`/`user.email` (that makes the committer Carson, whose account does not own Claude's key, so GitHub marks the commit Unverified). Commits made on Carson's Mac follow his own signing setup. Do not rewrite or force-push old commits to change their badges.
+
 ## Working with the owner (Carson)
 
 - Year 2 CS student; replies should be direct and concise.

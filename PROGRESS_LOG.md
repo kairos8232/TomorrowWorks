@@ -4,6 +4,15 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (13:26 MYT) — "Unverified" commit badges explained and fixed going forward
+
+- **Cause:** Claude's workspace signs commits with Claude's SSH key, but commits since 21 Oct 00:50 were made with the *committer* set to Carson. GitHub only verifies a signature against the committer's account, so they show **Unverified**. `03b3640` shows **Verified** because a rebase left Claude as committer.
+- **Fix from now on:** author = Carson (`--author`), committer = Claude. Rule added to `CLAUDE.md` → Git. This commit is the first made that way.
+- **Not changed:** older commits keep their badge. Re-signing them would mean rewriting and force-pushing `dev` (breaks Replit and the Mac copy, and makes history look rewritten). The badge does not affect judging; the handbook checks for a continuous, truthful history.
+- **Optional for Carson:** GitHub "vigilant mode" (Settings → SSH and GPG keys → *Flag unsigned commits as unverified*) also marks every unsigned commit from his Mac as Unverified. Turning it off, or adding a signing key on the Mac, avoids that for his own commits.
+
+---
+
 ## 21 Oct 2026 (13:10–13:45 MYT) — First-visit clarity: home, guided flow, Aina
 
 **Feedback (Carson):** new visitors would not understand what the app is for or why it jumps into a table. Agreed choices: replace the old profile/gap screens, use a fictional persona "Aina", show empty pages as "Soon".
