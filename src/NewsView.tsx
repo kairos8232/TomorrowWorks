@@ -26,6 +26,6 @@ export function NewsView() {
         <span className="note">{a.outlet}, {day(a.seenAt)}{a.topics.length ? `. ${a.topics.join(', ')}` : ''}</span>
       </li>)}
     </ul>
-    <p className="note">Reported news, not job counts: it never changes your scores. Headlines from outlets in Malaysia found by <a href={newsFile.source.url} target="_blank" rel="noreferrer">GDELT</a> in the {newsFile.source.window}, retrieved {newsFile.source.retrievedAt}. Topics come from the search that found each headline.</p>
+    <p className="note">Reported news, not job counts: it never changes your scores. Headlines from outlets in Malaysia found by <a href={newsFile.source.url} target="_blank" rel="noreferrer">GDELT</a> in the {newsFile.source.window}, retrieved {newsFile.source.retrievedAt}. Topics come from search terms found in each headline; “Other” means none were.</p>
   </section>;
 }

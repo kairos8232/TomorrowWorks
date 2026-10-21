@@ -1,22 +1,24 @@
 """Fetch recent Malaysian workplace headlines from the GDELT DOC 2.0 API.
 
-Usage (needs internet; standard library only; about a minute, longer if GDELT asks it to wait):
+Usage (needs internet; standard library only; one request, a few seconds):
     python3 scripts/import_gdelt_news.py
 
 Writes data/sources/gdelt-news.json: headline, link, outlet, language, the
-date GDELT first saw it, and which topic query found it.
+date GDELT first saw it, and topic tags.
 
 Rules (see API_PLAN.md):
 - Only metadata and a link to the original article are stored; no article text.
-- Topic tags come from the query that matched, not from reading the article.
+- ONE request covers all four topics (GDELT rate-limits repeated calls).
+  Topic tags are then given by matching each topic's search terms in the
+  headline; a headline matching none is tagged "Other". No article is read.
 - News shows what was reported. It is not a count of jobs and never changes
   any score in the app.
-- GDELT asks for at most one request every 5 seconds; this script waits 10
-  between topics, and on "429 Too Many Requests" waits 30, 60, then 120 s
-  and tries again. If it still fails, wait 10 minutes and run it again.
+- On "429 Too Many Requests" the script waits 60, 120, then 300 s and tries
+  again. If it still fails, try again in an hour (GDELT limits by IP).
 - Cite GDELT and link each original article (https://gdeltproject.org/about.html).
 """
 import json
+import re
 import sys
 import urllib.error
 import time
@@ -27,30 +29,41 @@ from pathlib import Path
 
 API = "https://api.gdeltproject.org/api/v2/doc/doc"
 WINDOW = "4w"            # last four weeks
-PER_TOPIC = 25
+MAX_RECORDS = 100     # one request for all topics
 
 # sourcecountry:MY = outlets GDELT locates in Malaysia (FIPS country code MY).
+# Each topic's terms are used in the single query and again to tag headlines.
 TOPICS = {
-    "AI and automation": '("artificial intelligence" OR "generative AI" OR automation)',
-    "Layoffs": '(layoff OR layoffs OR retrenchment OR "job cuts")',
-    "Hiring": '(hiring OR "job openings" OR recruitment OR "talent shortage")',
-    "Reskilling": '(reskilling OR upskilling OR "HRD Corp" OR TVET)',
+    "AI and automation": ["artificial intelligence", "generative AI", "automation", "AI"],
+    "Layoffs": ["layoff", "layoffs", "retrenchment", "job cuts"],
+    "Hiring": ["hiring", "job openings", "recruitment", "talent shortage"],
+    "Reskilling": ["reskilling", "upskilling", "HRD Corp", "TVET"],
 }
+# "AI" alone is too short for GDELT's query, so it is only used for tagging.
+QUERY = "(" + " OR ".join(
+    f'"{t}"' if " " in t else t for terms in TOPICS.values() for t in terms if t != "AI") + ")"
+
+
+def topics_for(title):
+    """Topics whose terms appear in the headline as whole words (case-insensitive)."""
+    found = [topic for topic, terms in TOPICS.items()
+             if any(re.search(rf"\b{re.escape(t)}\b", title, re.IGNORECASE) for t in terms)]
+    return found or ["Other"]
 
 
 def fetch(query):
     params = {"query": f"sourcecountry:MY {query}", "mode": "artlist", "format": "json",
-              "maxrecords": str(PER_TOPIC), "timespan": WINDOW, "sort": "datedesc"}
+              "maxrecords": str(MAX_RECORDS), "timespan": WINDOW, "sort": "datedesc"}
     url = f"{API}?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(url, headers={"User-Agent": "TomorrowWorks hackathon prototype"})
-    for wait in (30, 60, 120, None):
+    for wait in (60, 120, 300, None):
         try:
             with urllib.request.urlopen(req, timeout=60) as res:
                 raw = res.read().decode("utf-8", errors="replace")
             break
         except urllib.error.HTTPError as err:
             if err.code != 429 or wait is None:
-                sys.exit(f"GDELT error {err.code} for {query!r}. If it is 429, wait 10 minutes and run again.")
+                sys.exit(f"GDELT error {err.code} for {query!r}. If it is 429, try again in an hour.")
             print(f"  GDELT says too many requests; waiting {wait} s and trying again...")
             time.sleep(wait)
     try:
@@ -66,27 +79,24 @@ def seen_iso(value):
 
 
 def main():
-    articles, queries = {}, []
-    for i, (topic, query) in enumerate(TOPICS.items()):
-        if i:
-            time.sleep(10)
-        url, found = fetch(query)
-        queries.append({"topic": topic, "query": f"sourcecountry:MY {query}", "url": url, "results": len(found)})
-        for a in found:
-            for field in ("url", "title", "seendate", "domain"):
-                if field not in a:
-                    sys.exit(f"GDELT article is missing {field!r}; fields were {sorted(a)}")
-            item = articles.setdefault(a["url"], {
-                "title": a["title"].strip(),
-                "url": a["url"],
-                "outlet": a["domain"],
-                "language": a.get("language", ""),
-                "seenAt": seen_iso(a["seendate"]),
-                "topics": [],
-            })
-            if topic not in item["topics"]:
-                item["topics"].append(topic)
-        print(f"{topic}: {len(found)} articles")
+    url, found = fetch(QUERY)
+    articles = {}
+    for a in found:
+        for field in ("url", "title", "seendate", "domain"):
+            if field not in a:
+                sys.exit(f"GDELT article is missing {field!r}; fields were {sorted(a)}")
+        title = a["title"].strip()
+        articles.setdefault(a["url"], {
+            "title": title,
+            "url": a["url"],
+            "outlet": a["domain"],
+            "language": a.get("language", ""),
+            "seenAt": seen_iso(a["seendate"]),
+            "topics": topics_for(title),
+        })
+    queries = [{"topic": "All topics (tagged by headline terms)", "query": f"sourcecountry:MY {QUERY}", "url": url, "results": len(found)}]
+    for topic in [*TOPICS, "Other"]:
+        print(f"{topic}: {sum(topic in a['topics'] for a in articles.values())} headlines")
 
     snapshot = {
         "source": {
@@ -97,7 +107,7 @@ def main():
             "retrievedAt": date.today().isoformat(),
             "window": "last 4 weeks before retrieval",
             "geography": "News outlets located in Malaysia (GDELT sourcecountry:MY)",
-            "measure": "Headlines reported; not job counts. Topic = the query that matched.",
+            "measure": "Headlines reported; not job counts. Topic = search terms found in the headline.",
         },
         "queries": queries,
         "articles": sorted(articles.values(), key=lambda a: a["seenAt"], reverse=True),
