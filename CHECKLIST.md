@@ -247,9 +247,9 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 10 — Add a reskilling pathway
 
-- [ ] Order missing skills into learning steps for a selected role.
-- [ ] Estimate the time for each step and explain the basis for the estimate.
-- [ ] Check each learning-resource link and its price or free-access claim.
+- [x] Order missing skills into learning steps for a selected role. (`src/pathway.ts`: greedy, most gaps closed first; tested)
+- [x] Estimate the time for each step and explain the basis for the estimate. (Provider-stated study time only; no stated hours is shown as such.)
+- [x] Check each learning-resource link and its price or free-access claim. (11 free courses opened on the provider page, 21 Oct 2026.)
 - [ ] Display the ordered pathway in the app.
 - [ ] Link each learning step back to the missing skill it addresses.
 

@@ -189,6 +189,20 @@ Switching to the fast scenario moves sustainability manager from 6th to 4th (res
 
 The app has a **Data snapshot** switch: *DOSM Q1 2026* vs *DOSM Q2 2026*. Same profile, same scenario; switching the snapshot changes `D`, which changes scores and possibly order. With the real data: Professionals go from +15.8% to −9.5% (D 0.66 → 0.41) and Clerical support workers from −1.8% to −17.2% (D 0.48 → 0.33). The screen states which signal moved. When DOSM publishes Q3 2026, running `scripts/import-dosm.mjs` on the new file adds a third snapshot with no code change — that is the refresh story for judges.
 
+## Learning plan rule (stage 10, added 21 Oct 2026)
+
+Code: `src/pathway.ts`, tests in `src/pathway.test.ts`. Data: `data/pathway/resources.json` (courses) and `data/pathway/noss.json` (Malaysian certification route).
+
+1. **Gaps** are the chosen role's essential ESCO skills the person does not hold, plus the transferable ones (they only get half credit, so they are still worth learning; shown with ≈ and the related skill).
+2. **Courses** are free resources opened by hand on the provider's own page (checked 21 Oct 2026). Each lists the ESCO skills its *stated learning outcomes* address, using exact labels from `data/roles.json`; a test fails if a label does not exist. This mapping is the team's reading and is an adapted use of ESCO.
+3. **Order (greedy):** step 1 is the course that closes the most remaining gaps; repeat with what is left. Ties: more fully missing skills first, then fewer stated hours (no stated hours counts as longest), then file order. Stop when no course closes another gap.
+4. **Time** is the study time the provider states (e.g. "8 hours study" on OpenLearn). We never estimate it. A course with no stated hours shows the provider's own wording (CS50x: "eleven weeks of material").
+5. **Leftover gaps** are listed as "No checked course yet". No course is invented to fill them.
+
+Why greedy: it is the simplest rule a person can check by hand ("this course builds 4 of your 6 gaps, so it comes first"), and it keeps the plan short.
+
+Current coverage with Aina's skills (11 courses): bookkeeper 4 of 6 gaps, billing clerk 1 of 8, accountant 6 of 15, financial analyst 5 of 22, business analyst 7 of 26, data analyst 8 of 36, software developer 3 of 24, sustainability manager 6 of 48. Low coverage is shown honestly; more courses can be added to the JSON after checking their pages.
+
 ## Skills radar (rising / declining skills)
 
 A skill's trend is derived, not invented: average `D` and average `R` across the roles in `roles.json` that list it. A skill shows as **rising** when both averages are above 0.5, **at risk** when both are below. Each skill links to the roles and source rows behind it.
