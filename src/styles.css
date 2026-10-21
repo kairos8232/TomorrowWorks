@@ -194,6 +194,40 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .role-focus .detail-actions, .role-focus .detail-facts, .role-focus .detail-skills, .role-focus .sdg-line, .role-focus .interest-line { margin-left: 0; }
 .role-focus .detail-facts { background: #f7f8f6; border-radius: 8px; padding: 16px; }
 .role-focus .detail-evidence { display: grid; gap: 12px; border-top: 1px solid #d9ded9; padding-top: 18px; }
+.role-focus a { color: #1e6b4f; }
+.moves-update { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 22px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 14px 18px; }
+.moves-update p { margin: 0; line-height: 1.5; }
+.moves-update > div { display: flex; flex-wrap: wrap; gap: 12px 22px; }
+.moves-personalise { margin-top: 18px; }
+.moves-personalise .secondary-button { padding: 9px 13px; }
+.moves-select-hint { margin: 12px 0 -8px; }
+.moves-focus { display: grid; gap: 18px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 30px); }
+.moves-focus h2 { font-size: clamp(25px, 3vw, 34px); margin: 0; }
+.moves-focus h3 { font-size: 16px; margin: 0 0 6px; }
+.moves-focus p { margin: 0; line-height: 1.55; }
+.change-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid #1c2430; }
+.change-list li { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr) minmax(160px, .8fr); gap: 12px; align-items: center; padding: 12px 2px; border-bottom: 1px solid #d9ded9; }
+.change-list small { color: #5d6873; font-size: 13px; }
+.method-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.method-grid > div { border-top: 2px solid #1c2430; padding-top: 12px; }
+.method-plain { max-width: 80ch; display: grid; gap: 8px; }
+.method-sources { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; border-top: 1px solid #d9ded9; padding-top: 16px; }
+.method-sources h3 { flex-basis: 100%; }
+.moves-focus a { color: #1e6b4f; }
+.preferences-view .ranking-options-body { padding: 0; }
+.preferences-view fieldset { border: 0; padding: 0; margin: 0; }
+.preferences-view legend { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.preferences-view .primary-button { justify-self: start; }
+@media (max-width: 860px) {
+  .method-grid { grid-template-columns: 1fr; }
+  .change-list li { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .change-list small { grid-column: 1 / -1; }
+}
+@media (max-width: 620px) {
+  .moves-update > div { width: 100%; }
+  .change-list li { grid-template-columns: 1fr; gap: 3px; }
+  .change-list small { grid-column: 1; }
+}
 .esco-link { font-size: 14px; color: #1e6b4f; }
 .skill-tag { border-radius: 4px; font-weight: 600; }
 .skill-editor { border-top: 1px solid #d9ded9; padding: 14px 0 0; margin-top: 18px; }
@@ -362,18 +396,6 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .gap-bar { grid-column: 1 / -1; order: 3; }
   .gap-course { grid-column: 1 / -1; order: 4; }
 }
-.what-changed { background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 0 16px; }
-.what-changed summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; cursor: pointer; list-style: none; padding: 12px 0; }
-.what-changed summary::-webkit-details-marker { display: none; }
-.what-changed summary strong { font-size: 16px; }
-.what-changed summary span { color: #5d6873; font-size: 14px; }
-.what-changed summary::after { content: ''; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin: 4px 2px 0 auto; }
-.what-changed[open] summary::after { transform: rotate(225deg); margin-top: 8px; }
-.what-changed[open] summary { border-bottom: 1px solid #d9ded9; }
-.what-changed p { margin: 0 0 8px; line-height: 1.55; }
-.what-changed ul { margin: 12px 0; padding-left: 18px; display: grid; gap: 6px; line-height: 1.5; }
-.what-changed .up { color: #1e6b4f; font-weight: 700; }
-.what-changed .down { color: #a8402b; font-weight: 700; }
 .cap { text-transform: capitalize; }
 .lang-pick { display: grid; gap: 4px; margin: 0 12px 18px; font-size: 13px; font-weight: 600; color: #5d6873; }
 .lang-pick select { padding: 6px 8px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 14px; color: #1c2430; background: #ffffff; }
@@ -421,18 +443,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .job-panel .note { margin-bottom: 0; }
 .job-panel select { width: 100%; }
 .selected-skills .step-actions { border-top: 1px solid #d9ded9; margin-top: 18px; padding-top: 18px; }
-.ranking-options { border-top: 1px solid #d9ded9; margin-top: 16px; }
-.ranking-options summary { list-style: none; cursor: pointer; color: #1e6b4f; font-weight: 700; padding: 12px 0 2px; width: fit-content; }
-.ranking-options summary::-webkit-details-marker { display: none; }
-.ranking-options summary::after { content: ''; display: inline-block; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin: 0 0 3px 10px; }
-.ranking-options[open] summary::after { transform: rotate(225deg); margin-bottom: 0; }
 .ranking-options-body { display: grid; gap: 12px; padding: 12px 0 4px; }
-.ranking-options fieldset { border: 0; padding: 0; margin: 0; }
-.ranking-options legend { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-.ranking-options .goal-pick { margin-top: 0; }
-.ranking-options .note { margin: 0; }
 .option-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 8px; border-radius: 50%; background: #1e6b4f; color: #ffffff; font-size: 12px; }
-.role-name::after { content: '→'; display: inline-block; margin-left: 8px; color: #5d6873; font-size: 16px; font-weight: 400; }
 summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #2f8a66; outline-offset: 3px; }
 
 @media (min-width: 1380px) {
@@ -465,9 +477,6 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .sidebar .nav-list[aria-label="My career"] .nav-item strong { justify-content: center; font-size: 13px; line-height: 1.2; }
   .job-panel { grid-template-columns: 1fr; }
   .people-grid { grid-template-columns: 1fr; }
-  .what-changed summary { display: block; padding-right: 24px; position: relative; }
-  .what-changed summary span { display: block; margin-top: 3px; }
-  .what-changed summary::after { position: absolute; right: 0; top: 16px; }
   .step-actions { flex-wrap: wrap; }
   .ledger-line { grid-template-columns: 26px repeat(3, minmax(0, 1fr)) 52px; grid-template-areas: "rank name name name score" ". f d r ."; gap: 8px 4px; }
   .ledger-line .part { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }

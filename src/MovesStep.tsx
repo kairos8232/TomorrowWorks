@@ -27,17 +27,11 @@ function Delta({ value }: { value: number | undefined }) {
   return <span className={`delta ${value > 0 ? 'up' : 'down'}`} aria-label={`${value > 0 ? 'up' : 'down'} ${Math.abs(value)} since the last switch`}>{value > 0 ? '▲' : '▼'}{Math.abs(value)}</span>;
 }
 
-// Shows the first few skills and a button for the rest, so long lists stay scannable.
+// The dedicated role view has room for the complete skill list.
 function SkillList({ title, empty, children }: { title: string; empty: string; children: React.ReactNode[] }) {
-  const t = useT();
-  const [all, setAll] = useState(false);
-  const LIMIT = 8;
-  const shown = all ? children : children.slice(0, LIMIT);
   return <div className="skill-list">
     <h4>{title} <span>{children.length}</span></h4>
-    {children.length === 0 ? <p className="note">{empty}</p> : <div className="tag-row">{shown}
-      {children.length > LIMIT && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('+{n} more', { n: children.length - LIMIT })}</button>}
-    </div>}
+    {children.length === 0 ? <p className="note">{empty}</p> : <div className="tag-row">{children}</div>}
   </div>;
 }
 
@@ -49,10 +43,9 @@ function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[]
   const tops = topTypes(roleId).map((x) => t(interestData.types[x].plain).toLowerCase());
   const fit = interestFit(roleId, picks);
   return <p className="interest-line note">
-    {t('Work interests: mostly {a} and {b}, then {c}.', { a: tops[0], b: tops[1], c: tops[2] })}{' '}
-    {fit !== null && <strong>{t('Your interest fit: {n}%.', { n: Math.round(fit * 100) })}</strong>}{' '}
-    {t('Source: {src}, {occ} ({match}).', { src: p.source === 'jobtag' ? 'job tag (MHLW Japan)' : 'O*NET (US DOL)', occ: p.occupation, match: p.match === 'close' ? t('close match') : t('related occupation') })}{' '}
-    <a href={p.url} target="_blank" rel="noreferrer">{t('Open')}</a>
+    <strong>{t('Work interests')}</strong> · {tops.slice(0, 2).join(' · ')}{' '}
+    {fit !== null && <span>· {t('Your interest fit: {n}%.', { n: Math.round(fit * 100) })}</span>}{' '}
+    <a href={p.url} target="_blank" rel="noreferrer" title={`${p.occupation} (${p.match})`}>{p.source === 'jobtag' ? 'job tag (Japan)' : 'O*NET (US)'}</a>
   </p>;
 }
 
@@ -88,9 +81,9 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
       <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
     </div>
     <div className="detail-facts">
-      <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}<small>{t('transferable count half')}</small></span>
-      <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small>{t('DOSM {a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
-      <span className="fact-r">{resilience ? <>{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}<small>{resilience.gradient}</small></> : t('No ILO data')}</span>
+      <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}</span>
+      <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small><a href={snapshots[demand.current === snapshots.q1.source.latestQuarter ? 'q1' : 'q2'].source.url} target="_blank" rel="noreferrer">DOSM</a> {t('{a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
+      <span className="fact-r">{resilience ? <><a href={ilo.source.url} target="_blank" rel="noreferrer">{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}</a><small>{resilience.gradient}</small></> : t('No ILO data')}</span>
     </div>
     <div className="detail-skills">
       <SkillList title={t('You have')} empty={t('None of this role’s essential skills yet.')}>
@@ -108,30 +101,47 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
 const signed = (x: number | null) => (x === null ? 'no data' : `${x >= 0 ? '+' : '−'}${Math.abs(x * 100).toFixed(1)}%`);
 const quarter = (q: string) => q.replace('-', ' ');
 
-/** Latest vs previous DOSM snapshot for the same skills and scenario: what moved, and why. */
-function WhatChanged({ profile, scenarioId, extras }: { profile: Profile; scenarioId: ScenarioId; extras: Extras }) {
+/** One focused comparison, with the job-ad source stated once. */
+function ChangesView({ changes, onBack }: { changes: ReturnType<typeof whatChanged>; onBack: () => void }) {
   const t = useT();
-  const [all, setAll] = useState(false);
-  const changes = useMemo(() => {
-    const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable, extras).moves;
-    return whatChanged(run('q1'), run('q2'));
-  }, [profile, scenarioId, extras]);
   const latest = quarter(snapshots.q2.source.latestQuarter);
   const earlier = quarter(snapshots.q1.source.latestQuarter);
-  if (changes.length === 0) return <details className="what-changed"><summary>{t('What changed with {q} job-ad data', { q: latest })}</summary><p className="note">{t('Nothing moved compared with {q} data.', { q: earlier })}</p></details>;
   const rankMoves = changes.filter((c) => c.rankBefore !== c.rankAfter).length;
-  const allDown = changes.every((c) => c.scoreAfter < c.scoreBefore);
-  const shown = all ? changes : changes.slice(0, 3);
-  return <details className="what-changed">
-    <summary><strong>{t('What changed with {q} job-ad data', { q: latest })}</strong><span>{rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })}</span></summary>
-    {allDown && <p>{t('Online job ads fell in every occupation group in {q}, so every score dropped.', { q: latest })}</p>}
-    <ul>{shown.map((c) => <li key={c.role.id}>
-      <strong className="cap">{c.role.title}</strong>{' '}
-      {c.rankBefore !== c.rankAfter ? <span className={c.rankAfter < c.rankBefore ? 'up' : 'down'}>{t('#{a} to #{b}', { a: c.rankBefore, b: c.rankAfter })}</span> : <span>{t('stays #{n}', { n: c.rankAfter })}</span>}, {t('score {a} to {b}', { a: c.scoreBefore, b: c.scoreAfter })}.{' '}
-      <span className="note">{t('Job ads for {group}: {now} in {q}, after {before} in {earlier}.', { group: t(c.group ?? ''), now: signed(c.changeAfter), q: latest, before: signed(c.changeBefore), earlier })}</span>
-    </li>)}</ul>
-    {changes.length > 3 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('Show all {n}', { n: changes.length })}</button>}
-  </details>;
+  const allDown = changes.length > 0 && changes.every((c) => c.scoreAfter < c.scoreBefore);
+  return <section className="moves-focus" aria-label={t('Compare quarters')}>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
+    <h2>{t('What changed with {q} job-ad data', { q: latest })}</h2>
+    <p>{changes.length === 0 ? t('Nothing moved compared with {q} data.', { q: earlier }) : rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('Online job ads fell in every occupation group in {q}, so every score dropped.', { q: latest })}</p>
+    {changes.length > 0 && <ul className="change-list">{[...changes].sort((a, b) => a.rankAfter - b.rankAfter).map((c) => <li key={c.role.id}>
+      <strong className="cap">{c.role.title}</strong>
+      <span>{c.rankBefore !== c.rankAfter ? t('#{a} to #{b}', { a: c.rankBefore, b: c.rankAfter }) : t('stays #{n}', { n: c.rankAfter })} · {t('score {a} to {b}', { a: c.scoreBefore, b: c.scoreAfter })}</span>
+      <small>{t(c.group ?? '')} {signed(c.changeAfter)}</small>
+    </li>)}</ul>}
+    <p className="note">{t('Job-ad change by occupation group, from {a} to {b}.', { a: earlier, b: latest })} <a href={snapshots.q2.source.url} target="_blank" rel="noreferrer">{t('DOSM source')}</a></p>
+  </section>;
+}
+
+function MethodView({ onBack }: { onBack: () => void }) {
+  const t = useT();
+  return <section className="moves-focus" aria-label={t('How ranking works')}>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
+    <h2>{t('How ranking works')}</h2>
+    <p>{t('Scores are estimates for comparing roles, not hiring decisions.')}</p>
+    <div className="method-grid">
+      <div><h3>{t('Skill fit')}</h3><p>{t('Your confirmed skills against the role’s essential ESCO skills. Related skills count half.')}</p></div>
+      <div><h3>{t('Demand')}</h3><p>{t('Change in Malaysian online job ads for the role’s occupation group.')}</p></div>
+      <div><h3>{t('AI resilience')}</h3><p>{t('How much of the work is less exposed to generative AI. Higher means less exposed.')}</p></div>
+    </div>
+    <div className="method-plain"><h3>{t('Fairness and limits')}</h3>
+      <p>{t('The ranking uses skills you confirmed, role skills and the two sourced signals above. It never asks for age, gender, ethnicity, religion or school.')}</p>
+      <p>{t('Tests check that the same skills produce the same scores. Job ads cover only online postings, and ESCO describes roles from a European perspective.')}</p>
+    </div>
+    <div className="method-sources"><h3>{t('Sources')}</h3>
+      <a href={snapshots.q2.source.url} target="_blank" rel="noreferrer">DOSM Job Market Insights</a>
+      <a href={ilo.source.url} target="_blank" rel="noreferrer">ILO Working Paper 140</a>
+      <a href="https://esco.ec.europa.eu/" target="_blank" rel="noreferrer">ESCO v1.2.1</a>
+    </div>
+  </section>;
 }
 
 export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
@@ -143,6 +153,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const [goals, setGoals] = useState<string[]>([]);
   const [useGoals, setUseGoals] = useState(false);
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null);
+  const [panel, setPanel] = useState<'ranking' | 'changes' | 'method' | 'preferences'>('ranking');
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
   const picks = profile.interests;
@@ -155,6 +166,10 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
     () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshot, ilo, scenario, transferable, extras),
     [profile, snapshot, scenario, extras],
   );
+  const changes = useMemo(() => {
+    const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable, extras).moves;
+    return whatChanged(run('q1'), run('q2'));
+  }, [profile, scenarioId, extras]);
 
   // Remember the previous scores so a data or scenario switch can show what changed.
   const previous = useRef<Map<string, number> | null>(null);
@@ -170,14 +185,42 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   }, [current, moves, switchKey]);
 
   const selectedResult = selectedRoleId ? [current, ...moves].find((result) => result?.role.id === selectedRoleId) : null;
+  const backToRanking = () => { setPanel('ranking'); setSelectedRoleId(null); window.scrollTo({ top: 0 }); };
+  const openPanel = (next: 'changes' | 'method' | 'preferences') => { setPanel(next); window.scrollTo({ top: 0 }); };
   if (selectedResult) {
     const rank = moves.findIndex((result) => result.role.id === selectedRoleId);
     return <div className="step-body"><RoleDetail result={selectedResult} rank={rank < 0 ? null : rank + 1} picks={picks}
-      onBack={() => { setSelectedRoleId(null); window.scrollTo({ top: 0 }); }}
+      onBack={backToRanking}
       onPlan={rank < 0 ? undefined : () => onPlan(selectedResult.role.id)} /></div>;
   }
+  if (panel === 'changes') return <div className="step-body"><ChangesView changes={changes} onBack={backToRanking} /></div>;
+  if (panel === 'method') return <div className="step-body"><MethodView onBack={backToRanking} /></div>;
+  if (panel === 'preferences') return <div className="step-body"><section className="moves-focus preferences-view" aria-label={t('Personalise ranking')}>
+    <button type="button" className="text-button role-back" onClick={backToRanking} autoFocus>{t('Back to ranking')}</button>
+    <h2>{t('Personalise ranking')}</h2>
+    <p className="note">{t('Optional choices. Switch them on to change scores; selected goals also highlight linked roles.')}</p>
+    <div className="ranking-options-body">
+      <fieldset><legend>{t('Your interests')}</legend>
+        <label className={`toggle${picks.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />
+          {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
+      </fieldset>
+      <div className="goal-pick" role="group" aria-label={t('Goals you care about')}>
+        <span>{t('Goals you care about')}</span>
+        {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
+          const on = goals.includes(g);
+          return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }}
+            onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)}>{g}</button>;
+        })}
+        <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
+      </div>
+      {goals.length > 0 && <p className="note">{goals.map((g) => `${g}. ${t(sdgData.goals[g].name)}`).join(' · ')}{useGoals ? '' : ` — ${t('highlighted only; switch on to count them in the ranking.')}`}</p>}
+    </div>
+    <button type="button" className="primary-button" onClick={backToRanking}>{t('Show my moves')}</button>
+  </section></div>;
 
   const persona = personaById(profile.persona);
+  const rankMoves = changes.filter((change) => change.rankBefore !== change.rankAfter).length;
+  const allDown = changes.length > 0 && changes.every((change) => change.scoreAfter < change.scoreBefore);
   return <div className="step-body">
     <div className="who">
       <p>{persona ? tx('{who}, {description} with {n} skills.', { who: <strong>{t('Viewing as {name}', { name: persona.name })}</strong>, description: t(persona.description), n: profile.held.size })
@@ -185,20 +228,11 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
     </div>
 
-    <WhatChanged profile={profile} scenarioId={scenarioId} extras={extras} />
-
-    <details className="how-to-read">
-      <summary>{t('How to read this')}</summary>
-      <dl>
-        <div><dt>{t('Score')}</dt><dd>{t('A mix of the three parts below, out of 100. It is an estimate to help you compare, not a hiring decision.')}</dd></div>
-        <div><dt>{t('Skill fit')}</dt><dd>{t('How many of the role’s essential skills you already have. A closely related skill counts half.')}</dd></div>
-        <div><dt>{t('Demand')}</dt><dd>{t('Whether online job ads for this kind of work rose or fell last quarter in Malaysia (DOSM, Department of Statistics Malaysia).')}</dd></div>
-        <div><dt>{t('AI resilience')}</dt><dd>{t('How much of the work generative AI is unlikely to change, from the ILO (International Labour Organization). Higher is safer.')}</dd></div>
-        <div><dt>{t('Goals')}</dt><dd>{t('Optional. Pick the SDGs you care about to highlight linked roles. When counted, a role linked to your goal through its own work scores 1, through some of its skills 0.5, otherwise 0; this counts for one sixth of the score.')}</dd></div>
-        <div><dt>{t('Interests')}</dt><dd>{t('Optional. When switched on, how well the work matches what you enjoy counts for one sixth of the score. Interest profiles of each kind of work come from job tag (Japan’s Ministry of Health, Labour and Welfare); no Malaysian data exists yet.')}</dd></div>
-        <div><dt>{t('Now')}</dt><dd>{t('Your current job, for comparison.')}</dd></div>
-      </dl>
-    </details>
+    <div className="moves-update">
+      <p><strong>{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</strong> · {rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
+      <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
+        <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
+    </div>
 
     <section className="ledger" aria-label="Ranked moves">
       <div className="ledger-controls">
@@ -209,41 +243,17 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
           {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
         </fieldset>
       </div>
-      <details className="ranking-options">
-        <summary>{t('Personalise with interests and goals')}{extrasOn > 0 && <span className="option-count">{extrasOn}</span>}</summary>
-        <div className="ranking-options-body">
-          <fieldset><legend>{t('Your interests')}</legend>
-            <label className={`toggle${picks.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />
-              {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
-          </fieldset>
-          <div className="goal-pick" role="group" aria-label={t('Goals you care about')}>
-            <span>{t('Goals you care about')}</span>
-            {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
-              const on = goals.includes(g);
-              return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }}
-                onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)}>{g}</button>;
-            })}
-            <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
-          </div>
-          {goals.length > 0 && <p className="note">{goals.map((g) => `${g}. ${t(sdgData.goals[g].name)}`).join(' · ')}{useGoals ? '' : ` — ${t('highlighted only; switch on to count them in the ranking.')}`}</p>}
-        </div>
-      </details>
+      <div className="moves-personalise">
+        <button type="button" className="secondary-button" onClick={() => openPanel('preferences')}>{t('Personalise ranking')}{extrasOn > 0 && <span className="option-count">{extrasOn}</span>}</button>
+      </div>
       <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
+      <p className="note moves-select-hint">{t('Select a role to see details.')}</p>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => { setSelectedRoleId(current.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />}
         {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onInspect={() => { setSelectedRoleId(m.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />)}
       </ol>
     </section>
-    <details className="how-to-read fairness">
-      <summary>{t('Is this fair?')}</summary>
-      <dl>
-        <div><dt>{t('Used')}</dt><dd>{t('Only the skills you confirmed, each role’s ESCO skills, DOSM job ads for the role’s occupation group, and ILO’s AI exposure for the role.')}</dd></div>
-        <div><dt>{t('Never asked')}</dt><dd>{t('Age, gender, ethnicity, religion, name, where you live or which school you went to. The app has no place to store them.')}</dd></div>
-        <div><dt>{t('Checked')}</dt><dd>{t('Automated tests prove that the same skills always give the same scores, whoever holds them and in whatever order they were added, and that your current job only takes that role off the list.')}</dd></div>
-        <div><dt>{t('Limits')}</dt><dd>{t('The sources can carry their own bias: job ads favour some kinds of work and ESCO describes roles from a European view. Scores support your decision; they do not decide it.')}</dd></div>
-      </dl>
-    </details>
   </div>;
 }
 

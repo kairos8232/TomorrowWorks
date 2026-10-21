@@ -180,7 +180,7 @@ function App() {
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
-        <SourcesFooter showSourceSummary={!['home', 'demand', 'outlook', 'news', 'trending'].includes(screen)} />
+        <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending'].includes(screen)} />
       </div>
     </main>
   </div></LangProvider>;
