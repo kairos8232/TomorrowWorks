@@ -450,8 +450,8 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .sidebar .viewer-switch { grid-column: 1 / -1; }
   .sidebar .viewer-switch summary { min-height: 42px; }
   .sidebar .nav-list[aria-label="My career"] { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; overflow: visible; }
-  .sidebar .nav-list[aria-label="My career"] .nav-item { min-width: 0; padding: 7px 5px; white-space: nowrap; }
-  .sidebar .nav-list[aria-label="My career"] .nav-item strong { font-size: 13px; }
+  .sidebar .nav-list[aria-label="My career"] .nav-item { min-width: 0; padding: 7px 5px; text-align: center; white-space: normal; }
+  .sidebar .nav-list[aria-label="My career"] .nav-item strong { justify-content: center; font-size: 13px; line-height: 1.2; }
   .job-panel { grid-template-columns: 1fr; }
   .people-grid { grid-template-columns: 1fr; }
   .what-changed summary { display: block; padding-right: 24px; position: relative; }
@@ -463,4 +463,8 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .ledger-line .part::before { font-size: 11px; line-height: 1.15; }
   .ledger-line .part-num { font-size: 13px; font-weight: 700; }
   .ledger-line .bar { display: none; }
+}
+@media (max-width: 360px) {
+  .sidebar { grid-template-columns: minmax(0, 1fr); }
+  .sidebar .lang-pick, .sidebar .viewer-switch { grid-column: 1; }
 }

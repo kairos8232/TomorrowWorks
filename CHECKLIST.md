@@ -2,6 +2,13 @@
 
 This checklist tracks the hackathon prototype. Complete one stage at a time. Check an item only after the work is present and verified. Commit the stage's implementation and its checklist updates together; split a stage into smaller commits if needed. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the broad audience and evidence rules, [SCREENS.md](SCREENS.md) explains each screen, and [BUILD_STAGES.md](BUILD_STAGES.md) lists small commit slices. The ChatGPT reference PDFs stay outside this repository.
 
+## UI refinement — 21 Oct 2026
+
+- [x] Use the sidebar as the career step navigation; remove the repeated step strip above the page.
+- [x] Shorten first-visit and skill-entry copy, bring the selected-skill action and expanded-role plan action next to their context, and collapse optional explanations and ranking preferences.
+- [x] Use wide Home columns and compact phone move rows; inspect Home and Your plan at 1440 px, Home, Your skills, Your moves and Your plan at 390 px, and the Malay Home header at 320 px. Check Malay and Chinese phone navigation.
+- [x] Run `npm run build` and `npm test` after the refinement (60 tests passed); run Impeccable layout detection (no findings).
+
 ## Stage 0 — Repository documents
 
 - [x] Write a README that identifies the project as a planned prototype.
