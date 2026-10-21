@@ -15,9 +15,9 @@ type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outloo
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
-  { id: 'skills', label: '1. Your skills', hint: 'Describe your work' },
-  { id: 'moves', label: '2. Your moves', hint: 'Roles ranked for you' },
-  { id: 'plan', label: '3. Your plan', hint: 'What to learn next' },
+  { id: 'skills', label: 'Your skills', hint: 'Describe your work' },
+  { id: 'moves', label: 'Your moves', hint: 'Roles ranked for you' },
+  { id: 'plan', label: 'Your plan', hint: 'What to learn next' },
 ];
 const teamNav: NavItem[] = [
   { id: 'team', label: 'Team view', hint: 'Who fits which role, shared gaps' },
@@ -99,13 +99,28 @@ function Home({ start }: { start: (who: ViewerId) => void }) {
   </div>;
 }
 
+function NavIcon({ id }: { id: Screen }) {
+  const shape = {
+    skills: <><path d="M4 7h2m4 0h10M4 12h2m4 0h10M4 17h2m4 0h10" /><path d="m3.5 7 1 1 2-2m-3 6 1 1 2-2m-3 6 1 1 2-2" /></>,
+    moves: <><path d="M4 18h5v-5h5V8h6" /><path d="m16 4 4 4-4 4" /></>,
+    plan: <><path d="M7 3h10v18H7zM10 8h4m-4 4h4m-4 4h4" /></>,
+    team: <><circle cx="9" cy="8" r="3" /><path d="M3.5 19v-2a5.5 5.5 0 0 1 11 0v2M17 6a3 3 0 0 1 0 6m1 3a4 4 0 0 1 2.5 4" /></>,
+    demand: <><path d="M4 20V11m5 9V6m5 14v-8m5 8V4M2 20h20" /></>,
+    outlook: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3" /></>,
+    news: <><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5" /></>,
+    trending: <><path d="M3 17h5v-5h5V8h8m-4-4 4 4-4 4" /></>,
+    home: null,
+  }[id];
+  return <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{shape}</svg>;
+}
+
 function NavGroup({ label, items, screen, go }: { label: string; items: NavItem[]; screen: Screen; go: (s: Screen) => void }) {
   const t = useT();
   return <div className="nav-group">
     <p className="nav-group-label">{t(label)}</p>
     <nav className="nav-list" aria-label={label}>
       {items.map((item) => <button key={item.id} type="button" className={`nav-item${screen === item.id ? ' active' : ''}${item.soon ? ' is-soon' : ''}`} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>
-        <strong>{t(item.label)}{item.soon && <span className="soon">{t('Soon')}</span>}</strong><small>{t(item.hint)}</small>
+        <NavIcon id={item.id} /><span className="nav-copy"><strong>{t(item.label)}{item.soon && <span className="soon">{t('Soon')}</span>}</strong><small>{t(item.hint)}</small></span>
       </button>)}
     </nav>
   </div>;
@@ -150,15 +165,13 @@ function App() {
   const t = translate(lang);
   return <LangProvider value={lang}><div className="app-shell">
     <aside className="sidebar" aria-label="Navigation">
-      <button type="button" className="brand" onClick={() => go('home')}>TomorrowWorks</button>
-      <p className="sidebar-kicker">{t('Your career, mapped forward.')}</p>
-      <label className="lang-pick"><span>{t('Language')}</span><select value={lang} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
+      <button type="button" className="brand" onClick={() => go('home')}>Tomorrow<span className="brand-accent">Works</span></button>
       <ViewerSwitch viewer={viewer} choose={start} />
       {kind === 'team'
         ? <NavGroup label="My team" items={teamNav} screen={screen} go={go} />
         : <NavGroup label="My career" items={careerNav} screen={screen} go={go} />}
       <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
-      <div className="sidebar-note">{t('Prototype for SDC Hackathon 2026')}<br /><span>{t('Profiles are fictional or stay in your browser.')}</span></div>
+      <label className="lang-pick"><span>{t('Language')}</span><select value={lang} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
     </aside>
 
     <main className="main-content">
