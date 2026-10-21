@@ -7,15 +7,19 @@ import { recommendMoves, scenarios } from './scoring';
 import { NewsView } from './NewsView';
 import { PlanStep } from './PlanStep';
 import { SkillsStep } from './SkillsStep';
+import { TeamView } from './TeamView';
 import './styles.css';
 
-type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'demand' | 'outlook' | 'news' | 'trending';
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending';
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
   { id: 'skills', label: '1. Your skills', hint: 'Describe your work' },
   { id: 'moves', label: '2. Your moves', hint: 'Roles ranked for you' },
   { id: 'plan', label: '3. Your plan', hint: 'What to learn next' },
+];
+const teamNav: NavItem[] = [
+  { id: 'team', label: 'Team view', hint: 'For HR and career centres' },
 ];
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
@@ -27,6 +31,7 @@ const marketNav: NavItem[] = [
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
   moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
+  team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
@@ -40,7 +45,7 @@ const comingSoon: Partial<Record<Screen, string>> = {
 
 type Start = PersonaId | 'me';
 
-function Home({ start }: { start: (who: Start) => void }) {
+function Home({ start, openTeam }: { start: (who: Start) => void; openTeam: () => void }) {
   // Each persona's live result, computed from the same data and rule as the Moves step.
   const previews = useMemo(() => personas.map((persona) => {
     const p = personaProfile(persona.id);
@@ -77,6 +82,12 @@ function Home({ start }: { start: (who: Start) => void }) {
           <ol className="mini-ledger">{moves.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol>
           <button type="button" className="text-button" onClick={() => start(persona.id)}>See {persona.name}’s moves</button>
         </article>)}
+        <article className="person-card team-card">
+          <p className="person-group">HR managers and career centres</p>
+          <h3>A whole team or class</h3>
+          <p>See which roles fit each person, and which skills the group lacks most for a move, with a course for each.</p>
+          <button type="button" className="text-button" onClick={openTeam}>Open the Team view</button>
+        </article>
       </div>
     </section>
 
@@ -130,6 +141,7 @@ function App() {
       <button type="button" className="brand" onClick={() => go('home')}>TomorrowWorks</button>
       <p className="sidebar-kicker">Your career, mapped forward.</p>
       <NavGroup label="My career" items={careerNav} screen={screen} go={go} />
+      <NavGroup label="For teams" items={teamNav} screen={screen} go={go} />
       <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
       <div className="sidebar-note">Prototype for SDC Hackathon 2026<br /><span>Profiles are fictional or stay in your browser.</span></div>
     </aside>
@@ -141,7 +153,7 @@ function App() {
           <h1>{page.title}</h1>
           <p>{page.intro}</p>
         </header>}
-        {screen === 'home' && <Home start={start} />}
+        {screen === 'home' && <Home start={start} openTeam={() => go('team')} />}
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) setProfile(emptyProfile()); go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
@@ -149,6 +161,7 @@ function App() {
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
           : <section className="panel"><h2>Add your skills first</h2><p className="note">Your plan is built from the skills a move needs that you don’t have yet.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or try it as Aina</button></section>)}
+        {screen === 'team' && <TeamView />}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}

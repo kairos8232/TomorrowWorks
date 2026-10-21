@@ -323,3 +323,33 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .person-card > p { line-height: 1.55; color: #3a4450; margin: 0 0 10px; }
 .person-card .text-button { align-self: flex-start; margin-top: auto; }
 .person-group { font-size: 13px; font-weight: 700; color: #1e6b4f; margin: 0; }
+/* Team view heatmap: number in every cell; shade only reinforces it. */
+.section-title { margin: 0 0 6px; font-size: 20px; }
+.team-view, .team-view > section { min-width: 0; max-width: 100%; }
+.heat-scroll { max-width: 100%; overflow-x: auto; margin: 14px 0 8px; -webkit-overflow-scrolling: touch; }
+.heatmap { border-collapse: separate; border-spacing: 3px; min-width: 760px; width: 100%; }
+.heatmap th, .heatmap td { font-size: 14px; }
+.heatmap thead th { vertical-align: bottom; text-align: center; font-weight: 600; }
+.heat-role { border: 0; background: transparent; font: inherit; font-size: 13px; color: #3a4450; padding: 4px; border-radius: 4px; cursor: pointer; line-height: 1.25; }
+.heat-role:hover { text-decoration: underline; }
+.heat-role.active { background: #1c2430; color: #ffffff; }
+.heatmap tbody th { text-align: left; font-weight: 700; white-space: nowrap; padding-right: 10px; }
+.heatmap tbody th small { display: block; font-weight: 400; color: #5d6873; font-size: 12px; }
+.heatmap td { text-align: center; font-weight: 700; padding: 10px 4px; border-radius: 4px; }
+.heatmap td.now { background: #ffffff; border: 1px dashed #5d6873; color: #5d6873; font-weight: 600; }
+.heat-avg th, .heat-avg td { border-top: 2px solid #1c2430; background: transparent !important; color: #1c2430; }
+.gap-table { list-style: none; margin: 14px 0 0; padding: 0; border-top: 2px solid #1c2430; }
+.gap-table li { display: grid; grid-template-columns: minmax(160px, 1.3fr) 120px minmax(110px, .9fr) minmax(160px, 1.3fr); gap: 14px; align-items: center; padding: 10px 4px; border-bottom: 1px solid #d9ded9; }
+.gap-name { font-weight: 600; }
+.gap-bar { height: 8px; background: #f6e7e2; border-radius: 4px; overflow: hidden; }
+.gap-bar span { display: block; height: 100%; background: #a8402b; }
+.gap-count { font-size: 14px; font-weight: 600; }
+.gap-count small { display: block; font-weight: 400; color: #5d6873; font-size: 12px; }
+.gap-course { font-size: 14px; }
+.gap-course a { color: #1e6b4f; }
+.team-card { background: #eef4ef; border-color: #b8cfc1; }
+@media (max-width: 640px) {
+  .gap-table li { grid-template-columns: 1fr auto; }
+  .gap-bar { grid-column: 1 / -1; order: 3; }
+  .gap-course { grid-column: 1 / -1; order: 4; }
+}

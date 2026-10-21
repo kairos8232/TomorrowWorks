@@ -47,6 +47,14 @@ My career (guided, step bar on top)      The job market (browse any time)
 - **Malaysian certification route:** SKM level, NOSS title and code, which official list it comes from (link), "closest standard by title" or "related standard, not the same job", and that an SKM is one route, not a requirement. Roles without one say "No matching NOSS found in the registers we checked".
 - If there are no skills: a short prompt to add skills or try Aina. If nothing is missing: "Nothing to build".
 
+## Team view (For teams)
+
+For HR / L&D managers (a fictional five-person finance team) and career centres (a fictional class of three graduates); brief target groups 3 and 4.
+- **Group** switch; a banner names who the view is for.
+- **Who fits which role:** heatmap, one row per person, one column per role; each cell shows that person's score (same rule as Your moves, Q2 2026, gradual AI change). The current job shows "Now". The last row averages the moves only. Shade reinforces the number; the number is always shown. Scrolls sideways on phones.
+- **Shared gaps for <role>:** selecting a role name lists its essential skills by how many movers lack them (names shown; "partly" for transferable), with the first checked course for each (free before paid), top 12.
+- Footer: everyone is fictional; in real use each person confirms their own skills and the manager sees the group view, not CVs.
+
 ## Job ads / AI exposure
 
 - **Job ads:** latest monthly unemployment rate from OpenDOSM as a context line (a different measure; hidden until imported), then DOSM online job ads by occupation group, Q1 → Q2 2026, one table, source stated once.

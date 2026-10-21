@@ -74,3 +74,43 @@ export const ainaProfile = () => personaProfile('aina');
 export const emptyProfile = (): Profile => ({ persona: null, currentRoleId: null, held: new Set(), extra: new Map() });
 
 export const sourceLinks = { dosm: dosmQ2.source.url, ilo: iloFile.source.url, esco: 'https://esco.ec.europa.eu/' };
+
+/**
+ * Fictional groups for the Team view: an HR manager's team and a career
+ * centre's graduating class (target groups 3 and 4 in the brief). A member
+ * either holds all essential skills of a role (roleId) or a listed set.
+ */
+export type TeamMember = { name: string; roleId: string | null; skillLabels: string[] | null };
+export type Team = { id: string; name: string; viewer: string; description: string; members: TeamMember[] };
+export const teams: Team[] = [
+  {
+    id: 'finance-team',
+    name: 'Finance team',
+    viewer: 'HR / learning and development manager',
+    description: 'A fictional five-person finance team at a mid-sized firm. Which moves fit the team, and which skills should a training budget go to first?',
+    members: [
+      { name: 'Aina', roleId: 'accounting-assistant', skillLabels: null },
+      { name: 'Ravi', roleId: 'billing-clerk', skillLabels: null },
+      { name: 'Mei Ling', roleId: 'bookkeeper', skillLabels: null },
+      { name: 'Farah', roleId: 'accounting-assistant', skillLabels: null },
+      { name: 'Daniel', roleId: 'accountant', skillLabels: null },
+    ],
+  },
+  {
+    id: 'graduating-class',
+    name: 'Graduating class',
+    viewer: 'University or TVET career centre',
+    description: 'Three fictional graduates advised by one career centre. Which roles fit each of them, and which skills is the whole class missing?',
+    members: [
+      { name: 'Hakim', roleId: null, skillLabels: personas[1].skillLabels },
+      { name: 'Siti', roleId: null, skillLabels: ['economics', 'microeconomics', 'macroeconomics', 'business communication', 'market research', 'conduct qualitative research', 'statistics', 'build business relationships'] },
+      { name: 'Wei Jie', roleId: null, skillLabels: ['computer programming', 'use databases', 'query languages', 'debug software', 'web services', 'digital data processing'] },
+    ],
+  },
+];
+
+export function memberSkills(m: TeamMember): Set<string> {
+  return m.skillLabels
+    ? new Set(m.skillLabels.map((label) => allSkills.find((s) => s.label === label)!.uri))
+    : new Set(roleById(m.roleId)!.essentialSkills.map((s) => s.uri));
+}
