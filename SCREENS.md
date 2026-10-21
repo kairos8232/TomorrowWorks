@@ -50,6 +50,12 @@ My career (guided, step bar on top)      The job market (browse any time)
 - **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; **How to read this** (Score, Skill fit, Demand, AI resilience, Now — in plain words, DOSM/ILO as abbreviations with full names); controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now"; ▲▼ after a switch; expandable rows (facts under columns, *You have* / *To build*, ESCO link).
 - If there are no skills: a short prompt to add skills or try Aina.
 
+## SDG links (all career screens)
+
+- Your moves: each expanded row shows the role's SDG target badges (goal colour stripe, links to sdgs.un.org) with the reason; *Highlight roles linked to a goal* chips (7, 8, 9, 12, 13, 16, 17) mark rows linked through the role or its essential skills, without changing scores.
+- Your plan: *How this move connects to the SDGs* panel: role targets with reasons, then *Skills you would build* grouped by target with counts and names; note on 4.4 and that links are connections, not measured impact.
+- Team view: the same panel for the selected role's shared gaps.
+
 ## 3. Your plan
 
 - **Entry:** *Plan this move* in an expanded row of Your moves, or the step bar (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.

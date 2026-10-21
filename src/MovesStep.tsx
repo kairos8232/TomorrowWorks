@@ -5,6 +5,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ilo, personaById, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
 import { whatChanged } from './changes';
 import { interestData, interestFit, topTypes, type InterestType } from './interests';
+import { roleSdgs, sdgData, skillSdgs } from './sdg';
+import { RoleSdgLine } from './SdgViews';
 import { recommendMoves, scenarios, type InterestFn, type RoleScore, type ScenarioId } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 
@@ -39,6 +41,12 @@ function SkillList({ title, empty, children }: { title: string; empty: string; c
   </div>;
 }
 
+/** True when the role itself, or one of its essential skills, links to the goal. */
+function linkedToGoal(role: RoleScore['role'], goal: string) {
+  return roleSdgs(role.id).some((l) => sdgData.targets[l.target].goal === goal)
+    || role.essentialSkills.some((s) => skillSdgs(s).some((l) => l.target !== '4.4' && sdgData.targets[l.target].goal === goal));
+}
+
 /** Which kinds of work this role involves (job tag / O*NET), and how that meets the person's picks. */
 function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[] }) {
   const t = useT();
@@ -54,7 +62,7 @@ function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[]
   </p>;
 }
 
-function LedgerRow({ result, rank, delta, onPlan, picks }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void; picks: InterestType[] }) {
+function LedgerRow({ result, rank, delta, onPlan, picks, goal }: { result: RoleScore; rank: number | null; delta?: number; onPlan?: () => void; picks: InterestType[]; goal: string | null }) {
   const t = useT();
   const { role, fit, demand, resilience } = result;
   const [open, setOpen] = useState(false);
@@ -62,7 +70,7 @@ function LedgerRow({ result, rank, delta, onPlan, picks }: { result: RoleScore; 
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
     <button type="button" className="ledger-line" onClick={() => setOpen(!open)} aria-expanded={open}>
       <span className="rank">{rank === null ? t('Now') : rank}</span>
-      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}</small></span>
+      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goal && linkedToGoal(role, goal) ? <em className="fits goal" style={{ color: sdgData.goals[goal].colour }}>{t('linked to SDG {n}', { n: goal })}</em> : null}</small></span>
       <Part value={part('F')} label={t('Skill fit')} area="f" />
       <Part value={part('D')} label={t('Demand')} area="d" />
       <Part value={part('R')} label={t('AI resilience')} area="r" />
@@ -83,6 +91,7 @@ function LedgerRow({ result, rank, delta, onPlan, picks }: { result: RoleScore; 
           {fit.missing.map((s) => <span className="skill-tag skill-gap" key={s.uri}>{s.label}</span>)}
         </SkillList>
       </div>
+      <RoleSdgLine roleId={role.id} />
       <InterestLine roleId={role.id} picks={picks} />
       <div className="detail-actions">
         {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
@@ -128,6 +137,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
   const [useInterests, setUseInterests] = useState(false);
+  const [goal, setGoal] = useState<string | null>(null);
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
   const picks = profile.interests;
@@ -195,11 +205,16 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
             {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
         </fieldset>
       </div>
+      <div className="goal-pick" role="group" aria-label={t('Highlight roles linked to a goal')}>
+        <span>{t('Highlight roles linked to a goal')}</span>
+        {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => <button key={g} type="button" aria-pressed={goal === g} className={`goal-chip${goal === g ? ' on' : ''}`} style={{ borderColor: info.colour, ...(goal === g ? { background: info.colour, color: '#ffffff' } : {}) }} onClick={() => setGoal(goal === g ? null : g)} title={t(info.name)}>{g}</button>)}
+        {goal && <span className="note">{t(sdgData.goals[goal].name)}. {t('This highlights; it does not change scores.')}</span>}
+      </div>
       <p className="note">{t(scenario.assumption)} {interest ? `${t('Your interests count for one sixth of each score.')} ` : ''}{t('Try switching: the arrows show how each score moves.')}</p>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
-        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} picks={picks} />}
-        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} picks={picks} />)}
+        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} picks={picks} goal={goal} />}
+        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} picks={picks} goal={goal} />)}
       </ol>
       <p className="note">{t('Select a role to see the skills you have and the skills to build, then plan the move.')}</p>
     </section>

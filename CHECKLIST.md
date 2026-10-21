@@ -261,10 +261,10 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 11 — Explain SDG connections
 
-- [ ] Map each recommended role to at least one relevant SDG.
-- [ ] Map each recommended skill to at least one relevant SDG.
-- [ ] Explain each connection in plain language.
-- [ ] Remove decorative or unsupported mappings.
+- [x] Map each recommended role to at least one relevant SDG. (`data/sdg/sdg-links.json`: 1–2 targets per role, reason tied to its ESCO essential skills.)
+- [x] Map each recommended skill to at least one relevant SDG. (Rules in `src/sdg.ts`: wording + ESCO green/digital flags; every skill also counts towards 4.4.)
+- [x] Explain each connection in plain language. (Reason shown with every role link and every skill rule.)
+- [ ] Remove decorative or unsupported mappings. *Team review of `data/sdg/sdg-links.json` pending (drafted with Claude 21 Oct).*
 
 **Done when:** The user can understand how the chosen pathway relates to the SDGs.  
 **Commit focus:** SDG mappings and explanations.
@@ -305,6 +305,6 @@ These are ideas from the Domain 1 brief, not submission blockers. Pick them only
 - [ ] Additional language support and a low-bandwidth mode.
 - [ ] Learner progress tracking or skill badges.
 - [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; "Is this fair?" panel on Your moves.)
-- [ ] Aggregated SDG contribution view for a person, organisation, or region.
+- [x] Aggregated SDG contribution view for a person, organisation, or region. (Your plan: per person; Team view: per team or class.)
 
 Additional APIs in [API_PLAN.md](API_PLAN.md) are also optional unless Stage 1 selects one as the required updatable source.

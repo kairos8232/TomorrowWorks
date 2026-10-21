@@ -8,6 +8,7 @@ import type { Resource } from './pathway';
 import { scenarios } from './scoring';
 import { sharedGaps, teamGrid } from './team';
 import { useT } from './i18n';
+import { SdgContribution } from './SdgViews';
 
 const resources = resourcesFile.resources as Resource[];
 
@@ -65,6 +66,7 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
       </ol>}
       {shared.gaps.length > 12 && <p className="note">{t('Showing the 12 most shared of {n} gaps.', { n: shared.gaps.length })}</p>}
     </section>
+    <SdgContribution roleId={target.id} skills={shared.gaps.map((g) => g.skill)} heading={t('What training this group would contribute to the SDGs')} />
     <p className="note">{t('All people here are fictional. In a real deployment each person would confirm their own skills; the manager or adviser sees the group view, not anyone’s CV.')}</p>
   </div>;
 }

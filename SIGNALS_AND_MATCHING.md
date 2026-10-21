@@ -212,6 +212,15 @@ The brief's intake asks for "skills, experience and interests". Interests use Ho
 - **Rule** (`src/interests.ts`): per pick, 1 if it is one of the role's two highest types (ties count), 0.5 if third, else 0; interest fit = average over picks.
 - **Score:** only when the person turns on *Include in ranking* on Your moves. Then `I` joins F, D, R with weight 0.2 before rescaling (so 1/6 of the score). Off by default, so the main score stays skills + market data. Tests: `src/interests.test.ts`.
 
+## SDG links (stage 11, added 21 Oct 2026)
+
+Data: `data/sdg/sdg-links.json`; rule: `src/sdg.ts`; tests: `src/sdg.test.ts`. Brief targets: 4.4, 4.3, 8.2, 8.5.
+
+- **Roles:** 1–2 UN targets each, written by hand with a reason tied to the role's own ESCO essential skills (e.g. accountant → 16.6 and 16.5 because *ensure compliance with accounting conventions* and *fraud detection* are essential skills; sustainability manager → 12.6 and 13.2; data analyst → 17.18 and 9.5). The three clerical roles → 8.5, because they are among the most AI-exposed in the ILO index and the product exists to move people from them into resilient work.
+- **Skills:** fixed patterns on the ESCO label (energy → 7.2/7.3; carbon, emission, climate → 13.2; waste, recycling, circular → 12.5; sustainability reporting, CSR → 12.6; awareness, training → 12.8; fraud → 16.5; statutory, conventions → 16.6; tax → 17.1; data quality, statistics → 17.18); any other ESCO **green** skill → Goal 12; ESCO **digital** skills → 4.4 (indicator 4.4.1 counts ICT skills). Every skill also counts towards 4.4, stated once rather than tagged on each skill.
+- **Where the user sees it:** reasons on each role in Your moves; *Highlight roles linked to a goal* (highlights only, never changes scores); *How this move connects to the SDGs* in Your plan (targets of the skills to build, with counts); the same summed for a team or class in Team view.
+- **Honesty:** links show a connection, not a measured impact. Drafted with Claude; team review pending before submission.
+
 ## Skills radar (rising / declining skills)
 
 A skill's trend is derived, not invented: average `D` and average `R` across the roles in `roles.json` that list it. A skill shows as **rising** when both averages are above 0.5, **at risk** when both are below. Each skill links to the roles and source rows behind it.

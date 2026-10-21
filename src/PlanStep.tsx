@@ -8,6 +8,7 @@ import { ilo, personaById, roleById, roles, snapshots, transferable, type Profil
 import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 import { useT, useTx } from './i18n';
+import { SdgContribution } from './SdgViews';
 
 const resources = resourcesFile.resources as Resource[];
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
@@ -119,6 +120,8 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           </dl>
         </details>
       </>}
+
+    <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('How this move connects to the SDGs')} />
 
     <NossRoute roleId={role.id} />
   </div>;
