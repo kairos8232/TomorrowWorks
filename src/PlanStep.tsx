@@ -9,7 +9,7 @@ import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 
 const resources = resourcesFile.resources as Resource[];
-type NossEntry = { code: string; title: string; level: number; source: string };
+type NossEntry = { code: string; title: string; level: number; source: string; page: number };
 type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
 const nossRoles = nossFile.roles as Record<string, NossRole>;
 const nossSources = nossFile.sources as Record<string, { name: string; url: string }>;
@@ -25,11 +25,11 @@ function NossRoute({ roleId }: { roleId: string }) {
   return <section className="panel plan-noss" aria-labelledby="noss">
     <h2 id="noss">Malaysian certification route</h2>
     {!entry || entry.noss.length === 0
-      ? <p>No matching National Occupational Skills Standard (NOSS) found in the registers we checked.</p>
+      ? <p>No matching National Occupational Skills Standard (NOSS) in the current JPK register (January 2025).</p>
       : <>
         <ul className="noss-list">{entry.noss.map((n) => <li key={n.code}>
           <strong>SKM Level {n.level}: {n.title}</strong>
-          <span>NOSS {n.code} · <a href={nossSources[n.source].url} target="_blank" rel="noreferrer">listed in {n.source === 'jpa2024' ? 'JPA list, Dec 2024' : 'JPK register, Nov 2015'}</a></span>
+          <span>NOSS {n.code} · <a href={`${nossSources[n.source].url}#page=${n.page}`} target="_blank" rel="noreferrer">JPK register, Jan 2025, p. {n.page}</a></span>
         </li>)}</ul>
         <p className="note">{entry.match === 'related' ? `A related standard, not the same job. ${entry.note ?? ''}` : 'Closest standard by title.'} An SKM is earned at a JPK-accredited centre or through recognition of prior learning (PPT). It is one route, not a requirement for the job. Check the code’s current status with <abbr title="Jabatan Pembangunan Kemahiran">JPK</abbr> before enrolling.</p>
       </>}

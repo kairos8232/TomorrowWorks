@@ -65,7 +65,7 @@ describe('real resources (data/pathway/resources.json)', () => {
 describe('Malaysian certification route (data/pathway/noss.json)', () => {
   const noss = nossFile as {
     sources: Record<string, { url: string }>;
-    roles: Record<string, { match: string; noss: { code: string; level: number; source: string }[] }>;
+    roles: Record<string, { match: string; noss: { code: string; level: number; source: string; page: number }[] }>;
   };
   it('every role has an entry, and "none" means no codes are shown', () => {
     for (const r of roles) {
@@ -79,6 +79,7 @@ describe('Malaysian certification route (data/pathway/noss.json)', () => {
       expect(n.code).toMatch(/^[A-Z]+\d*-\d{3}-\d(:\d{4})?$/);
       expect(Number(n.code.split('-')[2][0])).toBe(n.level);
       expect(noss.sources[n.source]?.url).toMatch(/^https:\/\//);
+      expect(n.page).toBeGreaterThan(0);
     }
   });
 });

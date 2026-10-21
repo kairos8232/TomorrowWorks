@@ -254,8 +254,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Link each learning step back to the missing skill it addresses. (*Builds* tags on each step.)
 
 - [x] **10d** For each role, look up a matching NOSS (JPK) by hand and record code, title, SKM level and link, or "no matching NOSS found"; show it as the Malaysian certification route without claiming it is required.
-  - Done 21 Oct 2026 in `data/pathway/noss.json` from the JPA SKPK list (1 Dec 2024) and the JPK NOSS register (Nov 2015). Close: accounting roles → FB-100-3:2012 Perakaunan (L3); software developer → IT-010-3:2016 / IT-010-4:2013. Related: data analyst → IT-121-4:2011 Database Programming. None found: accountant, financial analyst, business analyst, sustainability manager.
-  - [ ] Open: the current JPK register (Daftar Standard, 22 Jan 2025) could only be read up to section C from here. Carson to check sections J, K, M, N (about pp. 110–153) and D/E by hand for newer codes and for the four "none" roles.
+  - Done 21 Oct 2026 in `data/pathway/noss.json` from the current JPK register (Daftar Standard, 22 Jan 2025, supplied by Carson; page numbers recorded). Close: billing clerk, accounting assistant, bookkeeper → FB-100-3/4:2012 Perakaunan; data analyst → IT-082-4/5:2016 Data Mining; software developer → J620-002-4/5:2020 Front-End / Full Stack, IT-010-3:2016. Related: accountant → FB-100-5:2012; financial analyst → K661-004-4/5:2025 Financial Paraplanning; sustainability manager → M711-005-5:2019 Energy Audit Management. None: business analyst.
 
 **Done when:** The sample user can follow a practical plan with working resources.  
 **Commit focus:** Learning-plan logic and display.
