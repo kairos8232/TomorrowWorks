@@ -50,6 +50,8 @@ Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Tab
 
 `scripts/import_lfs_month.py` → `data/sources/opendosm-lfs-month.json` and `scripts/import_gdelt_news.py` → `data/sources/gdelt-news.json` need internet that Claude's workspace does not have (both hosts are blocked); Carson runs them on his Mac. The committed files start as empty snapshots, and the UI shows "not imported yet". News never feeds scores.
 
+Courses at scale: `scripts/import_coursera_catalog.py` (Carson's Mac, stdlib) → `data/raw/coursera-catalog.json` (gitignored; ~25,000 courses with Coursera's own text). `scripts/match_courses_runpod.py` (Mac, numpy, RunPod key from env/.env) embeds them on RunPod Job B, compares with the Job A ESCO vectors, and writes `data/derived/coursera-skill-matches.json` (name, link, stated workload, similarity only) plus `coursera-spotcheck.md`. AI-matched courses are labelled as not hand-checked; `--fake N` tests offline.
+
 `scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
 
 Server: `server/index.mjs` (no dependencies) serves `dist/` and `/api/skill-search`; `server/search.mjs` loads the RunPod vectors and ranks skills (tests in `server/search.test.mjs`). The RunPod key is read from env (Replit Secrets) only. Replit publishes as **Autoscale**.
