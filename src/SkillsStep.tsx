@@ -48,11 +48,11 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     {profile.held.has(s.uri) ? '✓ ' : '+ '}{s.label}{extra}
   </button>;
 
-  return <div className="step-body">
-    <section className="panel">
-      <h2>{t('Your current job')}</h2>
-      <p className="note">{t('Shown as “Now” so you can compare. It is never recommended back to you.')}</p>
-      <select value={profile.currentRoleId ?? ''} onChange={(e) => update({ currentRoleId: e.target.value || null })} aria-label="Your current job">
+  return <div className="step-body skills-body">
+    <section className="panel job-panel">
+      <div><h2>{t('Your current job')}</h2>
+        <p className="note">{t('Shown as “Now” so you can compare. It is never recommended back to you.')}</p></div>
+      <select value={profile.currentRoleId ?? ''} onChange={(e) => update({ currentRoleId: e.target.value || null })} aria-label={t('Your current job')}>
         <option value="">{t('Not in this list')}</option>
         {roles.map((r) => <option key={r.id} value={r.id}>{roleTitle(r.title)}</option>)}
       </select>
@@ -71,12 +71,6 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       {listHits.length > 0 && <div className="tag-row">{listHits.map((s) => pick(s))}</div>}
     </section>
 
-    <section className="panel">
-      <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
-      {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
-        : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
-    </section>
-
     <section className="panel" aria-labelledby="enjoy">
       <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
       <p className="note">{t('Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
@@ -90,9 +84,14 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       })}</div>
     </section>
 
-    <div className="step-actions">
-      <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t('See my moves')}</button>
-      {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
-    </div>
+    <section className="panel selected-skills">
+      <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
+      {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
+        : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
+      <div className="step-actions">
+        <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t('See my moves')}</button>
+        {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
+      </div>
+    </section>
   </div>;
 }

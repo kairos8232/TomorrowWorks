@@ -108,21 +108,20 @@ function WhatChanged({ profile, scenarioId, extras }: { profile: Profile; scenar
   }, [profile, scenarioId, extras]);
   const latest = quarter(snapshots.q2.source.latestQuarter);
   const earlier = quarter(snapshots.q1.source.latestQuarter);
-  if (changes.length === 0) return <section className="what-changed"><h2>{t('What changed with {q} job-ad data', { q: latest })}</h2><p className="note">{t('Nothing moved compared with {q} data.', { q: earlier })}</p></section>;
+  if (changes.length === 0) return <details className="what-changed"><summary>{t('What changed with {q} job-ad data', { q: latest })}</summary><p className="note">{t('Nothing moved compared with {q} data.', { q: earlier })}</p></details>;
   const rankMoves = changes.filter((c) => c.rankBefore !== c.rankAfter).length;
   const allDown = changes.every((c) => c.scoreAfter < c.scoreBefore);
   const shown = all ? changes : changes.slice(0, 3);
-  return <section className="what-changed" aria-labelledby="changed">
-    <h2 id="changed">{t('What changed with {q} job-ad data', { q: latest })}</h2>
-    <p>{allDown ? `${t('Online job ads fell in every occupation group in {q}, so every score dropped.', { q: latest })} ` : ''}{rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })}</p>
+  return <details className="what-changed">
+    <summary><strong>{t('What changed with {q} job-ad data', { q: latest })}</strong><span>{rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })}</span></summary>
+    {allDown && <p>{t('Online job ads fell in every occupation group in {q}, so every score dropped.', { q: latest })}</p>}
     <ul>{shown.map((c) => <li key={c.role.id}>
       <strong className="cap">{c.role.title}</strong>{' '}
       {c.rankBefore !== c.rankAfter ? <span className={c.rankAfter < c.rankBefore ? 'up' : 'down'}>{t('#{a} to #{b}', { a: c.rankBefore, b: c.rankAfter })}</span> : <span>{t('stays #{n}', { n: c.rankAfter })}</span>}, {t('score {a} to {b}', { a: c.scoreBefore, b: c.scoreAfter })}.{' '}
       <span className="note">{t('Job ads for {group}: {now} in {q}, after {before} in {earlier}.', { group: t(c.group ?? ''), now: signed(c.changeAfter), q: latest, before: signed(c.changeBefore), earlier })}</span>
     </li>)}</ul>
     {changes.length > 3 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('Show all {n}', { n: changes.length })}</button>}
-    <p className="note">{t('Same skills and assumption, only the DOSM data differs. When a new quarter is imported, this compares it with the one before.')}</p>
-  </section>;
+  </details>;
 }
 
 export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
@@ -182,16 +181,6 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       </dl>
     </details>
 
-    <details className="how-to-read fairness">
-      <summary>{t('Is this fair?')}</summary>
-      <dl>
-        <div><dt>{t('Used')}</dt><dd>{t('Only the skills you confirmed, each role’s ESCO skills, DOSM job ads for the role’s occupation group, and ILO’s AI exposure for the role.')}</dd></div>
-        <div><dt>{t('Never asked')}</dt><dd>{t('Age, gender, ethnicity, religion, name, where you live or which school you went to. The app has no place to store them.')}</dd></div>
-        <div><dt>{t('Checked')}</dt><dd>{t('Automated tests prove that the same skills always give the same scores, whoever holds them and in whatever order they were added, and that your current job only takes that role off the list.')}</dd></div>
-        <div><dt>{t('Limits')}</dt><dd>{t('The sources can carry their own bias: job ads favour some kinds of work and ESCO describes roles from a European view. Scores support your decision; they do not decide it.')}</dd></div>
-      </dl>
-    </details>
-
     <section className="ledger" aria-label="Ranked moves">
       <div className="ledger-controls">
         <fieldset><legend>{t('Job-ad data')}</legend>
@@ -215,14 +204,22 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
       </div>
       {goals.length > 0 && <p className="note">{goals.map((g) => `${g}. ${t(sdgData.goals[g].name)}`).join(' · ')}{useGoals ? '' : ` — ${t('highlighted only; switch on to count them in the ranking.')}`}</p>}
-      <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? `${t('Your choices count for one sixth of each score.')} ` : extrasOn === 2 ? `${t('Your interests and goals together count for two sevenths of each score.')} ` : ''}{t('Try switching: the arrows show how each score moves.')}</p>
+      <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} picks={picks} goals={goals} />}
         {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onPlan={() => onPlan(m.role.id)} picks={picks} goals={goals} />)}
       </ol>
-      <p className="note">{t('Select a role to see the skills you have and the skills to build, then plan the move.')}</p>
     </section>
+    <details className="how-to-read fairness">
+      <summary>{t('Is this fair?')}</summary>
+      <dl>
+        <div><dt>{t('Used')}</dt><dd>{t('Only the skills you confirmed, each role’s ESCO skills, DOSM job ads for the role’s occupation group, and ILO’s AI exposure for the role.')}</dd></div>
+        <div><dt>{t('Never asked')}</dt><dd>{t('Age, gender, ethnicity, religion, name, where you live or which school you went to. The app has no place to store them.')}</dd></div>
+        <div><dt>{t('Checked')}</dt><dd>{t('Automated tests prove that the same skills always give the same scores, whoever holds them and in whatever order they were added, and that your current job only takes that role off the list.')}</dd></div>
+        <div><dt>{t('Limits')}</dt><dd>{t('The sources can carry their own bias: job ads favour some kinds of work and ESCO describes roles from a European view. Scores support your decision; they do not decide it.')}</dd></div>
+      </dl>
+    </details>
   </div>;
 }
 
