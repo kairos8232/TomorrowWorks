@@ -46,7 +46,9 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
 
     <section className="ledger" aria-labelledby="heat">
       <h2 id="heat" className="section-title">{t('Who fits which role')}</h2>
-      <p className="note">{t('Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually). “Now” marks their current job.')}</p>
+      <p className="note">{members.some((m) => m.roleId)
+        ? t('Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually). “Now” marks their current job.')
+        : t('Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually).')}</p>
       <div className="heat-scroll">
         <table className="heatmap">
           <thead><tr><th scope="col">{t('Person')}</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => setTargetId(r.id)}>{roleTitle(r.title)}</button></th>)}</tr></thead>
@@ -57,7 +59,7 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
                 {c.current ? t('Now') : c.result.score100}
               </td>)}
             </tr>)}
-            <tr className="heat-avg"><th scope="row">{t('Average')}<small>{t('moves only')}</small></th>
+            <tr className="heat-avg"><th scope="row">{t('Average')}{members.some((m) => m.roleId) && <small>{t('moves only')}</small>}</th>
               {grid.averages.map((a) => <td key={a.role.id}>{a.average ?? '–'}</td>)}</tr>
           </tbody>
         </table>

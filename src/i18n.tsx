@@ -557,6 +557,7 @@ const dict: Record<string, Entry> = {
   'Who lacks each skill ({n} gaps)': { ms: 'Siapa yang kekurangan setiap kemahiran ({n} jurang)', zh: '每项技能谁欠缺（{n} 项缺口）' },
   'All {n} lack': { ms: 'Kesemua {n} kekurangan', zh: '全部 {n} 人欠缺' },
   '{n} of {m} lack': { ms: '{n} daripada {m} kekurangan', zh: '{m} 人中 {n} 人欠缺' },
+  'Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually).': { ms: 'Setiap sel ialah skor orang itu untuk peranan tersebut, daripada 100, menggunakan peraturan yang sama seperti Langkah anda (iklan kerja S2 2026, AI mengubah kerja secara beransur-ansur).', zh: '每个格子是该人在该职位上的得分（满分 100），与“你的转岗方向”使用相同规则（2026 年第二季度招聘广告，AI 逐步改变工作）。' },
 };
 
 const LangContext = createContext<Lang>('en');
