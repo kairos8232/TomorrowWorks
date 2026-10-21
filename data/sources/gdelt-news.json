@@ -1,0 +1,14 @@
+{
+  "source": {
+    "name": "GDELT DOC 2.0 API (news metadata)",
+    "publisher": "The GDELT Project",
+    "url": "https://www.gdeltproject.org/",
+    "terms": "https://gdeltproject.org/about.html",
+    "retrievedAt": null,
+    "window": "last 4 weeks before retrieval",
+    "geography": "News outlets located in Malaysia (GDELT sourcecountry:MY)",
+    "measure": "Headlines reported; not job counts. Topic = the query that matched."
+  },
+  "queries": [],
+  "articles": []
+}

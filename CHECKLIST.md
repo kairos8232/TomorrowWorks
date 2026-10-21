@@ -198,8 +198,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [ ] Explain what “rising” and “declining” mean for the chosen source; label future claims as estimates.
 - [ ] Show a clear state for missing or stale data.
 
-- [ ] **6d** Import a dated snapshot of Malaysian workplace news from the GDELT DOC API (headline, outlet, date, link, topic tag) with a refresh script; show it on Workplace changes, labelled as reported issues that do not affect scores.
-- [ ] **6e** Show the latest OpenDOSM monthly Labour Force Survey figures (`lfs_month`) as context on Demand, with the month and source.
+- [ ] **6d** *(script `scripts/import_gdelt_news.py` and Workplace news page built 21 Oct; snapshot not yet imported — GDELT is unreachable from Claude's workspace, Carson runs it on his Mac)* Import a dated snapshot of Malaysian workplace news from the GDELT DOC API (headline, outlet, date, link, topic tag) with a refresh script; show it on Workplace changes, labelled as reported issues that do not affect scores.
+- [ ] **6e** *(script `scripts/import_lfs_month.py` and Job ads context line built 21 Oct; snapshot pending Carson's run)* Show the latest OpenDOSM monthly Labour Force Survey figures (`lfs_month`) as context on Demand, with the month and source.
 
 **Done when:** A visitor can browse before profiling and see the evidence behind each displayed claim.
 **Commit focus:** Public market display and source context.

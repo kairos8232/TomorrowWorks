@@ -11,7 +11,7 @@ Home ─┬─ "Try it as Aina" ───────────────▶
 My career (guided, step bar on top)      The job market (browse any time)
   1. Your skills   Current                 Job ads           Current
   2. Your moves    Current                 AI exposure       Current
-  3. Your plan     Soon                    Workplace news    Soon
+  3. Your plan     Soon                    Workplace news    Current (empty until imported)
                                            Skills in demand  Soon
 ```
 
@@ -38,12 +38,12 @@ Ordered missing skills for a chosen move, free or low-cost courses, and the Mala
 
 ## Job ads / AI exposure
 
-- **Job ads:** DOSM online job ads by occupation group, Q1 → Q2 2026, one table, source stated once.
+- **Job ads:** latest monthly unemployment rate from OpenDOSM as a context line (a different measure; hidden until imported), then DOSM online job ads by occupation group, Q1 → Q2 2026, one table, source stated once.
 - **AI exposure:** ILO exposure for the nine roles, one table, with the "not a job-loss forecast" note.
 
 ## Workplace news / Skills in demand — Soon
 
-- **Workplace news:** GDELT headlines from Malaysian outlets (stage 6d); context only, never changes scores.
+- **Workplace news (current):** GDELT headlines from Malaysian outlets with outlet, date and topic filter (AI and automation, Layoffs, Hiring, Reskilling); context only, never changes scores. Shows "No news imported yet" until `scripts/import_gdelt_news.py` has been run.
 - **Skills in demand:** not connected; role skills from ESCO appear in *Your moves*.
 
 ## Removed on 21 Oct 2026

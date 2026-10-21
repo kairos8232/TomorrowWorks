@@ -4,6 +4,7 @@ import { aina, ainaProfile, emptyProfile, ilo, roles, snapshots, sourceLinks, tr
 import { MovesStep, SourcesFooter } from './MovesStep';
 import { DemandTable, OutlookTable } from './PublicTables';
 import { recommendMoves, scenarios } from './scoring';
+import { NewsView } from './NewsView';
 import { SkillsStep } from './SkillsStep';
 import './styles.css';
 
@@ -18,7 +19,7 @@ const careerNav: NavItem[] = [
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
   { id: 'outlook', label: 'AI exposure', hint: 'How much AI could change' },
-  { id: 'news', label: 'Workplace news', hint: 'Latest reported changes', soon: true },
+  { id: 'news', label: 'Workplace news', hint: 'Latest reported changes' },
   { id: 'trending', label: 'Skills in demand', hint: 'Skills employers ask for', soon: true },
 ];
 
@@ -28,13 +29,12 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   plan: { title: 'Your plan', intro: 'The skills to learn next for a move you choose.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
-  news: { title: 'Workplace news', intro: 'Dated news about AI, hiring and layoffs in Malaysia.' },
+  news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
   trending: { title: 'Skills in demand', intro: 'Skills that Malaysian employers ask for.' },
 };
 
 const comingSoon: Partial<Record<Screen, string>> = {
   plan: 'Pick a move and get the missing skills in a sensible order, each with a free or low-cost course and, where one exists, the Malaysian SKM certification route. Being built this week.',
-  news: 'Headlines from Malaysian news outlets with dates and links, so you can see what is changing now. News is shown as context only and never changes your scores. Being built this week.',
   trending: 'Not connected yet. For now, each role’s skills come from ESCO and appear when you open a role in Your moves.',
 };
 
@@ -142,6 +142,7 @@ function App() {
           : <section className="panel"><h2>Add your skills first</h2><p className="note">Your moves are ranked from your skills.</p><button type="button" className="primary-button" onClick={() => go('skills')}>Add skills</button> <button type="button" className="text-button" onClick={() => start('aina')}>Or try it as Aina</button></section>)}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
+        {screen === 'news' && <NewsView />}
         {comingSoon[screen] && <section className="panel soon-panel"><h2>Coming soon</h2><p>{comingSoon[screen]}</p>{screen === 'plan' && <button type="button" className="text-button" onClick={() => go('moves')}>Back to your moves</button>}</section>}
         <SourcesFooter />
       </div>

@@ -146,7 +146,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .ledger-controls legend { font-size: 14px; font-weight: 600; color: #3a4450; margin-bottom: 6px; padding: 0; }
 .choice { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #c5ccc6; background: #fbfcfa; font-size: 15px; font-weight: 500; white-space: nowrap; cursor: pointer; }
 .choice:first-of-type { border-radius: 6px 0 0 6px; }
-.choice:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
+.choice:last-of-type { border-radius: 0 6px 6px 0; }
+.choice + .choice { border-left: 0; }
 .choice:has(input:checked) { background: #1c2430; border-color: #1c2430; color: #ffffff; }
 .choice input { accent-color: #1e6b4f; margin: 0; }
 .choice:focus-within { outline: 3px solid #2f8a66; outline-offset: 2px; }
@@ -275,3 +276,14 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .how-to-read dl div { grid-template-columns: 1fr; gap: 2px; }
   .panel select { min-width: 0; width: 100%; }
 }
+
+/* Labour context and news (21 Oct 2026) */
+.labour-context { border-left: 3px solid #1e6b4f; padding: 4px 0 4px 14px; margin-bottom: 20px; }
+.labour-context p { margin: 0; }
+.labour-context strong { font-size: 22px; }
+.labour-context .note { margin-top: 4px; }
+.news-list { list-style: none; margin: 16px 0 0; padding: 0; border-top: 2px solid #1c2430; }
+.news-list li { display: grid; gap: 4px; padding: 12px 0; border-bottom: 1px solid #d9ded9; }
+.news-list a { color: #1c2430; font-weight: 600; line-height: 1.45; text-decoration: none; }
+.news-list a:hover { text-decoration: underline; }
+.news-list .note { margin: 0; }

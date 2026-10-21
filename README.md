@@ -233,6 +233,8 @@ python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx 2026-08-18 <do
 python3 scripts/import_ilo_exposure.py "data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf" <download date>
 python3 scripts/build_roles.py "data/raw/ESCO dataset - v1.2.1 - classification - en - csv"
 python3 scripts/build_transferable_skills.py   # needs numpy; uses data/derived/esco/
+python3 scripts/import_lfs_month.py            # OpenDOSM monthly labour force (internet; standard library)
+python3 scripts/import_gdelt_news.py           # GDELT Malaysian workplace headlines (internet; standard library)
 ```
 
 The ESCO embedding runs on a RunPod GPU Pod; see [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required).

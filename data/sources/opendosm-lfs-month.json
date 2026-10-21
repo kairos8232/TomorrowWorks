@@ -1,0 +1,15 @@
+{
+  "source": {
+    "name": "OpenDOSM: Monthly Principal Labour Force Statistics (lfs_month)",
+    "publisher": "Department of Statistics Malaysia (DOSM)",
+    "url": "https://open.dosm.gov.my/data-catalogue/lfs_month",
+    "api": "https://api.data.gov.my/data-catalogue?id=lfs_month&sort=-date&limit=13",
+    "retrievedAt": null,
+    "latestMonth": null,
+    "geography": "Malaysia",
+    "measure": "Labour force counts in thousands of persons; unemployment and participation rates in %",
+    "coverage": "Survey estimates. From 2025 the series uses 2020 Census population (trend break with earlier data).",
+    "licence": "CC BY 4.0"
+  },
+  "months": []
+}

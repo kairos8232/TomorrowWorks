@@ -4,16 +4,33 @@ import dosmQ1 from '../data/sources/dosm-jmi-2026-q1.json';
 import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
 import iloFile from '../data/sources/ilo-genai-exposure-2025.json';
 import rolesFile from '../data/roles.json';
+import lfsFile from '../data/sources/opendosm-lfs-month.json';
 
 const pct = (now: number, before: number) => {
   const change = ((now - before) / before) * 100;
   return `${change >= 0 ? '+' : '−'}${Math.abs(change).toFixed(1)}%`;
 };
 
+type LfsMonth = { date: string; u_rate: number; lf_employed: number; lf_unemployed: number };
+const monthName = (d: string) => new Date(d).toLocaleDateString('en-MY', { month: 'long', year: 'numeric' });
+
+/** Latest monthly unemployment rate (OpenDOSM), shown as context above the job-ad table. */
+function LabourContext() {
+  const months = lfsFile.months as LfsMonth[];
+  if (months.length === 0) return null;
+  const [latest] = months;
+  const yearAgo = months.find((m) => m.date.slice(0, 4) === String(Number(latest.date.slice(0, 4)) - 1) && m.date.slice(5, 7) === latest.date.slice(5, 7));
+  return <div className="labour-context">
+    <p><strong>{latest.u_rate}%</strong> unemployment in {monthName(latest.date)}{yearAgo ? `, ${yearAgo.u_rate}% a year earlier` : ''}. {Math.round(latest.lf_employed).toLocaleString()} thousand people employed.</p>
+    <p className="note">Labour Force Survey, a different measure from job ads below. Source: <a href={lfsFile.source.url} target="_blank" rel="noreferrer">OpenDOSM</a>, retrieved {lfsFile.source.retrievedAt}, CC BY 4.0.</p>
+  </div>;
+}
+
 export function DemandTable() {
   const rows = dosmQ2.occupationMajorGroups.filter((g) => g.iscoMajorGroup && g.quarterly['2026-Q1'] != null && g.quarterly['2026-Q2'] != null);
   const src = dosmQ2.source;
   return <section className="data-table" aria-label="Online job ads by occupation group">
+    <LabourContext />
     <table>
       <thead><tr><th>Occupation group</th><th className="num">Q1 2026</th><th className="num">Q2 2026</th><th className="num">Change</th></tr></thead>
       <tbody>{rows.map((g) => {

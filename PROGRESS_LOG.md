@@ -4,6 +4,17 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (13:27–14:00 MYT) — News page and monthly labour context (data import pending)
+
+- **Network limit:** `api.gdeltproject.org` and `api.data.gov.my` are blocked from Claude's workspace and from the computer link's shell. So the importers are standard-library Python scripts for Carson to run on his Mac.
+- **`scripts/import_lfs_month.py`:** OpenDOSM `lfs_month`, latest 13 months → `data/sources/opendosm-lfs-month.json`. Fields and units confirmed from the API and the catalogue page (counts in thousands; rates in %; CC BY 4.0; next update 11 Nov 2026; trend break from 2025 due to the 2020 Census). A read of the API showed August 2026 unemployment at 2.9%; this is not committed until the script runs.
+- **`scripts/import_gdelt_news.py`:** four topic queries (AI and automation, Layoffs, Hiring, Reskilling) on Malaysian outlets (`sourcecountry:MY`), last 4 weeks, 25 per topic, 6 s between requests; stores headline, link, outlet, language, date and matched topics only. GDELT's response could not be fetched here, so the field names follow its documentation and the script stops with a clear error if they differ.
+- **App:** *Workplace news* page (topic filter, outlet and date, "never changes your scores" note, GDELT credit) replaces the "Soon" page; *Job ads* shows the unemployment rate as a context line above the table. Both files are committed as empty snapshots, so the pages say "not imported yet" instead of showing anything invented.
+- **Checked** with temporary test data (removed before commit): both pages render, the topic filter works, no page errors. Build passes; 21 tests pass.
+- **Carson to run:** `python3 scripts/import_lfs_month.py` and `python3 scripts/import_gdelt_news.py`, then commit the two JSON files.
+
+---
+
 ## 21 Oct 2026 (13:26 MYT) — "Unverified" commit badges explained and fixed going forward
 
 - **Cause:** Claude's workspace signs commits with Claude's SSH key, but commits since 21 Oct 00:50 were made with the *committer* set to Carson. GitHub only verifies a signature against the committer's account, so they show **Unverified**. `03b3640` shows **Verified** because a rebase left Claude as committer.

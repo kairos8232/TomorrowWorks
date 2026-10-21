@@ -48,6 +48,8 @@ Key code: `src/main.tsx` (home, navigation, step bar, coming-soon pages), `src/d
 
 Data: raw sources in `data/raw/` (gitignored): DOSM JMI xlsx, ILO WP140 PDF (Table A1 via `pdftotext -layout`), ESCO v1.2.1 CSV folder. `scripts/import_ilo_exposure.py <pdf> <download date>` (needs pdftotext) writes `data/sources/ilo-genai-exposure-2025.json`. `runpod/embed_esco_skills.py` runs on a RunPod GPU Pod (`--dry-run` locally). `scripts/import_dosm_jmi.py <file> <release date> <download date>` (needs openpyxl) converts a DOSM JMI xlsx in `data/raw/` (gitignored) into `data/sources/dosm-jmi-<quarter>.json`. DOSM occupation data is by **major group only**; use quarter-on-quarter change, not year-on-year.
 
+`scripts/import_lfs_month.py` → `data/sources/opendosm-lfs-month.json` and `scripts/import_gdelt_news.py` → `data/sources/gdelt-news.json` need internet that Claude's workspace does not have (both hosts are blocked); Carson runs them on his Mac. The committed files start as empty snapshots, and the UI shows "not imported yet". News never feeds scores.
+
 `scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
 
 Server: `server/index.mjs` (no dependencies) serves `dist/` and `/api/skill-search`; `server/search.mjs` loads the RunPod vectors and ranks skills (tests in `server/search.test.mjs`). The RunPod key is read from env (Replit Secrets) only. Replit publishes as **Autoscale**.
