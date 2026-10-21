@@ -153,7 +153,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const [goals, setGoals] = useState<string[]>([]);
   const [useGoals, setUseGoals] = useState(false);
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null);
-  const [panel, setPanel] = useState<'ranking' | 'changes' | 'method' | 'preferences'>('ranking');
+  const [panel, setPanel] = useState<'ranking' | 'changes' | 'method'>('ranking');
   const snapshot = snapshots[snapshotId];
   const scenario = scenarios[scenarioId];
   const picks = profile.interests;
@@ -186,7 +186,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
 
   const selectedResult = selectedRoleId ? [current, ...moves].find((result) => result?.role.id === selectedRoleId) : null;
   const backToRanking = () => { setPanel('ranking'); setSelectedRoleId(null); window.scrollTo({ top: 0 }); };
-  const openPanel = (next: 'changes' | 'method' | 'preferences') => { setPanel(next); window.scrollTo({ top: 0 }); };
+  const openPanel = (next: 'changes' | 'method') => { setPanel(next); window.scrollTo({ top: 0 }); };
   if (selectedResult) {
     const rank = moves.findIndex((result) => result.role.id === selectedRoleId);
     return <div className="step-body"><RoleDetail result={selectedResult} rank={rank < 0 ? null : rank + 1} picks={picks}
@@ -195,29 +195,6 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   }
   if (panel === 'changes') return <div className="step-body"><ChangesView changes={changes} onBack={backToRanking} /></div>;
   if (panel === 'method') return <div className="step-body"><MethodView onBack={backToRanking} /></div>;
-  if (panel === 'preferences') return <div className="step-body"><section className="moves-focus preferences-view" aria-label={t('Personalise ranking')}>
-    <button type="button" className="text-button role-back" onClick={backToRanking} autoFocus>{t('Back to ranking')}</button>
-    <h2>{t('Personalise ranking')}</h2>
-    <p className="note">{t('Optional choices. Switch them on to change scores; selected goals also highlight linked roles.')}</p>
-    <div className="ranking-options-body">
-      <fieldset><legend>{t('Your interests')}</legend>
-        <label className={`toggle${picks.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />
-          {picks.length === 0 ? t('Pick them in Your skills first') : t('Include in ranking ({list})', { list: picks.map((x) => t(interestData.types[x].plain).toLowerCase()).join(', ') })}</label>
-      </fieldset>
-      <div className="goal-pick" role="group" aria-label={t('Goals you care about')}>
-        <span>{t('Goals you care about')}</span>
-        {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
-          const on = goals.includes(g);
-          return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }}
-            onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)}>{g}</button>;
-        })}
-        <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
-      </div>
-      {goals.length > 0 && <p className="note">{goals.map((g) => `${g}. ${t(sdgData.goals[g].name)}`).join(' · ')}{useGoals ? '' : ` — ${t('highlighted only; switch on to count them in the ranking.')}`}</p>}
-    </div>
-    <button type="button" className="primary-button" onClick={backToRanking}>{t('Show my moves')}</button>
-  </section></div>;
-
   const persona = personaById(profile.persona);
   const rankMoves = changes.filter((change) => change.rankBefore !== change.rankAfter).length;
   const allDown = changes.length > 0 && changes.every((change) => change.scoreAfter < change.scoreBefore);
@@ -242,9 +219,17 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         <fieldset><legend>{t('If AI changes work')}</legend>
           {(['moderate', 'fast'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="scenario" checked={scenarioId === id} onChange={() => setScenarioId(id)} />{id === 'moderate' ? t('Gradually') : t('Quickly')}</label>)}
         </fieldset>
-      </div>
-      <div className="moves-personalise">
-        <button type="button" className="secondary-button" onClick={() => openPanel('preferences')}>{t('Personalise ranking')}{extrasOn > 0 && <span className="option-count">{extrasOn}</span>}</button>
+        <fieldset className="ranking-personalise"><legend>{t('Personalise ranking')}</legend>
+          <label className={`toggle${picks.length === 0 ? ' off' : ''}`} title={picks.length ? picks.map((x) => t(interestData.types[x].plain)).join(', ') : t('Pick them in Your skills first')}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />{t('Interests')}{picks.length > 0 && <small>{picks.length}</small>}</label>
+          <div className="ranking-goals" role="group" aria-label={t('Goals you care about')}>
+            <span>{t('Goals')}</span>
+            {Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
+              const on = goals.includes(g);
+              return <button key={g} type="button" aria-pressed={on} className={`goal-chip${on ? ' on' : ''}`} style={{ borderColor: info.colour, ...(on ? { background: info.colour, color: '#ffffff' } : {}) }} onClick={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} title={t(info.name)} aria-label={`${g}: ${t(info.name)}`}>{g}</button>;
+            })}
+            <label className={`toggle${goals.length === 0 ? ' off' : ''}`}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Count in ranking')}</label>
+          </div>
+        </fieldset>
       </div>
       <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
       <p className="note moves-select-hint">{t('Select a role to see details.')}</p>

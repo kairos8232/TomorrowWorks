@@ -198,8 +198,12 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .moves-update { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 22px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 14px 18px; }
 .moves-update p { margin: 0; line-height: 1.5; }
 .moves-update > div { display: flex; flex-wrap: wrap; gap: 12px 22px; }
-.moves-personalise { margin-top: 18px; }
-.moves-personalise .secondary-button { padding: 9px 13px; }
+.ledger-controls .ranking-personalise { flex: 1 1 420px; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.ranking-personalise .toggle { padding: 8px 10px; white-space: nowrap; }
+.ranking-personalise .toggle small { color: #5d6873; font-size: 12px; }
+.ranking-goals { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+.ranking-goals > span { color: #5d6873; font-size: 14px; font-weight: 600; margin-right: 2px; }
+.ranking-goals .goal-chip { min-width: 30px; padding: 5px 6px; font-size: 13px; border-width: 1px; }
 .moves-select-hint { margin: 12px 0 -8px; }
 .moves-focus { display: grid; gap: 18px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 30px); }
 .moves-focus h2 { font-size: clamp(25px, 3vw, 34px); margin: 0; }
@@ -214,10 +218,6 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .method-sources { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; border-top: 1px solid #d9ded9; padding-top: 16px; }
 .method-sources h3 { flex-basis: 100%; }
 .moves-focus a { color: #1e6b4f; }
-.preferences-view .ranking-options-body { padding: 0; }
-.preferences-view fieldset { border: 0; padding: 0; margin: 0; }
-.preferences-view legend { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-.preferences-view .primary-button { justify-self: start; }
 @media (max-width: 860px) {
   .method-grid { grid-template-columns: 1fr; }
   .change-list li { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
