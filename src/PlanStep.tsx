@@ -48,22 +48,34 @@ function CourseCard({ n, title, url, meta, closes, label, primary, showNumber }:
   </li>;
 }
 
+/**
+ * Malaysian certification route as one compact, optional card under the courses.
+ * Not a numbered step: it is a qualification, not a course, and its skills are not mapped.
+ */
 function NossRoute({ roleId }: { roleId: string }) {
   const t = useT();
   const lang = useLang();
   const entry = nossRoles[roleId];
-  return <section className="panel plan-noss" aria-labelledby="noss">
-    <h2 id="noss">{t('Malaysian certification route')}</h2>
-    {!entry || entry.noss.length === 0
-      ? <p>{t('No matching National Occupational Skills Standard (NOSS) in the current JPK register (January 2025).')}</p>
-      : <>
-        <ul className="noss-list">{entry.noss.map((n) => <li key={n.code}>
-          <strong title={n.title}>{t('SKM Level {n}', { n: n.level })}: {lang === 'ms' ? n.title.replace(/ \([^)]*\)$/, '') : n.title.match(/\(([^)]*)\)$/)?.[1] ?? n.title}</strong>
-          <span>NOSS {n.code} · <a href={`${nossSources[n.source].url}#page=${n.page}`} target="_blank" rel="noreferrer">{t('JPK register, Jan 2025, p. {n}', { n: n.page })}</a></span>
-        </li>)}</ul>
-        <p className="note plan-noss-note">{entry.match === 'related' ? `${t('Related route, not the same job.')} ${entry.note ? t(entry.note) : ''}` : t('Closest standard by title.')} {t('Optional SKM route via a JPK-accredited centre or prior learning (PPT). Check the code with JPK before enrolling.')}</p>
-      </>}
-    <p className="note plan-noss-date">{t('Checked by hand on {date}.', { date: nossFile.checkedAt })}</p>
+  if (!entry || entry.noss.length === 0) {
+    return <p className="plan-noss-none note">{t('Malaysian certification: no matching NOSS standard in the current JPK register (January 2025).')}</p>;
+  }
+  // Show the Malay title in Bahasa Malaysia, the English one otherwise; merge levels that share a title.
+  const titleOf = (n: NossEntry) => (lang === 'ms' ? n.title.replace(/ \([^)]*\)$/, '') : n.title.match(/\(([^)]*)\)$/)?.[1] ?? n.title);
+  const groups = new Map<string, NossEntry[]>();
+  for (const n of entry.noss) groups.set(titleOf(n), [...(groups.get(titleOf(n)) ?? []), n]);
+  const first = entry.noss[0];
+  const levels = (list: NossEntry[]) => list.map((n) => n.level).sort().join(` ${t('or')} `);
+  return <section className="plan-noss-card" aria-labelledby="noss">
+    <div className="plan-course-head">
+      <div>
+        <span className="course-kind noss">{t('Malaysian certification · optional')}</span>
+        <h3 id="noss">{`SKM ${[...groups][0][0]} · ${t('Level')} ${levels([...groups][0][1])}`}</h3>
+        {groups.size > 1 && <p className="noss-also">{t('Also')}: {[...groups].slice(1).map(([title, list]) => `SKM ${title} · ${t('Level')} ${levels(list)}`).join(' · ')}</p>}
+      </div>
+      <a className="secondary-button plan-course-action" href={`${nossSources[first.source].url}#page=${first.page}`} target="_blank" rel="noreferrer">{t('View in JPK register')}</a>
+    </div>
+    <p className="plan-meta">NOSS {entry.noss.map((n) => n.code).join(', ')} · {t('JPK register, Jan 2025, p. {n}', { n: [...new Set(entry.noss.map((n) => n.page))].join(', ') })}</p>
+    <p className="note">{entry.match === 'related' ? `${t('Related route, not the same job.')} ${entry.note ? t(entry.note) : ''} ` : ''}{t('Optional SKM route via a JPK-accredited centre or prior learning (PPT). Check the code with JPK before enrolling.')} {t('Checked by hand on {date}.', { date: nossFile.checkedAt })}</p>
   </section>;
 }
 
@@ -133,10 +145,13 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           {plan.steps.length > 0 && t('Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.', { date: resourcesFile.checkedAt })}{' '}
           {suggested.steps.length > 0 && t('AI suggestions: RunPod compared {n} Coursera course descriptions with the remaining skills and ordered them the same way; not checked by hand, and match % is text similarity, not quality. Catalogue retrieved {date}; eligible Malaysians can get Coursera free for 3 months through Rakyat Digital.', { n: matches.method.coursesEmbedded.toLocaleString(), date: matches.method.catalogue.retrievedAt })}
         </p>
+
+        <NossRoute roleId={role.id} />
       </section>}
+
+    {plan.gaps.length === 0 && <NossRoute roleId={role.id} />}
 
     <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('This move and the SDGs')} compact />
 
-    <NossRoute roleId={role.id} />
   </div>;
 }

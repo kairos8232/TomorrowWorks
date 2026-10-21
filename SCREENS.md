@@ -52,6 +52,10 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Personalise ranking** is visible beside the data and scenario controls and wraps on narrower screens. Its interest switch is disabled until the person picks interests. Selected goals highlight linked roles; the separate switch adds them to the ranking. The note says how optional parts affect the score, and arrows show score changes. A role view shows its leading work interests, interest fit, and a job tag or O\*NET source link; rows with fit ≥ 75% show "fits your interests".
 - If there are no skills: a short prompt to add your own skills. Sample profiles remain available in View as.
 
+## Your plan: certification card
+
+- **Malaysian certification · optional** (one compact card under the course list, not a numbered step: it is a qualification, not a course, and its skills are not mapped): closest SKM standard and levels merged on one line (e.g. *SKM Accounting · Level 3 or 4*), other standards under *Also*, NOSS codes with JPK register pages, *View in JPK register*, and the optional/check-with-JPK note. Roles without a NOSS show one line instead of a card.
+
 ## SDG links (all career screens)
 
 - Your moves: each focused role view shows its SDG target badges (links to sdgs.un.org) with the reason; *Goals you care about* chips (7, 8, 9, 12, 13, 16, 17, several allowed) sit in **Personalise ranking** and mark rows "linked to SDG n" (through the role) or "skills linked to SDG n"; the *Count in ranking* switch (off by default) adds goal fit to the score, and the arrows show the change.

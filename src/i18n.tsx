@@ -469,6 +469,13 @@ const dict: Record<string, Entry> = {
   'No course found yet': { ms: 'Belum ada kursus ditemui', zh: '尚未找到课程' },
   'Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.': { ms: 'Kursus disemak: dibuka secara manual pada {date}; disusun mengikut bilangan jurang yang diliputi, kemudian harga dan jam yang dinyatakan.', zh: '已核实课程：于 {date} 人工打开核实；按涵盖的技能缺口数量排序，其次是价格和注明的时数。' },
   'AI suggestions: RunPod compared {n} Coursera course descriptions with the remaining skills and ordered them the same way; not checked by hand, and match % is text similarity, not quality. Catalogue retrieved {date}; eligible Malaysians can get Coursera free for 3 months through Rakyat Digital.': { ms: 'Cadangan AI: RunPod membandingkan {n} penerangan kursus Coursera dengan kemahiran yang tinggal dan menyusunnya dengan cara yang sama; belum disemak secara manual, dan padanan % ialah persamaan teks, bukan kualiti. Katalog diambil {date}; rakyat Malaysia yang layak boleh menggunakan Coursera percuma selama 3 bulan melalui Rakyat Digital.', zh: 'AI 推荐：RunPod 将 {n} 门 Coursera 课程介绍与剩余技能比较，并按同样方式排序；未经人工核实，匹配度是文本相似度，不代表质量。课程目录获取于 {date}；符合资格的马来西亚人可通过 Rakyat Digital 免费使用 Coursera 3 个月。' },
+  // Compact certification card (added 21 Oct 2026)
+  'Malaysian certification: no matching NOSS standard in the current JPK register (January 2025).': { ms: 'Pensijilan Malaysia: tiada standard NOSS yang sepadan dalam daftar JPK semasa (Januari 2025).', zh: '马来西亚认证：目前的 JPK 登记册（2025 年 1 月）中没有匹配的 NOSS 标准。' },
+  'or': { ms: 'atau', zh: '或' },
+  'Malaysian certification · optional': { ms: 'Pensijilan Malaysia · pilihan', zh: '马来西亚认证 · 可选' },
+  'Level': { ms: 'Tahap', zh: '级别' },
+  'View in JPK register': { ms: 'Lihat dalam daftar JPK', zh: '在 JPK 登记册中查看' },
+  'Also': { ms: 'Juga', zh: '另有' },
 };
 
 const LangContext = createContext<Lang>('en');
