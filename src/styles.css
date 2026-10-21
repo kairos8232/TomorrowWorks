@@ -663,3 +663,4 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .trio-col:first-child { padding-top: 0; border-top: 0; }
 }
 .trio-col .skill-tag { text-align: left; }
+.plan-noss-step .note { margin: 6px 0 0; } .plan-noss-step h3 { margin: 0 0 4px; } .plan-noss-step .tag-row .note { margin: 0; }

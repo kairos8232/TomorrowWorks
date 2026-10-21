@@ -549,6 +549,8 @@ const dict: Record<string, Entry> = {
   'Responsible consumption': { ms: 'Penggunaan bertanggungjawab', zh: '负责任消费' },
   'Strong institutions': { ms: 'Institusi yang kukuh', zh: '强有力的机构' },
   'Partnerships': { ms: 'Perkongsian', zh: '伙伴关系' },
+  'Certifies': { ms: 'Mengesahkan', zh: '认证' },
+  'the whole job, not single skills': { ms: 'keseluruhan pekerjaan, bukan kemahiran tunggal', zh: '整个职位，而非单项技能' },
 };
 
 const LangContext = createContext<Lang>('en');

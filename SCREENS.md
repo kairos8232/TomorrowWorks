@@ -54,7 +54,7 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## Your plan: certification card
 
-- **Malaysian certification · optional** (one compact card under the course list, not a numbered step: it is a qualification, not a course, and its skills are not mapped): closest SKM standard and levels merged on one line (e.g. *SKM Accounting · Level 3 or 4*), other standards under *Also*, NOSS codes with JPK register pages, *View in JPK register*, and the optional/check-with-JPK note. Roles without a NOSS show one line instead of a card.
+- **Malaysian certification · optional** (the last numbered step of the course list, labelled optional; instead of *Builds* it says *Certifies the whole job, not single skills*, because NOSS standards are not mapped to ESCO skills): closest SKM standard and levels merged on one line (e.g. *SKM Accounting · Level 3 or 4*), other standards under *Also*, NOSS codes with JPK register pages, *View in JPK register*, and the optional/check-with-JPK note. Roles without a NOSS get no step, only one line under the list.
 
 ## SDG links (all career screens)
 
