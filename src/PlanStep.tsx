@@ -14,22 +14,22 @@ import matchesFile from '../data/derived/coursera-skill-matches.json';
 
 const resources = resourcesFile.resources as Resource[];
 // AI-matched Coursera courses (RunPod, bge-m3); see scripts/match_courses_runpod.py.
-const matches = matchesFile as { method: { coursesEmbedded: number; catalogue: { retrievedAt: string } }; skills: Record<string, { courses: SuggestedCourse[] } | undefined> };
+export const matches = matchesFile as { method: { coursesEmbedded: number; catalogue: { retrievedAt: string } }; skills: Record<string, { courses: SuggestedCourse[] } | undefined> };
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
 type NossEntry = { code: string; title: string; level: number; source: string; page: number };
 type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
 const nossRoles = nossFile.roles as Record<string, NossRole>;
 const nossSources = nossFile.sources as Record<string, { name: string; url: string }>;
 
-function GapTag({ gap }: { gap: Gap }) {
+export function GapTag({ gap }: { gap: Gap }) {
   return gap.partly
     ? <span className="skill-tag related" title={`≈ ${gap.partly}`}>{gap.skill.label}<small>≈ {gap.partly}</small></span>
     : <span className="skill-tag skill-gap">{gap.skill.label}</span>;
 }
 
 /** One course in the plan. Checked and AI-suggested courses share this layout; only the label differs. */
-function CourseCard({ n, title, url, meta, closes, label, primary, showNumber }: {
-  n: number; title: string; url: string; meta: React.ReactNode; closes: Gap[]; label: React.ReactNode; primary: boolean; showNumber: boolean;
+export function CourseCard({ n, title, url, meta, closes, label, primary, showNumber, extra }: {
+  n: number; title: string; url: string; meta: React.ReactNode; closes: Gap[]; label: React.ReactNode; primary: boolean; showNumber: boolean; extra?: React.ReactNode;
 }) {
   const t = useT();
   return <li>
@@ -44,6 +44,7 @@ function CourseCard({ n, title, url, meta, closes, label, primary, showNumber }:
       </div>
       <p className="plan-meta">{meta}</p>
       <div className="tag-row"><span className="plan-closes">{t('Builds')}</span>{closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
+      {extra}
     </div>
   </li>;
 }

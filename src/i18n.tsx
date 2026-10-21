@@ -551,6 +551,10 @@ const dict: Record<string, Entry> = {
   'Partnerships': { ms: 'Perkongsian', zh: '伙伴关系' },
   'Certifies': { ms: 'Mengesahkan', zh: '认证' },
   'the whole job, not single skills': { ms: 'keseluruhan pekerjaan, bukan kemahiran tunggal', zh: '整个职位，而非单项技能' },
+  'Training plan for {role}': { ms: 'Pelan latihan untuk {role}', zh: '{role} 的培训计划' },
+  '{n} of {m} people would be moving into this role. They share {g} skill gaps; courses that cover the most of them come first.': { ms: '{n} daripada {m} orang akan beralih ke peranan ini. Mereka berkongsi {g} jurang kemahiran; kursus yang meliputi paling banyak didahulukan.', zh: '{m} 人中有 {n} 人会转入此职位。他们共有 {g} 项技能缺口；覆盖最多缺口的课程排在前面。' },
+  'Needed by {n} of {m}: {names}': { ms: 'Diperlukan oleh {n} daripada {m}: {names}', zh: '{m} 人中 {n} 人需要：{names}' },
+  'Who lacks each skill ({n} gaps)': { ms: 'Siapa yang kekurangan setiap kemahiran ({n} jurang)', zh: '每项技能谁欠缺（{n} 项缺口）' },
 };
 
 const LangContext = createContext<Lang>('en');

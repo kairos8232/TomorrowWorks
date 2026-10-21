@@ -76,7 +76,7 @@ My career (sidebar navigation)           The job market (browse any time)
 For HR / L&D managers (a fictional five-person finance team) and career centres (a fictional class of three graduates); brief target groups 3 and 4.
 - **Group** switch; a banner names who the view is for.
 - **Who fits which role:** heatmap, one row per person, one column per role; each cell shows that person's score (same rule as Your moves, Q2 2026, gradual AI change). The current job shows "Now". The last row averages the moves only. Shade reinforces the number; the number is always shown. Scrolls sideways on phones.
-- **Shared gaps for <role>:** selecting a role name lists its essential skills by how many movers lack them (names shown; "partly" for transferable), with the first checked course for each (free before paid), top 12.
+- **Training plan for <role>** (left) + **Team training and the SDGs** (right, sticky; stacks under 1100 px): selecting a role name groups the gaps the movers share into numbered course cards, using the same rule and cards as Your plan (`planForGaps`: checked courses first, then AI suggestions, first 4 then *Show all*), each with *Needed by n of m: names*. Gaps with no course are listed once. *Who lacks each skill (n gaps)* (collapsed) keeps the per-skill list with counts and names ("partly" for transferable).
 - Footer: everyone is fictional; in real use each person confirms their own skills and the manager sees the group view, not CVs.
 
 ## Job ads / AI exposure

@@ -672,3 +672,8 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .plan-layout .sdg-summary-list { grid-template-columns: 1fr; }
 .plan-layout .sdg-panel h2 { font-size: 18px; }
 @media (max-width: 1100px) { .plan-layout { grid-template-columns: 1fr; } .plan-layout > .sdg-panel { position: static; } }
+/* Team view: training plan grouped by course (same cards as Your plan), SDG on the right. */
+.team-plan h2 { margin: 0 0 4px; }
+.team-needs { margin: 8px 0 0; font-size: 13px; color: #5d6873; }
+.team-plan .gap-table li { grid-template-columns: minmax(160px, 1.4fr) 100px minmax(110px, 1fr); }
+.team-view > .plan-layout { margin-top: 0; }

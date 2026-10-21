@@ -4,7 +4,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
 import { ilo, memberSkills, roleTitle, roles, snapshots, teams, transferable, type Viewer } from './data';
-import type { Resource } from './pathway';
+import { planForGaps, suggestedSteps, type Gap, type Resource } from './pathway';
+import { CourseCard, GapTag, matches } from './PlanStep';
 import { scenarios } from './scoring';
 import { sharedGaps, teamGrid } from './team';
 import { useT } from './i18n';
@@ -25,6 +26,20 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
   useEffect(() => setTargetId(null), [team]);
   const target = roles.find((r) => r.id === targetId) ?? ranked[0].role;
   const shared = useMemo(() => sharedGaps(members, target, transferable, resources), [members, target]);
+  // Same course rule as Your plan, applied to the gaps the group shares (most shared first).
+  const course = useMemo(() => {
+    const gaps: Gap[] = shared.gaps.map((g) => ({ skill: g.skill, partly: null }));
+    const plan = planForGaps(gaps, resources);
+    return { plan, ai: suggestedSteps(plan.uncovered, matches.skills) };
+  }, [shared]);
+  const [showAllAi, setShowAllAi] = useState(false);
+  useEffect(() => setShowAllAi(false), [target]);
+  const whoNeeds = (closes: Gap[]) => {
+    const names = new Set(shared.gaps.filter((g) => closes.some((c) => c.skill.uri === g.skill.uri)).flatMap((g) => [...g.missing, ...g.partly]));
+    return <p className="team-needs">{t('Needed by {n} of {m}: {names}', { n: names.size, m: shared.movers, names: members.map((m) => m.name).filter((n) => names.has(n)).join(', ') })}</p>;
+  };
+  const aiShown = showAllAi ? course.ai.steps : course.ai.steps.slice(0, 4);
+  const total = course.plan.steps.length + course.ai.steps.length;
 
   return <div className="step-body team-view">
     <div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {t(team.description)}</p></div>
@@ -50,23 +65,42 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
       <p className="note">{t('Select a role name to see what the group would need to learn for it.')}</p>
     </section>
 
-    <section className="ledger" aria-labelledby="shared">
-      <h2 id="shared" className="section-title">{t('Shared gaps for {role}', { role: roleTitle(target.title) })}</h2>
-      <p className="note">{t('{n} of {m} people would be moving into this role. Skills most of them lack come first, with the first checked course that covers each (free before paid).', { n: shared.movers, m: members.length })}</p>
-      {shared.gaps.length === 0 ? <p>{t('No gaps: everyone already has these skills.')}</p> : <ol className="gap-table">
-        {shared.gaps.slice(0, 12).map((g) => {
-          const count = g.missing.length + g.partly.length;
-          return <li key={g.skill.uri}>
-            <span className="gap-name">{g.skill.label}</span>
-            <span className="gap-bar" aria-hidden="true"><span style={{ width: `${(count / shared.movers) * 100}%` }} /></span>
-            <span className="gap-count">{t('{n} of {m}', { n: count, m: shared.movers })}<small>{[...g.missing, ...g.partly.map((n) => t('{name} (partly)', { name: n }))].join(', ')}</small></span>
-            <span className="gap-course">{g.course ? <a href={g.course.url} target="_blank" rel="noreferrer">{g.course.title}</a> : <span className="note">{t('No checked course yet')}</span>}</span>
-          </li>;
-        })}
-      </ol>}
-      {shared.gaps.length > 12 && <p className="note">{t('Showing the 12 most shared of {n} gaps.', { n: shared.gaps.length })}</p>}
+    <div className="plan-layout">
+    <section className="panel team-plan" aria-labelledby="shared">
+      <h2 id="shared">{t('Training plan for {role}', { role: roleTitle(target.title) })}</h2>
+      <p className="note">{t('{n} of {m} people would be moving into this role. They share {g} skill gaps; courses that cover the most of them come first.', { n: shared.movers, m: members.length, g: shared.gaps.length })}</p>
+      {shared.gaps.length === 0 ? <p>{t('No gaps: everyone already has these skills.')}</p> : <>
+        {total > 0 && <ol className="plan-steps">
+          {course.plan.steps.map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber primary={i === 0}
+            title={step.resource.title} url={step.resource.url} closes={step.closes}
+            label={<span className="course-kind checked">{t('Checked course')}</span>}
+            meta={<>{step.resource.provider} · {step.resource.free ? t(step.resource.cost) : step.resource.access === 'rakyat-digital' ? t('Paid; free 3 months via Rakyat Digital') : t(step.resource.cost)} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</>}
+            extra={whoNeeds(step.closes)} />)}
+          {aiShown.map((step, i) => <CourseCard key={step.course.slug} n={course.plan.steps.length + i + 1} showNumber primary={course.plan.steps.length === 0 && i === 0}
+            title={step.course.name} url={step.course.url} closes={step.closes}
+            label={<span className="course-kind ai">{t('AI suggestion · match {n}%', { n: Math.round(step.bestMatch * 100) })}</span>}
+            meta={<>Coursera · {t('Paid; free 3 months via Rakyat Digital')} · {step.course.workload ?? t('time not stated')}</>}
+            extra={whoNeeds(step.closes)} />)}
+        </ol>}
+        {course.ai.steps.length > 4 && <button type="button" className="text-button plan-more" onClick={() => setShowAllAi(!showAllAi)}>{showAllAi ? t('Show fewer') : t('Show all {n} suggestions', { n: course.ai.steps.length })}</button>}
+        {course.ai.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{course.ai.unmatched.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>}
+        <details className="how-to-read">
+          <summary>{t('Who lacks each skill ({n} gaps)', { n: shared.gaps.length })}</summary>
+          <ol className="gap-table">
+            {shared.gaps.map((g) => {
+              const count = g.missing.length + g.partly.length;
+              return <li key={g.skill.uri}>
+                <span className="gap-name">{g.skill.label}</span>
+                <span className="gap-bar" aria-hidden="true"><span style={{ width: `${(count / shared.movers) * 100}%` }} /></span>
+                <span className="gap-count">{t('{n} of {m}', { n: count, m: shared.movers })}<small>{[...g.missing, ...g.partly.map((n) => t('{name} (partly)', { name: n }))].join(', ')}</small></span>
+              </li>;
+            })}
+          </ol>
+        </details>
+      </>}
     </section>
     <SdgContribution roleId={target.id} skills={shared.gaps.map((g) => g.skill)} heading={t('Team training and the SDGs')} compact />
+    </div>
     <p className="note">{t('All people here are fictional. In a real deployment each person would confirm their own skills; the manager or adviser sees the group view, not anyone’s CV.')}</p>
   </div>;
 }

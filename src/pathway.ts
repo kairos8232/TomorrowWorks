@@ -31,10 +31,14 @@ export type Gap = { skill: Skill; partly: string | null };
 export type PlanStep = { resource: Resource; closes: Gap[] };
 
 export function learningPlan(result: RoleScore, resources: Resource[]) {
-  const gaps: Gap[] = [
+  return planForGaps([
     ...result.fit.missing.map((skill) => ({ skill, partly: null })),
     ...result.fit.transferable.map((t) => ({ skill: t.need, partly: t.have.label })),
-  ];
+  ], resources);
+}
+
+/** The greedy course rule for any list of gaps (one person's, or a team's shared gaps). */
+export function planForGaps(gaps: Gap[], resources: Resource[]) {
   let open = gaps;
   const steps: PlanStep[] = [];
   const unused = [...resources];
@@ -71,7 +75,7 @@ export function learningPlan(result: RoleScore, resources: Resource[]) {
   };
 }
 
-export type LearningPlan = ReturnType<typeof learningPlan>;
+export type LearningPlan = ReturnType<typeof planForGaps>;
 
 /** One AI-matched course per step, from data/derived/coursera-skill-matches.json. */
 export type SuggestedCourse = { slug: string; name: string; url: string; workload: string | null; similarity: number };
