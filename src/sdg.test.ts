@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import rolesFile from '../data/roles.json';
-import { roleSdgs, sdgData, sdgTotals, skillSdgs } from './sdg';
+import { goalFit, roleSdgs, sdgData, sdgTotals, skillSdgs } from './sdg';
+import { recommendMoves, scenarios } from './scoring';
+import { ilo, personaProfile, snapshots, transferable } from './data';
 import type { Role } from './scoring';
 
 const roles = rolesFile.roles as Role[];
@@ -29,5 +31,21 @@ describe('SDG links', () => {
     const sm = roles.find((r) => r.id === 'sustainability-manager')!;
     const targets = sdgTotals(sm.essentialSkills).map((t) => t.target);
     for (const t of ['13.2', '12.5', '12.6']) expect(targets).toContain(t);
+  });
+});
+
+describe('goal fit (optional score part G)', () => {
+  const byId = (id: string) => roles.find((r) => r.id === id)!;
+  it('1 through the role itself, 0.5 through some skills only, 0 otherwise, null with no goals', () => {
+    expect(goalFit(byId('sustainability-manager'), ['13'])).toBe(1);
+    expect(goalFit(byId('accountant'), ['16'])).toBe(1);
+    expect(goalFit(byId('billing-clerk'), ['13'])).toBe(0);
+    expect(goalFit(byId('data-analyst'), [])).toBeNull();
+  });
+  it('choosing climate (13) moves sustainability manager up for Hakim', () => {
+    const p = personaProfile('hakim');
+    const rank = (G: ((r: Role) => number | null) | null) => recommendMoves(roles, p.currentRoleId, p.held, snapshots.q2, ilo, scenarios.moderate, transferable, { G })
+      .moves.findIndex((m) => m.role.id === 'sustainability-manager');
+    expect(rank((r) => goalFit(r, ['13']))).toBeLessThan(rank(null));
   });
 });

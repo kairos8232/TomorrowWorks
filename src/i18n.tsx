@@ -395,6 +395,15 @@ const dict: Record<string, Entry> = {
   'Produces high-quality, reliable data.': { ms: 'Menghasilkan data berkualiti tinggi dan boleh dipercayai.', zh: '产生高质量、可靠的数据。' },
   'ESCO marks it as a green skill.': { ms: 'ESCO menandakannya sebagai kemahiran hijau.', zh: 'ESCO 将其标记为绿色技能。' },
   'A digital skill (SDG indicator 4.4.1 counts ICT skills).': { ms: 'Kemahiran digital (penunjuk SDG 4.4.1 mengira kemahiran ICT).', zh: '数字技能（SDG 指标 4.4.1 统计信息通信技能）。' },
+  // Goals switch (added 21 Oct 2026)
+  'skills linked to SDG {n}': { ms: 'kemahiran berkait dengan SDG {n}', zh: '技能与 SDG {n} 相关' },
+  'Goals you care about': { ms: 'Matlamat yang anda pedulikan', zh: '你关心的目标' },
+  'Count in ranking': { ms: 'Kira dalam susunan', zh: '计入排名' },
+  'highlighted only; switch on to count them in the ranking.': { ms: 'hanya diserlahkan; hidupkan untuk mengiranya dalam susunan.', zh: '仅突出显示；开启后才计入排名。' },
+  'Your choices count for one sixth of each score.': { ms: 'Pilihan anda dikira satu perenam daripada setiap skor.', zh: '你的选择占每个分数的六分之一。' },
+  'Your interests and goals together count for two sevenths of each score.': { ms: 'Minat dan matlamat anda bersama dikira dua pertujuh daripada setiap skor.', zh: '你的兴趣和目标合计占每个分数的七分之二。' },
+  'Goals': { ms: 'Matlamat', zh: '目标' },
+  'Optional. Pick the SDGs you care about to highlight linked roles. When counted, a role linked to your goal through its own work scores 1, through some of its skills 0.5, otherwise 0; this counts for one sixth of the score.': { ms: 'Pilihan. Pilih SDG yang anda pedulikan untuk menyerlahkan peranan berkaitan. Apabila dikira, peranan yang berkait dengan matlamat anda melalui kerjanya sendiri mendapat 1, melalui sebahagian kemahirannya 0.5, selain itu 0; ini dikira satu perenam daripada skor.', zh: '可选。选择你关心的可持续发展目标以突出相关职位。计入排名时，职位本身与目标相关得 1 分，仅部分技能相关得 0.5 分，否则 0 分；占分数的六分之一。' },
 };
 
 const LangContext = createContext<Lang>('en');

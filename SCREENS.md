@@ -52,7 +52,7 @@ My career (guided, step bar on top)      The job market (browse any time)
 
 ## SDG links (all career screens)
 
-- Your moves: each expanded row shows the role's SDG target badges (goal colour stripe, links to sdgs.un.org) with the reason; *Highlight roles linked to a goal* chips (7, 8, 9, 12, 13, 16, 17) mark rows linked through the role or its essential skills, without changing scores.
+- Your moves: each expanded row shows the role's SDG target badges (goal colour stripe, links to sdgs.un.org) with the reason; *Goals you care about* chips (7, 8, 9, 12, 13, 16, 17, several allowed) mark rows "linked to SDG n" (through the role) or "skills linked to SDG n"; the *Count in ranking* switch (off by default) adds goal fit to the score, and the arrows show the change.
 - Your plan: *How this move connects to the SDGs* panel: role targets with reasons, then *Skills you would build* grouped by target with counts and names; note on 4.4 and that links are connections, not measured impact.
 - Team view: the same panel for the selected role's shared gaps.
 

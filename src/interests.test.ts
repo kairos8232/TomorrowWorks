@@ -43,18 +43,18 @@ describe('interests in the score (switch on)', () => {
   const ilo = iloFile as IloExposure;
   const role = roles.find((r) => r.id === 'data-analyst')!;
   it('off: the score is unchanged', () => {
-    expect(scoreRole(role, new Set(), snap, ilo, scenarios.moderate, undefined, null).score)
+    expect(scoreRole(role, new Set(), snap, ilo, scenarios.moderate, undefined, {}).score)
       .toBe(scoreRole(role, new Set(), snap, ilo, scenarios.moderate).score);
   });
   it('on: interest is one part, weights rescaled to sum to 1', () => {
-    const r = scoreRole(role, new Set(), snap, ilo, scenarios.moderate, undefined, () => 1);
+    const r = scoreRole(role, new Set(), snap, ilo, scenarios.moderate, undefined, { I: () => 1 });
     const total = r.contributions.reduce((s, c) => s + c.weight, 0);
     expect(total).toBeCloseTo(1, 10);
     expect(r.contributions.find((c) => c.key === 'I')!.weight).toBeCloseTo(INTEREST_WEIGHT / 1.2, 10);
   });
   it('picking investigative work moves data analyst above billing clerk for a person with no skills', () => {
     const fn = (r: Role) => interestFit(r.id, ['I']);
-    const order = recommendMoves(roles, null, new Set(), snap, ilo, scenarios.moderate, undefined, fn).moves.map((m) => m.role.id);
+    const order = recommendMoves(roles, null, new Set(), snap, ilo, scenarios.moderate, undefined, { I: fn }).moves.map((m) => m.role.id);
     expect(order.indexOf('data-analyst')).toBeLessThan(order.indexOf('billing-clerk'));
   });
 });

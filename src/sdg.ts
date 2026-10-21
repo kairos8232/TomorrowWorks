@@ -37,3 +37,21 @@ export function sdgTotals(skills: Skill[]) {
   for (const s of skills) for (const l of skillSdgs(s)) byTarget.set(l.target, [...(byTarget.get(l.target) ?? []), s]);
   return [...byTarget].map(([target, list]) => ({ target, skills: list })).sort((a, b) => b.skills.length - a.skills.length || a.target.localeCompare(b.target, undefined, { numeric: true }));
 }
+
+/** Goals (SDG numbers) a role is linked to: 'role' through its own links, 'skills' only through its essential skills. */
+export function roleGoalLink(role: { id: string; essentialSkills: Skill[] }, goal: string): 'role' | 'skills' | null {
+  if (roleSdgs(role.id).some((l) => sdgData.targets[l.target].goal === goal)) return 'role';
+  if (role.essentialSkills.some((s) => skillSdgs(s).some((l) => l.target !== '4.4' && sdgData.targets[l.target].goal === goal))) return 'skills';
+  return null;
+}
+
+/**
+ * Goal fit (optional score part G): 1 if the role itself is linked to one of
+ * the person's goals, 0.5 if only some of its essential skills are, else 0.
+ * With no goals picked it is null and the score is unchanged.
+ */
+export function goalFit(role: { id: string; essentialSkills: Skill[] }, goals: string[]): number | null {
+  if (goals.length === 0) return null;
+  const links = goals.map((g) => roleGoalLink(role, g));
+  return links.includes('role') ? 1 : links.includes('skills') ? 0.5 : 0;
+}

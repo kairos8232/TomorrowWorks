@@ -8,8 +8,10 @@
 //   D  demand trend    = clamp(0.5 + Δ, 0, 1), Δ = quarter-on-quarter change in DOSM
 //                        online job offerings for the role's ISCO major group
 //   R  AI resilience   = 1 − ILO mean GenAI exposure of the role's ISCO code
-//   I  interest fit    = optional, only when the person turns it on (src/interests.ts);
-//                        weight INTEREST_WEIGHT, then all weights are rescaled to sum to 1
+//   I  interest fit    = optional, only when the person turns it on (src/interests.ts)
+//   G  goal fit        = optional, only when the person turns it on (src/sdg.ts goalFit)
+//                        each optional part has weight EXTRA_WEIGHT; then all weights are
+//                        rescaled to sum to 1 (one optional part on = 1/6 of the score)
 //
 // Every function here is pure: data goes in, numbers and reasons come out.
 
@@ -63,11 +65,14 @@ export const scenarios: Record<ScenarioId, Scenario> = {
   },
 };
 
-/** Weight of the optional interest part, before rescaling (0.2 of 1.2 = 1/6 of the score). */
-export const INTEREST_WEIGHT = 0.2;
+/** Weight of each optional part (interests, goals), before rescaling. */
+export const EXTRA_WEIGHT = 0.2;
+export const INTEREST_WEIGHT = EXTRA_WEIGHT;
 
-/** Interest fit for one role (0 to 1), or null when interests are off or unknown. */
+/** An optional part for one role (0 to 1), or null when it is off or unknown. */
 export type InterestFn = (role: Role) => number | null;
+/** Optional parts the person switched on: I = interest fit, G = goal fit. */
+export type Extras = { I?: InterestFn | null; G?: InterestFn | null };
 
 export const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 
@@ -126,19 +131,22 @@ export function aiResilience(ilo: IloExposure, isco: string) {
  */
 export function scoreRole(
   role: Role, confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot, ilo: IloExposure, scenario: Scenario,
-  transferable: TransferableSkills = noTransferableSkills, interest: InterestFn | null = null,
+  transferable: TransferableSkills = noTransferableSkills, extras: Extras = {},
 ) {
   const fit = skillFit(role, confirmedSkillUris, transferable);
   const demand = demandTrend(snapshot, role.iscoMajorGroup);
   const resilience = aiResilience(ilo, role.isco);
 
   const parts = [
-    { key: 'F' as 'F' | 'D' | 'R' | 'I', value: fit.F as number | null, weight: scenario.weights.F },
+    { key: 'F' as 'F' | 'D' | 'R' | 'I' | 'G', value: fit.F as number | null, weight: scenario.weights.F },
     { key: 'D' as const, value: demand?.D ?? null, weight: scenario.weights.D },
     { key: 'R' as const, value: resilience?.R ?? null, weight: scenario.weights.R },
   ];
-  const I = interest ? interest(role) : null;
-  if (I !== null) parts.push({ key: 'I' as const, value: I, weight: INTEREST_WEIGHT });
+  for (const key of ['I', 'G'] as const) {
+    const fn = extras[key];
+    const value = fn ? fn(role) : null;
+    if (value !== null) parts.push({ key, value, weight: EXTRA_WEIGHT });
+  }
   const available = parts.filter((p) => p.value !== null);
   const totalWeight = available.reduce((sum, p) => sum + p.weight, 0);
   const contributions = available.map((p) => ({ key: p.key, value: p.value as number, weight: p.weight / totalWeight }));
@@ -162,10 +170,10 @@ export type RoleScore = ReturnType<typeof scoreRole>;
 /** Rank roles by score, highest first; ties keep role-set order. */
 export function rankRoles(
   roles: Role[], confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot, ilo: IloExposure, scenario: Scenario,
-  transferable: TransferableSkills = noTransferableSkills, interest: InterestFn | null = null,
+  transferable: TransferableSkills = noTransferableSkills, extras: Extras = {},
 ) {
   return roles
-    .map((role, index) => ({ index, result: scoreRole(role, confirmedSkillUris, snapshot, ilo, scenario, transferable, interest) }))
+    .map((role, index) => ({ index, result: scoreRole(role, confirmedSkillUris, snapshot, ilo, scenario, transferable, extras) }))
     .sort((a, b) => b.result.score - a.result.score || a.index - b.index)
     .map((x) => x.result);
 }
@@ -177,11 +185,11 @@ export function rankRoles(
  */
 export function recommendMoves(
   roles: Role[], currentRoleId: string | null, confirmedSkillUris: ReadonlySet<string>, snapshot: DosmSnapshot,
-  ilo: IloExposure, scenario: Scenario, transferable: TransferableSkills = noTransferableSkills, interest: InterestFn | null = null,
+  ilo: IloExposure, scenario: Scenario, transferable: TransferableSkills = noTransferableSkills, extras: Extras = {},
 ) {
   const current = roles.find((r) => r.id === currentRoleId) ?? null;
   return {
-    current: current ? scoreRole(current, confirmedSkillUris, snapshot, ilo, scenario, transferable, interest) : null,
-    moves: rankRoles(roles.filter((r) => r !== current), confirmedSkillUris, snapshot, ilo, scenario, transferable, interest),
+    current: current ? scoreRole(current, confirmedSkillUris, snapshot, ilo, scenario, transferable, extras) : null,
+    moves: rankRoles(roles.filter((r) => r !== current), confirmedSkillUris, snapshot, ilo, scenario, transferable, extras),
   };
 }
