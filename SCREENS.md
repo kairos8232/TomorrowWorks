@@ -42,7 +42,7 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## 1. Your skills: interests
 
-- Optional panel *What kind of work do you enjoy?*: six RIASEC choices in plain words, up to two. It sits beside the goals panel; both are single-column checklists (tick box, name, small subtitle) and stack on phones. Sample people have picks (Aina: data and details, helping people; Hakim: solving problems, data and details).
+- Optional panel *What kind of work do you enjoy?*: six RIASEC choices in plain words, up to two. Skills, interests and goals share one panel in three columns (*Your skills* tags | interests | goals), with *See my moves* below; interests and goals are single-column checklists (tick box, name, small subtitle). Below 1100 px the columns stack. Sample people have picks (Aina: data and details, helping people; Hakim: solving problems, data and details).
 
 ## 2. Your moves
 

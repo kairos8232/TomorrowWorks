@@ -80,8 +80,15 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
 
     </div>
 
-    <div className="prefs-pair">
-    <section className="panel" aria-labelledby="enjoy">
+    <section className="panel profile-trio selected-skills">
+    <div className="trio-cols">
+    <div className="trio-col">
+      <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
+      {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
+        : <div className="tag-row">{visibleHeld.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
+      {heldSkills.length > 8 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
+    </div>
+    <div className="trio-col" role="group" aria-labelledby="enjoy">
       <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
       <p className="note">{t('Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
       <div className="choice-list">{interestTypes.map((type) => {
@@ -93,9 +100,8 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
           <span><strong>{t(interestData.types[type].plain)}</strong><small>{t(interestData.types[type].name)}</small></span>
         </button>;
       })}</div>
-    </section>
-
-    <section className="panel" aria-labelledby="contribute">
+    </div>
+    <div className="trio-col" role="group" aria-labelledby="contribute">
       <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="count">{t('optional')}</span></h2>
       <p className="note">{t('UN Sustainable Development Goals. Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
       <div className="choice-list">{Object.entries(sdgData.goals).filter(([g]) => g !== '4').map(([g, info]) => {
@@ -108,14 +114,8 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
           <span><strong>{t(info.short)}</strong>{info.short !== info.name && <small>{t(info.name)}</small>}</span>
         </button>;
       })}</div>
-    </section>
     </div>
-
-    <section className="panel selected-skills">
-      <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
-      {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
-        : <div className="tag-row">{visibleHeld.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
-      {heldSkills.length > 8 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
+    </div>
       <div className="step-actions">
         <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t('See my moves')}</button>
         {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
