@@ -4,6 +4,13 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (late) — Daily news refresh; key headlines per topic
+
+- **Daily refresh:** `/api/news` fetches GDELT at most once a day until 1 Nov 2026, memory only (no commits after the deadline), committed snapshot as fallback, retry 6 h after a failure.
+- **In brief:** per topic, counts plus the 3 most representative real headlines, picked by RunPod bge-m3 (closest to the topic centroid). Chosen over an LLM summary: nothing is generated, it follows the "LLMs never generate" rule, and it costs one small embedding batch per day.
+
+---
+
 ## 21 Oct 2026 (21:30–22:15 MYT) — Plan touch-ups; Future Skills Radar
 
 - **Plan:** checked courses and AI suggestions in one numbered list of identical cards (AI suggestions use the same greedy rule over RunPod matches); certification as one compact optional card under the courses.

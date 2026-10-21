@@ -602,3 +602,12 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .cap-first::first-letter { text-transform: uppercase; }
 .radar details .radar-list { margin-top: 12px; }
 @media (max-width: 900px) { .band-grid { grid-template-columns: 1fr; } }
+.news-brief { margin: 16px 0; padding: 14px 16px; background: #fbfcfa; border: 1px solid #d9ded9; border-left: 4px solid #1c2430; border-radius: 10px; }
+.news-brief h2 { margin: 0 0 8px; font-size: 18px; }
+.news-brief-topic { padding: 8px 0; border-top: 1px solid #e3e7e3; }
+.news-brief-topic h3 { margin: 0 0 4px; font-size: 15px; }
+.news-brief-topic h3 span { font-weight: 400; color: #5d6873; font-size: 13px; margin-left: 6px; }
+.news-brief-topic ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.news-brief-topic a { color: #1c2430; }
+.news-brief-topic small { color: #5d6873; margin-left: 4px; }
+.news-brief > .note { margin: 8px 0 0; }

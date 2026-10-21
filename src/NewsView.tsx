@@ -5,15 +5,45 @@ import newsFile from '../data/sources/gdelt-news.json';
 import { useT, useTx } from './i18n';
 
 type Article = { title: string; url: string; outlet: string; language: string; seenAt: string; topics: string[] };
-type NewsBody = { source: typeof newsFile.source & { covered?: { from: string; to: string }; fetchedAt?: string }; articles: Article[]; live?: boolean };
+type Brief = { picks: Record<string, string[]>; model: string };
+type NewsBody = { source: typeof newsFile.source & { covered?: { from: string; to: string }; fetchedAt?: string }; articles: Article[]; live?: boolean; brief?: Brief | null };
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+
+/** Per topic: counts plus the most representative real headlines (picked by RunPod; nothing generated). */
+function TopicBrief({ articles, brief, topic }: { articles: Article[]; brief: Brief; topic: string }) {
+  const t = useT();
+  const byUrl = new Map(articles.map((a) => [a.url, a]));
+  const names = Object.keys(brief.picks).filter((x) => topic === 'All topics' || x === topic);
+  if (names.length === 0) return null;
+  return <section className="news-brief" aria-label={t('In brief')}>
+    <h2>{t('In brief')}</h2>
+    {names.map((name) => {
+      const list = articles.filter((a) => a.topics.includes(name));
+      const outlets = new Set(list.map((a) => a.outlet)).size;
+      const langs = [...new Set(list.map((a) => a.language))].map((l) => t(l)).join(', ');
+      return <div key={name} className="news-brief-topic">
+        <h3>{t(name)} <span>{t('{n} headlines · {m} outlets · {langs}', { n: list.length, m: outlets, langs })}</span></h3>
+        <ul>{brief.picks[name].map((url) => byUrl.get(url)).filter((a): a is Article => Boolean(a)).map((a) => <li key={a.url}><a href={a.url} target="_blank" rel="noreferrer">{a.title}</a> <small>{a.outlet}</small></li>)}</ul>
+      </div>;
+    })}
+    <p className="note">{t('Key headlines are the real headlines closest to the centre of each topic, picked by {model}. No text is written by AI.', { model: brief.model })}</p>
+  </section>;
+}
 
 export function NewsView() {
   const [topic, setTopic] = useState('All topics');
   // Bundled snapshot first; the server may replace it with today's GDELT headlines (until 1 Nov 2026).
   const [news, setNews] = useState<NewsBody>(newsFile as NewsBody);
   useEffect(() => {
-    fetch('/api/news').then((r) => (r.ok ? r.json() : null)).then((body: NewsBody | null) => { if (body?.articles?.length) setNews(body); }).catch(() => {});
+    let tries = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const load = () => fetch('/api/news').then((r) => (r.ok ? r.json() : null)).then((body: NewsBody | null) => {
+      if (body?.articles?.length) setNews(body);
+      // The brief is computed on RunPod in the background; ask again a few times while it is not ready.
+      if (body && !body.brief && tries++ < 4) timer = setTimeout(load, 20_000);
+    }).catch(() => {});
+    load();
+    return () => clearTimeout(timer);
   }, []);
   const articles = news.articles;
   const topics = ['All topics', ...new Set(articles.flatMap((a) => a.topics).filter((x) => x !== 'Other')), 'Other'];
@@ -31,6 +61,7 @@ export function NewsView() {
         {topics.map((x) => <label key={x} className="choice"><input type="radio" name="topic" checked={topic === x} onChange={() => setTopic(x)} />{t(x)}</label>)}
       </fieldset>
     </div>
+    {news.brief && <TopicBrief articles={articles} brief={news.brief} topic={topic} />}
     <ul className="news-list">
       {shown.map((a) => <li key={a.url}>
         <a href={a.url} target="_blank" rel="noreferrer">{a.title}</a>

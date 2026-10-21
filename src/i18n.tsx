@@ -520,6 +520,12 @@ const dict: Record<string, Entry> = {
   'Reported news, not job counts: it never changes your scores. {n} headlines from outlets in Malaysia found by {gdelt}, seen {from} to {to}, retrieved {date}. Topics come from topic words in each headline (English, Malay, Chinese); “Other” headlines matched the search only in the article text and are often off-topic.': { ms: 'Berita yang dilaporkan, bukan bilangan kerja: ia tidak mengubah skor anda. {n} tajuk daripada media di Malaysia yang ditemui oleh {gdelt}, dilihat dari {from} hingga {to}, diambil pada {date}. Topik berdasarkan kata topik dalam setiap tajuk (Inggeris, Melayu, Cina); tajuk “Lain-lain” hanya sepadan dalam teks artikel dan selalunya tidak berkaitan.', zh: '这些是新闻报道，不是职位数量，不会改变你的分数。{gdelt} 找到的 {n} 条马来西亚媒体标题，时间为 {from} 至 {to}，获取于 {date}。主题根据标题中的主题词判断（英文、马来文、中文）；“其他”标题只在正文中匹配搜索，常与主题无关。' },
   'Updated daily until 1 Nov 2026.': { ms: 'Dikemas kini setiap hari hingga 1 Nov 2026.', zh: '每日更新至 2026 年 11 月 1 日。' },
   'Saved snapshot.': { ms: 'Petikan tersimpan.', zh: '已保存的快照。' },
+  'In brief': { ms: 'Ringkasan', zh: '简报' },
+  '{n} headlines · {m} outlets · {langs}': { ms: '{n} tajuk · {m} media · {langs}', zh: '{n} 条标题 · {m} 家媒体 · {langs}' },
+  'Key headlines are the real headlines closest to the centre of each topic, picked by {model}. No text is written by AI.': { ms: 'Tajuk utama ialah tajuk sebenar yang paling hampir dengan pusat setiap topik, dipilih oleh {model}. Tiada teks ditulis oleh AI.', zh: '重点标题是最接近每个主题中心的真实标题，由 {model} 挑选。没有任何文字由 AI 撰写。' },
+  'English': { ms: 'Inggeris', zh: '英文' },
+  'Malay': { ms: 'Melayu', zh: '马来文' },
+  'Chinese': { ms: 'Cina', zh: '中文' },
 };
 
 const LangContext = createContext<Lang>('en');

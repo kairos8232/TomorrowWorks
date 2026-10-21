@@ -82,3 +82,51 @@ export function newsService({ snapshot, topics, fetchImpl = fetch, now = () => D
     },
   };
 }
+
+// ---- Key headlines per topic (RunPod, bge-m3) -------------------------------
+// For each topic: embed its headlines, take their average direction (centroid),
+// and keep the 3 headlines closest to it: the most representative real
+// headlines. Nothing is written by a model, so nothing can be invented.
+
+const norm = (v) => { const n = Math.hypot(...v) || 1; return v.map((x) => x / n); };
+const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
+
+/** articles + vectors (same order) -> { topic: [url, url, url] }, most representative first. */
+export function keyHeadlines(articles, vectors, perTopic = 3) {
+  const out = {};
+  const topics = [...new Set(articles.flatMap((a) => a.topics))].filter((t) => t !== 'Other');
+  for (const topic of topics) {
+    const idx = articles.map((a, i) => (a.topics.includes(topic) ? i : -1)).filter((i) => i >= 0);
+    const vs = idx.map((i) => norm(vectors[i]));
+    const centre = norm(vs[0].map((_, d) => vs.reduce((s, v) => s + v[d], 0) / vs.length));
+    out[topic] = idx.map((i, k) => ({ i, sim: dot(vs[k], centre) }))
+      .sort((a, b) => b.sim - a.sim).slice(0, perTopic).map((x) => articles[x.i].url);
+  }
+  return out;
+}
+
+/**
+ * briefService({ embedMany }) -> { for(body) }: returns the cached brief for this
+ * set of articles, or starts computing it in the background (one RunPod batch per
+ * new set, i.e. at most once per daily refresh) and returns null meanwhile.
+ */
+export function briefService({ embedMany }) {
+  const cache = new Map(); // key -> { picks, model }
+  const running = new Set();
+  return {
+    for(body) {
+      const tagged = body.articles.filter((a) => !a.topics.includes('Other'));
+      const key = tagged.map((a) => a.url).join('\n');
+      if (!embedMany || tagged.length === 0) return null;
+      if (cache.has(key)) return cache.get(key);
+      if (!running.has(key)) {
+        running.add(key);
+        embedMany(tagged.map((a) => a.title))
+          .then((vectors) => cache.set(key, { picks: keyHeadlines(tagged, vectors), model: 'BAAI/bge-m3 on RunPod' }))
+          .catch((err) => console.warn(`News brief failed: ${err.message}`))
+          .finally(() => running.delete(key));
+      }
+      return null;
+    },
+  };
+}

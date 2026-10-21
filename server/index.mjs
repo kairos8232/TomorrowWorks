@@ -15,7 +15,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSkillIndex, nearestSkills } from './search.mjs';
 import { readFileSync } from 'node:fs';
-import { newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
+import { briefService, newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -46,6 +46,24 @@ async function embed(text) {
   if (!Array.isArray(vector)) throw new Error('RunPod response has no embedding');
   return vector;
 }
+
+/** Embed many short texts in batches of 32 (news headlines for the key-headlines brief). */
+async function embedMany(texts) {
+  const out = [];
+  for (let i = 0; i < texts.length; i += 32) {
+    const res = await fetch(`${RUNPOD_BASE_URL}/${RUNPOD_ENDPOINT_ID}/openai/v1/embeddings`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${RUNPOD_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: index.model, input: texts.slice(i, i + 32) }),
+      signal: AbortSignal.timeout(120_000),
+    });
+    if (!res.ok) throw new Error(`RunPod responded ${res.status}`);
+    const body = await res.json();
+    out.push(...[...body.data].sort((a, b) => a.index - b.index).map((d) => d.embedding));
+  }
+  return out;
+}
+const brief = briefService({ embedMany: RUNPOD_API_KEY && RUNPOD_ENDPOINT_ID ? embedMany : null });
 
 // Small per-visitor limit so the sponsor credit cannot be drained by a script.
 const recent = new Map();
@@ -91,7 +109,8 @@ createServer(async (req, res) => {
       return send(res, 200, { skills: index.items.length, model: index.model, runpod: Boolean(RUNPOD_API_KEY && RUNPOD_ENDPOINT_ID) });
     }
     if (req.url === '/api/news') {
-      return send(res, 200, await news.get());
+      const body = await news.get();
+      return send(res, 200, { ...body, brief: brief.for(body) });
     }
     if (req.url === '/api/skill-search') {
       if (req.method !== 'POST') return send(res, 405, { error: 'Use POST' });

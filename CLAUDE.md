@@ -54,7 +54,7 @@ Courses at scale: `scripts/import_coursera_catalog.py` (Carson's Mac, stdlib) â†
 
 `scripts/build_roles.py <ESCO folder>` writes `data/roles.json` (9 ESCO occupations; skills with green/digital flags). ESCO skill vectors from RunPod are in `data/derived/esco/`.
 
-Server: `server/index.mjs` (no dependencies) serves `dist/`, `/api/skill-search` and `/api/news` (`server/news.mjs`: GDELT fetched at most once a day until 1 Nov 2026, memory only, snapshot fallback; topic words in `data/sources/news-topics.json`, shared with the Python importer); `server/search.mjs` loads the RunPod vectors and ranks skills (tests in `server/search.test.mjs`). The RunPod key is read from env (Replit Secrets) only. Replit publishes as **Autoscale**.
+Server: `server/index.mjs` (no dependencies) serves `dist/`, `/api/skill-search` and `/api/news` (`server/news.mjs`: GDELT fetched at most once a day until 1 Nov 2026, memory only, snapshot fallback; topic words in `data/sources/news-topics.json`, shared with the Python importer; per-topic key headlines picked by RunPod bge-m3 (centroid nearest, extractive, one batch per daily set)); `server/search.mjs` loads the RunPod vectors and ranks skills (tests in `server/search.test.mjs`). The RunPod key is read from env (Replit Secrets) only. Replit publishes as **Autoscale**.
 
 Scoring: `src/scoring.ts` (pure functions: skill fit with exact and transferable skills, demand trend, AI resilience, scenarios, ranking, `recommendMoves`). Transferable skills come from `data/derived/transferable-skills.json` (`scripts/build_transferable_skills.py`, threshold 0.85, half credit); tests in `src/scoring.test.ts`. Change the rule only together with its tests and `SIGNALS_AND_MATCHING.md`.
 

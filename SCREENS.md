@@ -85,7 +85,7 @@ For HR / L&D managers (a fictional five-person finance team) and career centres 
 
 ## Workplace news / Skills in demand — Soon
 
-- **Workplace news (current):** GDELT headlines from Malaysian outlets with outlet, date and topic filter (AI and automation, Layoffs, Hiring, Reskilling); context only, never changes scores. Shows "No news imported yet" until `scripts/import_gdelt_news.py` has been run.
+- **Workplace news (current):** GDELT headlines from Malaysian outlets with outlet, date and topic filter (AI and automation, Layoffs, Hiring, Reskilling); context only, never changes scores. The server refreshes it once a day until 1 Nov 2026 (memory only) and falls back to the committed snapshot. **In brief:** for each topic, the headline count, number of outlets and languages, plus the 3 key headlines: the real headlines closest to the topic centre in RunPod bge-m3 embeddings (one RunPod batch per daily set, cached). No text is written by AI; the box is hidden when RunPod is not configured.
 - **Skills in demand:** not connected; role skills from ESCO appear in *Your moves*.
 
 ## Removed on 21 Oct 2026
