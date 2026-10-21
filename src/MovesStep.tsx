@@ -76,6 +76,10 @@ function LedgerRow({ result, rank, delta, onPlan, picks, goals }: { result: Role
         <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small>{t('DOSM {a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
         <span className="fact-r">{resilience ? <>{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}<small>{resilience.gradient}</small></> : t('No ILO data')}</span>
       </div>
+      <div className="detail-actions">
+        {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
+        <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
+      </div>
       <div className="detail-skills">
         <SkillList title={t('You have')} empty={t('None of this role’s essential skills yet.')}>
           {[...fit.transferable.map((t) => <span className="skill-tag related" key={t.need.uri} title={`≈ ${t.have.label} (${t.similarity.toFixed(2)})`}>{t.need.label}<small>≈ {t.have.label}</small></span>),
@@ -87,10 +91,6 @@ function LedgerRow({ result, rank, delta, onPlan, picks, goals }: { result: Role
       </div>
       <RoleSdgLine roleId={role.id} />
       <InterestLine roleId={role.id} picks={picks} />
-      <div className="detail-actions">
-        {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
-        <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
-      </div>
     </div>}
   </li>;
 }

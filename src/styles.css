@@ -174,9 +174,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .delta.down { color: #a8402b; }
 @media (prefers-reduced-motion: no-preference) { .delta { animation: delta-in .5s ease-out; } @keyframes delta-in { from { opacity: 0; transform: translateY(-4px); } } }
 .ledger-detail { padding: 0 12px 20px; display: grid; gap: 16px; }
-.detail-facts { display: grid; grid-template-columns: 48px minmax(180px, 1.6fr) repeat(3, minmax(110px, 1fr)) 88px; gap: 16px; font-size: 14px; font-weight: 600; color: #1c2430; }
+.detail-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-left: 64px; font-size: 14px; font-weight: 600; color: #1c2430; }
 .detail-facts small { display: block; font-weight: 400; color: #5d6873; }
-.fact-f { grid-column: 3; } .fact-d { grid-column: 4; } .fact-r { grid-column: 5; }
 .detail-skills { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-left: 64px; }
 .skill-list h4 { margin: 0 0 8px; font-size: 14px; }
 .skill-list h4 span { color: #5d6873; font-weight: 400; }
@@ -201,7 +200,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .part { grid-template-columns: 1fr 38px; }
   .part::before { content: attr(data-label); font-size: 13px; color: #5d6873; grid-column: 1 / -1; }
   .ledger-detail { padding-left: 12px; }
-  .detail-facts { grid-template-columns: 1fr; gap: 8px; } .fact-f, .fact-d, .fact-r { grid-column: auto; }
+  .detail-facts { grid-template-columns: 1fr; gap: 8px; margin-left: 0; }
   .detail-skills { grid-template-columns: 1fr; margin-left: 0; } .detail-actions { margin-left: 0; }
 }
 
