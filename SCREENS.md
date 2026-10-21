@@ -34,6 +34,7 @@ My career (guided, step bar on top)      The job market (browse any time)
 
 ## 2. Your moves
 
+- **What changed with <latest quarter> job-ad data** (top of the page): the same skills and scenario scored with the previous and latest DOSM snapshots; summary line (e.g. job ads fell in every group, n moves changed place), the top 3 changes (rank, score, and the occupation group's job-ad change in both quarters), *Show all*. Logic: `src/changes.ts`.
 - **Current:** banner "Viewing as Aina…" or "Your n skills…", with *Use my own skills* / *Edit skills*; **How to read this** (Score, Skill fit, Demand, AI resilience, Now — in plain words, DOSM/ILO as abbreviations with full names); controls *Job-ad data* (2026 Q1 / Q2) and *If AI changes work* (Gradually / Quickly); ranked ledger with the current job pinned as "Now"; ▲▼ after a switch; expandable rows (facts under columns, *You have* / *To build*, ESCO link).
 - If there are no skills: a short prompt to add skills or try Aina.
 

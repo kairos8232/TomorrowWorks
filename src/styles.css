@@ -353,3 +353,10 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .gap-bar { grid-column: 1 / -1; order: 3; }
   .gap-course { grid-column: 1 / -1; order: 4; }
 }
+.what-changed { background: #ffffff; border: 1px solid #d9ded9; border-left: 4px solid #1c2430; border-radius: 10px; padding: 14px 18px; }
+.what-changed h2 { margin: 0 0 6px; font-size: 18px; }
+.what-changed p { margin: 0 0 8px; line-height: 1.55; }
+.what-changed ul { margin: 0 0 8px; padding-left: 18px; display: grid; gap: 6px; line-height: 1.5; }
+.what-changed .up { color: #1e6b4f; font-weight: 700; }
+.what-changed .down { color: #a8402b; font-weight: 700; }
+.cap { text-transform: capitalize; }

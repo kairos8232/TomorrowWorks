@@ -273,7 +273,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 - [ ] Define assumptions for moderate and rapid AI-change scenarios.
 - [x] Let the user switch between scenarios (moderate / fast; fast lifts sustainability manager from 6th to 4th).
-- [ ] Show how the recommendations or pathways change.
+- [x] Show how the recommendations or pathways change. (Your moves: arrows after a switch, and *What changed* comparing the Q1 and Q2 snapshots with the job-ad reason.)
 - [x] Keep the same profile when switching scenarios so the comparison is understandable.
 - [ ] Label forecasts as estimates and explain the uncertainty.
 

@@ -3,6 +3,7 @@
 import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ilo, personaById, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
+import { whatChanged } from './changes';
 import { recommendMoves, scenarios, type RoleScore, type ScenarioId } from './scoring';
 
 const pct = (x: number) => `${x >= 0 ? '+' : ''}${(x * 100).toFixed(1)}%`;
@@ -70,6 +71,35 @@ function LedgerRow({ result, rank, delta, onPlan }: { result: RoleScore; rank: n
   </li>;
 }
 
+const signed = (x: number | null) => (x === null ? 'no data' : `${x >= 0 ? '+' : '−'}${Math.abs(x * 100).toFixed(1)}%`);
+const quarter = (q: string) => q.replace('-', ' ');
+
+/** Latest vs previous DOSM snapshot for the same skills and scenario: what moved, and why. */
+function WhatChanged({ profile, scenarioId }: { profile: Profile; scenarioId: ScenarioId }) {
+  const [all, setAll] = useState(false);
+  const changes = useMemo(() => {
+    const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable).moves;
+    return whatChanged(run('q1'), run('q2'));
+  }, [profile, scenarioId]);
+  const latest = quarter(snapshots.q2.source.latestQuarter);
+  const earlier = quarter(snapshots.q1.source.latestQuarter);
+  if (changes.length === 0) return <section className="what-changed"><h2>What changed with {latest} data</h2><p className="note">Nothing moved compared with {earlier} data.</p></section>;
+  const rankMoves = changes.filter((c) => c.rankBefore !== c.rankAfter).length;
+  const allDown = changes.every((c) => c.scoreAfter < c.scoreBefore);
+  const shown = all ? changes : changes.slice(0, 3);
+  return <section className="what-changed" aria-labelledby="changed">
+    <h2 id="changed">What changed with {latest} job-ad data</h2>
+    <p>{allDown ? `Online job ads fell in every occupation group in ${latest}, so every score dropped. ` : ''}{rankMoves === 0 ? 'Your order of moves stayed the same.' : `${rankMoves} ${rankMoves === 1 ? 'move changed' : 'moves changed'} place.`}</p>
+    <ul>{shown.map((c) => <li key={c.role.id}>
+      <strong className="cap">{c.role.title}</strong>{' '}
+      {c.rankBefore !== c.rankAfter ? <span className={c.rankAfter < c.rankBefore ? 'up' : 'down'}>#{c.rankBefore} to #{c.rankAfter}</span> : <span>stays #{c.rankAfter}</span>}, score {c.scoreBefore} to {c.scoreAfter}.{' '}
+      <span className="note">Job ads for {c.group}: {signed(c.changeAfter)} in {latest}, after {signed(c.changeBefore)} in {earlier}.</span>
+    </li>)}</ul>
+    {changes.length > 3 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? 'Show fewer' : `Show all ${changes.length}`}</button>}
+    <p className="note">Same skills and assumption, only the DOSM data differs. When a new quarter is imported, this compares it with the one before.</p>
+  </section>;
+}
+
 export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
@@ -99,6 +129,8 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       <p>{persona ? <><strong>Viewing as {persona.name}</strong>, {persona.description} with {profile.held.size} skills.</> : <><strong>Your {profile.held.size} {profile.held.size === 1 ? 'skill' : 'skills'}</strong>{current ? `, current job ${current.role.title}` : ''}.</>}</p>
       <button type="button" className="text-button" onClick={onEditSkills}>{persona ? 'Use my own skills' : 'Edit skills'}</button>
     </div>
+
+    <WhatChanged profile={profile} scenarioId={scenarioId} />
 
     <details className="how-to-read">
       <summary>How to read this</summary>
