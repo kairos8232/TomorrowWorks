@@ -15,6 +15,7 @@ import matchesFile from '../data/derived/coursera-skill-matches.json';
 const resources = resourcesFile.resources as Resource[];
 // AI-matched Coursera courses (RunPod, bge-m3); see scripts/match_courses_runpod.py.
 export const matches = matchesFile as { method: { coursesEmbedded: number; catalogue: { retrievedAt: string } }; skills: Record<string, { courses: SuggestedCourse[] } | undefined> };
+const hrd = resourcesFile.hrdCorp;
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
 type NossEntry = { code: string; title: string; level: number; source: string; page: number };
 type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
@@ -130,6 +131,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           : plan.uncovered.length === 0
             ? t('Start with the first checked course below.')
             : t('Start with a checked course, then review suggestions for the remaining skills.')}</p>
+        {plan.steps.length > 0 && <p className="plan-total"><strong>{t('Estimated time: {h} hours', { h: plan.statedHours })}</strong> {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}{plan.stepsWithoutHours > 0 ? ` (${t('{n} without a stated time', { n: plan.stepsWithoutHours })})` : ''}{suggested.steps.length > 0 ? `; ${t('AI suggestions show their own time')}` : ''}.</p>}
 
         {total + Number(hasNoss(role.id)) > 0 && <ol className={`plan-steps${total + Number(hasNoss(role.id)) === 1 ? ' single' : ''}`}>
           {plan.steps.map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber={total + Number(hasNoss(role.id)) > 1} primary={i === 0}
@@ -149,6 +151,8 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         {[...new Set(plan.steps.map((s) => s.resource.access).filter((a): a is string => !!a))].map((id) => <p key={id} className="plan-access note">
           <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
         </p>)}
+
+        <p className="plan-access note"><strong>HRD Corp:</strong> {t(hrd.claimable.note)} <a href={hrd.claimable.url} target="_blank" rel="noreferrer">{t(hrd.claimable.name)}</a>. {t(hrd.elatih.note)} <a href={hrd.elatih.url} target="_blank" rel="noreferrer">{t(hrd.elatih.name)}</a>. {t('Checked by hand on {date}.', { date: hrd.checkedAt })}</p>
 
         <p className="plan-method note">
           {plan.steps.length > 0 && t('Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.', { date: resourcesFile.checkedAt })}{' '}

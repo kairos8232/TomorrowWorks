@@ -558,6 +558,14 @@ const dict: Record<string, Entry> = {
   'All {n} lack': { ms: 'Kesemua {n} kekurangan', zh: '全部 {n} 人欠缺' },
   '{n} of {m} lack': { ms: '{n} daripada {m} kekurangan', zh: '{m} 人中 {n} 人欠缺' },
   'Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually).': { ms: 'Setiap sel ialah skor orang itu untuk peranan tersebut, daripada 100, menggunakan peraturan yang sama seperti Langkah anda (iklan kerja S2 2026, AI mengubah kerja secara beransur-ansur).', zh: '每个格子是该人在该职位上的得分（满分 100），与“你的转岗方向”使用相同规则（2026 年第二季度招聘广告，AI 逐步改变工作）。' },
+  'Estimated time: {h} hours': { ms: 'Anggaran masa: {h} jam', zh: '预计时间：{h} 小时' },
+  'for the {n} checked courses, as stated by each provider': { ms: 'untuk {n} kursus yang disemak, seperti yang dinyatakan oleh setiap penyedia', zh: '（{n} 门已核对课程，按各提供方公布的时长）' },
+  '{n} without a stated time': { ms: '{n} tanpa masa dinyatakan', zh: '{n} 门未注明时长' },
+  'AI suggestions show their own time': { ms: 'cadangan AI menunjukkan masa masing-masing', zh: 'AI 推荐课程各自显示时长' },
+  'Training providers register programmes under this scheme to offer them to employers registered with HRD Corp (Training Providers Circular No. 3/2021). None of the courses in this plan is checked as HRD Corp-claimable; ask your HR if your employer is registered.': { ms: 'Penyedia latihan mendaftarkan program di bawah skim ini untuk ditawarkan kepada majikan yang berdaftar dengan HRD Corp (Pekeliling Penyedia Latihan No. 3/2021). Tiada kursus dalam pelan ini disemak sebagai boleh dituntut HRD Corp; tanya HR anda jika majikan anda berdaftar.', zh: '培训机构在此计划下登记课程，以提供给已在 HRD Corp 注册的雇主（培训机构通告 2021 年第 3 号）。本计划中的课程均未核实可向 HRD Corp 申领；如你的雇主已注册，请咨询人力资源部门。' },
+  'HRD Corp\'s e-learning platform is open to all individuals, with more than 1,000 free courses (HRD Corp FAQ). Not matched to these skills yet.': { ms: 'Platform e-pembelajaran HRD Corp terbuka kepada semua individu, dengan lebih 1,000 kursus percuma (Soalan Lazim HRD Corp). Belum dipadankan dengan kemahiran ini.', zh: 'HRD Corp 的在线学习平台向所有人开放，提供 1,000 多门免费课程（HRD Corp 常见问题）。尚未与这些技能匹配。' },
+  'HRD Corp Claimable Courses': { ms: 'Kursus Boleh Tuntut HRD Corp', zh: 'HRD Corp 可申领课程' },
+  'HRD Corp e-LATiH': { ms: 'HRD Corp e-LATiH', zh: 'HRD Corp e-LATiH' },
 };
 
 const LangContext = createContext<Lang>('en');

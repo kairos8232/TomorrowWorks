@@ -357,5 +357,18 @@
       "source": "https://www.businesstoday.com.my/2026/10/08/digital-ministry-to-provide-100000-malaysians-with-three-months-free-access-to-coursera-courses/",
       "checkedAt": "2026-10-21"
     }
+  },
+  "hrdCorp": {
+    "checkedAt": "2026-10-21",
+    "claimable": {
+      "name": "HRD Corp Claimable Courses",
+      "url": "https://hrdcorp.gov.my/program-registration-hrd-corp-claimable-course/",
+      "note": "Training providers register programmes under this scheme to offer them to employers registered with HRD Corp (Training Providers Circular No. 3/2021). None of the courses in this plan is checked as HRD Corp-claimable; ask your HR if your employer is registered."
+    },
+    "elatih": {
+      "name": "HRD Corp e-LATiH",
+      "url": "https://supportcentre.hrdcorp.gov.my/portal/en/kb/articles/faqs-hrd-corp-e-latih",
+      "note": "HRD Corp's e-learning platform is open to all individuals, with more than 1,000 free courses (HRD Corp FAQ). Not matched to these skills yet."
+    }
   }
 }

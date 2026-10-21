@@ -684,3 +684,4 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .lack-group h3 { margin: 0 0 8px; font-size: 15px; }
 .lack-group h3 span { font-weight: 400; color: #5d6873; font-size: 13px; margin-left: 6px; }
 .lack-group .tag-row { margin: 0; gap: 6px; }
+.plan-total { margin: 10px 0 0; padding: 8px 12px; background: #eef4ef; border-radius: 8px; font-size: 14px; color: #1c2430; }
