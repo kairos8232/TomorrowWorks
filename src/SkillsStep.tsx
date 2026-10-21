@@ -24,13 +24,14 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
 
   async function findSkills(e: React.FormEvent) {
     e.preventDefault();
+    setFound([]); // clear the previous results so they are not mistaken for this search
     setSearch({ busy: true, message: 'Searching. The first search after a pause can take up to a minute.' });
     try {
       const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: description }) });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error ?? 'Skill search is unavailable right now. Pick skills from the list below instead.');
       setFound(body.results);
-      setSearch({ busy: false, message: body.results.length ? 'Add the skills that are true for you.' : 'No close ESCO skills found. Try describing a task you do often.' });
+      setSearch({ busy: false, message: body.results.length ? `Closest ESCO skills for “${description.trim()}”. Add the ones that are true for you.` : 'No close ESCO skills found. Try describing a task you do often.' });
     } catch (err) {
       setFound([]);
       setSearch({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Skill search is unavailable right now. Pick skills from the list below instead.' });

@@ -7,6 +7,7 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 ## 21 Oct 2026 (13:47 MYT) — RunPod Job B live; GDELT rate limit
 
 - **Job B verified live** on the published Replit app with Replit Secrets set: the Chinese description "我负责每月的财务报表" returned real ESCO skills at 58–60% similarity, including *prepare financial statements*, *interpret financial statements*, *maintain financial records*, *monitor financial accounts*. Some matches are sector-specific ESCO skills (e.g. *manage financial transactions of fuel station*); the person only adds what is true. English and Bahasa Malaysia checks to record next.
+- **UI fix (reported by Carson):** a new skill search left the previous results on screen while it ran. Results now clear when a search starts, and the message names the text they belong to. Checked with a slow fake endpoint: 0 old results during the second search.
 - **GDELT 429 Too Many Requests** on Carson's Mac after two quick runs. `scripts/import_gdelt_news.py` now waits 10 s between topics and retries a 429 after 30, 60 and 120 s, then stops with advice to wait 10 minutes.
 
 ---
