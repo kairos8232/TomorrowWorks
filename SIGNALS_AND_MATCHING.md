@@ -222,9 +222,15 @@ Data: `data/sdg/sdg-links.json`; rule: `src/sdg.ts`; tests: `src/sdg.test.ts`. B
 - **Goal fit (optional score part G):** the person picks goals on Your moves; they highlight linked roles. With *Count in ranking* on, G = 1 if the role itself links to a picked goal, 0.5 if only some of its essential skills do, else 0; weight 0.2 before rescaling like interests (one optional part on = 1/6 of the score; both = 2/7). Example: Hakim picking 12 and 13 moves sustainability manager from #4 to #1. Tests in `src/sdg.test.ts`.
 - **Honesty:** links show a connection, not a measured impact. Drafted with Claude; team review pending before submission.
 
-## Skills radar (rising / declining skills)
+## Future Skills Radar (built 21 Oct 2026)
 
-A skill's trend is derived, not invented: average `D` and average `R` across the roles in `roles.json` that list it. A skill shows as **rising** when both averages are above 0.5, **at risk** when both are below. Each skill links to the roles and source rows behind it.
+Code: `src/radar.ts`, `src/RadarView.tsx`; tests: `src/radar.test.ts`. Screen: *Future skills radar* (was "Skills in demand · Soon").
+
+- **Per skill** (every essential skill of the nine roles, 185): `D` = average job-ad trend of the roles that list it (DOSM, quarter on quarter), `R` = average AI resilience of those roles (1 − ILO exposure). **Outlook** = (wD·D + wR·R) / (wD + wR) with the scenario weights (Gradually 0.25/0.15, Quickly 0.2/0.3); missing signals share their weight.
+- **Groups, not single-skill ranks:** most skills belong to one role and so share its signals exactly (all 45 sustainability-manager-only skills tie). Ranking them 1–45 would be false precision, so skills needed by the same roles form one group (24 groups); groups are ranked. Skills shared by several roles show "shared by n roles".
+- **Rising / falling:** every occupation group's job ads fell in 2026 Q2, so absolute change is uninformative; the arrow is the group's rank change from the Q1 to the Q2 snapshot under the same scenario.
+- **Bands:** top third green, bottom third red. The person's own skills are ticked, and a summary counts how many fall in the top and bottom thirds (Aina: 14 and 5 of 20).
+- **Honesty:** an estimate derived from roles, not a measured demand for each skill; labelled on screen. ESCO green/digital flags shown on skills.
 
 ## Where AI is used: RunPod skill search over a real taxonomy
 

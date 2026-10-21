@@ -8,6 +8,7 @@ import { NewsView } from './NewsView';
 import { PlanStep } from './PlanStep';
 import { SkillsStep } from './SkillsStep';
 import { TeamView } from './TeamView';
+import { RadarView } from './RadarView';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
 import './styles.css';
 
@@ -26,7 +27,7 @@ const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
   { id: 'outlook', label: 'AI exposure', hint: 'How much AI could change' },
   { id: 'news', label: 'Workplace news', hint: 'Latest reported changes' },
-  { id: 'trending', label: 'Skills in demand', hint: 'Skills employers ask for', soon: true },
+  { id: 'trending', label: 'Future skills radar', hint: 'Skills rising or at risk' },
 ];
 
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
@@ -37,11 +38,10 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
-  trending: { title: 'Skills in demand', intro: 'Skills that Malaysian employers ask for.' },
+  trending: { title: 'Future skills radar', intro: 'Which skills have the strongest outlook as AI changes work, estimated from Malaysian job ads and AI exposure of the roles that need them.' },
 };
 
 const comingSoon: Partial<Record<Screen, string>> = {
-  trending: 'Not connected yet. For now, each role’s skills come from ESCO and appear when you open a role in Your moves.',
 };
 
 function Home({ start }: { start: (who: ViewerId) => void }) {
@@ -192,6 +192,7 @@ function App() {
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
+        {screen === 'trending' && <RadarView profile={profile} />}
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
         <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending'].includes(screen)} />
       </div>

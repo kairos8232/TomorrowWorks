@@ -95,3 +95,10 @@ The free-text *My profile* form, the *My skill gaps* comparison and the *Sign in
 ## Every screen
 
 Footer with sources and the ESCO acknowledgement. Layout checked at 1440 px and 390 px with no horizontal scrolling.
+
+## Future skills radar (The job market)
+
+- Summary cards: strongest outlook group, most at risk group, and (if the viewer has skills) how many of them fall in the top and bottom thirds.
+- Controls: Job-ad data (2026 Q1 / Q2) and If AI changes work (Gradually / Quickly).
+- Ranked list of 24 skill groups (skills needed by the same roles): rank, roles, skill count, "shared by n roles", "you have n", outlook bar out of 100, job-ad change and AI exposure, ▲▼ rank move since Q1 data; skill chips (first 8, +more) with ✓ for held skills and green/digital flags; green/red left border for top/bottom third.
+- Method note: estimate derived from roles, not measured skill demand; supports the decision, does not predict hiring.

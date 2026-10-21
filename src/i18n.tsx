@@ -476,6 +476,23 @@ const dict: Record<string, Entry> = {
   'Level': { ms: 'Tahap', zh: '级别' },
   'View in JPK register': { ms: 'Lihat dalam daftar JPK', zh: '在 JPK 登记册中查看' },
   'Also': { ms: 'Juga', zh: '另有' },
+  // Future skills radar (added 21 Oct 2026)
+  'Future skills radar': { ms: 'Radar kemahiran masa depan', zh: '未来技能雷达' },
+  'Skills rising or at risk': { ms: 'Kemahiran meningkat atau berisiko', zh: '上升或面临风险的技能' },
+  'Which skills have the strongest outlook as AI changes work, estimated from Malaysian job ads and AI exposure of the roles that need them.': { ms: 'Kemahiran mana yang mempunyai prospek paling kukuh apabila AI mengubah kerja, dianggarkan daripada iklan kerja Malaysia dan pendedahan AI peranan yang memerlukannya.', zh: '随着 AI 改变工作，哪些技能前景最好——根据需要这些技能的职位的马来西亚招聘广告和 AI 影响程度估算。' },
+  'shared by {n} roles': { ms: 'dikongsi oleh {n} peranan', zh: '{n} 个职位共有' },
+  'you have {n}': { ms: 'anda ada {n}', zh: '你已具备 {n} 项' },
+  'Outlook {n} of 100': { ms: 'Prospek {n} daripada 100', zh: '前景 {n}/100' },
+  'Job ads {x}': { ms: 'Iklan kerja {x}', zh: '招聘广告 {x}' },
+  'AI exposure {x}': { ms: 'Pendedahan AI {x}', zh: 'AI 影响程度 {x}' },
+  'green': { ms: 'hijau', zh: '绿色' },
+  'digital': { ms: 'digital', zh: '数字' },
+  'Strongest outlook': { ms: 'Prospek paling kukuh', zh: '前景最好' },
+  'Most at risk': { ms: 'Paling berisiko', zh: '风险最高' },
+  '{a} in the top third, {b} in the bottom third': { ms: '{a} dalam satu pertiga teratas, {b} dalam satu pertiga terbawah', zh: '{a} 项在前三分之一，{b} 项在后三分之一' },
+  'of {n} you have in these roles': { ms: 'daripada {n} yang anda ada dalam peranan ini', zh: '（你在这些职位中具备的 {n} 项技能中）' },
+  'Skills needed by the same roles share the same signals, so they are shown together. Outlook out of 100 combines the job-ad trend and AI resilience of those roles; arrows show the move since {q} data.': { ms: 'Kemahiran yang diperlukan oleh peranan yang sama berkongsi isyarat yang sama, jadi ia ditunjukkan bersama. Prospek daripada 100 menggabungkan trend iklan kerja dan ketahanan AI peranan tersebut; anak panah menunjukkan perubahan sejak data {q}.', zh: '由相同职位需要的技能共享相同信号，因此一起显示。前景（满分 100）结合这些职位的招聘趋势和 AI 抗性；箭头显示自 {q} 数据以来的变化。' },
+  'An estimate derived from roles, not a measured demand for each skill: DOSM online job ads by occupation group (quarter on quarter) and ILO generative AI exposure, for the essential ESCO skills of the nine roles. It supports your decision; it does not predict hiring.': { ms: 'Anggaran yang diperoleh daripada peranan, bukan permintaan yang diukur bagi setiap kemahiran: iklan kerja dalam talian DOSM mengikut kumpulan pekerjaan (suku ke suku) dan pendedahan AI generatif ILO, untuk kemahiran penting ESCO sembilan peranan. Ia menyokong keputusan anda; ia tidak meramal pengambilan pekerja.', zh: '这是根据职位推算的估计，而非每项技能的实测需求：采用 DOSM 按职业类别的网上招聘广告（季度环比）和 ILO 生成式 AI 影响程度，覆盖九个职位的 ESCO 核心技能。它辅助你决策，并不预测招聘。' },
 };
 
 const LangContext = createContext<Lang>('en');
