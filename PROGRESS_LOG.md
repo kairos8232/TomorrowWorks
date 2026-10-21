@@ -4,6 +4,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (23:30 MYT) — Measured check for the SDG matcher
+
+- **Why:** the 0.60 SDG threshold came from looking at examples; Carson asked whether an existing labelled dataset could help. A dataset cannot replace the team check of our own 73 matches, but it can measure the matcher.
+- **Prepared:** `scripts/calibrate_sdg_osdg.py` on the OSDG Community Dataset (Zenodo, CC BY 4.0, volunteer-labelled SDG texts): same model and targets, fixed sample per SDG, accuracy overall, per similarity band and per threshold, with its limits written into the report. Tested offline with `--fake`. Carson runs it on his Mac; results go into SIGNALS_AND_MATCHING.md, RUNPOD_SETUP.md and the PRD.
+- **Docs:** README status brought up to date.
+
+---
+
 ## 21 Oct 2026 (22:45–23:20 MYT) — Plan time, HRD Corp, SDG links by RunPod
 
 - **Plan:** total stated time of checked courses; HRD Corp note with official sources (Claimable Courses scheme via employers; e-LATiH free courses), none of our courses claimed as claimable.

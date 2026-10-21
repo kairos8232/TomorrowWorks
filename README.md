@@ -188,14 +188,15 @@ TomorrowWorks/
 │   ├── build_transferable_skills.py # RunPod vectors → transferable skills
 │   ├── import_lfs_month.py     # OpenDOSM monthly labour context
 │   ├── import_gdelt_news.py    # Malaysian workplace news metadata
-│   └── import_coursera_catalog.py, match_courses_runpod.py # Course matching preparation
+│   ├── import_coursera_catalog.py, match_courses_runpod.py # Coursera courses matched to skills on RunPod
+│   └── match_sdg_runpod.py, calibrate_sdg_osdg.py # UN SDG targets matched to skills on RunPod; accuracy check on OSDG
 ├── data/
 │   ├── sources/            # Attributed DOSM, ILO, OpenDOSM and empty GDELT snapshots
 │   ├── roles.json          # Nine ESCO roles with skills (adapted ESCO selection)
 │   ├── derived/esco/       # ESCO skill vectors from the RunPod GPU run
 │   ├── pathway/            # Checked courses and sourced NOSS/SKM routes
 │   ├── interests/          # Role interest profiles and sources
-│   ├── sdg/                # Reviewed-role draft and skill-link rules
+│   ├── sdg/                # SDG goal names and the review of RunPod SDG matches
 │   └── raw/                # Original downloads (gitignored)
 ├── .replit, replit.md      # Replit run workflow and notes
 ├── vite.config.ts          # Allows Replit's preview proxy; proxies /api in development
@@ -208,9 +209,8 @@ TomorrowWorks/
 
 ## Current Status and Next Work
 
-- **Working:** fictional individual and team views; ESCO skill intake; RunPod skill search; nine-role ranking with DOSM Q1/Q2 and gradual/fast switches; visible gaps and reasons; learning plans from 21 checked course records; NOSS/SKM routes; role and skill SDG explanations; optional interests and SDG ranking switches; English, Bahasa Malaysia and Chinese interface text.
-- **Data pending:** the GDELT news snapshot is empty, so Workplace news shows an honest no-news state. The public Skills in demand page and a skill-level Future Skills Radar are not implemented. AI-matched Coursera catalogue suggestions are being prepared and require a spot-check before display.
-- **Review pending:** team review of SDG mappings and Malay/Chinese translations; DOSM reuse terms; complete live, mobile, accessibility and link checks; Replit and RunPod evidence for the Technical & Tools Declaration.
+- **Working (21 Oct):** fictional individual and team views ("View as"); ESCO skill intake with RunPod skill search, interests and SDG goals; nine-role ranking with DOSM Q1/Q2 and gradual/fast switches and "what changed"; learning plans (21 checked courses plus RunPod-matched Coursera suggestions, estimated time, HRD Corp note, NOSS/SKM step); Future Skills Radar; Team view with heatmap and group course plan; SDG links from RunPod matches with strong/possible levels and a 4.4 baseline; Workplace news (GDELT, refreshed daily until 1 Nov, key headlines picked by RunPod); English, Bahasa Malaysia and Chinese.
+- **Review pending (team):** translations (`translation-review.csv`), SDG matches (`data/derived/sdg-validation.csv`), checked courses and NOSS codes, Coursera spot-check; DOSM reuse terms; live, mobile and link checks; Replit and RunPod evidence for the Tools Declaration. Optional: run `scripts/calibrate_sdg_osdg.py` for a measured SDG matcher accuracy.
 - **Submission pending:** PRD in the official template, pitch slides, declaration, 5–7 minute video, public repository and judge access. Follow [CHECKLIST.md](CHECKLIST.md) for verified status and [PROGRESS_LOG.md](PROGRESS_LOG.md) for recent decisions.
 
 ## Running Locally
