@@ -304,7 +304,7 @@ These are ideas from the Domain 1 brief, not submission blockers. Pick them only
 - [ ] Automatic re-planning when a refreshed trend signal changes a recommendation.
 - [ ] Additional language support and a low-bandwidth mode.
 - [ ] Learner progress tracking or skill badges.
-- [ ] Fairness checks for differences related to age, gender, or background.
+- [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; "Is this fair?" panel on Your moves.)
 - [ ] Aggregated SDG contribution view for a person, organisation, or region.
 
 Additional APIs in [API_PLAN.md](API_PLAN.md) are also optional unless Stage 1 selects one as the required updatable source.

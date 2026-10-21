@@ -143,6 +143,16 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       </dl>
     </details>
 
+    <details className="how-to-read fairness">
+      <summary>Is this fair?</summary>
+      <dl>
+        <div><dt>Used</dt><dd>Only the skills you confirmed, each role’s ESCO skills, DOSM job ads for the role’s occupation group, and ILO’s AI exposure for the role.</dd></div>
+        <div><dt>Never asked</dt><dd>Age, gender, ethnicity, religion, name, where you live or which school you went to. The app has no place to store them.</dd></div>
+        <div><dt>Checked</dt><dd>Automated tests prove that the same skills always give the same scores, whoever holds them and in whatever order they were added, and that your current job only takes that role off the list.</dd></div>
+        <div><dt>Limits</dt><dd>The sources can carry their own bias: job ads favour some kinds of work and ESCO describes roles from a European view. Scores support your decision; they do not decide it.</dd></div>
+      </dl>
+    </details>
+
     <section className="ledger" aria-label="Ranked moves">
       <div className="ledger-controls">
         <fieldset><legend>Job-ad data</legend>
