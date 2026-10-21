@@ -55,7 +55,7 @@ function Home({ start }: { start: (who: ViewerId) => void }) {
   return <div className="home">
     <section className="home-hero">
       <h1>{t('AI is changing your job. See where you can move next.')}</h1>
-      <p>{t('For Malaysian workers, graduates, and the people who advise them. TomorrowWorks compares skills with nine real roles, using official Malaysian job-ad figures and international research on AI.')}</p>
+      <p>{t('Explore career moves using your skills, Malaysian job-ad data and research on AI.')}</p>
       <div className="hero-actions">
         <button type="button" className="primary-button" onClick={() => start('me')}>{t('Start with my own skills')}</button>
         <button type="button" className="secondary-button" onClick={() => start('aina')}>{t('Try a sample person')}</button>
@@ -66,9 +66,9 @@ function Home({ start }: { start: (who: ViewerId) => void }) {
     <section className="home-how" aria-labelledby="how">
       <h2 id="how">{t('How it works')}</h2>
       <ol>
-        <li><strong>{t('Your skills.')}</strong> {t('Describe your work in your own words. An AI model finds the matching skills, and you confirm them.')}</li>
-        <li><strong>{t('Your moves.')}</strong> {t('Nine roles ranked by skill fit, job-ad demand and AI exposure. Every score shows its reasons.')}</li>
-        <li><strong>{t('Your plan.')}</strong> {t('Pick a move and get courses for the skills it needs, free first, plus the Malaysian SKM route where one exists.')}</li>
+        <li><strong>{t('Your skills.')}</strong> {t('Describe your work and confirm the skills it finds.')}</li>
+        <li><strong>{t('Your moves.')}</strong> {t('Compare nine roles with clear reasons for each score.')}</li>
+        <li><strong>{t('Your plan.')}</strong> {t('See checked courses and a Malaysian SKM route where one exists.')}</li>
       </ol>
     </section>
 

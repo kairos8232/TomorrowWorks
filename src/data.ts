@@ -45,7 +45,7 @@ export const personas: Persona[] = [
     name: 'Aina',
     group: 'Working adult whose job AI is changing',
     description: 'a fictional accounting assistant',
-    summary: 'Fictional accounting assistant, three years at a mid-sized firm in Shah Alam. Her days are invoices, bank reconciliations and month-end reports, the kind of routine work AI tools now speed up.',
+    summary: 'Fictional accounting assistant in Shah Alam, handling invoices, bank reconciliations and reports.',
     roleId: 'accounting-assistant',
     skillLabels: null, // all essential skills of her role
     interests: ['C', 'S'],
@@ -55,7 +55,7 @@ export const personas: Persona[] = [
     name: 'Hakim',
     group: 'Fresh graduate choosing a first job',
     description: 'a fictional statistics graduate',
-    summary: 'Fictional fresh graduate in statistics from a Malaysian public university, with a three-month internship cleaning survey data. No job yet; he wants to know which roles his degree skills lead to.',
+    summary: 'Fictional statistics graduate with a survey-data internship, choosing his first role.',
     roleId: null,
     skillLabels: ['statistics', 'apply statistical analysis techniques', 'quantitative analysis', 'empirical analysis', 'conduct quantitative research',
       'scientific research methodology', 'economics', 'microeconomics', 'macroeconomics', 'digital data processing', 'perform data cleansing',
@@ -130,11 +130,11 @@ export const viewers: Viewer[] = [
   { id: 'hakim', name: 'Hakim', group: personas[1].group, summary: personas[1].summary, kind: 'person' },
   {
     id: 'hr', name: 'Puan Rosnah', group: 'HR and learning manager', kind: 'team', teamId: 'finance-team',
-    summary: 'Fictional HR and learning manager at a mid-sized firm. She decides where the finance team’s training budget goes as AI takes over routine accounting work.',
+    summary: 'Fictional HR manager deciding which skills her finance team should learn.',
   },
   {
     id: 'adviser', name: 'Encik Lim', group: 'University career adviser', kind: 'team', teamId: 'graduating-class',
-    summary: 'Fictional career adviser at a university career centre, preparing advice for three graduating students who ask which jobs their skills lead to.',
+    summary: 'Fictional university adviser comparing career moves for three graduates.',
   },
   { id: 'me', name: 'Me', group: 'Your own skills', summary: 'Describe your own work and see your own moves. Nothing is saved.', kind: 'me' },
 ];
