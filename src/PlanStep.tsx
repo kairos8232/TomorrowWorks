@@ -9,6 +9,7 @@ import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 
 const resources = resourcesFile.resources as Resource[];
+const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
 type NossEntry = { code: string; title: string; level: number; source: string; page: number };
 type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
 const nossRoles = nossFile.roles as Record<string, NossRole>;
@@ -67,7 +68,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         <p className="plan-summary">
           <strong>{plan.gaps.length}</strong> essential {plan.gaps.length === 1 ? 'skill' : 'skills'} to build{plan.gaps.some((g) => g.partly) ? `, ${plan.gaps.filter((g) => g.partly).length} of them partly there` : ''}.{' '}
           {plan.steps.length > 0
-            ? <>{plan.steps.length} free {plan.steps.length === 1 ? 'course covers' : 'courses cover'} {closed} of them{plan.statedHours > 0 ? <>, about <strong>{plan.statedHours} hours</strong> of study as the providers state it</> : ''}{plan.stepsWithoutHours ? ` (plus ${plan.stepsWithoutHours} ${plan.stepsWithoutHours === 1 ? 'course' : 'courses'} with no stated hours)` : ''}.</>
+            ? <>{plan.steps.length} {plan.steps.length === 1 ? 'course covers' : 'courses cover'} {closed} of them{plan.statedHours > 0 ? <>, about <strong>{plan.statedHours} hours</strong> of study as the providers state it</> : ''}{plan.stepsWithoutHours ? ` (plus ${plan.stepsWithoutHours} ${plan.stepsWithoutHours === 1 ? 'course' : 'courses'} with no stated hours)` : ''}.</>
             : 'None of the courses we have checked covers them yet.'}
         </p>
 
@@ -76,12 +77,16 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
             <span className="plan-num">{i + 1}</span>
             <div>
               <h3><a href={step.resource.url} target="_blank" rel="noreferrer">{step.resource.title}</a></h3>
-              <p className="plan-meta">{step.resource.provider} · {step.resource.level} · {step.resource.cost}</p>
+              <p className="plan-meta">{step.resource.provider} · {step.resource.level} · {step.resource.free ? step.resource.cost : <span className="plan-paid">{step.resource.cost}</span>}</p>
               <p className="plan-time">{step.resource.timeBasis}.</p>
               <div className="tag-row"><span className="plan-closes">Builds</span>{step.closes.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
             </div>
           </li>)}
         </ol>}
+
+        {[...new Set(plan.steps.map((s) => s.resource.access).filter((a): a is string => !!a))].map((id) => <p key={id} className="plan-access note">
+          <strong><a href={access[id].url} target="_blank" rel="noreferrer">{access[id].name}</a>:</strong> {access[id].note} <a href={access[id].source} target="_blank" rel="noreferrer">Source</a>.
+        </p>)}
 
         {plan.uncovered.length > 0 && <section className="skill-list plan-left">
           <h4>No checked course yet <span>{plan.uncovered.length}</span></h4>
@@ -93,9 +98,9 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           <summary>How this plan is made</summary>
           <dl>
             <div><dt>Skills</dt><dd>The role’s essential ESCO skills you don’t have yet. A skill you partly have (≈) is included because it only counts half.</dd></div>
-            <div><dt>Order</dt><dd>Start with the course that builds the most of your missing skills, then the next. If two are equal, the one with fewer stated hours comes first.</dd></div>
+            <div><dt>Order</dt><dd>Start with the course that builds the most of your missing skills, then the next. If two are equal, a free course comes before a paid one, then the one with fewer stated hours.</dd></div>
             <div><dt>Time</dt><dd>The study time each provider states on its course page. We don’t estimate it ourselves.</dd></div>
-            <div><dt>Courses</dt><dd>Free courses checked by hand on {resourcesFile.checkedAt}. The link to each skill is our reading of the course’s stated outcomes.</dd></div>
+            <div><dt>Courses</dt><dd>OpenLearn, CS50x and UN CC:Learn (free) and Coursera (paid, or free for 3 months through Rakyat Digital), each checked by hand on its own page on {resourcesFile.checkedAt}. The link to each skill is our reading of the course’s stated outcomes and skills.</dd></div>
           </dl>
         </details>
       </>}

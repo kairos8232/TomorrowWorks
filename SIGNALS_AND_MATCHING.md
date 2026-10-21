@@ -194,14 +194,14 @@ The app has a **Data snapshot** switch: *DOSM Q1 2026* vs *DOSM Q2 2026*. Same p
 Code: `src/pathway.ts`, tests in `src/pathway.test.ts`. Data: `data/pathway/resources.json` (courses) and `data/pathway/noss.json` (Malaysian certification route).
 
 1. **Gaps** are the chosen role's essential ESCO skills the person does not hold, plus the transferable ones (they only get half credit, so they are still worth learning; shown with ≈ and the related skill).
-2. **Courses** are free resources opened by hand on the provider's own page (checked 21 Oct 2026). Each lists the ESCO skills its *stated learning outcomes* address, using exact labels from `data/roles.json`; a test fails if a label does not exist. This mapping is the team's reading and is an adapted use of ESCO.
-3. **Order (greedy):** step 1 is the course that closes the most remaining gaps; repeat with what is left. Ties: more fully missing skills first, then fewer stated hours (no stated hours counts as longest), then file order. Stop when no course closes another gap.
+2. **Courses** are opened by hand on the provider's own page (checked 21 Oct 2026): free ones (OpenLearn, CS50x, UN CC:Learn) and Coursera courses, which are paid but reachable free for three months through Rakyat Digital's Global Learning Pass (Ministry of Digital, 100,000 licences for eligible Malaysians with MyDigital ID, from 16 Sep 2026). Each lists the ESCO skills its *stated learning outcomes* address, using exact labels from `data/roles.json`; a test fails if a label does not exist. This mapping is the team's reading and is an adapted use of ESCO.
+3. **Order (greedy):** step 1 is the course that closes the most remaining gaps; repeat with what is left. Ties: more fully missing skills first, then free before paid, then fewer stated hours (no stated hours counts as longest), then file order. Stop when no course closes another gap.
 4. **Time** is the study time the provider states (e.g. "8 hours study" on OpenLearn). We never estimate it. A course with no stated hours shows the provider's own wording (CS50x: "eleven weeks of material").
 5. **Leftover gaps** are listed as "No checked course yet". No course is invented to fill them.
 
 Why greedy: it is the simplest rule a person can check by hand ("this course builds 4 of your 6 gaps, so it comes first"), and it keeps the plan short.
 
-Current coverage with Aina's skills (11 courses): bookkeeper 4 of 6 gaps, billing clerk 1 of 8, accountant 6 of 15, financial analyst 5 of 22, business analyst 7 of 26, data analyst 8 of 36, software developer 3 of 24, sustainability manager 6 of 48. Low coverage is shown honestly; more courses can be added to the JSON after checking their pages.
+Current coverage with Aina's skills (21 courses): bookkeeper 4 of 6 gaps, billing clerk 1 of 8, accountant 6 of 15, financial analyst 6 of 22, business analyst 8 of 26, data analyst 11 of 36, software developer 5 of 24, sustainability manager 10 of 48. Low coverage is shown honestly; more courses can be added to the JSON after checking their pages.
 
 ## Skills radar (rising / declining skills)
 

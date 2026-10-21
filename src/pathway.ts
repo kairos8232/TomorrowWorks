@@ -3,10 +3,11 @@
 //
 // Gaps     = the role's essential skills the person is missing, plus the
 //            transferable ones (only half credit, so still worth learning).
-// Steps    = free courses from data/pathway/resources.json, picked greedily:
+// Steps    = courses from data/pathway/resources.json, picked greedily:
 //            each step is the course that closes the most remaining gaps
-//            (ties: more fully missing skills, then fewer stated hours,
-//            then file order). Stop when no course closes another gap.
+//            (ties: more fully missing skills, then free before paid, then
+//            fewer stated hours, then file order). Stop when no course
+//            closes another gap.
 // Time     = the study hours each provider states. Never estimated by us.
 // Leftover = gaps no checked course covers, shown as such.
 import type { RoleScore, Skill } from './scoring';
@@ -17,6 +18,8 @@ export type Resource = {
   provider: string;
   url: string;
   cost: string;
+  free: boolean;
+  access: string | null;
   level: string;
   hours: number | null;
   timeBasis: string;
@@ -42,10 +45,13 @@ export function learningPlan(result: RoleScore, resources: Resource[]) {
       const closes = open.filter((g) => resource.covers.includes(g.skill.label));
       const full = closes.filter((g) => g.partly === null).length;
       if (closes.length === 0) return;
-      const better = !best
+      const rival = best ? unused[best.index] : null;
+      const better = !best || !rival
         || closes.length > best.closes.length
         || (closes.length === best.closes.length && full > best.full)
-        || (closes.length === best.closes.length && full === best.full && (resource.hours ?? Infinity) < (unused[best.index].hours ?? Infinity));
+        || (closes.length === best.closes.length && full === best.full && resource.free && !rival.free)
+        || (closes.length === best.closes.length && full === best.full && resource.free === rival.free
+          && (resource.hours ?? Infinity) < (rival.hours ?? Infinity));
       if (better) best = { index, closes, full };
     });
     if (!best) break;

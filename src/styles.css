@@ -313,3 +313,6 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
   .who.plan-who .text-button { margin-left: 0; }
   .plan-steps > li { grid-template-columns: 32px 1fr; gap: 10px; }
 }
+.plan-paid { color: #3a4450; }
+.plan-access { margin: 0; background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 12px 16px; }
+.plan-access a { color: #1e6b4f; }

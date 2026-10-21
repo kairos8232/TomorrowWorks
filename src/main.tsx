@@ -27,7 +27,7 @@ const marketNav: NavItem[] = [
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
   moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
-  plan: { title: 'Your plan', intro: 'Free courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
+  plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
@@ -60,7 +60,7 @@ function Home({ start }: { start: (who: 'aina' | 'me') => void }) {
       <ol>
         <li><strong>Your skills.</strong> Describe your work in your own words. An AI model finds the matching skills, and you confirm them.</li>
         <li><strong>Your moves.</strong> Nine roles ranked by skill fit, job-ad demand and AI exposure. Every score shows its reasons.</li>
-        <li><strong>Your plan.</strong> Pick a move and get free courses for the skills it needs, plus the Malaysian SKM route where one exists.</li>
+        <li><strong>Your plan.</strong> Pick a move and get courses for the skills it needs, free first, plus the Malaysian SKM route where one exists.</li>
       </ol>
     </section>
 

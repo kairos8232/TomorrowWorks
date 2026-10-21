@@ -16,8 +16,8 @@ const score = (role: Role, held: Set<string>) =>
 // --- Synthetic example: the greedy order can be checked by hand -------------
 const skill = (n: number) => ({ uri: `s${n}`, label: `skill ${n}`, type: 'skill/competence', green: false, digital: false });
 const role: Role = { id: 'r', title: 'r', escoUri: '', isco: '9999', iscoMajorGroup: '9', description: '', essentialSkills: [1, 2, 3, 4, 5].map(skill), optionalSkills: [] };
-const course = (id: string, covers: number[], hours: number | null): Resource =>
-  ({ id, title: id, provider: 'test', url: '', cost: 'Free', level: '', hours, timeBasis: '', covers: covers.map((n) => `skill ${n}`) });
+const course = (id: string, covers: number[], hours: number | null, free = true): Resource =>
+  ({ id, title: id, provider: 'test', url: '', cost: free ? 'Free' : 'Paid', free, access: null, level: '', hours, timeBasis: '', covers: covers.map((n) => `skill ${n}`) });
 
 describe('learning plan rule (synthetic)', () => {
   const held = new Set(['s1']); // missing 2, 3, 4, 5
@@ -32,6 +32,10 @@ describe('learning plan rule (synthetic)', () => {
     const plan = learningPlan(score(role, held), [course('long', [2], 20), course('none', [2], null), course('short', [2], 5)]);
     expect(plan.steps.map((s) => s.resource.id)).toEqual(['short']);
   });
+  it('prefers a free course over a paid one that closes the same gaps, even if longer', () => {
+    const plan = learningPlan(score(role, held), [course('paid', [2, 3], 5, false), course('free', [2, 3], 20)]);
+    expect(plan.steps.map((s) => s.resource.id)).toEqual(['free']);
+  });
   it('never invents a step when no course covers a gap', () => {
     const plan = learningPlan(score(role, held), []);
     expect(plan.steps).toEqual([]);
@@ -43,6 +47,9 @@ describe('real resources (data/pathway/resources.json)', () => {
   const labels = new Set(roles.flatMap((r) => r.essentialSkills.map((s) => s.label)));
   it('every resource maps only to ESCO essential skills that exist in roles.json', () => {
     for (const r of resources) for (const label of r.covers) expect(labels.has(label), `${r.id}: ${label}`).toBe(true);
+  });
+  it('every paid resource names an access programme that exists', () => {
+    for (const r of resources) if (!r.free) expect((resourcesFile.access as Record<string, unknown>)[r.access ?? ''], r.id).toBeDefined();
   });
   it('every resource has a link, a cost and a stated time basis', () => {
     for (const r of resources) {
