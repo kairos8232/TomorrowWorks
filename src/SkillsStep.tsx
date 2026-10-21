@@ -15,6 +15,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
   const [search, setSearch] = useState<{ busy: boolean; message: string; vars: Record<string, string> }>({ busy: false, message: '', vars: {} });
   const [query, setQuery] = useState('');
+  const [showAllHeld, setShowAllHeld] = useState(false);
 
   const update = (patch: Partial<Profile>) => setProfile({ ...profile, ...patch, persona: null });
   function toggle(skill: Skill) {
@@ -44,6 +45,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   const needle = query.trim().toLowerCase();
   const listHits = needle.length >= 2 ? allSkills.filter((s) => s.label.toLowerCase().includes(needle)).slice(0, 12) : [];
   const heldSkills = [...profile.held].map((u) => skillByUri.get(u) ?? profile.extra.get(u)).filter((s): s is Skill => Boolean(s)).sort((a, b) => a.label.localeCompare(b.label));
+  const visibleHeld = showAllHeld ? heldSkills : heldSkills.slice(0, 8);
   const pick = (s: Skill, extra?: React.ReactNode) => <button type="button" key={s.uri} className={`skill-tag${profile.held.has(s.uri) ? '' : ' skill-add'}`} onClick={() => toggle(s)} aria-pressed={profile.held.has(s.uri)}>
     {profile.held.has(s.uri) ? '✓ ' : '+ '}{s.label}{extra}
   </button>;
@@ -87,7 +89,8 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     <section className="panel selected-skills">
       <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
       {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
-        : <div className="tag-row">{heldSkills.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
+        : <div className="tag-row">{visibleHeld.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
+      {heldSkills.length > 8 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
       <div className="step-actions">
         <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t('See my moves')}</button>
         {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
