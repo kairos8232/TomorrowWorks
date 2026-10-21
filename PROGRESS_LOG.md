@@ -4,6 +4,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 21 Oct 2026 (16:10–20:40 MYT) — Goals switch; Coursera matched on RunPod
+
+- **Goals switch:** *Goals you care about* + *Count in ranking* (G = 1 role link, 0.5 skill link, 0 none). Carson then reworked Your moves on his Mac into focused views (role detail, changes, method; commits 2650b37–eda905c); his uncommitted *Personalise ranking* edit was left untouched.
+- **Coursera at scale:** Carson ran the import (25,051 courses) and the RunPod matching (783 requests, 3.7 h). Spot-checked by similarity band; threshold 0.66, English only, top 3 → 159 of 185 skills matched. Your plan shows them as *Found by AI on Coursera, not checked by hand*. RunPod details in RUNPOD_SETUP.md.
+- **Spend:** balance US$21.37 before the run; the "1d 6h left" estimate reflected the busy worker, not idle cost.
+
+---
+
 ## 21 Oct 2026 (15:00–16:10 MYT) — Requirements re-check; interests; SDG links
 
 - **Re-read the Domain 1 brief and handbooks.** Gaps found: SDG mapping (must-have 5) not started; interests missing from intake; no skill-level "Future Skills Radar"; HRD Corp courses not covered; all submission documents outstanding (PRD in the official template from the organisers' Drive, slides, Tools Declaration with Replit proof and RunPod screenshots, video, public repo + collaborators). Risk noted: handbook §8.5.3–8.5.4, every member must be able to explain the code.

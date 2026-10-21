@@ -91,3 +91,11 @@ If the endpoint is down, the profile screen offers a searchable list of ESCO ski
 - [x] Job B Serverless endpoint URL, from the team's own account: `https://api.runpod.ai/v2/j6ssjfy9z074hp` (screenshot the endpoint page for the declaration).
 - [x] Model named: `BAAI/bge-m3` (open weights), purpose: retrieve ESCO skills; generates no content.
 - [ ] Approximate credit used, out of US$25.
+
+
+## Job B batch use: Coursera course matching (21 Oct 2026)
+
+- `scripts/import_coursera_catalog.py` → 25,051 courses (Coursera courses.v1, retrieved 2026-10-21).
+- `scripts/match_courses_runpod.py` on Carson's Mac → **783 requests** to endpoint `j6ssjfy9z074hp` (Infinity, BAAI/bge-m3), **13,323 s** (about 3.7 h; about 2 courses/s on the 16 GB worker; two read timeouts retried). Spend rate while running about US$0.69/h, so roughly US$2.5; idle cost is US$0 (Active workers 0, idle timeout 5 s).
+- The dashboard's "estimated time left" is computed from the current spend rate, so it showed about 1 day while the worker was busy; it returns to no spend once idle.
+- Evidence for the Tools Declaration: Overview request-volume chart and Metrics tab for 21 Oct.
