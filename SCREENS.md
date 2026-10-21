@@ -50,7 +50,7 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Compare quarters** shows all ranked moves with Q1 and Q2 rank, score, and occupation-group change, plus one DOSM source link. Logic: `src/changes.ts`.
 - **How ranking works** explains the three score parts, fairness and limits, and links DOSM, ILO and ESCO once. The fairness claim is backed by `src/fairness.test.ts`.
 - **Personalise ranking** is visible beside the data and scenario controls and wraps on narrower screens. Its interest switch is disabled until the person picks interests. Selected goals highlight linked roles; the separate switch adds them to the ranking. The note says how optional parts affect the score, and arrows show score changes. A role view shows its leading work interests, interest fit, and a job tag or O\*NET source link; rows with fit ≥ 75% show "fits your interests".
-- If there are no skills: a short prompt to add skills or try Aina.
+- If there are no skills: a short prompt to add your own skills. Sample profiles remain available in View as.
 
 ## SDG links (all career screens)
 
@@ -67,7 +67,7 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Found by AI on Coursera** (under the skills without a checked course): for each such skill, the best Coursera match from the RunPod run, with match %, Coursera's stated workload, a *not checked by hand* label, the catalogue date and the Rakyat Digital note; first 6, *Show all*.
 - **How this plan is made:** Skills, Order, Time, Courses in plain words. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
 - **Malaysian certification route:** SKM level, NOSS title and code, which official list it comes from (link), "closest standard by title" or "related standard, not the same job", and that an SKM is one route, not a requirement. Roles without one say "No matching NOSS found in the registers we checked".
-- If there are no skills: a short prompt to add skills or try Aina. If nothing is missing: "Nothing to build".
+- If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
 ## Team view (For teams)
 

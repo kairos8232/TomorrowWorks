@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## UI refinement — 21 Oct 2026
 
+- [x] Keep empty Your moves and Your plan states focused on adding the visitor's skills; remove the Aina detour while leaving sample profiles in View as. Check both pages and the Add skills destination in the live browser, including the 390 px Malay layout; build and all 62 tests pass.
 - [x] Replace repeated Your moves disclosures and row expanders with focused role, comparison and method views; keep source explanations in one method view and direct links beside role facts. Check desktop and 390 px layouts, then run build and tests.
 - [x] Show personalisation alongside the job-ad and AI controls; refresh the navigation rail with shorter labels and a soft active state. Build, tests and static CSS scan passed; the later browser pass checked the rail at 1440 and 390 px.
 - [x] Separate empty-state actions, arrange job/manual search beside work description on wide screens, shorten the Me switcher, and make language a compact icon control. Check the live 1440 and 390 px layouts plus the Malay header at 320 px; build and all 62 tests pass.

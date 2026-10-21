@@ -284,7 +284,6 @@ const dict: Record<string, Entry> = {
   'Add your skills first': { ms: 'Tambah kemahiran anda dahulu', zh: '请先添加你的技能' },
   'Your moves are ranked from your skills.': { ms: 'Langkah anda disusun berdasarkan kemahiran anda.', zh: '你的职业选择根据你的技能排名。' },
   'Add skills': { ms: 'Tambah kemahiran', zh: '添加技能' },
-  'Or view as Aina': { ms: 'Atau lihat sebagai Aina', zh: '或以 Aina 身份查看' },
   'Your plan is built from the skills a move needs that you don’t have yet.': { ms: 'Pelan anda dibina daripada kemahiran yang diperlukan untuk langkah itu yang anda belum ada.', zh: '你的计划根据该职位需要而你尚未具备的技能制定。' },
   'a fictional accounting assistant': { ms: 'pembantu akaun rekaan', zh: '一名虚构的会计助理' },
   'Fictional accounting assistant in Shah Alam, handling invoices, bank reconciliations and reports.': { ms: 'Pembantu akaun rekaan di Shah Alam yang mengurus invois, penyelarasan bank dan laporan.', zh: '虚构的莎阿南会计助理，负责发票、银行对账和报告。' },
