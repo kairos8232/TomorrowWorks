@@ -91,6 +91,7 @@ const dict: Record<string, Entry> = {
   'Find my skills': { ms: 'Cari kemahiran saya', zh: '查找我的技能' },
   'Searching…': { ms: 'Mencari…', zh: '搜索中…' },
   'Or search the skill list': { ms: 'Atau cari dalam senarai kemahiran', zh: '或搜索技能列表' },
+  'Search the skill list': { ms: 'Cari dalam senarai kemahiran', zh: '搜索技能列表' },
   'No skills yet. Describe your work or search the list above.': { ms: 'Belum ada kemahiran. Terangkan kerja anda atau cari dalam senarai di atas.', zh: '还没有技能。请描述你的工作或搜索上面的列表。' },
   'See my moves': { ms: 'Lihat langkah saya', zh: '查看我的职业选择' },
   'Add at least one skill first.': { ms: 'Tambah sekurang-kurangnya satu kemahiran dahulu.', zh: '请先添加至少一项技能。' },

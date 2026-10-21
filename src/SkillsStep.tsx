@@ -51,6 +51,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   </button>;
 
   return <div className="step-body skills-body">
+    <div className="skills-intake">
     <section className="panel job-panel">
       <div><h2>{t('Your current job')}</h2>
         <p className="note">{t('Shown as “Now” for comparison, outside the ranking.')}</p></div>
@@ -58,9 +59,14 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
         <option value="">{t('Not in this list')}</option>
         {roles.map((r) => <option key={r.id} value={r.id}>{roleTitle(r.title)}</option>)}
       </select>
+      <div className="manual-search">
+        <h3>{t('Search the skill list')}</h3>
+        <input type="search" aria-label={t('Search the skill list')} value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t('Try budget, data or sustainability')} />
+        {listHits.length > 0 && <div className="tag-row">{listHits.map((s) => pick(s))}</div>}
+      </div>
     </section>
 
-    <section className="panel">
+    <section className="panel describe-panel">
       <h2>{t('Describe your work')}</h2>
       <p className="note">{t('Write in English, Bahasa Malaysia or Chinese. AI suggests existing ESCO skills; you choose which to add.')}</p>
       <form className="skill-search" onSubmit={findSkills}>
@@ -69,9 +75,9 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       </form>
       {search.message && <p className="note" aria-live="polite">{t(search.message, search.vars)}</p>}
       {found.length > 0 && <div className="tag-row">{found.map((s) => pick(s, <small>{t('match {n}%', { n: Math.round(s.similarity * 100) })}</small>))}</div>}
-      <label className="list-search">{t('Or search the skill list')}<input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t('Try budget, data or sustainability')} /></label>
-      {listHits.length > 0 && <div className="tag-row">{listHits.map((s) => pick(s))}</div>}
     </section>
+
+    </div>
 
     <section className="panel" aria-labelledby="enjoy">
       <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
