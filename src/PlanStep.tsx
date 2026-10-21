@@ -105,12 +105,6 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
           <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
         </p>)}
 
-        {plan.uncovered.length > 0 && <section className="skill-list plan-left">
-          <h4>{t('Skills without a checked course')} <span>({plan.uncovered.length})</span></h4>
-          <div className="tag-row">{plan.uncovered.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>
-          <p className="note">{t('We list a course only after checking its page against the skill.')}</p>
-        </section>}
-
         {plan.uncovered.length > 0 && <AiCourses skills={plan.uncovered.map((g) => g.skill)} />}
 
         <details className="how-to-read">

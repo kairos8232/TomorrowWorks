@@ -346,8 +346,6 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .plan-meta, .plan-time { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.5; }
 .plan-steps .tag-row { margin: 10px 0 0; gap: 6px; align-items: center; }
 .plan-closes { font-size: 14px; font-weight: 600; color: #3a4450; margin-right: 4px; }
-.plan-left { background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 14px 16px; }
-.plan-left .note { margin: 10px 0 0; }
 .noss-list { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 10px; }
 .noss-list li { display: grid; gap: 2px; }
 .noss-list span { color: #5d6873; font-size: 14px; }
@@ -526,12 +524,12 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .sidebar .viewer-switch { grid-column: 1; grid-row: 3; }
 }
 /* AI-matched courses: clearly labelled as machine-found, not checked by hand. */
-.ai-courses { background: #ffffff; border: 1px dashed #8a96a3; border-radius: 10px; padding: 14px 16px; }
+.ai-courses { background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 18px 20px; }
 .ai-courses h4 { margin: 0 0 6px; font-size: 15px; }
-.ai-label { margin-left: 6px; padding: 2px 6px; border-radius: 4px; background: #eef0f3; color: #3a4450; font-size: 12px; font-weight: 600; }
-.ai-courses ul { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 8px; }
-.ai-courses li { display: grid; grid-template-columns: minmax(140px, 0.8fr) 1.6fr; gap: 12px; align-items: baseline; }
-.ai-courses li small { display: block; color: #5d6873; font-size: 12px; }
+.ai-count { margin-left: 5px; color: #5d6873; font-weight: 500; }
+.ai-courses ul { list-style: none; margin: 10px 0 6px; padding: 0; }
+.ai-courses li { display: grid; grid-template-columns: minmax(180px, 0.8fr) 1.6fr; gap: 12px; align-items: baseline; padding: 9px 0; border-top: 1px solid #e3e7e3; }
+.ai-courses li small { display: block; color: #5d6873; font-size: 14px; }
 .ai-courses a { color: #1e6b4f; }
-.ai-skill { font-size: 14px; font-weight: 600; color: #a8402b; }
+.ai-skill { font-size: 14px; font-weight: 600; color: #1c2430; }
 @media (max-width: 640px) { .ai-courses li { grid-template-columns: 1fr; gap: 2px; } }

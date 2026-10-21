@@ -63,8 +63,7 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Entry:** *Plan this move* in a focused role view of Your moves, or the sidebar career step (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.
 - **Summary line:** n essential skills to build (m partly there); k free courses cover x of them, about h hours as the providers state it.
 - **Numbered steps:** course title (link to the provider page), provider · level · cost, the provider's stated time, and *Builds* with the gap skills it closes (≈ marks a skill the person partly has).
-- **No checked course yet:** leftover gaps, with a line saying courses are only listed after their page was checked.
-- **Found by AI on Coursera** (under the skills without a checked course): for each such skill, the best Coursera match from the RunPod run, with match %, Coursera's stated workload, a *not checked by hand* label, the catalogue date and the Rakyat Digital note; first 6, *Show all*.
+- **Skills without a checked course:** one row per leftover gap, beside its best AI suggested Coursera match or an explicit no-suggestion state. These matches are unverified text similarities, not quality ratings; the list starts with 6 rows and can show all. The catalogue date and Rakyat Digital note remain below it.
 - **How this plan is made:** Skills, Order, Time, Courses in plain words. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
 - **Malaysian certification route:** SKM level, NOSS title and code, which official list it comes from (link), "closest standard by title" or "related standard, not the same job", and that an SKM is one route, not a requirement. Roles without one say "No matching NOSS found in the registers we checked".
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".

@@ -13,18 +13,17 @@ const matches = matchesFile as { method: { coursesEmbedded: number; threshold: n
 export function AiCourses({ skills }: { skills: Skill[] }) {
   const t = useT();
   const [all, setAll] = useState(false);
-  const found = skills.map((s) => ({ skill: s, course: matches.skills[s.uri]?.courses[0] })).filter((x): x is { skill: Skill; course: Match } => Boolean(x.course));
-  if (found.length === 0) return null;
-  const shown = all ? found : found.slice(0, 6);
+  const rows = skills.map((skill) => ({ skill, course: matches.skills[skill.uri]?.courses[0] as Match | undefined }));
+  const shown = all ? rows : rows.slice(0, 6);
   return <section className="ai-courses" aria-labelledby="ai-courses">
-    <h4 id="ai-courses">{t('Found by AI on Coursera')} <span className="ai-label">{t('not checked by hand')}</span></h4>
-    <p className="note">{t('RunPod compared {n} Coursera course descriptions with these skills (BAAI/bge-m3). The match is text similarity, not a quality rating; open the course to judge it.', { n: matches.method.coursesEmbedded.toLocaleString() })}</p>
+    <h4 id="ai-courses">{t('Skills without a checked course')} <span className="ai-count">{skills.length}</span></h4>
+    <p className="note">{t('AI suggested Coursera matches below. They are unverified; match % is text similarity, not course quality.')}</p>
     <ul>{shown.map(({ skill, course }) => <li key={skill.uri}>
       <span className="ai-skill">{skill.label}</span>
-      <span><a href={course.url} target="_blank" rel="noreferrer">{course.name}</a>
-        <small>{t('match {n}%', { n: Math.round(course.similarity * 100) })}{course.workload ? ` · ${course.workload}` : ''}</small></span>
+      <span>{course ? <><a href={course.url} target="_blank" rel="noreferrer">{course.name}</a>
+        <small>{t('match {n}%', { n: Math.round(course.similarity * 100) })}{course.workload ? ` · ${course.workload}` : ''}</small></> : t('No AI suggestion')}</span>
     </li>)}</ul>
-    {found.length > 6 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('Show all {n}', { n: found.length })}</button>}
+    {rows.length > 6 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('Show all {n}', { n: rows.length })}</button>}
     <p className="note">{t('Catalogue retrieved {date}. Coursera is paid; eligible Malaysians can get 3 months free through Rakyat Digital.', { date: matches.method.catalogue.retrievedAt })}</p>
   </section>;
 }
