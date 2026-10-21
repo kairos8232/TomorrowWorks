@@ -449,7 +449,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .sdg-summary-heading strong { font-size: 15px; line-height: 1.4; }
 .sdg-summary-list p { margin: 6px 0 0; color: #3a4450; font-size: 14px; line-height: 1.5; }
 .sdg-summary-list small { display: block; margin-top: 6px; color: #5d6873; font-size: 14px; }
-.sdg-panel .sdg-summary-note { margin: 4px 0 0; max-width: 80ch; }
+.sdg-summary-list small + small { margin-top: 2px; }
+.sdg-panel .sdg-summary-note { margin: 4px 0 0; }
 @media (max-width: 760px) { .sdg-summary-list { grid-template-columns: 1fr; } }
 .goal-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; font-size: 14px; font-weight: 600; color: #3a4450; }
 .goal-chip { min-width: 34px; padding: 4px 8px; border: 2px solid; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 700; cursor: pointer; color: #1c2430; }
