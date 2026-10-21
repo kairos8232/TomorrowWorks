@@ -4,6 +4,7 @@ import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
 import iloFile from '../data/sources/ilo-genai-exposure-2025.json';
 import transferableFile from '../data/derived/transferable-skills.json';
 import resourcesFile from '../data/pathway/resources.json';
+import nossFile from '../data/pathway/noss.json';
 import { learningPlan, type Resource } from './pathway';
 import { scenarios, scoreRole, type DosmSnapshot, type IloExposure, type Role, type TransferableSkills } from './scoring';
 
@@ -58,5 +59,26 @@ describe('real resources (data/pathway/resources.json)', () => {
     for (const step of plan.steps) for (const g of step.closes) expect(gapLabels.has(g.skill.label)).toBe(true);
     expect(plan.steps[0].resource.id).toBe('ol-financial-statements');
     expect(plan.steps.length + plan.uncovered.length).toBeGreaterThan(0);
+  });
+});
+
+describe('Malaysian certification route (data/pathway/noss.json)', () => {
+  const noss = nossFile as {
+    sources: Record<string, { url: string }>;
+    roles: Record<string, { match: string; noss: { code: string; level: number; source: string }[] }>;
+  };
+  it('every role has an entry, and "none" means no codes are shown', () => {
+    for (const r of roles) {
+      const entry = noss.roles[r.id];
+      expect(entry, r.id).toBeDefined();
+      expect(entry.match === 'none').toBe(entry.noss.length === 0);
+    }
+  });
+  it('every NOSS code has the JPK shape, a level 1–5 and a cited source', () => {
+    for (const entry of Object.values(noss.roles)) for (const n of entry.noss) {
+      expect(n.code).toMatch(/^[A-Z]+\d*-\d{3}-\d(:\d{4})?$/);
+      expect(Number(n.code.split('-')[2][0])).toBe(n.level);
+      expect(noss.sources[n.source]?.url).toMatch(/^https:\/\//);
+    }
   });
 });

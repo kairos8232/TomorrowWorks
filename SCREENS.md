@@ -39,6 +39,7 @@ My career (guided, step bar on top)      The job market (browse any time)
 - **Numbered steps:** course title (link to the provider page), provider · level · cost, the provider's stated time, and *Builds* with the gap skills it closes (≈ marks a skill the person partly has).
 - **No checked course yet:** leftover gaps, with a line saying courses are only listed after their page was checked.
 - **How this plan is made:** Skills, Order, Time, Courses in plain words. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
+- **Malaysian certification route:** SKM level, NOSS title and code, which official list it comes from (link), "closest standard by title" or "related standard, not the same job", and that an SKM is one route, not a requirement. Roles without one say "No matching NOSS found in the registers we checked".
 - If there are no skills: a short prompt to add skills or try Aina. If nothing is missing: "Nothing to build".
 
 ## Job ads / AI exposure

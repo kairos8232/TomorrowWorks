@@ -253,7 +253,9 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Display the ordered pathway in the app. (3. Your plan; checked at 1280 px and 390 px.)
 - [x] Link each learning step back to the missing skill it addresses. (*Builds* tags on each step.)
 
-- [ ] **10d** For each role, look up a matching NOSS (JPK) by hand and record code, title, SKM level and link, or "no matching NOSS found"; show it as the Malaysian certification route without claiming it is required.
+- [x] **10d** For each role, look up a matching NOSS (JPK) by hand and record code, title, SKM level and link, or "no matching NOSS found"; show it as the Malaysian certification route without claiming it is required.
+  - Done 21 Oct 2026 in `data/pathway/noss.json` from the JPA SKPK list (1 Dec 2024) and the JPK NOSS register (Nov 2015). Close: accounting roles → FB-100-3:2012 Perakaunan (L3); software developer → IT-010-3:2016 / IT-010-4:2013. Related: data analyst → IT-121-4:2011 Database Programming. None found: accountant, financial analyst, business analyst, sustainability manager.
+  - [ ] Open: the current JPK register (Daftar Standard, 22 Jan 2025) could only be read up to section C from here. Carson to check sections J, K, M, N (about pp. 110–153) and D/E by hand for newer codes and for the four "none" roles.
 
 **Done when:** The sample user can follow a practical plan with working resources.  
 **Commit focus:** Learning-plan logic and display.

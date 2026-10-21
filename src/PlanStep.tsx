@@ -1,17 +1,40 @@
 // Step 3: a learning plan for one chosen move.
 // Rule: src/pathway.ts (documented in SIGNALS_AND_MATCHING.md, "Learning plan rule").
-// Courses: data/pathway/resources.json, checked by hand.
+// Courses: data/pathway/resources.json. NOSS: data/pathway/noss.json. Both checked by hand.
 import { useMemo } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
+import nossFile from '../data/pathway/noss.json';
 import { aina, ilo, roleById, roles, snapshots, transferable, type Profile } from './data';
 import { learningPlan, type Gap, type Resource } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
 
 const resources = resourcesFile.resources as Resource[];
+type NossEntry = { code: string; title: string; level: number; source: string };
+type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
+const nossRoles = nossFile.roles as Record<string, NossRole>;
+const nossSources = nossFile.sources as Record<string, { name: string; url: string }>;
+
 function GapTag({ gap }: { gap: Gap }) {
   return gap.partly
     ? <span className="skill-tag related" title={`You have a related skill: ${gap.partly}`}>{gap.skill.label}<small>≈ {gap.partly}</small></span>
     : <span className="skill-tag skill-gap">{gap.skill.label}</span>;
+}
+
+function NossRoute({ roleId }: { roleId: string }) {
+  const entry = nossRoles[roleId];
+  return <section className="panel plan-noss" aria-labelledby="noss">
+    <h2 id="noss">Malaysian certification route</h2>
+    {!entry || entry.noss.length === 0
+      ? <p>No matching National Occupational Skills Standard (NOSS) found in the registers we checked.</p>
+      : <>
+        <ul className="noss-list">{entry.noss.map((n) => <li key={n.code}>
+          <strong>SKM Level {n.level}: {n.title}</strong>
+          <span>NOSS {n.code} · <a href={nossSources[n.source].url} target="_blank" rel="noreferrer">listed in {n.source === 'jpa2024' ? 'JPA list, Dec 2024' : 'JPK register, Nov 2015'}</a></span>
+        </li>)}</ul>
+        <p className="note">{entry.match === 'related' ? `A related standard, not the same job. ${entry.note ?? ''}` : 'Closest standard by title.'} An SKM is earned at a JPK-accredited centre or through recognition of prior learning (PPT). It is one route, not a requirement for the job. Check the code’s current status with <abbr title="Jabatan Pembangunan Kemahiran">JPK</abbr> before enrolling.</p>
+      </>}
+    <p className="note">Checked by hand on {nossFile.checkedAt}.</p>
+  </section>;
 }
 
 export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
@@ -77,5 +100,6 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves }: {
         </details>
       </>}
 
+    <NossRoute roleId={role.id} />
   </div>;
 }
