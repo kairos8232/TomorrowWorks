@@ -104,6 +104,12 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 22 Oct 2026 (14:20 MYT) — Person view inside Team view
+
+- Carson: Team view lacked a per-person view. Each name in the heatmap now opens that person's panel: top moves with futures shares, gaps for the selected role, first courses and estimated time. Same rules as Your moves and Your plan; no new data.
+
+---
+
 ## 22 Oct 2026 (13:45–14:20 MYT) — 1,000 possible futures (handling uncertainty)
 
 - Carson asked for a stand-out answer to brief feature 6. Added a seeded futures simulator: same scoring rule, AI speed anywhere between Gradually and Quickly, ILO exposure within its published SD, either DOSM quarter. Your moves now says how often each move is the best (Aina: Bookkeeper 99%, robust; Hakim: 62/26/12%, no single best), shows top-3 share and a 90% score range per row, flags close calls, and states the tipping point.

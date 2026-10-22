@@ -6,12 +6,62 @@ import resourcesFile from '../data/pathway/resources.json';
 import { ilo, memberSkills, roleTitle, roles, snapshots, teams, transferable, type Viewer } from './data';
 import { planForGaps, suggestedSteps, type Gap, type Resource } from './pathway';
 import { CourseCard, GapTag, matches } from './PlanStep';
-import { scenarios } from './scoring';
+import { recommendMoves, scenarios, skillFit } from './scoring';
+import { simulateFutures } from './futures';
 import { sharedGaps, teamGrid } from './team';
 import { useT } from './i18n';
 import { SdgContribution } from './SdgViews';
 
 const resources = resourcesFile.resources as Resource[];
+
+type Member = { name: string; roleId: string | null; held: ReadonlySet<string> };
+
+/** One person's own view inside Team view: top moves, futures, their gaps and first courses for the chosen role. */
+function PersonPanel({ member, target, onClose }: { member: Member; target: (typeof roles)[number]; onClose: () => void }) {
+  const t = useT();
+  const { moves } = useMemo(() => recommendMoves(roles, member.roleId, member.held, snapshots.q2, ilo, scenarios.moderate, transferable), [member]);
+  const futures = useMemo(() => simulateFutures({ roles, currentRoleId: member.roleId, held: member.held, snapshots: [snapshots.q1, snapshots.q2], ilo, transferable }), [member]);
+  const inRole = member.roleId === target.id;
+  const fit = skillFit(target, member.held, transferable);
+  const gaps: Gap[] = [...fit.missing.map((skill) => ({ skill, partly: null })), ...fit.transferable.map((x) => ({ skill: x.need, partly: x.have.label }))];
+  const plan = planForGaps(gaps, resources);
+  const ai = suggestedSteps(plan.uncovered, matches.skills);
+  const steps = [
+    ...plan.steps.map((s) => ({ key: s.resource.id, title: s.resource.title, url: s.resource.url, n: s.closes.length, label: t('Checked course') })),
+    ...ai.steps.map((s) => ({ key: s.course.slug, title: s.course.name, url: s.course.url, n: s.closes.length, label: t('AI suggestion') })),
+  ];
+  const current = member.roleId ? roleTitle(roles.find((r) => r.id === member.roleId)!.title) : t('No job yet');
+  return <section className="panel person-panel" aria-labelledby="person-head">
+    <div className="person-head">
+      <h2 id="person-head">{member.name} <span>{current} · {t('{n} skills', { n: member.held.size })}</span></h2>
+      <button type="button" className="text-button" onClick={onClose}>{t('Back to the whole group')}</button>
+    </div>
+    <div className="person-cols">
+      <div>
+        <h3>{t('Top moves')}</h3>
+        <ol className="person-moves">{moves.slice(0, 3).map((m) => {
+          const f = futures.byRole.get(m.role.id);
+          return <li key={m.role.id}>{roleTitle(m.role.title)} <strong>{m.score100}</strong>
+            {f && <small>{t('best move in {p}% of futures', { p: Math.round(f.best * 100) })}</small>}</li>;
+        })}</ol>
+      </div>
+      <div>
+        <h3>{t('For {role}', { role: roleTitle(target.title) })}</h3>
+        {inRole ? <p className="note">{t('This is their current job.')}</p> : <>
+          <p className="note">{t('Has {a} of {b} essential skills', { a: fit.matched.length, b: target.essentialSkills.length })}{fit.transferable.length ? ` · ${t('{n} transferable', { n: fit.transferable.length })}` : ''}</p>
+          {gaps.length > 0 && <div className="tag-row">{gaps.slice(0, 8).map((g) => <GapTag key={g.skill.uri} gap={g} />)}{gaps.length > 8 && <span className="note">{t('+{n} more', { n: gaps.length - 8 })}</span>}</div>}
+        </>}
+      </div>
+      <div>
+        <h3>{t('First courses')}</h3>
+        {inRole || steps.length === 0 ? <p className="note">{inRole ? t('Nothing to build for this role.') : t('No course found yet')}</p>
+          : <ol className="person-steps">{steps.slice(0, 3).map((s) => <li key={s.key}><a href={s.url} target="_blank" rel="noreferrer">{s.title}</a><small>{s.label} · {t('builds {n} of their gaps', { n: s.n })}</small></li>)}</ol>}
+        {!inRole && plan.steps.length > 0 && <p className="note">{t('Estimated time: {h} hours', { h: plan.statedHours })} {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}.</p>}
+      </div>
+    </div>
+    <p className="note">{t('Same rules as Your moves and Your plan. In real use, each person confirms their own skills and decides their own move; this view supports the conversation.')}</p>
+  </section>;
+}
 
 /** Cell shade: darker green = higher score. Text always carries the number. */
 const shade = (score: number) => `rgba(30, 107, 79, ${Math.min(0.9, 0.08 + score / 110)})`;
@@ -23,7 +73,8 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
   const grid = useMemo(() => teamGrid(members, roles, snapshots.q2, ilo, scenarios.moderate, transferable), [members]);
   const ranked = [...grid.averages].filter((a) => a.average !== null).sort((a, b) => b.average! - a.average!);
   const [targetId, setTargetId] = useState<string | null>(null);
-  useEffect(() => setTargetId(null), [team]);
+  const [personName, setPersonName] = useState<string | null>(null);
+  useEffect(() => { setTargetId(null); setPersonName(null); }, [team]);
   const target = roles.find((r) => r.id === targetId) ?? ranked[0].role;
   const shared = useMemo(() => sharedGaps(members, target, transferable, resources), [members, target]);
   // Same course rule as Your plan, applied to the gaps the group shares (most shared first).
@@ -54,7 +105,7 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
           <thead><tr><th scope="col">{t('Person')}</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => setTargetId(r.id)}>{roleTitle(r.title)}</button></th>)}</tr></thead>
           <tbody>
             {grid.rows.map((row) => <tr key={row.member.name}>
-              <th scope="row">{row.member.name}<small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></th>
+              <th scope="row"><button type="button" className={`heat-person${row.member.name === personName ? ' active' : ''}`} aria-pressed={row.member.name === personName} onClick={() => setPersonName(row.member.name === personName ? null : row.member.name)}>{row.member.name}</button><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></th>
               {row.cells.map((c) => <td key={c.role.id} className={c.current ? 'now' : ''} style={c.current ? undefined : { background: shade(c.result.score100), color: c.result.score100 > 45 ? '#ffffff' : '#1c2430' }}>
                 {c.current ? t('Now') : c.result.score100}
               </td>)}
@@ -64,8 +115,10 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
           </tbody>
         </table>
       </div>
-      <p className="note">{t('Select a role name to see what the group would need to learn for it.')}</p>
+      <p className="note">{t('Select a role name to see what the group would need to learn for it, or a person’s name for their own view.')}</p>
     </section>
+
+    {personName && <PersonPanel member={members.find((m) => m.name === personName)!} target={target} onClose={() => setPersonName(null)} />}
 
     <div className="plan-layout">
     <section className="panel team-plan" aria-labelledby="shared">

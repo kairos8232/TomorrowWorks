@@ -747,6 +747,17 @@ const dict: Record<string, Entry> = {
   'score {a}–{b}': { ms: 'skor {a}–{b}', zh: '分数 {a}–{b}' },
   'close call with #{n}': { ms: 'hampir sama dengan #{n}', zh: '与第 {n} 名接近' },
   'score {a}–{b} across futures': { ms: 'skor {a}–{b} merentas masa depan', zh: '各种未来中分数 {a}–{b}' },
+  'Back to the whole group': { ms: 'Kembali ke seluruh kumpulan', zh: '返回整个群组' },
+  'Top moves': { ms: 'Langkah teratas', zh: '最佳转岗方向' },
+  'For {role}': { ms: 'Untuk {role}', zh: '对于 {role}' },
+  'This is their current job.': { ms: 'Ini pekerjaan semasa mereka.', zh: '这是他们目前的工作。' },
+  'Has {a} of {b} essential skills': { ms: 'Ada {a} daripada {b} kemahiran teras', zh: '具备 {b} 项核心技能中的 {a} 项' },
+  'First courses': { ms: 'Kursus pertama', zh: '首先学习的课程' },
+  'Nothing to build for this role.': { ms: 'Tiada yang perlu dibina untuk peranan ini.', zh: '此职位无需再培养技能。' },
+  'builds {n} of their gaps': { ms: 'membina {n} daripada jurang mereka', zh: '弥补其 {n} 项缺口' },
+  'best move in {p}% of futures': { ms: 'langkah terbaik dalam {p}% masa depan', zh: '在 {p}% 的未来中为最佳选择' },
+  'Same rules as Your moves and Your plan. In real use, each person confirms their own skills and decides their own move; this view supports the conversation.': { ms: 'Peraturan yang sama seperti Langkah anda dan Pelan anda. Dalam penggunaan sebenar, setiap orang mengesahkan kemahiran sendiri dan memutuskan langkah sendiri; paparan ini menyokong perbincangan.', zh: '与“你的转岗方向”和“你的计划”使用相同规则。实际使用中，每个人确认自己的技能并自行决定转岗方向；此视图用于支持沟通。' },
+  'Select a role name to see what the group would need to learn for it, or a person’s name for their own view.': { ms: 'Pilih nama peranan untuk melihat apa yang perlu dipelajari oleh kumpulan, atau nama seseorang untuk paparan mereka sendiri.', zh: '选择职位名称查看群组需要学习的内容，或选择人名查看其个人视图。' },
 };
 
 const LangContext = createContext<Lang>('en');
