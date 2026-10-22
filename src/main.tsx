@@ -1,9 +1,8 @@
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ainaProfile, emptyProfile, ilo, personaProfile, roles, snapshots, sourceLinks, teams, transferable, viewerById, viewers, type PersonaId, type Profile, type ViewerId } from './data';
+import { ainaProfile, emptyProfile, personaProfile, roles, viewerById, viewers, type PersonaId, type Profile, type ViewerId } from './data';
 import { MovesStep, SourcesFooter } from './MovesStep';
 import { DemandTable, OutlookTable } from './PublicTables';
-import { recommendMoves, scenarios } from './scoring';
 import { NewsView } from './NewsView';
 import { PlanStep } from './PlanStep';
 import { advanceLearning, type CourseProgress, type LearningAction } from './learningCheck';
@@ -12,6 +11,8 @@ import { TeamView } from './TeamView';
 import { RadarView } from './RadarView';
 import { SignalSources } from './SignalSources';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
+import '@fontsource/carlito/400.css';
+import '@fontsource/carlito/700.css';
 import './styles.css';
 
 type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
@@ -48,58 +49,77 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
 const comingSoon: Partial<Record<Screen, string>> = {
 };
 
-function Home({ start }: { start: (who: ViewerId) => void }) {
-  // Each persona's live result, computed from the same data and rule as the Moves step.
-  const previews = useMemo(() => viewers.filter((v) => v.kind !== 'me').map((viewer) => {
-    if (viewer.kind === 'team') return { viewer, moves: [] };
-    const p = personaProfile(viewer.id as PersonaId);
-    return { viewer, moves: recommendMoves(roles, p.currentRoleId, p.held, snapshots.q2, ilo, scenarios.moderate, transferable).moves.slice(0, 3) };
-  }), []);
+function Home({ start, startWithRole, go, setLang }: {
+  start: (who: ViewerId) => void;
+  startWithRole: (role: string) => void;
+  go: (screen: Screen) => void;
+  setLang: (lang: Lang) => void;
+}) {
+  const [role, setRole] = useState('Accounting assistant');
   const t = useT();
-  return <div className="home">
-    <section className="home-hero">
-      <h1>{t('AI is changing your job. See where you can move next.')}</h1>
-      <p>{t('Explore career moves using your skills, Malaysian job-ad data and research on AI.')}</p>
-      <div className="hero-actions">
-        <button type="button" className="primary-button" onClick={() => start('me')}>{t('Start with my own skills')}</button>
-        <button type="button" className="secondary-button" onClick={() => start('aina')}>{t('Try a sample person')}</button>
+  function submit(event: React.FormEvent) {
+    event.preventDefault();
+    if (role.trim()) startWithRole(role);
+  }
+  return <div className="quiet-home">
+    <header className="public-header" aria-label={t('Main navigation')}>
+      <button type="button" className="public-brand" onClick={() => go('home')}>TomorrowWorks</button>
+      <nav className="public-nav" aria-label={t('Explore TomorrowWorks')}>
+        <button type="button" onClick={() => go('skills')}>{t('Explore careers')}</button>
+        <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
+        <a href="#how">{t('How it works')}</a>
+      </nav>
+      <button type="button" className="organisation-link" onClick={() => start('hr')}>{t('For organisations')}</button>
+      <div className="public-language" aria-label={t('Language')}>
+        <button type="button" onClick={() => setLang('ms')}>BM</button><span aria-hidden="true">/</span><button type="button" onClick={() => setLang('zh')}>中文</button>
       </div>
-      <p className="note">{t('No account, no CV. Nothing you enter leaves your browser tab except the words you send to the skill search.')}</p>
-    </section>
+    </header>
 
-    <section className="home-how" aria-labelledby="how">
-      <h2 id="how">{t('How it works')}</h2>
-      <ol>
-        <li><strong>{t('Your skills.')}</strong> {t('Describe your work and confirm the skills it finds.')}</li>
-        <li><strong>{t('Your moves.')}</strong> {t('Compare nine roles with clear reasons for each score.')}</li>
-        <li><strong>{t('Your plan.')}</strong> {t('See checked courses and a Malaysian SKM route where one exists.')}</li>
-      </ol>
-    </section>
+    <main>
+      <section className="quiet-hero" aria-labelledby="home-title">
+        <h1 id="home-title">{t('Your experience can take you further.')}</h1>
+        <form className="direction-form" onSubmit={submit}>
+          <label htmlFor="current-role">{t('I work as')}</label>
+          <div className="role-field"><input id="current-role" value={role} onChange={(event) => setRole(event.target.value)} autoComplete="organization-title" /></div>
+          <button type="submit">{t('Show me where it can lead')}</button>
+        </form>
+        <p className="quiet-proof">{t('Malaysian job-market evidence')} <span aria-hidden="true">·</span> {t('No CV required')}</p>
+        <div className="journey-route" aria-hidden="true">
+          <i className="route-segment route-a" /><i className="route-segment route-b" /><i className="route-segment route-c" />
+          <i className="route-segment route-d" /><i className="route-segment route-e" /><i className="route-segment route-f" />
+          <i className="route-segment route-g" /><i className="route-segment route-h" /><i className="route-segment route-i" />
+          <span className="route-marker" />
+        </div>
+      </section>
 
-    <section className="home-people" aria-labelledby="meet">
-      <h2 id="meet">{t('One tool, four kinds of user')}</h2>
-      <div className="people-grid">
-        {previews.map(({ viewer, moves }) => <article key={viewer.id} className={`person-card${viewer.kind === 'team' ? ' team-card' : ''}`}>
-          <p className="person-group">{t(viewer.group)}</p>
-          <h3>{viewer.name}</h3>
-          <p>{t(viewer.summary)}</p>
-          {viewer.kind === 'person'
-            ? <><p className="note">{t('Top moves with Q2 2026 data')}</p>
-              <ol className="mini-ledger">{moves.map((m) => <li key={m.role.id}><span>{m.role.title}</span><strong>{m.score100}</strong></li>)}</ol></>
-            : <p className="note">{t('Team view: {n} fictional people', { n: teams.find((x) => x.id === viewer.teamId)!.members.length })}</p>}
-          <button type="button" className="text-button" onClick={() => start(viewer.id)}>{t('View as {name}', { name: viewer.name })}</button>
-        </article>)}
-      </div>
-    </section>
+      <section className="quiet-next" id="how" aria-labelledby="next-title">
+        <div className="quiet-section-head">
+          <p>{t('How it works')}</p>
+          <h2 id="next-title">{t('One role. More than one possible future.')}</h2>
+        </div>
+        <ol className="quiet-steps">
+          <li><span>01</span><div><h3>{t('Start with the work you already do')}</h3><p>{t('Choose your role, then keep only the skills that feel true to your experience.')}</p></div></li>
+          <li><span>02</span><div><h3>{t('See realistic next moves')}</h3><p>{t('Compare nearby roles using skill fit, Malaysian demand and likely AI change.')}</p></div></li>
+          <li><span>03</span><div><h3>{t('Leave with one practical plan')}</h3><p>{t('See the gaps to close and the learning route that can move you forward.')}</p></div></li>
+        </ol>
+      </section>
 
-    <section className="home-sources" aria-labelledby="data">
-      <h2 id="data">{t('Where the numbers come from')}</h2>
-      <dl>
-        <div><dt><a href={sourceLinks.dosm} target="_blank" rel="noreferrer">DOSM</a></dt><dd>{t('Department of Statistics Malaysia. Online job ads by occupation, every quarter.')}</dd></div>
-        <div><dt><a href={sourceLinks.ilo} target="_blank" rel="noreferrer">ILO</a></dt><dd>{t('International Labour Organization. How much of each job’s tasks generative AI could change.')}</dd></div>
-        <div><dt><a href={sourceLinks.esco} target="_blank" rel="noreferrer">ESCO</a></dt><dd>{t('The European Commission’s list of skills and occupations. It uses the same job codes as Malaysia’s MASCO.')}</dd></div>
-      </dl>
-    </section>
+      <section className="quiet-evidence" aria-labelledby="evidence-title">
+        <p className="quiet-kicker">{t('Built for decisions in Malaysia')}</p>
+        <h2 id="evidence-title">{t('A clearer view of where work is moving.')}</h2>
+        <div className="evidence-row">
+          <p>{t('Explore job-ad demand, workplace signals and changing skill needs without starting from a blank search box.')}</p>
+          <button type="button" onClick={() => go('demand')}>{t('Explore the job market')} <span aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section className="quiet-organisations" aria-labelledby="organisations-title">
+        <p>{t('For employers and educators')}</p>
+        <h2 id="organisations-title">{t('Help more people make their next move.')}</h2>
+        <button type="button" onClick={() => start('hr')}>{t('Open the organisation view')} <span aria-hidden="true">→</span></button>
+      </section>
+    </main>
+    <footer className="public-footer"><span>TomorrowWorks</span><span>{t('Career direction, grounded in evidence.')}</span></footer>
   </div>;
 }
 
@@ -186,20 +206,44 @@ function App() {
     else if (v.kind === 'me') { setProfile(emptyProfile()); go('skills'); }
     else go('team');
   }
+  function startWithRole(role: string) {
+    const normalized = role.trim().toLowerCase();
+    const match = roles.find((candidate) => candidate.title.toLowerCase() === normalized || candidate.title.toLowerCase().includes(normalized));
+    setViewer('me');
+    setPlanRoleId(null);
+    setProfile({ ...emptyProfile(), currentRoleId: match?.id ?? null });
+    go('skills');
+  }
   const kind = viewerById(viewer).kind;
   const page = screen === 'home' ? null : titles[screen];
 
   const t = translate(lang);
+  if (screen === 'home') return <LangProvider value={lang}><Home start={start} startWithRole={startWithRole} go={go} setLang={setLang} /></LangProvider>;
+
+  const inMarket = marketNav.some(item => item.id === screen);
+  const primaryItems = kind === 'team' ? teamNav : careerNav;
+
   return <LangProvider value={lang}><div className="app-shell">
-    <aside className="sidebar" aria-label="Navigation">
-      <button type="button" className="brand" onClick={() => go('home')}>Tomorrow<span className="brand-accent">Works</span></button>
-      <ViewerSwitch viewer={viewer} choose={start} />
-      {kind === 'team'
-        ? <NavGroup label="My team" items={teamNav} screen={screen} go={go} />
-        : <NavGroup label="My career" items={careerNav} screen={screen} go={go} />}
-      <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
-      <label className="lang-pick"><svg className="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></svg><span>{t('Language')}</span><select value={lang} aria-label={t('Language')} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select><svg className="lang-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m2 4 4 4 4-4" /></svg></label>
-    </aside>
+    <header className="workspace-header">
+      <div className="workspace-header-main">
+        <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
+        <nav className="workspace-primary" aria-label={t('Main navigation')}>
+          <button type="button" className={!inMarket && kind !== 'team' ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>
+          <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
+          <button type="button" className={kind === 'team' ? 'active' : ''} onClick={() => start('hr')}>{t('For organisations')}</button>
+        </nav>
+        <div className="workspace-utility">
+          <ViewerSwitch viewer={viewer} choose={start} />
+          <label className="workspace-language"><span className="sr-only">{t('Language')}</span><select value={lang} aria-label={t('Language')} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
+        </div>
+      </div>
+      <div className="workspace-subnav">
+        <p>{kind === 'team' ? t('Organisation workspace') : inMarket ? t('Malaysia job market') : t('Your career path')}</p>
+        <nav aria-label={kind === 'team' ? t('My team') : inMarket ? t('The job market') : t('My career')}>
+          {(kind === 'team' ? teamNav : inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
+        </nav>
+      </div>
+    </header>
 
     <main className="main-content">
       <div className="content-wrap">
@@ -207,7 +251,6 @@ function App() {
           <h1>{t(page.title)}</h1>
           {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
         </header>}
-        {screen === 'home' && <Home start={start} />}
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
