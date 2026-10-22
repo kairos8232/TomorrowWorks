@@ -1,5 +1,12 @@
 # Progress log
 
+## 22 Oct 2026 — Region view merged into Team view
+
+- Carson found the separate Region view confusing and asked to combine it with Team view. Team view now opens with pills for the three fictional groups plus *All groups: SDG contribution*; the old Region screen (`RegionView.tsx` → `AllGroupsView.tsx`), its nav item and the Encik Faizal viewer are gone. Same rule and tests (`src/region.ts`); wording now says this is the region level of the SDG view and that an employer or regional skills body could use it. New EN/MS/ZH strings need team review.
+- Fixed a phone overflow caused by the nested wrapper (heatmap stretched the page). Build and 113 tests pass; checked desktop 1300 px and phone 390 px in Chromium, no page errors. Header still overflows by 8 px at 390 px (Data saver button), which was already there.
+
+---
+
 ## 22 Oct 2026 — Whole Your plan page usability pass
 
 - User requested friendlier UI and selected Whole Your plan page. Simplified visible intro/progress copy, kept progress then next Start/Continue action, added Your courses heading, moved compact medal/trophy badges after courses. Optional evidence, funding, selection method and badge earning rules use labelled native disclosures.

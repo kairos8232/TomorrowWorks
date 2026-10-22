@@ -1127,3 +1127,14 @@ details.course-check { padding-block:0; }
 .region-groups li > div { flex: 1; }
 .region-groups .note { margin: 4px 0 0; }
 @media (max-width: 620px) { .region-groups li { flex-wrap: wrap; } .region-lever-targets { margin-left: 20px; } }
+
+/* Team view: pick one group, or all groups (SDG contribution added up). */
+.team-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
+.team-view > * { min-width: 0; }
+.group-switch { display: flex; flex-wrap: wrap; gap: 8px; }
+.group-switch button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid #cfd6cf; border-radius: 999px; background: #fff; color: #1c2430; font: inherit; font-size: 14px; cursor: pointer; }
+.group-switch button i { width: 10px; height: 10px; border-radius: 3px; }
+.group-switch button[aria-pressed="true"] { background: #1e3d33; border-color: #1e3d33; color: #fff; font-weight: 600; }
+.group-switch .group-switch-all { margin-left: auto; }
+.group-switch button:focus-visible { outline: 3px solid #7fd6a8; outline-offset: 2px; }
+@media (max-width: 620px) { .group-switch .group-switch-all { margin-left: 0; } }

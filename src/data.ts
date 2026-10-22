@@ -137,8 +137,8 @@ export function memberSkills(m: TeamMember): Set<string> {
  * Demo "View as" choices: one fictional person per target group in the brief.
  * No sign-in exists; switching only changes which sample data and screens show.
  */
-export type ViewerId = PersonaId | 'hr' | 'adviser' | 'region' | 'me';
-export type Viewer = { id: ViewerId; name: string; group: string; summary: string; kind: 'person' | 'team' | 'region' | 'me'; teamId?: string; regionId?: string };
+export type ViewerId = PersonaId | 'hr' | 'adviser' | 'me';
+export type Viewer = { id: ViewerId; name: string; group: string; summary: string; kind: 'person' | 'team' | 'me'; teamId?: string };
 export const viewers: Viewer[] = [
   { id: 'aina', name: 'Aina', group: personas[0].group, summary: personas[0].summary, kind: 'person' },
   { id: 'hakim', name: 'Hakim', group: personas[1].group, summary: personas[1].summary, kind: 'person' },
@@ -149,10 +149,6 @@ export const viewers: Viewer[] = [
   {
     id: 'adviser', name: 'Encik Lim', group: 'University career adviser', kind: 'team', teamId: 'graduating-class',
     summary: 'Fictional university adviser comparing career moves for three graduates.',
-  },
-  {
-    id: 'region', name: 'Encik Faizal', group: 'Regional skills officer', kind: 'region', regionId: 'klang-valley',
-    summary: 'Fictional officer at a regional skills body, seeing how all its groups contribute to the SDGs.',
   },
   { id: 'me', name: 'Me', group: 'Your own skills', summary: 'Describe your own work and see your own moves. Nothing is saved.', kind: 'me' },
 ];

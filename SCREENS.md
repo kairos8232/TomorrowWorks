@@ -31,9 +31,10 @@ My career (sidebar navigation)           The job market (browse any time)
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
 
-## Region view (22 Oct)
+## Team view: group switch and All groups (22 Oct)
 
-- Viewer *Encik Faizal* (fictional regional skills officer), nav *My region → Region view*. Region = *Klang Valley skills network* (fictional) with three groups: Finance team, Graduating class, Logistics office (new, 4 people). *Where this region's reskilling contributes*: per strong SDG target, "n of m people", a bar split by group colour, and the people with their best move; 4.4 baseline row; *Moves that would add SDG targets* (2nd/3rd moves whose role links add targets); possible links collapsed; a note that no state statistics are used. *Groups in this region* lists each group's best moves and opens its Team view with *Back to region*. Rule and tests: `src/region.ts`, `src/region.test.ts`.
+- A row of pills at the top of Team view: *Finance team*, *Graduating class*, *Logistics office* (new, 4 people) and *All groups: SDG contribution*. It opens on the viewer's own group (Puan Rosnah → finance team, Encik Lim → graduating class). The separate Region screen and its viewer were removed (Carson, 22 Oct): one organisation screen is easier to explain.
+- *All groups* is the region level of the SDG view: *Which SDG targets all groups' reskilling reaches*: per strong SDG target, "n of m people", a bar split by group colour, and the people with their best move; 4.4 baseline row; *Moves that would add SDG targets* (2nd/3rd moves whose role links add targets); possible links collapsed; a note that no state statistics are used. *The groups* lists each group's best moves; *Open this group* switches the pill. Rule and tests: `src/region.ts`, `src/region.test.ts`; screen `src/AllGroupsView.tsx`.
 
 ## Data saver (sidebar, 22 Oct)
 
@@ -45,9 +46,9 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## View as (sidebar) and Home: one tool, four kinds of user
 
-- No sign-in. A **View as** chip near the top of the rail works like an account menu but only swaps fictional demo data: **Aina** (working adult whose job AI is changing), **Hakim** (fresh graduate), **Puan Rosnah** (HR and learning manager → Team view, finance team), **Encik Lim** (university career adviser → Team view, graduating class), **Me (my own skills)**. The closed chip shows the selected name above a small **Individual**, **Team**, or **Region** label; the full role description remains in the menu. Label: "Demo people are fictional. No sign-in in this prototype."
+- No sign-in. A **View as** chip near the top of the rail works like an account menu but only swaps fictional demo data: **Aina** (working adult whose job AI is changing), **Hakim** (fresh graduate), **Puan Rosnah** (HR and learning manager → Team view, finance team), **Encik Lim** (university career adviser → Team view, graduating class), **Me (my own skills)**. The closed chip shows the selected name above a small **Individual** or **Team** label; the full role description remains in the menu. Label: "Demo people are fictional. No sign-in in this prototype."
 - The sidebar follows the viewer: individuals see *My career* (Your skills / moves / plan); HR and the adviser see *My team* (Team view). Everyone sees *The job market*.
-- The workspace header follows the selected viewer on desktop and in the mobile menu: individuals see *Career path* and *Job market*; team and region viewers see *For organisations* and *Job market*. Returning from Job market keeps the selected viewer.
+- The workspace header follows the selected viewer on desktop and in the mobile menu: individuals see *Career path* and *Job market*; team viewers see *For organisations* and *Job market*. Returning from Job market keeps the selected viewer.
 - On wide screens a compact navigation rail keeps the viewer switcher near the top and language choice at the bottom. Destinations use icons and short labels; the selected page has a soft green fill. At 980 px and below, the same navigation moves above the content.
 - Public Home: the role prompt leads into Your skills. One subtle line draws from beyond the left edge to beyond the right edge behind the hero, clears, then draws a newly generated route; it stays within the section, pauses when offscreen or hidden, and remains still with reduced motion. Job market and organisation routes remain in the header.
 - *Edit skills* while viewing a sample person switches the viewer to Me.

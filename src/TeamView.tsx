@@ -1,5 +1,6 @@
 // Team view for HR / L&D managers and career centres: a skills heatmap for a
-// whole group and the gaps they share for one target role.
+// whole group and the gaps they share for one target role, plus "All groups":
+// the SDG contribution of every group added up (src/AllGroupsView.tsx).
 // Rule: src/team.ts (same scoring as Your moves). People are fictional.
 import { useEffect, useMemo, useState } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
@@ -11,6 +12,8 @@ import { simulateFutures } from './futures';
 import { sharedGaps, teamGrid } from './team';
 import { useT } from './i18n';
 import { SdgContribution } from './SdgViews';
+import { AllGroupsView, GROUP_COLOURS } from './AllGroupsView';
+import { regions } from './region';
 
 const resources = resourcesFile.resources as Resource[];
 
@@ -102,9 +105,28 @@ function PersonPage({ member, teamName, onBack }: { member: Member; teamName: st
 /** Cell shade: darker green = higher score. Text always carries the number. */
 const shade = (score: number) => `rgba(30, 107, 79, ${Math.min(0.9, 0.08 + score / 110)})`;
 
+/** Switch between one group and all groups; starts on the viewer's own group. */
 export function TeamView({ viewer }: { viewer: Viewer }) {
   const t = useT();
-  const team = teams.find((x) => x.id === viewer.teamId) ?? teams[0];
+  const [teamId, setTeamId] = useState<string | 'all'>(viewer.teamId ?? teams[0].id);
+  useEffect(() => setTeamId(viewer.teamId ?? teams[0].id), [viewer]);
+  const ids = regions[0].teamIds;
+  const pick = (id: string) => { setTeamId(id); window.scrollTo({ top: 0 }); };
+  return <div className="step-body team-view">
+    <div className="group-switch" role="group" aria-label={t('Choose a group')}>
+      {ids.map((id, k) => <button key={id} type="button" aria-pressed={teamId === id} onClick={() => pick(id)}>
+        <i style={{ background: GROUP_COLOURS[k] }} aria-hidden="true" />{t(teams.find((x) => x.id === id)!.name)}</button>)}
+      <button type="button" className="group-switch-all" aria-pressed={teamId === 'all'} onClick={() => pick('all')}>{t('All groups: SDG contribution')}</button>
+    </div>
+    {teamId === 'all'
+      ? <><div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {t(regions[0].description)}</p></div>
+        <AllGroupsView onOpenTeam={pick} /></>
+      : <TeamBody viewer={viewer} team={teams.find((x) => x.id === teamId)!} />}
+  </div>;
+}
+
+function TeamBody({ viewer, team }: { viewer: Viewer; team: (typeof teams)[number] }) {
+  const t = useT();
   const members = useMemo(() => team.members.map((m) => ({ name: m.name, roleId: m.roleId, held: memberSkills(m) })), [team]);
   const grid = useMemo(() => teamGrid(members, roles, snapshots.q2, ilo, scenarios.moderate, transferable), [members]);
   const ranked = [...grid.averages].filter((a) => a.average !== null).sort((a, b) => b.average! - a.average!);
@@ -130,9 +152,9 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
 
   const open = (name: string) => { setPersonName(name); window.scrollTo({ top: 0 }); };
   if (personName) {
-    return <div className="step-body team-view"><PersonPage member={members.find((m) => m.name === personName)!} teamName={t(team.name)} onBack={() => { setPersonName(null); window.scrollTo({ top: 0 }); }} /></div>;
+    return <div className="team-body"><PersonPage member={members.find((m) => m.name === personName)!} teamName={t(team.name)} onBack={() => { setPersonName(null); window.scrollTo({ top: 0 }); }} /></div>;
   }
-  return <div className="step-body team-view">
+  return <div className="team-body">
     <div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {t(team.description)}</p></div>
 
     <section className="ledger" aria-labelledby="heat">

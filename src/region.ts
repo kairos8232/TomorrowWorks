@@ -16,7 +16,7 @@ export type Region = { id: string; name: string; description: string; teamIds: s
 export const regions: Region[] = [{
   id: 'klang-valley',
   name: 'Klang Valley skills network',
-  description: 'A fictional regional skills body that supports the three groups below: a finance team, a graduating class and a logistics office.',
+  description: 'All three fictional groups added up: a finance team, a graduating class and a logistics office.',
   teamIds: ['finance-team', 'graduating-class', 'logistics-office'],
 }];
 

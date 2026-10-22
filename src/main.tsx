@@ -11,7 +11,6 @@ import './styles.css';
 // Screens after the first steps load on demand, with their data (low bandwidth: the first visit
 // downloads only Home, Your skills and Your moves).
 const PlanStep = lazy(() => import('./PlanStep').then((m) => ({ default: m.PlanStep })));
-const RegionView = lazy(() => import('./RegionView').then((m) => ({ default: m.RegionView })));
 const TeamView = lazy(() => import('./TeamView').then((m) => ({ default: m.TeamView })));
 const DemandTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.DemandTable })));
 const OutlookTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.OutlookTable })));
@@ -19,16 +18,13 @@ const NewsView = lazy(() => import('./NewsView').then((m) => ({ default: m.NewsV
 const RadarView = lazy(() => import('./RadarView').then((m) => ({ default: m.RadarView })));
 const SignalSources = lazy(() => import('./SignalSources').then((m) => ({ default: m.SignalSources })));
 
-type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'region' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
   { id: 'skills', label: 'Your skills', hint: 'Describe your work' },
   { id: 'moves', label: 'Your moves', hint: 'Roles ranked for you' },
   { id: 'plan', label: 'Your plan', hint: 'What to learn next' },
-];
-const regionNav: NavItem[] = [
-  { id: 'region', label: 'Region view', hint: 'SDG contribution of all groups' },
 ];
 const teamNav: NavItem[] = [
   { id: 'team', label: 'Team view', hint: 'Who fits which role, shared gaps' },
@@ -44,8 +40,7 @@ const marketNav: NavItem[] = [
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
   moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
-  region: { title: 'Region view', intro: 'For regional skills bodies: how the reskilling of all the groups they support adds up towards the SDGs.' },
-  team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
+  team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, career centres advising a class, and anyone adding up several groups’ SDG contribution.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
   outlook: { title: 'AI impact by role', intro: 'How much AI could change each role, how applicable it is, and how it is already used.' },
@@ -207,7 +202,6 @@ function NavIcon({ id }: { id: Screen }) {
     skills: <><path d="M4 7h2m4 0h10M4 12h2m4 0h10M4 17h2m4 0h10" /><path d="m3.5 7 1 1 2-2m-3 6 1 1 2-2m-3 6 1 1 2-2" /></>,
     moves: <><path d="M4 18h5v-5h5V8h6" /><path d="m16 4 4 4-4 4" /></>,
     plan: <><path d="M7 3h10v18H7zM10 8h4m-4 4h4m-4 4h4" /></>,
-    region: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></>,
     team: <><circle cx="9" cy="8" r="3" /><path d="M3.5 19v-2a5.5 5.5 0 0 1 11 0v2M17 6a3 3 0 0 1 0 6m1 3a4 4 0 0 1 2.5 4" /></>,
     demand: <><path d="M4 20V11m5 9V6m5 14v-8m5 8V4M2 20h20" /></>,
     outlook: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3" /></>,
@@ -236,7 +230,7 @@ function ViewerSwitch({ viewer, choose }: { viewer: ViewerId; choose: (v: Viewer
   const t = useT();
   const ref = useRef<HTMLDetailsElement>(null);
   const current = viewerById(viewer);
-  const viewType = current.kind === 'team' ? 'Team' : current.kind === 'region' ? 'Region' : 'Individual';
+  const viewType = current.kind === 'team' ? 'Team' : 'Individual';
   return <details className="viewer-switch" ref={ref}>
     <summary><span className="avatar" aria-hidden="true">{current.name[0]}</span>
       <span><strong>{current.name}</strong><small>{t(viewType)}</small></span></summary>
@@ -289,7 +283,6 @@ function App() {
     setPlanRoleId(null);
     if (v.kind === 'person') { setProfile(personaProfile(who as PersonaId)); go('moves'); }
     else if (v.kind === 'me') { setProfile(emptyProfile()); go('skills'); }
-    else if (v.kind === 'region') go('region');
     else go('team');
   }
   function startWithRole(role: string) {
@@ -307,8 +300,8 @@ function App() {
   if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
   const inMarket = marketNav.some(item => item.id === screen);
-  const isOrganisation = kind === 'team' || kind === 'region';
-  const primaryItems = kind === 'region' ? regionNav : kind === 'team' ? teamNav : careerNav;
+  const isOrganisation = kind === 'team';
+  const primaryItems = kind === 'team' ? teamNav : careerNav;
 
   return <LangProvider value={lang}><DataSaverProvider value={saver}><div className="app-shell">
     <header className="workspace-header">
@@ -317,14 +310,14 @@ function App() {
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
           {!isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
           <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
-          {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
+          {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('team')}>{t('For organisations')}</button>}
         </nav>
         <details className="workspace-mobile-menu">
           <summary>{t('Menu')}</summary>
           <nav aria-label={t('Main navigation')}>
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
-            {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
+            {isOrganisation && <button type="button" onClick={() => go('team')}>{t('For organisations')}</button>}
           </nav>
         </details>
         <div className="workspace-utility">
@@ -341,7 +334,7 @@ function App() {
           <h1>{t(page.title)}</h1>
           {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
         </header>}
-        <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
+        <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'team' ? t('My team') : t('My career')}>
           {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
         </nav>
         <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
@@ -352,7 +345,6 @@ function App() {
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
-        {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
