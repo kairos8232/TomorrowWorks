@@ -347,6 +347,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Optional improvements after the required functions
 
+- [x] Simplify Your plan to a single course choice and action, short skill list, and compact certification, goal, and milestone facts. Remove the repeated course cards and long on-page explanations; check desktop and phone layouts (22 Oct 2026).
 - [x] Draw the homepage route progressively as one line from beyond the left screen edge to beyond the right, then clear and choose a different route for the next trace. Keep it within the hero and check wide and phone layouts, reduced motion, and offscreen pause.
 
 These are ideas from the Domain 1 brief, not submission blockers. Pick them only after the required journey works and there is time to verify them.

@@ -20,7 +20,7 @@ export function CourseProgressControl({status,onAction}:{status:CourseStatus|und
  const t=useT();const id=useId();const [text,setText]=useState(status?.url??'');const [editing,setEditing]=useState(false);const [error,setError]=useState(false);
  const showForm=!status||editing;
  return <details className="course-check">
-  <summary id={id}><span>{t(status ? 'Evidence submitted — not verified' : 'Finished this course? Try a demo evidence link')}</span><span className="evidence-optional">{t('Optional')}</span></summary>
+  <summary id={id}><span>{t(status ? 'Evidence submitted — not verified' : 'Add demo evidence')}</span><span className="evidence-optional">{t('Optional')}</span></summary>
   <div className="course-evidence-body">
   <p className="note">{t('Prototype: use a fictional public credential link only. Do not submit a real certificate or personal information. File uploads are not enabled.')}</p>
   {status && <div role="status">

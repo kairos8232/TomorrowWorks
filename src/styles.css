@@ -818,6 +818,55 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .plan-course-section .plan-course-action { min-height: 40px; }
 .plan-more-section > h2 { margin-bottom: 14px; font-size: 22px; }
 .plan-more-section .learning-milestones { margin-top: 0; padding-top: 0; border-top: 0; }
+/* Your plan is a single working surface: choose a course, see its skills, then open it. */
+.content-wrap.plan-page { padding-top: 26px; }
+.plan-page .page-head { margin-bottom: 16px; }
+.plan-page .page-head h1 { font-size: clamp(36px, 4vw, 52px); }
+.plan-page .workspace-subnav { margin-top: 0; margin-bottom: 20px; }
+.plan-page .step-body { gap: 12px; }
+.plan-page .plan-who { padding: 8px 12px; }
+.plan-dashboard { padding: clamp(18px, 2.5vw, 28px); }
+.plan-dashboard-top { display: flex; align-items: start; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid #d8ddd7; }
+.plan-dashboard-top h2 { font-size: clamp(24px, 2.5vw, 32px); line-height: 1.15; }
+.plan-dashboard-top p { margin: 5px 0 0; color: #5d6873; font-size: 14px; }
+.plan-dashboard-body { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.5fr); gap: 28px; padding: 22px 0; }
+.plan-course-picker { min-width: 0; }
+.plan-course-picker label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 15px; }
+.plan-dashboard .plan-course-picker select { display: block; box-sizing: border-box; width: 100%; min-width: 0; padding: 11px 12px; background: #fff; }
+.plan-course-source { margin: 10px 0 0; color: #5d6873; font-size: 13px; line-height: 1.4; }
+.plan-selected-course { min-width: 0; padding-left: 28px; border-left: 1px solid #d8ddd7; }
+.plan-selected-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.plan-selected-heading h3 { margin: 5px 0 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.2; }
+.plan-selected-heading .primary-button { flex: none; text-decoration: none; white-space: nowrap; }
+.plan-selected-skills { margin: 16px 0 4px; align-items: center; }
+.plan-selected-course .course-check { margin-top: 10px; border-top: 1px solid #e3e7e3; }
+.plan-verification-note { margin: 3px 0 0; color: #657069; font-size: 12px; }
+.plan-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; border-top: 1px solid #d8ddd7; }
+.plan-fact { display: flex; flex-direction: column; gap: 7px; min-width: 0; padding: 15px 18px; border-right: 1px solid #e3e7e3; font-size: 14px; line-height: 1.35; }
+.plan-fact:first-child { padding-left: 0; }
+.plan-fact:last-child { border-right: 0; }
+.plan-fact > span:first-child { color: #5d6873; font-size: 12px; }
+.plan-fact a { color: #216548; overflow-wrap: anywhere; }
+.plan-sdg-badges { display: flex; flex-wrap: wrap; gap: 4px; }
+.plan-sdg-badges .sdg-badge { font-size: 12px; }
+.plan-mini-milestones { display: flex; flex-wrap: wrap; gap: 8px; }
+.plan-mini-milestones span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.plan-mini-milestones b { display: grid; place-items: center; width: 18px; height: 18px; border: 1px solid #aebbb1; border-radius: 50%; color: #66776b; font-size: 11px; }
+@media (max-width: 850px) {
+  .plan-dashboard-body { grid-template-columns: 1fr; gap: 16px; }
+  .plan-selected-course { padding: 16px 0 0; border-left: 0; border-top: 1px solid #d8ddd7; }
+  .plan-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plan-fact:nth-child(2) { border-right: 0; }
+  .plan-fact:nth-child(n+3) { border-top: 1px solid #e3e7e3; }
+}
+@media (max-width: 560px) {
+  .content-wrap.plan-page { padding-top: 20px; }
+  .plan-page .page-head { margin-bottom: 18px; }
+  .plan-dashboard-top { display: block; }
+  .plan-selected-heading { align-items: start; flex-direction: column; }
+  .plan-facts { grid-template-columns: 1fr 1fr; }
+  .plan-fact { padding: 12px; }
+}
 /* Team view: training plan grouped by course (same cards as Your plan), SDG on the right. */
 .team-plan h2 { margin: 0 0 4px; }
 .team-needs { margin: 8px 0 0; font-size: 13px; color: #5d6873; }
@@ -875,6 +924,8 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .workspace-mobile-menu nav { position: absolute; top: calc(100% + 10px); right: 0; width: 230px; display: grid; padding: 10px; background: #fff; border: 1px solid #d8ddd7; box-shadow: 0 14px 36px rgba(12, 24, 44, .1); }
   .workspace-mobile-menu nav button { border: 0; background: transparent; padding: 12px; text-align: left; color: #0c182c; }
   .workspace-mobile-menu nav button:hover { background: #f0f3ef; }
+  .workspace-utility .workspace-saver-toggle { display: none; }
+  .workspace-mobile-menu .workspace-menu-saver { border-top: 1px solid #d8ddd7; color: #315f46; }
   .workspace-utility .viewer-switch { display: none; }
   .page-head { grid-template-columns: 1fr; gap: 20px; }
 }

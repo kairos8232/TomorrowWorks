@@ -2,24 +2,22 @@
 // Rule: src/pathway.ts (documented in SIGNALS_AND_MATCHING.md, "Learning plan rule").
 // Courses: data/pathway/resources.json. NOSS: data/pathway/noss.json. Both checked by hand.
 import type React from 'react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
 import nossFile from '../data/pathway/noss.json';
-import { ilo, personaById, roleById, roles, snapshots, transferable, type Profile } from './data';
+import { ilo, personaById, roles, snapshots, transferable, type Profile } from './data';
 import { learningPlan, suggestedSteps, type Gap, type Resource, type SuggestedCourse } from './pathway';
 import { recommendMoves, scenarios } from './scoring';
-import { useLang, useT, useTx } from './i18n';
-import { SdgContribution } from './SdgViews';
+import { useLang, useT } from './i18n';
+import { SdgBadge } from './SdgViews';
+import { roleSdgs, sdgTotals } from './sdg';
 import matchesFile from '../data/derived/coursera-skill-matches.json';
-import { CourseProgressControl, LearningProgress } from './CourseProgress';
-import { ChangeCourse } from './ChangeCourse';
-import { LearningMilestones } from './LearningMilestones';
-import { activityCount, type CourseProgress, type LearningAction } from './learningCheck';
+import { CourseProgressControl } from './CourseProgress';
+import type { CourseProgress, LearningAction } from './learningCheck';
 
 const resources = resourcesFile.resources as Resource[];
 // AI-matched Coursera courses (RunPod, bge-m3); see scripts/match_courses_runpod.py.
 export const matches = matchesFile as { method: { coursesEmbedded: number; catalogue: { retrievedAt: string } }; skills: Record<string, { courses: SuggestedCourse[] } | undefined> };
-const hrd = resourcesFile.hrdCorp;
 const access = resourcesFile.access as Record<string, { name: string; url: string; note: string; source: string }>;
 type NossEntry = { code: string; title: string; level: number; source: string; page: number };
 type NossRole = { match: 'close' | 'related' | 'none'; noss: NossEntry[]; note?: string };
@@ -59,29 +57,14 @@ function NossRoute({ roleId }: { roleId: string }) {
   const t = useT();
   const lang = useLang();
   const entry = nossRoles[roleId];
-  if (!entry || entry.noss.length === 0) {
-    return <p className="plan-noss-none note">{t('Malaysian certification: no matching NOSS standard in the current JPK register (January 2025).')}</p>;
-  }
+  if (!entry || entry.noss.length === 0) return null;
   // Show the Malay title in Bahasa Malaysia, the English one otherwise; merge levels that share a title.
   const titleOf = (n: NossEntry) => (lang === 'ms' ? n.title.replace(/ \([^)]*\)$/, '') : n.title.match(/\(([^)]*)\)$/)?.[1] ?? n.title);
   const groups = new Map<string, NossEntry[]>();
   for (const n of entry.noss) groups.set(titleOf(n), [...(groups.get(titleOf(n)) ?? []), n]);
   const first = entry.noss[0];
   const levels = (list: NossEntry[]) => list.map((n) => n.level).sort().join(` ${t('or')} `);
-  const body = <>
-    <div className="plan-course-head">
-      <div>
-        <span className="course-kind noss">{t('Malaysian certification · optional')}</span>
-        <h3 id="noss">{`SKM ${[...groups][0][0]} · ${t('Level')} ${levels([...groups][0][1])}`}</h3>
-        {groups.size > 1 && <p className="noss-also">{t('Also')}: {[...groups].slice(1).map(([title, list]) => `SKM ${title} · ${t('Level')} ${levels(list)}`).join(' · ')}</p>}
-      </div>
-      <a className="secondary-button plan-course-action" href={`${nossSources[first.source].url}#page=${first.page}`} target="_blank" rel="noreferrer">{t('View in JPK register')}</a>
-    </div>
-    <p className="plan-meta">NOSS {entry.noss.map((n) => n.code).join(', ')} · {t('JPK register, Jan 2025, p. {n}', { n: [...new Set(entry.noss.map((n) => n.page))].join(', ') })}</p>
-    <p className="note">{entry.match === 'related' ? `${t('Related route, not the same job.')} ${entry.note ? t(entry.note) : ''} ` : ''}{t('Optional SKM route via a JPK-accredited centre or prior learning (PPT). Check the code with JPK before enrolling.')} {t('Checked by hand on {date}.', { date: nossFile.checkedAt })}</p>
-    <div className="tag-row"><span className="plan-closes">{t('Certifies')}</span><span className="note">{t('the whole job, not single skills')}</span></div>
-  </>;
-  return <section className="plan-noss-card" aria-labelledby="noss">{body}</section>;
+  return <div className="plan-fact"><span>{t('Optional certification')}{entry.match === 'related' ? ` · ${t('Related route')}` : ''}</span><a href={`${nossSources[first.source].url}#page=${first.page}`} target="_blank" rel="noreferrer">SKM {[...groups][0][0]} · {t('Level')} {levels([...groups][0][1])} ↗</a></div>;
 }
 
 export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress, onCourseStatus, openedCourses, onOpenCourse, learningChoices, onChooseLearningCourse }: {
@@ -91,7 +74,6 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
   progress: CourseProgress; onCourseStatus: (course: string, action: LearningAction) => void;
 }) {
   const t = useT();
-  const tx = useTx();
   // Only the skill-fit part matters here; demand and scenario do not change the gaps.
   const { moves } = useMemo(
     () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots.q2, ilo, scenarios.moderate, transferable),
@@ -102,28 +84,19 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
   const role = chosen.role;
   const persona = personaById(profile.persona);
   const suggested = useMemo(() => suggestedSteps(plan.uncovered, matches.skills), [plan]);
-  const [showAllAi, setShowAllAi] = useState(false);
-  const aiShown = showAllAi ? suggested.steps : suggested.steps.slice(0, 4);
   const total = plan.steps.length + suggested.steps.length;
   const courseChoices = [
-    ...plan.steps.map(step => ({ title: step.resource.title, url: step.resource.url, provider: step.resource.provider, suggested: false })),
-    ...suggested.steps.map(step => ({ title: step.course.name, url: step.course.url, provider: 'Coursera', suggested: true })),
+    ...plan.steps.map(step => ({ title: step.resource.title, url: step.resource.url, provider: step.resource.provider, suggested: false, closes: step.closes, time: step.resource.hours === null ? null : t('{n} hours', { n: step.resource.hours }), accessId: step.resource.access })),
+    ...suggested.steps.map(step => ({ title: step.course.name, url: step.course.url, provider: 'Coursera', suggested: true, closes: step.closes, time: step.course.workload, accessId: 'rakyat-digital' })),
   ];
   // Keep the existing checked-first plan order; submitted evidence is not completed learning.
   const selectedCourse = courseChoices.find(course => course.url === learningChoices[role.id]);
   const nextCourse = selectedCourse ?? courseChoices.find(course => !progress[course.url]) ?? courseChoices[0];
-  const highlightedGaps = nextCourse
-    ? plan.steps.find(step => step.resource.url === nextCourse.url)?.closes ?? suggested.steps.find(step => step.course.url === nextCourse.url)?.closes ?? []
-    : [];
-  const activities = activityCount([...plan.steps.map(step => step.resource.url), ...suggested.steps.map(step => step.course.url)], progress);
+  const sdgTargets = [...new Set([...roleSdgs(role).map(link => link.target), ...sdgTotals(plan.gaps.map(gap => gap.skill)).map(link => link.target)].filter(target => target !== '4.4'))];
 
   return <div className="step-body">
     <div className="who plan-who">
-      <p>{persona
-        ? (profile.currentRoleId
-          ? tx('{who}, from {role}, to', { who: <strong>{t('Plan for {name}', { name: persona.name })}</strong>, role: roleById(profile.currentRoleId)?.title })
-          : tx('{who} to', { who: <strong>{t('Plan for {name}', { name: persona.name })}</strong> }))
-        : tx('{who} to', { who: <strong>{t('Your plan')}</strong> })}</p>
+      <p><strong>{persona ? t('Plan for {name}', { name: persona.name }) : t('Your plan')}</strong></p>
       <label className="plan-pick"><span className="visually-hidden">{t('Move to plan')}</span>
         <select value={role.id} onChange={(e) => onPickRole(e.target.value)}>
           {moves.map((m, i) => <option key={m.role.id} value={m.role.id}>{i + 1}. {m.role.title}</option>)}
@@ -132,77 +105,37 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
       <button type="button" className="text-button" onClick={onBackToMoves}>{t('Back to your moves')}</button>
     </div>
 
-    <div className="plan-layout individual-plan">
-    <div className="plan-main">
     {plan.gaps.length === 0
       ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
-      : <>
-      <section className="panel plan-learning" aria-labelledby="plan-skills-heading">
-        <p className="plan-eyebrow">{t('Your learning route')}</p>
-        <h2 id="plan-skills-heading">{t('Build {n} skills for {role}', {n: plan.gaps.length, role: role.title})}</h2>
-        <p className="plan-learning-intro">{t('Open a course, learn on the provider’s site, then return here to choose what to learn next.')}</p>
-        {plan.steps.length > 0 && <p className="plan-total"><strong>{t('Estimated time: {h} hours', { h: plan.statedHours })}</strong> {plan.steps.length === 1 ? t('for the checked course, as stated by its provider') : t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}{plan.stepsWithoutHours > 0 ? ` (${t('{n} without a stated time', { n: plan.stepsWithoutHours })})` : ''}{suggested.steps.length > 0 ? `; ${t('AI suggestions show their own time')}` : ''}.</p>}
-
-      </section>
-      <section className="panel plan-course-section" aria-labelledby="plan-courses-heading">
-        <h2 id="plan-courses-heading" className="plan-courses-heading">{t('Courses for this move')}</h2>
-        {total > 0 ? <p className="note plan-courses-intro">{t('Choose one to start. Each course lists the skills it may help you build.')}</p> : <p className="note">{t('No courses found for this move yet. The skills to build are still shown below.')}</p>}
-        {nextCourse && <section className="next-learning" aria-labelledby="next-learning-title">
-          <div>
-            <h3 id="next-learning-title">{t('Start here')}</h3>
-            <p className="next-course-title">{nextCourse.title}</p>
-            <p className="note">{nextCourse.provider} · {t(nextCourse.suggested ? 'AI suggestion · not checked by hand' : 'Checked course')}</p>
+      : <section className="panel plan-dashboard" aria-labelledby="plan-skills-heading">
+        <div className="plan-dashboard-top">
+          <div><h2 id="plan-skills-heading">{t('{n} skills to build', { n: plan.gaps.length })}</h2>
+          <p>{total > 0 ? t('{n} courses to choose from', { n: total }) : t('No course found yet')}</p></div>
+        </div>
+        {nextCourse && <div className="plan-dashboard-body">
+          <div className="plan-course-picker">
+            <label htmlFor="plan-course-choice">{t('Choose a course')}</label>
+            <select id="plan-course-choice" value={nextCourse.url} onChange={event => onChooseLearningCourse(role.id, event.target.value)}>
+              {courseChoices.map((course, index) => <option key={course.url} value={course.url}>{index + 1}. {course.title}{course.suggested ? ` · ${t('AI suggestion')}` : ''}</option>)}
+            </select>
+            <p className="plan-course-source">{nextCourse.provider} · {nextCourse.time ?? t('time not stated')} · {t(nextCourse.suggested ? 'AI suggestion · not checked by hand' : 'Checked course')}</p>
           </div>
-          <div className="next-learning-actions"><a className="primary-button" href={nextCourse.url} target="_blank" rel="noreferrer" onClick={() => onOpenCourse(nextCourse.url)} aria-label={t(openedCourses?.has(nextCourse.url) ? 'Continue learning: {name}' : 'Start learning: {name}', { name: nextCourse.title })}>{t(openedCourses?.has(nextCourse.url) ? 'Continue learning' : 'Start learning')}</a>
-          <ChangeCourse key={(profile.persona ?? 'me') + role.id} courses={courseChoices} currentUrl={nextCourse.url} onConfirm={url=>onChooseLearningCourse(role.id,url)} /></div>
-          <div className="tag-row next-learning-skills"><span className="plan-closes">{t('Builds')}</span>{highlightedGaps.map(gap => <GapTag key={gap.skill.uri} gap={gap} />)}</div>
-          <p className="note next-learning-note">{t('Opens the provider page. Lesson progress is not tracked here.')}</p>
-          <CourseProgressControl key={(profile.persona ?? 'me') + nextCourse.url} status={progress[nextCourse.url]} onAction={(action) => onCourseStatus(nextCourse.url, action)} />
-        </section>}
-        {total > 1 && <h3 className="plan-other-heading">{t('Other courses for this move')}</h3>}
-        {total > 1 && <ol className="plan-steps single">
-          {plan.steps.filter(step => step.resource.url !== nextCourse?.url).map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber={false} primary={false}
-            title={step.resource.title} url={step.resource.url} closes={step.closes} onOpen={() => onOpenCourse(step.resource.url)}
-            extra={<CourseProgressControl key={(profile.persona ?? 'me') + step.resource.url} status={progress[step.resource.url]} onAction={(action) => onCourseStatus(step.resource.url, action)} />}
-            label={<span className="course-kind checked">{t('Checked course')}</span>}
-            meta={<span title={step.resource.timeBasis}>{step.resource.provider} · {t(step.resource.level)} · {step.resource.free ? t(step.resource.cost) : step.resource.access === 'rakyat-digital' ? t('Paid; free 3 months via Rakyat Digital') : <span className="plan-paid">{t(step.resource.cost)}</span>} · {step.resource.hours !== null ? t('{n} hours', { n: step.resource.hours }) : t(step.resource.timeBasis)}</span>} />)}
-          {aiShown.filter(step => step.course.url !== nextCourse?.url).map((step, i) => <CourseCard key={step.course.slug} n={plan.steps.length + i + 1} showNumber={false} primary={false}
-            title={step.course.name} url={step.course.url} closes={step.closes} onOpen={() => onOpenCourse(step.course.url)}
-            extra={<CourseProgressControl key={(profile.persona ?? 'me') + step.course.url} status={progress[step.course.url]} onAction={(action) => onCourseStatus(step.course.url, action)} />}
-            label={<span className="course-kind ai">{t('AI suggestion · match {n}%', { n: Math.round(step.bestMatch * 100) })}</span>}
-            meta={<>Coursera · {t('Paid; free 3 months via Rakyat Digital')} · {step.course.workload ?? t('time not stated')}</>} />)}
-        </ol>}
-        {suggested.steps.length > 4 && <button type="button" className="text-button plan-more" onClick={() => setShowAllAi(!showAllAi)}>{showAllAi ? t('Show fewer') : t('Show all {n} suggestions', { n: suggested.steps.length })}</button>}
-
-        {suggested.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{suggested.unmatched.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>}
-
-        {total > 0 && <LearningProgress total={activities.total} recorded={activities.recorded} />}
-      </section>
-      <section className="panel plan-more-section" aria-label={t('More about this move')}>
-        <h2>{t('More about this move')}</h2>
-        <LearningMilestones courseUrls={courseChoices.map(course=>course.url)} />
-        <NossRoute roleId={role.id} />
-        <details className="plan-support"><summary>{t('Access and funding options')}</summary>
-        {[...new Set(plan.steps.map((s) => s.resource.access).filter((a): a is string => !!a))].map((id) => <p key={id} className="plan-access note">
-          <strong><a href={access[id].url} target="_blank" rel="noreferrer">{t(access[id].name)}</a>:</strong> {t(access[id].note)} <a href={access[id].source} target="_blank" rel="noreferrer">{t('Source')}</a>.
-        </p>)}
-
-        <p className="plan-access note"><strong>HRD Corp:</strong> {t(hrd.claimable.note)} <a href={hrd.claimable.url} target="_blank" rel="noreferrer">{t(hrd.claimable.name)}</a>. {t(hrd.elatih.note)} <a href={hrd.elatih.url} target="_blank" rel="noreferrer">{t(hrd.elatih.name)}</a>. {t('Checked by hand on {date}.', { date: hrd.checkedAt })}</p>
-
-        </details>
-        <details className="plan-support"><summary>{t('How these courses were selected')}</summary>
-        <p className="plan-method note">
-          {plan.steps.length > 0 && t('Checked courses: opened by hand on {date}; ordered by how many gaps they cover, then price and stated hours.', { date: resourcesFile.checkedAt })}{' '}
-          {suggested.steps.length > 0 && t('AI suggestions: RunPod compared {n} Coursera course descriptions with the remaining skills and ordered them the same way; not checked by hand, and match % is text similarity, not quality. Catalogue retrieved {date}; eligible Malaysians can get Coursera free for 3 months through Rakyat Digital.', { n: matches.method.coursesEmbedded.toLocaleString(), date: matches.method.catalogue.retrievedAt })}
-        </p>
-        </details>
-      </section></>}
-
-    {plan.gaps.length === 0 && <NossRoute roleId={role.id} />}
-
-    </div>
-    <SdgContribution roleId={role.id} skills={plan.gaps.map((g) => g.skill)} heading={t('How this move connects to the SDGs')} intro={t('These links show where skills in this plan relate to UN goals. They are not a measure of impact.')} compact />
-    </div>
+          <div className="plan-selected-course">
+            <div className="plan-selected-heading"><div><h3>{nextCourse.title}</h3></div>
+              <a className="primary-button" href={nextCourse.url} target="_blank" rel="noreferrer" onClick={() => onOpenCourse(nextCourse.url)} aria-label={t(openedCourses?.has(nextCourse.url) ? 'Continue learning: {name}' : 'Start learning: {name}', { name: nextCourse.title })}>{t(openedCourses?.has(nextCourse.url) ? 'Continue learning' : 'Start learning')} ↗</a></div>
+            <div className="tag-row plan-selected-skills"><span className="plan-closes">{t('Builds')}</span>{nextCourse.closes.map(gap => <GapTag key={gap.skill.uri} gap={gap} />)}</div>
+            <CourseProgressControl key={(profile.persona ?? 'me') + nextCourse.url} status={progress[nextCourse.url]} onAction={action => onCourseStatus(nextCourse.url, action)} />
+            <p className="plan-verification-note">{t('Completion not verified here')}</p>
+          </div>
+        </div>}
+        {suggested.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{suggested.unmatched.map(gap => <GapTag key={gap.skill.uri} gap={gap} />)}</div>}
+        <div className="plan-facts">
+          <NossRoute roleId={role.id} />
+          {nextCourse?.accessId && access[nextCourse.accessId] && <div className="plan-fact"><span>{t('Access')}</span><a href={access[nextCourse.accessId].url} target="_blank" rel="noreferrer">{t(access[nextCourse.accessId].name)} ↗</a></div>}
+          <div className="plan-fact"><span>{t('Linked goals')}</span><div className="plan-sdg-badges">{[...sdgTargets, '4.4'].map(target => <SdgBadge key={target} target={target} short />)}</div></div>
+          <div className="plan-fact plan-milestone-fact"><span>{t('Milestones')} · {t('Locked until verification')}</span><div className="plan-mini-milestones"><span><b aria-hidden="true">1</b>{t('First course')}</span><span><b aria-hidden="true">✓</b>{t('Full plan')}</span></div></div>
+        </div>
+      </section>}
 
   </div>;
 }

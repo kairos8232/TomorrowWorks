@@ -325,6 +325,7 @@ function App() {
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
+            <button type="button" className="workspace-menu-saver" role="switch" aria-checked={saver} onClick={toggleSaver}>{t('Data saver')}: {saver ? t('On') : t('Off')}</button>
           </nav>
         </details>
         <div className="workspace-utility">
@@ -336,10 +337,10 @@ function App() {
     </header>
 
     <main className="main-content">
-      <div className="content-wrap">
-        {page && <header className="page-head">
+      <div className={`content-wrap${screen === 'plan' ? ' plan-page' : ''}`}>
+        {page && screen !== 'plan' && <header className="page-head">
           <h1>{t(page.title)}</h1>
-          {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
+          {screen !== 'moves' && <p>{t(page.intro)}</p>}
         </header>}
         <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
@@ -361,7 +362,7 @@ function App() {
         {screen === 'signals' && <SignalSources />}
         </Suspense>
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
-        <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
+        <SourcesFooter showSourceSummary={!['home', 'moves', 'plan', 'demand', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
       </div>
     </main>
   </div></DataSaverProvider></LangProvider>;

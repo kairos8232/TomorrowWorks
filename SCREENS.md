@@ -67,32 +67,30 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Personalise ranking** is visible beside the data and scenario controls and wraps on narrower screens. Its interest switch is disabled until the person picks interests. The goal switch works the same way: disabled until goals are picked in Your skills, and it shows the picked goals' colour squares. The note says how optional parts affect the score, and arrows show score changes. A role view shows its leading work interests, interest fit, and a job tag or O\*NET source link; rows with fit ≥ 75% show "fits your interests".
 - If there are no skills: a short prompt to add your own skills. Sample profiles remain available in View as.
 
-## Your plan: certification card
+## Your plan: certification link
 
-- **Malaysian certification · optional** (the last numbered step of the course list, labelled optional; instead of *Builds* it says *Certifies the whole job, not single skills*, because NOSS standards are not mapped to ESCO skills): closest SKM standard and levels merged on one line (e.g. *SKM Accounting · Level 3 or 4*), other standards under *Also*, NOSS codes with JPK register pages, *View in JPK register*, and the optional/check-with-JPK note. Roles without a NOSS get no step, only one line under the list.
+- The supporting facts row links to the nearest optional SKM standard in the JPK register, with levels merged on one line. Related routes are labelled. Roles without a match have no certification link.
 
 ## SDG links (all career screens)
 
 - Your skills: optional panel *What do you want your work to contribute to?* below the interests: goals 7, 8, 9, 12, 13, 16, 17 as cards (official colour square, number, short name, full name), up to two. Sample people have picks (Aina: 12 Responsible consumption; Hakim: 9 Innovation). Goals with no strong match are disabled with "Only possible matches so far" or "No strong match yet".
 - Your moves: one *Goals* switch in **Personalise ranking**, next to *Interests* (off by default; adds goal fit to the score, arrows show the change). A row gets a tag (colour square, number, short name, plus "via skills" when only its skills link) only for a picked goal it links to, so tags set roles apart instead of repeating on every row. Each focused role view shows its strong targets with how many of its skills match ("Strong match · checked"), or "No strong match to a specific SDG target yet"; then the 4.4 baseline and a collapsed *Possible links (n), not checked*.
-- Your plan: the SDG panel is a right-hand column beside the course list (sticky while scrolling; below the list under 1100 px), so it is seen without scrolling to the end. One compact row per linked SDG target combines the selected role's reason with the count of linked gap skills. SDG 4.4 separates the broad link for all gaps from the specific ESCO digital subset; these links indicate connections, not measured impact. Full gap names stay in the course and uncovered-skill sections above.
+- Your plan: linked target badges sit in the supporting facts row and open the UN goal pages. They indicate connections, not measured impact. The selected course shows the skills it may build; uncovered skills remain visible separately.
 - Team view: one compact row per linked target combines the selected role's reason with a count of linked gap skills. SDG 4.4 shows both the broad link for all gap skills and the smaller count with a specific ESCO digital flag. Full skill names stay in *Shared gaps* above, and the method note still distinguishes connections from measured impact.
 
 ## 3. Your plan
 
 - **Entry:** *Plan this move* in a focused role view of Your moves, or the sidebar career step (defaults to the top move). A select at the top switches between the person's ranked moves; *Back to your moves*.
-- **Learning route:** a short overview names the chosen role, gap count, and stated time. The course section highlights one course with its skills, provider link, course switcher, and optional demo evidence control. Other courses follow without repeating the highlighted course; AI suggestions are labelled and can be expanded beyond the first four. A course card links to the provider rather than tracking lesson progress.
-- **Completion and supporting context:** after the courses, a plain note explains that the demo cannot verify completion. Milestones, optional certification, funding, and selection method appear in a separate *More about this move* section. The SDG explanation follows at full width. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
-- **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
+- **Learning route:** one compact panel shows the gap count, a selector containing every checked course and AI suggestion, the selected course's provider, time, provenance, linked skills, and provider link. Switching courses updates this panel directly. Optional demo evidence stays with the selected course; completion is not verified here. Rule: `SIGNALS_AND_MATCHING.md` → "Learning plan rule".
+- **Supporting facts:** a short row links to the optional SKM/NOSS standard (with related routes labelled), course access when available, and linked SDG targets. Two small milestone markers remain locked until course completion can be verified. Course selection and the course source label replace the long stacked course cards and explanatory sections.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
 ## Your plan usability refinement (22 Oct 2026)
 
-- Current order is role/gaps/time → highlighted course and other courses → completion limitation → milestones/certification/funding/method → SDG links. The highlighted course is omitted from the other-course list.
+- Current order is role selector → skill count and course selector → selected course and action → compact supporting facts. The plan page omits the redundant large title. On phones, the course selector and action stack in the same panel.
 - Course evidence is optional and collapsed behind a keyboard-accessible summary. No evidence: *Finished this course? Try a demo evidence link*; submitted evidence: *Evidence submitted — not verified*, visible even while collapsed. Expanding reveals the fictional-only privacy notice before the form, validation, link and edit/remove controls. No evidence or verification behaviour changed.
-- The unavailable-verification notice replaces the always-empty progress bar. *About demo evidence* explains the distinction between a link, course completion, and skill mastery. Funding, method and exact milestone rules remain available in labelled native disclosures. Provider links, course-change warning and all gaps remain available.
-- Milestones use two separate cards with small medal/trophy artwork beside the title. How to unlock reveals the exact rule and skill-mastery limit; lock state and verification availability remain visible.
-- Build and 88 tests pass. Edge 1440 × 1000 and 390 × 844 screenshots reviewed; order, collapsed evidence, keyboard expansion, bad/good URL, removal, unchanged completion/locked badges, modal, badge/funding disclosures, Accountant switch and EN/MS/ZH phone fit pass. No page errors; pre-existing favicon 404 excluded. Translation review remains pending.
+- The unavailable-verification notice sits with the selected course. Evidence links do not verify completion or unlock milestones. The course selector labels AI suggestions and the detail identifies whether the course was checked by hand.
+- Milestones appear as two tiny locked markers, for the first course and the full plan. The pure eligibility rule remains in `src/milestones.ts`; no verification service is connected.
 
 ## Learning milestone badges — step 4 (22 Oct 2026, corrected)
 
