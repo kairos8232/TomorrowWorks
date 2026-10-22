@@ -18,6 +18,27 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] Use wide Home columns and compact phone move rows; inspect Home and Your plan at 1440 px, Home, Your skills, Your moves and Your plan at 390 px, and the Malay Home header at 320 px. Check Malay and Chinese phone navigation.
 - [x] Run `npm run build` and `npm test` after the refinement (60 tests passed); run Impeccable layout detection (no findings).
 
+## Learner motivation — evidence-link preview (22 Oct 2026)
+
+- [x] Replace reflection/activity controls with fictional public credential-link submission on individual courses. Support format validation, edit/cancel/remove, and explicit unverified status.
+- [x] Show accessible evidence-submission bar; keep it separate from verified completion and skills. Preserve memory-only privacy and viewer separation; no files or reviewer integration.
+- [x] Build and 84 tests pass. Desktop/phone Edge checks cover invalid URLs, checked/AI submissions, editing/removal, counts, navigation, role/learner separation, refresh, translated fit and Team/NOSS exclusions.
+- [x] Step 2: clear verified-course completion count and accessible progress bar, separate from submitted evidence; explain course completion versus skill mastery. Build and 84 tests pass; Edge desktop/phone, translated fit, evidence changes and unchanged completion bar checked.
+- [x] Step 3: next-course Start/Continue action using existing plan order, visible provider, AI provenance and session-only visited-link tracking. Completion verification remains disconnected; clicks give no completion credit. Build, 84 tests and desktop/phone browser checks pass.
+- [x] Add Change course with warning and explicit confirmation; preserve evidence and link history. Choices are learner/role-specific, in-memory only. Build, 84 tests and desktop/mobile browser interaction checks pass.
+- [x] Step 4 corrected: remove self-report controls/state; badges unlock only from authoritative verified completion. Verification is not connected, so both remain locked. Distinct medal/trophy illustrations, richer green/gold cards and lock-status chips added; desktop/phone preview checked.
+- [x] Build, 88 tests and Edge desktop/phone checks pass; evidence cannot unlock badges, no self-report UI, role changes and translated fit checked.
+- [ ] User review of revised step 4 badge preview; team translation review; provider/reviewer integration before live unlocking.
+- [ ] Team review of new translations.
+- [ ] Decide real evidence storage, consent, access and deletion before file uploads or real credentials.
+- [ ] Provider/authorised-reviewer verification before completion claims or badges.
+
+## Your plan usability — 22 Oct 2026
+
+- [x] Prioritise course progress and learning action; move compact badges after courses; shorten repeated copy. Collapse optional evidence, funding, method and exact badge rules while preserving visible unverified status and demo limitations.
+- [x] Build and 88 tests pass. Edge desktop/phone screenshots and keyboard evidence interaction, URL validation/submission/removal, course modal, disclosures, role changes and translated fit checked. Verification behaviour unchanged.
+- [ ] User review of the simplified whole-page preview; team review of new translations.
+
 ## Stage 0 — Repository documents
 
 - [x] Write a README that identifies the project as a planned prototype.

@@ -1,5 +1,105 @@
 # Progress log
 
+## 22 Oct 2026 — Whole Your plan page usability pass
+
+- User requested friendlier UI and selected Whole Your plan page. Simplified visible intro/progress copy, kept progress then next Start/Continue action, added Your courses heading, moved compact medal/trophy badges after courses. Optional evidence, funding, selection method and badge earning rules use labelled native disclosures.
+- Evidence summary always identifies submission as unverified; expanded form retains fictional-only privacy note before input. Verification-unavailable notice remains visible in progress; deeper count/mastery/privacy limits remain under How progress works. Evidence validation/state, warning modal, provider links, plan data/scoring and locked badges unchanged. New EN/MS/ZH text requires team review.
+- Build and 88 tests pass. Existing Edge/puppeteer desktop 1440 × 1000 and phone 390 × 844: order, initially collapsed optional evidence, keyboard opening, bad/good URL, save/remove, completion stays zero, badges locked, change-course modal, badge/funding disclosures, Accountant plan and translated phone fit pass. Screenshot review complete. No page errors; existing favicon 404 excluded. Screenshots outside repo. No new packages; not committed/pushed; await user preview.
+
+---
+
+## 22 Oct 2026 — More attractive milestone artwork
+
+- User requested more attractive badges. Replaced small shared emblems with distinct star-medal/ribbon and trophy SVG artwork, larger centred awards, green/gold card tints and lock chips. Locked status stays explicit; no earned-state data or verification behaviour changed.
+- Build and 88 tests pass. Edge desktop/phone screenshots and EN/MS/ZH fit reviewed; locked state, no self-report UI, evidence not unlocking badges and unchanged verified progress checked. No new packages or image assets; not committed/pushed.
+
+---
+
+## 22 Oct 2026 — Remove self-reporting; sharper verified-only badges
+
+- User rejected self-report controls and requested badges light only from course detection/verification. Removed all completion-report state and controls, and active self-report copy. Badges now depend only on a verified-course set. No actual provider/reviewer detector exists: the current set is deliberately empty and UI explicitly says verification is not connected. No fake unlocks from links or clicks.
+- Stronger borders, angular medal emblems and textual Locked/Unlocked states; earned styling uses ledger green. Eligibility rule handles first verified course across plans and every unique selected-plan course, excluding empty plans and optional NOSS. Skill mastery remains separate.
+- Build passes. An over-broad field rename initially broke three test assertions; corrected their completed field, then all 88 tests pass. Edge desktop/phone checks confirm no self-report UI, both locked, evidence not unlocking/advancing verified progress, role changes and EN/MS/ZH fit; no page errors. Screenshots outside repo. Translation team review pending. Not committed/pushed; await review.
+
+---
+
+## 22 Oct 2026 — Step 4: self-reported learning milestones
+
+- User explicitly requested First course completed and Selected plan’s courses completed as self-reported milestones, with exact earning rules; skill badges require separate assessment and are not added. Added clearly labelled course-report checkboxes separate from evidence submission and the verified bar.
+- First badge needs at least one report by the current learner in the session; plan badge needs all unique current-plan course URLs, checked plus AI suggestions including hidden courses, excluding NOSS; empty plans never earn. Reversible reports and role changes recalculate eligibility; no generated claims, assessments, automatic skills, verified completion or ranking changes.
+- State stays in App memory per actual profile owner. Shared course URLs carry reports across roles; viewers stay separate; refresh clears reports. New EN/MS/ZH copy has the usual pending team review. Earned/not-earned text carries status as well as colour.
+- Production build and 88 tests pass, including four milestone rules. Edge at 1440 × 1000 / 390 × 844: evidence alone earns nothing; first report and all reports earn appropriate badges; removing reports revokes eligibility; verified bar stays zero; keyboard, navigation, learner/role changes, refresh, certification/Team exclusions and translated fit pass. No page errors. Screenshots and tooling outside repo; no new packages. Branch kit-yiu, not committed/pushed; await preview feedback.
+
+---
+
+
+## 22 Oct 2026 — Course switching with a confirmation warning
+
+- User requested a course-change button and warning before replacing current/next learning. Added native dialog with actual selected-plan courses, a warning, Cancel and Confirm. Draft selection does not change the panel until confirmed. Same-course confirmation is disabled; Escape cancels and browser focus returns to the trigger.
+- Confirm updates course title/provider/Start-Continue URL. Choices are per profile owner and role, survive navigation/role switching and clear on refresh. Valid explicit selection takes priority over default first-without-evidence rule, allowing revisit; stale choices fall back to the current plan. Header now names the role. Existing evidence, visits, ranking and completion remain unchanged.
+- Build and 84 tests pass. Edge desktop 1440 × 1000 / phone 390 × 844: warning, draft/cancel/Escape/confirm, modal focus restoration, provider URL, Start/Continue, evidence retention, completion zero, navigation, role/viewer separation, refresh, EN/MS/ZH modal fit and no page errors checked. No new packages. Translation team review pending. Screenshots outside repo; not committed/pushed; awaiting preview.
+
+---
+
+
+## 22 Oct 2026 — Step 3: useful next learning action
+
+- User requested Start/Continue guidance with visible provider links. Panel follows existing checked-first plan order and selects the first course without submitted evidence. This is a transparent proxy, not a claim to know external course completion. Course/provider links remain visible and AI suggestions retain their unverified label.
+- Start changes to Continue only after opening a provider link this session (also through a card's View course action). Continue reopens the provider page, not a saved lesson position. Visited URLs stay in memory per learner, survive navigation and role changes, clear on refresh, and never change completion/evidence counts, skills, ranking or SDG claims.
+- Evidence for all courses produces a clear unverified-completion notice; removing evidence restores the earlier next course. No next card with zero courses; Team view unchanged. EN/MS/ZH added, team review pending.
+- Build and 84 tests pass. Existing Edge via puppeteer-core, desktop 1440 × 1000 / phone 390 × 844: correct URL/label, Start→Continue, no credit from clicks, navigation, learner separation, translated fit and 44px action size, AI fallback, all-evidence state, removal, target changes, Team exclusion and refresh pass. No page errors; screenshots outside repo. Work on kit-yiu, not committed or pushed; await preview feedback.
+
+---
+
+
+## 22 Oct 2026 — Step 2: clear course-progress summary
+
+- User clarified step 2 is the completed-course count and accessible progress bar, with mastery kept separate. Added Your course progress: 0 of N courses verified complete, plus a distinct evidence-submission count. Completion is explicitly zero until provider/reviewer verification exists; no fabricated completed state or user-set completion. Course total includes checked/AI courses and hidden suggestions, deduplicated by URL; excludes optional certification.
+- Native progress has a count label and method description; summary explains verified course completion is distinct from mastery of mapped skills. EN/MS/ZH text added; team translation review pending.
+- Build and all 84 tests pass. Existing Edge/puppeteer preview at 1440 × 1000 and 390 × 844: evidence submit/edit/cancel/remove counts update but completed count/bar stays zero; accessible label/description checked; navigation, role/viewer separation, translated phone fit, refresh and Team/NOSS exclusions pass. No page errors; pre-existing favicon excluded. Screenshots outside repo. No commit or push for this step; await user preview.
+
+---
+
+
+## 22 Oct 2026 — Credential-link evidence prototype replaces reflections
+
+- User proposed certificates/proof after rejecting reflection usefulness, then approved trying a fictional public credential-link submission prototype. File uploads remain disabled; no real certificates or personal data. Previous activity and quiz entries are superseded.
+- Every individual checked/AI course supports submit/edit/cancel/remove. HTTPS URL syntax is checked, not existence, issuer, identity, authenticity or relevance. UI says Evidence submitted — not verified and explicitly states there is no reviewer delivery. Progress counts submitted links per unique current-plan course URL; removing reduces it. No completion badge or skill/scoring change.
+- Links remain memory-only per profile owner and clear on refresh. No link fetching, API, new dependencies, accounts or storage. Real uploads require separate consent/access/retention/deletion decisions; verification requires provider or authorised review integration.
+- Build and 84 tests pass (URL validation, edit/remove, unique-plan counting). Edge desktop 1440 × 1000 and phone 390 × 844: malformed/unsafe link rejection, submit/edit/cancel/remove, checked/AI courses, counts, navigation, role/learner isolation, refresh, EN/MS/ZH fit and Team/NOSS exclusion pass. No page errors; favicon remains a pre-existing 404. Screenshots outside repo. Team translation review pending. Branch kit-yiu; no commit or push; awaiting preview feedback.
+
+---
+
+## 22 Oct 2026 — Shared learning activity flow replaces the one-course quiz
+
+- User rejected bespoke quizzes per course as unscalable and authorised trying a shared guided flow. Replaced quiz/answer logic with three activities on every checked course and AI suggestion: open provider link, review mapped skills, save an ungraded reflection. Provider opening records a click only; reviewing and reflecting are learner-recorded actions, not independent verification.
+- Native progress sums activities on unique course URLs in the current plan, including collapsed suggestions; it never labels external courses completed. All cards state completion not verified. No badges, generated questions, automatic skill updates or provider integration.
+- Saved reflections can be edited without extra progress. State and notes stay in memory per profile owner and clear on refresh. Form prohibits personal/confidential information and asks for fictional examples; translated EN/MS/ZH UI; team language review pending.
+- Verified build and 84 tests, including sequential transitions, blank-note rejection, progress deduplication and edit/reopen handling. Edge browser at 1440 × 1000 / 390 × 844: checked and AI flows, blank rejection, notes, edit, bar, navigation, role changes, Aina/Hakim separation, languages, refresh and Team/NOSS exclusions pass. No page errors. Browser plugin absent; used already-installed Edge/puppeteer-core with screenshots outside the repo.
+- Work remains on kit-yiu, uncommitted and unpushed. Await user preview before further features. Prior quiz and manual-selector entries are historical and superseded.
+
+---
+
+## 22 Oct 2026 — User correction: guided assessment instead of manual completion
+
+- Supersedes the self-reported selector in the prior entry. User required guidance and a progress bar rather than choosing completion manually.
+- ol-bookkeeping now has three original synthetic practice questions, aligned with the learning outcomes on OpenLearn's course page (https://www.open.edu/openlearn/money-business/introduction-bookkeeping-and-accounting/content-section-0/, checked 22 Oct). Course outcomes cover accounting equations, double entry and trial balances. Question/answer content is drafted, pending team review; not a provider exam, not a validated competency instrument.
+- Pure advanceLearning transitions require learning → assessment → all three correct. Wrong/incomplete answers never pass; explanations and retry guide learning. Opening a provider link only starts learning. Native progress counts passed assessments in the selected plan, not completed external courses or resolved skill gaps. Plans with no assessment have an explicit empty state.
+- Browser checks: installed Edge via existing puppeteer-core (Browser plugin absent; no tooling download). Desktop 1440 × 1000 and phone 390 × 844; start/gating, incomplete submit, wrong-answer feedback/retry, pass, role changes, zero-assessment state, navigation, Aina/Hakim isolation, refresh reset, Team/NOSS exclusions and EN/MS/ZH phone fit passed. No application exceptions or failed assets except the pre-existing favicon 404. Build and 84 tests pass, including 3 assessment-rule tests. Screenshot review led to clearer vertical learning steps.
+- State remains memory-only; confirmed skills, scores and SDG claims unchanged. No manual completion control, generated claims, new dependencies, badges, commit or push. Await user preview feedback before extending.
+
+---
+
+## 22 Oct 2026 — Learner motivation, step 1: course status
+
+- User requested one step at a time, with a preview and check after every step. Work is on kit-yiu. No summary or badge has been added yet.
+- Individual courses now offer Not started / In progress / Completed through CourseProgressControl, passed via CourseCard's existing extra slot. State lives in App, separate for each actual profile owner and course URL; navigation and role switching preserve it, refresh clears it. No automatic skill or score changes. Labels and disclosure have Malay and Chinese translations (team language review remains applicable).
+- Verification: npm run build and npm test passed (81 tests). Existing Edge and puppeteer-core were used because Browser plugin was absent and downloading Playwright was declined. Checked desktop 1440 × 1000, phone 390 × 844, status changes and undo, keyboard interaction, page navigation, role switching, Aina/Hakim isolation, refresh reset, Team/NOSS exclusion and translated control fit. No page exceptions or application console errors; favicon.ico returns 404.
+- Dependencies installed at locked versions; Windows system certificates resolved the registry certificate failure. Screenshots and temporary preview scripts remain outside the TomorrowWorks repository. No commit or push; user review of step 1 comes next.
+
+---
+
+
 What was done, why, and what is still open. Newest entry first. Add an entry whenever a decision or finding changes the plan; keep the *how* in the linked documents.
 
 ---
@@ -443,3 +543,5 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 - `09cd1ce` — `CLAUDE.md`, `SIGNALS_AND_MATCHING.md`, README section, `API_PLAN.md` pointer.
 - `977d59c` — DOSM importer, Q1/Q2 2026 snapshots, `.gitignore`, updated plan after the DOSM findings.
 - Next: `Add progress log` — `PROGRESS_LOG.md` plus its links in `README.md` and `CLAUDE.md`.
+
+- Step 3 placement correction (22 Oct): user requested the next-action panel beneath course progress; moved it below the summary.

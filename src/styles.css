@@ -697,3 +697,84 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-possible summary { cursor: pointer; font-weight: 600; }
 .sdg-possible ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
 .sdg-possible small { color: #5d6873; }
+
+/* Guided learning checks in individual plans. */
+.learning-progress { margin-block: 18px; padding: 16px; border: 1px solid #d9ded9; border-radius: 6px; background: #f7f8f6; }
+.learning-progress h3, .course-check h4 { margin: 0 0 8px; font-size: 16px; }
+.learning-progress p { margin: 6px 0; }
+.learning-progress progress { display: block; width: 100%; height: 16px; accent-color: #1e6b4f; }
+.course-check { margin-top: 18px; padding-top: 16px; border-top: 1px solid #d9ded9; }
+.learning-stages { display: grid; gap: 6px; padding-left: 20px; margin-block: 12px; font-size: 14px; }
+.learning-stages [aria-current] { font-weight: 700; color: #1e6b4f; }
+.check-question { min-width: 0; margin: 16px 0; padding: 12px; border: 1px solid #d9ded9; border-radius: 6px; }
+.check-question legend { padding: 0 4px; font-size: 15px; font-weight: 600; }
+.check-question label { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; cursor: pointer; }
+.check-question input { flex-shrink: 0; accent-color: #1e6b4f; }
+.course-check button, .course-check a.secondary-button { min-height: 44px; }
+.course-check input:focus-visible { outline: 2px solid #2f8a66; outline-offset: 3px; }
+
+/* Reflections are session-only activity notes. */
+.completion-unverified { font-size: 14px; color: #5d6873; margin: 6px 0; }
+.reflection-label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.course-check textarea { box-sizing: border-box; width: 100%; max-width: 100%; min-height: 112px; padding: 10px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; color: #1c2430; background: white; resize: vertical; }
+.saved-reflection { white-space: pre-wrap; overflow-wrap: anywhere; }
+.learning-skill-list { padding-left: 20px; font-size: 15px; }
+
+/* Demo credential links: no file upload or verification claims. */
+.evidence-url { box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px; border: 1px solid #c5ccc6; border-radius: 6px; background: #fff; color: #1c2430; font: inherit; }
+.evidence-url:focus-visible { outline: 2px solid #2f8a66; outline-offset: 2px; }
+.evidence-url[aria-invalid=true] { border-color: #a8402b; }
+.evidence-link { display: block; overflow-wrap: anywhere; margin-block: 10px; }
+.evidence-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+.course-completion-count { font-weight: 700; font-size: 18px; }
+
+/* One next action, following the existing plan order. */
+.next-learning { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; margin-block: 18px; padding: 16px; border: 1px solid #c5ccc6; border-left: 3px solid #1e6b4f; border-radius: 6px; }
+.next-learning > div { flex: 1 1 240px; min-width: 0; }
+.next-learning h3 { margin: 0 0 8px; font-size: 16px; }
+.next-course-title { margin: 4px 0; font-weight: 700; overflow-wrap: anywhere; }
+.next-learning .note { margin: 4px 0; }
+.next-learning-note { flex-basis: 100%; }
+.next-learning a.primary-button { min-height: 44px; }
+
+.change-course-dialog { width: min(520px, calc(100vw - 40px)); max-height: calc(100dvh - 40px); box-sizing: border-box; overflow: auto; padding: 24px; border: 1px solid #c5ccc6; border-radius: 10px; background: #fff; color: #1c2430; }
+.change-course-dialog::backdrop { background: rgb(28 36 48 / 45%); }
+.change-course-dialog h2 { margin-top: 0; font-size: 22px; }
+.change-course-dialog select { box-sizing: border-box; width: 100%; min-height: 44px; padding: 8px; font: inherit; border: 1px solid #c5ccc6; border-radius: 6px; }
+.change-course-dialog button, .change-course-button { min-height: 44px; }
+.change-course-dialog .evidence-actions { margin-top: 18px; }
+
+
+/* Award illustrations stay subdued until authoritative completion unlocks them. */
+.learning-milestones { margin-block: 20px; }
+.learning-milestones h3 { font-size: 18px; margin: 0 0 8px; }
+.milestone-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; list-style: none; padding: 0; }
+.milestone { --badge-fill:#e0ebe5; --badge-inner:#f5f9f6; --badge-line:#708b7b; --badge-ribbon:#c5d6ca; position:relative; overflow:hidden; padding:16px 20px 20px; border:1px solid #c5d4ca; border-bottom:4px solid #789483; border-radius:12px; background:#f6faf7; text-align:center; }
+.milestone-plan { --badge-fill:#f1e6cf; --badge-inner:#fffaf1; --badge-line:#a48c5b; --badge-ribbon:#e2d1ad; border-color:#ded1b7; border-bottom-color:#b49a65; background:#fcfaf5; }
+.milestone-heading { display:flex; justify-content:flex-end; }
+.milestone-state { display:inline-flex; align-items:center; gap:5px; padding:4px 8px; border:1px solid #cbd3ce; border-radius:4px; background:#fff; color:#4e5c54; font-size:12px; font-weight:700; }
+.milestone-state svg { width:14px; height:14px; }
+.milestone-art { display:grid; place-items:center; margin:0 auto 8px; color:var(--badge-line); }
+.milestone-art>svg { width:160px; max-width:100%; height:132px; }
+.milestone h4 { margin:8px 0 10px; font-size:18px; line-height:1.35; }
+.milestone .note { margin:0; font-size:14px; line-height:1.55; }
+.milestone.earned { --badge-fill:#d8b052; --badge-inner:#fff3cd; --badge-line:#805814; --badge-ribbon:#1e6b4f; border-color:#1e6b4f; border-bottom-color:#1e6b4f; background:#edf6ef; }
+.milestone.earned .milestone-state { background:#1e6b4f; color:#fff; border-color:#1e6b4f; }
+@media(max-width:620px) { .milestone-grid { grid-template-columns:1fr; } }
+
+/* Keep the learning action close; details expand only when needed. */
+.plan-explainer summary,.plan-support summary,.milestone-rule summary { cursor:pointer; font-size:14px; font-weight:600; min-height:36px; padding-block:8px; }
+.plan-courses-heading { margin:24px 0 8px; font-size:18px; }
+details.course-check { padding-block:0; }
+.course-check>summary { display:flex; align-items:center; flex-wrap:wrap; gap:8px; min-height:44px; padding-block:10px; cursor:pointer; font-size:14px; font-weight:600; }
+.course-check>summary::before { content:'+'; color:#1e6b4f; font-size:20px; width:16px; }
+.course-check[open]>summary::before { content:'−'; }
+.evidence-optional { margin-left:auto; color:#5d6873; font-size:12px; font-weight:400; }
+.course-evidence-body { padding:4px 0 14px; }
+.plan-support { margin-top:12px; border-top:1px solid #d9ded9; }
+.learning-milestones { padding-top:20px; border-top:1px solid #d9ded9; }
+.milestone-art>svg { width:124px; height:104px; }
+.milestone-rule { text-align:left; }
+.milestone-rule summary { text-align:center; }
+.milestone-rule .note { margin:8px 0; }

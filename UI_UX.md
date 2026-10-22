@@ -10,6 +10,10 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 2. **Personal demo:** Recognise that My career uses a fictional, unsaved profile. Review it, choose a target, and see a hand-checkable skill comparison.
 3. **Later Domain 1 work:** Compare sourced future roles, see why they match, follow a reskilling pathway, inspect SDG reasons, and compare scenarios. Empty or planned states must not imply those features already work.
 
+## Your plan usability update — 22 Oct 2026
+
+Put the next learning action directly after compact course progress; courses come before badges. Optional evidence forms use native details, with submitted/unverified status visible in the summary and fictional-only privacy instructions visible before entering a link. Keep the verification-unavailable notice visible once in progress; expand count/privacy detail, funding, method and exact badge earning rules on demand. Badge artwork stays recognisable at a smaller size. This preserves requirements while reducing repeated text and unnecessary scrolling. Build, tests and desktop/phone interaction checks passed; see PROGRESS_LOG.md.
+
 ## Screen design rules
 
 - Put the main question and useful action in the first view. Avoid large empty hero space that pushes content below the fold.

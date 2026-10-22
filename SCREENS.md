@@ -71,6 +71,44 @@ My career (sidebar navigation)           The job market (browse any time)
 - **Malaysian certification route:** SKM level and the NOSS title in the selected language where the source provides both Malay and English (full bilingual title on hover), code and official register link, a brief closest/related distinction, and the optional centre or prior-learning route. Roles without one say no matching NOSS was found in the checked register.
 - If there are no skills: a short prompt to add your own skills. If nothing is missing: "Nothing to build".
 
+## Your plan usability refinement (22 Oct 2026)
+
+- User selected the whole Your plan page for a usability pass. Main order is gaps/time → compact progress summary → next Start/Continue action → Your courses → milestone badges → optional access/funding and course-selection details. Keep the next action directly under progress.
+- Course evidence is optional and collapsed behind a keyboard-accessible summary. No evidence: Add completion evidence; submitted evidence: Evidence submitted — not verified, visible even while collapsed. Expanding reveals the fictional-only privacy notice before the form, validation, link and edit/remove controls. No evidence or verification behaviour changed.
+- Progress keeps the unavailable-verification notice visible. How progress works expands count coverage, mastery distinction and session/privacy limits. Funding, method and exact badge rules remain available in labelled native disclosures. Provider links, course-change warning and all gaps remain available.
+- Badges retain medal/trophy artwork at a more compact size and sit after courses. How to unlock reveals the exact rule and skill-mastery limit; lock state and verification availability remain visible.
+- Build and 88 tests pass. Edge 1440 × 1000 and 390 × 844 screenshots reviewed; order, collapsed evidence, keyboard expansion, bad/good URL, removal, unchanged completion/locked badges, modal, badge/funding disclosures, Accountant switch and EN/MS/ZH phone fit pass. No page errors; pre-existing favicon 404 excluded. Translation review remains pending.
+
+## Learning milestone badges — step 4 (22 Oct 2026, corrected)
+
+- User removed self-reporting. No completion-report checkbox, report state or self-reported badge text remains in the current UI. First course completed requires at least one authoritative verified course completion. Selected plan’s courses completed requires verification for every unique current-plan course URL, including AI suggestions and excluding NOSS. Empty plans never earn.
+- Provider/reviewer verification is not connected, so the current verified-course set is deliberately empty: both badges stay Locked. The app does not detect external course completion. Evidence links and opened pages never unlock badges; verified progress remains zero. Future trusted verification can drive the pure eligibility rule; badges do not establish skill mastery.
+- Visuals use two distinct SVG awards: a star medal with ribbons and a trophy, larger centred artwork, green/gold tints, rounded cards and readable lock-status chips. Locked badges remain subdued; earned styling uses stronger gold and ledger green. No invented earned demo state is exposed.
+- Build and 88 tests pass. Edge desktop 1440 × 1000 and phone 390 × 844: no self-report controls/text, locked state, evidence not unlocking, unchanged verified bar, role changes and EN/MS/ZH fit pass. No page errors. New translations need team review.
+
+## Changing the highlighted course — step 3 refinement (22 Oct 2026)
+
+- Change course opens a native modal dialog with courses from the selected role's actual plan (including collapsed AI suggestions, identified as suggestions). A warning states the highlighted course and Start/Continue link will change; evidence and visited-link history are retained; switching does not complete a course.
+- Selecting a draft does not apply it. Confirm course change updates the highlighted title, provider and action URL; Cancel or Escape preserves the previous course. Same-course confirmation is disabled. Browser modal focus and focus restoration are retained.
+- Choices persist in memory per learner and target role across page/role changes, clear on refresh, and are used only while the course remains in the current plan. Explicitly chosen courses can be revisited even with submitted evidence. Default next-course behaviour applies when no valid choice exists. The heading names the selected role to distinguish occupation from course title.
+- Build and 84 tests pass. Edge desktop/phone checks cover warning/draft/confirm/cancel/Escape/focus, Start/Continue, evidence preservation, unchanged completion, navigation, learner/role isolation, refresh and EN/MS/ZH dialog fit. No page errors; team translation review pending.
+
+## Next learning action — step 3 (22 Oct 2026)
+
+- A compact Your next learning step panel below the progress summary highlights the first course in the existing plan order without submitted evidence. Checked courses come before AI suggestions; the panel labels suggestions as not hand-checked. No independent claim that a course is unfinished: completion remains unverified.
+- Start learning opens the provider in a new tab; Continue learning reopens that same provider URL after a link was clicked this session. It does not restore lesson position. The provider name and each course's existing View course link remain visible; both actions record the visited URL only.
+- Visited links are in memory per profile owner, survive navigation/role changes and clear on refresh. They give no evidence or completion credit and do not alter skills, recommendations or SDG claims. Team cards do not get the next-action panel.
+- Submitting evidence advances the next-course selection without implying completion; removing it makes the earlier course eligible again. With evidence for every course, show an unverified-completion notice and retain every course link below; with no courses, omit the panel.
+- Build and 84 tests pass. Edge desktop 1440 × 1000 / phone 390 × 844 checks cover provider URL and label, Start/Continue, navigation, learner separation, translated fit and action size, AI fallback, all-evidence state, removal, target changes, Team exclusion and refresh. No page errors; team translation review remains pending.
+
+## Completion evidence — credential-link prototype (22 Oct 2026)
+
+- Supersedes reflection/activity tracking and the earlier course quiz. Each individual-plan checked course and AI suggestion accepts a fictional public HTTPS credential link. Real certificates and personal information are prohibited in this demo; file uploads are not enabled.
+- A submission shows Evidence submitted — not verified. Only URL syntax is checked: HTTPS, a dotted hostname, no embedded credentials and a maximum of 2,000 characters. The app does not fetch the link or confirm existence, issuer, learner identity or course relevance. It has no reviewer queue or provider integration.
+- Links can be edited, cancelled during editing, or removed. Removing evidence reduces the native, labelled bar. Step 2 replaces the submission bar with a labelled verified-completion bar and a separate evidence-submission count. The course total uses unique course URLs in the current plan, including hidden suggestions; NOSS routes are excluded. Completion remains zero because there is no verification integration; submitting a link never advances it. The summary distinguishes course completion from mastery of linked skills. No skills, gaps, scores, badges or SDG claims change.
+- Links stay in App memory, separate for Aina, Hakim and Me; navigation and target changes preserve them, refresh clears them. Nothing is uploaded or sent to a reviewer. Team view and NOSS certification routes have no submission controls.
+- Build and 84 tests pass. Installed Edge desktop 1440 × 1000 and phone 390 × 844 checks cover malformed/unsafe URLs, submission/edit/cancel/remove, checked/AI course counts, navigation, role/learner separation, refresh and EN/MS/ZH phone fit. No page errors; existing favicon 404 excluded. New translations still need team review.
+
 ## Team view (For teams)
 
 For HR / L&D managers (a fictional five-person finance team) and career centres (a fictional class of three graduates); brief target groups 3 and 4.
