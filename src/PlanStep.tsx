@@ -68,8 +68,8 @@ function NossRoute({ roleId }: { roleId: string }) {
   return <div className="plan-fact"><span>{t('Optional certification')}{entry.match === 'related' ? ` · ${t('Related route')}` : ''}</span><a href={`${nossSources[first.source].url}#page=${first.page}`} target="_blank" rel="noreferrer">SKM {[...groups][0][0]} · {t('Level')} {levels([...groups][0][1])} ↗</a></div>;
 }
 
-export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress, onCourseStatus, openedCourses, onOpenCourse, learningChoices, onChooseLearningCourse }: {
-  profile: Profile; roleId: string | null; onPickRole: (id: string) => void; onBackToMoves: () => void;
+export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus, openedCourses, onOpenCourse, learningChoices, onChooseLearningCourse }: {
+  profile: Profile; roleId: string | null; onPickRole: (id: string) => void;
   learningChoices: Record<string, string>; onChooseLearningCourse: (role: string, url: string) => void;
   openedCourses: Set<string> | undefined; onOpenCourse: (url: string) => void;
   progress: CourseProgress; onCourseStatus: (course: string, action: LearningAction) => void;
@@ -94,24 +94,20 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
   const selectedCourse = courseChoices.find(course => course.url === learningChoices[role.id]);
   const nextCourse = selectedCourse ?? courseChoices.find(course => !progress[course.url]) ?? courseChoices[0];
   const sdgTargets = [...new Set([...roleSdgs(role).map(link => link.target), ...sdgTotals(plan.gaps.map(gap => gap.skill)).map(link => link.target)].filter(target => target !== '4.4'))];
+  const rolePicker = <label className="plan-pick" htmlFor="plan-role-choice"><span>{persona ? t('Plan for {name}', { name: persona.name }) : t('Move to plan')}</span>
+    <select id="plan-role-choice" value={role.id} onChange={(e) => onPickRole(e.target.value)}>
+      {moves.map((m, i) => <option key={m.role.id} value={m.role.id}>{i + 1}. {m.role.title}</option>)}
+    </select>
+  </label>;
 
   return <div className="step-body">
-    <div className="who plan-who">
-      <p><strong>{persona ? t('Plan for {name}', { name: persona.name }) : t('Your plan')}</strong></p>
-      <label className="plan-pick"><span className="visually-hidden">{t('Move to plan')}</span>
-        <select value={role.id} onChange={(e) => onPickRole(e.target.value)}>
-          {moves.map((m, i) => <option key={m.role.id} value={m.role.id}>{i + 1}. {m.role.title}</option>)}
-        </select>
-      </label>
-      <button type="button" className="text-button" onClick={onBackToMoves}>{t('Back to your moves')}</button>
-    </div>
-
     {plan.gaps.length === 0
-      ? <section className="panel"><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></section>
+      ? <section className="panel"><div className="plan-dashboard-top"><div><h2>{t('Nothing to build')}</h2><p className="note">{t('You already have every essential ESCO skill for this role.')}</p></div>{rolePicker}</div></section>
       : <section className="panel plan-dashboard" aria-labelledby="plan-skills-heading">
         <div className="plan-dashboard-top">
           <div><h2 id="plan-skills-heading">{t('{n} skills to build', { n: plan.gaps.length })}</h2>
           <p>{total > 0 ? t('{n} courses to choose from', { n: total }) : t('No course found yet')}</p></div>
+          {rolePicker}
         </div>
         {nextCourse && <div className="plan-dashboard-body">
           <div className="plan-course-picker">

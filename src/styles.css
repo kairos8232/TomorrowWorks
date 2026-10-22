@@ -469,9 +469,9 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 
 /* Step 3: learning plan. Numbered steps read like a ledger; green = what you build. */
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.who.plan-who { justify-content: flex-start; }
-.who.plan-who .text-button { margin-left: auto; }
-.plan-pick select { padding: 7px 9px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 16px; color: #1c2430; background: #ffffff; text-transform: capitalize; }
+.plan-pick { display: grid; gap: 6px; width: min(100%, 280px); flex: none; }
+.plan-pick span { color: #5d6873; font-size: 13px; font-weight: 700; }
+.plan-pick select { width: 100%; min-width: 0; padding: 9px 12px; border: 1px solid #b8c8bc; border-radius: 6px; font: inherit; font-size: 17px; font-weight: 700; color: #1c2430; background: #ffffff; text-transform: capitalize; }
 .plan-learning-intro { margin: 0 0 12px; color: #3a4450; }
 .plan-steps { list-style: none; margin: 0; padding: 0; }
 .plan-steps > li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid #d9ded9; }
@@ -490,7 +490,6 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .plan-noss-note { margin-bottom: 0; }
 .plan-noss-date { margin: 6px 0 0; }
 @media (max-width: 640px) {
-  .who.plan-who .text-button { margin-left: 0; }
   .plan-steps > li { grid-template-columns: 32px 1fr; gap: 10px; }
   .plan-course-head { display: block; }
   .plan-course-action { margin: 8px 0 0; }
@@ -835,7 +834,6 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .plan-page .page-head h1 { font-size: clamp(36px, 4vw, 52px); }
 .plan-page .workspace-subnav { margin-top: 0; margin-bottom: 20px; }
 .plan-page .step-body { gap: 12px; }
-.plan-page .plan-who { padding: 8px 12px; }
 .plan-dashboard { padding: clamp(18px, 2.5vw, 28px); }
 .plan-dashboard-top { display: flex; align-items: start; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid #d8ddd7; }
 .plan-dashboard-top h2 { font-size: clamp(24px, 2.5vw, 32px); line-height: 1.15; }
@@ -876,6 +874,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .content-wrap.plan-page { padding-top: 20px; }
   .plan-page .page-head { margin-bottom: 18px; }
   .plan-dashboard-top { display: block; }
+  .plan-dashboard-top .plan-pick { width: 100%; margin-top: 16px; }
   .plan-selected-heading { align-items: start; flex-direction: column; }
   .plan-facts { grid-template-columns: 1fr 1fr; }
   .plan-fact { padding: 12px; }
