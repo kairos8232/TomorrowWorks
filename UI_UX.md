@@ -12,7 +12,9 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 
 ## Your plan usability update — 22 Oct 2026
 
-Put the next learning action directly after compact course progress; courses come before badges. Optional evidence forms use native details, with submitted/unverified status visible in the summary and fictional-only privacy instructions visible before entering a link. Keep the verification-unavailable notice visible once in progress; expand count/privacy detail, funding, method and exact badge earning rules on demand. Badge artwork stays recognisable at a smaller size. This preserves requirements while reducing repeated text and unnecessary scrolling. Build, tests and desktop/phone interaction checks passed; see PROGRESS_LOG.md.
+The user preferred the compact plan redesign over the earlier attempt to move a long page into many expanders. **Reduce the content itself; do not simply hide the same copy.** Your plan now has one working surface: choose a course, see its provider, checked/AI status and linked skills, then open it. Switching courses changes that surface directly. The role selector sits above it; a short facts row holds optional SKM certification, access where relevant, linked SDG targets and two small locked milestone markers. The redundant large page title, repeated course cards, progress box and long explanatory stack were removed. Optional demo evidence remains with the selected course; the completion limitation stays visible beside it. Keep the source and verification distinctions that affect a person's decision, using short labels near the choice.
+
+On wide screens, the plan's main choice and action fit in the first view. On phones, controls stack without horizontal page overflow, and the action appears before supporting facts. The mobile Data saver switch lives in Menu so the header fits. See [SCREENS.md](SCREENS.md) for current behaviour.
 
 ## Screen design rules
 

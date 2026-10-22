@@ -12,7 +12,8 @@ For each UI task:
 1. Inspect the current screen at a wide and narrow viewport. Identify the user's main task and the most visible friction before changing layout or copy.
 2. Keep public market discovery freely browsable. Keep individual skill gaps, promotion targets, and qualifications inside My career. The fictional demo entry is not authentication.
 3. Prioritise a clear heading, the primary action, readable controls, and an honest next step. If a source or Domain 1 feature is unfinished, show its status without presenting sample data as evidence.
-4. Use existing React/CSS patterns and make focused changes. Avoid a numbered journey, decorative dashboards, invented scores, mandatory certificates without a checked source, or a new dependency just for appearance.
-5. Check keyboard access, labels, visible focus, text contrast, overflow at narrow widths, and a complete real screen interaction. Run the build and update the screen guide and checklist with what was verified.
+4. On dense task screens such as Your plan, simplify the actual content before adding disclosures. Keep one visible working surface for the choice and action; replace repeated cards and explanations with short, decision-relevant labels. Keep source quality and verification limits beside the affected choice. A compact row can hold optional links and status facts.
+5. Use existing React/CSS patterns and make focused changes. Avoid a numbered journey, decorative dashboards, invented scores, mandatory certificates without a checked source, or a new dependency just for appearance.
+6. Check keyboard access, labels, visible focus, text contrast, overflow at narrow widths, and a complete real screen interaction. Run the build and update the screen guide and checklist with what was verified.
 
 The interface should help someone answer a concrete work question before showing implementation details. Preserve the user's product choices and the Domain 1 requirements recorded in the project docs.
