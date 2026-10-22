@@ -878,3 +878,30 @@ details.course-check { padding-block:0; }
 .signal-table td small.in-score { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #e6f0ea; color: #1e6b4f; font-size: 11px; font-weight: 700; }
 .signal-table td { vertical-align: top; }
 .signal-table td:nth-child(5) { white-space: nowrap; }
+
+/* Start from your CV (Your skills). */
+.cv-panel { display: grid; gap: 14px; }
+.cv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 28px; align-items: center; }
+.cv-head h2 { margin: 0 0 6px; }
+.cv-head .note { margin: 0; max-width: 70ch; }
+.cv-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.cv-upload { cursor: pointer; display: inline-block; }
+#cv-file:focus-visible + .cv-upload { outline: 3px solid #2f8a66; outline-offset: 3px; }
+.cv-paste { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+.cv-paste textarea { width: 100%; padding: 9px 10px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 16px; resize: vertical; }
+.cv-lines { display: grid; gap: 10px; border-top: 1px solid #e3e7e3; padding-top: 14px; }
+.cv-summary { margin: 0; }
+.cv-lines details summary { cursor: pointer; font-weight: 600; font-size: 14px; color: #1e6b4f; }
+.cv-lines ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; max-height: 260px; overflow-y: auto; }
+.cv-lines li { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 5px 8px; background: #f4f6f3; border-radius: 6px; }
+.cv-go { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.cv-go .primary-button:disabled { opacity: .55; cursor: not-allowed; }
+.cv-results { display: grid; gap: 12px; border-top: 1px solid #e3e7e3; padding-top: 14px; }
+.cv-results ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+.cv-results li label { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border: 1px solid #d9ded9; border-radius: 10px; cursor: pointer; height: 100%; }
+.cv-results li label:has(input:checked) { border-color: #1e6b4f; background: #eef5f0; }
+.cv-results li.have label { opacity: .65; cursor: default; }
+.cv-results input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: #1e6b4f; }
+.cv-results small { color: #5d6873; font-size: 13px; }
+.cv-results .cv-from { display: block; margin-top: 3px; font-style: italic; }
+@media (max-width: 760px) { .cv-head, .cv-paste { grid-template-columns: 1fr; } }

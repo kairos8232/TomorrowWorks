@@ -68,3 +68,19 @@ export function nearestSkills(index, queryVector, k = 10, minSimilarity = 0.5) {
     .filter((r) => scores[r] >= minSimilarity)
     .map((r) => ({ ...index.items[r], similarity: Math.round(scores[r] * 1000) / 1000 }));
 }
+
+/**
+ * Skills suggested by a CV: the nearest skills of each CV line (perLine, at or above min),
+ * merged so each skill appears once with its best similarity and the line it came from,
+ * strongest first, at most max. lines[i] belongs to vectors[i].
+ */
+export function cvSuggestions(index, vectors, lines, { perLine = 3, min = 0.55, max = 25 } = {}) {
+  const best = new Map();
+  vectors.forEach((vec, i) => {
+    for (const hit of nearestSkills(index, vec, perLine, min)) {
+      const old = best.get(hit.uri);
+      if (!old || hit.similarity > old.similarity) best.set(hit.uri, { ...hit, from: lines[i] });
+    }
+  });
+  return [...best.values()].sort((a, b) => b.similarity - a.similarity).slice(0, max);
+}

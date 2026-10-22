@@ -52,7 +52,7 @@ New visitors start on **Home** and can enter their own skills or use **View as**
 
 | Feature | Working in the prototype | Remaining check |
 | --- | --- | --- |
-| Skills profile intake | Confirm skills from RunPod-assisted ESCO search or the list, choose a current role and up to two optional work interests; fictional profiles can be loaded | Real accounts and résumé upload need separate privacy decisions |
+| Skills profile intake | Upload or paste a CV (read in the browser, contact details removed, lines matched to ESCO skills on RunPod, user ticks what is true), or confirm skills from RunPod-assisted ESCO search or the list, choose a current role and up to two optional work interests; fictional profiles can be loaded | Real accounts and saved CVs need separate privacy decisions |
 | AI-trend signal layer | Dated DOSM Q1/Q2 2026 job-ad snapshots and ILO occupation exposure feed the role score; OpenDOSM monthly unemployment appears as separate context | Check DOSM reuse terms and refresh workflow before submission |
 | Future-role matching | Nine ESCO roles ranked with visible skill fit, demand and AI-resilience parts; current job shown separately; exact, transferable and missing skills shown | Verify the complete live demo and source claims |
 | Personalised reskilling | Selected move produces ordered steps from 21 checked course records, provider-stated times, uncovered gaps and a sourced NOSS/SKM route where found | Course coverage remains partial; a certification route is not a job requirement |

@@ -45,3 +45,20 @@ describe('ESCO skill index from the RunPod run', () => {
     expect(Math.hypot(...v)).toBeCloseTo(1, 6);
   });
 });
+
+describe('CV suggestions', () => {
+  // Tiny 2-D index: three skills on known directions.
+  const index = { dim: 2, model: 'test', items: [{ uri: 'a', label: 'budget' }, { uri: 'b', label: 'invoice' }, { uri: 'c', label: 'audit' }], vectors: Float32Array.from([1, 0, 0, 1, 0.6, 0.8]) };
+  it('keeps each skill once, with its best similarity and the line it came from', async () => {
+    const { cvSuggestions } = await import('./search.mjs');
+    const out = cvSuggestions(index, [[1, 0], [0, 1]], ['line about budgets', 'line about invoices'], { perLine: 3, min: 0.55 });
+    expect(out.map((s) => s.uri)).toEqual(['a', 'b', 'c']);
+    expect(out.find((s) => s.uri === 'c').from).toBe('line about invoices');   // 0.8 beats 0.6
+    expect(out.find((s) => s.uri === 'c').similarity).toBe(0.8);
+  });
+  it('drops skills below the minimum and respects max', async () => {
+    const { cvSuggestions } = await import('./search.mjs');
+    expect(cvSuggestions(index, [[1, 0]], ['x'], { min: 0.7 }).map((s) => s.uri)).toEqual(['a']);
+    expect(cvSuggestions(index, [[1, 0], [0, 1]], ['x', 'y'], { max: 1 })).toHaveLength(1);
+  });
+});

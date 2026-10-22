@@ -128,7 +128,10 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Record real accounts and résumé upload as future work requiring decisions on consent, storage, review, and deletion.
 - [x] Verify that the visitor can browse first, continue through the demo entry, review the profile, and reach matches without a misleading sign-in claim.
 
-**Done when:** The public-first demo flow works and states plainly that sign-in and résumé upload are not implemented.
+**Done when:** The public-first demo flow works and states plainly that sign-in and saved accounts are not implemented.
+
+- [x] CV upload or paste on *Your skills* (22 Oct): read in the browser, contact lines removed, lines shown before sending, matched on RunPod via `/api/cv-skills`, user ticks skills; nothing stored. Tested with a fictional PDF against a local stand-in for RunPod (`src/cv.test.ts`, `server/search.test.mjs`).
+- [ ] Check CV matching quality on the live app with real RunPod (fictional sample CV and one fictional PDF); adjust the 0.55 minimum if location or company lines produce nonsense matches.
 **Commit focus:** Split the market-first navigation, demo sign-in entry, and optional profile field into separate commits.
 
 ## Stage 4c — Replace the guided journey with browsing

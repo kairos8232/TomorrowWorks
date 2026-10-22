@@ -1,5 +1,6 @@
-// Step 1: the person's skills, as ESCO skills. Two ways in: describe your work
-// (RunPod skill search, Job B) or pick from the list. Matches use only these.
+// Step 1: the person's skills, as ESCO skills. Three ways in: a CV (read in the
+// browser, lines matched on RunPod; src/CvPanel.tsx), describe your work (RunPod
+// skill search, Job B) or pick from the list. Matches use only these.
 import type React from 'react';
 import { useState } from 'react';
 import { allSkills, roles, roleTitle, type Profile } from './data';
@@ -7,6 +8,7 @@ import type { Skill } from './scoring';
 import { useT } from './i18n';
 import { interestData, interestTypes, type InterestType } from './interests';
 import { goalStatus, sdgData } from './sdg';
+import { CvPanel } from './CvPanel';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
@@ -24,6 +26,12 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     const extra = new Map(profile.extra);
     if (held.has(skill.uri)) held.delete(skill.uri);
     else { held.add(skill.uri); if (!skillByUri.has(skill.uri)) extra.set(skill.uri, skill); }
+    update({ held, extra });
+  }
+  function addMany(skills: Skill[]) {
+    const held = new Set(profile.held);
+    const extra = new Map(profile.extra);
+    for (const s of skills) { held.add(s.uri); if (!skillByUri.has(s.uri)) extra.set(s.uri, s); }
     update({ held, extra });
   }
 
@@ -52,6 +60,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   </button>;
 
   return <div className="step-body skills-body">
+    <CvPanel held={profile.held} onAdd={addMany} />
     <div className="skills-intake">
     <section className="panel job-panel">
       <div><h2>{t('Your current job')}</h2>

@@ -24,7 +24,7 @@ Visitors can choose any area, industry, or search term in any order. Search and 
 
 ## Personal guidance
 
-**My career** is optional. The preliminary demo uses a fictional profile and says clearly that sign-in, résumé upload, and saved accounts do not exist yet. Personal guidance compares reviewed skills and optional qualifications with a **chosen target role** to show individual gaps for a promotion or career move. Later sourced role matching and learning pathways build on that comparison. An example career transition is a test case, not the product's target audience. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the personal questions, credential rules, and demo boundary.
+**My career** is optional. The preliminary demo uses a fictional profile and says clearly that sign-in and saved accounts do not exist yet. A CV can be uploaded or pasted (22 Oct, Carson): it is read in the browser, contact lines are removed, the person checks the lines, only those lines are sent once to RunPod for matching, and nothing is stored. Personal guidance compares reviewed skills and optional qualifications with a **chosen target role** to show individual gaps for a promotion or career move. Later sourced role matching and learning pathways build on that comparison. An example career transition is a test case, not the product's target audience. [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines the personal questions, credential rules, and demo boundary.
 
 No age, gender, ethnicity, or other protected trait is needed to browse or generate matches. Avoid personality scores inferred from news or a résumé. Any real résumé flow needs consent, review, storage, and deletion decisions before implementation.
 
@@ -44,7 +44,7 @@ All visible evidence needs a link to its origin. Do not copy full article bodies
 - The team must choose at least one updatable public trend source, import a small attributed snapshot or live response, and show how a refresh changes a visible signal or recommendation.
 - A separate news or official-announcement source is useful for workplace changes, but its access and reuse terms must be checked before any article appears in the app.
 - Replit runs the web app; the defined RunPod GPU task must affect a visible result when integrated.
-- A fictional profile can demonstrate personal guidance. Real accounts and résumé upload are later work.
+- A fictional profile can demonstrate personal guidance. Real accounts and saved CVs are later work; CV upload exists only as the in-browser, not-stored flow above.
 
 ## Acceptance for this scope change
 

@@ -582,3 +582,8 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 - Open: republish on Replit and look at the AI impact page and the futures panel by eye.
 - Futures panel redesigned to stand out (Carson: every block looked the same): dark panel, big verdict, 1,000 dots (one per future, coloured by best move), AI-speed strip showing the tipping point. `simulateFutures` now also returns `winners` (best move per future; tested). Checked in a browser at 1440 px and 390 px for Aina (robust) and Hakim (no single best move). 98 tests pass.
 
+## 22 Oct 2026 (afternoon): CV upload
+- Brief feature 1 allows "CV upload, form or questionnaire"; we had form + questionnaire. Carson chose to add CV upload with RunPod matching and a consent line.
+- `src/cv.ts` reads PDF (pdf.js 5.7.284, Apache-2.0, loaded only when a PDF is chosen) or text, splits lines, removes contact lines and headings; `src/CvPanel.tsx` shows the lines to be sent (removable), calls `/api/cv-skills`, and lists suggestions as tick boxes with the source line. Server: `cvSuggestions` in `server/search.mjs`; `.mjs` now served as JavaScript (pdf.js worker).
+- Checked in Chromium with a fictional PDF against a local stand-in for RunPod (word overlap, so match quality was not tested). 104 tests pass. Open: check real match quality on the live app.
+
