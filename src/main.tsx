@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ainaProfile, emptyProfile, personaProfile, roles, viewerById, viewers, type PersonaId, type Profile, type ViewerId } from './data';
 import { MovesStep, SourcesFooter } from './MovesStep';
@@ -49,10 +49,23 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
 const comingSoon: Partial<Record<Screen, string>> = {
 };
 
-function Home({ start, startWithRole, go, setLang }: {
+function LanguagePicker({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }) {
+  const t = useT();
+  const picker = useRef<HTMLDetailsElement>(null);
+  const current = languages.find((option) => option.id === lang)!;
+  return <details className="language-picker" ref={picker}>
+    <summary aria-label={`${t('Language')}: ${current.label}`}><span className="language-full">{current.label}</span><span className="language-short">{lang === 'en' ? 'EN' : lang === 'ms' ? 'BM' : '中文'}</span></summary>
+    <div className="language-options" aria-label={t('Language')}>
+      {languages.map((option) => <button key={option.id} type="button" aria-pressed={lang === option.id} onClick={() => { setLang(option.id); picker.current!.open = false; }}><span>{option.label}</span><span aria-hidden="true">{lang === option.id ? '✓' : ''}</span></button>)}
+    </div>
+  </details>;
+}
+
+function Home({ start, startWithRole, go, lang, setLang }: {
   start: (who: ViewerId) => void;
   startWithRole: (role: string) => void;
   go: (screen: Screen) => void;
+  lang: Lang;
   setLang: (lang: Lang) => void;
 }) {
   const [role, setRole] = useState('Accounting assistant');
@@ -70,9 +83,7 @@ function Home({ start, startWithRole, go, setLang }: {
         <a href="#how">{t('How it works')}</a>
       </nav>
       <button type="button" className="organisation-link" onClick={() => start('hr')}>{t('For organisations')}</button>
-      <div className="public-language" aria-label={t('Language')}>
-        <button type="button" onClick={() => setLang('ms')}>BM</button><span aria-hidden="true">/</span><button type="button" onClick={() => setLang('zh')}>中文</button>
-      </div>
+      <LanguagePicker lang={lang} setLang={setLang} />
     </header>
 
     <main>
@@ -197,6 +208,7 @@ function App() {
   const [lang, setLangState] = useState<Lang>(() => {
     try { const saved = localStorage.getItem('tw-lang'); return saved === 'ms' || saved === 'zh' ? saved : 'en'; } catch { return 'en'; }
   });
+  useEffect(() => { document.documentElement.lang = lang === 'ms' ? 'ms-MY' : lang === 'zh' ? 'zh-Hans' : 'en'; }, [lang]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem('tw-lang', l); } catch { /* storage unavailable */ } };
   const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
@@ -219,7 +231,7 @@ function App() {
   const page = screen === 'home' ? null : titles[screen];
 
   const t = translate(lang);
-  if (screen === 'home') return <LangProvider value={lang}><Home start={start} startWithRole={startWithRole} go={go} setLang={setLang} /></LangProvider>;
+  if (screen === 'home') return <LangProvider value={lang}><Home start={start} startWithRole={startWithRole} go={go} lang={lang} setLang={setLang} /></LangProvider>;
 
   const inMarket = marketNav.some(item => item.id === screen);
   const primaryItems = kind === 'team' ? teamNav : careerNav;
@@ -243,7 +255,7 @@ function App() {
         </details>
         <div className="workspace-utility">
           <ViewerSwitch viewer={viewer} choose={start} />
-          <label className="workspace-language"><span className="sr-only">{t('Language')}</span><select value={lang} aria-label={t('Language')} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
+          <LanguagePicker lang={lang} setLang={setLang} />
         </div>
       </div>
     </header>
