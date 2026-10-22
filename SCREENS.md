@@ -15,6 +15,8 @@ My career (sidebar navigation)           The job market (browse any time)
                                            Skills in demand  Soon
 ```
 
+- **1,000 possible futures** (panel above the ranking, 22 Oct): the robust best move ("best in n% of futures") or "No single best move" with bars for the leading moves; the tipping point sentence; *How the futures are made* (collapsed) lists the assumptions. Each ranked row adds *Top 3 in n% of futures · score a–b across futures* and a *close call with #n* tag when the order flips often.
+
 ## Home
 
 - **Question it answers:** what is this, who is it for, how does it work, can I trust the numbers?

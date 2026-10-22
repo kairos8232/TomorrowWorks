@@ -732,6 +732,21 @@ const dict: Record<string, Entry> = {
   'Links proposed by RunPod ({model}) and keyword matching; shown as strong only if two reviewers agreed ({n} of {p} pairs). A connection, not a measured impact.': { ms: 'Pautan dicadangkan oleh RunPod ({model}) dan padanan kata kunci; ditunjukkan sebagai kukuh hanya jika dua penyemak bersetuju ({n} daripada {p} pasangan). Satu kaitan, bukan impak yang diukur.', zh: '关联由 RunPod（{model}）和关键词匹配提出；只有两位审核者都同意时才显示为强关联（{p} 对中的 {n} 对）。表示联系，而非经测量的影响。' },
   'Reviewed link': { ms: 'Pautan disemak', zh: '已审核的关联' },
   '{n} of its {m} essential skills link to this target': { ms: '{n} daripada {m} kemahiran terasnya berkait dengan sasaran ini', zh: '其 {m} 项核心技能中有 {n} 项与此目标相关' },
+  '{n} possible futures': { ms: '{n} masa depan yang mungkin', zh: '{n} 种可能的未来' },
+  '{role} is your best move in {p}% of simulated futures: a robust choice.': { ms: '{role} ialah langkah terbaik anda dalam {p}% masa depan simulasi: pilihan yang kukuh.', zh: '在 {p}% 的模拟未来中，{role} 都是你的最佳选择：一个稳健的选择。' },
+  'No single best move. Best move in how many futures:': { ms: 'Tiada satu langkah terbaik. Langkah terbaik dalam berapa banyak masa depan:', zh: '没有唯一的最佳选择。在多少种未来中是最佳选择：' },
+  'Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.': { ms: 'Titik perubahan: {a} mendahului sehingga AI bergerak kira-kira {x}% daripada Beransur ke Cepat; selepas itu, {b}.', zh: '转折点：在 AI 速度从“逐渐”到“迅速”约 {x}% 之前，{a} 领先；之后是 {b}。' },
+  '{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).': { ms: '{a} kekal langkah terbaik anda pada setiap kelajuan AI dari Beransur ke Cepat (iklan kerja {q}, nilai ILO yang diterbitkan).', zh: '从“逐渐”到“迅速”的任何 AI 速度下，{a} 都是你的最佳选择（{q} 招聘广告，ILO 公布值）。' },
+  'How the futures are made': { ms: 'Bagaimana masa depan ini dibina', zh: '这些未来是如何生成的' },
+  'AI speed: anywhere between Gradually and Quickly, chosen at random in each future (our assumption).': { ms: 'Kelajuan AI: di mana-mana antara Beransur dan Cepat, dipilih secara rawak dalam setiap masa depan (andaian kami).', zh: 'AI 速度：在“逐渐”与“迅速”之间，每种未来随机选取（我们的假设）。' },
+  'AI exposure: the ILO mean plus a random amount within the ILO’s own standard deviation for each job.': { ms: 'Pendedahan AI: purata ILO ditambah jumlah rawak dalam sisihan piawai ILO sendiri bagi setiap pekerjaan.', zh: 'AI 暴露度：ILO 平均值加上在 ILO 自身标准差范围内的随机量（每个职位）。' },
+  'Job-ad demand: one of the two DOSM quarters we have, chosen at random.': { ms: 'Permintaan iklan kerja: salah satu daripada dua suku DOSM yang kami ada, dipilih secara rawak.', zh: '招聘广告需求：在我们拥有的两个 DOSM 季度中随机选取一个。' },
+  'Each future is scored with the same rule as the ranking below; your skills, interests and goals do not change. A fixed seed gives the same result every time.': { ms: 'Setiap masa depan diskor dengan peraturan yang sama seperti kedudukan di bawah; kemahiran, minat dan matlamat anda tidak berubah. Benih tetap memberi keputusan yang sama setiap kali.', zh: '每种未来都使用与下方排名相同的规则评分；你的技能、兴趣和目标不变。固定的随机种子使每次结果相同。' },
+  'Score ranges on each row cover 90% of futures. These are estimates for comparing options, not predictions.': { ms: 'Julat skor pada setiap baris meliputi 90% masa depan. Ini anggaran untuk membandingkan pilihan, bukan ramalan.', zh: '每行的分数范围涵盖 90% 的未来。这些是用于比较选项的估计，而非预测。' },
+  'Top 3 in {n}% of futures': { ms: '3 teratas dalam {n}% masa depan', zh: '在 {n}% 的未来中位列前三' },
+  'score {a}–{b}': { ms: 'skor {a}–{b}', zh: '分数 {a}–{b}' },
+  'close call with #{n}': { ms: 'hampir sama dengan #{n}', zh: '与第 {n} 名接近' },
+  'score {a}–{b} across futures': { ms: 'skor {a}–{b} merentas masa depan', zh: '各种未来中分数 {a}–{b}' },
 };
 
 const LangContext = createContext<Lang>('en');

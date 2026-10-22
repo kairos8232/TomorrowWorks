@@ -104,6 +104,12 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 22 Oct 2026 (13:45–14:20 MYT) — 1,000 possible futures (handling uncertainty)
+
+- Carson asked for a stand-out answer to brief feature 6. Added a seeded futures simulator: same scoring rule, AI speed anywhere between Gradually and Quickly, ILO exposure within its published SD, either DOSM quarter. Your moves now says how often each move is the best (Aina: Bookkeeper 99%, robust; Hakim: 62/26/12%, no single best), shows top-3 share and a 90% score range per row, flags close calls, and states the tipping point.
+
+---
+
 ## 22 Oct 2026 (13:30 MYT) — SDG review results applied
 
 - **Team review done** (two reviewers, blind, 145 pairs): agreement 66%, kappa 0.48 (three labels) / 0.69 (relevant vs not); AI alone 21/73 relevant, AI + draft rules 21/32 (in-sample), keyword baseline 14/40; below 0.60 only 4/30 relevant. Keyword matching found 10 relevant links the AI missed.

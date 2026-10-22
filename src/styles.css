@@ -778,3 +778,17 @@ details.course-check { padding-block:0; }
 .milestone-rule { text-align:left; }
 .milestone-rule summary { text-align:center; }
 .milestone-rule .note { margin:8px 0; }
+/* 1,000 possible futures (Handling uncertainty). */
+.futures-panel { background: #ffffff; border: 1px solid #d9ded9; border-left: 4px solid #1c2430; border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; }
+.futures-panel h2 { margin: 0; font-size: 18px; }
+.futures-answer { margin: 0; font-size: 16px; font-weight: 600; }
+.futures-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-width: 560px; }
+.futures-bars li { display: grid; grid-template-columns: minmax(130px, 200px) 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
+.futures-bars .bar { height: 10px; background: #e3e7e3; border-radius: 5px; overflow: hidden; }
+.futures-bars .bar span { display: block; height: 100%; background: #1e6b4f; }
+.futures-bars strong { text-align: right; }
+.futures-panel .note { margin: 0; }
+.futures-panel details summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+.futures-panel details ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
+.future-line { display: block; margin-top: 2px; color: #5d6873; font-weight: 400; }
+.close-call { font-style: normal; margin-left: 6px; white-space: nowrap; padding: 0 6px; border-radius: 4px; background: #fff3d6; color: #7a5300; font-weight: 700; }

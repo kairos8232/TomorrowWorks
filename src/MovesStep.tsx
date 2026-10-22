@@ -2,7 +2,8 @@
 // Data: src/data.ts. Scoring rule: src/scoring.ts (documented in SIGNALS_AND_MATCHING.md).
 import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ilo, personaById, roles, snapshots, transferable, type Profile, type SnapshotId } from './data';
+import { ilo, personaById, roles, roleTitle, snapshots, transferable, type Profile, type SnapshotId } from './data';
+import { simulateFutures, tippingPoints, type RoleFutures } from './futures';
 import { whatChanged } from './changes';
 import { interestData, interestFit, topTypes, type InterestType } from './interests';
 import { goalFit, roleGoalLink, sdgData } from './sdg';
@@ -49,14 +50,50 @@ function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[]
   </p>;
 }
 
-function LedgerRow({ result, rank, delta, onInspect, picks, goals }: { result: RoleScore; rank: number | null; delta?: number; onInspect: () => void; picks: InterestType[]; goals: string[] }) {
+/** How many futures a lower row must win against the row above to be called a close call. */
+const CLOSE_CALL = 0.3;
+
+/** "1,000 possible futures": the answer under uncertainty, the tipping point, and the assumptions. */
+function FuturesPanel({ futures, tipping, quarter }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string }) {
+  const t = useT();
+  const leaders = [...futures.byRole.values()].filter((x) => x.best > 0).sort((a, b) => b.best - a.best).slice(0, 4);
+  const name = (id: string) => roleTitle(roles.find((r) => r.id === id)!.title);
+  const p = (x: number) => Math.round(x * 100);
+  const top = leaders[0];
+  return <section className="futures-panel" aria-labelledby="futures-head">
+    <h2 id="futures-head">{t('{n} possible futures', { n: futures.runs.toLocaleString() })}</h2>
+    <p className="futures-answer">{top && top.best >= 0.8
+      ? t('{role} is your best move in {p}% of simulated futures: a robust choice.', { role: name(top.roleId), p: p(top.best) })
+      : t('No single best move. Best move in how many futures:')}</p>
+    <ul className="futures-bars">{leaders.map((x) => <li key={x.roleId}>
+      <span className="cap-first">{name(x.roleId)}</span>
+      <span className="bar" aria-hidden="true"><span style={{ width: `${p(x.best)}%` }} /></span>
+      <strong>{p(x.best)}%</strong>
+    </li>)}</ul>
+    <p className="note">{tipping.length > 1
+      ? t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })
+      : tipping[0] ? t('{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).', { a: name(tipping[0].roleId), q: quarter }) : null}</p>
+    <details>
+      <summary>{t('How the futures are made')}</summary>
+      <ul className="note">
+        <li>{t('AI speed: anywhere between Gradually and Quickly, chosen at random in each future (our assumption).')}</li>
+        <li>{t('AI exposure: the ILO mean plus a random amount within the ILO’s own standard deviation for each job.')}</li>
+        <li>{t('Job-ad demand: one of the two DOSM quarters we have, chosen at random.')}</li>
+        <li>{t('Each future is scored with the same rule as the ranking below; your skills, interests and goals do not change. A fixed seed gives the same result every time.')}</li>
+        <li>{t('Score ranges on each row cover 90% of futures. These are estimates for comparing options, not predictions.')}</li>
+      </ul>
+    </details>
+  </section>;
+}
+
+function LedgerRow({ result, rank, delta, onInspect, picks, goals, future, closeTo }: { result: RoleScore; rank: number | null; delta?: number; onInspect: () => void; picks: InterestType[]; goals: string[]; future?: RoleFutures; closeTo?: number }) {
   const t = useT();
   const { role, fit } = result;
   const part = (k: 'F' | 'D' | 'R') => result.contributions.find((c) => c.key === k)?.value ?? null;
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
     <button type="button" className="ledger-line" onClick={onInspect}>
       <span className="rank">{rank === null ? t('Now') : rank}</span>
-      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="sdg-tag" title={roleGoalLink(role, g) === 'role' ? t('This role is linked to SDG {n}', { n: g }) : t('Some skills of this role are linked to SDG {n}', { n: g })}><span className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>{t(sdgData.goals[g].short)}{roleGoalLink(role, g) === 'skills' ? ` · ${t('via skills')}` : ''}</em>)}</small></span>
+      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="sdg-tag" title={roleGoalLink(role, g) === 'role' ? t('This role is linked to SDG {n}', { n: g }) : t('Some skills of this role are linked to SDG {n}', { n: g })}><span className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>{t(sdgData.goals[g].short)}{roleGoalLink(role, g) === 'skills' ? ` · ${t('via skills')}` : ''}</em>)}{future && <span className="future-line">{future.top3 > 0 ? `${t('Top 3 in {n}% of futures', { n: Math.round(future.top3 * 100) })} · ` : ''}{t('score {a}–{b} across futures', { a: future.low, b: future.high })}{closeTo ? <em className="close-call">{t('close call with #{n}', { n: closeTo })}</em> : null}</span>}</small></span>
       <Part value={part('F')} label={t('Skill fit')} area="f" />
       <Part value={part('D')} label={t('Demand')} area="d" />
       <Part value={part('R')} label={t('AI resilience')} area="r" />
@@ -166,6 +203,9 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
     () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshot, ilo, scenario, transferable, extras),
     [profile, snapshot, scenario, extras],
   );
+  // 1,000 simulated futures (src/futures.ts): same rule, uncertain AI speed, ILO exposure and quarter.
+  const futures = useMemo(() => simulateFutures({ roles, currentRoleId: profile.currentRoleId, held: profile.held, snapshots: [snapshots.q1, snapshots.q2], ilo, transferable, extras }), [profile, extras]);
+  const tipping = useMemo(() => tippingPoints({ roles, currentRoleId: profile.currentRoleId, held: profile.held, snapshot, ilo, transferable, extras }), [profile, snapshot, extras]);
   const changes = useMemo(() => {
     const run = (id: SnapshotId) => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots[id], ilo, scenarios[scenarioId], transferable, extras).moves;
     return whatChanged(run('q1'), run('q2'));
@@ -211,6 +251,8 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
     </div>
 
+    <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
+
     <section className="ledger" aria-label="Ranked moves">
       <div className="ledger-controls">
         <fieldset><legend>{t('Job-ad data')}</legend>
@@ -229,7 +271,8 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => { setSelectedRoleId(current.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />}
-        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onInspect={() => { setSelectedRoleId(m.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />)}
+        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onInspect={() => { setSelectedRoleId(m.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals}
+          future={futures.byRole.get(m.role.id)} closeTo={i > 0 && futures.swapShare(moves[i - 1].role.id, m.role.id) >= CLOSE_CALL ? i : undefined} />)}
       </ol>
     </section>
   </div>;

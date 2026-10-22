@@ -227,6 +227,17 @@ Data: `data/sdg/sdg-links.json`; rule: `src/sdg.ts`; tests: `src/sdg.test.ts`. B
 - **Goal fit (optional score part G):** the person picks goals on Your moves; they highlight linked roles. With *Count in ranking* on, G = 1 if the role itself links to a picked goal, 0.5 if only some of its essential skills do, else 0; weight 0.2 before rescaling like interests (one optional part on = 1/6 of the score; both = 2/7). Example: Aina picking 12 moves sustainability manager up (test in `src/sdg.test.ts`). Tests in `src/sdg.test.ts`.
 - **Honesty:** links show a connection, not a measured impact; the screen states the method and how many AI matches people removed. Rejections drafted with Claude on 21 Oct; team confirmation pending before submission.
 
+## Futures simulator: handling uncertainty (added 22 Oct 2026)
+
+Code: `src/futures.ts`; tests: `src/futures.test.ts`; screen: *1,000 possible futures* panel on Your moves, plus a line on every ranked row. Brief feature 6 asks for more than one scenario and clear estimates; this goes further by scoring every move in **1,000 simulated futures** with the same scoring rule:
+
+- **AI speed** t ~ uniform(0, 1); weights move in a straight line from *Gradually* (t = 0: 0.6/0.25/0.15) to *Quickly* (t = 1: 0.5/0.2/0.3). Our assumption, stated on screen.
+- **AI exposure** per role = ILO mean + ILO standard deviation × normal(0, 1), kept within 0–1. The ILO publishes both numbers for every occupation (e.g. accounting clerks 0.64 ± 0.07), so this spread is the source's own uncertainty, not ours.
+- **Demand**: the job-ad change of one of the two DOSM quarters, chosen at random.
+- Skills, interests and goals stay as the person set them. Fixed seed (7): the same result on every visit.
+
+**Shown:** the share of futures in which each move is the best (robust when ≥ 80%, otherwise "no single best move" with the shares); per row, *Top 3 in n% of futures* and the score range covering 90% of futures (5th–95th percentile); **close call** when the row below beats the row above in ≥ 30% of futures; and the **tipping point**: AI speed swept from Gradually to Quickly with the published ILO means and the chosen quarter, reporting where the best move changes. Examples: Aina, Bookkeeper best in 99% of futures, no tipping point; Hakim, Financial analyst 62%, Business analyst 26%, Data analyst 12%, tipping to Business analyst at about 96% of the way to Quickly. These are estimates for comparing options, not predictions (stated on screen).
+
 ## Future Skills Radar (built 21 Oct 2026)
 
 Code: `src/radar.ts`, `src/RadarView.tsx`; tests: `src/radar.test.ts`. Screen: *Future skills radar* (was "Skills in demand · Soon").

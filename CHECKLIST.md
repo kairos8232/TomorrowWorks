@@ -310,11 +310,11 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 12 — Compare future scenarios
 
-- [ ] Define assumptions for moderate and rapid AI-change scenarios.
+- [x] Define assumptions for moderate and rapid AI-change scenarios. *(22 Oct: scenario assumptions on screen; 1,000-futures simulator with ILO SD, score ranges, tipping point and 'estimates, not predictions' note; `src/futures.test.ts`.)*
 - [x] Let the user switch between scenarios (moderate / fast; fast lifts sustainability manager from 6th to 4th).
 - [x] Show how the recommendations or pathways change. (Your moves: arrows after a switch, and *What changed* comparing the Q1 and Q2 snapshots with the job-ad reason.)
 - [x] Keep the same profile when switching scenarios so the comparison is understandable.
-- [ ] Label forecasts as estimates and explain the uncertainty.
+- [x] Label forecasts as estimates and explain the uncertainty. *(22 Oct: scenario assumptions on screen; 1,000-futures simulator with ILO SD, score ranges, tipping point and 'estimates, not predictions' note; `src/futures.test.ts`.)*
 
 **Done when:** A user can compare at least two plausible outcomes.  
 **Commit focus:** Scenario logic and comparison interface.
