@@ -21,6 +21,11 @@ describe('futures simulator', () => {
     expect(f.reduce((s, x) => s + x.top3, 0)).toBeCloseTo(3);
     for (const x of f) { expect(x.low).toBeLessThanOrEqual(x.mid); expect(x.mid).toBeLessThanOrEqual(x.high); }
   });
+  it('one winner per future, matching the best-move shares', () => {
+    const f = run();
+    expect(f.winners).toHaveLength(f.runs);
+    for (const x of f.byRole.values()) expect(f.winners.filter((w) => w === x.roleId).length / f.runs).toBeCloseTo(x.best);
+  });
   it('the current job is never a move', () => {
     expect(run().byRole.has(aina.currentRoleId!)).toBe(false);
   });

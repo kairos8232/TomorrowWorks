@@ -15,7 +15,7 @@ My career (sidebar navigation)           The job market (browse any time)
                                            Skills in demand  Soon
 ```
 
-- **1,000 possible futures** (panel above the ranking, 22 Oct): the robust best move ("best in n% of futures") or "No single best move" with bars for the leading moves; the tipping point sentence; *How the futures are made* (collapsed) lists the assumptions. Each ranked row adds *Top 3 in n% of futures · score a–b across futures* and a *close call with #n* tag when the order flips often.
+- **1,000 possible futures** (panel above the ranking, 22 Oct): the robust best move ("best in n% of futures") or "No single best move" as a large headline on a dark panel (the one dark block on the screen, so it stands out); one dot per future, coloured by its best move (top 3 moves coloured, the rest grey; a move that wins a few futures shows "<1%", not 0%); an AI-speed strip from Gradually to Quickly coloured by the leading move, with the tipping point sentence; *How the futures are made* (collapsed) lists the assumptions. Each ranked row adds *Top 3 in n% of futures · score a–b across futures* and a *close call with #n* tag when the order flips often.
 
 ## Home
 

@@ -68,6 +68,7 @@ export function simulateFutures(input: {
   const best = new Map<string, number>();
   const top3 = new Map<string, number>();
   const ranks: Map<string, number>[] = [];
+  const winners: string[] = [];   // best move of each future, in run order (drawn as one dot each)
   for (let i = 0; i < runs; i++) {
     const t = r();
     const snapshot = snapshots[Math.floor(r() * snapshots.length)];
@@ -86,6 +87,7 @@ export function simulateFutures(input: {
       if (k < 3) top3.set(m.role.id, (top3.get(m.role.id) ?? 0) + 1);
     });
     ranks.push(rank);
+    if (moves[0]) winners.push(moves[0].role.id);
   }
   const byRole = new Map<string, RoleFutures>();
   for (const [id, list] of scores) {
@@ -94,7 +96,7 @@ export function simulateFutures(input: {
   }
   /** Share of futures in which `lower` (shown below) beats `upper`. */
   const swapShare = (upper: string, lower: string) => ranks.filter((m) => (m.get(lower) ?? 0) < (m.get(upper) ?? 0)).length / runs;
-  return { runs, seed, byRole, swapShare };
+  return { runs, seed, byRole, swapShare, winners };
 }
 
 /**

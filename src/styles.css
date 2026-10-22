@@ -778,16 +778,26 @@ details.course-check { padding-block:0; }
 .milestone-rule { text-align:left; }
 .milestone-rule summary { text-align:center; }
 .milestone-rule .note { margin:8px 0; }
-/* 1,000 possible futures (Handling uncertainty). */
-.futures-panel { background: #ffffff; border: 1px solid #d9ded9; border-left: 4px solid #1c2430; border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; }
-.futures-panel h2 { margin: 0; font-size: 18px; }
-.futures-answer { margin: 0; font-size: 16px; font-weight: 600; }
-.futures-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-width: 560px; }
-.futures-bars li { display: grid; grid-template-columns: minmax(130px, 200px) 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
-.futures-bars .bar { height: 10px; background: #e3e7e3; border-radius: 5px; overflow: hidden; }
-.futures-bars .bar span { display: block; height: 100%; background: #1e6b4f; }
-.futures-bars strong { text-align: right; }
-.futures-panel .note { margin: 0; }
+/* 1,000 possible futures (Handling uncertainty): the one dark, large panel on Your moves. */
+.futures-panel { background: #15302a; color: #eef4ee; border-radius: 16px; padding: 26px 28px 20px; display: grid; gap: 22px; }
+.futures-top { display: grid; grid-template-columns: minmax(240px, 5fr) minmax(0, 7fr); gap: 28px; align-items: center; }
+.futures-lead { display: grid; gap: 10px; }
+.futures-panel h2 { margin: 0; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.05; letter-spacing: -.03em; font-weight: 800; }
+.futures-sub { margin: 0; font-size: 15px; color: #b9cdc2; max-width: 36ch; }
+.futures-legend { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 7px; }
+.futures-legend li { display: grid; grid-template-columns: 14px 1fr auto; gap: 10px; align-items: center; font-size: 16px; }
+.futures-legend i { width: 14px; height: 14px; border-radius: 4px; }
+.futures-legend strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.futures-dots { width: 100%; height: auto; display: block; }
+.futures-speed { display: grid; gap: 6px; border-top: 1px solid #2d4a41; padding-top: 16px; }
+.speed-labels { display: flex; justify-content: space-between; font-size: 13px; color: #b9cdc2; }
+.speed-strip { display: flex; gap: 3px; height: 14px; }
+.speed-strip span { border-radius: 4px; min-width: 6px; }
+.speed-note { margin: 4px 0 0; font-size: 14px; color: #dbe7de; }
+.futures-panel .note { color: #b9cdc2; }
+.futures-panel details summary { color: #eef4ee; }
+.futures-panel :focus-visible { outline-color: #7fd6a8; }
+@media (max-width: 760px) { .futures-top { grid-template-columns: 1fr; } .futures-panel { padding: 20px 18px 16px; } }
 .futures-panel details summary { cursor: pointer; font-weight: 600; font-size: 14px; }
 .futures-panel details ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
 .future-line { display: block; margin-top: 2px; color: #5d6873; font-weight: 400; }
