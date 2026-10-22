@@ -30,15 +30,15 @@ describe('daily refresh until 1 Nov 2026, memory only, snapshot fallback', () =>
     t += day; await svc.get();
     expect(calls).toBe(2);
   });
-  it('falls back to the snapshot when GDELT fails, and waits 6 hours before retrying', async () => {
+  it('falls back to the snapshot when GDELT fails, and waits 30 minutes before retrying', async () => {
     let calls = 0; let t = Date.parse('2026-10-22T09:00:00+08:00');
     const svc = newsService({ snapshot, topics, now: () => t, fetchImpl: async () => { calls++; return { ok: false, status: 429, text: async () => '' }; } });
     const body = await svc.get();
     expect(body.live).toBe(false);
     expect(body.source.name).toBe('snapshot');
-    t += 60 * 60 * 1000; await svc.get();
+    t += 20 * 60 * 1000; await svc.get();
     expect(calls).toBe(1);
-    t += 6 * 60 * 60 * 1000; await svc.get();
+    t += 10 * 60 * 1000; await svc.get();
     expect(calls).toBe(2);
   });
   it('never fetches after the end date', async () => {

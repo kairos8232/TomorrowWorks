@@ -5,12 +5,13 @@
 //   scripts/import_gdelt_news.py (data/sources/news-topics.json).
 // - Keeps the result in memory only: nothing is written to disk or committed.
 // - If GDELT fails, is slow or rate-limits, the committed snapshot
-//   (data/sources/gdelt-news.json) is served, and the next try waits 6 hours.
+//   (data/sources/gdelt-news.json) is served, and the next try waits 30 minutes
+//   (a single 429 should not keep old news up for hours; still far below GDELT's limits).
 // News is context only and never changes any score.
 
 export const NEWS_REFRESH_UNTIL = Date.parse(process.env.NEWS_REFRESH_UNTIL ?? '2026-11-01T23:59:59+08:00');
 const DAY = 24 * 60 * 60 * 1000;
-const RETRY_AFTER_FAILURE = 6 * 60 * 60 * 1000;
+const RETRY_AFTER_FAILURE = 30 * 60 * 1000;
 const API = 'https://api.gdeltproject.org/api/v2/doc/doc';
 
 const hasChinese = (s) => /[一-鿿]/.test(s);
