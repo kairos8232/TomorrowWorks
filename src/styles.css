@@ -819,8 +819,8 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .workspace-utility .viewer-switch { position: relative; margin: 0; }
 .workspace-utility .viewer-switch summary { min-width: 0; padding: 6px 8px; border: 0; background: transparent; }
 .workspace-utility .viewer-switch summary .avatar { width: 28px; height: 28px; font-size: 12px; }
-.workspace-utility .viewer-switch summary small { display: none; }
-.workspace-utility .viewer-switch summary strong { font-size: 14px; font-weight: 400; color: #53605a; }
+.workspace-utility .viewer-switch summary small { display: block; font-size: 11px; line-height: 1.2; color: #657069; }
+.workspace-utility .viewer-switch summary strong { font-size: 14px; line-height: 1.2; font-weight: 600; color: #0c182c; }
 .workspace-utility .viewer-switch ul { position: absolute; top: calc(100% + 10px); right: 0; width: 260px; max-height: 360px; overflow: auto; z-index: 50; box-shadow: 0 16px 40px rgba(12, 24, 44, .12); }
 .workspace-utility .viewer-switch > .note { display: none; }
 .workspace-subnav { display: flex; align-items: center; gap: 8px; margin: -18px 0 38px; padding: 0 0 16px; border-bottom: 1px solid #cfd5cf; overflow-x: auto; scrollbar-width: none; }

@@ -236,10 +236,10 @@ function ViewerSwitch({ viewer, choose }: { viewer: ViewerId; choose: (v: Viewer
   const t = useT();
   const ref = useRef<HTMLDetailsElement>(null);
   const current = viewerById(viewer);
-  const sampleLabel = current.kind === 'team' ? t('Sample team') : current.kind === 'me' ? t('My path') : `${t('Sample')} — ${current.name}`;
+  const viewType = current.kind === 'team' ? 'Team' : current.kind === 'region' ? 'Region' : 'Individual';
   return <details className="viewer-switch" ref={ref}>
-    <summary><span className="avatar" aria-hidden="true">{current.kind === 'team' ? 'T' : current.kind === 'me' ? 'M' : current.name[0]}</span>
-      <span><small>{t('Try an example')}</small><strong>{sampleLabel}</strong></span></summary>
+    <summary><span className="avatar" aria-hidden="true">{current.name[0]}</span>
+      <span><strong>{current.name}</strong><small>{t(viewType)}</small></span></summary>
     <ul>{viewers.map((v) => <li key={v.id}><button type="button" aria-current={v.id === viewer ? 'true' : undefined} onClick={() => { ref.current!.open = false; choose(v.id); }}>
       <strong>{v.id === 'me' ? t('Me (my own skills)') : v.name}</strong><small>{t(v.group)}</small>
     </button></li>)}</ul>

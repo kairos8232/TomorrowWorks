@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## UI refinement — 21 Oct 2026
 
+- [x] Show the selected viewer's name above a small Individual, Team, or Region label in the View as switcher. Verify Puan Rosnah and Encik Lim in the live desktop Team view, check the responsive switcher rules, and run the production build.
 - [x] Group Your plan's skill gaps in one panel so checked courses and uncovered skills read as one learning task. Check Aina's Bookkeeper plan at desktop and 390 px; build passes.
 - [x] Give the first checked course a clear View course action, and number course steps only when there is more than one. Check Aina's plan at desktop and 390 px; build passes.
 - [x] Trim Your plan: combine uncovered skills and unverified AI suggestions, show four rows initially with all gaps available, shorten checked-course details and method, use the compact SDG summary, and condense certification titles and copy. Check Hakim's plan at desktop and 390 px, verify *Show all 13*, build and all 62 tests.
