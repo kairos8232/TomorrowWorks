@@ -106,17 +106,18 @@ const shade = (score: number) => `rgba(30, 107, 79, ${Math.min(0.9, 0.08 + score
 /** One group only: the viewer's own team or class. */
 export function TeamView({ viewer }: { viewer: Viewer }) {
   const team = teams.find((x) => x.id === viewer.teamId) ?? teams[0];
-  return <div className="step-body team-view"><TeamBody viewer={viewer} team={team} /></div>;
+  return <div className="step-body team-view"><TeamBody team={team} /></div>;
 }
 
-function TeamBody({ viewer, team }: { viewer: Viewer; team: (typeof teams)[number] }) {
+function TeamBody({ team }: { team: (typeof teams)[number] }) {
   const t = useT();
   const members = useMemo(() => team.members.map((m) => ({ name: m.name, roleId: m.roleId, held: memberSkills(m) })), [team]);
   const grid = useMemo(() => teamGrid(members, roles, snapshots.q2, ilo, scenarios.moderate, transferable), [members]);
   const ranked = [...grid.averages].filter((a) => a.average !== null).sort((a, b) => b.average! - a.average!);
   const [targetId, setTargetId] = useState<string | null>(null);
   const [personName, setPersonName] = useState<string | null>(null);
-  useEffect(() => { setTargetId(null); setPersonName(null); }, [team]);
+  const [mode, setMode] = useState<'plan' | 'compare'>('plan');
+  useEffect(() => { setTargetId(null); setPersonName(null); setMode('plan'); }, [team]);
   const target = roles.find((r) => r.id === targetId) ?? ranked[0].role;
   const shared = useMemo(() => sharedGaps(members, target, transferable, resources), [members, target]);
   // Same course rule as Your plan, applied to the gaps the group shares (most shared first).
@@ -129,9 +130,9 @@ function TeamBody({ viewer, team }: { viewer: Viewer; team: (typeof teams)[numbe
   useEffect(() => setShowAllAi(false), [target]);
   const whoNeeds = (closes: Gap[]) => {
     const names = new Set(shared.gaps.filter((g) => closes.some((c) => c.skill.uri === g.skill.uri)).flatMap((g) => [...g.missing, ...g.partly]));
-    return <p className="team-needs">{t('Needed by {n} of {m}: {names}', { n: names.size, m: shared.movers, names: members.map((m) => m.name).filter((n) => names.has(n)).join(', ') })}</p>;
+    return <p className="team-needs">{t('Needed by {n} of {m}', { n: names.size, m: shared.movers })}</p>;
   };
-  const aiShown = showAllAi ? course.ai.steps : course.ai.steps.slice(0, 4);
+  const aiShown = showAllAi ? course.ai.steps : course.ai.steps.slice(0, 2);
   const total = course.plan.steps.length + course.ai.steps.length;
 
   const open = (name: string) => { setPersonName(name); window.scrollTo({ top: 0 }); };
@@ -139,48 +140,61 @@ function TeamBody({ viewer, team }: { viewer: Viewer; team: (typeof teams)[numbe
     return <div className="team-body"><PersonPage member={members.find((m) => m.name === personName)!} teamName={t(team.name)} onBack={() => { setPersonName(null); window.scrollTo({ top: 0 }); }} /></div>;
   }
   return <div className="team-body">
-    <div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {t(team.description)}</p></div>
-
-    <section className="ledger" aria-labelledby="heat">
-      <h2 id="heat" className="section-title">{t('Who fits which role')}</h2>
-      <p className="note">{members.some((m) => m.roleId)
-        ? t('Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually). “Now” marks their current job.')
-        : t('Each cell is that person’s score for the role, out of 100, from the same rule as Your moves (Q2 2026 job ads, AI changing work gradually).')}</p>
-      <div className="heat-scroll">
-        <table className="heatmap">
-          <thead><tr><th scope="col">{t('Person')}</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => setTargetId(r.id)}>{roleTitle(r.title)}</button></th>)}</tr></thead>
-          <tbody>
-            {grid.rows.map((row) => <tr key={row.member.name}>
-              <th scope="row"><button type="button" className="heat-person" onClick={() => open(row.member.name)}>{row.member.name}</button><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></th>
-              {row.cells.map((c) => <td key={c.role.id} className={c.current ? 'now' : ''} style={c.current ? undefined : { background: shade(c.result.score100), color: c.result.score100 > 45 ? '#ffffff' : '#1c2430' }}>
-                {c.current ? t('Now') : c.result.score100}
-              </td>)}
-            </tr>)}
-            <tr className="heat-avg"><th scope="row">{t('Average')}{members.some((m) => m.roleId) && <small>{t('moves only')}</small>}</th>
-              {grid.averages.map((a) => <td key={a.role.id}>{a.average ?? '–'}</td>)}</tr>
-          </tbody>
-        </table>
+    <div className="team-toolbar">
+      <p>{t(team.name)} · {t('{n} people', { n: members.length })}</p>
+      <div className="team-modes" aria-label={t('Team view')}>
+        <button type="button" className={mode === 'plan' ? 'on' : ''} aria-pressed={mode === 'plan'} onClick={() => setMode('plan')}>{t('Team plan')}</button>
+        <button type="button" className={mode === 'compare' ? 'on' : ''} aria-pressed={mode === 'compare'} onClick={() => setMode('compare')}>{t('Compare roles')}</button>
       </div>
-      <p className="note">{t('Select a role name to see what the group would need to learn for it, or a person’s name for their own view.')}</p>
-    </section>
+    </div>
 
-    <section className="panel people-list" aria-labelledby="people-head">
-      <h2 id="people-head">{t('People')} <span className="count">{members.length}</span></h2>
-      <ul>{grid.rows.map((row) => {
-        const best = row.cells.filter((c) => !c.current).sort((a, b) => b.result.score - a.result.score)[0];
-        return <li key={row.member.name}>
-          <span className="person-avatar small" aria-hidden="true">{row.member.name[0]}</span>
-          <div className="people-who"><strong>{row.member.name}</strong><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}, {t('{n} skills', { n: row.member.held.size })}</small></div>
-          <div className="people-best"><small>{t('Best move')}</small><span>{roleTitle(best.role.title)} <strong>{best.result.score100}</strong></span></div>
-          <button type="button" className="secondary-button" onClick={() => open(row.member.name)}>{t('Open profile')}</button>
-        </li>;
-      })}</ul>
-    </section>
+    {mode === 'compare' ? <section className="panel team-compare" aria-labelledby="heat">
+      <h2 id="heat">{t('Who fits which role')}</h2>
+      <p className="note">{t('Select a role to see its team plan, or a person to open their profile.')}</p>
+      <div className="heat-scroll"><table className="heatmap">
+        <thead><tr><th scope="col">{t('Person')}</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => { setTargetId(r.id); setMode('plan'); }}>{roleTitle(r.title)}</button></th>)}</tr></thead>
+        <tbody>{grid.rows.map((row) => <tr key={row.member.name}>
+          <th scope="row"><button type="button" className="heat-person" onClick={() => open(row.member.name)}>{row.member.name}</button><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></th>
+          {row.cells.map((c) => <td key={c.role.id} className={c.current ? 'now' : ''} style={c.current ? undefined : { background: shade(c.result.score100), color: c.result.score100 > 45 ? '#ffffff' : '#1c2430' }}>{c.current ? t('Now') : c.result.score100}</td>)}
+        </tr>)}
+        <tr className="heat-avg"><th scope="row">{t('Average')}{members.some((m) => m.roleId) && <small>{t('moves only')}</small>}</th>{grid.averages.map((a) => <td key={a.role.id}>{a.average ?? '–'}</td>)}</tr>
+        </tbody>
+      </table></div>
+    </section> : <>
+      <div className="team-target">
+        <label htmlFor="team-role">{t('Plan for role')}</label>
+        <select id="team-role" value={target.id} onChange={(event) => setTargetId(event.target.value)}>{ranked.map((item) => <option key={item.role.id} value={item.role.id}>{roleTitle(item.role.title)}</option>)}</select>
+        <span>{t('{n} moving', { n: shared.movers })} · {t('{n} shared gaps', { n: shared.gaps.length })}</span>
+      </div>
+
+      <div className="team-overview">
+        <section className="panel team-fit" aria-labelledby="team-fit-head">
+          <h2 id="team-fit-head">{t('Fit for {role}', { role: roleTitle(target.title) })}</h2>
+          <ul>{grid.rows.map((row) => {
+            const cell = row.cells.find((c) => c.role.id === target.id)!;
+            const fit = skillFit(target, row.member.held, transferable);
+            const gaps = fit.missing.length + fit.transferable.length;
+            return <li key={row.member.name}><button type="button" className="team-fit-person" onClick={() => open(row.member.name)}>
+              <span className="person-avatar small" aria-hidden="true">{row.member.name[0]}</span>
+              <span className="team-fit-name"><strong>{row.member.name}</strong><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></span>
+              <span className="team-fit-gap">{cell.current ? t('Current role') : t('{n} to build', { n: gaps })}</span>
+              <span className="team-fit-score">{cell.current ? t('Now') : cell.result.score100}</span>
+            </button></li>;
+          })}</ul>
+        </section>
+        <section className="panel team-priorities" aria-labelledby="team-priorities-head">
+          <h2 id="team-priorities-head">{t('Skills to teach first')}</h2>
+          {shared.gaps.length === 0 ? <p className="note">{t('No gaps: everyone already has these skills.')}</p> : <ol>{shared.gaps.slice(0, 5).map((gap) => <li key={gap.skill.uri}>
+            <span>{gap.skill.label}</span><strong>{gap.missing.length + gap.partly.length}/{shared.movers}</strong>
+          </li>)}</ol>}
+          {shared.gaps.length > 5 && <p className="team-priority-note">{t('{n} more gaps in the training plan below', { n: shared.gaps.length - 5 })}</p>}
+        </section>
+      </div>
 
     <div className="plan-layout">
     <section className="panel team-plan" aria-labelledby="shared">
       <h2 id="shared">{t('Training plan for {role}', { role: roleTitle(target.title) })}</h2>
-      <p className="note">{t('{n} of {m} people would be moving into this role. They share {g} skill gaps; courses that cover the most of them come first.', { n: shared.movers, m: members.length, g: shared.gaps.length })}</p>
+      <p className="note">{t('Courses covering the most shared gaps come first.')}</p>
       {shared.gaps.length === 0 ? <p>{t('No gaps: everyone already has these skills.')}</p> : <>
         {total > 0 && <ol className="plan-steps">
           {course.plan.steps.map((step, i) => <CourseCard key={step.resource.id} n={i + 1} showNumber primary={i === 0}
@@ -194,10 +208,10 @@ function TeamBody({ viewer, team }: { viewer: Viewer; team: (typeof teams)[numbe
             meta={<>Coursera · {t('Paid; free 3 months via Rakyat Digital')} · {step.course.workload ?? t('time not stated')}</>}
             extra={whoNeeds(step.closes)} />)}
         </ol>}
-        {course.ai.steps.length > 4 && <button type="button" className="text-button plan-more" onClick={() => setShowAllAi(!showAllAi)}>{showAllAi ? t('Show fewer') : t('Show all {n} suggestions', { n: course.ai.steps.length })}</button>}
+        {course.ai.steps.length > 2 && <button type="button" className="text-button plan-more" onClick={() => setShowAllAi(!showAllAi)}>{showAllAi ? t('Show fewer') : t('Show all {n} suggestions', { n: course.ai.steps.length })}</button>}
         {course.ai.unmatched.length > 0 && <div className="plan-unmatched"><span className="plan-closes">{t('No course found yet')}</span>{course.ai.unmatched.map((g) => <GapTag key={g.skill.uri} gap={g} />)}</div>}
         <details className="how-to-read">
-          <summary>{t('Who lacks each skill ({n} gaps)', { n: shared.gaps.length })}</summary>
+          <summary>{t('See all {n} skill gaps', { n: shared.gaps.length })}</summary>
           {(() => {
             // Group skills by exactly who lacks them, most people first.
             const groups = new Map<string, { who: string[]; count: number; skills: typeof shared.gaps }>();
@@ -218,6 +232,7 @@ function TeamBody({ viewer, team }: { viewer: Viewer; team: (typeof teams)[numbe
     </section>
     <SdgContribution roleId={target.id} skills={shared.gaps.map((g) => g.skill)} heading={t('Team training and the SDGs')} compact />
     </div>
+    </>}
     <p className="note">{t('All people here are fictional. In a real deployment each person would confirm their own skills; the manager or adviser sees the group view, not anyone’s CV.')}</p>
   </div>;
 }

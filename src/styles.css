@@ -1363,6 +1363,32 @@ details.course-check { padding-block:0; }
 
 .team-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
 .team-view > * { min-width: 0; }
+.team-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid #d9ded9; }
+.team-toolbar p { margin: 0; font-size: 14px; color: #5d6873; }
+.team-modes { display: flex; gap: 4px; padding: 3px; border: 1px solid #d9ded9; border-radius: 9px; background: #fff; }
+.team-modes button { border: 0; border-radius: 6px; background: transparent; padding: 7px 14px; color: #3a4450; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.team-modes button.on { background: #1c2430; color: #fff; }
+.team-target { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.team-target label { font-size: 14px; font-weight: 700; }
+.team-target select { width: min(100%, 290px); padding: 8px 10px; }
+.team-target span { margin-left: auto; font-size: 14px; color: #5d6873; }
+.team-overview { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.team-overview .panel { min-width: 0; }
+.team-overview h2, .team-compare h2 { margin: 0 0 12px; font-size: 21px; }
+.team-fit ul, .team-priorities ol { margin: 0; padding: 0; list-style: none; }
+.team-fit li + li, .team-priorities li + li { border-top: 1px solid #e3e7e3; }
+.team-fit-person { width: 100%; border: 0; background: transparent; color: inherit; text-align: left; display: grid; grid-template-columns: auto minmax(0, 1fr) auto 44px; gap: 12px; align-items: center; padding: 9px 3px; font: inherit; cursor: pointer; }
+.team-fit-person:hover, .team-fit-person:focus-visible { background: #eef4ef; }
+.team-fit-name strong, .team-fit-name small { display: block; }
+.team-fit-name small { color: #5d6873; font-size: 12px; }
+.team-fit-gap { color: #5d6873; font-size: 13px; }
+.team-fit-score { font-size: 18px; font-weight: 700; text-align: right; }
+.team-priorities li { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; font-size: 14px; }
+.team-priorities li strong { flex: none; color: #1e6b4f; }
+.team-priority-note { color: #5d6873; font-size: 13px; margin: 12px 0 0; }
+.team-compare .note { margin: 0; }
+@media (max-width: 900px) { .team-overview { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .team-toolbar { align-items: flex-start; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 7px; } .team-target select { width: 100%; } .team-target span { margin-left: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
 
 /* Region view: what it is for, and the three levels of the SDG view. */
 .region-purpose h2 { margin: 0 0 6px; }
