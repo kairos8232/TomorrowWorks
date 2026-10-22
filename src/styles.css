@@ -46,7 +46,13 @@ html { scrollbar-color: #477157 #ecece8; }
 .quiet-proof span { padding: 0 7px; color: #a6aaaf; }
 
 .journey-route { position: absolute; top: 6%; left: 0; width: 100%; height: 76%; z-index: 0; pointer-events: none; fill: none; stroke: #477157; stroke-width: 1.5; }
-.journey-route-line { opacity: .4; stroke-linecap: round; stroke-linejoin: round; }
+.journey-route-line { opacity: .4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000 1000; stroke-dashoffset: 1000; animation: draw-route 14s linear infinite; }
+.journey-route.is-paused .journey-route-line { animation-play-state: paused; }
+@keyframes draw-route {
+  0% { stroke-dashoffset: 1000; }
+  82%, 99.9% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 1000; }
+}
 
 .quiet-next { position: relative; min-height: 720px; padding: 112px 6.05% 124px; background: #f2f3f0; z-index: 1; }
 .quiet-section-head { display: grid; grid-template-columns: minmax(150px, .35fr) minmax(480px, 1fr); gap: 8vw; align-items: start; }
@@ -73,7 +79,7 @@ html { scrollbar-color: #477157 #ecece8; }
 .public-footer span:first-child { color: #0c182c; font-size: 20px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .journey-route-line { opacity: .2; }
+  .journey-route-line { animation: none; stroke-dashoffset: 0; opacity: .2; }
 }
 
 @media (max-width: 1050px) {

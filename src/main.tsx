@@ -69,6 +69,43 @@ function LanguagePicker({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) =
   </details>;
 }
 
+function roundedRoute(points: [number, number][]) {
+  const [start, ...rest] = points;
+  let path = `M ${start[0]} ${start[1]}`;
+  for (let i = 1; i < points.length - 1; i++) {
+    const before = points[i - 1];
+    const corner = points[i];
+    const after = points[i + 1];
+    const incoming = Math.hypot(corner[0] - before[0], corner[1] - before[1]);
+    const outgoing = Math.hypot(after[0] - corner[0], after[1] - corner[1]);
+    const radius = Math.min(45, incoming / 2, outgoing / 2);
+    const entry: [number, number] = [corner[0] - (corner[0] - before[0]) / incoming * radius, corner[1] - (corner[1] - before[1]) / incoming * radius];
+    const exit: [number, number] = [corner[0] + (after[0] - corner[0]) / outgoing * radius, corner[1] + (after[1] - corner[1]) / outgoing * radius];
+    path += ` L ${entry[0]} ${entry[1]} Q ${corner[0]} ${corner[1]} ${exit[0]} ${exit[1]}`;
+  }
+  const end = rest[rest.length - 1];
+  return `${path} L ${end[0]} ${end[1]}`;
+}
+
+function randomHeroRoute(previous: number): { path: string; pattern: number } {
+  const between = (min: number, max: number) => Math.round(min + Math.random() * (max - min));
+  const start = -120;
+  const first = between(700, 790);
+  const middle = between(990, 1090);
+  const right = between(1210, 1300);
+  const startY = between(425, 470);
+  const top = between(145, 210);
+  const mid = between(335, 410);
+  const bottom = between(520, 590);
+  const pattern = (previous + 1 + between(0, 1)) % 3;
+  const routes: [number, number][][] = [
+    [[start, startY], [first, startY], [first, top], [right, top], [right, mid], [middle, mid], [middle, bottom], [1560, bottom]],
+    [[start, startY], [first, startY], [first, bottom], [right, bottom], [right, top], [middle, top], [middle, mid], [1560, mid]],
+    [[start, startY], [first, startY], [first, top], [middle, top], [middle, bottom], [right, bottom], [right, mid], [1560, mid]],
+  ];
+  return { path: roundedRoute(routes[pattern]), pattern };
+}
+
 function Home({ start, startWithRole, go, lang, setLang }: {
   start: (who: ViewerId) => void;
   startWithRole: (role: string) => void;
@@ -80,20 +117,28 @@ function Home({ start, startWithRole, go, lang, setLang }: {
   const routeRef = useRef<SVGSVGElement>(null);
   useEffect(() => {
     const route = routeRef.current;
-    if (!route) return;
+    const line = route?.querySelector('.journey-route-line');
+    if (!route || !line) return;
+    let pattern = -1;
+    const reroute = () => {
+      const next = randomHeroRoute(pattern);
+      pattern = next.pattern;
+      line.setAttribute('d', next.path);
+    };
+    reroute();
+    line.addEventListener('animationiteration', reroute);
     let visible = true;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => {
       const paused = !visible || document.hidden || reducedMotion.matches;
-      if (paused) route.pauseAnimations();
-      else route.unpauseAnimations();
+      route.classList.toggle('is-paused', paused);
     };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); });
     observer.observe(route);
     document.addEventListener('visibilitychange', update);
     reducedMotion.addEventListener('change', update);
     update();
-    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', update); reducedMotion.removeEventListener('change', update); };
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', update); reducedMotion.removeEventListener('change', update); line.removeEventListener('animationiteration', reroute); };
   }, []);
   const t = useT();
   function submit(event: React.FormEvent) {
@@ -122,9 +167,7 @@ function Home({ start, startWithRole, go, lang, setLang }: {
         </form>
         <p className="quiet-proof">{t('Malaysian job-market evidence')} <span aria-hidden="true">·</span> {t('No CV required')}</p>
         <svg ref={routeRef} className="journey-route" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-          <path className="journey-route-line" d="M 520 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1350">
-            <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M 520 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1350; M 520 390 H 710 Q 770 390 770 330 V 220 Q 770 160 830 160 H 1250 Q 1330 160 1330 240 V 290 Q 1330 350 1270 350 H 1150 Q 1090 350 1090 410 V 460 Q 1090 520 1150 520 H 1350; M 520 500 H 810 Q 870 500 870 440 V 330 Q 870 270 930 270 H 1160 Q 1240 270 1240 350 V 390 Q 1240 450 1180 450 H 1050 Q 990 450 990 510 V 550 Q 990 610 1050 610 H 1350; M 520 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1350" />
-          </path>
+          <path className="journey-route-line" pathLength="1000" d="M -120 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1560" />
         </svg>
       </section>
 
