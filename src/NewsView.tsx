@@ -37,15 +37,19 @@ export function NewsView() {
   const [news, setNews] = useState<NewsBody>(newsFile as NewsBody);
   const saver = useDataSaver();
   const [want, setWant] = useState(false);   // data saver: fetch today's headlines only when asked
+  const [briefLoading, setBriefLoading] = useState(false);
   useEffect(() => {
     if (saver && !want) return;
     let tries = 0;
     let timer: ReturnType<typeof setTimeout>;
     const load = () => fetch('/api/news').then((r) => (r.ok ? r.json() : null)).then((body: NewsBody | null) => {
       if (body?.articles?.length) setNews(body);
-      // The brief is computed on RunPod in the background; ask again a few times while it is not ready.
-      if (body && !body.brief && tries++ < 4) timer = setTimeout(load, 20_000);
-    }).catch(() => {});
+      // The brief is computed on RunPod in the background; a sleeping worker can take
+      // 1-2 minutes to start, so ask again every 20 s for up to 3 minutes.
+      const waiting = Boolean(body && !body.brief && tries++ < 9);
+      setBriefLoading(waiting);
+      if (waiting) timer = setTimeout(load, 20_000);
+    }).catch(() => setBriefLoading(false));
     load();
     return () => clearTimeout(timer);
   }, [saver, want]);
@@ -65,7 +69,8 @@ export function NewsView() {
         {topics.map((x) => <label key={x} className="choice"><input type="radio" name="topic" checked={topic === x} onChange={() => setTopic(x)} />{t(x)}</label>)}
       </fieldset>
     </div>
-    {news.brief && <TopicBrief articles={articles} brief={news.brief} topic={topic} />}
+    {news.brief ? <TopicBrief articles={articles} brief={news.brief} topic={topic} />
+      : briefLoading && <p className="note news-brief-loading" aria-live="polite">{t('The summary of key headlines is loading. RunPod may be starting up, which can take a minute or two.')}</p>}
     <ul className="news-list">
       {shown.map((a) => <li key={a.url}>
         <a href={a.url} target="_blank" rel="noreferrer">{a.title}</a>

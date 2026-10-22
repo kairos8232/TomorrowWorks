@@ -1,5 +1,13 @@
 # Progress log
 
+## 23 Oct 2026 — Live news: stale snapshot and missing summary
+
+- Carson saw 21 Oct news and no *In brief* on the live app. Diagnosed with him (browser console + Replit Shell + deployment logs): GDELT answered 429 once at 22 Oct 23:26 and the server then waited 6 hours; RunPod requests timed out (worker asleep, cold start > 90 s), so skill search gave 502 and the brief failed. RunPod itself worked (HTTP 200 from Shell); the brief appeared once the worker was warm.
+- Fixes: GDELT retry after 30 min instead of 6 h (test updated); server wakes RunPod with one tiny request and starts the brief on start (checked with a fake endpoint: brief ready before the first visit); News page asks again every 20 s for up to 3 min and shows "summary is loading" meanwhile (checked in Chromium with a 45 s fake RunPod). New EN/MS/ZH line needs team review.
+- Not code: set RunPod Active workers = 1 while recording the video and during judging; Republish after pulling. Labour force refresh (`server/lfs.mjs`) still waits 6 h after a failure; unchanged.
+
+---
+
 ## 22 Oct 2026 — Region view separated again and made clearer
 
 - Carson: one manager should not see other organisations' groups, and the region's purpose was unclear. Team view now shows only the viewer's own group (no pills). Region view is back as its own screen for Encik Faizal (fictional regional skills centre officer), opening with *What this view is for* (who uses it, its one question, Person → Group → Region). It shows totals only (no names) and a *Routes that would reach more targets* table by role (`routesToFund`, new test). New EN/MS/ZH strings need team review.
