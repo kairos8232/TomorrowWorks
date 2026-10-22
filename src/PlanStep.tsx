@@ -13,6 +13,7 @@ import { SdgBadge } from './SdgViews';
 import { roleSdgs, sdgTotals } from './sdg';
 import matchesFile from '../data/derived/coursera-skill-matches.json';
 import { CourseProgressControl } from './CourseProgress';
+import { MilestoneIcon } from './LearningMilestones';
 import type { CourseProgress, LearningAction } from './learningCheck';
 
 const resources = resourcesFile.resources as Resource[];
@@ -133,7 +134,7 @@ export function PlanStep({ profile, roleId, onPickRole, onBackToMoves, progress,
           <NossRoute roleId={role.id} />
           {nextCourse?.accessId && access[nextCourse.accessId] && <div className="plan-fact"><span>{t('Access')}</span><a href={access[nextCourse.accessId].url} target="_blank" rel="noreferrer">{t(access[nextCourse.accessId].name)} ↗</a></div>}
           <div className="plan-fact"><span>{t('Linked goals')}</span><div className="plan-sdg-badges">{[...sdgTargets, '4.4'].map(target => <SdgBadge key={target} target={target} short />)}</div></div>
-          <div className="plan-fact plan-milestone-fact"><span>{t('Milestones')} · {t('Locked until verification')}</span><div className="plan-mini-milestones"><span><b aria-hidden="true">1</b>{t('First course')}</span><span><b aria-hidden="true">✓</b>{t('Full plan')}</span></div></div>
+          <div className="plan-fact plan-milestone-fact"><span>{t('Milestones')} · {t('Locked until verification')}</span><div className="plan-mini-milestones"><span className="mini-milestone mini-milestone-first"><MilestoneIcon kind="first" />{t('First course')}</span><span className="mini-milestone mini-milestone-plan"><MilestoneIcon kind="plan" />{t('Full plan')}</span></div></div>
         </div>
       </section>}
 

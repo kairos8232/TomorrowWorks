@@ -57,9 +57,7 @@ const CLOSE_CALL = 0.3;
 /** Colours of the leading moves in the futures panel (rest = grey). Fixed order, so a role keeps its colour. */
 const FUTURE_COLOURS = ['#7fd6a8', '#f2b84b', '#ef8a6b'];
 const FUTURE_REST = '#5d7d70';
-const DOT_ROWS = 20;
-
-/** "1,000 possible futures": one dot per future coloured by its best move, the tipping point on an AI-speed strip, and the assumptions. */
+/** Compact summary of 1,000 simulated futures and the AI-speed tipping point. */
 function FuturesPanel({ futures, tipping, quarter }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string }) {
   const t = useT();
   const leaders = [...futures.byRole.values()].filter((x) => x.best > 0).sort((a, b) => b.best - a.best);
@@ -70,51 +68,35 @@ function FuturesPanel({ futures, tipping, quarter }: { futures: ReturnType<typeo
   const top = leaders[0];
   const robust = !!top && top.best >= 0.8;
   const colour = (id: string) => { const k = shown.findIndex((x) => x.roleId === id); return k >= 0 ? FUTURE_COLOURS[k] : FUTURE_REST; };
-  // Dots grouped by winner (biggest group first), filled column by column, so each move forms one block.
-  const order = new Map(leaders.map((x, k) => [x.roleId, k]));
-  const dots = [...futures.winners].sort((a, b) => (order.get(a) ?? 99) - (order.get(b) ?? 99));
-  const cols = Math.ceil(dots.length / DOT_ROWS);
+  const rest = leaders.slice(3).reduce((sum, x) => sum + x.best, 0);
   return <section className="futures-panel" aria-labelledby="futures-head">
     <div className="futures-top">
       <div className="futures-lead">
         <h2 id="futures-head">{robust ? t('{role} is your best move', { role: name(top.roleId) }) : t('No single best move')}</h2>
         <p className="futures-sub">{robust
           ? t('Best in {p}% of {n} simulated futures: a robust choice.', { p: share(top.best), n: futures.runs.toLocaleString() })
-          : t('Each dot is one of {n} simulated futures, coloured by its best move.', { n: futures.runs.toLocaleString() })}</p>
+          : t('{n} simulated futures', { n: futures.runs.toLocaleString() })}</p>
         <ul className="futures-legend">{shown.map((x) => <li key={x.roleId}>
           <i style={{ background: colour(x.roleId) }} aria-hidden="true" />
           <span className="cap-first">{name(x.roleId)}</span>
           <strong>{share(x.best)}%</strong>
         </li>)}</ul>
       </div>
-      <svg className="futures-dots" viewBox={`0 0 ${cols * 10} ${DOT_ROWS * 10}`} aria-hidden="true" focusable="false">
-        {dots.map((id, i) => <circle key={i} cx={Math.floor(i / DOT_ROWS) * 10 + 5} cy={(i % DOT_ROWS) * 10 + 5} r="3.6" fill={colour(id)} />)}
-      </svg>
     </div>
-    <div className="futures-speed">
+    <div className="futures-share" role="img" aria-label={leaders.map(x => `${name(x.roleId)} ${share(x.best)}%`).join(', ')}>
+      {shown.map(x => <span key={x.roleId} style={{ width: `${x.best * 100}%`, background: colour(x.roleId) }} />)}
+      {rest > 0 && <span style={{ width: `${rest * 100}%`, background: FUTURE_REST }} />}
+    </div>
+    {tipping.length > 1 ? <div className="futures-speed">
       <div className="speed-labels"><span>{t('Gradually')}</span><span>{t('AI speed')}</span><span>{t('Quickly')}</span></div>
-      <div className="speed-strip" role="img" aria-label={tipping.length > 1
-        ? t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })
-        : tipping[0] ? t('{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).', { a: name(tipping[0].roleId), q: quarter }) : ''}>
+      <div className="speed-strip" role="img" aria-label={t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })}>
         {tipping.map((seg, k) => {
           const end = k === tipping.length - 1 ? 1 : tipping[k + 1].from;
           return <span key={seg.roleId + seg.from} style={{ flexGrow: Math.max(end - seg.from, 0.02), background: colour(seg.roleId) }} />;
         })}
       </div>
-      <p className="speed-note">{tipping.length > 1
-        ? t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })
-        : tipping[0] ? t('{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).', { a: name(tipping[0].roleId), q: quarter }) : null}</p>
-    </div>
-    <details>
-      <summary>{t('How the futures are made')}</summary>
-      <ul className="note">
-        <li>{t('AI speed: anywhere between Gradually and Quickly, chosen at random in each future (our assumption).')}</li>
-        <li>{t('AI exposure: each future trusts one of three sources (ILO, Microsoft or Anthropic), chosen at random; ILO values vary within their own standard deviation.')}</li>
-        <li>{t('Job-ad demand: one of the two DOSM quarters we have, chosen at random.')}</li>
-        <li>{t('Each future is scored with the same rule as the ranking below; your skills, interests and goals do not change. A fixed seed gives the same result every time.')}</li>
-        <li>{t('Score ranges on each row cover 90% of futures. These are estimates for comparing options, not predictions.')}</li>
-      </ul>
-    </details>
+      <p className="speed-note">{t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })}</p>
+    </div> : tipping[0] ? <p className="futures-steady">{t('Best at every AI speed · {q} job ads and ILO values', { q: quarter })}</p> : null}
   </section>;
 }
 
@@ -201,6 +183,11 @@ function MethodView({ onBack }: { onBack: () => void }) {
       <div><h3>{t('Demand')}</h3><p>{t('Change in Malaysian online job ads for the role’s occupation group.')}</p></div>
       <div><h3>{t('AI resilience')}</h3><p>{t('How much of the work is less exposed to generative AI. Higher means less exposed.')}</p></div>
     </div>
+    <div className="method-plain"><h3>{t('How the futures are made')}</h3>
+      <p>{t('AI speed: anywhere between Gradually and Quickly, chosen at random in each future (our assumption).')} {t('Job-ad demand: one of the two DOSM quarters we have, chosen at random.')}</p>
+      <p>{t('AI exposure: each future trusts one of three sources (ILO, Microsoft or Anthropic), chosen at random; ILO values vary within their own standard deviation.')} {t('Each future is scored with the same rule as the ranking below; your skills, interests and goals do not change. A fixed seed gives the same result every time.')}</p>
+      <p>{t('Score ranges on each row cover 90% of futures. These are estimates for comparing options, not predictions.')}</p>
+    </div>
     <div className="method-plain"><h3>{t('Fairness and limits')}</h3>
       <p>{t('The ranking uses skills you confirmed, role skills and the two sourced signals above. It never asks for age, gender, ethnicity, religion or school.')}</p>
       <p>{t('Tests check that the same skills produce the same scores. Job ads cover only online postings, and ESCO describes roles from a European perspective.')}</p>
@@ -216,7 +203,6 @@ function MethodView({ onBack }: { onBack: () => void }) {
 
 export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
   const t = useT();
-  const tx = useTx();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
   const [useInterests, setUseInterests] = useState(false);
@@ -272,22 +258,27 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   const rankMoves = changes.filter((change) => change.rankBefore !== change.rankAfter).length;
   const allDown = changes.length > 0 && changes.every((change) => change.scoreAfter < change.scoreBefore);
   return <div className="step-body">
-    <div className="who">
-      <p>{persona ? tx('{who}, {description} with {n} skills.', { who: <strong>{t('Viewing as {name}', { name: persona.name })}</strong>, description: t(persona.description), n: profile.held.size })
-        : tx('{who}{job}.', { who: <strong>{profile.held.size === 1 ? t('Your 1 skill') : t('Your {n} skills', { n: profile.held.size })}</strong>, job: current ? `, ${t('current job {role}', { role: current.role.title })}` : '' })}</p>
-      <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
-    </div>
+    <header className="moves-intro">
+      <div>
+        <h1>{t('Your moves')}</h1>
+        <div className="who">
+          <p>{persona ? <><strong>{t('Viewing as {name}', { name: persona.name })}</strong> · {t('{n} skills', { n: profile.held.size })}</>
+            : <><strong>{profile.held.size === 1 ? t('Your 1 skill') : t('Your {n} skills', { n: profile.held.size })}</strong>{current ? ` · ${t('current job {role}', { role: current.role.title })}` : ''}</>}</p>
+          <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
+        </div>
+      </div>
+      <div className="moves-update">
+        <p><strong>{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</strong> · {rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
+        <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
+          <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
+      </div>
+    </header>
 
-    <div className="moves-update">
-      <p><strong>{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</strong> · {rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
-      <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
-        <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
-    </div>
-
-    <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
-
-    <section className="ledger" aria-label="Ranked moves">
-      <div className="ledger-controls">
+    <div className="moves-workbench">
+      <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
+      <section className="moves-settings" aria-labelledby="moves-settings-title">
+        <h2 id="moves-settings-title">{t('Adjust ranking')}</h2>
+        <div className="ledger-controls">
         <fieldset><legend>{t('Job-ad data')}</legend>
           {(['q1', 'q2'] as const).map((id) => <label key={id} className="choice"><input type="radio" name="snapshot" checked={snapshotId === id} onChange={() => setSnapshotId(id)} />{snapshots[id].source.latestQuarter.replace('-', ' ')}</label>)}
         </fieldset>
@@ -298,9 +289,13 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
           <label className={`toggle${picks.length === 0 ? ' off' : ''}`} title={picks.length ? picks.map((x) => t(interestData.types[x].plain)).join(', ') : t('Pick them in Your skills first')}><input type="checkbox" checked={useInterests && picks.length > 0} disabled={picks.length === 0} onChange={(e) => setUseInterests(e.target.checked)} />{t('Interests')}{picks.length > 0 && <small>{picks.length}</small>}</label>
           <label className={`toggle${goals.length === 0 ? ' off' : ''}`} title={goals.length ? goals.map((g) => `SDG ${g} ${t(sdgData.goals[g].short)}`).join(', ') : t('Pick them in Your skills first')}><input type="checkbox" checked={useGoals && goals.length > 0} disabled={goals.length === 0} onChange={(e) => setUseGoals(e.target.checked)} />{t('Goals')}{goals.length > 0 && <span className="sdg-mini">{goals.map((g) => <span key={g} className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>)}</span>}</label>
         </fieldset>
-      </div>
-      <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
-      <p className="note moves-select-hint">{t('Select a role to see details.')}</p>
+        </div>
+        <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
+      </section>
+    </div>
+
+    <section className="ledger" aria-label="Ranked moves">
+      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see details.')}</p></div>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => { setSelectedRoleId(current.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />}
