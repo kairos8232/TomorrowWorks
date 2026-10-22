@@ -1,7 +1,7 @@
 // Future Skills Radar: where the viewer's own skills stand, and the nine jobs
 // behind the signals. Rule: src/radar.ts (SIGNALS_AND_MATCHING.md, "Future Skills Radar").
-// First view shows only the viewer's skills and one next step per band; every
-// other skill stays behind a "Show its skills" button so the page is not a wall of tags.
+// One skill band and one role can be inspected at a time, keeping long skill
+// lists from pushing the rest of the comparison far down the page.
 import { useMemo, useState } from 'react';
 import { ilo, roles, snapshots, type Profile, type SnapshotId } from './data';
 import { useT } from './i18n';
@@ -28,8 +28,6 @@ function roleOutlooks(snapshotId: SnapshotId, scenarioId: ScenarioId) {
 
 function YourBand({ band, skills, onGo }: { band: Band; skills: Skill[]; onGo: (s: 'moves' | 'plan') => void }) {
   const t = useT();
-  const [all, setAll] = useState(false);
-  const head = { strong: t('Growing in value'), middle: t('Holding steady'), risk: t('At risk') }[band];
   const why = {
     strong: t('Used in jobs where hiring held up better and AI is likely to change less of the work.'),
     middle: t('Used in jobs in the middle on both hiring and AI change.'),
@@ -40,38 +38,34 @@ function YourBand({ band, skills, onGo }: { band: Band; skills: Skill[]; onGo: (
     middle: { label: t('See roles that use them'), to: 'moves' as const },
     risk: { label: t('See moves that reuse them'), to: 'moves' as const },
   }[band];
-  const shown = all ? skills : skills.slice(0, 5);
-  return <section className={`you-band ${band}`}>
-    <h2><strong>{skills.length}</strong> {head}</h2>
+  return <section id="radar-band-panel" className={`you-band ${band}`} role="tabpanel" aria-labelledby={`radar-band-${band}`}>
     <p className="note">{why}</p>
     {skills.length > 0
-      ? <ul>{shown.map((s) => <li key={s.uri}>{s.label}</li>)}</ul>
+      ? <ul>{skills.map((s) => <li key={s.uri}>{s.label}</li>)}</ul>
       : <p className="note">{t('None of your skills here.')}</p>}
-    {skills.length > 5 && <button type="button" className="text-button" onClick={() => setAll(!all)}>{all ? t('Show fewer') : t('+{n} more', { n: skills.length - 5 })}</button>}
     {skills.length > 0 && <button type="button" className="text-button you-band-go" onClick={() => onGo(action.to)}>{action.label} →</button>}
   </section>;
 }
 
-function JobRow({ role, band, demandChange, exposure, move, held }: { role: Role; band: Band; demandChange: number | null; exposure: number | null; move: number; held: ReadonlySet<string> }) {
+function JobRow({ role, band, demandChange, exposure, move, held, open, showAll, onToggle, onShowAll }: { role: Role; band: Band; demandChange: number | null; exposure: number | null; move: number; held: ReadonlySet<string>; open: boolean; showAll: boolean; onToggle: () => void; onShowAll: () => void }) {
   const t = useT();
-  const [open, setOpen] = useState(false);
   const mine = role.essentialSkills.filter((s) => held.has(s.uri)).length;
   const label = { strong: t('Growing in value'), middle: t('Holding steady'), risk: t('At risk') }[band];
   const skills = [...role.essentialSkills].sort((a, b) => Number(held.has(b.uri)) - Number(held.has(a.uri)) || a.label.localeCompare(b.label));
   return <li className={`job-row ${band}`}>
-    <div className="job-row-head">
+    <button type="button" className="job-row-trigger" aria-expanded={open} onClick={onToggle}>
       <div>
         <strong className="job-title">{role.title}</strong>
         <small>{t('Job ads {x}', { x: pct(demandChange) })} · {t('AI exposure {x}', { x: exposure === null ? '–' : exposure.toFixed(2) })}
           {move !== 0 ? ` · ${move > 0 ? '▲' : '▼'}${Math.abs(move)} ${t('since last quarter')}` : ''}</small>
       </div>
+      <span className="job-row-meta">{t('{n} essential ESCO skills', { n: skills.length })}{mine > 0 && <small>{t('{n} held', { n: mine })}</small>}</span>
       <span className={`band-label ${band}`}>{label}</span>
-    </div>
-    <button type="button" className="text-button" aria-expanded={open} onClick={() => setOpen(!open)}>
-      {open ? t('Hide skills') : mine > 0 ? t('Show its {n} skills (you have {m})', { n: skills.length, m: mine }) : t('Show its {n} skills', { n: skills.length })}
+      <span className="job-row-chevron" aria-hidden="true">{open ? '−' : '+'}</span>
     </button>
-    {open && <div className="tag-row job-row-skills">
-      {skills.map((s) => <span key={s.uri} className={`skill-tag${held.has(s.uri) ? '' : ' radar-skill'}`}>{held.has(s.uri) ? '✓ ' : ''}{s.label}</span>)}
+    {open && <div className="job-row-detail">
+      <div className="tag-row job-row-skills">{(showAll ? skills : skills.slice(0, 8)).map((s) => <span key={s.uri} className={`skill-tag${held.has(s.uri) ? '' : ' radar-skill'}`}>{held.has(s.uri) ? '✓ ' : ''}{s.label}</span>)}</div>
+      {skills.length > 8 && <button type="button" className="text-button" onClick={onShowAll}>{showAll ? t('Show fewer') : t('+{n} more', { n: skills.length - 8 })}</button>}
     </div>}
   </li>;
 }
@@ -80,6 +74,9 @@ export function RadarView({ profile, onGo }: { profile: Profile; onGo: (s: 'move
   const t = useT();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
+  const [activeBand, setActiveBand] = useState<Band>('strong');
+  const [openRoleId, setOpenRoleId] = useState<string | null>(null);
+  const [showAllJobSkills, setShowAllJobSkills] = useState(false);
   const held = profile.held;
   const { mineByBand, jobs } = useMemo(() => {
     const rows = skillRadar(roles, snapshots[snapshotId], ilo, scenarios[scenarioId]);
@@ -93,6 +90,7 @@ export function RadarView({ profile, onGo }: { profile: Profile; onGo: (s: 'move
     return { mineByBand, jobs };
   }, [snapshotId, scenarioId, held]);
   const total = mineByBand.strong.length + mineByBand.middle.length + mineByBand.risk.length;
+  const bandLabels: Record<Band, string> = { strong: t('Growing in value'), middle: t('Holding steady'), risk: t('At risk') };
 
   return <div className="step-body radar">
     <div className="radar-controls">
@@ -103,9 +101,12 @@ export function RadarView({ profile, onGo }: { profile: Profile; onGo: (s: 'move
 
     {total > 0
       ? <>
-        <h2 className="radar-section">{t('Your skills')} <span>{t('{n} of your skills are used in these jobs', { n: total })}</span></h2>
-        <div className="you-grid">
-          {(['strong', 'middle', 'risk'] as const).map((b) => <YourBand key={b} band={b} skills={mineByBand[b]} onGo={onGo} />)}
+        <h2 className="radar-section">{t('Your skills')}</h2>
+        <div className="radar-band-view">
+          <div className="radar-band-tabs" role="tablist" aria-label={t('Your skills')}>
+            {(['strong', 'middle', 'risk'] as const).map((b) => <button key={b} id={`radar-band-${b}`} type="button" role="tab" aria-selected={activeBand === b} aria-controls="radar-band-panel" className={b} onClick={() => setActiveBand(b)}><strong>{mineByBand[b].length}</strong><span>{bandLabels[b]}</span></button>)}
+          </div>
+          <YourBand band={activeBand} skills={mineByBand[activeBand]} onGo={onGo} />
         </div>
       </>
       : <section className="panel"><p>{t('Add your skills in Your skills to see where yours fall.')}</p>
@@ -114,7 +115,7 @@ export function RadarView({ profile, onGo }: { profile: Profile; onGo: (s: 'move
     <h2 className="radar-section">{t('The jobs behind these signals')} <span>{t('Best outlook first')}</span></h2>
     {jobs.every((j) => j.demandChange !== null && j.demandChange < 0) && <p className="note">{t('Job ads fell for all nine jobs in this quarter, so the labels compare the jobs with each other.')}</p>}
     <ol className="job-list">
-      {jobs.map((j) => <JobRow key={j.role.id} role={j.role} band={j.band} demandChange={j.demandChange} exposure={j.exposure} move={j.move} held={held} />)}
+      {jobs.map((j) => <JobRow key={j.role.id} role={j.role} band={j.band} demandChange={j.demandChange} exposure={j.exposure} move={j.move} held={held} open={openRoleId === j.role.id} showAll={showAllJobSkills} onToggle={() => { setOpenRoleId(openRoleId === j.role.id ? null : j.role.id); setShowAllJobSkills(false); }} onShowAll={() => setShowAllJobSkills(!showAllJobSkills)} />)}
     </ol>
 
     <details className="how-to-read">
