@@ -1072,7 +1072,7 @@ details.course-check { padding-block:0; }
 .moves-page .moves-update { display: grid; align-content: center; gap: 5px; padding: 12px 18px; border: 1px solid #d8ddd7; border-radius: 8px; background: #fff; }
 .moves-page .moves-update h2 { margin: 0; font-size: 19px; line-height: 1.2; }
 .moves-page .moves-update > div { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 2px; }
-.moves-workbench { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(320px, .85fr); gap: 18px; align-items: start; }
+.moves-workbench { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(320px, .85fr); gap: 18px; align-items: stretch; }
 .moves-sidebar { display: grid; gap: 12px; min-width: 0; }
 .moves-page .futures-panel { min-height: 260px; padding: 25px 28px; gap: 17px; border-radius: 10px; align-content: center; }
 .moves-page .futures-top { display: block; }
