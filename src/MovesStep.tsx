@@ -124,28 +124,31 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
     <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
     <div className="role-focus-heading">
       <div><span className="role-focus-rank">{rank === null ? t('Now') : t('Rank {n}', { n: rank })}</span><h2>{role.title}</h2>
-        <p className="note">{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''} · {t('{n} to build', { n: fit.missing.length })}</p></div>
+        <p className="note">{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''} · {t('{n} to build', { n: fit.missing.length })}</p>
+        <div className="detail-actions">
+          {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
+          <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
+        </div>
+      </div>
       <strong className="focus-score">{result.score100}<small>{t('Score')}</small></strong>
-    </div>
-    <div className="detail-actions">
-      {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
-      <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
     </div>
     <div className="detail-facts">
       <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}</span>
       <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small><a href={snapshots[demand.current === snapshots.q1.source.latestQuarter ? 'q1' : 'q2'].source.url} target="_blank" rel="noreferrer">DOSM</a> {t('{a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
       <span className="fact-r">{resilience ? <><a href={ilo.source.url} target="_blank" rel="noreferrer">{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}</a><small>{resilience.gradient}</small></> : t('No ILO data')}</span>
     </div>
-    <div className="detail-skills">
-      <SkillList title={t('You have')} empty={t('None of this role’s essential skills yet.')}>
-        {[...fit.transferable.map((item) => <span className="skill-tag related" key={item.need.uri} title={item.have.label}>{item.need.label}<small>≈ {item.have.label}</small></span>),
-          ...fit.matched.map((skill) => <span className="skill-tag" key={skill.uri}>{skill.label}</span>)]}
-      </SkillList>
-      <SkillList title={t('To build')} empty={t('Nothing missing.')}>
-        {fit.missing.map((skill) => <span className="skill-tag skill-gap" key={skill.uri}>{skill.label}</span>)}
-      </SkillList>
+    <div className="role-focus-content">
+      <div className="detail-skills">
+        <SkillList title={t('To build')} empty={t('Nothing missing.')}>
+          {fit.missing.map((skill) => <span className="skill-tag skill-gap" key={skill.uri}>{skill.label}</span>)}
+        </SkillList>
+        <SkillList title={t('You have')} empty={t('None of this role’s essential skills yet.')}>
+          {[...fit.transferable.map((item) => <span className="skill-tag related" key={item.need.uri} title={item.have.label}>{item.need.label}<small>≈ {item.have.label}</small></span>),
+            ...fit.matched.map((skill) => <span className="skill-tag" key={skill.uri}>{skill.label}</span>)]}
+        </SkillList>
+      </div>
+      <div className="detail-evidence"><h3>{t('This move and the SDGs')}</h3><RoleSdgLine roleId={role.id} /><InterestLine roleId={role.id} picks={picks} /></div>
     </div>
-    <div className="detail-evidence"><RoleSdgLine roleId={role.id} /><InterestLine roleId={role.id} picks={picks} /></div>
   </section>;
 }
 
