@@ -31,6 +31,10 @@ My career (sidebar navigation)           The job market (browse any time)
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
 
+## Region view (22 Oct)
+
+- Viewer *Encik Faizal* (fictional regional skills officer), nav *My region → Region view*. Region = *Klang Valley skills network* (fictional) with three groups: Finance team, Graduating class, Logistics office (new, 4 people). *Where this region's reskilling contributes*: per strong SDG target, "n of m people", a bar split by group colour, and the people with their best move; 4.4 baseline row; *Moves that would add SDG targets* (2nd/3rd moves whose role links add targets); possible links collapsed; a note that no state statistics are used. *Groups in this region* lists each group's best moves and opens its Team view with *Back to region*. Rule and tests: `src/region.ts`, `src/region.test.ts`.
+
 ## Data saver (sidebar, 22 Oct)
 
 - Switch under the language picker. On: no web font (system fonts), news and labour-force panels show the bundled snapshot and fetch live data only on request (*Load today's headlines*). Starts on when the browser reports save-data; the choice is remembered in this browser. Independently, screens other than Home, Your skills and Your moves load on demand, and the server gzips text files and caches `dist/assets/` for a year. First visit measured at 229 KB (Chromium, 390 px, via `server/index.mjs`, font excluded because it is blocked in Claude's workspace).

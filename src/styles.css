@@ -916,3 +916,29 @@ details.course-check { padding-block:0; }
 .saver-toggle.on .saver-track span { transform: translateX(14px); }
 @media (prefers-reduced-motion: reduce) { .saver-track, .saver-track span { transition: none; } }
 .loading-note { padding: 24px 0; }
+
+/* Region view (regional skills body). */
+.region-view { display: grid; gap: 16px; }
+.region-sdg { display: grid; gap: 14px; }
+.region-sdg h2, .region-groups h2 { margin: 0; }
+.region-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+.region-legend li, .region-levers li, .region-groups li { display: flex; align-items: center; gap: 8px; }
+.region-legend i, .region-levers i, .region-groups li > i { flex: none; width: 12px; height: 12px; border-radius: 3px; }
+.region-legend small, .region-groups small { color: #5d6873; }
+.region-targets { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.region-targets > li { display: grid; gap: 6px; }
+.region-target-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.region-count { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+.region-bar { display: flex; height: 12px; background: #e9ece8; border-radius: 6px; overflow: hidden; }
+.region-bar span { height: 100%; }
+.region-targets small { color: #5d6873; }
+.region-levers { border-top: 1px solid #e3e7e3; padding-top: 14px; display: grid; gap: 8px; }
+.region-levers h3 { margin: 0; font-size: 16px; }
+.region-levers ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.region-levers small { color: #5d6873; margin-left: 4px; }
+.region-lever-targets { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+.region-groups ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.region-groups li { justify-content: space-between; padding: 12px 14px; border: 1px solid #d9ded9; border-radius: 10px; }
+.region-groups li > div { flex: 1; }
+.region-groups .note { margin: 4px 0 0; }
+@media (max-width: 620px) { .region-groups li { flex-wrap: wrap; } .region-lever-targets { margin-left: 20px; } }

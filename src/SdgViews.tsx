@@ -23,7 +23,7 @@ function LinkWhy({ link, total }: { link: SdgLink; total: number }) {
 }
 
 /** Possible links (just under the threshold, not checked), collapsed. */
-function PossibleLinks({ skills, exclude }: { skills: Skill[]; exclude: string[] }) {
+export function PossibleLinks({ skills, exclude }: { skills: Skill[]; exclude: string[] }) {
   const t = useT();
   const list = sdgPossibleTotals(skills).filter((p) => !exclude.includes(p.target));
   if (list.length === 0) return null;
