@@ -76,7 +76,7 @@ export function newsService({ snapshot, topics, fetchImpl = fetch, now = () => D
       const t = now();
       const fresh = cache && t - cache.fetchedAt < DAY;
       if (!fresh && t <= until && t >= nextTry) {
-        inFlight ??= refresh().catch((err) => { console.warn(`News refresh failed: ${err.message}`); nextTry = t + RETRY_AFTER_FAILURE; }).finally(() => { inFlight = null; });
+        inFlight ??= refresh().catch((err) => { console.warn(`News refresh failed: ${err.message}${err.cause ? ` (${err.cause.code ?? err.cause.message})` : ''}`); nextTry = t + RETRY_AFTER_FAILURE; }).finally(() => { inFlight = null; });
         await inFlight;
       }
       return cache ? { ...cache.body, live: true } : { ...snapshot, live: false };
