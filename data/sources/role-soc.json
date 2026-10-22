@@ -1,15 +1,54 @@
 {
   "about": "US Standard Occupational Classification (SOC 2018) code for each of the nine roles, used to read the US-based AI usage datasets (Microsoft Working with AI; Anthropic Economic Index). Chosen by the team from O*NET occupation titles and descriptions; sustainability manager uses the same O*NET occupation as data/interests/role-interests.json. A mapping onto a published list, not generated.",
-  "source": { "name": "O*NET-SOC 2019 taxonomy (SOC 2018)", "url": "https://www.onetcenter.org/taxonomy.html", "checkedAt": "2026-10-22" },
+  "source": {
+    "name": "O*NET-SOC 2019 taxonomy (SOC 2018)",
+    "url": "https://www.onetcenter.org/taxonomy.html",
+    "checkedAt": "2026-10-22"
+  },
   "roles": {
-    "billing-clerk": { "soc": "43-3021", "title": "Billing and Posting Clerks" },
-    "accounting-assistant": { "soc": "43-3031", "title": "Bookkeeping, Accounting, and Auditing Clerks" },
-    "bookkeeper": { "soc": "43-3031", "title": "Bookkeeping, Accounting, and Auditing Clerks" },
-    "accountant": { "soc": "13-2011", "title": "Accountants and Auditors" },
-    "financial-analyst": { "soc": "13-2051", "title": "Financial and Investment Analysts" },
-    "business-analyst": { "soc": "13-1111", "title": "Management Analysts" },
-    "data-analyst": { "soc": "15-2051", "title": "Data Scientists" },
-    "software-developer": { "soc": "15-1252", "title": "Software Developers" },
-    "sustainability-manager": { "soc": "11-1011", "title": "Chief Executives (O*NET 11-1011.03 Chief Sustainability Officers)" }
-  }
+    "billing-clerk": {
+      "soc": "43-3021",
+      "title": "Billing and Posting Clerks"
+    },
+    "accounting-assistant": {
+      "soc": "43-3031",
+      "title": "Bookkeeping, Accounting, and Auditing Clerks"
+    },
+    "bookkeeper": {
+      "soc": "43-3031",
+      "title": "Bookkeeping, Accounting, and Auditing Clerks"
+    },
+    "accountant": {
+      "soc": "13-2011",
+      "title": "Accountants and Auditors"
+    },
+    "financial-analyst": {
+      "soc": "13-2051",
+      "title": "Financial and Investment Analysts"
+    },
+    "business-analyst": {
+      "soc": "13-1111",
+      "title": "Management Analysts"
+    },
+    "data-analyst": {
+      "soc": "15-2051",
+      "title": "Data Scientists",
+      "onetTaskCodes": [
+        "15-1199.08"
+      ]
+    },
+    "software-developer": {
+      "soc": "15-1252",
+      "title": "Software Developers",
+      "onetTaskCodes": [
+        "15-1132.00",
+        "15-1133.00"
+      ]
+    },
+    "sustainability-manager": {
+      "soc": "11-1011",
+      "title": "Chief Executives (O*NET 11-1011.03 Chief Sustainability Officers)"
+    }
+  },
+  "taskCodesNote": "The Anthropic task file (release 2025-03-27) uses O*NET-SOC 2010 task codes. Where SOC 2018 renumbered an occupation, onetTaskCodes lists the 2010 occupation(s) used for the automation vs assistance split: Software Developers, Applications (15-1132) and Systems Software (15-1133); Business Intelligence Analysts (15-1199.08) for data analyst, the closest 2010 occupation."
 }

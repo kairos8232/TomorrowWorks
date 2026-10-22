@@ -59,13 +59,16 @@ async function get(name) {
 const key = (task) => task.toLowerCase().trim().replace(/\.$/, '');
 
 const [exposure, pattern, pct, tasks] = await Promise.all([get('exposure'), get('pattern'), get('pct'), get('tasks')]);
-const socs = [...new Set(Object.values(JSON.parse(readFileSync('data/sources/role-soc.json', 'utf8')).roles).map((r) => r.soc))];
+// SOC 2018 code -> O*NET task codes to read (2010 codes where SOC 2018 renumbered the occupation).
+const taskCodes = new Map();
+for (const r of Object.values(JSON.parse(readFileSync('data/sources/role-soc.json', 'utf8')).roles)) taskCodes.set(r.soc, r.onetTaskCodes ?? [r.soc]);
+const socs = [...taskCodes.keys()];
 const patternBy = new Map(pattern.map((r) => [key(r.task_name), r]));
 const pctBy = new Map(pct.map((r) => [key(r.task_name), Number(r.pct)]));
 
 const roles = {};
 for (const soc of socs) {
-  const own = tasks.filter((t) => (t['O*NET-SOC Code'] ?? '').startsWith(soc));
+  const own = tasks.filter((t) => taskCodes.get(soc).some((code) => (t['O*NET-SOC Code'] ?? '').startsWith(code)));
   let auto = 0, aug = 0, weight = 0, matched = 0;
   for (const t of own) {
     const p = patternBy.get(key(t.Task ?? '')); const w = pctBy.get(key(t.Task ?? '')) ?? 0;
@@ -76,7 +79,7 @@ for (const soc of socs) {
     if (a + g === 0) continue;
     auto += w * a / (a + g); aug += w * g / (a + g); weight += w;
   }
-  roles[soc] = { tasks: own.length, tasksWithUse: matched, automationShare: weight ? Math.round((auto / weight) * 1000) / 1000 : null };
+  roles[soc] = { taskCodes: taskCodes.get(soc), tasks: own.length, tasksWithUse: matched, automationShare: weight ? Math.round((auto / weight) * 1000) / 1000 : null };
 }
 
 const out = {
