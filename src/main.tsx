@@ -233,16 +233,18 @@ function App() {
           <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
           <button type="button" className={kind === 'team' && !inMarket ? 'active' : ''} onClick={() => start('hr')}>{t('For organisations')}</button>
         </nav>
+        <details className="workspace-mobile-menu">
+          <summary>{t('Menu')}</summary>
+          <nav aria-label={t('Main navigation')}>
+            <button type="button" onClick={() => kind === 'team' ? start('me') : go('skills')}>{t('Career path')}</button>
+            <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
+            <button type="button" onClick={() => start('hr')}>{t('For organisations')}</button>
+          </nav>
+        </details>
         <div className="workspace-utility">
           <ViewerSwitch viewer={viewer} choose={start} />
           <label className="workspace-language"><span className="sr-only">{t('Language')}</span><select value={lang} aria-label={t('Language')} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select></label>
         </div>
-      </div>
-      <div className="workspace-subnav">
-        <p>{inMarket ? t('Malaysia job market') : kind === 'team' ? t('Organisation workspace') : t('Your career path')}</p>
-        <nav aria-label={inMarket ? t('The job market') : kind === 'team' ? t('My team') : t('My career')}>
-          {(inMarket ? marketNav : kind === 'team' ? teamNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
-        </nav>
       </div>
     </header>
 
@@ -252,6 +254,9 @@ function App() {
           <h1>{t(page.title)}</h1>
           {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
         </header>}
+        <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'team' ? t('My team') : t('My career')}>
+          {(inMarket ? marketNav : kind === 'team' ? teamNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
+        </nav>
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
