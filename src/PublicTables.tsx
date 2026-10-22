@@ -1,7 +1,9 @@
 // Public Demand and Outlook views: one compact table each, with the source
 // stated once underneath instead of on every row.
+import { useEffect, useState } from 'react';
 import dosmQ1 from '../data/sources/dosm-jmi-2026-q1.json';
 import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
+import { aeiData, aiViews, msData, roleSoc } from './aiviews';
 import iloFile from '../data/sources/ilo-genai-exposure-2025.json';
 import rolesFile from '../data/roles.json';
 import lfsFile from '../data/sources/opendosm-lfs-month.json';
@@ -21,13 +23,16 @@ function LabourContext() {
   const t = useT();
   const tx = useTx();
   const lang = useLang();
-  const months = lfsFile.months as LfsMonth[];
+  // Snapshot first; the server refreshes it daily from OpenDOSM until 1 Nov (server/lfs.mjs).
+  const [lfs, setLfs] = useState<{ source: typeof lfsFile.source; months: LfsMonth[]; live?: boolean }>({ source: lfsFile.source, months: lfsFile.months as LfsMonth[] });
+  useEffect(() => { fetch('/api/lfs').then((r) => (r.ok ? r.json() : null)).then((body) => { if (body?.months?.length) setLfs(body); }).catch(() => {}); }, []);
+  const months = lfs.months;
   if (months.length === 0) return null;
   const [latest] = months;
   const yearAgo = months.find((m) => m.date.slice(0, 4) === String(Number(latest.date.slice(0, 4)) - 1) && m.date.slice(5, 7) === latest.date.slice(5, 7));
   return <div className="labour-context">
     <p>{tx('{rate} unemployment in {month}.', { rate: <strong>{latest.u_rate}%</strong>, month: monthName(latest.date, lang) })}{yearAgo ? ` ${t('{rate}% a year earlier.', { rate: yearAgo.u_rate })}` : ''} {t('{n} thousand people employed.', { n: Math.round(latest.lf_employed).toLocaleString() })}</p>
-    <p className="note">{tx('Labour Force Survey, a different measure from job ads below. Source: {src}, retrieved {date}, CC BY 4.0.', { src: <a href={lfsFile.source.url} target="_blank" rel="noreferrer">OpenDOSM</a>, date: lfsFile.source.retrievedAt })}</p>
+    <p className="note">{tx('Labour Force Survey, a different measure from job ads below. Source: {src}, retrieved {date}, CC BY 4.0.', { src: <a href={lfs.source.url} target="_blank" rel="noreferrer">OpenDOSM</a>, date: lfs.source.retrievedAt })}</p>
   </div>;
 }
 
@@ -54,14 +59,40 @@ export function DemandTable() {
 export function OutlookTable() {
   const t = useT();
   const tx = useTx();
-  const occ = new Map(iloFile.occupations.map((o) => [o.isco, o]));
-  const rows = rolesFile.roles.map((r) => ({ role: r, ilo: occ.get(r.isco) })).filter((r) => r.ilo).sort((a, b) => b.ilo!.mean - a.ilo!.mean);
-  return <section className="data-table" aria-label="Generative AI exposure by role">
+  const rows = rolesFile.roles.map((r) => ({ role: r, v: aiViews(r) })).filter((r) => r.v.ilo).sort((a, b) => b.v.ilo!.mean - a.v.ilo!.mean);
+  const aeiReady = aeiData.occupations.length > 0;
+  const level = (x: number) => (x >= 0.55 ? 'high' : x >= 0.4 ? 'mid' : 'low');
+  return <section className="data-table ai-views" aria-label="Three views of AI impact by role">
+    <p className="ai-views-intro">{t('Three independent views of how AI affects each role. Where they disagree, the 1,000 futures in Your moves try each view.')}</p>
     <p className="table-scroll-hint">{t('Swipe sideways to see all columns.')}</p>
     <table>
-      <thead><tr><th>{t('Role')}</th><th className="num">ISCO</th><th className="num">{t('Exposure')}</th><th>{t('ILO gradient')}</th></tr></thead>
-      <tbody>{rows.map(({ role, ilo }) => <tr key={role.id}><td className="cap">{role.title}</td><td className="num">{role.isco}</td><td className="num">{ilo!.mean.toFixed(2)}</td><td>{ilo!.gradient}</td></tr>)}</tbody>
+      <thead><tr>
+        <th>{t('Role')}</th>
+        <th className="num">{t('Could change')}<small>ILO</small></th>
+        <th className="num">{t('AI applicable')}<small>Microsoft</small></th>
+        <th className="num">{t('Used with AI today')}<small>Anthropic</small></th>
+        <th>{t('How AI is used')}<small>Anthropic</small></th>
+      </tr></thead>
+      <tbody>{rows.map(({ role, v }) => <tr key={role.id}>
+        <td className="cap">{role.title}<small className="soc">SOC {roleSoc.roles[role.id]?.soc}</small></td>
+        <td className="num"><span className={`ai-dot ${level(v.ilo!.mean)}`} />{v.ilo!.mean.toFixed(2)}<small>± {v.ilo!.sd.toFixed(2)}</small></td>
+        <td className="num">{v.ms ? <><span className={`ai-dot ${level(v.ms.onIlo)}`} />{v.ms.score.toFixed(2)}</> : '–'}</td>
+        <td className="num">{v.aei ? <><span className={`ai-dot ${level(v.aei.onIlo)}`} />{v.aei.observed.toFixed(2)}</> : '–'}</td>
+        <td>{v.aei?.automationShare != null
+          ? <span className="auto-split" title={t('{a}% automates the task, {b}% helps the person', { a: Math.round(v.aei.automationShare * 100), b: Math.round((1 - v.aei.automationShare) * 100) })}>
+            <span className="bar"><span style={{ width: `${v.aei.automationShare * 100}%` }} /></span>
+            {v.aei.automationShare >= 0.5 ? t('Mostly automates') : t('Mostly assists')}</span>
+          : '–'}</td>
+      </tr>)}</tbody>
     </table>
-    <p className="note">{tx('Exposure is the average share of a role’s tasks that generative AI could change (0 to 1). It does not predict job loss. Source: {src}, 2025.', { src: <a href={iloFile.source.url} target="_blank" rel="noreferrer">ILO Working Paper 140</a> })}</p>
+    <p className="note"><span className="ai-dot high" /> {t('higher')} <span className="ai-dot mid" /> {t('middle')} <span className="ai-dot low" /> {t('lower')}, {t('compared on one scale across all occupations in each source.')}</p>
+    <ul className="note ai-sources">
+      <li>{tx('ILO: share of tasks generative AI could change, mean ± spread from the source (0 to 1); not a job-loss forecast. {src}, 2025.', { src: <a href={iloFile.source.url} target="_blank" rel="noreferrer">ILO Working Paper 140</a> })}</li>
+      <li>{tx('Microsoft: AI applicability from Bing Copilot conversations, United States, January–September 2024. {src}, CC BY 4.0, retrieved {date}.', { src: <a href={msData.source.url} target="_blank" rel="noreferrer">Working with AI</a>, date: msData.source.retrievedAt })}</li>
+      <li>{aeiReady
+        ? tx('Anthropic: observed exposure and automation vs assistance from Claude conversations. {src}, CC-BY, retrieved {date}.', { src: <a href={aeiData.source.url as string} target="_blank" rel="noreferrer">Anthropic Economic Index</a>, date: aeiData.source.retrievedAt })
+        : tx('Anthropic: not imported yet ({src}).', { src: <a href={aeiData.source.url as string} target="_blank" rel="noreferrer">Anthropic Economic Index</a> })}</li>
+      <li>{t('Microsoft and Anthropic use US occupation codes (SOC); each role’s code is shown under its name.')}</li>
+    </ul>
   </section>;
 }

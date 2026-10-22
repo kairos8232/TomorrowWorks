@@ -4,12 +4,14 @@
 // Instead of two fixed scenarios, score every move in many simulated futures, each with:
 //   AI speed  t ~ uniform(0, 1): weights move in a straight line from "Gradually" (t = 0)
 //             to "Quickly" (t = 1)                                   (our assumption)
-//   exposure  for each role, ILO mean + ILO standard deviation × normal(0, 1), kept in 0..1
-//             (the ILO publishes both numbers for every occupation)
+//   exposure  which expert view is right is itself uncertain: each future picks one source
+//             at random (src/aiviews.ts). ILO: mean + ILO standard deviation × normal(0, 1);
+//             Microsoft / Anthropic: their value placed on the ILO scale. Kept in 0..1.
 //   demand    the job-ad change of one of the two DOSM quarters we have, chosen at random
 // Everything else (skills, the scoring rule, optional interests/goals) is unchanged, so
 // each future is scored with exactly the same rule as Your moves.
 // A fixed seed makes the result identical on every visit.
+import { aiSources, aiViews } from './aiviews';
 import { recommendMoves, scenarios, type DosmSnapshot, type Extras, type IloExposure, type Role, type Scenario, type TransferableSkills } from './scoring';
 
 export const FUTURES = 1000;
@@ -59,6 +61,9 @@ export function simulateFutures(input: {
   const r = rng(seed);
   const iscos = new Set(roles.map((x) => x.isco));
   const base = ilo.occupations.filter((o) => iscos.has(o.isco));
+  const sources = aiSources();
+  // Per ISCO code: the Microsoft / Anthropic values on the ILO scale (first role with that code).
+  const alt = new Map(roles.map((role) => [role.isco, aiViews(role)]));
   const scores = new Map<string, number[]>();
   const best = new Map<string, number>();
   const top3 = new Map<string, number>();
@@ -66,7 +71,12 @@ export function simulateFutures(input: {
   for (let i = 0; i < runs; i++) {
     const t = r();
     const snapshot = snapshots[Math.floor(r() * snapshots.length)];
-    const sampled: IloExposure = { ...ilo, occupations: base.map((o) => ({ ...o, mean: Math.min(1, Math.max(0, o.mean + o.sd * normal(r))) })) };
+    const source = sources[Math.floor(r() * sources.length)];
+    const sampled: IloExposure = { ...ilo, occupations: base.map((o) => {
+      const v = alt.get(o.isco);
+      const other = source === 'ms' ? v?.ms?.onIlo : source === 'aei' ? v?.aei?.onIlo : undefined;
+      return { ...o, mean: other ?? Math.min(1, Math.max(0, o.mean + o.sd * normal(r))) };
+    }) };
     const { moves } = recommendMoves(roles, currentRoleId, held, snapshot, sampled, scenarioAt(t), transferable, extras);
     const rank = new Map<string, number>();
     moves.forEach((m, k) => {

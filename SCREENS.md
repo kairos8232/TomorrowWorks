@@ -124,7 +124,8 @@ For HR / L&D managers (a fictional five-person finance team) and career centres 
 ## Job ads / AI exposure
 
 - **Job ads:** latest monthly unemployment rate from OpenDOSM as a context line (a different measure; hidden until imported), then DOSM online job ads by occupation group, Q1 → Q2 2026, one table, source stated once.
-- **AI exposure:** ILO exposure for the nine roles, one table, with the "not a job-loss forecast" note.
+- **AI impact by role** (nav *AI impact*, 22 Oct): one table, three views per role: *Could change* (ILO mean ± SD), *AI applicable* (Microsoft), *Used with AI today* and *How AI is used* (Anthropic: observed exposure; automates vs assists bar), with higher/middle/lower dots on one common scale, each role's SOC code, and one source line per view ("not imported yet" until the Anthropic import runs).
+- **Signal sources** (22 Oct): every source with what it measures, where, how often it updates, its date (read from the files), what it is used for, and an *in the score* tag for DOSM, ILO and ESCO.
 
 ## Workplace news / Skills in demand — Soon
 

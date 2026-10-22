@@ -855,3 +855,16 @@ details.course-check { padding-block:0; }
 .people-best strong { margin-left: 4px; }
 .person-panel .role-back { justify-self: start; }
 @media (max-width: 700px) { .people-list li { grid-template-columns: auto 1fr; } .people-best, .people-list .secondary-button { grid-column: 2; justify-self: start; } }
+/* AI exposure page: three views of AI impact. */
+.ai-views-intro { margin: 0 0 10px; font-size: 15px; }
+.ai-views th small, .ai-views td small { display: block; font-weight: 400; color: #5d6873; font-size: 11px; }
+.ai-views td small.soc { font-size: 11px; }
+.ai-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; background: #8a96a3; }
+.ai-dot.high { background: #a8402b; } .ai-dot.mid { background: #c9932c; } .ai-dot.low { background: #1e6b4f; }
+.auto-split { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.auto-split .bar { width: 60px; height: 8px; background: #cfe3d8; border-radius: 4px; overflow: hidden; }
+.auto-split .bar span { display: block; height: 100%; background: #a8402b; }
+.ai-sources { padding-left: 18px; display: grid; gap: 4px; }
+.signal-table td small.in-score { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #e6f0ea; color: #1e6b4f; font-size: 11px; font-weight: 700; }
+.signal-table td { vertical-align: top; }
+.signal-table td:nth-child(5) { white-space: nowrap; }

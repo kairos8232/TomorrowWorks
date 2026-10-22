@@ -1,0 +1,13 @@
+{
+ "source": {
+  "name": "Anthropic Economic Index",
+  "url": "https://huggingface.co/datasets/Anthropic/EconomicIndex",
+  "publisher": "Anthropic",
+  "licence": "CC-BY (data)",
+  "geography": "Global use of Claude; occupations in the US O*NET/SOC classification",
+  "measure": "Observed exposure per occupation; automation vs augmentation share of AI use on each occupation's tasks",
+  "retrievedAt": null
+ },
+ "occupations": [],
+ "roles": {}
+}

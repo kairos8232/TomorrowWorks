@@ -104,6 +104,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 22 Oct 2026 (14:05–15:00 MYT) — More AI-trend signals
+
+- **Three views of AI impact:** Microsoft *Working with AI* applicability (imported here from GitHub, 785 US occupations, CC BY 4.0) and the Anthropic Economic Index (importer ready; huggingface.co is blocked here, so it runs in Replit's Shell) next to ILO, mapped through SOC codes; shown on *AI impact by role* and used in the futures. The views disagree (Microsoft rates analysts more exposed than ILO), which the futures now reflect (Hakim: Financial analyst 80%).
+- **Signal sources page:** every source, what it measures, where, update rhythm, date and use.
+- **Monthly labour force:** was already imported (to Aug 2026, `d3e82a8`; I misread it earlier). The Replit server now refreshes it daily from OpenDOSM until 1 Nov, like news.
+
+---
+
 ## 22 Oct 2026 (14:20 MYT) — Person view inside Team view
 
 - Carson: Team view lacked a per-person view, then asked for it as its own page. Team view now lists the people (best move, score, *Open profile*); each profile opens as a separate page with *Back to team*, starting on the person's best move.

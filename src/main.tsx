@@ -10,10 +10,11 @@ import { advanceLearning, type CourseProgress, type LearningAction } from './lea
 import { SkillsStep } from './SkillsStep';
 import { TeamView } from './TeamView';
 import { RadarView } from './RadarView';
+import { SignalSources } from './SignalSources';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
 import './styles.css';
 
-type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending';
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
@@ -26,9 +27,10 @@ const teamNav: NavItem[] = [
 ];
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
-  { id: 'outlook', label: 'AI exposure', hint: 'How much AI could change' },
+  { id: 'outlook', label: 'AI impact', hint: 'Three views of AI by role' },
   { id: 'news', label: 'Workplace news', hint: 'Latest reported changes' },
   { id: 'trending', label: 'Future skills radar', hint: 'Skills rising or at risk' },
+  { id: 'signals', label: 'Signal sources', hint: 'Every source and its date' },
 ];
 
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
@@ -37,9 +39,10 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
-  outlook: { title: 'AI exposure by role', intro: 'How much of each role’s work generative AI could change.' },
+  outlook: { title: 'AI impact by role', intro: 'How much AI could change each role, how applicable it is, and how it is already used.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
   trending: { title: 'Future skills radar', intro: 'Which skills are gaining value as AI changes work, and where yours stand.' },
+  signals: { title: 'Signal sources', intro: 'Every data source behind TomorrowWorks: what it measures, how often it updates, and its date.' },
 };
 
 const comingSoon: Partial<Record<Screen, string>> = {
@@ -110,6 +113,7 @@ function NavIcon({ id }: { id: Screen }) {
     outlook: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3" /></>,
     news: <><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5" /></>,
     trending: <><path d="M3 17h5v-5h5V8h8m-4-4 4 4-4 4" /></>,
+    signals: <><path d="M4 18a8 8 0 0 1 16 0" /><path d="M7.5 18a4.5 4.5 0 0 1 9 0" /><circle cx="12" cy="18" r="1.2" /></>,
     home: null,
   }[id];
   return <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{shape}</svg>;
@@ -216,8 +220,9 @@ function App() {
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
+        {screen === 'signals' && <SignalSources />}
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
-        <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending'].includes(screen)} />
+        <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
       </div>
     </main>
   </div></LangProvider>;
