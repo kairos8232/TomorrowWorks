@@ -64,11 +64,10 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   </button>;
 
   return <div className="step-body skills-body">
-    <CvPanel held={profile.held} onAdd={addMany} />
     <div className="skills-intake">
     <section className="panel job-panel">
       <div><h2>{t('Your current job')}</h2>
-        <p className="note">{t('Shown as “Now” for comparison, outside the ranking.')}</p></div>
+        <p className="note">{t('Shown as “Now” beside ranked moves.')}</p></div>
       <select value={profile.currentRoleId ?? ''} onChange={(e) => update({ currentRoleId: e.target.value || null })} aria-label={t('Your current job')}>
         <option value="">{t('Not in this list')}</option>
         {roles.map((r) => <option key={r.id} value={r.id}>{roleTitle(r.title)}</option>)}
@@ -82,7 +81,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
 
     <section className="panel describe-panel">
       <h2>{t('Describe your work')}</h2>
-      <p className="note">{t('Write in English, Bahasa Malaysia or Chinese. AI suggests existing ESCO skills; you choose which to add.')}</p>
+      <p className="note">{t('Describe a task in English, Bahasa Malaysia or Chinese. Choose which suggested skills to add.')}</p>
       <form className="skill-search" onSubmit={findSkills}>
         <textarea aria-label={t('Describe your work')} value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder={t('e.g. I reconcile bank statements and prepare month-end reports')} />
         <button type="submit" className="primary-button" disabled={search.busy || !description.trim()}>{search.busy ? t('Searching…') : t('Find my skills')}</button>
@@ -92,6 +91,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     </section>
 
     </div>
+    <CvPanel held={profile.held} onAdd={addMany} />
 
     <section className="panel profile-trio selected-skills">
     <div className="trio-cols">
@@ -103,7 +103,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     </div>
     <div className="trio-col" role="group" aria-labelledby="enjoy">
       <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
-      <p className="note">{t('Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
+      <p className="note">{t('Choose up to two. Turn on Interests in Your moves to use them in ranking.')}</p>
       <div className="choice-list">{interestTypes.map((type) => {
         const on = profile.interests.includes(type);
         const full = !on && profile.interests.length >= 2;
@@ -116,7 +116,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     </div>
     <div className="trio-col" role="group" aria-labelledby="contribute">
       <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="count">{t('optional')}</span></h2>
-      <p className="note">{t('UN Sustainable Development Goals. Pick up to two. They only change your ranking if you switch them on in Your moves.')}</p>
+      <p className="note">{t('Choose up to two UN goals. Turn on Goals in Your moves to use them in ranking.')}</p>
       <div className="choice-list">{sdgData.pickerGoals.map((g) => {
         const info = sdgData.goals[g];
         const status = goalStatus(roles, g);

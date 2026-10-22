@@ -1257,6 +1257,32 @@ details.course-check { padding-block:0; }
 .cv-results .cv-from { display: block; margin-top: 3px; font-style: italic; }
 @media (max-width: 760px) { .cv-head, .cv-paste { grid-template-columns: 1fr; } }
 
+/* Your skills: put the three ways to add skills together before personal preferences. */
+.skills-body { grid-template-columns: minmax(0, 2.15fr) minmax(330px, 1fr); align-items: stretch; }
+.skills-body .skills-intake { grid-column: 1; grid-row: 1; align-items: stretch; }
+.skills-body .cv-panel { grid-column: 2; grid-row: 1; align-content: start; }
+.skills-body .cv-head { grid-template-columns: 1fr; align-items: start; }
+.skills-body .cv-actions { gap: 8px 12px; }
+.skills-body .selected-skills { grid-column: 1 / -1; }
+.skills-body .trio-cols { grid-template-columns: .9fr 1.1fr 1.1fr; }
+.skills-body .choice-list { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+.skills-body .choice-list .interest-choice { min-width: 0; }
+@media (max-width: 1100px) {
+  .skills-body .trio-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skills-body .trio-col:first-child { grid-column: 1 / -1; }
+  .skills-body .trio-col:nth-child(2) { padding: 22px 14px 0 0; border-left: 0; border-top: 1px solid #e3e7e3; }
+  .skills-body .trio-col:last-child { padding: 22px 0 0 14px; }
+}
+@media (max-width: 1180px) {
+  .skills-body { grid-template-columns: 1fr; }
+  .skills-body .skills-intake, .skills-body .cv-panel, .skills-body .selected-skills { grid-column: 1; grid-row: auto; }
+}
+@media (max-width: 620px) {
+  .skills-body .trio-cols { grid-template-columns: 1fr; }
+  .skills-body .trio-col:last-child { padding: 22px 0 0; }
+  .skills-body .choice-list { grid-template-columns: 1fr; }
+}
+
 /* Data saver switch (sidebar) and loading note for on-demand screens. */
 .saver-toggle { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 8px; padding: 8px 10px; border: 1px solid #d9ded9; border-radius: 10px; background: #ffffff; color: #3a4450; text-align: left; }
 .saver-toggle strong { display: block; font-size: 14px; }
