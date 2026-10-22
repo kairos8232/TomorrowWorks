@@ -802,7 +802,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .individual-plan .plan-learning h2 { font-size: clamp(24px,2.3vw,32px); line-height: 1.15; }
 .individual-plan .plan-learning-intro { font-size: 16px; }
 .individual-plan .plan-total { display: inline-block; margin-top: 2px; padding: 0; background: transparent; color: #4c5c52; }
-.individual-plan .next-learning { margin: 18px 0 4px; padding: 20px; border-color: #9fbbaa; border-left: 4px solid #1e6b4f; border-radius: 10px; background: #f7faf8; }
+.individual-plan .next-learning { margin: 18px 0 4px; padding: 20px; border-color: #9fbbaa; border-radius: 10px; background: #f7faf8; }
 .individual-plan .next-learning > div:first-child { flex: 1 1 280px; }
 .individual-plan .next-learning-actions { display: flex; flex: 0 0 auto; align-items: center; flex-wrap: wrap; gap: 10px; }
 .individual-plan .next-learning-skills { flex-basis: 100%; margin: 0; }
