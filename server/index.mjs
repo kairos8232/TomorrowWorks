@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { loadSkillIndex, nearestSkills } from './search.mjs';
 import { readFileSync } from 'node:fs';
 import { briefService, newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
+import { lfsService } from './lfs.mjs';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -24,6 +25,7 @@ const { RUNPOD_API_KEY, RUNPOD_ENDPOINT_ID } = process.env;
 const PORT = Number(process.env.PORT) || 5000;
 const RUNPOD_BASE_URL = process.env.RUNPOD_BASE_URL ?? 'https://api.runpod.ai/v2';
 const MAX_TEXT = 500;
+const lfs = lfsService({ snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'opendosm-lfs-month.json'), 'utf8')) });
 const news = newsService({
   snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'gdelt-news.json'), 'utf8')),
   topics: JSON.parse(readFileSync(join(root, 'data', 'sources', 'news-topics.json'), 'utf8')),
@@ -108,6 +110,7 @@ createServer(async (req, res) => {
     if (req.url === '/api/health') {
       return send(res, 200, { skills: index.items.length, model: index.model, runpod: Boolean(RUNPOD_API_KEY && RUNPOD_ENDPOINT_ID) });
     }
+    if (req.url === '/api/lfs') return send(res, 200, await lfs.get());
     if (req.url === '/api/news') {
       const body = await news.get();
       return send(res, 200, { ...body, brief: brief.for(body) });
