@@ -316,15 +316,15 @@ function App() {
         <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
           {!isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
-          <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
           {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
+          <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
         </nav>
         <details className="workspace-mobile-menu">
           <summary>{t('Menu')}</summary>
           <nav aria-label={t('Main navigation')}>
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
-            <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
             {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
+            <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
           </nav>
         </details>
         <div className="workspace-utility">

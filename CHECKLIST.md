@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## UI refinement — 21 Oct 2026
 
+- [x] Put the viewer's Career path or For organisations section before Job market in desktop and mobile workspace navigation, and add the workspace-style bottom divider to the Home header. Check Home, Aina, and Puan Rosnah in the live browser; production build passes.
 - [x] Simplify Region view's purpose section: remove connector arrows and repeated audience copy, tighten the three cards, and let the main question use the full panel width. Review the desktop reference and responsive CSS; production build passes.
 - [x] Show Career path only for individual viewers and For organisations only for team/region viewers in desktop and mobile workspace navigation. Check Aina, Puan Rosnah, Encik Lim, and Encik Faizal in the live desktop view, including returning from Job market without changing the viewer; production build passes.
 - [x] Show the selected viewer's name above a small Individual, Team, or Region label in the View as switcher. Verify Puan Rosnah and Encik Lim in the live desktop Team view, check the responsive switcher rules, and run the production build.
