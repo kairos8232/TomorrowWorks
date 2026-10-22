@@ -156,9 +156,10 @@ function ViewerSwitch({ viewer, choose }: { viewer: ViewerId; choose: (v: Viewer
   const t = useT();
   const ref = useRef<HTMLDetailsElement>(null);
   const current = viewerById(viewer);
+  const sampleLabel = current.kind === 'team' ? t('Sample team') : current.kind === 'me' ? t('My path') : `${t('Sample')} — ${current.name}`;
   return <details className="viewer-switch" ref={ref}>
-    <summary><span className="avatar" aria-hidden="true">{current.name === 'Me' ? t('Me')[0] : current.name.split(' ').pop()![0]}</span>
-      <span><small>{t('Viewing as')}</small><strong>{current.name === 'Me' ? t('Me') : current.name}</strong></span></summary>
+    <summary><span className="avatar" aria-hidden="true">{current.kind === 'team' ? 'T' : current.kind === 'me' ? 'M' : current.name[0]}</span>
+      <span><small>{t('Try an example')}</small><strong>{sampleLabel}</strong></span></summary>
     <ul>{viewers.map((v) => <li key={v.id}><button type="button" aria-current={v.id === viewer ? 'true' : undefined} onClick={() => { ref.current!.open = false; choose(v.id); }}>
       <strong>{v.id === 'me' ? t('Me (my own skills)') : v.name}</strong><small>{t(v.group)}</small>
     </button></li>)}</ul>
@@ -228,9 +229,9 @@ function App() {
       <div className="workspace-header-main">
         <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
-          <button type="button" className={!inMarket && kind !== 'team' ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>
+          <button type="button" className={!inMarket && kind !== 'team' ? 'active' : ''} onClick={() => kind === 'team' ? start('me') : go('skills')}>{t('Career path')}</button>
           <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
-          <button type="button" className={kind === 'team' ? 'active' : ''} onClick={() => start('hr')}>{t('For organisations')}</button>
+          <button type="button" className={kind === 'team' && !inMarket ? 'active' : ''} onClick={() => start('hr')}>{t('For organisations')}</button>
         </nav>
         <div className="workspace-utility">
           <ViewerSwitch viewer={viewer} choose={start} />
@@ -238,9 +239,9 @@ function App() {
         </div>
       </div>
       <div className="workspace-subnav">
-        <p>{kind === 'team' ? t('Organisation workspace') : inMarket ? t('Malaysia job market') : t('Your career path')}</p>
-        <nav aria-label={kind === 'team' ? t('My team') : inMarket ? t('The job market') : t('My career')}>
-          {(kind === 'team' ? teamNav : inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
+        <p>{inMarket ? t('Malaysia job market') : kind === 'team' ? t('Organisation workspace') : t('Your career path')}</p>
+        <nav aria-label={inMarket ? t('The job market') : kind === 'team' ? t('My team') : t('My career')}>
+          {(inMarket ? marketNav : kind === 'team' ? teamNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
         </nav>
       </div>
     </header>
