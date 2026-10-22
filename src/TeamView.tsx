@@ -72,13 +72,24 @@ function PersonPanel({ member, target, onPickRole, onClose }: { member: Member; 
           {gaps.length > 6 && <button type="button" className="text-button" onClick={() => setAllGaps(!allGaps)}>{allGaps ? t('Show fewer') : t('Show all {n}', { n: gaps.length })}</button>}
         </div>
         <div>
-          <h4>{t('Start with')}</h4>
+          <div className="start-head">
+            <h4>{t('Start with')}</h4>
+            {plan.steps.length > 0 && <span className="start-total">{t('About {h} hours', { h: plan.statedHours })}</span>}
+          </div>
           {steps.length === 0 ? <p className="note">{t('No course found yet')}</p>
-            : <ol className="person-steps">{steps.map((s) => <li key={s.key}>
-              <a href={s.url} target="_blank" rel="noreferrer">{s.title}</a>
-              <small>{s.ai ? `${t('AI suggestion')}, ` : ''}{t('covers {n} of these skills', { n: s.n })}{s.time ? `, ${s.time}` : ''}</small>
+            : <ol className="start-steps">{steps.map((s, k) => <li key={s.key} className={k === 0 ? 'first' : ''}>
+              <span className="start-num" aria-hidden="true">{k + 1}</span>
+              <div className="start-body">
+                <a href={s.url} target="_blank" rel="noreferrer" className="start-title">{s.title}</a>
+                <span className="start-meta">
+                  {s.time && <span className="chip">{s.time}</span>}
+                  <span>{t('covers {n} of these skills', { n: s.n })}</span>
+                  {s.ai && <span className="chip ai">{t('AI suggestion')}</span>}
+                </span>
+                {k === 0 && <a href={s.url} target="_blank" rel="noreferrer" className="primary-button start-open">{t('Open course')}</a>}
+              </div>
             </li>)}</ol>}
-          {plan.steps.length > 0 && <p className="note">{t('Estimated time: {h} hours', { h: plan.statedHours })} {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}.</p>}
+          {plan.steps.length > 0 && <p className="note start-note">{t('Total of the {n} checked courses, as stated by each provider.', { n: plan.steps.length })}</p>}
         </div>
       </div>
     </>}

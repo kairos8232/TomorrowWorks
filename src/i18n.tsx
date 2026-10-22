@@ -770,6 +770,9 @@ const dict: Record<string, Entry> = {
   'Start with': { ms: 'Mulakan dengan', zh: '从这里开始' },
   'covers {n} of these skills': { ms: 'meliputi {n} daripada kemahiran ini', zh: '涵盖其中 {n} 项技能' },
   '{n}, including {m} related': { ms: '{n}, termasuk {m} berkaitan', zh: '{n} 项，其中 {m} 项相关' },
+  'About {h} hours': { ms: 'Kira-kira {h} jam', zh: '约 {h} 小时' },
+  'Open course': { ms: 'Buka kursus', zh: '打开课程' },
+  'Total of the {n} checked courses, as stated by each provider.': { ms: 'Jumlah {n} kursus yang disemak, seperti yang dinyatakan oleh setiap penyedia.', zh: '{n} 门已核对课程的总时长，按各提供方公布。' },
 };
 
 const LangContext = createContext<Lang>('en');
