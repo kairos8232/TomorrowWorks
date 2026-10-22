@@ -265,19 +265,19 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
           <button type="button" className="text-button" onClick={onEditSkills}>{t('Edit skills')}</button>
         </div>}
       </div>
-      <div className="moves-intro-context">
-        <p className="moves-description">{t('Compare roles by skill fit, demand and AI change.')}</p>
-        <div className="moves-update">
-          <p><strong>{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</strong> · {rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
-          <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
-            <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
-        </div>
-      </div>
+      <p className="moves-description">{t('Compare roles by skill fit, demand and AI change.')}</p>
     </header>
 
     <div className="moves-workbench">
       <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
-      <section className="moves-settings" aria-labelledby="moves-settings-title">
+      <div className="moves-sidebar">
+        <section className="moves-update" aria-labelledby="moves-update-title">
+          <h2 id="moves-update-title">{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</h2>
+          <p>{rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
+          <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
+            <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
+        </section>
+        <section className="moves-settings" aria-labelledby="moves-settings-title">
         <h2 id="moves-settings-title">{t('Adjust ranking')}</h2>
         <div className="ledger-controls">
         <fieldset><legend>{t('Job-ad data')}</legend>
@@ -292,7 +292,8 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
         </fieldset>
         </div>
         <p className="note">{t(scenario.assumption)} {extrasOn === 1 ? t('Your choices count for one sixth of each score.') : extrasOn === 2 ? t('Your interests and goals together count for two sevenths of each score.') : ''}</p>
-      </section>
+        </section>
+      </div>
     </div>
 
     <section className="ledger" aria-label="Ranked moves">
