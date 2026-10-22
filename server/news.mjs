@@ -4,7 +4,7 @@
 //   the last day of the hackathon), with the same query and topic words as
 //   scripts/import_gdelt_news.py (data/sources/news-topics.json).
 // - Keeps the result in memory only: nothing is written to disk or committed.
-// - If GDELT fails, is slow or rate-limits, the committed snapshot
+// - If GDELT fails, takes over 45 s or rate-limits, the committed snapshot
 //   (data/sources/gdelt-news.json) is served, and the next try waits 30 minutes
 //   (a single 429 should not keep old news up for hours; still far below GDELT's limits).
 // News is context only and never changes any score.
@@ -55,7 +55,7 @@ export function newsService({ snapshot, topics, fetchImpl = fetch, now = () => D
 
   async function refresh() {
     const params = new URLSearchParams({ query: `sourcecountry:MY ${gdeltQuery(topics)}`, mode: 'artlist', format: 'json', maxrecords: '100', timespan: '7d', sort: 'datedesc' });
-    const res = await fetchImpl(`${API}?${params}`, { headers: { 'User-Agent': 'TomorrowWorks hackathon prototype' }, signal: AbortSignal.timeout(15_000) });
+    const res = await fetchImpl(`${API}?${params}`, { headers: { 'User-Agent': 'TomorrowWorks hackathon prototype' }, signal: AbortSignal.timeout(45_000) });   // the full topic query can take 20-40 s (23 Oct: 15 s timed out)
     if (!res.ok) throw new Error(`GDELT responded ${res.status}`);
     const text = await res.text();
     const articles = toArticles(JSON.parse(text || '{}').articles ?? [], topics);
