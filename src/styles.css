@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap');
+/* Web font is loaded from src/dataSaver.tsx unless Data saver is on; system fonts are the fallback. */
 
-:root { font-family: 'Schibsted Grotesk', sans-serif; font-size: 16px; color: #1c2430; background: #f7f8f6; font-synthesis: none; }
+:root { font-family: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; color: #1c2430; background: #f7f8f6; font-synthesis: none; }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
 button { font: inherit; cursor: pointer; }
 button:focus-visible, a:focus-visible, .nav-item:focus-visible, .market-card:focus-visible { outline: 3px solid #2f8a66; outline-offset: 3px; }
 .app-shell { min-height: 100vh; display: grid; grid-template-columns: 264px minmax(0, 1fr); }
 .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: #eef0ec; color: #1c2430; border-right: 1px solid #d9ded9; padding: 28px 16px 18px; display: flex; flex-direction: column; }
-.brand { display: flex; align-items: center; font: 800 21px 'Schibsted Grotesk', sans-serif; letter-spacing: -.03em; padding: 2px 10px; }
+.brand { display: flex; align-items: center; font: 800 21px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: -.03em; padding: 2px 10px; }
 .brand-accent { color: #1e6b4f; }
-.nav-group-label { color: #5d6873; font: 700 12px 'Schibsted Grotesk', sans-serif; letter-spacing: .06em; margin: 0 10px 8px; }
+.nav-group-label { color: #5d6873; font: 700 12px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: .06em; margin: 0 10px 8px; }
 .nav-list { display: grid; gap: 3px; }
 .nav-item { width: 100%; border: 1px solid transparent; border-radius: 10px; background: transparent; color: #3a4450; padding: 10px; display: flex; align-items: center; gap: 11px; text-align: left; }
 .nav-item:hover { background: #ffffff; }
@@ -28,7 +28,7 @@ button:focus-visible, a:focus-visible, .nav-item:focus-visible, .market-card:foc
 .career-button:hover { background: #17563f; }
 .content-wrap { max-width: 1600px; margin: 0 auto; padding: clamp(24px, 3vw, 48px); }
 .hero { padding: 16px 0 24px; }
-h1, h2 { font-family: 'Schibsted Grotesk', sans-serif; }
+h1, h2 { font-family: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
 h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-spacing: -.03em; }
 .hero p { max-width: 960px; color: #5d6873; font-size: clamp(17px, 1.2vw, 19px); line-height: 1.6; margin: 16px 0 0; text-wrap: pretty; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 20px; }
@@ -37,11 +37,11 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .browse-controls { background: white; border: 1px solid #d9ded9; border-radius: 10px; padding: 18px 20px; margin-bottom: 24px; }
 .browse-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .browse-fields label { display: grid; gap: 7px; color: #3a4450; font-size: 14px; font-weight: 700; }
-.browse-fields input, .browse-fields select { min-width: 0; width: 100%; border: 1px solid #c5ccc6; border-radius: 9px; background: #fbfcfa; color: #1c2430; padding: 10px 12px; font: 400 16px 'Schibsted Grotesk', sans-serif; }
+.browse-fields input, .browse-fields select { min-width: 0; width: 100%; border: 1px solid #c5ccc6; border-radius: 9px; background: #fbfcfa; color: #1c2430; padding: 10px 12px; font: 400 16px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
 .browse-fields input:focus, .browse-fields select:focus { outline: 2px solid #9cc7b2; border-color: #1e6b4f; }
 .scope-status { margin: 12px 0 0; color: #5d6873; font-size: 14px; line-height: 1.5; }
 .work-card { display: flex; align-items: center; gap: 20px; background: white; padding: 28px; border: 1px solid #d9ded9; border-radius: 12px;  }
-.card-icon { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: #e6f0ea; color: #1e6b4f; font: 800 19px 'Schibsted Grotesk', sans-serif; }
+.card-icon { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: #e6f0ea; color: #1e6b4f; font: 800 19px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
 .work-card h2 { margin: 0 0 6px; font-size: 21px; }
 .work-card p { margin: 0; color: #5d6873; font-size: clamp(16px, 1.05vw, 18px); line-height: 1.6; }
 .demo-entry { margin-top: 18px; }
@@ -49,7 +49,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .market-card { background: white; border: 1px solid #d9ded9; border-radius: 12px; padding: 24px;  }
 .market-card { width: 100%; text-align: left; }
 .market-card:hover, .market-card:focus-visible { border-color: #1e6b4f; outline: 2px solid #cfe3d7; }
-.market-label { color: #5d6873; font: 600 14px 'Schibsted Grotesk', sans-serif; }
+.market-label { color: #5d6873; font: 600 14px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
 .market-card h2 { font-size: 21px; margin: 15px 0 10px; }
 .market-card p { color: #5d6873; font-size: clamp(16px, 1.05vw, 18px); line-height: 1.6; margin: 0; text-wrap: pretty; }
 .card-link { display: inline-block; margin-top: 20px; color: #1e6b4f; font-size: 15px; font-weight: 700; }
@@ -72,22 +72,22 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .profile-panel form { display: grid; gap: 18px; }
 .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .profile-panel label { display: grid; gap: 8px; font-size: 14px; font-weight: 700; color: #3a4450; }
-.profile-panel input, .profile-panel textarea, .profile-panel select { width: 100%; border: 1px solid #c5ccc6; border-radius: 10px; padding: 12px 13px; font: 400 16px 'Schibsted Grotesk', sans-serif; color: #1c2430; background: #fbfcfa; }
+.profile-panel input, .profile-panel textarea, .profile-panel select { width: 100%; border: 1px solid #c5ccc6; border-radius: 10px; padding: 12px 13px; font: 400 16px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #1c2430; background: #fbfcfa; }
 .profile-panel input:focus, .profile-panel textarea:focus, .profile-panel select:focus { outline: 2px solid #9cc7b2; border-color: #1e6b4f; }
 .profile-panel label small { color: #5d6873; font-size: 14px; font-weight: 400; line-height: 1.45; }
 .profile-panel form > .primary-button { justify-self: start; margin-top: 2px; }
 .form-error { margin: 0; color: #a8402b; background: #f6e7e2; border-radius: 8px; padding: 10px 12px; font-size: 14px; }
 .profile-review { margin-top: 30px; border-top: 1px solid #d9ded9; padding-top: 24px; }
-.review-label { color: #5d6873; font: 600 14px 'Schibsted Grotesk', sans-serif; }
-.profile-review h3 { font: 800 22px 'Schibsted Grotesk', sans-serif; margin: 7px 0 5px; }
+.review-label { color: #5d6873; font: 600 14px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.profile-review h3 { font: 800 22px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; margin: 7px 0 5px; }
 .profile-review p { color: #5d6873; font-size: 16px; line-height: 1.6; margin: 0 0 12px; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0; }
 .skill-tag { padding: 6px 9px; border-radius: 7px; background: #e6f0ea; color: #1e6b4f; font-size: 14px; font-weight: 700; }
 .profile-review .review-interests { margin-bottom: 16px; }
 .profile-context { margin-top: 9px !important; color: #1e6b4f !important; }
 .gap-results { margin-top: 28px; border-top: 1px solid #d9ded9; padding-top: 24px; }
-.gap-results h3 { font: 800 22px 'Schibsted Grotesk', sans-serif; margin: 8px 0; }
-.gap-results h4 { font: 800 16px 'Schibsted Grotesk', sans-serif; margin: 0 0 10px; }
+.gap-results h3 { font: 800 22px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; margin: 8px 0; }
+.gap-results h4 { font: 800 16px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; margin: 0 0 10px; }
 .gap-results p { color: #5d6873; font-size: 16px; line-height: 1.6; }
 .gap-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 22px 0; }
 .gap-grid > div, .credential-note { background: #fbfcfa; border: 1px solid #d9ded9; border-radius: 13px; padding: 18px; }
@@ -135,7 +135,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 
 /* Role matches: a ranked ledger. Colour carries meaning only:
    green = held or rising, red = to build or falling. */
-.brand { font: 800 22px 'Schibsted Grotesk', sans-serif; letter-spacing: -.03em; padding: 2px 10px; }
+.brand { font: 800 22px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: -.03em; padding: 2px 10px; }
 .note { color: #5d6873; font-size: 14px; line-height: 1.55; }
 .ledger { background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 28px); }
 .ledger-controls { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: flex-end; }
@@ -304,7 +304,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .home h2 { font-size: 22px; margin: 0 0 14px; }
 .home-how ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: step; }
 .home-how li { counter-increment: step; border-top: 2px solid #1c2430; padding-top: 12px; line-height: 1.55; color: #3a4450; }
-.home-how li::before { content: counter(step); display: block; font: 800 28px 'Schibsted Grotesk', sans-serif; color: #1e6b4f; margin-bottom: 6px; }
+.home-how li::before { content: counter(step); display: block; font: 800 28px 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #1e6b4f; margin-bottom: 6px; }
 .home-how strong { color: #1c2430; }
 .home-aina { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 30px); }
 .home-aina p { line-height: 1.6; color: #3a4450; margin: 0; }
@@ -905,3 +905,14 @@ details.course-check { padding-block:0; }
 .cv-results small { color: #5d6873; font-size: 13px; }
 .cv-results .cv-from { display: block; margin-top: 3px; font-style: italic; }
 @media (max-width: 760px) { .cv-head, .cv-paste { grid-template-columns: 1fr; } }
+
+/* Data saver switch (sidebar) and loading note for on-demand screens. */
+.saver-toggle { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 8px; padding: 8px 10px; border: 1px solid #d9ded9; border-radius: 10px; background: #ffffff; color: #3a4450; text-align: left; }
+.saver-toggle strong { display: block; font-size: 14px; }
+.saver-toggle small { display: block; font-size: 12px; color: #5d6873; }
+.saver-track { flex: none; width: 34px; height: 20px; border-radius: 10px; background: #c5ccc6; position: relative; transition: background .15s; }
+.saver-track span { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #ffffff; transition: transform .15s; }
+.saver-toggle.on .saver-track { background: #1e6b4f; }
+.saver-toggle.on .saver-track span { transform: translateX(14px); }
+@media (prefers-reduced-motion: reduce) { .saver-track, .saver-track span { transition: none; } }
+.loading-note { padding: 24px 0; }

@@ -876,6 +876,11 @@ const dict: Record<string, Entry> = {
   'No text found in this PDF (it may be a scanned image). Paste the text instead.': { ms: 'Tiada teks dalam PDF ini (mungkin imej imbasan). Tampal teksnya.', zh: '此 PDF 中没有文本（可能是扫描图片）。请改为粘贴文本。' },
   'Use a PDF or .txt file, or paste the text.': { ms: 'Gunakan fail PDF atau .txt, atau tampal teksnya.', zh: '请使用 PDF 或 .txt 文件，或粘贴文本。' },
   'Could not read this file. Paste the text instead.': { ms: 'Fail ini tidak dapat dibaca. Tampal teksnya.', zh: '无法读取此文件。请改为粘贴文本。' },
+  'Data saver': { ms: 'Penjimat data', zh: '省流量模式' },
+  'On: system fonts, live feeds on request': { ms: 'Hidup: fon sistem, suapan langsung bila diminta', zh: '开启：使用系统字体，实时内容按需加载' },
+  'Off': { ms: 'Tutup', zh: '关闭' },
+  'Loading…': { ms: 'Memuatkan…', zh: '加载中…' },
+  'Load today’s headlines': { ms: 'Muatkan tajuk berita hari ini', zh: '加载今日新闻' },
 };
 
 const LangContext = createContext<Lang>('en');

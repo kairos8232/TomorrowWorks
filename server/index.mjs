@@ -17,6 +17,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cvSuggestions, loadSkillIndex, nearestSkills } from './search.mjs';
 import { readFileSync } from 'node:fs';
+import { gzipSync } from 'node:zlib';
 import { briefService, newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
 import { lfsService } from './lfs.mjs';
 
@@ -94,18 +95,33 @@ async function readJson(req, limit = 10_000) {
 
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
 
+// Low bandwidth: text files are sent gzip-compressed (about a quarter of the size) and
+// built files with a content hash in their name (dist/assets/) are cached for a year,
+// so a repeat visit downloads almost nothing. Compressed copies are kept in memory.
+const gzipCache = new Map();
+const compressible = new Set(['.html', '.js', '.mjs', '.css', '.json', '.svg']);
+function sendFile(req, res, file, data) {
+  const ext = extname(file);
+  const headers = { 'Content-Type': types[ext] ?? 'application/octet-stream', 'Vary': 'Accept-Encoding',
+    'Cache-Control': file.includes(`${join('dist', 'assets')}`) ? 'public, max-age=31536000, immutable' : 'no-cache' };
+  if (compressible.has(ext) && /\bgzip\b/.test(req.headers['accept-encoding'] ?? '')) {
+    if (!gzipCache.has(file)) gzipCache.set(file, gzipSync(data, { level: 9 }));
+    res.writeHead(200, { ...headers, 'Content-Encoding': 'gzip' });
+    return res.end(gzipCache.get(file));
+  }
+  res.writeHead(200, headers);
+  res.end(data);
+}
+
 async function serveStatic(req, res) {
   const path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
   const file = normalize(join(dist, path === '/' ? 'index.html' : path));
   if (!file.startsWith(dist)) return send(res, 400, { error: 'Bad path' });
   try {
-    const data = await readFile(file);
-    res.writeHead(200, { 'Content-Type': types[extname(file)] ?? 'application/octet-stream' });
-    res.end(data);
+    sendFile(req, res, file, await readFile(file));
   } catch {
-    const html = await readFile(join(dist, 'index.html')); // single-page app fallback
-    res.writeHead(200, { 'Content-Type': types['.html'] });
-    res.end(html);
+    const index = join(dist, 'index.html'); // single-page app fallback
+    sendFile(req, res, index, await readFile(index));
   }
 }
 

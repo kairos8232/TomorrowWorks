@@ -587,3 +587,7 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 - `src/cv.ts` reads PDF (pdf.js 5.7.284, Apache-2.0, loaded only when a PDF is chosen) or text, splits lines, removes contact lines and headings; `src/CvPanel.tsx` shows the lines to be sent (removable), calls `/api/cv-skills`, and lists suggestions as tick boxes with the source line. Server: `cvSuggestions` in `server/search.mjs`; `.mjs` now served as JavaScript (pdf.js worker).
 - Checked in Chromium with a fictional PDF against a local stand-in for RunPod (word overlap, so match quality was not tested). 104 tests pass. Open: check real match quality on the live app.
 
+## 22 Oct 2026 (afternoon): low-bandwidth mode
+- Brief extra "low-bandwidth, mobile-friendly": the server sent files uncompressed (about 1.1 MB on a first visit). Now gzip plus a one-year cache for hashed assets, lazy-loaded screens (PlanStep, TeamView, tables, news, radar, sources), and a *Data saver* switch (system fonts, live feeds on request; on by default when the device asks to save data). Measured first visit: 229 KB. 104 tests pass.
+- Next (Carson chose 22 Oct): region SDG view = people → teams → region (no open state-by-occupation data exists: data.gov.my dataset is empty, OpenDOSM has none, DOSM JMI is national); fairness audit of the CV/description intake on RunPod (identity words must not change suggested skills; method after Wilson & Caliskan 2024, arXiv 2407.20371).
+

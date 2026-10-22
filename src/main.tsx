@@ -1,18 +1,23 @@
-import { useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ainaProfile, emptyProfile, ilo, personaProfile, roles, snapshots, sourceLinks, teams, transferable, viewerById, viewers, type PersonaId, type Profile, type ViewerId } from './data';
 import { MovesStep, SourcesFooter } from './MovesStep';
-import { DemandTable, OutlookTable } from './PublicTables';
 import { recommendMoves, scenarios } from './scoring';
-import { NewsView } from './NewsView';
-import { PlanStep } from './PlanStep';
 import { advanceLearning, type CourseProgress, type LearningAction } from './learningCheck';
 import { SkillsStep } from './SkillsStep';
-import { TeamView } from './TeamView';
-import { RadarView } from './RadarView';
-import { SignalSources } from './SignalSources';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
+import { applyFonts, DataSaverProvider, initialDataSaver, saveDataSaver } from './dataSaver';
 import './styles.css';
+
+// Screens after the first steps load on demand, with their data (low bandwidth: the first visit
+// downloads only Home, Your skills and Your moves).
+const PlanStep = lazy(() => import('./PlanStep').then((m) => ({ default: m.PlanStep })));
+const TeamView = lazy(() => import('./TeamView').then((m) => ({ default: m.TeamView })));
+const DemandTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.DemandTable })));
+const OutlookTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.OutlookTable })));
+const NewsView = lazy(() => import('./NewsView').then((m) => ({ default: m.NewsView })));
+const RadarView = lazy(() => import('./RadarView').then((m) => ({ default: m.RadarView })));
+const SignalSources = lazy(() => import('./SignalSources').then((m) => ({ default: m.SignalSources })));
 
 type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
 
@@ -177,6 +182,9 @@ function App() {
     try { const saved = localStorage.getItem('tw-lang'); return saved === 'ms' || saved === 'zh' ? saved : 'en'; } catch { return 'en'; }
   });
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem('tw-lang', l); } catch { /* storage unavailable */ } };
+  const [saver, setSaver] = useState(initialDataSaver);
+  useEffect(() => applyFonts(saver), [saver]);
+  const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
   const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
     const v = viewerById(who);
@@ -190,7 +198,7 @@ function App() {
   const page = screen === 'home' ? null : titles[screen];
 
   const t = translate(lang);
-  return <LangProvider value={lang}><div className="app-shell">
+  return <LangProvider value={lang}><DataSaverProvider value={saver}><div className="app-shell">
     <aside className="sidebar" aria-label="Navigation">
       <button type="button" className="brand" onClick={() => go('home')}>Tomorrow<span className="brand-accent">Works</span></button>
       <ViewerSwitch viewer={viewer} choose={start} />
@@ -199,6 +207,10 @@ function App() {
         : <NavGroup label="My career" items={careerNav} screen={screen} go={go} />}
       <NavGroup label="The job market" items={marketNav} screen={screen} go={go} />
       <label className="lang-pick"><svg className="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></svg><span>{t('Language')}</span><select value={lang} aria-label={t('Language')} onChange={(e) => setLang(e.target.value as Lang)}>{languages.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}</select><svg className="lang-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m2 4 4 4 4-4" /></svg></label>
+      <button type="button" className={`saver-toggle${saver ? ' on' : ''}`} role="switch" aria-checked={saver} onClick={toggleSaver}>
+        <span className="saver-track" aria-hidden="true"><span /></span>
+        <span><strong>{t('Data saver')}</strong><small>{saver ? t('On: system fonts, live feeds on request') : t('Off')}</small></span>
+      </button>
     </aside>
 
     <main className="main-content">
@@ -207,6 +219,7 @@ function App() {
           <h1>{t(page.title)}</h1>
           {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
         </header>}
+        <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
         {screen === 'home' && <Home start={start} />}
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
@@ -221,11 +234,12 @@ function App() {
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
         {screen === 'signals' && <SignalSources />}
+        </Suspense>
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
         <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
       </div>
     </main>
-  </div></LangProvider>;
+  </div></DataSaverProvider></LangProvider>;
 }
 
 createRoot(document.getElementById('root')!).render(<App />);

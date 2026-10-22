@@ -345,7 +345,7 @@ These are ideas from the Domain 1 brief, not submission blockers. Pick them only
 
 - [ ] Employer view with a team skills-gap heatmap and group learning plan.
 - [ ] Automatic re-planning when a refreshed trend signal changes a recommendation.
-- [ ] Additional language support and a low-bandwidth mode.
+- [x] Additional language support and a low-bandwidth mode. (EN/BM/中文 on every screen, translations still to be reviewed; 22 Oct: screens after the first steps load on demand, server sends gzip and caches built files for a year, first visit measured at 229 KB through `server/index.mjs` (was about 1.1 MB uncompressed); *Data saver* switch in the sidebar (starts on when the device asks to save data) skips the web font and live news/labour-force requests.)
 - [ ] Learner progress tracking or skill badges.
 - [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; the focused "How ranking works" view states the limits.)
 - [x] Aggregated SDG contribution view for a person, organisation, or region. (Your plan: per person; Team view: per team or class.)

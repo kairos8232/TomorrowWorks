@@ -31,6 +31,10 @@ My career (sidebar navigation)           The job market (browse any time)
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
 
+## Data saver (sidebar, 22 Oct)
+
+- Switch under the language picker. On: no web font (system fonts), news and labour-force panels show the bundled snapshot and fetch live data only on request (*Load today's headlines*). Starts on when the browser reports save-data; the choice is remembered in this browser. Independently, screens other than Home, Your skills and Your moves load on demand, and the server gzips text files and caches `dist/assets/` for a year. First visit measured at 229 KB (Chromium, 390 px, via `server/index.mjs`, font excluded because it is blocked in Claude's workspace).
+
 ## Language (sidebar)
 
 - A compact globe-and-language select sits at the bottom of the desktop rail and beside the brand on phones, remembered in the browser (localStorage, with fallback). Covers navigation, page titles, Home, step headings, buttons, controls and table headers (`src/i18n.tsx`; drafted with Claude, **team must review the Malay and Chinese**). ESCO skill labels and role titles stay in English (ESCO has no Malay or Chinese version). All screen text is translated except provider course titles, ESCO skill and role names, data-source names and the ESCO licence sentence (required in English); the footer says so in BM and Chinese.
