@@ -17,11 +17,13 @@ const resources = resourcesFile.resources as Resource[];
 type Member = { name: string; roleId: string | null; held: ReadonlySet<string> };
 
 /** One person's own view inside Team view: where they fit, how far they are from the chosen role, and where to start. */
-function PersonPanel({ member, target, onPickRole, onClose }: { member: Member; target: (typeof roles)[number]; onPickRole: (id: string) => void; onClose: () => void }) {
+function PersonPage({ member, teamName, onBack }: { member: Member; teamName: string; onBack: () => void }) {
   const t = useT();
+  const [targetId, onPickRole] = useState<string | null>(null);
   const [allGaps, setAllGaps] = useState(false);
-  useEffect(() => setAllGaps(false), [member, target]);
+  useEffect(() => setAllGaps(false), [member, targetId]);
   const { moves } = useMemo(() => recommendMoves(roles, member.roleId, member.held, snapshots.q2, ilo, scenarios.moderate, transferable), [member]);
+  const target = roles.find((r) => r.id === targetId) ?? moves[0].role;
   const futures = useMemo(() => simulateFutures({ roles, currentRoleId: member.roleId, held: member.held, snapshots: [snapshots.q1, snapshots.q2], ilo, transferable }), [member]);
   const inRole = member.roleId === target.id;
   const fit = skillFit(target, member.held, transferable);
@@ -36,13 +38,13 @@ function PersonPanel({ member, target, onPickRole, onClose }: { member: Member; 
   const current = member.roleId ? roleTitle(roles.find((r) => r.id === member.roleId)!.title) : t('No job yet');
   const pct = (n: number) => `${(n / total) * 100}%`;
   return <section className="panel person-panel" aria-labelledby="person-head">
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to {team}', { team: teamName })}</button>
     <header className="person-head">
       <span className="person-avatar" aria-hidden="true">{member.name[0]}</span>
       <div>
         <h2 id="person-head">{member.name}</h2>
         <p>{current}, {t('{n} skills', { n: member.held.size })}</p>
       </div>
-      <button type="button" className="text-button" onClick={onClose}>{t('Back to the whole group')}</button>
     </header>
 
     <h3>{t('Where {name} fits best', { name: member.name })}</h3>
@@ -126,6 +128,10 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
   const aiShown = showAllAi ? course.ai.steps : course.ai.steps.slice(0, 4);
   const total = course.plan.steps.length + course.ai.steps.length;
 
+  const open = (name: string) => { setPersonName(name); window.scrollTo({ top: 0 }); };
+  if (personName) {
+    return <div className="step-body team-view"><PersonPage member={members.find((m) => m.name === personName)!} teamName={t(team.name)} onBack={() => { setPersonName(null); window.scrollTo({ top: 0 }); }} /></div>;
+  }
   return <div className="step-body team-view">
     <div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {t(team.description)}</p></div>
 
@@ -139,7 +145,7 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
           <thead><tr><th scope="col">{t('Person')}</th>{roles.map((r) => <th scope="col" key={r.id}><button type="button" className={`heat-role${r.id === target.id ? ' active' : ''}`} onClick={() => setTargetId(r.id)}>{roleTitle(r.title)}</button></th>)}</tr></thead>
           <tbody>
             {grid.rows.map((row) => <tr key={row.member.name}>
-              <th scope="row"><button type="button" className={`heat-person${row.member.name === personName ? ' active' : ''}`} aria-pressed={row.member.name === personName} onClick={() => setPersonName(row.member.name === personName ? null : row.member.name)}>{row.member.name}</button><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></th>
+              <th scope="row"><button type="button" className="heat-person" onClick={() => open(row.member.name)}>{row.member.name}</button><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}</small></th>
               {row.cells.map((c) => <td key={c.role.id} className={c.current ? 'now' : ''} style={c.current ? undefined : { background: shade(c.result.score100), color: c.result.score100 > 45 ? '#ffffff' : '#1c2430' }}>
                 {c.current ? t('Now') : c.result.score100}
               </td>)}
@@ -152,7 +158,18 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
       <p className="note">{t('Select a role name to see what the group would need to learn for it, or a person’s name for their own view.')}</p>
     </section>
 
-    {personName && <PersonPanel member={members.find((m) => m.name === personName)!} target={target} onPickRole={setTargetId} onClose={() => setPersonName(null)} />}
+    <section className="panel people-list" aria-labelledby="people-head">
+      <h2 id="people-head">{t('People')} <span className="count">{members.length}</span></h2>
+      <ul>{grid.rows.map((row) => {
+        const best = row.cells.filter((c) => !c.current).sort((a, b) => b.result.score - a.result.score)[0];
+        return <li key={row.member.name}>
+          <span className="person-avatar small" aria-hidden="true">{row.member.name[0]}</span>
+          <div className="people-who"><strong>{row.member.name}</strong><small>{row.member.roleId ? roleTitle(roles.find((r) => r.id === row.member.roleId)!.title) : t('No job yet')}, {t('{n} skills', { n: row.member.held.size })}</small></div>
+          <div className="people-best"><small>{t('Best move')}</small><span>{roleTitle(best.role.title)} <strong>{best.result.score100}</strong></span></div>
+          <button type="button" className="secondary-button" onClick={() => open(row.member.name)}>{t('Open profile')}</button>
+        </li>;
+      })}</ul>
+    </section>
 
     <div className="plan-layout">
     <section className="panel team-plan" aria-labelledby="shared">

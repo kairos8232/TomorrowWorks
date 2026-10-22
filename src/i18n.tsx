@@ -773,6 +773,10 @@ const dict: Record<string, Entry> = {
   'About {h} hours': { ms: 'Kira-kira {h} jam', zh: '约 {h} 小时' },
   'Open course': { ms: 'Buka kursus', zh: '打开课程' },
   'Total of the {n} checked courses, as stated by each provider.': { ms: 'Jumlah {n} kursus yang disemak, seperti yang dinyatakan oleh setiap penyedia.', zh: '{n} 门已核对课程的总时长，按各提供方公布。' },
+  'Back to {team}': { ms: 'Kembali ke {team}', zh: '返回{team}' },
+  'People': { ms: 'Orang', zh: '成员' },
+  'Best move': { ms: 'Langkah terbaik', zh: '最佳选择' },
+  'Open profile': { ms: 'Buka profil', zh: '打开个人资料' },
 };
 
 const LangContext = createContext<Lang>('en');

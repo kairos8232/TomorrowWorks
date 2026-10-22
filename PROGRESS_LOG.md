@@ -106,7 +106,8 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ## 22 Oct 2026 (14:20 MYT) — Person view inside Team view
 
-- Carson: Team view lacked a per-person view. Each name in the heatmap now opens that person's panel: top moves with futures shares, gaps for the selected role, first courses and estimated time. Same rules as Your moves and Your plan; no new data.
+- Carson: Team view lacked a per-person view, then asked for it as its own page. Team view now lists the people (best move, score, *Open profile*); each profile opens as a separate page with *Back to team*, starting on the person's best move.
+- First version: Each name in the heatmap now opens that person's panel: top moves with futures shares, gaps for the selected role, first courses and estimated time. Same rules as Your moves and Your plan; no new data.
 
 ---
 

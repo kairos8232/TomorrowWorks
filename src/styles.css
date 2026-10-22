@@ -843,3 +843,15 @@ details.course-check { padding-block:0; }
 .chip.ai { background: transparent; border: 1px dashed #8a96a3; }
 .start-open { justify-self: start; padding: 7px 14px; font-size: 14px; text-decoration: none; }
 .start-note { font-size: 12px; }
+/* Team view: people list; each profile opens as its own page. */
+.people-list h2 { margin: 0 0 6px; font-size: 18px; }
+.people-list ul { list-style: none; margin: 0; padding: 0; }
+.people-list li { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid #e3e7e3; }
+.people-list li:first-child { border-top: 0; }
+.person-avatar.small { width: 34px; height: 34px; font-size: 15px; }
+.people-who strong { display: block; font-size: 15px; }
+.people-who small, .people-best small { display: block; color: #5d6873; font-size: 12px; }
+.people-best span { font-size: 15px; }
+.people-best strong { margin-left: 4px; }
+.person-panel .role-back { justify-self: start; }
+@media (max-width: 700px) { .people-list li { grid-template-columns: auto 1fr; } .people-best, .people-list .secondary-button { grid-column: 2; justify-self: start; } }
