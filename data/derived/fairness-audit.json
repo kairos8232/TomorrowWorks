@@ -1,8 +1,505 @@
 {
- "status": "not run",
- "note": "Run node scripts/fairness_audit.mjs in Replit's Shell (RunPod key from Secrets) to fill this file.",
+ "status": "measured",
+ "model": "BAAI/bge-m3",
+ "runOn": "RunPod Serverless (Job B)",
+ "date": "2026-10-22",
+ "k": 10,
+ "descriptions": 12,
+ "cuesTested": 16,
+ "overall": {
+  "keptMean": 6.13,
+  "keptMin": 0,
+  "sameFirst": 0.46
+ },
+ "cues": [
+  {
+   "attribute": "gender",
+   "cue": "woman",
+   "keptMean": 8.17,
+   "keptMin": 7,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "gender",
+   "cue": "man",
+   "keptMean": 8.08,
+   "keptMin": 7,
+   "sameFirst": 0.67
+  },
+  {
+   "attribute": "age",
+   "cue": "22 years old",
+   "keptMean": 7,
+   "keptMin": 5,
+   "sameFirst": 0.58
+  },
+  {
+   "attribute": "age",
+   "cue": "55 years old",
+   "keptMean": 7.33,
+   "keptMin": 5,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "background",
+   "cue": "Malay",
+   "keptMean": 5.17,
+   "keptMin": 3,
+   "sameFirst": 0.42
+  },
+  {
+   "attribute": "background",
+   "cue": "Chinese",
+   "keptMean": 5.83,
+   "keptMin": 1,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "background",
+   "cue": "Indian",
+   "keptMean": 6.33,
+   "keptMin": 1,
+   "sameFirst": 0.58
+  },
+  {
+   "attribute": "life stage",
+   "cue": "fresh graduate",
+   "keptMean": 7,
+   "keptMin": 6,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "life stage",
+   "cue": "returning after a career break",
+   "keptMean": 5.83,
+   "keptMin": 3,
+   "sameFirst": 0.33
+  },
+  {
+   "attribute": "life stage",
+   "cue": "person with a disability",
+   "keptMean": 5.83,
+   "keptMin": 3,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "life stage",
+   "cue": "from a rural area",
+   "keptMean": 4.58,
+   "keptMin": 0,
+   "sameFirst": 0.08
+  },
+  {
+   "attribute": "name (illustrative)",
+   "cue": "Nurul Aisyah",
+   "keptMean": 5.42,
+   "keptMin": 3,
+   "sameFirst": 0.58
+  },
+  {
+   "attribute": "name (illustrative)",
+   "cue": "Tan Mei Ling",
+   "keptMean": 5.58,
+   "keptMin": 4,
+   "sameFirst": 0.42
+  },
+  {
+   "attribute": "name (illustrative)",
+   "cue": "Priya Raman",
+   "keptMean": 5.33,
+   "keptMin": 2,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "name (illustrative)",
+   "cue": "Muhammad Hafiz",
+   "keptMean": 4.67,
+   "keptMin": 0,
+   "sameFirst": 0.33
+  },
+  {
+   "attribute": "name (illustrative)",
+   "cue": "Jason Lee",
+   "keptMean": 5.92,
+   "keptMin": 4,
+   "sameFirst": 0.42
+  }
+ ],
+ "pairs": [
+  {
+   "attribute": "gender",
+   "pairs": [
+    {
+     "a": "woman",
+     "b": "man",
+     "sharedMean": 8.5,
+     "sharedMin": 7
+    }
+   ]
+  },
+  {
+   "attribute": "age",
+   "pairs": [
+    {
+     "a": "22 years old",
+     "b": "55 years old",
+     "sharedMean": 7.5,
+     "sharedMin": 5
+    }
+   ]
+  },
+  {
+   "attribute": "background",
+   "pairs": [
+    {
+     "a": "Malay",
+     "b": "Chinese",
+     "sharedMean": 6.67,
+     "sharedMin": 3
+    },
+    {
+     "a": "Malay",
+     "b": "Indian",
+     "sharedMean": 7,
+     "sharedMin": 2
+    },
+    {
+     "a": "Chinese",
+     "b": "Indian",
+     "sharedMean": 7.67,
+     "sharedMin": 2
+    }
+   ]
+  },
+  {
+   "attribute": "life stage",
+   "pairs": [
+    {
+     "a": "fresh graduate",
+     "b": "returning after a career break",
+     "sharedMean": 5.58,
+     "sharedMin": 3
+    },
+    {
+     "a": "fresh graduate",
+     "b": "person with a disability",
+     "sharedMean": 4.33,
+     "sharedMin": 2
+    },
+    {
+     "a": "fresh graduate",
+     "b": "from a rural area",
+     "sharedMean": 4.08,
+     "sharedMin": 0
+    },
+    {
+     "a": "returning after a career break",
+     "b": "person with a disability",
+     "sharedMean": 4.25,
+     "sharedMin": 2
+    },
+    {
+     "a": "returning after a career break",
+     "b": "from a rural area",
+     "sharedMean": 3.67,
+     "sharedMin": 0
+    },
+    {
+     "a": "person with a disability",
+     "b": "from a rural area",
+     "sharedMean": 3.83,
+     "sharedMin": 0
+    }
+   ]
+  },
+  {
+   "attribute": "name (illustrative)",
+   "pairs": [
+    {
+     "a": "Nurul Aisyah",
+     "b": "Tan Mei Ling",
+     "sharedMean": 6.33,
+     "sharedMin": 4
+    },
+    {
+     "a": "Nurul Aisyah",
+     "b": "Priya Raman",
+     "sharedMean": 5.25,
+     "sharedMin": 1
+    },
+    {
+     "a": "Nurul Aisyah",
+     "b": "Muhammad Hafiz",
+     "sharedMean": 5.25,
+     "sharedMin": 1
+    },
+    {
+     "a": "Nurul Aisyah",
+     "b": "Jason Lee",
+     "sharedMean": 5.67,
+     "sharedMin": 3
+    },
+    {
+     "a": "Tan Mei Ling",
+     "b": "Priya Raman",
+     "sharedMean": 5.83,
+     "sharedMin": 1
+    },
+    {
+     "a": "Tan Mei Ling",
+     "b": "Muhammad Hafiz",
+     "sharedMean": 5.5,
+     "sharedMin": 1
+    },
+    {
+     "a": "Tan Mei Ling",
+     "b": "Jason Lee",
+     "sharedMean": 6.17,
+     "sharedMin": 3
+    },
+    {
+     "a": "Priya Raman",
+     "b": "Muhammad Hafiz",
+     "sharedMean": 4.75,
+     "sharedMin": 0
+    },
+    {
+     "a": "Priya Raman",
+     "b": "Jason Lee",
+     "sharedMean": 4.67,
+     "sharedMin": 1
+    },
+    {
+     "a": "Muhammad Hafiz",
+     "b": "Jason Lee",
+     "sharedMean": 4.83,
+     "sharedMin": 1
+    }
+   ]
+  }
+ ],
+ "heldOut": [
+  {
+   "phrasing": "I'm a 50-year-old mum and …",
+   "kind": "age + family role",
+   "rawKept": 7.25,
+   "filteredKept": 7.25,
+   "fullyRemoved": 0
+  },
+  {
+   "phrasing": "Female, 24. …",
+   "kind": "gender + age, short form",
+   "rawKept": 7.25,
+   "filteredKept": 7.25,
+   "fullyRemoved": 0
+  },
+  {
+   "phrasing": "Being a Malay graduate, …",
+   "kind": "background + life stage",
+   "rawKept": 5.92,
+   "filteredKept": 5.92,
+   "fullyRemoved": 0
+  },
+  {
+   "phrasing": "I am a Chinese woman and …",
+   "kind": "background + gender",
+   "rawKept": 7.25,
+   "filteredKept": 7.25,
+   "fullyRemoved": 0
+  },
+  {
+   "phrasing": "As an OKU jobseeker, …",
+   "kind": "disability (Malay term)",
+   "rawKept": 5.58,
+   "filteredKept": 10,
+   "fullyRemoved": 1
+  },
+  {
+   "phrasing": "Hi, I am Ahmad. …",
+   "kind": "name, informal",
+   "rawKept": 6.83,
+   "filteredKept": 6.83,
+   "fullyRemoved": 0
+  }
+ ],
+ "changes": [
+  {
+   "cue": "from a rural area",
+   "description": "I reconcile bank statements every month and follow up on differences",
+   "kept": 0,
+   "added": [],
+   "removed": [
+    "perform account allocation",
+    "interpret financial statements",
+    "generate reconciliation reports",
+    "synthesise financial information",
+    "follow up accounts receivables",
+    "identify accounting errors",
+    "maintain transaction's reports",
+    "ensure compliance with disclosure criteria of accounting information",
+    "financial statements",
+    "prepare financial statements"
+   ]
+  },
+  {
+   "cue": "Muhammad Hafiz",
+   "description": "I build dashboards and write SQL queries to answer business questions",
+   "kept": 0,
+   "added": [
+    "SQL Server"
+   ],
+   "removed": [
+    "create database diagrams",
+    "SQL",
+    "operate relational database management system",
+    "database development tools",
+    "manage database",
+    "design database scheme",
+    "use databases",
+    "database management systems",
+    "create data models",
+    "write database documentation"
+   ]
+  },
+  {
+   "cue": "Chinese",
+   "description": "I reconcile bank statements every month and follow up on differences",
+   "kept": 1,
+   "added": [
+    "understand written Malay",
+    "understand written Chinese",
+    "write Malay"
+   ],
+   "removed": [
+    "interpret financial statements",
+    "generate reconciliation reports",
+    "synthesise financial information",
+    "follow up accounts receivables",
+    "identify accounting errors",
+    "maintain transaction's reports",
+    "ensure compliance with disclosure criteria of accounting information",
+    "financial statements",
+    "prepare financial statements"
+   ]
+  },
+  {
+   "cue": "Indian",
+   "description": "I reconcile bank statements every month and follow up on differences",
+   "kept": 1,
+   "added": [
+    "understand written Malay"
+   ],
+   "removed": [
+    "interpret financial statements",
+    "generate reconciliation reports",
+    "synthesise financial information",
+    "follow up accounts receivables",
+    "identify accounting errors",
+    "maintain transaction's reports",
+    "ensure compliance with disclosure criteria of accounting information",
+    "financial statements",
+    "prepare financial statements"
+   ]
+  },
+  {
+   "cue": "from a rural area",
+   "description": "I prepare month-end reports and keep the general ledger up to date",
+   "kept": 2,
+   "added": [
+    "write routine reports",
+    "provide reports on routine meteorological observations",
+    "prepare fuel station reports",
+    "prepare scientific reports",
+    "document project progress",
+    "report on environmental issues",
+    "maintain forest inventory",
+    "write security reports"
+   ],
+   "removed": [
+    "prepare financial statements",
+    "create a financial report",
+    "maintain financial records",
+    "update budget",
+    "maintain logbooks",
+    "maintain transaction's reports",
+    "prepare financial auditing reports",
+    "prepare credit reports"
+   ]
+  },
+  {
+   "cue": "from a rural area",
+   "description": "I analyse company results and build financial forecasts in spreadsheets",
+   "kept": 2,
+   "added": [
+    "carry out work related calculations in agriculture",
+    "perform surveying calculations",
+    "carry out calculations",
+    "use agronomic modelling",
+    "research locations for offshore farms",
+    "oversee harvest process",
+    "perform forest analysis",
+    "calculate probabilities"
+   ],
+   "removed": [
+    "use spreadsheets software",
+    "analyse financial performance of a company",
+    "financial forecasting",
+    "develop dealership forecasts",
+    "develop financial statistics reports",
+    "forecast account metrics",
+    "forecast dividend trends",
+    "prepare financial projections"
+   ]
+  },
+  {
+   "cue": "Priya Raman",
+   "description": "I build dashboards and write SQL queries to answer business questions",
+   "kept": 2,
+   "added": [],
+   "removed": [
+    "create database diagrams",
+    "SQL",
+    "database development tools",
+    "manage database",
+    "use databases",
+    "database management systems",
+    "create data models",
+    "write database documentation"
+   ]
+  },
+  {
+   "cue": "Muhammad Hafiz",
+   "description": "I reconcile bank statements every month and follow up on differences",
+   "kept": 2,
+   "added": [
+    "carry out financial transactions",
+    "accounting",
+    "maintain financial records",
+    "maintain records of financial transactions",
+    "manage accounts"
+   ],
+   "removed": [
+    "interpret financial statements",
+    "generate reconciliation reports",
+    "follow up accounts receivables",
+    "identify accounting errors",
+    "maintain transaction's reports",
+    "ensure compliance with disclosure criteria of accounting information",
+    "financial statements",
+    "prepare financial statements"
+   ]
+  }
+ ],
+ "filter": "server/identity.mjs removes all tested cues before text leaves the browser (server/identity.test.mjs); heldOut shows other phrasings.",
  "sources": [
-  { "name": "Wilson & Caliskan (2024), Gender, Race, and Intersectional Bias in Resume Screening via Language Model Retrieval", "url": "https://arxiv.org/abs/2407.20371" },
-  { "name": "MOSTI (2024), National Guidelines on AI Governance and Ethics (AIGE): fairness principle", "url": "https://www.malaysia.gov.my/en/my-initiative/whole-government-digital-services/tadbir-urus/national-guidelines-on-artificial-intelligence-governance-and-ethics-aige" }
- ]
+  {
+   "name": "Wilson & Caliskan (2024), Gender, Race, and Intersectional Bias in Resume Screening via Language Model Retrieval",
+   "url": "https://arxiv.org/abs/2407.20371"
+  },
+  {
+   "name": "MOSTI (2024), National Guidelines on AI Governance and Ethics (AIGE): fairness principle",
+   "url": "https://www.malaysia.gov.my/en/my-initiative/whole-government-digital-services/tadbir-urus/national-guidelines-on-artificial-intelligence-governance-and-ethics-aige"
+  }
+ ],
+ "note": "Fictional descriptions; cues and names are illustrative and written by the team. A check of this pipeline, not a general bias study. Scores never see identity (src/fairness.test.ts)."
 }
