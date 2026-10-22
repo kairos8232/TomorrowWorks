@@ -794,6 +794,30 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .plan-layout .sdg-summary-list { grid-template-columns: 1fr; }
 .plan-layout .sdg-panel h2 { font-size: 18px; }
 @media (max-width: 1100px) { .plan-layout { grid-template-columns: 1fr; } .plan-layout > .sdg-panel { position: static; } }
+.plan-layout.individual-plan { grid-template-columns: minmax(0,1fr); gap: 16px; }
+.individual-plan > .sdg-panel { position: static; }
+.individual-plan .sdg-summary-list { grid-template-columns: 1fr; }
+.individual-plan .plan-learning { background: #f9fbf9; }
+.plan-eyebrow { margin: 0 0 8px; color: #27684d; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.individual-plan .plan-learning h2 { font-size: clamp(24px,2.3vw,32px); line-height: 1.15; }
+.individual-plan .plan-learning-intro { font-size: 16px; }
+.individual-plan .plan-total { display: inline-block; margin-top: 2px; padding: 0; background: transparent; color: #4c5c52; }
+.individual-plan .next-learning { margin: 18px 0 4px; padding: 20px; border-color: #9fbbaa; border-left: 4px solid #1e6b4f; border-radius: 10px; background: #f7faf8; }
+.individual-plan .next-learning > div:first-child { flex: 1 1 280px; }
+.individual-plan .next-learning-actions { display: flex; flex: 0 0 auto; align-items: center; flex-wrap: wrap; gap: 10px; }
+.individual-plan .next-learning-skills { flex-basis: 100%; margin: 0; }
+.individual-plan .next-learning > .course-check { flex-basis: 100%; margin-top: 0; }
+.individual-plan .next-learning h3 { margin-bottom: 6px; color: #27684d; font-size: 14px; }
+.individual-plan .next-course-title { font-size: 20px; line-height: 1.25; }
+.individual-plan .next-learning-note { margin: 0; }
+.plan-course-section .plan-courses-heading { margin: 0 0 6px; font-size: 22px; }
+.plan-course-section .plan-courses-intro { margin: 0 0 8px; }
+.plan-other-heading { margin: 28px 0 0; font-size: 17px; }
+.plan-course-section .plan-steps > li { padding: 20px 0; }
+.plan-course-section .plan-steps > li:last-child { border-bottom: 0; }
+.plan-course-section .plan-course-action { min-height: 40px; }
+.plan-more-section > h2 { margin-bottom: 14px; font-size: 22px; }
+.plan-more-section .learning-milestones { margin-top: 0; padding-top: 0; border-top: 0; }
 /* Team view: training plan grouped by course (same cards as Your plan), SDG on the right. */
 .team-plan h2 { margin: 0 0 4px; }
 .team-needs { margin: 8px 0 0; font-size: 13px; color: #5d6873; }
@@ -883,10 +907,9 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-possible small { color: #5d6873; }
 
 /* Guided learning checks in individual plans. */
-.learning-progress { margin-block: 18px; padding: 16px; border: 1px solid #d9ded9; border-radius: 6px; background: #f7f8f6; }
+.learning-progress { margin-top: 18px; padding: 16px 18px; border: 1px solid #d9ded9; border-radius: 8px; background: #f7f8f6; }
 .learning-progress h3, .course-check h4 { margin: 0 0 8px; font-size: 16px; }
 .learning-progress p { margin: 6px 0; }
-.learning-progress progress { display: block; width: 100%; height: 16px; accent-color: #1e6b4f; }
 .course-check { margin-top: 18px; padding-top: 16px; border-top: 1px solid #d9ded9; }
 .learning-stages { display: grid; gap: 6px; padding-left: 20px; margin-block: 12px; font-size: 14px; }
 .learning-stages [aria-current] { font-weight: 700; color: #1e6b4f; }

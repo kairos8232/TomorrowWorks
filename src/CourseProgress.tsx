@@ -5,28 +5,22 @@ import { credentialUrl, type CourseStatus, type LearningAction } from './learnin
 export function LearningProgress({total,recorded}:{total:number;recorded:number}) {
  const t=useT();const id=useId();
  // This prototype has no provider/reviewer verification. Never infer completion from a link.
- const completed=0;
- return <section className="learning-progress" aria-labelledby={id}>
-  <h3 id={id}>{t('Your course progress')}</h3>
-  {total>0 ? <>
-    <p id={id+'-count'} className="course-completion-count" aria-live="polite">{t('{completed} of {total} courses verified complete',{completed,total})}</p>
-    <progress value={completed} max={total} aria-labelledby={id+' '+id+'-count'} aria-describedby={id+'-method'} />
-    <p className="note" aria-live="polite">{t('Evidence submitted for {recorded} of {total} courses',{recorded,total})}</p>
-
-  </> : <p>{t('No courses to track in this plan yet.')}</p>}
-  <p className="note" id={id+'-method'}>{t('Demo: completion verification is not connected. Submitting evidence will not fill this bar.')}</p>
-  <details className="plan-explainer"><summary>{t('How progress works')}</summary>
-    <p className="note">{t('Counts include checked courses and AI suggestions in this plan. Optional certification routes are excluded.')}</p>
+ return <aside className="learning-progress" aria-labelledby={id}>
+  <h3 id={id}>{t('About course completion')}</h3>
+  <p className="note">{t('You can start these courses now. This demo cannot verify when you finish them.')}</p>
+  {total>0 && recorded>0 && <p className="note" aria-live="polite">{t('Evidence submitted for {recorded} of {total} courses',{recorded,total})}. {t('These links are not verified and do not unlock milestones.')}</p>}
+  <details className="plan-explainer"><summary>{t('About demo evidence')}</summary>
+    <p className="note">{t('Evidence links are optional. They do not verify a completed course or unlock a milestone.')}</p>
     <p className="note">{t('A completed course does not prove mastery of every linked skill. Evidence links stay in this tab, clear on refresh and are not sent to a reviewer.')}</p>
   </details>
- </section>;
+ </aside>;
 }
 
 export function CourseProgressControl({status,onAction}:{status:CourseStatus|undefined;onAction:(action:LearningAction)=>void}) {
  const t=useT();const id=useId();const [text,setText]=useState(status?.url??'');const [editing,setEditing]=useState(false);const [error,setError]=useState(false);
  const showForm=!status||editing;
  return <details className="course-check">
-  <summary id={id}><span>{t(status ? 'Evidence submitted — not verified' : 'Add completion evidence')}</span><span className="evidence-optional">{t('Optional')}</span></summary>
+  <summary id={id}><span>{t(status ? 'Evidence submitted — not verified' : 'Finished this course? Try a demo evidence link')}</span><span className="evidence-optional">{t('Optional')}</span></summary>
   <div className="course-evidence-body">
   <p className="note">{t('Prototype: use a fictional public credential link only. Do not submit a real certificate or personal information. File uploads are not enabled.')}</p>
   {status && <div role="status">

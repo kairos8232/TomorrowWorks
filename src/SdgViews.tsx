@@ -55,7 +55,7 @@ export function SdgMethodNote() {
 }
 
 /** "This move and the SDGs": what the skills to build connect to, strong first, then possible, then the 4.4 baseline. */
-export function SdgContribution({ roleId, skills, heading }: { roleId: string | null; skills: Skill[]; heading: string; compact?: boolean }) {
+export function SdgContribution({ roleId, skills, heading, intro }: { roleId: string | null; skills: Skill[]; heading: string; intro?: string; compact?: boolean }) {
   const t = useT();
   const role = roleId ? roleById(roleId) : null;
   const roleLinks = role ? roleSdgs(role) : [];
@@ -65,6 +65,7 @@ export function SdgContribution({ roleId, skills, heading }: { roleId: string | 
   const gapCount = new Set(skills.map((skill) => skill.uri)).size;
   return <section className="panel sdg-panel" aria-label={heading}>
     <h2>{heading}</h2>
+    {intro && <p className="note">{intro}</p>}
     <ul className="sdg-summary-list">
       {targets.map((target) => {
         const roleLink = roleLinks.find((link) => link.target === target);
