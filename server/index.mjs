@@ -162,4 +162,18 @@ createServer(async (req, res) => {
     console.error(err);
     return send(res, 502, { error: 'Skill search is unavailable right now. Pick skills from the list instead.' });
   }
-}).listen(PORT, '0.0.0.0', () => console.log(`TomorrowWorks on http://0.0.0.0:${PORT}`));
+}).listen(PORT, '0.0.0.0', () => { console.log(`TomorrowWorks on http://0.0.0.0:${PORT}`); warmUp(); });
+
+/**
+ * On start, wake the RunPod worker with one tiny request and start the news brief, so
+ * the first visitor does not wait for a cold start (Autoscale restarts the server when
+ * it has been idle; a sleeping RunPod worker can take over 90 s to load bge-m3).
+ */
+function warmUp() {
+  if (!RUNPOD_API_KEY || !RUNPOD_ENDPOINT_ID) return;
+  const t = Date.now();
+  embed('warm up')
+    .then(() => console.log(`RunPod warm in ${((Date.now() - t) / 1000).toFixed(1)} s`))
+    .catch((err) => console.warn(`RunPod warm-up failed: ${err.message}`));
+  news.get().then((body) => brief.for(body)).catch(() => {});
+}
