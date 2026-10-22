@@ -24,4 +24,9 @@ describe('CV lines', () => {
     expect(lines).toContain('Reconcile bank statements every month and follow up on differences');
     expect(lines.join(' ')).not.toMatch(/AINA|example\.com|\+60/);
   });
+  it('removes name, age and identity phrases from lines', () => {
+    const { lines, identityRemoved } = cvLines('As a woman, I prepare month-end reports\nI am 52 years old. I reconcile bank accounts');
+    expect(lines).toEqual(['I prepare month-end reports', 'I reconcile bank accounts']);
+    expect(identityRemoved).toBe(2);
+  });
 });

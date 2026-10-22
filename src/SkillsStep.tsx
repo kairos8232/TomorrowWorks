@@ -9,6 +9,7 @@ import { useT } from './i18n';
 import { interestData, interestTypes, type InterestType } from './interests';
 import { goalStatus, sdgData } from './sdg';
 import { CvPanel } from './CvPanel';
+import { stripIdentity } from '../server/identity.mjs';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
@@ -40,11 +41,14 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     setFound([]); // clear the previous results so they are not mistaken for this search
     setSearch({ busy: true, message: 'Searching. The first search after a pause can take up to a minute.', vars: {} });
     try {
-      const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: description }) });
+      // Fairness and privacy: name, age and identity phrases are removed before the text leaves the browser.
+      const clean = stripIdentity(description);
+      if (!clean.text.trim()) throw new Error('Describe a task you do, for example what you prepare, check or build.');
+      const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: clean.text }) });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error ?? 'Skill search is unavailable right now. Pick skills from the list below instead.');
       setFound(body.results);
-      setSearch({ busy: false, message: body.results.length ? 'Closest ESCO skills for “{text}”. Add the ones that are true for you.' : 'No close ESCO skills found. Try describing a task you do often.', vars: { text: description.trim() } });
+      setSearch({ busy: false, message: (body.results.length ? 'Closest ESCO skills for “{text}”. Add the ones that are true for you.' : 'No close ESCO skills found. Try describing a task you do often.') + (clean.removed ? ' Personal details (name, age or identity) were left out of the search; they do not describe skills.' : ''), vars: { text: clean.text.trim() } });
     } catch (err) {
       setFound([]);
       setSearch({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Skill search is unavailable right now. Pick skills from the list below instead.', vars: {} });

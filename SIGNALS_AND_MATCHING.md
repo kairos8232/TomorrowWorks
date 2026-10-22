@@ -286,3 +286,11 @@ Code: `src/radar.ts`, `src/RadarView.tsx`; tests: `src/radar.test.ts`. Screen: *
 | DOSM detail is only by major group | Roles in a group share the demand signal; say so on screen; add finer data in Phase 2 if DOSM or another source provides it. |
 | YoY figures inflated by source coverage changes | Use QoQ only; state the limitation. |
 | Live demo network failure | Snapshots are committed JSON; the app runs without live calls. |
+
+## Fairness of the text intake (22 Oct 2026)
+
+Scores never see identity (`src/fairness.test.ts`). The words a person types do reach the embedding model, and embedding models have been shown to rank CVs differently by name alone (Wilson & Caliskan 2024, arXiv 2407.20371); Malaysia's National Guidelines on AI Governance and Ethics (MOSTI, Sept 2024) put fairness first. Two measures:
+
+- **Filter** (`server/identity.mjs`, browser): removes sentences stating a name or age and a leading "As a/an/someone …," clause that names an identity (gender, age group, ethnicity, religion, family role, life stage such as "fresh graduate", disability, origin). Work clauses ("As a team lead,") are kept. Plain rules, tested.
+- **Audit** (`scripts/fairness_audit.mjs`, RunPod Job B): 12 fictional work descriptions, each as written and with 16 identity cues (gender, age, three Malaysian backgrounds, four life stages, five illustrative names); same top-10 search as the app. Reports skills kept out of 10, first suggestion unchanged, and pair overlap (woman vs man, etc.). Six held-out phrasings, written after the filter and not used to tune it, are measured as typed and after the filter. Offline check with the fake embedder: the filter fully removes only 1 of 6 held-out phrasings, so the screen says "common" phrases. Cues and names are illustrative; this checks our pipeline and is not a general bias study.
+

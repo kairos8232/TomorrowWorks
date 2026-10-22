@@ -1,0 +1,8 @@
+{
+ "status": "not run",
+ "note": "Run node scripts/fairness_audit.mjs in Replit's Shell (RunPod key from Secrets) to fill this file.",
+ "sources": [
+  { "name": "Wilson & Caliskan (2024), Gender, Race, and Intersectional Bias in Resume Screening via Language Model Retrieval", "url": "https://arxiv.org/abs/2407.20371" },
+  { "name": "MOSTI (2024), National Guidelines on AI Governance and Ethics (AIGE): fairness principle", "url": "https://www.malaysia.gov.my/en/my-initiative/whole-government-digital-services/tadbir-urus/national-guidelines-on-artificial-intelligence-governance-and-ethics-aige" }
+ ]
+}

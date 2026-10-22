@@ -8,6 +8,7 @@ import { whatChanged } from './changes';
 import { interestData, interestFit, topTypes, type InterestType } from './interests';
 import { goalFit, roleGoalLink, sdgData } from './sdg';
 import { RoleSdgLine } from './SdgViews';
+import { FairnessNote } from './FairnessNote';
 import { recommendMoves, scenarios, type Extras, type RoleScore, type ScenarioId } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 
@@ -203,6 +204,7 @@ function MethodView({ onBack }: { onBack: () => void }) {
     <div className="method-plain"><h3>{t('Fairness and limits')}</h3>
       <p>{t('The ranking uses skills you confirmed, role skills and the two sourced signals above. It never asks for age, gender, ethnicity, religion or school.')}</p>
       <p>{t('Tests check that the same skills produce the same scores. Job ads cover only online postings, and ESCO describes roles from a European perspective.')}</p>
+      <FairnessNote />
     </div>
     <div className="method-sources"><h3>{t('Sources')}</h3>
       <a href={snapshots.q2.source.url} target="_blank" rel="noreferrer">DOSM Job Market Insights</a>

@@ -16,6 +16,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
   const fileRef = useRef<HTMLInputElement>(null);
   const [lines, setLines] = useState<string[]>([]);
   const [removed, setRemoved] = useState(0);
+  const [identity, setIdentity] = useState(0);
   const [source, setSource] = useState('');
   const [paste, setPaste] = useState<string | null>(null);
   const [found, setFound] = useState<Suggestion[]>([]);
@@ -24,7 +25,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
 
   function load(text: string, name: string) {
     const out = cvLines(text);
-    setLines(out.lines); setRemoved(out.contactRemoved); setSource(name);
+    setLines(out.lines); setRemoved(out.contactRemoved); setIdentity(out.identityRemoved); setSource(name);
     setFound([]); setPicked(new Set()); setPaste(null);
     setStatus({ busy: false, message: out.lines.length ? '' : 'No work lines found. Paste the text of your experience instead.', vars: {} });
   }
@@ -35,7 +36,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
     catch (err) { setStatus({ busy: false, message: err instanceof Error ? err.message : 'Could not read this file. Paste the text instead.', vars: {} }); }
     if (fileRef.current) fileRef.current.value = '';
   }
-  function clear() { setLines([]); setRemoved(0); setSource(''); setFound([]); setPicked(new Set()); setPaste(null); setStatus({ busy: false, message: '', vars: {} }); }
+  function clear() { setLines([]); setRemoved(0); setIdentity(0); setSource(''); setFound([]); setPicked(new Set()); setPaste(null); setStatus({ busy: false, message: '', vars: {} }); }
 
   async function match() {
     setFound([]); setPicked(new Set());
@@ -78,7 +79,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
     </div>}
 
     {lines.length > 0 && found.length === 0 && <div className="cv-lines">
-      <p className="cv-summary"><strong>{source}</strong>: {t('{n} lines to match', { n: lines.length })}{removed > 0 && <> · {t('{n} contact lines removed', { n: removed })}</>}</p>
+      <p className="cv-summary"><strong>{source}</strong>: {t('{n} lines to match', { n: lines.length })}{removed > 0 && <> · {t('{n} contact lines removed', { n: removed })}</>}{identity > 0 && <> · {t('{n} personal details removed (name, age or identity)', { n: identity })}</>}</p>
       <details>
         <summary>{t('Check what will be sent')}</summary>
         <ul>{lines.map((l, i) => <li key={l}><span>{l}</span><button type="button" className="text-button" aria-label={t('Remove line: {line}', { line: l })} onClick={() => setLines(lines.filter((_, k) => k !== i))}>✕</button></li>)}</ul>

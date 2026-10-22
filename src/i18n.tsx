@@ -909,6 +909,17 @@ const dict: Record<string, Entry> = {
   'Groups in this region': { ms: 'Kumpulan di wilayah ini', zh: '本区域的群体' },
   'Best moves': { ms: 'Langkah terbaik', zh: '最佳选择' },
   'Open team view': { ms: 'Buka paparan pasukan', zh: '打开团队视图' },
+  'Before your words are searched, common name, age and identity phrases (for example “As a woman,” or “I am 55 years old”) are removed in your browser. They do not describe skills.': { ms: 'Sebelum perkataan anda dicari, frasa nama, umur dan identiti yang biasa (contohnya “Sebagai seorang wanita,” atau “Saya berumur 55 tahun”) dibuang dalam pelayar anda. Ia tidak menerangkan kemahiran.', zh: '在搜索你的文字之前，常见的姓名、年龄和身份短语（例如“作为一名女性，”或“我今年 55 岁”）会在你的浏览器中被删除。它们并不描述技能。' },
+  'Measured on RunPod ({date}, {model}): adding gender, age, background, life-stage words or a name to {n} work descriptions kept on average {k} of the top 10 suggested skills (lowest {min}).': { ms: 'Diukur di RunPod ({date}, {model}): menambah perkataan jantina, umur, latar belakang, peringkat hidup atau nama kepada {n} huraian kerja mengekalkan purata {k} daripada 10 kemahiran teratas yang dicadangkan (terendah {min}).', zh: '在 RunPod 上测量（{date}，{model}）：在 {n} 条工作描述中加入性别、年龄、背景、人生阶段词语或姓名后，前 10 项建议技能平均保留 {k} 项（最低 {min}）。' },
+  'Women and men writing the same description shared {s} of 10 suggestions.': { ms: 'Wanita dan lelaki yang menulis huraian yang sama berkongsi {s} daripada 10 cadangan.', zh: '写下相同描述的女性和男性共享 10 项建议中的 {s} 项。' },
+  'An audit of how identity words move the skill suggestions has not been run yet.': { ms: 'Audit tentang bagaimana perkataan identiti mengubah cadangan kemahiran belum dijalankan.', zh: '尚未进行身份词语如何影响技能建议的审核。' },
+  'Why we check: {a}; {b}.': { ms: 'Mengapa kami menyemak: {a}; {b}.', zh: '我们为何检查：{a}；{b}。' },
+  'a 2024 study found text-embedding models rank CVs differently by name': { ms: 'kajian 2024 mendapati model pembenaman teks menyusun CV secara berbeza mengikut nama', zh: '2024 年的一项研究发现，文本嵌入模型会因姓名不同而对简历排序不同' },
+  'fairness is the first principle of Malaysia’s AI governance guidelines (MOSTI, 2024)': { ms: 'keadilan ialah prinsip pertama garis panduan tadbir urus AI Malaysia (MOSTI, 2024)', zh: '公平性是马来西亚 AI 治理指南的首要原则（MOSTI，2024）' },
+  'Describe a task you do, for example what you prepare, check or build.': { ms: 'Terangkan tugas yang anda lakukan, contohnya apa yang anda sediakan, semak atau bina.', zh: '描述你做的一项任务，例如你准备、检查或构建的东西。' },
+  '{n} personal details removed (name, age or identity)': { ms: '{n} butiran peribadi dibuang (nama, umur atau identiti)', zh: '已删除 {n} 项个人信息（姓名、年龄或身份）' },
+  'Closest ESCO skills for “{text}”. Add the ones that are true for you. Personal details (name, age or identity) were left out of the search; they do not describe skills.': { ms: 'Kemahiran ESCO paling hampir untuk “{text}”. Tambah yang benar bagi anda. Butiran peribadi (nama, umur atau identiti) tidak dimasukkan dalam carian; ia tidak menerangkan kemahiran.', zh: '与“{text}”最接近的 ESCO 技能。添加符合你的技能。个人信息（姓名、年龄或身份）未纳入搜索；它们并不描述技能。' },
+  'No close ESCO skills found. Try describing a task you do often. Personal details (name, age or identity) were left out of the search; they do not describe skills.': { ms: 'Tiada kemahiran ESCO yang hampir ditemui. Cuba terangkan tugas yang kerap anda lakukan. Butiran peribadi (nama, umur atau identiti) tidak dimasukkan dalam carian; ia tidak menerangkan kemahiran.', zh: '未找到相近的 ESCO 技能。请尝试描述你经常做的任务。个人信息（姓名、年龄或身份）未纳入搜索；它们并不描述技能。' },
 };
 
 const LangContext = createContext<Lang>('en');

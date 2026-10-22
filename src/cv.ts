@@ -4,6 +4,8 @@
 // Only the remaining lines are sent once to /api/cv-skills (RunPod Job B).
 // Tested in src/cv.test.ts.
 
+import { stripIdentity } from '../server/identity.mjs';
+
 export const CV_MAX_LINES = 40;
 export const CV_MAX_LINE = 300;
 
@@ -19,19 +21,25 @@ const describesWork = (line: string) => line.split(/\s+/).filter((w) => /\p{L}{2
  * Split CV text into lines worth matching: one per bullet or line, long paragraphs
  * split into sentences, bullets stripped, contact details and short headings
  * (names, "Education", dates) dropped, duplicates removed, at most CV_MAX_LINES.
- * Returns the lines and how many were dropped as contact details.
+ * Name, age and identity phrases are removed from each line (server/identity.mjs).
+ * Returns the lines and how many contact lines and identity phrases were removed.
  */
-export function cvLines(text: string): { lines: string[]; contactRemoved: number } {
+export function cvLines(text: string): { lines: string[]; contactRemoved: number; identityRemoved: number } {
   const seen = new Set<string>();
   const lines: string[] = [];
   let contactRemoved = 0;
+  let identityRemoved = 0;
   const parts = text.replace(/\r/g, '').split(/\n|[•▪●◦]|;\s/);
   for (const raw of parts) {
     const pieces = raw.length > 200 ? raw.split(/(?<=[.!?])\s+/) : [raw];
     for (const piece of pieces) {
-      const line = piece.replace(BULLET, '').replace(/\s+/g, ' ').trim().slice(0, CV_MAX_LINE);
-      if (!line) continue;
-      if (CONTACT.test(line)) { contactRemoved++; continue; }
+      const raw = piece.replace(BULLET, '').replace(/\s+/g, ' ').trim();
+      if (!raw) continue;
+      if (CONTACT.test(raw)) { contactRemoved++; continue; }
+      // Name, age and identity phrases never reach the matcher (server/identity.mjs).
+      const clean = stripIdentity(raw);
+      identityRemoved += clean.removed;
+      const line = clean.text.slice(0, CV_MAX_LINE);
       if (!describesWork(line)) continue;
       const key = line.toLowerCase();
       if (seen.has(key)) continue;
@@ -39,7 +47,7 @@ export function cvLines(text: string): { lines: string[]; contactRemoved: number
       lines.push(line);
     }
   }
-  return { lines: lines.slice(0, CV_MAX_LINES), contactRemoved };
+  return { lines: lines.slice(0, CV_MAX_LINES), contactRemoved, identityRemoved };
 }
 
 /** Read a CV file in the browser: PDF (pdf.js, loaded only when needed) or plain text. */
