@@ -301,8 +301,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Map each recommended role to at least one relevant SDG. (`data/sdg/sdg-links.json`: 1–2 targets per role, reason tied to its ESCO essential skills.)
 - [x] Map each recommended skill to at least one relevant SDG. (Rules in `src/sdg.ts`: wording + ESCO green/digital flags; every skill also counts towards 4.4.)
 - [x] Explain each connection in plain language. (Reason shown with every role link and every skill rule.)
-- [ ] Remove decorative or unsupported mappings. *Skill links now from RunPod matches ≥ 0.60 with 34 of 73 rejected in `data/sdg/sdg-review.json` (drafted with Claude 21 Oct); team-written role links removed; strong/possible/baseline levels; per-match rejected/uncertain decisions; validation via the blind review kit in `data/sdg/review/` (item below).*
-- [ ] Blind SDG review: two teammates label `data/sdg/review/review-A.csv` and `review-B.csv` independently (GUIDE.md); run `scripts/evaluate_sdg_review.py`, settle `disagreements.csv`, rerun with `--final`; commit `results.md`; update `sdg-review.json` (decisions, `status`) and quote the numbers in the PRD.
+- [x] Remove decorative or unsupported mappings. *(22 Oct: only links two reviewers labelled relevant are shown as strong.)* *Skill links now from RunPod matches ≥ 0.60 with 34 of 73 rejected in `data/sdg/sdg-review.json` (drafted with Claude 21 Oct); team-written role links removed; strong/possible/baseline levels; per-match rejected/uncertain decisions; validation via the blind review kit in `data/sdg/review/` (item below).*
+- [x] Blind SDG review *(done 22 Oct by two teammates: `data/sdg/review/results.md`, kappa 0.48 / 0.69; labels applied in `sdg-review.json`, status team-reviewed)*. Quote the numbers in the PRD (see PRD item).
 - [ ] (Optional) Run `scripts/calibrate_sdg_osdg.py` (OSDG Community Dataset) for goal-level accuracy on independent text; can run in Replit Shell (key in Secrets) instead of the Mac.
 
 **Done when:** The user can understand how the chosen pathway relates to the SDGs.  

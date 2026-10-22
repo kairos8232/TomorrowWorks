@@ -1,5 +1,5 @@
 {
-  "about": "SDG goals (official colours, short names) and short target titles shortened from the UN 2030 Agenda, for display. Links come from RunPod matches (data/derived/sdg-skill-matches.json) checked in data/sdg/sdg-review.json; rule in src/sdg.ts.",
+  "about": "SDG goals (official colours, short names) and short target titles shortened from the UN 2030 Agenda, for display. Links: data/sdg/sdg-review.json (two-reviewer labels) and RunPod matches; rule in src/sdg.ts.",
   "goals": {
     "4": {
       "name": "Quality education",
@@ -55,6 +55,36 @@
       "name": "Life on land",
       "short": "Life on land",
       "colour": "#56C02B"
+    },
+    "1": {
+      "name": "No poverty",
+      "short": "No poverty",
+      "colour": "#E5243B"
+    },
+    "2": {
+      "name": "Zero hunger",
+      "short": "Zero hunger",
+      "colour": "#DDA63A"
+    },
+    "3": {
+      "name": "Good health and well-being",
+      "short": "Good health",
+      "colour": "#4C9F38"
+    },
+    "6": {
+      "name": "Clean water and sanitation",
+      "short": "Clean water",
+      "colour": "#26BDE2"
+    },
+    "11": {
+      "name": "Sustainable cities and communities",
+      "short": "Sustainable cities",
+      "colour": "#FD9D24"
+    },
+    "14": {
+      "name": "Life below water",
+      "short": "Life below water",
+      "colour": "#0A97D9"
     }
   },
   "targets": {
@@ -185,6 +215,14 @@
     "5.4": {
       "goal": "5",
       "title": "Recognise and value unpaid care and domestic work"
+    },
+    "11.6": {
+      "goal": "11",
+      "title": "Reduce the environmental impact of cities, including waste management"
+    },
+    "12.2": {
+      "goal": "12",
+      "title": "Sustainable management and efficient use of natural resources"
     }
   },
   "pickerGoals": [

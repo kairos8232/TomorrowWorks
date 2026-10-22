@@ -1,32 +1,30 @@
 // SDG links for roles and skills. Tested in src/sdg.test.ts.
 //
-// Skill -> UN targets matched by RunPod (BAAI/bge-m3): cosine similarity between the
-//          ESCO skill text and the official UN target text (scripts/match_sdg_runpod.py,
-//          data/derived/sdg-skill-matches.json). Levels (data/sdg/sdg-review.json):
-//            strong   = similarity >= threshold (0.60, provisional) and kept by the review:
-//                       used for tags, role links and the optional Goals ranking.
-//            possible = similarity from possibleFrom (0.55, a display choice) up to the threshold,
-//                       or above it but marked uncertain in the review; shown as "possible,
-//                       not confirmed", never used for ranking or tags.
-//            Rejected matches (whole targets, or single skill-target pairs) are never shown.
-//            below possibleFrom: not shown.
+// Skill -> UN targets, from the blind review (data/sdg/sdg-review.json, data/sdg/review/):
+//            strong   = both reviewers (or their discussion) labelled the pair relevant; the pair
+//                       was proposed by RunPod (bge-m3 similarity to the official UN target text)
+//                       or by the keyword baseline. Used for tags, role links and Goals ranking.
+//            possible = labelled uncertain, or a RunPod match from possibleFrom (0.55) up that
+//                       nobody reviewed; shown as "possible, not confirmed", never ranked.
+//            not relevant: never shown.
 //          ESCO digital skills also link to 4.4 (indicator 4.4.1 counts ICT skills).
 //          Baseline: every skill counts towards 4.4 (relevant skills for decent jobs), shown once.
-// Role  -> the two targets matched strongly by most of its essential skills (none is fine).
+// Role  -> the two targets most of its essential skills link to strongly (none is fine).
 import sdgFile from '../data/sdg/sdg-links.json';
 import reviewFile from '../data/sdg/sdg-review.json';
 import matchFile from '../data/derived/sdg-skill-matches.json';
 import unFile from '../data/sources/un-sdg-targets.json';
 import type { Skill } from './scoring';
 
-/** source: 'ai' = RunPod match; 'esco' = ESCO digital flag. level: see the rule above. */
-export type SdgLink = { target: string; source: 'ai' | 'esco'; level: 'strong' | 'possible'; similarity?: number; uncertain?: boolean; skills?: Skill[] };
+/** source: 'reviewed' = from the two-reviewer labels; 'ai' = unreviewed RunPod match; 'esco' = ESCO digital flag. */
+export type SdgLink = { target: string; source: 'reviewed' | 'ai' | 'esco'; level: 'strong' | 'possible'; similarity?: number; uncertain?: boolean; skills?: Skill[] };
 export const sdgData = sdgFile as {
   goals: Record<string, { name: string; short: string; colour: string }>;
   targets: Record<string, { goal: string; title: string }>;
   pickerGoals: string[];
 };
-export const sdgReview = reviewFile;
+type Label = { skill: string; target: string; label: 'relevant' | 'not relevant' | 'uncertain'; proposedBy: string; similarity: number | null };
+export const sdgReview = reviewFile as typeof reviewFile & { labels: Label[] };
 export const sdgMatches = matchFile as { method: { model: string; where: string; matchedAt: string; targets: { name: string; url: string; retrievedAt: string } }; skills: Record<string, { label: string; targets: { code: string; similarity: number }[] }> };
 const unTitles = new Map(unFile.targets.map((t) => [t.code, t.title]));
 
@@ -35,38 +33,31 @@ export const targetGoal = (code: string) => sdgData.targets[code]?.goal ?? code.
 /** Short title used on screen (shortened from the UN text); the official UN text otherwise. */
 export const targetTitle = (code: string) => sdgData.targets[code]?.title ?? unTitles.get(code) ?? code;
 
-const rejectedTargets = new Set(sdgReview.rejectTargets.map((r) => r.target));
-const decision = new Map(sdgReview.decisions.map((d) => [`${d.skill}|${d.target}`, d.status]));
-const rejected = (label: string, code: string) => rejectedTargets.has(code) || decision.get(`${label}|${code}`) === 'rejected';
-const uncertain = (label: string, code: string) => decision.get(`${label}|${code}`) === 'uncertain';
+const labelsBySkill = new Map<string, Label[]>();
+for (const l of sdgReview.labels) labelsBySkill.set(l.skill, [...(labelsBySkill.get(l.skill) ?? []), l]);
+const reviewed = (skill: Skill) => labelsBySkill.get(skill.label) ?? [];
 
-/** RunPod matches at or above the threshold, and what the review did with them (shown as counts). */
-export const reviewCounts = (() => {
-  const all = Object.values(sdgMatches.skills).flatMap((s) => s.targets.filter((t) => t.similarity >= sdgReview.threshold).map((t) => [s.label, t.code]));
-  const rej = all.filter(([l, c]) => rejected(l, c)).length;
-  const unc = all.filter(([l, c]) => !rejected(l, c) && uncertain(l, c)).length;
-  return { proposed: all.length, rejected: rej, uncertain: unc, kept: all.length - rej - unc };
-})();
-
-function aiLinks(skill: Skill, level: 'strong' | 'possible'): SdgLink[] {
-  return (sdgMatches.skills[skill.uri]?.targets ?? [])
-    .filter((t) => !rejected(skill.label, t.code))
-    .filter((t) => {
-      const above = t.similarity >= sdgReview.threshold;
-      const unsure = uncertain(skill.label, t.code);
-      return level === 'strong' ? above && !unsure : (above && unsure) || (!above && t.similarity >= sdgReview.possibleFrom);
-    })
-    .map((t) => ({ target: t.code, source: 'ai', level, similarity: t.similarity, uncertain: uncertain(skill.label, t.code) || undefined }));
-}
+/** Counts shown in the short note on screen. */
+export const reviewCounts = { relevant: sdgReview.results.relevant, pairs: sdgReview.results.pairs };
 
 /** Strong SDG links for one skill (the 4.4 baseline for every skill is handled separately). */
 export function skillSdgs(skill: Skill): SdgLink[] {
-  const links = aiLinks(skill, 'strong');
-  if (skill.digital) links.push({ target: '4.4', source: 'esco', level: 'strong' });
+  const links: SdgLink[] = reviewed(skill).filter((l) => l.label === 'relevant')
+    .map((l) => ({ target: l.target, source: 'reviewed', level: 'strong', similarity: l.similarity ?? undefined }));
+  if (skill.digital && !links.some((l) => l.target === '4.4')) links.push({ target: '4.4', source: 'esco', level: 'strong' });
   return links;
 }
-/** Possible links: just under the threshold and not checked. Display only. */
-export const skillPossibleSdgs = (skill: Skill) => aiLinks(skill, 'possible');
+
+/** Possible links: labelled uncertain, or RunPod matches nobody reviewed from possibleFrom up. Display only. */
+export function skillPossibleSdgs(skill: Skill): SdgLink[] {
+  const seen = new Set(reviewed(skill).map((l) => l.target));
+  const uncertain: SdgLink[] = reviewed(skill).filter((l) => l.label === 'uncertain')
+    .map((l) => ({ target: l.target, source: 'reviewed', level: 'possible', similarity: l.similarity ?? undefined, uncertain: true }));
+  const unreviewed: SdgLink[] = (sdgMatches.skills[skill.uri]?.targets ?? [])
+    .filter((t) => !seen.has(t.code) && t.similarity >= sdgReview.possibleFrom)
+    .map((t) => ({ target: t.code, source: 'ai', level: 'possible', similarity: t.similarity }));
+  return [...uncertain, ...unreviewed];
+}
 
 function totals(skills: Skill[], links: (s: Skill) => SdgLink[]) {
   const byTarget = new Map<string, { skills: Skill[]; best: number }>();
@@ -92,7 +83,7 @@ type RoleLike = { id: string; essentialSkills: Skill[] };
 /** A role's links: up to two targets matched strongly by most of its essential skills. */
 export function roleSdgs(role: RoleLike): SdgLink[] {
   return sdgTotals(role.essentialSkills).filter((t) => t.target !== '4.4').slice(0, 2)
-    .map((t) => ({ target: t.target, source: 'ai', level: 'strong', similarity: t.best, skills: t.skills }));
+    .map((t) => ({ target: t.target, source: 'reviewed', level: 'strong', similarity: t.best, skills: t.skills }));
 }
 
 /** Goals (SDG numbers) a role is linked to: 'role' through its own links, 'skills' only through some essential skills. */

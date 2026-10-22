@@ -7,47 +7,43 @@ import type { Role } from './scoring';
 
 const roles = rolesFile.roles as Role[];
 
-describe('SDG links (RunPod matches: strong kept by review, possible or uncertain not confirmed, 4.4 baseline)', () => {
+describe('SDG links (two-reviewer labels: relevant = strong, uncertain = possible, not relevant = hidden)', () => {
   const byId = (id: string) => roles.find((r) => r.id === id)!;
-  const sm = byId('sustainability-manager');
   const all = roles.flatMap((r) => r.essentialSkills);
   const find = (label: string) => all.find((s) => s.label === label)!;
+  const labelOf = (skill: string, target: string) => sdgReview.labels.find((l) => l.skill === skill && l.target === target)?.label;
   it('every shown target has a goal colour and a title', () => {
     for (const s of all) for (const l of [...skillSdgs(s), ...skillPossibleSdgs(s)]) {
       expect(sdgData.goals[targetGoal(l.target)], l.target).toBeDefined();
       expect(targetTitle(l.target)).not.toBe(l.target);
     }
   });
-  it('strong links are at or above the threshold and not rejected; possible ones sit between possibleFrom and the threshold unless marked uncertain', () => {
-    for (const s of all) {
-      for (const l of skillSdgs(s).filter((x) => x.source === 'ai')) expect(l.similarity!).toBeGreaterThanOrEqual(sdgReview.threshold);
-      for (const l of skillPossibleSdgs(s)) { expect(l.similarity!).toBeGreaterThanOrEqual(sdgReview.possibleFrom); if (!l.uncertain) expect(l.similarity!).toBeLessThan(sdgReview.threshold); }
-      for (const l of [...skillSdgs(s), ...skillPossibleSdgs(s)]) expect(sdgReview.rejectTargets.map((x) => x.target)).not.toContain(l.target);
+  it('strong links are exactly the pairs the reviewers labelled relevant (plus ESCO digital -> 4.4)', () => {
+    for (const s of all) for (const l of skillSdgs(s)) {
+      if (l.source === 'esco') expect(l.target).toBe('4.4');
+      else expect(labelOf(s.label, l.target)).toBe('relevant');
     }
-    expect(reviewCounts.rejected).toBeGreaterThan(0);
-    expect(reviewCounts.rejected).toBeLessThan(reviewCounts.proposed);
+    expect(reviewCounts.relevant).toBe(sdgReview.labels.filter((l) => l.label === 'relevant').length);
   });
-  it('uncertain matches are never strong, only possible (offer financial services -> 9.3)', () => {
+  it('pairs labelled not relevant never show; uncertain ones only as possible', () => {
+    for (const s of all) for (const l of [...skillSdgs(s), ...skillPossibleSdgs(s)]) expect(labelOf(s.label, l.target)).not.toBe('not relevant');
     const s = find('offer financial services');
     expect(skillSdgs(s).map((l) => l.target)).not.toContain('9.3');
     expect(skillPossibleSdgs(s).find((l) => l.target === '9.3')?.uncertain).toBe(true);
-    expect(reviewCounts.kept + reviewCounts.rejected + reviewCounts.uncertain).toBe(reviewCounts.proposed);
-  });
-  it('rejected matches never show (data migration is not migration of people)', () => {
     expect(skillSdgs(find('develop automated migration methods')).map((l) => l.target)).not.toContain('10.7');
   });
-  it('sustainability manager: strong links to 12.6 and 9.4 from many skills', () => {
-    const links = roleSdgs(sm);
-    expect(links.map((l) => l.target)).toEqual(['12.6', '9.4']);
-    expect(links[0].skills!.length).toBeGreaterThan(5);
+  it('keyword-proposed links count when reviewers confirmed them (environmental awareness -> 12.8, energy efficiency -> 7.3)', () => {
+    expect(skillSdgs(find('promote environmental awareness')).map((l) => l.target)).toContain('12.8');
+    expect(skillSdgs(find('energy efficiency')).map((l) => l.target)).toContain('7.3');
   });
-  it('no forced links: a role without strong matches has none (4.4 baseline only)', () => {
+  it('sustainability manager links to 12.6 and 9.4 through many skills; billing clerk has none (4.4 baseline only)', () => {
+    expect(roleSdgs(byId('sustainability-manager')).map((l) => l.target)).toEqual(['12.6', '9.4']);
     expect(roleSdgs(byId('billing-clerk'))).toEqual([]);
   });
-  it('climate (13) is only a possible match today, so the goal picker disables it', () => {
-    expect(skillPossibleSdgs(find('advise on carbon emissions reduction')).map((l) => l.target)).toContain('13.3');
-    expect(goalStatus(roles, '13')).toBe('possible');
-    expect(goalStatus(roles, '12')).toBe('strong');
+  it('goal picker: climate (13) and clean energy (7) have reviewed links; 16 only possible ones', () => {
+    expect(goalStatus(roles, '13')).toBe('strong');
+    expect(goalStatus(roles, '7')).toBe('strong');
+    expect(goalStatus(roles, '16')).toBe('possible');
   });
   it('ESCO digital skills also link to 4.4', () => {
     const s = { uri: 'x', label: 'use databases', type: 'skill/competence', green: false, digital: true };

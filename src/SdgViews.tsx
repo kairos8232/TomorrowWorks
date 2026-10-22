@@ -2,7 +2,7 @@
 // Rule: src/sdg.ts (RunPod matches: strong = checked by people; possible = not checked; 4.4 baseline).
 import { roleById } from './data';
 import { useT } from './i18n';
-import { goalUrl, reviewCounts, roleSdgs, sdgData, sdgMatches, sdgPossibleTotals, sdgReview, sdgTotals, targetGoal, targetTitle, type SdgLink } from './sdg';
+import { goalUrl, reviewCounts, roleSdgs, sdgData, sdgMatches, sdgPossibleTotals, sdgTotals, targetGoal, targetTitle, type SdgLink } from './sdg';
 import type { Skill } from './scoring';
 
 export function SdgBadge({ target, short = false }: { target: string; short?: boolean }) {
@@ -19,7 +19,7 @@ const names = (skills: Skill[], t: ReturnType<typeof useT>) =>
 /** Why a role links to a target: how many of its skills RunPod matched strongly. */
 function LinkWhy({ link, total }: { link: SdgLink; total: number }) {
   const t = useT();
-  return <p>{t('{n} of its {m} essential skills match this target', { n: link.skills!.length, m: total })}: {names(link.skills!, t)}. <span className="sdg-source strong">{sdgReview.status === 'draft' ? t('Strong match · draft review') : t('Strong match · reviewed')}</span></p>;
+  return <p>{t('{n} of its {m} essential skills link to this target', { n: link.skills!.length, m: total })}: {names(link.skills!, t)}. <span className="sdg-source strong">{t('Reviewed link')}</span></p>;
 }
 
 /** Possible links (just under the threshold, not checked), collapsed. */
@@ -51,10 +51,7 @@ export function RoleSdgLine({ roleId }: { roleId: string }) {
 /** How the links were made, with the counts from the human check. */
 export function SdgMethodNote() {
   const t = useT();
-  const v = { model: sdgMatches.method.model, th: sdgReview.threshold.toFixed(2), lo: sdgReview.possibleFrom.toFixed(2), r: reviewCounts.rejected, u: reviewCounts.uncertain, p: reviewCounts.proposed };
-  return <p className="note sdg-summary-note">{t('How links are made: RunPod ({model}) compares each ESCO skill with the official UN target texts. Strong: similarity of at least {th}, a provisional threshold from exploratory inspection.', v)} {sdgReview.status === 'draft'
-    ? t('A draft review of the {p} matches above it removed {r} and marked {u} uncertain; team validation is pending.', v)
-    : t('The team reviewed the {p} matches above it, removing {r} and marking {u} uncertain.', v)} {t('Possible: {lo} to {th} or uncertain, not confirmed, never used for ranking ({lo} is a display choice). Lower: not shown. Links show a connection, not a measured impact.', v)} <a href={sdgMatches.method.targets.url} target="_blank" rel="noreferrer">{t('UN target list')}</a></p>;
+  return <p className="note sdg-summary-note">{t('Links proposed by RunPod ({model}) and keyword matching; shown as strong only if two reviewers agreed ({n} of {p} pairs). A connection, not a measured impact.', { model: sdgMatches.method.model, n: reviewCounts.relevant, p: reviewCounts.pairs })} <a href={sdgMatches.method.targets.url} target="_blank" rel="noreferrer">{t('UN target list')}</a></p>;
 }
 
 /** "This move and the SDGs": what the skills to build connect to, strong first, then possible, then the 4.4 baseline. */
@@ -74,7 +71,7 @@ export function SdgContribution({ roleId, skills, heading }: { roleId: string | 
         const linked = strong.find((x) => x.target === target)?.skills ?? [];
         return <li key={target}>
           <div className="sdg-summary-heading"><SdgBadge target={target} short /><strong>{t(targetTitle(target))}</strong></div>
-          {roleLink && role ? <LinkWhy link={roleLink} total={role.essentialSkills.length} /> : <p><span className="sdg-source strong">{sdgReview.status === 'draft' ? t('Strong match · draft review') : t('Strong match · reviewed')}</span></p>}
+          {roleLink && role ? <LinkWhy link={roleLink} total={role.essentialSkills.length} /> : <p><span className="sdg-source strong">{t('Reviewed link')}</span></p>}
           {linked.length > 0 && <small>{roleLink ? t('You would build {n} of them', { n: linked.length }) : t('Gap skills you would build for it: {skills}', { skills: names(linked, t) })}</small>}
         </li>;
       })}

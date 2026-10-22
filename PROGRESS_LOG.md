@@ -104,6 +104,14 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 
 ---
 
+## 22 Oct 2026 (13:30 MYT) — SDG review results applied
+
+- **Team review done** (two reviewers, blind, 145 pairs): agreement 66%, kappa 0.48 (three labels) / 0.69 (relevant vs not); AI alone 21/73 relevant, AI + draft rules 21/32 (in-sample), keyword baseline 14/40; below 0.60 only 4/30 relevant. Keyword matching found 10 relevant links the AI missed.
+- **App now uses the reviewed labels:** strong = 35 pairs labelled relevant (AI or keyword), uncertain = possible, not relevant = hidden. Clean energy (7) and Climate action (13) are pickable again; 16 and 17 only possible. On-screen note shortened to one line (Carson).
+- The learning-progress work from the `kit-yiu` branch (PR #1) was merged on GitHub before this change.
+
+---
+
 ## 21 Oct 2026 (23:30 MYT) — Measured check for the SDG matcher
 
 - **Why:** the 0.60 SDG threshold came from looking at examples; Carson asked whether an existing labelled dataset could help. A dataset cannot replace the team check of our own 73 matches, but it can measure the matcher.

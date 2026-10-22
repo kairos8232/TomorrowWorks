@@ -729,6 +729,9 @@ const dict: Record<string, Entry> = {
   'A draft review of the {p} matches above it removed {r} and marked {u} uncertain; team validation is pending.': { ms: 'Semakan draf terhadap {p} padanan di atasnya membuang {r} dan menandakan {u} sebagai tidak pasti; pengesahan pasukan belum selesai.', zh: '对高于该阈值的 {p} 项匹配进行了初步审核，删除 {r} 项，标记 {u} 项为不确定；团队验证尚未完成。' },
   'The team reviewed the {p} matches above it, removing {r} and marking {u} uncertain.': { ms: 'Pasukan menyemak {p} padanan di atasnya, membuang {r} dan menandakan {u} sebagai tidak pasti.', zh: '团队审核了高于该阈值的 {p} 项匹配，删除 {r} 项，标记 {u} 项为不确定。' },
   'Possible: {lo} to {th} or uncertain, not confirmed, never used for ranking ({lo} is a display choice). Lower: not shown. Links show a connection, not a measured impact.': { ms: 'Mungkin: {lo} hingga {th} atau tidak pasti, belum disahkan, tidak digunakan untuk kedudukan ({lo} ialah pilihan paparan). Lebih rendah: tidak ditunjukkan. Pautan menunjukkan kaitan, bukan impak yang diukur.', zh: '可能：{lo} 至 {th} 或不确定，未确认，不用于排名（{lo} 是显示上的选择）。更低：不显示。关联表示联系，而非经测量的影响。' },
+  'Links proposed by RunPod ({model}) and keyword matching; shown as strong only if two reviewers agreed ({n} of {p} pairs). A connection, not a measured impact.': { ms: 'Pautan dicadangkan oleh RunPod ({model}) dan padanan kata kunci; ditunjukkan sebagai kukuh hanya jika dua penyemak bersetuju ({n} daripada {p} pasangan). Satu kaitan, bukan impak yang diukur.', zh: '关联由 RunPod（{model}）和关键词匹配提出；只有两位审核者都同意时才显示为强关联（{p} 对中的 {n} 对）。表示联系，而非经测量的影响。' },
+  'Reviewed link': { ms: 'Pautan disemak', zh: '已审核的关联' },
+  '{n} of its {m} essential skills link to this target': { ms: '{n} daripada {m} kemahiran terasnya berkait dengan sasaran ini', zh: '其 {m} 项核心技能中有 {n} 项与此目标相关' },
 };
 
 const LangContext = createContext<Lang>('en');

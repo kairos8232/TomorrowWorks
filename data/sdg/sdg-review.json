@@ -1,190 +1,1032 @@
 {
-  "about": "Review of the RunPod SDG matches (data/derived/sdg-skill-matches.json). Strong links = similarity at or above the provisional threshold and not rejected or marked uncertain here. Uncertain matches are shown with the possible links, never used for ranking or tags.",
-  "status": "draft",
-  "reviewedBy": "Draft review by Claude on 21 Oct 2026 of the 73 matches at or above 0.60; team validation pending (blind review kit in data/sdg/review/).",
-  "threshold": 0.6,
-  "thresholdReason": "Provisional. Chosen by exploratory inspection of the matches on 21 Oct 2026 (data/derived/sdg-spotcheck.md), not a validated standard; to be confirmed by the team's validation, which will give the acceptance rate.",
-  "possibleFrom": 0.55,
-  "possibleReason": "A display choice, not a validated boundary: matches from 0.55 to just under the threshold are shown as 'possible, not confirmed' because some are fair (carbon emissions reduction -> 13.3, calculate tax -> 17.1) and some are not. They never change rankings or tags. Below 0.55 nothing is shown.",
-  "rejectTargets": [
-    {
-      "target": "2.4",
-      "reason": "About food production and agriculture; none of the nine roles works in farming."
-    },
-    {
-      "target": "6.3",
-      "reason": "About water quality; matched on the words 'waste' and 'efficiency', not on water work."
-    },
-    {
-      "target": "6.4",
-      "reason": "About water-use efficiency; matched on 'efficiency', not on water work."
-    },
-    {
-      "target": "14.2",
-      "reason": "About marine and coastal ecosystems; none of the matched skills is about the sea."
-    },
-    {
-      "target": "17.4",
-      "reason": "About the debt of developing countries; matched on the word 'sustainability'."
-    }
-  ],
-  "rejectTargetsNote": "Target-wide only where the target is clearly outside the work of the nine roles in this prototype; revisit if roles are added.",
-  "decisions": [
-    {
-      "skill": "advise on sustainable management policies",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "promote environmental awareness",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "sustainable finance",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "measure company's sustainability performance",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "sustainability consulting",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "global standards for sustainability reporting",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "advise on sustainability solutions",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "advise on corporate social responsibility",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "use sustainable materials and components",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "build business relationships",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "align efforts towards business development",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "corporate sustainability",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "coordinate environmental efforts",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "environmental policy",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "ensure compliance with environmental legislation",
-      "target": "17.16",
-      "status": "rejected",
-      "reason": "Too broad: 17.16 is the global partnership between countries; this skill matched on the word 'sustainable', not on partnership work."
-    },
-    {
-      "skill": "promote environmental awareness",
-      "target": "10.3",
-      "status": "rejected",
-      "reason": "10.3 is about equal opportunity and discrimination; matched on policy wording only."
-    },
-    {
-      "skill": "ensure compliance with environmental legislation",
-      "target": "10.3",
-      "status": "rejected",
-      "reason": "10.3 is about equal opportunity and discrimination; matched on 'legislation' only."
-    },
-    {
-      "skill": "develop automated migration methods",
-      "target": "10.7",
-      "status": "rejected",
-      "reason": "Data migration, not migration of people."
-    },
-    {
-      "skill": "information confidentiality",
-      "target": "16.10",
-      "status": "rejected",
-      "reason": "16.10 is about public access to information; confidentiality points the other way."
-    },
-    {
-      "skill": "offer financial services",
-      "target": "9.3",
-      "status": "uncertain",
-      "reason": "Fits only if the services reach small enterprises; depends on the job."
-    },
-    {
-      "skill": "offer financial services",
-      "target": "8.3",
-      "status": "uncertain",
-      "reason": "Fits only where it supports small businesses' access to finance; depends on the job."
-    },
-    {
-      "skill": "promote environmental awareness",
-      "target": "12.6",
-      "status": "uncertain",
-      "reason": "Indirect: 12.6 is about company practices; awareness fits 12.8 better, which was not matched."
-    },
-    {
-      "skill": "advise on sustainable management policies",
-      "target": "8.3",
-      "status": "uncertain",
-      "reason": "8.3 is about policies for decent jobs and small businesses; only partly related."
-    },
-    {
-      "skill": "sustainable technologies",
-      "target": "4.7",
-      "status": "uncertain",
-      "reason": "4.7 is about learners gaining knowledge for sustainable development; fits the learner, not the work itself."
-    },
-    {
-      "skill": "produce sustainable products",
-      "target": "4.7",
-      "status": "uncertain",
-      "reason": "4.7 is about learners gaining knowledge for sustainable development; fits the learner, not the work itself."
-    },
-    {
-      "skill": "green building standards",
-      "target": "4.7",
-      "status": "uncertain",
-      "reason": "4.7 is about learners gaining knowledge for sustainable development; fits the learner, not the work itself."
-    }
-  ]
+ "about": "Blind review of SDG links by two reviewers (data/sdg/review/: GUIDE.md, review-A.csv, review-B.csv, disagreements.csv, results.md). Strong links = pairs both reviewers (or their discussion) labelled relevant, whether proposed by RunPod (bge-m3) or the keyword baseline. Uncertain = shown as possible, never ranked. Not relevant = hidden. Pairs nobody reviewed: RunPod matches from possibleFrom up are shown as possible, not confirmed.",
+ "status": "team-reviewed",
+ "reviewedBy": "Two team reviewers, independently, 22 Oct 2026; 50 disagreements settled by discussion. Agreement 66% (Cohen's kappa 0.48 three labels, 0.69 relevant vs not).",
+ "results": {
+  "pairs": 145,
+  "not relevant": 71,
+  "uncertain": 39,
+  "relevant": 35,
+  "precisionAIOnly": "21/73",
+  "precisionKeyword": "14/40"
+ },
+ "possibleFrom": 0.55,
+ "possibleReason": "Display choice for pairs nobody reviewed: RunPod matches from 0.55 up are shown as 'possible, not confirmed'. In the review, only 4 of 30 fresh RunPod pairs below 0.60 were relevant.",
+ "labels": [
+  {
+   "skill": "information structure",
+   "target": "9.1",
+   "label": "not relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.511
+  },
+  {
+   "skill": "environmental policy",
+   "target": "14.2",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.618
+  },
+  {
+   "skill": "environmental policy",
+   "target": "17.13",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "environmental policy",
+   "target": "17.14",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "environmental policy",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.615
+  },
+  {
+   "skill": "environmental policy",
+   "target": "9.4",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.621
+  },
+  {
+   "skill": "accounting department processes",
+   "target": "12.6",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.485
+  },
+  {
+   "skill": "accounting department processes",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.495
+  },
+  {
+   "skill": "perform business research",
+   "target": "9.5",
+   "label": "not relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.57
+  },
+  {
+   "skill": "ensure compliance with environmental legislation",
+   "target": "10.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.617
+  },
+  {
+   "skill": "ensure compliance with environmental legislation",
+   "target": "14.2",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.603
+  },
+  {
+   "skill": "ensure compliance with environmental legislation",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.606
+  },
+  {
+   "skill": "develop automated migration methods",
+   "target": "10.7",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.603
+  },
+  {
+   "skill": "green computing",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.632
+  },
+  {
+   "skill": "sustainable technologies",
+   "target": "2.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.665
+  },
+  {
+   "skill": "sustainable technologies",
+   "target": "4.7",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.663
+  },
+  {
+   "skill": "sustainable technologies",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.703
+  },
+  {
+   "skill": "climate change impact",
+   "target": "13.2",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "climate change impact",
+   "target": "13.3",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.549
+  },
+  {
+   "skill": "sustainable finance",
+   "target": "12.6",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.641
+  },
+  {
+   "skill": "sustainable finance",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.654
+  },
+  {
+   "skill": "sustainable finance",
+   "target": "9.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.634
+  },
+  {
+   "skill": "engineering principles",
+   "target": "9.1",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.574
+  },
+  {
+   "skill": "prepare tax returns forms",
+   "target": "9.4",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.5
+  },
+  {
+   "skill": "circular economy",
+   "target": "6.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.639
+  },
+  {
+   "skill": "circular economy",
+   "target": "8.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.661
+  },
+  {
+   "skill": "circular economy",
+   "target": "9.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.668
+  },
+  {
+   "skill": "debug software",
+   "target": "10.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.503
+  },
+  {
+   "skill": "data mining",
+   "target": "12.1",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "perform business analysis",
+   "target": "9.5",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.535
+  },
+  {
+   "skill": "allocate bills",
+   "target": "12.5",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "carry out training in environmental matters",
+   "target": "12.6",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.563
+  },
+  {
+   "skill": "carry out training in environmental matters",
+   "target": "4.7",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.576
+  },
+  {
+   "skill": "carry out training in environmental matters",
+   "target": "8.6",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "calculate tax",
+   "target": "17.1",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.585
+  },
+  {
+   "skill": "bookkeeping regulations",
+   "target": "10.7",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.505
+  },
+  {
+   "skill": "apply change management",
+   "target": "13.2",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "apply change management",
+   "target": "8.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.561
+  },
+  {
+   "skill": "organise business documents",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.467
+  },
+  {
+   "skill": "organise business documents",
+   "target": "8.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.499
+  },
+  {
+   "skill": "waste management",
+   "target": "11.6",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "waste management",
+   "target": "12.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.579
+  },
+  {
+   "skill": "waste management",
+   "target": "12.5",
+   "label": "relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.537
+  },
+  {
+   "skill": "global standards for sustainability reporting",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.647
+  },
+  {
+   "skill": "global standards for sustainability reporting",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.646
+  },
+  {
+   "skill": "data engineering",
+   "target": "8.7",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "investment banking",
+   "target": "8.10",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "assess the life cycle of resources",
+   "target": "12.4",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "perform scientific research",
+   "target": "9.5",
+   "label": "relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.59
+  },
+  {
+   "skill": "hazardous waste types",
+   "target": "3.9",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.492
+  },
+  {
+   "skill": "ICT debugging tools",
+   "target": "17.6",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.424
+  },
+  {
+   "skill": "business analysis",
+   "target": "9.3",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.527
+  },
+  {
+   "skill": "corporate social responsibility",
+   "target": "4.7",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.539
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "11.3",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "12.2",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.685
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "14.7",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "17.14",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.685
+  },
+  {
+   "skill": "advise on sustainable management policies",
+   "target": "8.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.641
+  },
+  {
+   "skill": "use sustainable materials and components",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.627
+  },
+  {
+   "skill": "use sustainable materials and components",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.634
+  },
+  {
+   "skill": "use sustainable materials and components",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.666
+  },
+  {
+   "skill": "collect ICT data",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.553
+  },
+  {
+   "skill": "green building standards",
+   "target": "4.7",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.617
+  },
+  {
+   "skill": "green building standards",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.618
+  },
+  {
+   "skill": "follow the statutory obligations",
+   "target": "17.4",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.493
+  },
+  {
+   "skill": "energy efficiency",
+   "target": "6.4",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.622
+  },
+  {
+   "skill": "energy efficiency",
+   "target": "7.1",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "energy efficiency",
+   "target": "7.2",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "energy efficiency",
+   "target": "7.3",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "energy efficiency",
+   "target": "8.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.619
+  },
+  {
+   "skill": "promote environmental awareness",
+   "target": "10.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.622
+  },
+  {
+   "skill": "promote environmental awareness",
+   "target": "12.6",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.662
+  },
+  {
+   "skill": "promote environmental awareness",
+   "target": "12.8",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "promote environmental awareness",
+   "target": "13.3",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "promote environmental awareness",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.656
+  },
+  {
+   "skill": "advise on efficiency improvements",
+   "target": "7.3",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "alternative energy",
+   "target": "7.2",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "produce sustainable products",
+   "target": "2.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.657
+  },
+  {
+   "skill": "produce sustainable products",
+   "target": "4.7",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.639
+  },
+  {
+   "skill": "produce sustainable products",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.63
+  },
+  {
+   "skill": "tools for software configuration management",
+   "target": "10.5",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.456
+  },
+  {
+   "skill": "business processes",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.616
+  },
+  {
+   "skill": "information confidentiality",
+   "target": "16.10",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.625
+  },
+  {
+   "skill": "information confidentiality",
+   "target": "17.6",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.537
+  },
+  {
+   "skill": "asset management",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.562
+  },
+  {
+   "skill": "manage environmental management system",
+   "target": "14.2",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.603
+  },
+  {
+   "skill": "advise on corporate social responsibility",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.64
+  },
+  {
+   "skill": "advise on corporate social responsibility",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.637
+  },
+  {
+   "skill": "advise on corporate social responsibility",
+   "target": "17.4",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.615
+  },
+  {
+   "skill": "lead the sustainability reporting process",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.664
+  },
+  {
+   "skill": "coordinate environmental efforts",
+   "target": "11.4",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "coordinate environmental efforts",
+   "target": "12.6",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.635
+  },
+  {
+   "skill": "coordinate environmental efforts",
+   "target": "14.2",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.608
+  },
+  {
+   "skill": "coordinate environmental efforts",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.62
+  },
+  {
+   "skill": "maintain customer records",
+   "target": "16.10",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.566
+  },
+  {
+   "skill": "advise on carbon emissions reduction",
+   "target": "12.6",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.62
+  },
+  {
+   "skill": "advise on carbon emissions reduction",
+   "target": "3.6",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "explain accounting records",
+   "target": "10.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.5
+  },
+  {
+   "skill": "analyse external factors of companies",
+   "target": "12.6",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.555
+  },
+  {
+   "skill": "analyse external factors of companies",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.537
+  },
+  {
+   "skill": "resource-efficient technologies",
+   "target": "16.8",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "resource-efficient technologies",
+   "target": "6.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.651
+  },
+  {
+   "skill": "resource-efficient technologies",
+   "target": "8.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.635
+  },
+  {
+   "skill": "resource-efficient technologies",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.652
+  },
+  {
+   "skill": "mitigate waste of resources",
+   "target": "12.5",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "mitigate waste of resources",
+   "target": "6.3",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.61
+  },
+  {
+   "skill": "mitigate waste of resources",
+   "target": "6.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.647
+  },
+  {
+   "skill": "mitigate waste of resources",
+   "target": "8.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.617
+  },
+  {
+   "skill": "prepare financial projections",
+   "target": "8.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.572
+  },
+  {
+   "skill": "consider economic criteria in decision making",
+   "target": "14.1",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "consider economic criteria in decision making",
+   "target": "5.5",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "consider economic criteria in decision making",
+   "target": "7.2",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "measure company's sustainability performance",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.658
+  },
+  {
+   "skill": "measure company's sustainability performance",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.654
+  },
+  {
+   "skill": "measure company's sustainability performance",
+   "target": "17.19",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.644
+  },
+  {
+   "skill": "tax legislation",
+   "target": "17.1",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.544
+  },
+  {
+   "skill": "sustainability consulting",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.636
+  },
+  {
+   "skill": "sustainability consulting",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.647
+  },
+  {
+   "skill": "advise on sustainability solutions",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.66
+  },
+  {
+   "skill": "advise on sustainability solutions",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.637
+  },
+  {
+   "skill": "advise on sustainability solutions",
+   "target": "9.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.611
+  },
+  {
+   "skill": "build business relationships",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.631
+  },
+  {
+   "skill": "energy conservation",
+   "target": "6.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.602
+  },
+  {
+   "skill": "energy conservation",
+   "target": "6.4",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.625
+  },
+  {
+   "skill": "energy conservation",
+   "target": "7.1",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "energy conservation",
+   "target": "7.2",
+   "label": "not relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "energy conservation",
+   "target": "7.3",
+   "label": "relevant",
+   "proposedBy": "keyword",
+   "similarity": null
+  },
+  {
+   "skill": "energy conservation",
+   "target": "8.4",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.625
+  },
+  {
+   "skill": "offer financial services",
+   "target": "8.10",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.587
+  },
+  {
+   "skill": "offer financial services",
+   "target": "8.3",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.605
+  },
+  {
+   "skill": "offer financial services",
+   "target": "9.3",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.62
+  },
+  {
+   "skill": "assess environmental impact",
+   "target": "14.2",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.602
+  },
+  {
+   "skill": "accounting",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.496
+  },
+  {
+   "skill": "scientific research methodology",
+   "target": "9.5",
+   "label": "relevant",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.56
+  },
+  {
+   "skill": "align efforts towards business development",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.63
+  },
+  {
+   "skill": "align efforts towards business development",
+   "target": "8.2",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.618
+  },
+  {
+   "skill": "align efforts towards business development",
+   "target": "8.3",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.631
+  },
+  {
+   "skill": "analyse software specifications",
+   "target": "4.5",
+   "label": "not relevant",
+   "proposedBy": "random",
+   "similarity": null
+  },
+  {
+   "skill": "corporate sustainability",
+   "target": "12.6",
+   "label": "relevant",
+   "proposedBy": "AI",
+   "similarity": 0.676
+  },
+  {
+   "skill": "corporate sustainability",
+   "target": "17.16",
+   "label": "not relevant",
+   "proposedBy": "AI",
+   "similarity": 0.621
+  },
+  {
+   "skill": "corporate sustainability",
+   "target": "9.4",
+   "label": "uncertain",
+   "proposedBy": "AI",
+   "similarity": 0.626
+  },
+  {
+   "skill": "company policies",
+   "target": "10.3",
+   "label": "uncertain",
+   "proposedBy": "AI+keyword",
+   "similarity": 0.562
+  },
+  {
+   "skill": "company policies",
+   "target": "10.4",
+   "label": "uncertain",
+   "proposedBy": "keyword",
+   "similarity": null
+  }
+ ]
 }
