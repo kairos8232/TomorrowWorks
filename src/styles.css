@@ -1069,12 +1069,12 @@ details.course-check { padding-block:0; }
 .moves-intro h1 { font: 400 clamp(44px, 4vw, 58px)/1 'Carlito', sans-serif; letter-spacing: -.035em; }
 .moves-page .who { justify-content: flex-start; gap: 6px 18px; margin-top: 12px; padding: 0; border: 0; border-radius: 0; background: transparent; font-size: 15px; }
 .moves-page .who p { margin: 0; color: #53605a; }
-.moves-page .moves-update { display: grid; align-content: center; gap: 8px; padding: 18px 24px; border: 1px solid #d8ddd7; border-radius: 8px; background: #fff; }
+.moves-page .moves-update { display: grid; align-content: center; gap: 5px; padding: 12px 18px; border: 1px solid #d8ddd7; border-radius: 8px; background: #fff; }
 .moves-page .moves-update h2 { margin: 0; font-size: 19px; line-height: 1.2; }
-.moves-page .moves-update > div { display: flex; flex-wrap: wrap; gap: 6px 20px; }
-.moves-workbench { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(320px, .85fr); gap: 18px; align-items: stretch; }
-.moves-sidebar { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 14px; min-width: 0; }
-.moves-page .futures-panel { padding: 25px 28px; gap: 17px; border-radius: 10px; align-content: center; }
+.moves-page .moves-update > div { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 2px; }
+.moves-workbench { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(320px, .85fr); gap: 18px; align-items: start; }
+.moves-sidebar { display: grid; gap: 12px; min-width: 0; }
+.moves-page .futures-panel { min-height: 260px; padding: 25px 28px; gap: 17px; border-radius: 10px; align-content: center; }
 .moves-page .futures-top { display: block; }
 .moves-page .futures-lead { grid-template-columns: minmax(0, 1fr) minmax(150px, .42fr); gap: 9px 22px; align-items: center; }
 .moves-page .futures-panel h2 { font-size: clamp(29px, 2.5vw, 37px); }
@@ -1090,17 +1090,17 @@ details.course-check { padding-block:0; }
 .moves-page .speed-strip { height: 10px; gap: 2px; }
 .moves-page .speed-note { margin: 0; font-size: 13px; line-height: 1.4; }
 .futures-steady { margin: 0; padding-top: 12px; border-top: 1px solid #2d4a41; color: #dbe7de; font-size: 14px; }
-.moves-settings { padding: 22px 24px; border: 1px solid #d8ddd7; border-radius: 8px; background: #f4f7f4; }
-.moves-settings h2 { margin: 0 0 17px; font-size: 25px; line-height: 1.2; }
-.moves-settings .ledger-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 12px; padding: 0; background: transparent; }
+.moves-settings { padding: 12px 18px; border: 1px solid #d8ddd7; border-radius: 8px; background: #f4f7f4; }
+.moves-settings h2 { margin: 0 0 7px; font-size: 23px; line-height: 1.2; }
+.moves-settings .ledger-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; padding: 0; background: transparent; }
 .moves-settings .ledger-controls .ranking-personalise { grid-column: 1 / -1; flex: none; min-width: 0; }
-.moves-settings > .note { margin: 14px 0 0; font-size: 13px; line-height: 1.4; }
+.moves-settings > .note { margin: 6px 0 0; font-size: 13px; line-height: 1.4; }
 .moves-page .ledger { padding: 25px 28px; }
 .ledger-intro { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; margin-bottom: 20px; }
 .ledger-intro h2 { margin: 0; font-size: 27px; line-height: 1.2; }
 .ledger-intro p { margin: 0; color: #657069; font-size: 14px; }
-.moves-page .ledger-controls legend { font-size: 13px; margin-bottom: 6px; }
-.moves-page .choice, .moves-page .ranking-personalise .toggle { padding: 8px 10px; font-size: 14px; }
+.moves-page .ledger-controls legend { font-size: 13px; margin-bottom: 4px; }
+.moves-page .choice, .moves-page .ranking-personalise .toggle { padding: 4px 9px; font-size: 14px; }
 .moves-page .ledger-table { margin: 0; }
 .moves-page .ledger-head, .moves-page .ledger-line { grid-template-columns: 42px minmax(220px, 1.7fr) repeat(3, minmax(100px, .8fr)) 70px; gap: 14px; }
 .moves-page .ledger-head { padding: 10px; }
@@ -1120,6 +1120,7 @@ details.course-check { padding-block:0; }
 .moves-page .moves-update p { margin: 0; font-size: 14px; line-height: 1.4; }
 @media (max-width: 1050px) {
   .moves-workbench { grid-template-columns: 1fr; }
+  .moves-page .futures-panel { min-height: 0; }
   .moves-settings .ledger-controls { display: flex; gap: 14px 24px; }
 }
 @media (max-width: 860px) {
