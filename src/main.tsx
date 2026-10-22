@@ -307,6 +307,7 @@ function App() {
   if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
   const inMarket = marketNav.some(item => item.id === screen);
+  const isOrganisation = kind === 'team' || kind === 'region';
   const primaryItems = kind === 'region' ? regionNav : kind === 'team' ? teamNav : careerNav;
 
   return <LangProvider value={lang}><DataSaverProvider value={saver}><div className="app-shell">
@@ -314,16 +315,16 @@ function App() {
       <div className="workspace-header-main">
         <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
-          <button type="button" className={!inMarket && kind !== 'team' ? 'active' : ''} onClick={() => kind === 'team' ? start('me') : go('skills')}>{t('Career path')}</button>
+          {!isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
           <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
-          <button type="button" className={kind === 'team' && !inMarket ? 'active' : ''} onClick={() => start('hr')}>{t('For organisations')}</button>
+          {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
         </nav>
         <details className="workspace-mobile-menu">
           <summary>{t('Menu')}</summary>
           <nav aria-label={t('Main navigation')}>
-            <button type="button" onClick={() => kind === 'team' ? start('me') : go('skills')}>{t('Career path')}</button>
+            {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
-            <button type="button" onClick={() => start('hr')}>{t('For organisations')}</button>
+            {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
           </nav>
         </details>
         <div className="workspace-utility">
