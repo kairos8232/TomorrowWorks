@@ -6,10 +6,26 @@
  "k": 10,
  "descriptions": 12,
  "cuesTested": 16,
+ "controlCuesTested": 5,
  "overall": {
   "keptMean": 6.13,
   "keptMin": 0,
   "sameFirst": 0.46
+ },
+ "control": {
+  "keptMean": 6.2,
+  "keptMin": 3,
+  "sameFirst": 0.45,
+  "pairSharedMean": 5.82
+ },
+ "languageShift": {
+  "ethnicityCues": 63,
+  "controlCues": 0,
+  "otherIdentityCues": 2,
+  "perCueCounts": {
+   "background": 3,
+   "control": 5
+  }
  },
  "cues": [
   {
@@ -88,6 +104,41 @@
    "keptMean": 4.58,
    "keptMin": 0,
    "sameFirst": 0.08
+  },
+  {
+   "attribute": "neutral (control)",
+   "cue": "careful worker",
+   "keptMean": 5.92,
+   "keptMin": 4,
+   "sameFirst": 0.42
+  },
+  {
+   "attribute": "neutral (control)",
+   "cue": "likes teamwork",
+   "keptMean": 6.5,
+   "keptMin": 3,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "neutral (control)",
+   "cue": "busy office",
+   "keptMean": 6.33,
+   "keptMin": 4,
+   "sameFirst": 0.5
+  },
+  {
+   "attribute": "neutral (control)",
+   "cue": "enjoys learning",
+   "keptMean": 5,
+   "keptMin": 3,
+   "sameFirst": 0.33
+  },
+  {
+   "attribute": "neutral (control)",
+   "cue": "small company",
+   "keptMean": 7.25,
+   "keptMin": 5,
+   "sameFirst": 0.5
   },
   {
    "attribute": "name (illustrative)",
@@ -209,6 +260,71 @@
      "b": "from a rural area",
      "sharedMean": 3.83,
      "sharedMin": 0
+    }
+   ]
+  },
+  {
+   "attribute": "neutral (control)",
+   "pairs": [
+    {
+     "a": "careful worker",
+     "b": "likes teamwork",
+     "sharedMean": 6.08,
+     "sharedMin": 4
+    },
+    {
+     "a": "careful worker",
+     "b": "busy office",
+     "sharedMean": 6.33,
+     "sharedMin": 4
+    },
+    {
+     "a": "careful worker",
+     "b": "enjoys learning",
+     "sharedMean": 4.92,
+     "sharedMin": 4
+    },
+    {
+     "a": "careful worker",
+     "b": "small company",
+     "sharedMean": 5.92,
+     "sharedMin": 4
+    },
+    {
+     "a": "likes teamwork",
+     "b": "busy office",
+     "sharedMean": 5.92,
+     "sharedMin": 4
+    },
+    {
+     "a": "likes teamwork",
+     "b": "enjoys learning",
+     "sharedMean": 5.58,
+     "sharedMin": 3
+    },
+    {
+     "a": "likes teamwork",
+     "b": "small company",
+     "sharedMean": 6.33,
+     "sharedMin": 5
+    },
+    {
+     "a": "busy office",
+     "b": "enjoys learning",
+     "sharedMean": 5.17,
+     "sharedMin": 3
+    },
+    {
+     "a": "busy office",
+     "b": "small company",
+     "sharedMean": 6.67,
+     "sharedMin": 4
+    },
+    {
+     "a": "enjoys learning",
+     "b": "small company",
+     "sharedMean": 5.25,
+     "sharedMin": 4
     }
    ]
   },

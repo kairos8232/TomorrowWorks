@@ -2,7 +2,11 @@
 
 12 fictional work descriptions, each embedded as written and with 16 identity cues; top 10 ESCO skills compared (BAAI/bge-m3, RunPod Serverless (Job B)).
 
-Overall: on average **6.13 of 10** suggestions kept (lowest 0); first suggestion unchanged in **46%** of cases.
+Identity cues: on average **6.13 of 10** suggestions kept (lowest 0); first suggestion unchanged in **46%** of cases.
+
+Control (5 neutral phrases of similar lengths, no protected attribute): **6.2 of 10** kept (lowest 3); first unchanged in **45%**; two neutral versions share 5.82 of 10. Any extra words shift the search, so identity cues are compared with this, not with zero change.
+
+Language skills pulled in by the cues (across 12 descriptions): ethnicity cues (3 cues) **63**; neutral control (5 cues) **0**; gender, age, life-stage and name cues **2**.
 
 | Attribute | Cue | Kept of 10 (mean) | Lowest | First unchanged |
 |---|---|---|---|---|
@@ -17,6 +21,11 @@ Overall: on average **6.13 of 10** suggestions kept (lowest 0); first suggestion
 | life stage | returning after a career break | 5.83 | 3 | 33% |
 | life stage | person with a disability | 5.83 | 3 | 50% |
 | life stage | from a rural area | 4.58 | 0 | 8% |
+| neutral (control) | careful worker | 5.92 | 4 | 42% |
+| neutral (control) | likes teamwork | 6.5 | 3 | 50% |
+| neutral (control) | busy office | 6.33 | 4 | 50% |
+| neutral (control) | enjoys learning | 5 | 3 | 33% |
+| neutral (control) | small company | 7.25 | 5 | 50% |
 | name (illustrative) | Nurul Aisyah | 5.42 | 3 | 58% |
 | name (illustrative) | Tan Mei Ling | 5.58 | 4 | 42% |
 | name (illustrative) | Priya Raman | 5.33 | 2 | 50% |
@@ -36,6 +45,16 @@ Overall: on average **6.13 of 10** suggestions kept (lowest 0); first suggestion
 | life stage | returning after a career break vs person with a disability | 4.25 | 2 |
 | life stage | returning after a career break vs from a rural area | 3.67 | 0 |
 | life stage | person with a disability vs from a rural area | 3.83 | 0 |
+| neutral (control) | careful worker vs likes teamwork | 6.08 | 4 |
+| neutral (control) | careful worker vs busy office | 6.33 | 4 |
+| neutral (control) | careful worker vs enjoys learning | 4.92 | 4 |
+| neutral (control) | careful worker vs small company | 5.92 | 4 |
+| neutral (control) | likes teamwork vs busy office | 5.92 | 4 |
+| neutral (control) | likes teamwork vs enjoys learning | 5.58 | 3 |
+| neutral (control) | likes teamwork vs small company | 6.33 | 5 |
+| neutral (control) | busy office vs enjoys learning | 5.17 | 3 |
+| neutral (control) | busy office vs small company | 6.67 | 4 |
+| neutral (control) | enjoys learning vs small company | 5.25 | 4 |
 | name (illustrative) | Nurul Aisyah vs Tan Mei Ling | 6.33 | 4 |
 | name (illustrative) | Nurul Aisyah vs Priya Raman | 5.25 | 1 |
 | name (illustrative) | Nurul Aisyah vs Muhammad Hafiz | 5.25 | 1 |
