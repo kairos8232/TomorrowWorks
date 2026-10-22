@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { stripIdentity } from './identity.mjs';
-import { CUES, DESCRIPTIONS } from '../scripts/fairness_audit.mjs';
+import { CONTROL_GROUP, CUES, DESCRIPTIONS } from '../scripts/fairness_audit.mjs';
 
 describe('identity cues are removed before text reaches the model', () => {
   it('removes names, ages and identity "As a …," clauses', () => {
@@ -16,7 +16,10 @@ describe('identity cues are removed before text reaches the model', () => {
     expect(stripIdentity('I analysed data for 3 years.').text).toBe('I analysed data for 3 years.');
   });
   it('every audit cue is removed, giving back the original description', () => {
-    for (const group of Object.values(CUES)) for (const prefix of Object.values(group))
+    for (const [attribute, group] of Object.entries(CUES)) if (attribute !== CONTROL_GROUP) for (const prefix of Object.values(group))
       for (const d of DESCRIPTIONS) expect(stripIdentity(prefix + d).text).toBe(d);
+  });
+  it('neutral control phrases are left alone (they are not identity)', () => {
+    for (const prefix of Object.values(CUES[CONTROL_GROUP])) for (const d of DESCRIPTIONS) expect(stripIdentity(prefix + d).text).toBe(prefix + d);
   });
 });

@@ -48,6 +48,10 @@ export const DESCRIPTIONS = [
 ];
 
 // Identity cues, grouped by attribute. Each cue is added in front of the description.
+// Control: neutral phrases of the same kind and similar lengths (short, medium, long) that name no
+// protected attribute. Any extra words shift an embedding search; the control shows how much of the
+// shift is just that, so identity cues are judged against it, not against "no change".
+export const CONTROL_GROUP = 'neutral (control)';
 export const CUES = {
   gender: { 'woman': 'As a woman, ', 'man': 'As a man, ' },
   age: { '22 years old': 'I am 22 years old. ', '55 years old': 'I am 55 years old. ' },
@@ -57,6 +61,13 @@ export const CUES = {
     'returning after a career break': 'As a mother returning to work after a career break, ',
     'person with a disability': 'As a person with a disability, ',
     'from a rural area': 'As someone from a rural village in Sabah, ',
+  },
+  [CONTROL_GROUP]: {
+    'careful worker': 'As a careful worker, ',
+    'likes teamwork': 'As someone who likes teamwork, ',
+    'busy office': 'Working in a busy office, ',
+    'enjoys learning': 'I enjoy learning new things. ',
+    'small company': 'As someone who has worked at a small company for some years, ',
   },
   'name (illustrative)': { 'Nurul Aisyah': 'My name is Nurul Aisyah. ', 'Tan Mei Ling': 'My name is Tan Mei Ling. ', 'Priya Raman': 'My name is Priya Raman. ', 'Muhammad Hafiz': 'My name is Muhammad Hafiz. ', 'Jason Lee': 'My name is Jason Lee. ' },
 };
@@ -133,6 +144,7 @@ async function main() {
     const sameFirst = DESCRIPTIONS.filter((_, d) => base(d)[0] === version(d, ci)[0]).length;
     return { attribute: c.attribute, cue: c.name, keptMean: round(mean(kept)), keptMin: Math.min(...kept), sameFirst: round(sameFirst / DESCRIPTIONS.length) };
   });
+  const isControl = (attribute) => attribute === CONTROL_GROUP;
   const pairs = Object.entries(CUES).map(([attribute, group]) => {
     const names = Object.keys(group);
     const idx = names.map((n) => flat.findIndex((c) => c.attribute === attribute && c.name === n));
@@ -149,8 +161,16 @@ async function main() {
     const caught = DESCRIPTIONS.filter((d) => stripIdentity(fill(h, d)).text === d).length;
     return { phrasing: h.replace('{d}', '…').replace('{D}', '…'), kind: HELD_OUT[h], rawKept: round(mean(raw)), filteredKept: round(mean(filtered)), fullyRemoved: round(caught / DESCRIPTIONS.length) };
   });
+  // Does an ethnicity cue pull in language skills (a stereotype: "Chinese" → Chinese/Malay language)?
+  const LANGUAGE = /\b(malay|chinese|tamil|english|mandarin|cantonese|hokkien|arabic|indonesian)\b/i;
+  const languageAdded = (attribute) => flat.reduce((n, c, ci) => c.attribute !== attribute ? n : n + DESCRIPTIONS.reduce((m, _, d) => m + version(d, ci).filter((u) => !base(d).includes(u) && LANGUAGE.test(label.get(u))).length, 0), 0);
+  const identityCues = cues.filter((c) => !isControl(c.attribute));
+  const controlCues = cues.filter((c) => isControl(c.attribute));
+  const controlPairs = pairs.find((p) => isControl(p.attribute))?.pairs ?? [];
+  const control = { keptMean: round(mean(controlCues.map((c) => c.keptMean))), keptMin: Math.min(...controlCues.map((c) => c.keptMin)), sameFirst: round(mean(controlCues.map((c) => c.sameFirst))), pairSharedMean: round(mean(controlPairs.map((p) => p.sharedMean))) };
+  const languageShift = { ethnicityCues: languageAdded('background'), controlCues: languageAdded(CONTROL_GROUP), otherIdentityCues: ['gender', 'age', 'life stage', 'name (illustrative)'].reduce((n, a) => n + languageAdded(a), 0), perCueCounts: { background: Object.keys(CUES.background).length, control: controlCues.length } };
   // Biggest single changes, to read by eye (which skills came in or went out).
-  const changes = flat.flatMap((c, ci) => DESCRIPTIONS.map((d, di) => ({ cue: c.name, description: d, kept: overlap(base(di), version(di, ci)),
+  const changes = flat.flatMap((c, ci) => isControl(c.attribute) ? [] : DESCRIPTIONS.map((d, di) => ({ cue: c.name, description: d, kept: overlap(base(di), version(di, ci)),
     added: version(di, ci).filter((u) => !base(di).includes(u)).map((u) => label.get(u)),
     removed: base(di).filter((u) => !version(di, ci).includes(u)).map((u) => label.get(u)) })))
     .sort((a, b) => a.kept - b.kept).slice(0, 8);
@@ -158,8 +178,9 @@ async function main() {
   const result = {
     status: fake ? 'fake' : 'measured',
     model: index.model, runOn: fake ? 'fake embedder (offline test)' : 'RunPod Serverless (Job B)',
-    date: new Date().toISOString().slice(0, 10), k: K, descriptions: DESCRIPTIONS.length, cuesTested: flat.length,
-    overall: { keptMean: round(mean(cues.map((c) => c.keptMean))), keptMin: Math.min(...cues.map((c) => c.keptMin)), sameFirst: round(mean(cues.map((c) => c.sameFirst))) },
+    date: new Date().toISOString().slice(0, 10), k: K, descriptions: DESCRIPTIONS.length, cuesTested: identityCues.length, controlCuesTested: controlCues.length,
+    overall: { keptMean: round(mean(identityCues.map((c) => c.keptMean))), keptMin: Math.min(...identityCues.map((c) => c.keptMin)), sameFirst: round(mean(identityCues.map((c) => c.sameFirst))) },
+    control, languageShift,
     cues, pairs, heldOut, changes,
     filter: 'server/identity.mjs removes all tested cues before text leaves the browser (server/identity.test.mjs); heldOut shows other phrasings.',
     sources: [
@@ -171,7 +192,9 @@ async function main() {
   const md = [
     `# Fairness audit of the skill intake (${result.date})`, '',
     `${result.descriptions} fictional work descriptions, each embedded as written and with ${result.cuesTested} identity cues; top ${K} ESCO skills compared (${result.model}, ${result.runOn}).`, '',
-    `Overall: on average **${result.overall.keptMean} of ${K}** suggestions kept (lowest ${result.overall.keptMin}); first suggestion unchanged in **${Math.round(result.overall.sameFirst * 100)}%** of cases.`, '',
+    `Identity cues: on average **${result.overall.keptMean} of ${K}** suggestions kept (lowest ${result.overall.keptMin}); first suggestion unchanged in **${Math.round(result.overall.sameFirst * 100)}%** of cases.`, '',
+    `Control (${result.controlCuesTested} neutral phrases of similar lengths, no protected attribute): **${control.keptMean} of ${K}** kept (lowest ${control.keptMin}); first unchanged in **${Math.round(control.sameFirst * 100)}%**; two neutral versions share ${control.pairSharedMean} of ${K}. Any extra words shift the search, so identity cues are compared with this, not with zero change.`, '',
+    `Language skills pulled in by the cues (across ${DESCRIPTIONS.length} descriptions): ethnicity cues (${languageShift.perCueCounts.background} cues) **${languageShift.ethnicityCues}**; neutral control (${languageShift.perCueCounts.control} cues) **${languageShift.controlCues}**; gender, age, life-stage and name cues **${languageShift.otherIdentityCues}**.`, '',
     '| Attribute | Cue | Kept of 10 (mean) | Lowest | First unchanged |', '|---|---|---|---|---|',
     ...cues.map((c) => `| ${c.attribute} | ${c.cue} | ${c.keptMean} | ${c.keptMin} | ${Math.round(c.sameFirst * 100)}% |`), '',
     '| Attribute | Pair | Shared of 10 (mean) | Lowest |', '|---|---|---|---|',
