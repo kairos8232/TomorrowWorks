@@ -24,8 +24,7 @@ export function RegionView({ viewer }: { viewer: Viewer }) {
 
     <section className="panel region-purpose" aria-labelledby="region-purpose-head">
       <h2 id="region-purpose-head">{t('What this view is for')}</h2>
-      <p className="region-who">{t('For a regional skills centre that funds training for many employers and colleges. Its question:')}</p>
-      <p className="region-question">{t('Which SDG targets does the training we fund reach, and which routes would reach more?')}</p>
+      <p className="region-question">{t('Which SDG targets does our training reach, and which routes could reach more?')}</p>
       <ol className="sdg-levels">
         <li><strong>{t('Person')}</strong><span>{t('Your plan: one person’s best move and the skills they would build.')}</span></li>
         <li><strong>{t('Group')}</strong><span>{t('Team view: an HR manager or adviser sees only their own team or class.')}</span></li>

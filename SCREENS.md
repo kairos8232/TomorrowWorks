@@ -34,7 +34,7 @@ My career (sidebar navigation)           The job market (browse any time)
 ## Region view (22 Oct, made clearer)
 
 - Separate from Team view (Carson, 22 Oct): an HR manager or adviser sees only their own team or class; only the regional viewer sees all groups. Viewer *Encik Faizal* (fictional regional skills centre officer), nav *For organisations → Region view*. The centre funds training for three fictional groups: Finance team, Graduating class, Logistics office (4 people).
-- *What this view is for*: who uses it (a regional skills centre funding many employers and colleges), its one question (which SDG targets the funded training reaches, which routes would reach more), and the three levels Person (Your plan) → Group (Team view) → Region (this view, highlighted).
+- *What this view is for*: the main question uses the panel width, followed by compact Person (Your plan), Group (Team view), and Region (this view, highlighted) cards without connector arrows. The page introduction identifies the regional skills centre audience.
 - *Which SDG targets the funded training reaches*: per strong target, "n of m people" and a bar split by group colour with group counts; 4.4 baseline row; possible links collapsed. **Totals only, no names.**
 - *Routes that would reach more targets*: table by role of 2nd/3rd moves that add targets the best move does not reach (people count by group, targets added). Rule and tests: `src/region.ts` (`regionSdg`, `routesToFund`), `src/region.test.ts`.
 
