@@ -48,7 +48,7 @@ My career (sidebar navigation)           The job market (browse any time)
 - No sign-in. A **View as** chip near the top of the rail works like an account menu but only swaps fictional demo data: **Aina** (working adult whose job AI is changing), **Hakim** (fresh graduate), **Puan Rosnah** (HR and learning manager → Team view, finance team), **Encik Lim** (university career adviser → Team view, graduating class), **Me (my own skills)**. The closed chip shows the shorter **Me** label and its initial; the full description remains in the menu. Label: "Demo people are fictional. No sign-in in this prototype."
 - The sidebar follows the viewer: individuals see *My career* (Your skills / moves / plan); HR and the adviser see *My team* (Team view). Everyone sees *The job market*.
 - On wide screens a compact navigation rail keeps the viewer switcher near the top and language choice at the bottom. Destinations use icons and short labels; the selected page has a soft green fill. At 980 px and below, the same navigation moves above the content.
-- Public Home: the role prompt leads into Your skills. A subtle route loops behind the hero, stays within that section, pauses when offscreen or the tab is hidden, and becomes still with reduced motion. Job market and organisation routes remain in the header.
+- Public Home: the role prompt leads into Your skills. One subtle line continually changes shape behind the hero, stays within that section, pauses when offscreen or the tab is hidden, and becomes still with reduced motion. Job market and organisation routes remain in the header.
 - *Edit skills* while viewing a sample person switches the viewer to Me.
 
 ## 1. Your skills: interests

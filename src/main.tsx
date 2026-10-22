@@ -82,12 +82,18 @@ function Home({ start, startWithRole, go, lang, setLang }: {
     const route = routeRef.current;
     if (!route) return;
     let visible = true;
-    const update = () => route.classList.toggle('is-paused', !visible || document.hidden);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      const paused = !visible || document.hidden || reducedMotion.matches;
+      if (paused) route.pauseAnimations();
+      else route.unpauseAnimations();
+    };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); });
     observer.observe(route);
     document.addEventListener('visibilitychange', update);
+    reducedMotion.addEventListener('change', update);
     update();
-    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', update); };
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', update); reducedMotion.removeEventListener('change', update); };
   }, []);
   const t = useT();
   function submit(event: React.FormEvent) {
@@ -116,12 +122,9 @@ function Home({ start, startWithRole, go, lang, setLang }: {
         </form>
         <p className="quiet-proof">{t('Malaysian job-market evidence')} <span aria-hidden="true">·</span> {t('No CV required')}</p>
         <svg ref={routeRef} className="journey-route" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-          <defs>
-            <path id="hero-route-path" pathLength="1000" d="M 970 94 H 1250 Q 1320 94 1320 164 V 238 Q 1320 300 1258 300 H 1116 Q 1056 300 1056 360 V 400 Q 1056 462 1118 462 H 1290 Q 1360 462 1360 532 V 584 Q 1360 650 1294 650 H 874 Q 808 650 808 584 V 540 Q 808 478 746 478 H 626 Q 564 478 564 416 V 304 Q 564 242 626 242 H 850 Q 910 242 910 182 V 154 Q 910 94 970 94 Z" />
-          </defs>
-          <use href="#hero-route-path" className="journey-route-track" />
-          <use href="#hero-route-path" className="journey-route-flow" />
-          <use href="#hero-route-path" className="journey-route-flow journey-route-flow-later" />
+          <path className="journey-route-line" d="M 520 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1350">
+            <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M 520 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1350; M 520 390 H 710 Q 770 390 770 330 V 220 Q 770 160 830 160 H 1250 Q 1330 160 1330 240 V 290 Q 1330 350 1270 350 H 1150 Q 1090 350 1090 410 V 460 Q 1090 520 1150 520 H 1350; M 520 500 H 810 Q 870 500 870 440 V 330 Q 870 270 930 270 H 1160 Q 1240 270 1240 350 V 390 Q 1240 450 1180 450 H 1050 Q 990 450 990 510 V 550 Q 990 610 1050 610 H 1350; M 520 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1350" />
+          </path>
         </svg>
       </section>
 
