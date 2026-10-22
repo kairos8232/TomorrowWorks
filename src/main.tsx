@@ -338,13 +338,13 @@ function App() {
 
     <main className="main-content">
       <div className={`content-wrap${screen === 'plan' ? ' plan-page' : screen === 'moves' ? ' moves-page' : ''}`}>
-        {page && screen !== 'plan' && screen !== 'moves' && <header className="page-head">
-          <h1>{t(page.title)}</h1>
-          <p>{t(page.intro)}</p>
-        </header>}
         <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
         </nav>
+        {page && screen !== 'moves' && <header className="page-head">
+          <h1>{t(page.title)}</h1>
+          <p>{t(page.intro)}</p>
+        </header>}
         <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0

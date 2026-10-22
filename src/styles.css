@@ -1108,13 +1108,24 @@ details.course-check { padding-block:0; }
 .moves-page .future-line { margin-top: 2px; }
 .moves-page .part { gap: 7px; font-size: 13px; }
 .moves-page .score { font-size: 25px; }
+/* Keep the workspace frame and page introductions aligned across sections. */
+.content-wrap, .content-wrap.plan-page, .content-wrap.moves-page { max-width: 1580px; padding-top: 38px; }
+.workspace-subnav, .plan-page .workspace-subnav, .moves-page .workspace-subnav { margin: 0 0 34px; }
+.page-head, .plan-page .page-head { grid-template-columns: minmax(0, 1fr) minmax(340px, .75fr); gap: 28px; align-items: end; margin: 0 0 20px; }
+.page-head h1, .plan-page .page-head h1 { max-width: none; font-size: clamp(44px, 4vw, 58px); line-height: 1; }
+.page-head p { max-width: none; font-size: 15px; line-height: 1.5; }
+.moves-intro-context { display: grid; gap: 9px; }
+.moves-description { margin: 0; color: #657069; font-size: 15px; line-height: 1.5; }
+.moves-page .moves-update { gap: 6px; padding: 0; border: 0; font-size: 13px; }
+.moves-page .moves-update p { margin: 0; }
 @media (max-width: 1050px) {
   .moves-workbench { grid-template-columns: 1fr; }
   .moves-settings .ledger-controls { display: flex; gap: 14px 24px; }
 }
 @media (max-width: 860px) {
+  .page-head, .plan-page .page-head { grid-template-columns: 1fr; gap: 14px; }
   .moves-intro { grid-template-columns: 1fr; gap: 14px; }
-  .moves-page .moves-update { border-left: 0; border-top: 1px solid #cfd8d1; padding: 13px 0 0; }
+  .moves-page .moves-update { border-top: 1px solid #cfd8d1; padding: 13px 0 0; }
   .moves-page .futures-lead { grid-template-columns: minmax(0, 1fr) minmax(160px, .5fr); }
   .moves-page .ledger-head { display: none; }
   .moves-page .ledger-line { grid-template-columns: 36px minmax(0, 1fr) 60px; grid-template-areas: "rank name score" ". f f" ". d d" ". r r"; gap: 6px 10px; }
@@ -1126,8 +1137,8 @@ details.course-check { padding-block:0; }
   .moves-page .ledger-line .part-r { grid-area: r; }
 }
 @media (max-width: 560px) {
-  .content-wrap.moves-page { padding-top: 24px; }
-  .moves-page .workspace-subnav { margin-bottom: 24px; }
+  .content-wrap, .content-wrap.plan-page, .content-wrap.moves-page { padding-top: 24px; }
+  .workspace-subnav, .plan-page .workspace-subnav, .moves-page .workspace-subnav { margin-bottom: 24px; }
   .moves-page .futures-panel { padding: 23px 20px; }
   .moves-page .futures-lead { grid-template-columns: 1fr; }
   .moves-page .futures-legend { grid-column: 1; grid-row: auto; }

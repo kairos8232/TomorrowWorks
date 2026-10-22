@@ -267,10 +267,13 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
           <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
         </div>
       </div>
-      <div className="moves-update">
-        <p><strong>{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</strong> · {rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
-        <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
-          <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
+      <div className="moves-intro-context">
+        <p className="moves-description">{t('Compare roles by skill fit, demand and AI change.')}</p>
+        <div className="moves-update">
+          <p><strong>{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</strong> · {rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('All scores fell as online job ads declined.')}</p>
+          <div><button type="button" className="text-button" onClick={() => openPanel('changes')}>{t('Compare quarters')}</button>
+            <button type="button" className="text-button" onClick={() => openPanel('method')}>{t('How ranking works')}</button></div>
+        </div>
       </div>
     </header>
 

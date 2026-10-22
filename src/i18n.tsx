@@ -192,6 +192,7 @@ const dict: Record<string, Entry> = {
   'Tell us what you do. Your moves are ranked from these skills only.': { ms: 'Beritahu kami apa yang anda lakukan. Langkah anda disusun daripada kemahiran ini sahaja.', zh: '告诉我们你做什么。职业选择只根据这些技能排名。' },
   'Your moves': { ms: 'Langkah anda', zh: '你的职业选择' },
   'Compare roles': { ms: 'Bandingkan peranan', zh: '比较职位' },
+  'Compare roles by skill fit, demand and AI change.': { ms: 'Bandingkan peranan mengikut kesesuaian kemahiran, permintaan dan perubahan AI.', zh: '根据技能匹配度、需求和 AI 带来的变化比较职位。' },
   'Adjust ranking': { ms: 'Laraskan kedudukan', zh: '调整排名' },
   'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.': { ms: 'Sembilan peranan disusun mengikut kesesuaian kemahiran anda, sama ada iklan kerja meningkat, dan sejauh mana AI boleh mengubah kerja itu.', zh: '九个职位，按技能匹配度、招聘广告是否增加、以及 AI 可能改变多少工作内容排名。' },
   'Your plan': { ms: 'Pelan anda', zh: '你的学习计划' },
