@@ -23,7 +23,7 @@ export function FairnessNote() {
     {m
       ? <>
         <p>{t('Measured on RunPod ({date}, {model}): adding identity words (gender, age, background, life stage or a name) to {n} work descriptions kept on average {k} of the top 10 suggested skills. Adding neutral words of similar length (for example “As someone who likes teamwork,”) kept {c}, so part of any shift is just from adding words.', { date: audit.date!, model: audit.model!, n: audit.descriptions!, k: m.o.keptMean, c: m.c.keptMean })}</p>
-        {m.lang && m.lang.ethnicityCues > m.lang.controlCues && <p>{t('Ethnicity words pulled language skills into the suggestions {e} times (neutral words: {c}). That is the kind of shift the filter prevents.', { e: m.lang.ethnicityCues, c: m.lang.controlCues })}</p>}
+        {m.lang && m.lang.ethnicityCues > m.lang.controlCues && <p>{t('Ethnicity words pulled language skills into the suggestions {e} times (neutral words: {c}). The filter removes the common phrasings of this, not every phrasing.', { e: m.lang.ethnicityCues, c: m.lang.controlCues })}</p>}
       </>
       : <p>{t('An audit of how identity words move the skill suggestions is being re-run with a neutral-words comparison.')}</p>}
     <p className="note">{tx('Why we check: {a}; {b}.', { a: <a href={audit.sources[0].url} target="_blank" rel="noreferrer">{t('a 2024 study found text-embedding models rank CVs differently by name')}</a>, b: <a href={audit.sources[1].url} target="_blank" rel="noreferrer">{t('fairness is the first principle of Malaysia’s AI governance guidelines (MOSTI, 2024)')}</a> })}</p>
