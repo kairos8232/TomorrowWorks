@@ -1,5 +1,7 @@
 // TomorrowWorks server: serves the built app (dist/) and one API route,
 // GET /api/news (daily GDELT refresh until 1 Nov 2026, memory only; see news.mjs) and
+// POST /api/cv-skills (the lines of a CV, contact details already removed in the browser;
+// matched the same way, nothing stored or logged) and
 // POST /api/skill-search, which embeds the person's own words with the
 // RunPod Serverless endpoint (Job B, BAAI/bge-m3) and returns the nearest
 // real ESCO skills. The RunPod API key stays here, in environment variables
@@ -13,8 +15,9 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadSkillIndex, nearestSkills } from './search.mjs';
+import { cvSuggestions, loadSkillIndex, nearestSkills } from './search.mjs';
 import { readFileSync } from 'node:fs';
+import { gzipSync } from 'node:zlib';
 import { briefService, newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
 import { lfsService } from './lfs.mjs';
 
@@ -25,6 +28,8 @@ const { RUNPOD_API_KEY, RUNPOD_ENDPOINT_ID } = process.env;
 const PORT = Number(process.env.PORT) || 5000;
 const RUNPOD_BASE_URL = process.env.RUNPOD_BASE_URL ?? 'https://api.runpod.ai/v2';
 const MAX_TEXT = 500;
+const CV_MAX_LINES = 40;   // same limits as src/cv.ts
+const CV_MAX_LINE = 300;
 const lfs = lfsService({ snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'opendosm-lfs-month.json'), 'utf8')) });
 const news = newsService({
   snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'gdelt-news.json'), 'utf8')),
@@ -82,26 +87,41 @@ function send(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
-async function readJson(req) {
+async function readJson(req, limit = 10_000) {
   let raw = '';
-  for await (const chunk of req) { raw += chunk; if (raw.length > 10_000) throw new Error('Body too large'); }
+  for await (const chunk of req) { raw += chunk; if (raw.length > limit) throw new Error('Body too large'); }
   return JSON.parse(raw || '{}');
 }
 
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
+
+// Low bandwidth: text files are sent gzip-compressed (about a quarter of the size) and
+// built files with a content hash in their name (dist/assets/) are cached for a year,
+// so a repeat visit downloads almost nothing. Compressed copies are kept in memory.
+const gzipCache = new Map();
+const compressible = new Set(['.html', '.js', '.mjs', '.css', '.json', '.svg']);
+function sendFile(req, res, file, data) {
+  const ext = extname(file);
+  const headers = { 'Content-Type': types[ext] ?? 'application/octet-stream', 'Vary': 'Accept-Encoding',
+    'Cache-Control': file.includes(`${join('dist', 'assets')}`) ? 'public, max-age=31536000, immutable' : 'no-cache' };
+  if (compressible.has(ext) && /\bgzip\b/.test(req.headers['accept-encoding'] ?? '')) {
+    if (!gzipCache.has(file)) gzipCache.set(file, gzipSync(data, { level: 9 }));
+    res.writeHead(200, { ...headers, 'Content-Encoding': 'gzip' });
+    return res.end(gzipCache.get(file));
+  }
+  res.writeHead(200, headers);
+  res.end(data);
+}
 
 async function serveStatic(req, res) {
   const path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
   const file = normalize(join(dist, path === '/' ? 'index.html' : path));
   if (!file.startsWith(dist)) return send(res, 400, { error: 'Bad path' });
   try {
-    const data = await readFile(file);
-    res.writeHead(200, { 'Content-Type': types[extname(file)] ?? 'application/octet-stream' });
-    res.end(data);
+    sendFile(req, res, file, await readFile(file));
   } catch {
-    const html = await readFile(join(dist, 'index.html')); // single-page app fallback
-    res.writeHead(200, { 'Content-Type': types['.html'] });
-    res.end(html);
+    const index = join(dist, 'index.html'); // single-page app fallback
+    sendFile(req, res, index, await readFile(index));
   }
 }
 
@@ -114,6 +134,17 @@ createServer(async (req, res) => {
     if (req.url === '/api/news') {
       const body = await news.get();
       return send(res, 200, { ...body, brief: brief.for(body) });
+    }
+    if (req.url === '/api/cv-skills') {
+      if (req.method !== 'POST') return send(res, 405, { error: 'Use POST' });
+      if (!RUNPOD_API_KEY || !RUNPOD_ENDPOINT_ID) return send(res, 503, { error: 'CV matching is not connected yet. Pick skills from the list instead.' });
+      if (!allowed(req.socket.remoteAddress ?? '')) return send(res, 429, { error: 'Too many searches. Wait a minute and try again.' });
+      const { lines } = await readJson(req, 20_000);
+      if (!Array.isArray(lines) || lines.length === 0 || !lines.every((l) => typeof l === 'string' && l.trim())) return send(res, 400, { error: 'No lines to match. Paste your CV text or choose a file.' });
+      if (lines.length > CV_MAX_LINES || lines.some((l) => l.length > CV_MAX_LINE)) return send(res, 400, { error: `Send at most ${CV_MAX_LINES} lines of up to ${CV_MAX_LINE} characters.` });
+      const started = Date.now();
+      const results = cvSuggestions(index, await embedMany(lines), lines);
+      return send(res, 200, { results, lines: lines.length, model: index.model, ms: Date.now() - started });
     }
     if (req.url === '/api/skill-search') {
       if (req.method !== 'POST') return send(res, 405, { error: 'Use POST' });

@@ -1,5 +1,6 @@
-// Step 1: the person's skills, as ESCO skills. Two ways in: describe your work
-// (RunPod skill search, Job B) or pick from the list. Matches use only these.
+// Step 1: the person's skills, as ESCO skills. Three ways in: a CV (read in the
+// browser, lines matched on RunPod; src/CvPanel.tsx), describe your work (RunPod
+// skill search, Job B) or pick from the list. Matches use only these.
 import type React from 'react';
 import { useState } from 'react';
 import { allSkills, roles, roleTitle, type Profile } from './data';
@@ -7,6 +8,8 @@ import type { Skill } from './scoring';
 import { useT } from './i18n';
 import { interestData, interestTypes, type InterestType } from './interests';
 import { goalStatus, sdgData } from './sdg';
+import { CvPanel } from './CvPanel';
+import { stripIdentity } from '../server/identity.mjs';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
@@ -26,17 +29,26 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
     else { held.add(skill.uri); if (!skillByUri.has(skill.uri)) extra.set(skill.uri, skill); }
     update({ held, extra });
   }
+  function addMany(skills: Skill[]) {
+    const held = new Set(profile.held);
+    const extra = new Map(profile.extra);
+    for (const s of skills) { held.add(s.uri); if (!skillByUri.has(s.uri)) extra.set(s.uri, s); }
+    update({ held, extra });
+  }
 
   async function findSkills(e: React.FormEvent) {
     e.preventDefault();
     setFound([]); // clear the previous results so they are not mistaken for this search
     setSearch({ busy: true, message: 'Searching. The first search after a pause can take up to a minute.', vars: {} });
     try {
-      const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: description }) });
+      // Fairness and privacy: name, age and identity phrases are removed before the text leaves the browser.
+      const clean = stripIdentity(description);
+      if (!clean.text.trim()) throw new Error('Describe a task you do, for example what you prepare, check or build.');
+      const res = await fetch('/api/skill-search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: clean.text }) });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error ?? 'Skill search is unavailable right now. Pick skills from the list below instead.');
       setFound(body.results);
-      setSearch({ busy: false, message: body.results.length ? 'Closest ESCO skills for “{text}”. Add the ones that are true for you.' : 'No close ESCO skills found. Try describing a task you do often.', vars: { text: description.trim() } });
+      setSearch({ busy: false, message: (body.results.length ? 'Closest ESCO skills for “{text}”. Add the ones that are true for you.' : 'No close ESCO skills found. Try describing a task you do often.') + (clean.removed ? ' Personal details (name, age or identity) were left out of the search; they do not describe skills.' : ''), vars: { text: clean.text.trim() } });
     } catch (err) {
       setFound([]);
       setSearch({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Skill search is unavailable right now. Pick skills from the list below instead.', vars: {} });
@@ -52,6 +64,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
   </button>;
 
   return <div className="step-body skills-body">
+    <CvPanel held={profile.held} onAdd={addMany} />
     <div className="skills-intake">
     <section className="panel job-panel">
       <div><h2>{t('Your current job')}</h2>

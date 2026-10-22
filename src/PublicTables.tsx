@@ -1,6 +1,7 @@
 // Public Demand and Outlook views: one compact table each, with the source
 // stated once underneath instead of on every row.
 import { useEffect, useState } from 'react';
+import { useDataSaver } from './dataSaver';
 import dosmQ1 from '../data/sources/dosm-jmi-2026-q1.json';
 import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
 import { aeiData, aiViews, msData, roleSoc } from './aiviews';
@@ -25,7 +26,8 @@ function LabourContext() {
   const lang = useLang();
   // Snapshot first; the server refreshes it daily from OpenDOSM until 1 Nov (server/lfs.mjs).
   const [lfs, setLfs] = useState<{ source: typeof lfsFile.source; months: LfsMonth[]; live?: boolean }>({ source: lfsFile.source, months: lfsFile.months as LfsMonth[] });
-  useEffect(() => { fetch('/api/lfs').then((r) => (r.ok ? r.json() : null)).then((body) => { if (body?.months?.length) setLfs(body); }).catch(() => {}); }, []);
+  const saver = useDataSaver();   // data saver: keep the bundled snapshot, no request
+  useEffect(() => { if (saver) return; fetch('/api/lfs').then((r) => (r.ok ? r.json() : null)).then((body) => { if (body?.months?.length) setLfs(body); }).catch(() => {}); }, [saver]);
   const months = lfs.months;
   if (months.length === 0) return null;
   const [latest] = months;

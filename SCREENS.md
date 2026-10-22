@@ -15,7 +15,7 @@ My career (sidebar navigation)           The job market (browse any time)
                                            Skills in demand  Soon
 ```
 
-- **1,000 possible futures** (panel above the ranking, 22 Oct): the robust best move ("best in n% of futures") or "No single best move" with bars for the leading moves; the tipping point sentence; *How the futures are made* (collapsed) lists the assumptions. Each ranked row adds *Top 3 in n% of futures · score a–b across futures* and a *close call with #n* tag when the order flips often.
+- **1,000 possible futures** (panel above the ranking, 22 Oct): the robust best move ("best in n% of futures") or "No single best move" as a large headline on a dark panel (the one dark block on the screen, so it stands out); one dot per future, coloured by its best move (top 3 moves coloured, the rest grey; a move that wins a few futures shows "<1%", not 0%); an AI-speed strip from Gradually to Quickly coloured by the leading move, with the tipping point sentence; *How the futures are made* (collapsed) lists the assumptions. Each ranked row adds *Top 3 in n% of futures · score a–b across futures* and a *close call with #n* tag when the order flips often.
 
 ## Home
 
@@ -26,9 +26,18 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## 1. Your skills
 
+- **Start from your CV** (22 Oct, top of the step, optional): *Choose CV file* (PDF or .txt, read in the browser with pdf.js, max 5 MB, first 10 pages), *Paste text*, or *Try a fictional CV* (Aina). `src/cv.ts` splits the text into lines, removes contact lines (email, links, phone numbers) and headings/names (all capitals, under three words), and caps at 40 lines. The person sees "n lines to match · n contact lines removed" and can open *Check what will be sent* to remove any line. *Find skills in my CV* sends only those lines once to `/api/cv-skills` (RunPod Job B, top 3 ESCO skills per line ≥ 0.55, best per skill, up to 25). Results are tick boxes with "match n%" and *from "line"*; nothing is added until the person ticks skills and presses *Add n selected skills*. Nothing is stored or logged.
 - **Current:** *Your current job* (ESCO role or "Not in this list"; shown as "Now" outside the ranking) and *Search the skill list* share the left side of the intake area on wide screens. *Describe your work* sits beside them and uses RunPod skill search (shows "match n%", user adds what is true; clear message if search is not connected). The intake stacks on phones. Below it are optional work interests and *Your skills* (removable chips, first eight shown until expanded), with *See my moves* beside the selected skills (disabled until one skill is added).
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
+
+## Region view (22 Oct)
+
+- Viewer *Encik Faizal* (fictional regional skills officer), nav *My region → Region view*. Region = *Klang Valley skills network* (fictional) with three groups: Finance team, Graduating class, Logistics office (new, 4 people). *Where this region's reskilling contributes*: per strong SDG target, "n of m people", a bar split by group colour, and the people with their best move; 4.4 baseline row; *Moves that would add SDG targets* (2nd/3rd moves whose role links add targets); possible links collapsed; a note that no state statistics are used. *Groups in this region* lists each group's best moves and opens its Team view with *Back to region*. Rule and tests: `src/region.ts`, `src/region.test.ts`.
+
+## Data saver (sidebar, 22 Oct)
+
+- Switch under the language picker. On: no web font (system fonts), news and labour-force panels show the bundled snapshot and fetch live data only on request (*Load today's headlines*). Starts on when the browser reports save-data; the choice is remembered in this browser. Independently, screens other than Home, Your skills and Your moves load on demand, and the server gzips text files and caches `dist/assets/` for a year. First visit measured at 229 KB (Chromium, 390 px, via `server/index.mjs`, font excluded because it is blocked in Claude's workspace).
 
 ## Language (sidebar)
 

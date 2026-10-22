@@ -8,6 +8,7 @@ import { whatChanged } from './changes';
 import { interestData, interestFit, topTypes, type InterestType } from './interests';
 import { goalFit, roleGoalLink, sdgData } from './sdg';
 import { RoleSdgLine } from './SdgViews';
+import { FairnessNote } from './FairnessNote';
 import { recommendMoves, scenarios, type Extras, type RoleScore, type ScenarioId } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 
@@ -53,31 +54,62 @@ function InterestLine({ roleId, picks }: { roleId: string; picks: InterestType[]
 /** How many futures a lower row must win against the row above to be called a close call. */
 const CLOSE_CALL = 0.3;
 
-/** "1,000 possible futures": the answer under uncertainty, the tipping point, and the assumptions. */
+/** Colours of the leading moves in the futures panel (rest = grey). Fixed order, so a role keeps its colour. */
+const FUTURE_COLOURS = ['#7fd6a8', '#f2b84b', '#ef8a6b'];
+const FUTURE_REST = '#5d7d70';
+const DOT_ROWS = 20;
+
+/** "1,000 possible futures": one dot per future coloured by its best move, the tipping point on an AI-speed strip, and the assumptions. */
 function FuturesPanel({ futures, tipping, quarter }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string }) {
   const t = useT();
-  const leaders = [...futures.byRole.values()].filter((x) => x.best > 0).sort((a, b) => b.best - a.best).slice(0, 4);
+  const leaders = [...futures.byRole.values()].filter((x) => x.best > 0).sort((a, b) => b.best - a.best);
+  const shown = leaders.slice(0, 3);
   const name = (id: string) => roleTitle(roles.find((r) => r.id === id)!.title);
   const p = (x: number) => Math.round(x * 100);
+  const share = (x: number) => (x > 0 && x < 0.005 ? '<1' : String(p(x)));   // a move that wins a few futures is not 0%
   const top = leaders[0];
+  const robust = !!top && top.best >= 0.8;
+  const colour = (id: string) => { const k = shown.findIndex((x) => x.roleId === id); return k >= 0 ? FUTURE_COLOURS[k] : FUTURE_REST; };
+  // Dots grouped by winner (biggest group first), filled column by column, so each move forms one block.
+  const order = new Map(leaders.map((x, k) => [x.roleId, k]));
+  const dots = [...futures.winners].sort((a, b) => (order.get(a) ?? 99) - (order.get(b) ?? 99));
+  const cols = Math.ceil(dots.length / DOT_ROWS);
   return <section className="futures-panel" aria-labelledby="futures-head">
-    <h2 id="futures-head">{t('{n} possible futures', { n: futures.runs.toLocaleString() })}</h2>
-    <p className="futures-answer">{top && top.best >= 0.8
-      ? t('{role} is your best move in {p}% of simulated futures: a robust choice.', { role: name(top.roleId), p: p(top.best) })
-      : t('No single best move. Best move in how many futures:')}</p>
-    <ul className="futures-bars">{leaders.map((x) => <li key={x.roleId}>
-      <span className="cap-first">{name(x.roleId)}</span>
-      <span className="bar" aria-hidden="true"><span style={{ width: `${p(x.best)}%` }} /></span>
-      <strong>{p(x.best)}%</strong>
-    </li>)}</ul>
-    <p className="note">{tipping.length > 1
-      ? t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })
-      : tipping[0] ? t('{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).', { a: name(tipping[0].roleId), q: quarter }) : null}</p>
+    <div className="futures-top">
+      <div className="futures-lead">
+        <h2 id="futures-head">{robust ? t('{role} is your best move', { role: name(top.roleId) }) : t('No single best move')}</h2>
+        <p className="futures-sub">{robust
+          ? t('Best in {p}% of {n} simulated futures: a robust choice.', { p: share(top.best), n: futures.runs.toLocaleString() })
+          : t('Each dot is one of {n} simulated futures, coloured by its best move.', { n: futures.runs.toLocaleString() })}</p>
+        <ul className="futures-legend">{shown.map((x) => <li key={x.roleId}>
+          <i style={{ background: colour(x.roleId) }} aria-hidden="true" />
+          <span className="cap-first">{name(x.roleId)}</span>
+          <strong>{share(x.best)}%</strong>
+        </li>)}</ul>
+      </div>
+      <svg className="futures-dots" viewBox={`0 0 ${cols * 10} ${DOT_ROWS * 10}`} aria-hidden="true" focusable="false">
+        {dots.map((id, i) => <circle key={i} cx={Math.floor(i / DOT_ROWS) * 10 + 5} cy={(i % DOT_ROWS) * 10 + 5} r="3.6" fill={colour(id)} />)}
+      </svg>
+    </div>
+    <div className="futures-speed">
+      <div className="speed-labels"><span>{t('Gradually')}</span><span>{t('AI speed')}</span><span>{t('Quickly')}</span></div>
+      <div className="speed-strip" role="img" aria-label={tipping.length > 1
+        ? t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })
+        : tipping[0] ? t('{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).', { a: name(tipping[0].roleId), q: quarter }) : ''}>
+        {tipping.map((seg, k) => {
+          const end = k === tipping.length - 1 ? 1 : tipping[k + 1].from;
+          return <span key={seg.roleId + seg.from} style={{ flexGrow: Math.max(end - seg.from, 0.02), background: colour(seg.roleId) }} />;
+        })}
+      </div>
+      <p className="speed-note">{tipping.length > 1
+        ? t('Tipping point: {a} leads until AI moves about {x}% of the way from Gradually to Quickly; after that, {b}.', { a: name(tipping[0].roleId), x: Math.round(tipping[1].from * 100), b: name(tipping[1].roleId) })
+        : tipping[0] ? t('{a} stays your best move at every AI speed from Gradually to Quickly ({q} job ads, published ILO values).', { a: name(tipping[0].roleId), q: quarter }) : null}</p>
+    </div>
     <details>
       <summary>{t('How the futures are made')}</summary>
       <ul className="note">
         <li>{t('AI speed: anywhere between Gradually and Quickly, chosen at random in each future (our assumption).')}</li>
-        <li>{t('AI exposure: the ILO mean plus a random amount within the ILO’s own standard deviation for each job.')}</li>
+        <li>{t('AI exposure: each future trusts one of three sources (ILO, Microsoft or Anthropic), chosen at random; ILO values vary within their own standard deviation.')}</li>
         <li>{t('Job-ad demand: one of the two DOSM quarters we have, chosen at random.')}</li>
         <li>{t('Each future is scored with the same rule as the ranking below; your skills, interests and goals do not change. A fixed seed gives the same result every time.')}</li>
         <li>{t('Score ranges on each row cover 90% of futures. These are estimates for comparing options, not predictions.')}</li>
@@ -172,6 +204,7 @@ function MethodView({ onBack }: { onBack: () => void }) {
     <div className="method-plain"><h3>{t('Fairness and limits')}</h3>
       <p>{t('The ranking uses skills you confirmed, role skills and the two sourced signals above. It never asks for age, gender, ethnicity, religion or school.')}</p>
       <p>{t('Tests check that the same skills produce the same scores. Job ads cover only online postings, and ESCO describes roles from a European perspective.')}</p>
+      <FairnessNote />
     </div>
     <div className="method-sources"><h3>{t('Sources')}</h3>
       <a href={snapshots.q2.source.url} target="_blank" rel="noreferrer">DOSM Job Market Insights</a>

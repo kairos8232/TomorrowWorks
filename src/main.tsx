@@ -1,27 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ainaProfile, emptyProfile, personaProfile, roles, viewerById, viewers, type PersonaId, type Profile, type ViewerId } from './data';
 import { MovesStep, SourcesFooter } from './MovesStep';
-import { DemandTable, OutlookTable } from './PublicTables';
-import { NewsView } from './NewsView';
-import { PlanStep } from './PlanStep';
 import { advanceLearning, type CourseProgress, type LearningAction } from './learningCheck';
 import { SkillsStep } from './SkillsStep';
-import { TeamView } from './TeamView';
-import { RadarView } from './RadarView';
-import { SignalSources } from './SignalSources';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
-import '@fontsource/carlito/400.css';
-import '@fontsource/carlito/700.css';
+import { applyFonts, DataSaverProvider, initialDataSaver, saveDataSaver } from './dataSaver';
 import './styles.css';
 
-type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
+// Screens after the first steps load on demand, with their data (low bandwidth: the first visit
+// downloads only Home, Your skills and Your moves).
+const PlanStep = lazy(() => import('./PlanStep').then((m) => ({ default: m.PlanStep })));
+const RegionView = lazy(() => import('./RegionView').then((m) => ({ default: m.RegionView })));
+const TeamView = lazy(() => import('./TeamView').then((m) => ({ default: m.TeamView })));
+const DemandTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.DemandTable })));
+const OutlookTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.OutlookTable })));
+const NewsView = lazy(() => import('./NewsView').then((m) => ({ default: m.NewsView })));
+const RadarView = lazy(() => import('./RadarView').then((m) => ({ default: m.RadarView })));
+const SignalSources = lazy(() => import('./SignalSources').then((m) => ({ default: m.SignalSources })));
+
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'region' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
   { id: 'skills', label: 'Your skills', hint: 'Describe your work' },
   { id: 'moves', label: 'Your moves', hint: 'Roles ranked for you' },
   { id: 'plan', label: 'Your plan', hint: 'What to learn next' },
+];
+const regionNav: NavItem[] = [
+  { id: 'region', label: 'Region view', hint: 'SDG contribution of all groups' },
 ];
 const teamNav: NavItem[] = [
   { id: 'team', label: 'Team view', hint: 'Who fits which role, shared gaps' },
@@ -37,6 +44,7 @@ const marketNav: NavItem[] = [
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
   moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
+  region: { title: 'Region view', intro: 'For regional skills bodies: how the reskilling of all the groups they support adds up towards the SDGs.' },
   team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
@@ -139,6 +147,7 @@ function NavIcon({ id }: { id: Screen }) {
     skills: <><path d="M4 7h2m4 0h10M4 12h2m4 0h10M4 17h2m4 0h10" /><path d="m3.5 7 1 1 2-2m-3 6 1 1 2-2m-3 6 1 1 2-2" /></>,
     moves: <><path d="M4 18h5v-5h5V8h6" /><path d="m16 4 4 4-4 4" /></>,
     plan: <><path d="M7 3h10v18H7zM10 8h4m-4 4h4m-4 4h4" /></>,
+    region: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></>,
     team: <><circle cx="9" cy="8" r="3" /><path d="M3.5 19v-2a5.5 5.5 0 0 1 11 0v2M17 6a3 3 0 0 1 0 6m1 3a4 4 0 0 1 2.5 4" /></>,
     demand: <><path d="M4 20V11m5 9V6m5 14v-8m5 8V4M2 20h20" /></>,
     outlook: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3" /></>,
@@ -210,6 +219,9 @@ function App() {
   });
   useEffect(() => { document.documentElement.lang = lang === 'ms' ? 'ms-MY' : lang === 'zh' ? 'zh-Hans' : 'en'; }, [lang]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem('tw-lang', l); } catch { /* storage unavailable */ } };
+  const [saver, setSaver] = useState(initialDataSaver);
+  useEffect(() => applyFonts(saver), [saver]);
+  const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
   const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
     const v = viewerById(who);
@@ -217,6 +229,7 @@ function App() {
     setPlanRoleId(null);
     if (v.kind === 'person') { setProfile(personaProfile(who as PersonaId)); go('moves'); }
     else if (v.kind === 'me') { setProfile(emptyProfile()); go('skills'); }
+    else if (v.kind === 'region') go('region');
     else go('team');
   }
   function startWithRole(role: string) {
@@ -231,12 +244,12 @@ function App() {
   const page = screen === 'home' ? null : titles[screen];
 
   const t = translate(lang);
-  if (screen === 'home') return <LangProvider value={lang}><Home start={start} startWithRole={startWithRole} go={go} lang={lang} setLang={setLang} /></LangProvider>;
+  if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
   const inMarket = marketNav.some(item => item.id === screen);
-  const primaryItems = kind === 'team' ? teamNav : careerNav;
+  const primaryItems = kind === 'region' ? regionNav : kind === 'team' ? teamNav : careerNav;
 
-  return <LangProvider value={lang}><div className="app-shell">
+  return <LangProvider value={lang}><DataSaverProvider value={saver}><div className="app-shell">
     <header className="workspace-header">
       <div className="workspace-header-main">
         <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
@@ -256,6 +269,7 @@ function App() {
         <div className="workspace-utility">
           <ViewerSwitch viewer={viewer} choose={start} />
           <LanguagePicker lang={lang} setLang={setLang} />
+          <button type="button" className="workspace-saver-toggle" role="switch" aria-checked={saver} onClick={toggleSaver}>{t('Data saver')}: {saver ? t('On') : t('Off')}</button>
         </div>
       </div>
     </header>
@@ -266,9 +280,10 @@ function App() {
           <h1>{t(page.title)}</h1>
           {screen !== 'moves' && screen !== 'plan' && <p>{t(page.intro)}</p>}
         </header>}
-        <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'team' ? t('My team') : t('My career')}>
-          {(inMarket ? marketNav : kind === 'team' ? teamNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
+        <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
+          {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
         </nav>
+        <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
@@ -276,17 +291,19 @@ function App() {
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} onBackToMoves={() => go('moves')} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
+        {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
         {screen === 'signals' && <SignalSources />}
+        </Suspense>
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
         <SourcesFooter showSourceSummary={!['home', 'moves', 'demand', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
       </div>
     </main>
-  </div></LangProvider>;
+  </div></DataSaverProvider></LangProvider>;
 }
 
 createRoot(document.getElementById('root')!).render(<App />);

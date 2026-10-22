@@ -128,7 +128,10 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 - [x] Record real accounts and résumé upload as future work requiring decisions on consent, storage, review, and deletion.
 - [x] Verify that the visitor can browse first, continue through the demo entry, review the profile, and reach matches without a misleading sign-in claim.
 
-**Done when:** The public-first demo flow works and states plainly that sign-in and résumé upload are not implemented.
+**Done when:** The public-first demo flow works and states plainly that sign-in and saved accounts are not implemented.
+
+- [x] CV upload or paste on *Your skills* (22 Oct): read in the browser, contact lines removed, lines shown before sending, matched on RunPod via `/api/cv-skills`, user ticks skills; nothing stored. Tested with a fictional PDF against a local stand-in for RunPod (`src/cv.test.ts`, `server/search.test.mjs`).
+- [ ] Check CV matching quality on the live app with real RunPod (fictional sample CV and one fictional PDF); adjust the 0.55 minimum if location or company lines produce nonsense matches.
 **Commit focus:** Split the market-first navigation, demo sign-in entry, and optional profile field into separate commits.
 
 ## Stage 4c — Replace the guided journey with browsing
@@ -229,7 +232,7 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Stage 6 — Build the public market explorer
 
-- [ ] Run `node scripts/import_anthropic_index.mjs` in Replit's Shell, commit `data/sources/anthropic-economic-index.json`, and check the AI impact page and futures.
+- [x] Anthropic Economic Index imported in Replit (22 Oct, commit 02d000f): all 8 SOC codes have tasks (2010 O*NET codes for software developer and data analyst); AI impact page values and futures checked in code. Still to look at on the live page after republishing.
 - [ ] Show supported current demand and skills-needed signals, with future outlook in a separate labelled section. *Demand (DOSM, 9 occupation groups) and Outlook (ILO exposure for the 9 roles) are live; Skills view still empty.*
 - [x] Display the measure, geography, source, publication date, and snapshot date beside each signal.
 - [x] Let the visitor open the original source or its attribution. *(22 Oct: Signal sources page links every source with its date.)*
@@ -342,9 +345,12 @@ These are ideas from the Domain 1 brief, not submission blockers. Pick them only
 
 - [ ] Employer view with a team skills-gap heatmap and group learning plan.
 - [ ] Automatic re-planning when a refreshed trend signal changes a recommendation.
-- [ ] Additional language support and a low-bandwidth mode.
+- [x] Additional language support and a low-bandwidth mode. (EN/BM/中文 on every screen, translations still to be reviewed; 22 Oct: screens after the first steps load on demand, server sends gzip and caches built files for a year, first visit measured at 229 KB through `server/index.mjs` (was about 1.1 MB uncompressed); *Data saver* switch in the sidebar (starts on when the device asks to save data) skips the web font and live news/labour-force requests.)
 - [ ] Learner progress tracking or skill badges.
-- [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; the focused "How ranking works" view states the limits.)
-- [x] Aggregated SDG contribution view for a person, organisation, or region. (Your plan: per person; Team view: per team or class.)
+- [x] Fairness checks for differences related to age, gender, or background. (No such inputs exist; `src/fairness.test.ts` proves same skills → same scores; the focused "How ranking works" view states the limits.) 22 Oct: identity filter `server/identity.mjs` removes common name/age/identity phrases in the browser before the skill search and CV matcher (tests in `server/identity.test.mjs`); *How ranking works* cites Wilson & Caliskan 2024 and MOSTI AIGE 2024.
+- [x] First fairness audit run on RunPod (22 Oct, `c5cf6ae`): identity cues kept 6.13 of the top 10 skills on average (first suggestion unchanged 46%); ethnicity cues pulled language skills in ("Chinese" → *understand written Malay*, *write Malay*). No neutral control yet, so the shift cannot be attributed to identity.
+- [x] Fairness audit re-run with control (22 Oct, `3d9da3a`): identity cues kept 6.13 of 10, neutral control 6.2 (so the overall shift is from added words, not identity); but ethnicity cues pulled 63 language skills into the top 10 over 36 queries (3 cues × 12 descriptions) versus 0 for the control. Gender pair overlap 8.5 of 10 vs 5.8 between neutral pairs: no gender disparity seen.
+- [ ] Decide whether to widen `server/identity.mjs` (two of six held-out ethnicity/gender phrasings still pass through) and write a fresh held-out set if so.
+- [x] Aggregated SDG contribution view for a person, organisation, or region. (Your plan: per person; Team view: per team or class; Region view (22 Oct): a fictional regional skills body's three groups, 12 people, added up person by person with the Your plan rule, plus second/third moves that would add targets. No state statistics: open state-by-occupation data is not published.)
 
 Additional APIs in [API_PLAN.md](API_PLAN.md) are also optional unless Stage 1 selects one as the required updatable source.
