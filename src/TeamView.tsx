@@ -16,50 +16,73 @@ const resources = resourcesFile.resources as Resource[];
 
 type Member = { name: string; roleId: string | null; held: ReadonlySet<string> };
 
-/** One person's own view inside Team view: top moves, futures, their gaps and first courses for the chosen role. */
-function PersonPanel({ member, target, onClose }: { member: Member; target: (typeof roles)[number]; onClose: () => void }) {
+/** One person's own view inside Team view: where they fit, how far they are from the chosen role, and where to start. */
+function PersonPanel({ member, target, onPickRole, onClose }: { member: Member; target: (typeof roles)[number]; onPickRole: (id: string) => void; onClose: () => void }) {
   const t = useT();
+  const [allGaps, setAllGaps] = useState(false);
+  useEffect(() => setAllGaps(false), [member, target]);
   const { moves } = useMemo(() => recommendMoves(roles, member.roleId, member.held, snapshots.q2, ilo, scenarios.moderate, transferable), [member]);
   const futures = useMemo(() => simulateFutures({ roles, currentRoleId: member.roleId, held: member.held, snapshots: [snapshots.q1, snapshots.q2], ilo, transferable }), [member]);
   const inRole = member.roleId === target.id;
   const fit = skillFit(target, member.held, transferable);
+  const total = target.essentialSkills.length;
   const gaps: Gap[] = [...fit.missing.map((skill) => ({ skill, partly: null })), ...fit.transferable.map((x) => ({ skill: x.need, partly: x.have.label }))];
   const plan = planForGaps(gaps, resources);
   const ai = suggestedSteps(plan.uncovered, matches.skills);
   const steps = [
-    ...plan.steps.map((s) => ({ key: s.resource.id, title: s.resource.title, url: s.resource.url, n: s.closes.length, label: t('Checked course') })),
-    ...ai.steps.map((s) => ({ key: s.course.slug, title: s.course.name, url: s.course.url, n: s.closes.length, label: t('AI suggestion') })),
-  ];
+    ...plan.steps.map((s) => ({ key: s.resource.id, title: s.resource.title, url: s.resource.url, n: s.closes.length, time: s.resource.hours !== null ? t('{n} hours', { n: s.resource.hours }) : null, ai: false })),
+    ...ai.steps.map((s) => ({ key: s.course.slug, title: s.course.name, url: s.course.url, n: s.closes.length, time: s.course.workload, ai: true })),
+  ].slice(0, 3);
   const current = member.roleId ? roleTitle(roles.find((r) => r.id === member.roleId)!.title) : t('No job yet');
+  const pct = (n: number) => `${(n / total) * 100}%`;
   return <section className="panel person-panel" aria-labelledby="person-head">
-    <div className="person-head">
-      <h2 id="person-head">{member.name} <span>{current} · {t('{n} skills', { n: member.held.size })}</span></h2>
+    <header className="person-head">
+      <span className="person-avatar" aria-hidden="true">{member.name[0]}</span>
+      <div>
+        <h2 id="person-head">{member.name}</h2>
+        <p>{current}, {t('{n} skills', { n: member.held.size })}</p>
+      </div>
       <button type="button" className="text-button" onClick={onClose}>{t('Back to the whole group')}</button>
-    </div>
-    <div className="person-cols">
-      <div>
-        <h3>{t('Top moves')}</h3>
-        <ol className="person-moves">{moves.slice(0, 3).map((m) => {
-          const f = futures.byRole.get(m.role.id);
-          return <li key={m.role.id}>{roleTitle(m.role.title)} <strong>{m.score100}</strong>
-            {f && <small>{t('best move in {p}% of futures', { p: Math.round(f.best * 100) })}</small>}</li>;
-        })}</ol>
+    </header>
+
+    <h3>{t('Where {name} fits best', { name: member.name })}</h3>
+    <div className="fit-cards">{moves.slice(0, 3).map((m) => {
+      const f = futures.byRole.get(m.role.id);
+      const on = m.role.id === target.id;
+      return <button type="button" key={m.role.id} className={`fit-card${on ? ' on' : ''}`} aria-pressed={on} onClick={() => onPickRole(m.role.id)}>
+        <span className="fit-role">{roleTitle(m.role.title)}</span>
+        <span className="fit-score">{m.score100}<small>{t('Score')}</small></span>
+        {f && <span className="fit-futures">{t('Best move in {p}% of futures', { p: Math.round(f.best * 100) })}</span>}
+      </button>;
+    })}</div>
+
+    <h3>{t('Getting to {role}', { role: roleTitle(target.title) })}</h3>
+    {inRole ? <p className="note">{t('This is their current job.')}</p> : <>
+      <div className="bridge">
+        <div className="bridge-bar" role="img" aria-label={t('{a} of {b} skills already, {c} related, {d} to learn', { a: fit.matched.length, b: total, c: fit.transferable.length, d: fit.missing.length })}>
+          <span className="have" style={{ width: pct(fit.matched.length) }} />
+          <span className="near" style={{ width: pct(fit.transferable.length) }} />
+        </div>
+        <p className="bridge-text"><strong>{t('{a} of {b} skills', { a: fit.matched.length, b: total })}</strong> {t('already')}{fit.transferable.length ? `, ${t('{n} related', { n: fit.transferable.length })}` : ''}, {t('{n} to learn', { n: fit.missing.length })}</p>
       </div>
-      <div>
-        <h3>{t('For {role}', { role: roleTitle(target.title) })}</h3>
-        {inRole ? <p className="note">{t('This is their current job.')}</p> : <>
-          <p className="note">{t('Has {a} of {b} essential skills', { a: fit.matched.length, b: target.essentialSkills.length })}{fit.transferable.length ? ` · ${t('{n} transferable', { n: fit.transferable.length })}` : ''}</p>
-          {gaps.length > 0 && <div className="tag-row">{gaps.slice(0, 8).map((g) => <GapTag key={g.skill.uri} gap={g} />)}{gaps.length > 8 && <span className="note">{t('+{n} more', { n: gaps.length - 8 })}</span>}</div>}
-        </>}
+      <div className="person-cols">
+        <div>
+          <h4>{t('Skills to learn')} <span className="count">{fit.transferable.length ? t('{n}, including {m} related', { n: gaps.length, m: fit.transferable.length }) : gaps.length}</span></h4>
+          <div className="tag-row">{(allGaps ? gaps : gaps.slice(0, 6)).map((g) => <span key={g.skill.uri} className="skill-tag person-gap">{g.skill.label}{g.partly ? <small> ≈ {g.partly}</small> : null}</span>)}</div>
+          {gaps.length > 6 && <button type="button" className="text-button" onClick={() => setAllGaps(!allGaps)}>{allGaps ? t('Show fewer') : t('Show all {n}', { n: gaps.length })}</button>}
+        </div>
+        <div>
+          <h4>{t('Start with')}</h4>
+          {steps.length === 0 ? <p className="note">{t('No course found yet')}</p>
+            : <ol className="person-steps">{steps.map((s) => <li key={s.key}>
+              <a href={s.url} target="_blank" rel="noreferrer">{s.title}</a>
+              <small>{s.ai ? `${t('AI suggestion')}, ` : ''}{t('covers {n} of these skills', { n: s.n })}{s.time ? `, ${s.time}` : ''}</small>
+            </li>)}</ol>}
+          {plan.steps.length > 0 && <p className="note">{t('Estimated time: {h} hours', { h: plan.statedHours })} {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}.</p>}
+        </div>
       </div>
-      <div>
-        <h3>{t('First courses')}</h3>
-        {inRole || steps.length === 0 ? <p className="note">{inRole ? t('Nothing to build for this role.') : t('No course found yet')}</p>
-          : <ol className="person-steps">{steps.slice(0, 3).map((s) => <li key={s.key}><a href={s.url} target="_blank" rel="noreferrer">{s.title}</a><small>{s.label} · {t('builds {n} of their gaps', { n: s.n })}</small></li>)}</ol>}
-        {!inRole && plan.steps.length > 0 && <p className="note">{t('Estimated time: {h} hours', { h: plan.statedHours })} {t('for the {n} checked courses, as stated by each provider', { n: plan.steps.length })}.</p>}
-      </div>
-    </div>
-    <p className="note">{t('Same rules as Your moves and Your plan. In real use, each person confirms their own skills and decides their own move; this view supports the conversation.')}</p>
+    </>}
+    <p className="note person-foot">{t('Same rules as Your moves and Your plan. In real use, each person confirms their own skills and decides their own move; this view supports the conversation.')}</p>
   </section>;
 }
 
@@ -118,7 +141,7 @@ export function TeamView({ viewer }: { viewer: Viewer }) {
       <p className="note">{t('Select a role name to see what the group would need to learn for it, or a person’s name for their own view.')}</p>
     </section>
 
-    {personName && <PersonPanel member={members.find((m) => m.name === personName)!} target={target} onClose={() => setPersonName(null)} />}
+    {personName && <PersonPanel member={members.find((m) => m.name === personName)!} target={target} onPickRole={setTargetId} onClose={() => setPersonName(null)} />}
 
     <div className="plan-layout">
     <section className="panel team-plan" aria-labelledby="shared">

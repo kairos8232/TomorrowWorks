@@ -758,6 +758,18 @@ const dict: Record<string, Entry> = {
   'best move in {p}% of futures': { ms: 'langkah terbaik dalam {p}% masa depan', zh: '在 {p}% 的未来中为最佳选择' },
   'Same rules as Your moves and Your plan. In real use, each person confirms their own skills and decides their own move; this view supports the conversation.': { ms: 'Peraturan yang sama seperti Langkah anda dan Pelan anda. Dalam penggunaan sebenar, setiap orang mengesahkan kemahiran sendiri dan memutuskan langkah sendiri; paparan ini menyokong perbincangan.', zh: '与“你的转岗方向”和“你的计划”使用相同规则。实际使用中，每个人确认自己的技能并自行决定转岗方向；此视图用于支持沟通。' },
   'Select a role name to see what the group would need to learn for it, or a person’s name for their own view.': { ms: 'Pilih nama peranan untuk melihat apa yang perlu dipelajari oleh kumpulan, atau nama seseorang untuk paparan mereka sendiri.', zh: '选择职位名称查看群组需要学习的内容，或选择人名查看其个人视图。' },
+  'Where {name} fits best': { ms: 'Di mana {name} paling sesuai', zh: '{name} 最适合的职位' },
+  'Best move in {p}% of futures': { ms: 'Langkah terbaik dalam {p}% masa depan', zh: '在 {p}% 的未来中为最佳选择' },
+  'Getting to {role}': { ms: 'Menuju {role}', zh: '迈向 {role}' },
+  '{a} of {b} skills already, {c} related, {d} to learn': { ms: '{a} daripada {b} kemahiran sudah ada, {c} berkaitan, {d} perlu dipelajari', zh: '已有 {b} 项技能中的 {a} 项，{c} 项相关，{d} 项待学' },
+  '{a} of {b} skills': { ms: '{a} daripada {b} kemahiran', zh: '{b} 项技能中的 {a} 项' },
+  'already': { ms: 'sudah ada', zh: '已具备' },
+  '{n} related': { ms: '{n} berkaitan', zh: '{n} 项相关' },
+  '{n} to learn': { ms: '{n} perlu dipelajari', zh: '{n} 项待学' },
+  'Skills to learn': { ms: 'Kemahiran untuk dipelajari', zh: '待学技能' },
+  'Start with': { ms: 'Mulakan dengan', zh: '从这里开始' },
+  'covers {n} of these skills': { ms: 'meliputi {n} daripada kemahiran ini', zh: '涵盖其中 {n} 项技能' },
+  '{n}, including {m} related': { ms: '{n}, termasuk {m} berkaitan', zh: '{n} 项，其中 {m} 项相关' },
 };
 
 const LangContext = createContext<Lang>('en');

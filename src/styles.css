@@ -792,19 +792,38 @@ details.course-check { padding-block:0; }
 .futures-panel details ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
 .future-line { display: block; margin-top: 2px; color: #5d6873; font-weight: 400; }
 .close-call { font-style: normal; margin-left: 6px; white-space: nowrap; padding: 0 6px; border-radius: 4px; background: #fff3d6; color: #7a5300; font-weight: 700; }
-/* Team view: one person's own view. */
+/* Team view: one person's own view. Quiet layout; the skill bridge bar is the one strong element. */
 .heat-person { border: 0; background: transparent; font: inherit; font-weight: 700; color: #1e6b4f; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .heat-person.active { color: #ffffff; background: #1c2430; padding: 1px 6px; border-radius: 4px; text-decoration: none; }
-.person-panel { border-left: 4px solid #1e6b4f; display: grid; gap: 12px; }
-.person-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.person-head h2 { margin: 0; font-size: 20px; }
-.person-head h2 span { font-size: 14px; font-weight: 400; color: #5d6873; margin-left: 6px; }
-.person-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.person-cols h3 { margin: 0 0 8px; font-size: 15px; }
-.person-cols .note { margin: 0 0 8px; }
-.person-moves, .person-steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; }
-.person-moves strong { margin-left: 6px; }
-.person-moves small, .person-steps small { display: block; color: #5d6873; font-size: 12px; }
-.person-steps a { color: #1c2430; font-weight: 600; }
-.person-cols .tag-row { margin: 0; gap: 6px; }
-@media (max-width: 900px) { .person-cols { grid-template-columns: 1fr; } }
+.heat-person:focus-visible, .fit-card:focus-visible { outline: 3px solid #1e6b4f; outline-offset: 2px; }
+.person-panel { display: grid; gap: 14px; }
+.person-panel h3 { margin: 6px 0 0; font-size: 16px; }
+.person-panel h4 { margin: 0 0 8px; font-size: 14px; color: #3a4450; }
+.person-head { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #e3e7e3; }
+.person-avatar { width: 44px; height: 44px; border-radius: 50%; background: #1e6b4f; color: #ffffff; display: grid; place-items: center; font-weight: 800; font-size: 19px; }
+.person-head h2 { margin: 0; font-size: 21px; }
+.person-head p { margin: 2px 0 0; color: #5d6873; font-size: 14px; }
+.fit-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.fit-card { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "role score" "futures score"; gap: 2px 10px; align-items: center; text-align: left; padding: 12px 14px; border: 1px solid #c5ccc6; border-radius: 10px; background: #ffffff; font: inherit; color: #1c2430; cursor: pointer; }
+.fit-card:hover { border-color: #1e6b4f; }
+.fit-card.on { border: 2px solid #1e6b4f; background: #eef4ef; padding: 11px 13px; }
+.fit-role { grid-area: role; font-weight: 700; font-size: 15px; }
+.fit-futures { grid-area: futures; font-size: 12px; color: #5d6873; }
+.fit-score { grid-area: score; font-size: 26px; font-weight: 800; line-height: 1; text-align: right; }
+.fit-score small { display: block; font-size: 11px; font-weight: 600; color: #5d6873; }
+.bridge { display: grid; gap: 6px; }
+.bridge-bar { height: 16px; border-radius: 8px; background: #e7ebe7; display: flex; overflow: hidden; }
+.bridge-bar .have { background: #1e6b4f; }
+.bridge-bar .near { background: repeating-linear-gradient(135deg, #1e6b4f 0 4px, #8fbfa9 4px 8px); }
+.bridge-text { margin: 0; font-size: 15px; color: #3a4450; }
+.bridge-text strong { color: #1c2430; }
+.person-cols { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; }
+.person-cols .tag-row { margin: 0 0 6px; gap: 6px; }
+.person-gap { background: #f1f3f0; color: #1c2430; font-weight: 600; }
+.person-gap small { color: #5d6873; font-weight: 400; }
+.person-steps { margin: 0 0 8px; padding-left: 22px; display: grid; gap: 10px; font-size: 14px; }
+.person-steps a { color: #1c2430; font-weight: 700; }
+.person-steps small { display: block; color: #5d6873; font-size: 12px; margin-top: 2px; }
+.person-panel .note { margin: 0; }
+.person-foot { padding-top: 10px; border-top: 1px solid #e3e7e3; }
+@media (max-width: 900px) { .fit-cards, .person-cols { grid-template-columns: 1fr; } .person-head { grid-template-columns: auto 1fr; } .person-head .text-button { grid-column: 1 / -1; justify-self: start; } }
