@@ -37,4 +37,12 @@ describe('region SDG view (people → groups → region)', () => {
       for (const t of a.targets) expect(p.targets).not.toContain(t);
     }
   });
+  it('routes to fund add up the 2nd/3rd moves by role, with no names', () => {
+    const total = r.paths.reduce((n, p) => n + p.alternatives.length, 0);
+    expect(r.routes.reduce((n, x) => n + x.people, 0)).toBe(total);
+    for (const route of r.routes) {
+      expect(Object.values(route.byTeam).reduce((a, b) => a + b, 0)).toBe(route.people);
+      expect(Object.keys(route)).toEqual(['roleId', 'people', 'byTeam', 'targets']);
+    }
+  });
 });

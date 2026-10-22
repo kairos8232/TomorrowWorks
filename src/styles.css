@@ -1128,13 +1128,21 @@ details.course-check { padding-block:0; }
 .region-groups .note { margin: 4px 0 0; }
 @media (max-width: 620px) { .region-groups li { flex-wrap: wrap; } .region-lever-targets { margin-left: 20px; } }
 
-/* Team view: pick one group, or all groups (SDG contribution added up). */
 .team-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
 .team-view > * { min-width: 0; }
-.group-switch { display: flex; flex-wrap: wrap; gap: 8px; }
-.group-switch button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid #cfd6cf; border-radius: 999px; background: #fff; color: #1c2430; font: inherit; font-size: 14px; cursor: pointer; }
-.group-switch button i { width: 10px; height: 10px; border-radius: 3px; }
-.group-switch button[aria-pressed="true"] { background: #1e3d33; border-color: #1e3d33; color: #fff; font-weight: 600; }
-.group-switch .group-switch-all { margin-left: auto; }
-.group-switch button:focus-visible { outline: 3px solid #7fd6a8; outline-offset: 2px; }
-@media (max-width: 620px) { .group-switch .group-switch-all { margin-left: 0; } }
+
+/* Region view: what it is for, and the three levels of the SDG view. */
+.region-purpose p { margin: 0 0 14px; max-width: 70ch; }
+.sdg-levels { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: lvl; }
+.sdg-levels li { display: grid; gap: 4px; padding: 12px 14px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; font-size: 14px; position: relative; }
+.sdg-levels li strong { font-size: 15px; }
+.sdg-levels li span { color: #5d6873; }
+.sdg-levels li.here { border-color: #1e3d33; background: #1e3d33; color: #fff; }
+.sdg-levels li.here span { color: #d6e6dd; }
+.sdg-levels li + li::before { content: "→"; position: absolute; left: -10px; top: 50%; transform: translate(-50%, -50%); color: #5d6873; }
+@media (max-width: 620px) { .sdg-levels { grid-template-columns: minmax(0, 1fr); } .sdg-levels li + li::before { content: none; } }
+.routes-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.routes-table th, .routes-table td { text-align: left; padding: 10px 8px; border-top: 1px solid #e3e7e3; vertical-align: top; }
+.routes-table thead th { border-top: none; color: #5d6873; font-weight: 600; font-size: 13px; }
+.routes-table small { color: #5d6873; margin-left: 4px; }
+.routes-table .region-lever-targets { margin-left: 0; }

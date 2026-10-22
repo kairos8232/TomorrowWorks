@@ -16,7 +16,7 @@ export type Region = { id: string; name: string; description: string; teamIds: s
 export const regions: Region[] = [{
   id: 'klang-valley',
   name: 'Klang Valley skills network',
-  description: 'All three fictional groups added up: a finance team, a graduating class and a logistics office.',
+  description: 'A fictional regional skills centre that funds training for three groups: a finance team at a firm, a university graduating class and a logistics office.',
   teamIds: ['finance-team', 'graduating-class', 'logistics-office'],
 }];
 
@@ -56,5 +56,24 @@ export function regionSdg(region: Region) {
     paths,
     targets: [...byTarget.values()].sort((a, b) => b.people - a.people || a.target.localeCompare(b.target, undefined, { numeric: true })),
     baseline: paths.filter((p) => p.skills.length > 0).length,   // everyone with something to learn counts towards 4.4
+    routes: routesToFund(paths),
   };
+}
+
+export type Route = { roleId: string; people: number; byTeam: Record<string, number>; targets: string[] };
+
+/**
+ * Routes a regional body could fund: 2nd or 3rd moves that would add SDG targets
+ * the person's best move does not reach, counted by role (totals, no names).
+ */
+export function routesToFund(paths: PersonPath[]): Route[] {
+  const byRole = new Map<string, Route>();
+  for (const p of paths) for (const a of p.alternatives) {
+    const r = byRole.get(a.roleId) ?? { roleId: a.roleId, people: 0, byTeam: {}, targets: [] };
+    r.people++;
+    r.byTeam[p.teamId] = (r.byTeam[p.teamId] ?? 0) + 1;
+    r.targets = [...new Set([...r.targets, ...a.targets])].sort();
+    byRole.set(a.roleId, r);
+  }
+  return [...byRole.values()].sort((a, b) => b.people - a.people || a.roleId.localeCompare(b.roleId));
 }

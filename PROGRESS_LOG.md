@@ -1,5 +1,12 @@
 # Progress log
 
+## 22 Oct 2026 — Region view separated again and made clearer
+
+- Carson: one manager should not see other organisations' groups, and the region's purpose was unclear. Team view now shows only the viewer's own group (no pills). Region view is back as its own screen for Encik Faizal (fictional regional skills centre officer), opening with *What this view is for* (who uses it, its one question, Person → Group → Region). It shows totals only (no names) and a *Routes that would reach more targets* table by role (`routesToFund`, new test). New EN/MS/ZH strings need team review.
+- Build and 114 tests pass; Chromium desktop 1300 px and phone 390 px checked, no page errors. Header still 8 px too wide at 390 px (Data saver button, already there).
+
+---
+
 ## 22 Oct 2026 — Region view merged into Team view
 
 - Carson found the separate Region view confusing and asked to combine it with Team view. Team view now opens with pills for the three fictional groups plus *All groups: SDG contribution*; the old Region screen (`RegionView.tsx` → `AllGroupsView.tsx`), its nav item and the Encik Faizal viewer are gone. Same rule and tests (`src/region.ts`); wording now says this is the region level of the SDG view and that an employer or regional skills body could use it. New EN/MS/ZH strings need team review.
