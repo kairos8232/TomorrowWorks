@@ -574,3 +574,10 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 - Next: `Add progress log` — `PROGRESS_LOG.md` plus its links in `README.md` and `CLAUDE.md`.
 
 - Step 3 placement correction (22 Oct): user requested the next-action panel beneath course progress; moved it below the summary.
+
+## 22 Oct 2026 (afternoon): Anthropic Economic Index imported
+- Carson ran the importer in Replit (756 occupations, commit `02d000f`). First run gave 0 tasks for software developer and data analyst (the task file uses 2010 O*NET codes); fixed in `9136c71`, second run fills all eight SOC codes. Automates share: bookkeeping 56%, software developer 58%, data analyst 45%, financial analyst 29%.
+- The real file has a `source.files` object, which broke `npm run build` (type of `aeiData.source`); loosened the type. Build and 97 tests pass.
+- Effect on futures: Hakim is now Financial analyst 56% / Business analyst 40% / Data analyst 4% (was 80/14/5), because the Anthropic view places Financial analyst as the most exposed role. Aina unchanged (Bookkeeper 100%).
+- Open: republish on Replit and look at the AI impact page and the futures panel by eye.
+

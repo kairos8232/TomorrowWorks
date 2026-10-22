@@ -24,7 +24,7 @@ const stats = (xs: number[]): Stats => {
 const clamp = (x: number) => Math.min(1, Math.max(0, x));
 
 export const msData = msFile as { source: Record<string, string>; occupations: { soc: string; title: string; score: number }[] };
-export const aeiData = aeiFile as { source: Record<string, string | null> & { retrievedAt: string | null }; occupations: { soc: string; title: string; observed: number }[]; roles: Record<string, { tasks: number; tasksWithUse: number; automationShare: number | null }> };
+export const aeiData = aeiFile as { source: Record<string, unknown> & { retrievedAt: string | null }; occupations: { soc: string; title: string; observed: number }[]; roles: Record<string, { tasks: number; tasksWithUse: number; automationShare: number | null }> };
 export const roleSoc = roleSocFile as { roles: Record<string, { soc: string; title: string }> };
 
 const iloStats = stats((iloFile.occupations as { mean: number }[]).map((o) => o.mean));
