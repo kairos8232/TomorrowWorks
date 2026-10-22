@@ -2,7 +2,7 @@
 // Data: src/data.ts. Scoring rule: src/scoring.ts (documented in SIGNALS_AND_MATCHING.md).
 import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ilo, personaById, roles, roleTitle, snapshots, transferable, type Profile, type SnapshotId } from './data';
+import { ilo, roles, roleTitle, snapshots, transferable, type Profile, type SnapshotId } from './data';
 import { simulateFutures, tippingPoints, type RoleFutures } from './futures';
 import { whatChanged } from './changes';
 import { interestData, interestFit, topTypes, type InterestType } from './interests';
@@ -254,18 +254,16 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   }
   if (panel === 'changes') return <div className="step-body"><ChangesView changes={changes} onBack={backToRanking} /></div>;
   if (panel === 'method') return <div className="step-body"><MethodView onBack={backToRanking} /></div>;
-  const persona = personaById(profile.persona);
   const rankMoves = changes.filter((change) => change.rankBefore !== change.rankAfter).length;
   const allDown = changes.length > 0 && changes.every((change) => change.scoreAfter < change.scoreBefore);
   return <div className="step-body">
     <header className="moves-intro">
       <div>
         <h1>{t('Your moves')}</h1>
-        <div className="who">
-          <p>{persona ? <><strong>{t('Viewing as {name}', { name: persona.name })}</strong> · {t('{n} skills', { n: profile.held.size })}</>
-            : <><strong>{profile.held.size === 1 ? t('Your 1 skill') : t('Your {n} skills', { n: profile.held.size })}</strong>{current ? ` · ${t('current job {role}', { role: current.role.title })}` : ''}</>}</p>
-          <button type="button" className="text-button" onClick={onEditSkills}>{persona ? t('Use my own skills') : t('Edit skills')}</button>
-        </div>
+        {!profile.persona && <div className="who">
+          <p><strong>{profile.held.size === 1 ? t('Your 1 skill') : t('Your {n} skills', { n: profile.held.size })}</strong>{current ? ` · ${t('current job {role}', { role: current.role.title })}` : ''}</p>
+          <button type="button" className="text-button" onClick={onEditSkills}>{t('Edit skills')}</button>
+        </div>}
       </div>
       <div className="moves-intro-context">
         <p className="moves-description">{t('Compare roles by skill fit, demand and AI change.')}</p>
