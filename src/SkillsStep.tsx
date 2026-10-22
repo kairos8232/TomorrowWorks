@@ -102,7 +102,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       {heldSkills.length > 8 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
     </div>
     <div className="trio-col" role="group" aria-labelledby="enjoy">
-      <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="count">{t('optional')}</span></h2>
+      <h2 id="enjoy">{t('What kind of work do you enjoy?')} <span className="optional-badge">{t('optional')}</span></h2>
       <p className="note">{t('Choose up to two. Turn on Interests in Your moves to use them in ranking.')}</p>
       <div className="choice-list">{interestTypes.map((type) => {
         const on = profile.interests.includes(type);
@@ -115,7 +115,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
       })}</div>
     </div>
     <div className="trio-col" role="group" aria-labelledby="contribute">
-      <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="count">{t('optional')}</span></h2>
+      <h2 id="contribute">{t('What do you want your work to contribute to?')} <span className="optional-badge">{t('optional')}</span></h2>
       <p className="note">{t('Choose up to two UN goals. Turn on Goals in Your moves to use them in ranking.')}</p>
       <div className="choice-list">{sdgData.pickerGoals.map((g) => {
         const info = sdgData.goals[g];

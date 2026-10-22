@@ -43,7 +43,7 @@ const marketNav: NavItem[] = [
 
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
-  moves: { title: 'Your moves', intro: 'Nine roles ranked by how well your skills fit, whether job ads are rising, and how much of the work AI could change.' },
+  moves: { title: 'Your moves', intro: 'Compare roles by skill fit, demand and AI change.' },
   region: { title: 'Region view', intro: 'For regional skills centres that fund training for many employers and colleges: which SDG targets that training reaches, in totals.' },
   team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
@@ -341,7 +341,7 @@ function App() {
         <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
         </nav>
-        {page && screen !== 'moves' && <header className="page-head">
+        {page && (screen !== 'moves' || profile.held.size === 0) && <header className="page-head">
           <h1>{t(page.title)}</h1>
           <p>{t(page.intro)}</p>
         </header>}

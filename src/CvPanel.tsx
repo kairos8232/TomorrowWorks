@@ -62,7 +62,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
   return <section className="panel cv-panel" aria-labelledby="cv-head">
     <div className="cv-head">
       <div>
-        <h2 id="cv-head">{t('Add skills from a CV')} <span className="count">{t('optional')}</span></h2>
+        <h2 id="cv-head">{t('Add skills from a CV')} <span className="optional-badge">{t('optional')}</span></h2>
         <p className="note">{t('Review work lines before sending them for skill matching. Contact details are removed; the file is never stored.')}</p>
       </div>
       <div className="cv-actions">

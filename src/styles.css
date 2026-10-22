@@ -1262,8 +1262,11 @@ details.course-check { padding-block:0; }
 .skills-body .skills-intake { grid-column: 1; grid-row: 1; align-items: stretch; }
 .skills-body .cv-panel { grid-column: 2; grid-row: 1; align-content: start; }
 .skills-body .cv-head { grid-template-columns: 1fr; align-items: start; }
+.skills-body .cv-head h2, .skills-body .trio-col h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; }
+.skills-body .optional-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; background: #e9f1ea; color: #315f46; font-size: 12px; line-height: 1.4; font-weight: 600; white-space: nowrap; }
 .skills-body .cv-actions { gap: 8px 12px; }
 .skills-body .selected-skills { grid-column: 1 / -1; }
+.skills-body .step-actions .note { margin: 0; }
 .skills-body .trio-cols { grid-template-columns: .9fr 1.1fr 1.1fr; }
 .skills-body .choice-list { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
 .skills-body .choice-list .interest-choice { min-width: 0; }
