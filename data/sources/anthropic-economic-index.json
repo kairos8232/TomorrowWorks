@@ -5,9 +5,3862 @@
   "publisher": "Anthropic",
   "licence": "CC-BY (data)",
   "geography": "Global use of Claude; occupations in the US O*NET/SOC classification",
-  "measure": "Observed exposure per occupation; automation vs augmentation share of AI use on each occupation's tasks",
-  "retrievedAt": null
+  "measure": "Observed exposure per occupation (labor_market_impacts/job_exposure.csv); automation vs augmentation share of AI use on each occupation’s tasks (release 2025-03-27), weighted by task share of conversations",
+  "files": {
+   "exposure": "labor_market_impacts/job_exposure.csv",
+   "pattern": "release_2025_03_27/automation_vs_augmentation_by_task.csv",
+   "pct": "release_2025_03_27/task_pct_v2.csv",
+   "tasks": "release_2025_03_27/onet_task_statements.csv"
+  },
+  "retrievedAt": "2026-10-22"
  },
- "occupations": [],
- "roles": {}
+ "occupations": [
+  {
+   "soc": "11-1011",
+   "title": "Chief Executives",
+   "observed": 0.0333
+  },
+  {
+   "soc": "11-1021",
+   "title": "General and Operations Managers",
+   "observed": 0.1378
+  },
+  {
+   "soc": "11-1031",
+   "title": "Legislators",
+   "observed": 0
+  },
+  {
+   "soc": "11-2011",
+   "title": "Advertising and Promotions Managers",
+   "observed": 0.1731
+  },
+  {
+   "soc": "11-2021",
+   "title": "Marketing Managers",
+   "observed": 0.3195
+  },
+  {
+   "soc": "11-2022",
+   "title": "Sales Managers",
+   "observed": 0.0433
+  },
+  {
+   "soc": "11-2032",
+   "title": "Public Relations Managers",
+   "observed": 0.2315
+  },
+  {
+   "soc": "11-3012",
+   "title": "Administrative Services Managers",
+   "observed": 0
+  },
+  {
+   "soc": "11-3013",
+   "title": "Facilities Managers",
+   "observed": 0.1345
+  },
+  {
+   "soc": "11-3021",
+   "title": "Computer and Information Systems Managers",
+   "observed": 0.1559
+  },
+  {
+   "soc": "11-3031",
+   "title": "Financial Managers",
+   "observed": 0.3907
+  },
+  {
+   "soc": "11-3051",
+   "title": "Industrial Production Managers",
+   "observed": 0.0132
+  },
+  {
+   "soc": "11-3061",
+   "title": "Purchasing Managers",
+   "observed": 0.2004
+  },
+  {
+   "soc": "11-3071",
+   "title": "Transportation, Storage, and Distribution Managers",
+   "observed": 0.0956
+  },
+  {
+   "soc": "11-3111",
+   "title": "Compensation and Benefits Managers",
+   "observed": 0
+  },
+  {
+   "soc": "11-3121",
+   "title": "Human Resources Managers",
+   "observed": 0
+  },
+  {
+   "soc": "11-3131",
+   "title": "Training and Development Managers",
+   "observed": 0.3777
+  },
+  {
+   "soc": "11-9013",
+   "title": "Farmers, Ranchers, and Other Agricultural Managers",
+   "observed": 0
+  },
+  {
+   "soc": "11-9021",
+   "title": "Construction Managers",
+   "observed": 0.1186
+  },
+  {
+   "soc": "11-9031",
+   "title": "Education and Childcare Administrators, Preschool and Daycare",
+   "observed": 0.0395
+  },
+  {
+   "soc": "11-9032",
+   "title": "Education Administrators, Kindergarten through Secondary",
+   "observed": 0.0525
+  },
+  {
+   "soc": "11-9033",
+   "title": "Education Administrators, Postsecondary",
+   "observed": 0.0644
+  },
+  {
+   "soc": "11-9041",
+   "title": "Architectural and Engineering Managers",
+   "observed": 0.0306
+  },
+  {
+   "soc": "11-9051",
+   "title": "Food Service Managers",
+   "observed": 0
+  },
+  {
+   "soc": "11-9071",
+   "title": "Gambling Managers",
+   "observed": 0
+  },
+  {
+   "soc": "11-9081",
+   "title": "Lodging Managers",
+   "observed": 0.1215
+  },
+  {
+   "soc": "11-9111",
+   "title": "Medical and Health Services Managers",
+   "observed": 0.0659
+  },
+  {
+   "soc": "11-9121",
+   "title": "Natural Sciences Managers",
+   "observed": 0.0613
+  },
+  {
+   "soc": "11-9131",
+   "title": "Postmasters and Mail Superintendents",
+   "observed": 0
+  },
+  {
+   "soc": "11-9141",
+   "title": "Property, Real Estate, and Community Association Managers",
+   "observed": 0.1653
+  },
+  {
+   "soc": "11-9151",
+   "title": "Social and Community Service Managers",
+   "observed": 0.1808
+  },
+  {
+   "soc": "11-9161",
+   "title": "Emergency Management Directors",
+   "observed": 0
+  },
+  {
+   "soc": "11-9171",
+   "title": "Funeral Home Managers",
+   "observed": 0.0108
+  },
+  {
+   "soc": "11-9179",
+   "title": "Personal Service Managers, All Other",
+   "observed": 0.1244
+  },
+  {
+   "soc": "11-9199",
+   "title": "Managers, All Other",
+   "observed": 0.0686
+  },
+  {
+   "soc": "13-1011",
+   "title": "Agents and Business Managers of Artists, Performers, and Athletes",
+   "observed": 0.118
+  },
+  {
+   "soc": "13-1031",
+   "title": "Claims Adjusters, Examiners, and Investigators",
+   "observed": 0.0818
+  },
+  {
+   "soc": "13-1032",
+   "title": "Insurance Appraisers, Auto Damage",
+   "observed": 0
+  },
+  {
+   "soc": "13-1041",
+   "title": "Compliance Officers",
+   "observed": 0.1211
+  },
+  {
+   "soc": "13-1051",
+   "title": "Cost Estimators",
+   "observed": 0
+  },
+  {
+   "soc": "13-1071",
+   "title": "Human Resources Specialists",
+   "observed": 0.4034
+  },
+  {
+   "soc": "13-1074",
+   "title": "Farm Labor Contractors",
+   "observed": 0
+  },
+  {
+   "soc": "13-1075",
+   "title": "Labor Relations Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "13-1081",
+   "title": "Logisticians",
+   "observed": 0.1571
+  },
+  {
+   "soc": "13-1111",
+   "title": "Management Analysts",
+   "observed": 0.2435
+  },
+  {
+   "soc": "13-1121",
+   "title": "Meeting, Convention, and Event Planners",
+   "observed": 0.1023
+  },
+  {
+   "soc": "13-1131",
+   "title": "Fundraisers",
+   "observed": 0.0466
+  },
+  {
+   "soc": "13-1141",
+   "title": "Compensation, Benefits, and Job Analysis Specialists",
+   "observed": 0.0649
+  },
+  {
+   "soc": "13-1151",
+   "title": "Training and Development Specialists",
+   "observed": 0.2793
+  },
+  {
+   "soc": "13-1161",
+   "title": "Market Research Analysts and Marketing Specialists",
+   "observed": 0.6483
+  },
+  {
+   "soc": "13-1199",
+   "title": "Business Operations Specialists, All Other",
+   "observed": 0.1846
+  },
+  {
+   "soc": "13-2011",
+   "title": "Accountants and Auditors",
+   "observed": 0.3478
+  },
+  {
+   "soc": "13-2031",
+   "title": "Budget Analysts",
+   "observed": 0.0672
+  },
+  {
+   "soc": "13-2041",
+   "title": "Credit Analysts",
+   "observed": 0.1685
+  },
+  {
+   "soc": "13-2051",
+   "title": "Financial and Investment Analysts",
+   "observed": 0.5716
+  },
+  {
+   "soc": "13-2052",
+   "title": "Personal Financial Advisors",
+   "observed": 0.3504
+  },
+  {
+   "soc": "13-2053",
+   "title": "Insurance Underwriters",
+   "observed": 0.0625
+  },
+  {
+   "soc": "13-2054",
+   "title": "Financial Risk Specialists",
+   "observed": 0.2649
+  },
+  {
+   "soc": "13-2061",
+   "title": "Financial Examiners",
+   "observed": 0.0428
+  },
+  {
+   "soc": "13-2071",
+   "title": "Credit Counselors",
+   "observed": 0.2341
+  },
+  {
+   "soc": "13-2072",
+   "title": "Loan Officers",
+   "observed": 0.1857
+  },
+  {
+   "soc": "13-2081",
+   "title": "Tax Examiners and Collectors, and Revenue Agents",
+   "observed": 0.0275
+  },
+  {
+   "soc": "13-2082",
+   "title": "Tax Preparers",
+   "observed": 0.1283
+  },
+  {
+   "soc": "13-2099",
+   "title": "Financial Specialists, All Other",
+   "observed": 0.2202
+  },
+  {
+   "soc": "15-1211",
+   "title": "Computer Systems Analysts",
+   "observed": 0.2763
+  },
+  {
+   "soc": "15-1212",
+   "title": "Information Security Analysts",
+   "observed": 0.4859
+  },
+  {
+   "soc": "15-1221",
+   "title": "Computer and Information Research Scientists",
+   "observed": 0.3404
+  },
+  {
+   "soc": "15-1231",
+   "title": "Computer Network Support Specialists",
+   "observed": 0.2867
+  },
+  {
+   "soc": "15-1232",
+   "title": "Computer User Support Specialists",
+   "observed": 0.4685
+  },
+  {
+   "soc": "15-1241",
+   "title": "Computer Network Architects",
+   "observed": 0.1987
+  },
+  {
+   "soc": "15-1242",
+   "title": "Database Administrators",
+   "observed": 0.3315
+  },
+  {
+   "soc": "15-1243",
+   "title": "Database Architects",
+   "observed": 0.5787
+  },
+  {
+   "soc": "15-1244",
+   "title": "Network and Computer Systems Administrators",
+   "observed": 0.3373
+  },
+  {
+   "soc": "15-1251",
+   "title": "Computer Programmers",
+   "observed": 0.7451
+  },
+  {
+   "soc": "15-1252",
+   "title": "Software Developers",
+   "observed": 0.288
+  },
+  {
+   "soc": "15-1253",
+   "title": "Software Quality Assurance Analysts and Testers",
+   "observed": 0.5195
+  },
+  {
+   "soc": "15-1254",
+   "title": "Web Developers",
+   "observed": 0.4802
+  },
+  {
+   "soc": "15-1255",
+   "title": "Web and Digital Interface Designers",
+   "observed": 0.249
+  },
+  {
+   "soc": "15-1299",
+   "title": "Computer Occupations, All Other",
+   "observed": 0.3106
+  },
+  {
+   "soc": "15-2011",
+   "title": "Actuaries",
+   "observed": 0.0539
+  },
+  {
+   "soc": "15-2021",
+   "title": "Mathematicians",
+   "observed": 0.4241
+  },
+  {
+   "soc": "15-2031",
+   "title": "Operations Research Analysts",
+   "observed": 0.4288
+  },
+  {
+   "soc": "15-2041",
+   "title": "Statisticians",
+   "observed": 0.2107
+  },
+  {
+   "soc": "15-2051",
+   "title": "Data Scientists",
+   "observed": 0.4605
+  },
+  {
+   "soc": "15-2099",
+   "title": "Mathematical Science Occupations, All Other",
+   "observed": 0.4793
+  },
+  {
+   "soc": "17-1011",
+   "title": "Architects, Except Landscape and Naval",
+   "observed": 0.0784
+  },
+  {
+   "soc": "17-1012",
+   "title": "Landscape Architects",
+   "observed": 0
+  },
+  {
+   "soc": "17-1021",
+   "title": "Cartographers and Photogrammetrists",
+   "observed": 0.08
+  },
+  {
+   "soc": "17-1022",
+   "title": "Surveyors",
+   "observed": 0.0022
+  },
+  {
+   "soc": "17-2011",
+   "title": "Aerospace Engineers",
+   "observed": 0.0753
+  },
+  {
+   "soc": "17-2021",
+   "title": "Agricultural Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "17-2031",
+   "title": "Bioengineers and Biomedical Engineers",
+   "observed": 0.1328
+  },
+  {
+   "soc": "17-2041",
+   "title": "Chemical Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "17-2051",
+   "title": "Civil Engineers",
+   "observed": 0.0081
+  },
+  {
+   "soc": "17-2061",
+   "title": "Computer Hardware Engineers",
+   "observed": 0.1453
+  },
+  {
+   "soc": "17-2071",
+   "title": "Electrical Engineers",
+   "observed": 0.059
+  },
+  {
+   "soc": "17-2072",
+   "title": "Electronics Engineers, Except Computer",
+   "observed": 0.0999
+  },
+  {
+   "soc": "17-2081",
+   "title": "Environmental Engineers",
+   "observed": 0.0358
+  },
+  {
+   "soc": "17-2111",
+   "title": "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors",
+   "observed": 0
+  },
+  {
+   "soc": "17-2112",
+   "title": "Industrial Engineers",
+   "observed": 0.0367
+  },
+  {
+   "soc": "17-2121",
+   "title": "Marine Engineers and Naval Architects",
+   "observed": 0.0358
+  },
+  {
+   "soc": "17-2131",
+   "title": "Materials Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "17-2141",
+   "title": "Mechanical Engineers",
+   "observed": 0.0813
+  },
+  {
+   "soc": "17-2151",
+   "title": "Mining and Geological Engineers, Including Mining Safety Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "17-2161",
+   "title": "Nuclear Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "17-2171",
+   "title": "Petroleum Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "17-2199",
+   "title": "Engineers, All Other",
+   "observed": 0.0659
+  },
+  {
+   "soc": "17-3011",
+   "title": "Architectural and Civil Drafters",
+   "observed": 0
+  },
+  {
+   "soc": "17-3012",
+   "title": "Electrical and Electronics Drafters",
+   "observed": 0.0889
+  },
+  {
+   "soc": "17-3013",
+   "title": "Mechanical Drafters",
+   "observed": 0
+  },
+  {
+   "soc": "17-3021",
+   "title": "Aerospace Engineering and Operations Technologists and Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "17-3022",
+   "title": "Civil Engineering Technologists and Technicians",
+   "observed": 0.0776
+  },
+  {
+   "soc": "17-3023",
+   "title": "Electrical and Electronic Engineering Technologists and Technicians",
+   "observed": 0.0202
+  },
+  {
+   "soc": "17-3024",
+   "title": "Electro-Mechanical and Mechatronics Technologists and Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "17-3025",
+   "title": "Environmental Engineering Technologists and Technicians",
+   "observed": 0.1029
+  },
+  {
+   "soc": "17-3026",
+   "title": "Industrial Engineering Technologists and Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "17-3027",
+   "title": "Mechanical Engineering Technologists and Technicians",
+   "observed": 0.0683
+  },
+  {
+   "soc": "17-3029",
+   "title": "Engineering Technologists and Technicians, Except Drafters, All Other",
+   "observed": 0
+  },
+  {
+   "soc": "17-3031",
+   "title": "Surveying and Mapping Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "19-1011",
+   "title": "Animal Scientists",
+   "observed": 0
+  },
+  {
+   "soc": "19-1012",
+   "title": "Food Scientists and Technologists",
+   "observed": 0
+  },
+  {
+   "soc": "19-1013",
+   "title": "Soil and Plant Scientists",
+   "observed": 0.0513
+  },
+  {
+   "soc": "19-1021",
+   "title": "Biochemists and Biophysicists",
+   "observed": 0.0756
+  },
+  {
+   "soc": "19-1022",
+   "title": "Microbiologists",
+   "observed": 0.0969
+  },
+  {
+   "soc": "19-1023",
+   "title": "Zoologists and Wildlife Biologists",
+   "observed": 0.0606
+  },
+  {
+   "soc": "19-1029",
+   "title": "Biological Scientists, All Other",
+   "observed": 0.2452
+  },
+  {
+   "soc": "19-1031",
+   "title": "Conservation Scientists",
+   "observed": 0
+  },
+  {
+   "soc": "19-1032",
+   "title": "Foresters",
+   "observed": 0
+  },
+  {
+   "soc": "19-1041",
+   "title": "Epidemiologists",
+   "observed": 0
+  },
+  {
+   "soc": "19-1042",
+   "title": "Medical Scientists, Except Epidemiologists",
+   "observed": 0.0381
+  },
+  {
+   "soc": "19-2011",
+   "title": "Astronomers",
+   "observed": 0.3849
+  },
+  {
+   "soc": "19-2012",
+   "title": "Physicists",
+   "observed": 0.2727
+  },
+  {
+   "soc": "19-2021",
+   "title": "Atmospheric and Space Scientists",
+   "observed": 0.038
+  },
+  {
+   "soc": "19-2031",
+   "title": "Chemists",
+   "observed": 0.2614
+  },
+  {
+   "soc": "19-2032",
+   "title": "Materials Scientists",
+   "observed": 0.1843
+  },
+  {
+   "soc": "19-2041",
+   "title": "Environmental Scientists and Specialists, Including Health",
+   "observed": 0.0548
+  },
+  {
+   "soc": "19-2042",
+   "title": "Geoscientists, Except Hydrologists and Geographers",
+   "observed": 0.043
+  },
+  {
+   "soc": "19-2043",
+   "title": "Hydrologists",
+   "observed": 0.0748
+  },
+  {
+   "soc": "19-2099",
+   "title": "Physical Scientists, All Other",
+   "observed": 0.0379
+  },
+  {
+   "soc": "19-3011",
+   "title": "Economists",
+   "observed": 0.2418
+  },
+  {
+   "soc": "19-3022",
+   "title": "Survey Researchers",
+   "observed": 0.4316
+  },
+  {
+   "soc": "19-3032",
+   "title": "Industrial-Organizational Psychologists",
+   "observed": 0.1577
+  },
+  {
+   "soc": "19-3033",
+   "title": "Clinical and Counseling Psychologists",
+   "observed": 0.0591
+  },
+  {
+   "soc": "19-3034",
+   "title": "School Psychologists",
+   "observed": 0.0467
+  },
+  {
+   "soc": "19-3039",
+   "title": "Psychologists, All Other",
+   "observed": 0
+  },
+  {
+   "soc": "19-3041",
+   "title": "Sociologists",
+   "observed": 0.3833
+  },
+  {
+   "soc": "19-3051",
+   "title": "Urban and Regional Planners",
+   "observed": 0.0959
+  },
+  {
+   "soc": "19-3091",
+   "title": "Anthropologists and Archeologists",
+   "observed": 0.1354
+  },
+  {
+   "soc": "19-3092",
+   "title": "Geographers",
+   "observed": 0.1096
+  },
+  {
+   "soc": "19-3093",
+   "title": "Historians",
+   "observed": 0.028
+  },
+  {
+   "soc": "19-3094",
+   "title": "Political Scientists",
+   "observed": 0.452
+  },
+  {
+   "soc": "19-3099",
+   "title": "Social Scientists and Related Workers, All Other",
+   "observed": 0.0327
+  },
+  {
+   "soc": "19-4012",
+   "title": "Agricultural Technicians",
+   "observed": 0.0058
+  },
+  {
+   "soc": "19-4013",
+   "title": "Food Science Technicians",
+   "observed": 0.2038
+  },
+  {
+   "soc": "19-4021",
+   "title": "Biological Technicians",
+   "observed": 0.0599
+  },
+  {
+   "soc": "19-4031",
+   "title": "Chemical Technicians",
+   "observed": 0.3148
+  },
+  {
+   "soc": "19-4042",
+   "title": "Environmental Science and Protection Technicians, Including Health",
+   "observed": 0.1444
+  },
+  {
+   "soc": "19-4043",
+   "title": "Geological Technicians, Except Hydrologic Technicians",
+   "observed": 0.229
+  },
+  {
+   "soc": "19-4051",
+   "title": "Nuclear Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "19-4061",
+   "title": "Social Science Research Assistants",
+   "observed": 0.4393
+  },
+  {
+   "soc": "19-4071",
+   "title": "Forest and Conservation Technicians",
+   "observed": 0.0221
+  },
+  {
+   "soc": "19-4092",
+   "title": "Forensic Science Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "19-4099",
+   "title": "Life, Physical, and Social Science Technicians, All Other",
+   "observed": 0.0955
+  },
+  {
+   "soc": "19-5011",
+   "title": "Occupational Health and Safety Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "19-5012",
+   "title": "Occupational Health and Safety Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "21-1012",
+   "title": "Educational, Guidance, and Career Counselors and Advisors",
+   "observed": 0.1182
+  },
+  {
+   "soc": "21-1013",
+   "title": "Marriage and Family Therapists",
+   "observed": 0
+  },
+  {
+   "soc": "21-1015",
+   "title": "Rehabilitation Counselors",
+   "observed": 0
+  },
+  {
+   "soc": "21-1021",
+   "title": "Child, Family, and School Social Workers",
+   "observed": 0.0074
+  },
+  {
+   "soc": "21-1022",
+   "title": "Healthcare Social Workers",
+   "observed": 0.0916
+  },
+  {
+   "soc": "21-1023",
+   "title": "Mental Health and Substance Abuse Social Workers",
+   "observed": 0
+  },
+  {
+   "soc": "21-1091",
+   "title": "Health Education Specialists",
+   "observed": 0.1376
+  },
+  {
+   "soc": "21-1092",
+   "title": "Probation Officers and Correctional Treatment Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "21-1093",
+   "title": "Social and Human Service Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "21-1094",
+   "title": "Community Health Workers",
+   "observed": 0
+  },
+  {
+   "soc": "21-2011",
+   "title": "Clergy",
+   "observed": 0.1116
+  },
+  {
+   "soc": "21-2021",
+   "title": "Directors, Religious Activities and Education",
+   "observed": 0.153
+  },
+  {
+   "soc": "23-1011",
+   "title": "Lawyers",
+   "observed": 0.1673
+  },
+  {
+   "soc": "23-1012",
+   "title": "Judicial Law Clerks",
+   "observed": 0.1704
+  },
+  {
+   "soc": "23-1021",
+   "title": "Administrative Law Judges, Adjudicators, and Hearing Officers",
+   "observed": 0.3048
+  },
+  {
+   "soc": "23-1022",
+   "title": "Arbitrators, Mediators, and Conciliators",
+   "observed": 0.2426
+  },
+  {
+   "soc": "23-1023",
+   "title": "Judges, Magistrate Judges, and Magistrates",
+   "observed": 0.3109
+  },
+  {
+   "soc": "23-2011",
+   "title": "Paralegals and Legal Assistants",
+   "observed": 0.2927
+  },
+  {
+   "soc": "23-2093",
+   "title": "Title Examiners, Abstractors, and Searchers",
+   "observed": 0.0216
+  },
+  {
+   "soc": "25-1011",
+   "title": "Business Teachers, Postsecondary",
+   "observed": 0.3072
+  },
+  {
+   "soc": "25-1021",
+   "title": "Computer Science Teachers, Postsecondary",
+   "observed": 0.2414
+  },
+  {
+   "soc": "25-1022",
+   "title": "Mathematical Science Teachers, Postsecondary",
+   "observed": 0.4305
+  },
+  {
+   "soc": "25-1031",
+   "title": "Architecture Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1032",
+   "title": "Engineering Teachers, Postsecondary",
+   "observed": 0.3589
+  },
+  {
+   "soc": "25-1041",
+   "title": "Agricultural Sciences Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1042",
+   "title": "Biological Science Teachers, Postsecondary",
+   "observed": 0.2914
+  },
+  {
+   "soc": "25-1043",
+   "title": "Forestry and Conservation Science Teachers, Postsecondary",
+   "observed": 0.0206
+  },
+  {
+   "soc": "25-1051",
+   "title": "Atmospheric, Earth, Marine, and Space Sciences Teachers, Postsecondary",
+   "observed": 0.0396
+  },
+  {
+   "soc": "25-1052",
+   "title": "Chemistry Teachers, Postsecondary",
+   "observed": 0.2185
+  },
+  {
+   "soc": "25-1053",
+   "title": "Environmental Science Teachers, Postsecondary",
+   "observed": 0.0232
+  },
+  {
+   "soc": "25-1054",
+   "title": "Physics Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1061",
+   "title": "Anthropology and Archeology Teachers, Postsecondary",
+   "observed": 0.0236
+  },
+  {
+   "soc": "25-1062",
+   "title": "Area, Ethnic, and Cultural Studies Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1063",
+   "title": "Economics Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1064",
+   "title": "Geography Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1065",
+   "title": "Political Science Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1066",
+   "title": "Psychology Teachers, Postsecondary",
+   "observed": 0.3219
+  },
+  {
+   "soc": "25-1067",
+   "title": "Sociology Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1071",
+   "title": "Health Specialties Teachers, Postsecondary",
+   "observed": 0.3045
+  },
+  {
+   "soc": "25-1072",
+   "title": "Nursing Instructors and Teachers, Postsecondary",
+   "observed": 0.1909
+  },
+  {
+   "soc": "25-1081",
+   "title": "Education Teachers, Postsecondary",
+   "observed": 0.2621
+  },
+  {
+   "soc": "25-1082",
+   "title": "Library Science Teachers, Postsecondary",
+   "observed": 0.018
+  },
+  {
+   "soc": "25-1111",
+   "title": "Criminal Justice and Law Enforcement Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1112",
+   "title": "Law Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1113",
+   "title": "Social Work Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1121",
+   "title": "Art, Drama, and Music Teachers, Postsecondary",
+   "observed": 0.2142
+  },
+  {
+   "soc": "25-1122",
+   "title": "Communications Teachers, Postsecondary",
+   "observed": 0.2111
+  },
+  {
+   "soc": "25-1123",
+   "title": "English Language and Literature Teachers, Postsecondary",
+   "observed": 0.3618
+  },
+  {
+   "soc": "25-1124",
+   "title": "Foreign Language and Literature Teachers, Postsecondary",
+   "observed": 0.2403
+  },
+  {
+   "soc": "25-1125",
+   "title": "History Teachers, Postsecondary",
+   "observed": 0.0994
+  },
+  {
+   "soc": "25-1126",
+   "title": "Philosophy and Religion Teachers, Postsecondary",
+   "observed": 0.2197
+  },
+  {
+   "soc": "25-1192",
+   "title": "Family and Consumer Sciences Teachers, Postsecondary",
+   "observed": 0
+  },
+  {
+   "soc": "25-1193",
+   "title": "Recreation and Fitness Studies Teachers, Postsecondary",
+   "observed": 0.1138
+  },
+  {
+   "soc": "25-1194",
+   "title": "Career/Technical Education Teachers, Postsecondary",
+   "observed": 0.1563
+  },
+  {
+   "soc": "25-2011",
+   "title": "Preschool Teachers, Except Special Education",
+   "observed": 0
+  },
+  {
+   "soc": "25-2012",
+   "title": "Kindergarten Teachers, Except Special Education",
+   "observed": 0
+  },
+  {
+   "soc": "25-2021",
+   "title": "Elementary School Teachers, Except Special Education",
+   "observed": 0.103
+  },
+  {
+   "soc": "25-2022",
+   "title": "Middle School Teachers, Except Special and Career/Technical Education",
+   "observed": 0.2972
+  },
+  {
+   "soc": "25-2023",
+   "title": "Career/Technical Education Teachers, Middle School",
+   "observed": 0
+  },
+  {
+   "soc": "25-2031",
+   "title": "Secondary School Teachers, Except Special and Career/Technical Education",
+   "observed": 0.2901
+  },
+  {
+   "soc": "25-2032",
+   "title": "Career/Technical Education Teachers, Secondary School",
+   "observed": 0
+  },
+  {
+   "soc": "25-2051",
+   "title": "Special Education Teachers, Preschool",
+   "observed": 0.0058
+  },
+  {
+   "soc": "25-2057",
+   "title": "Special Education Teachers, Middle School",
+   "observed": 0.134
+  },
+  {
+   "soc": "25-2058",
+   "title": "Special Education Teachers, Secondary School",
+   "observed": 0.0989
+  },
+  {
+   "soc": "25-2059",
+   "title": "Special Education Teachers, All Other",
+   "observed": 0.0257
+  },
+  {
+   "soc": "25-3011",
+   "title": "Adult Basic Education, Adult Secondary Education, and English as a Second Language Instructors",
+   "observed": 0.0636
+  },
+  {
+   "soc": "25-3021",
+   "title": "Self-Enrichment Teachers",
+   "observed": 0.0662
+  },
+  {
+   "soc": "25-3041",
+   "title": "Tutors",
+   "observed": 0.4077
+  },
+  {
+   "soc": "25-4011",
+   "title": "Archivists",
+   "observed": 0.1348
+  },
+  {
+   "soc": "25-4012",
+   "title": "Curators",
+   "observed": 0.4123
+  },
+  {
+   "soc": "25-4013",
+   "title": "Museum Technicians and Conservators",
+   "observed": 0
+  },
+  {
+   "soc": "25-4022",
+   "title": "Librarians and Media Collections Specialists",
+   "observed": 0.2032
+  },
+  {
+   "soc": "25-4031",
+   "title": "Library Technicians",
+   "observed": 0.054
+  },
+  {
+   "soc": "25-9021",
+   "title": "Farm and Home Management Educators",
+   "observed": 0
+  },
+  {
+   "soc": "25-9031",
+   "title": "Instructional Coordinators",
+   "observed": 0.3043
+  },
+  {
+   "soc": "25-9044",
+   "title": "Teaching Assistants, Postsecondary",
+   "observed": 0.1002
+  },
+  {
+   "soc": "27-1011",
+   "title": "Art Directors",
+   "observed": 0.2098
+  },
+  {
+   "soc": "27-1012",
+   "title": "Craft Artists",
+   "observed": 0.0539
+  },
+  {
+   "soc": "27-1013",
+   "title": "Fine Artists, Including Painters, Sculptors, and Illustrators",
+   "observed": 0.3565
+  },
+  {
+   "soc": "27-1014",
+   "title": "Special Effects Artists and Animators",
+   "observed": 0.3571
+  },
+  {
+   "soc": "27-1021",
+   "title": "Commercial and Industrial Designers",
+   "observed": 0.0437
+  },
+  {
+   "soc": "27-1022",
+   "title": "Fashion Designers",
+   "observed": 0.0568
+  },
+  {
+   "soc": "27-1023",
+   "title": "Floral Designers",
+   "observed": 0
+  },
+  {
+   "soc": "27-1024",
+   "title": "Graphic Designers",
+   "observed": 0.3672
+  },
+  {
+   "soc": "27-1025",
+   "title": "Interior Designers",
+   "observed": 0
+  },
+  {
+   "soc": "27-1026",
+   "title": "Merchandise Displayers and Window Trimmers",
+   "observed": 0
+  },
+  {
+   "soc": "27-1027",
+   "title": "Set and Exhibit Designers",
+   "observed": 0
+  },
+  {
+   "soc": "27-2011",
+   "title": "Actors",
+   "observed": 0.1011
+  },
+  {
+   "soc": "27-2012",
+   "title": "Producers and Directors",
+   "observed": 0.092
+  },
+  {
+   "soc": "27-2021",
+   "title": "Athletes and Sports Competitors",
+   "observed": 0
+  },
+  {
+   "soc": "27-2022",
+   "title": "Coaches and Scouts",
+   "observed": 0
+  },
+  {
+   "soc": "27-2023",
+   "title": "Umpires, Referees, and Other Sports Officials",
+   "observed": 0
+  },
+  {
+   "soc": "27-2031",
+   "title": "Dancers",
+   "observed": 0
+  },
+  {
+   "soc": "27-2032",
+   "title": "Choreographers",
+   "observed": 0.0801
+  },
+  {
+   "soc": "27-2041",
+   "title": "Music Directors and Composers",
+   "observed": 0.0368
+  },
+  {
+   "soc": "27-2042",
+   "title": "Musicians and Singers",
+   "observed": 0
+  },
+  {
+   "soc": "27-3011",
+   "title": "Broadcast Announcers and Radio Disc Jockeys",
+   "observed": 0.0634
+  },
+  {
+   "soc": "27-3023",
+   "title": "News Analysts, Reporters, and Journalists",
+   "observed": 0.2098
+  },
+  {
+   "soc": "27-3031",
+   "title": "Public Relations Specialists",
+   "observed": 0.453
+  },
+  {
+   "soc": "27-3041",
+   "title": "Editors",
+   "observed": 0.246
+  },
+  {
+   "soc": "27-3042",
+   "title": "Technical Writers",
+   "observed": 0.4747
+  },
+  {
+   "soc": "27-3043",
+   "title": "Writers and Authors",
+   "observed": 0.2462
+  },
+  {
+   "soc": "27-3091",
+   "title": "Interpreters and Translators",
+   "observed": 0.4304
+  },
+  {
+   "soc": "27-3092",
+   "title": "Court Reporters and Simultaneous Captioners",
+   "observed": 0.3431
+  },
+  {
+   "soc": "27-4011",
+   "title": "Audio and Video Technicians",
+   "observed": 0.0173
+  },
+  {
+   "soc": "27-4012",
+   "title": "Broadcast Technicians",
+   "observed": 0.0197
+  },
+  {
+   "soc": "27-4014",
+   "title": "Sound Engineering Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "27-4021",
+   "title": "Photographers",
+   "observed": 0.195
+  },
+  {
+   "soc": "27-4031",
+   "title": "Camera Operators, Television, Video, and Film",
+   "observed": 0.1651
+  },
+  {
+   "soc": "27-4032",
+   "title": "Film and Video Editors",
+   "observed": 0.2234
+  },
+  {
+   "soc": "29-1011",
+   "title": "Chiropractors",
+   "observed": 0
+  },
+  {
+   "soc": "29-1021",
+   "title": "Dentists, General",
+   "observed": 0.0309
+  },
+  {
+   "soc": "29-1022",
+   "title": "Oral and Maxillofacial Surgeons",
+   "observed": 0
+  },
+  {
+   "soc": "29-1023",
+   "title": "Orthodontists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1024",
+   "title": "Prosthodontists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1031",
+   "title": "Dietitians and Nutritionists",
+   "observed": 0.1328
+  },
+  {
+   "soc": "29-1041",
+   "title": "Optometrists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1051",
+   "title": "Pharmacists",
+   "observed": 0.0896
+  },
+  {
+   "soc": "29-1071",
+   "title": "Physician Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "29-1081",
+   "title": "Podiatrists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1122",
+   "title": "Occupational Therapists",
+   "observed": 0.008
+  },
+  {
+   "soc": "29-1123",
+   "title": "Physical Therapists",
+   "observed": 0.0174
+  },
+  {
+   "soc": "29-1124",
+   "title": "Radiation Therapists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1125",
+   "title": "Recreational Therapists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1126",
+   "title": "Respiratory Therapists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1127",
+   "title": "Speech-Language Pathologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1128",
+   "title": "Exercise Physiologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1129",
+   "title": "Therapists, All Other",
+   "observed": 0.0402
+  },
+  {
+   "soc": "29-1131",
+   "title": "Veterinarians",
+   "observed": 0.0926
+  },
+  {
+   "soc": "29-1141",
+   "title": "Registered Nurses",
+   "observed": 0.0595
+  },
+  {
+   "soc": "29-1151",
+   "title": "Nurse Anesthetists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1161",
+   "title": "Nurse Midwives",
+   "observed": 0.052
+  },
+  {
+   "soc": "29-1171",
+   "title": "Nurse Practitioners",
+   "observed": 0.0944
+  },
+  {
+   "soc": "29-1181",
+   "title": "Audiologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1211",
+   "title": "Anesthesiologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1213",
+   "title": "Dermatologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1215",
+   "title": "Family Medicine Physicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-1216",
+   "title": "General Internal Medicine Physicians",
+   "observed": 0.084
+  },
+  {
+   "soc": "29-1217",
+   "title": "Neurologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1218",
+   "title": "Obstetricians and Gynecologists",
+   "observed": 0.0685
+  },
+  {
+   "soc": "29-1221",
+   "title": "Pediatricians, General",
+   "observed": 0
+  },
+  {
+   "soc": "29-1222",
+   "title": "Physicians, Pathologists",
+   "observed": 0.1577
+  },
+  {
+   "soc": "29-1223",
+   "title": "Psychiatrists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1224",
+   "title": "Radiologists",
+   "observed": 0.199
+  },
+  {
+   "soc": "29-1229",
+   "title": "Physicians, All Other",
+   "observed": 0.0297
+  },
+  {
+   "soc": "29-1241",
+   "title": "Ophthalmologists, Except Pediatric",
+   "observed": 0
+  },
+  {
+   "soc": "29-1242",
+   "title": "Orthopedic Surgeons, Except Pediatric",
+   "observed": 0
+  },
+  {
+   "soc": "29-1243",
+   "title": "Pediatric Surgeons",
+   "observed": 0
+  },
+  {
+   "soc": "29-1291",
+   "title": "Acupuncturists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1292",
+   "title": "Dental Hygienists",
+   "observed": 0
+  },
+  {
+   "soc": "29-1299",
+   "title": "Healthcare Diagnosing or Treating Practitioners, All Other",
+   "observed": 0.0222
+  },
+  {
+   "soc": "29-2031",
+   "title": "Cardiovascular Technologists and Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-2032",
+   "title": "Diagnostic Medical Sonographers",
+   "observed": 0
+  },
+  {
+   "soc": "29-2033",
+   "title": "Nuclear Medicine Technologists",
+   "observed": 0.0513
+  },
+  {
+   "soc": "29-2034",
+   "title": "Radiologic Technologists and Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-2035",
+   "title": "Magnetic Resonance Imaging Technologists",
+   "observed": 0.039
+  },
+  {
+   "soc": "29-2042",
+   "title": "Emergency Medical Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-2043",
+   "title": "Paramedics",
+   "observed": 0
+  },
+  {
+   "soc": "29-2051",
+   "title": "Dietetic Technicians",
+   "observed": 0.2446
+  },
+  {
+   "soc": "29-2052",
+   "title": "Pharmacy Technicians",
+   "observed": 0.0735
+  },
+  {
+   "soc": "29-2053",
+   "title": "Psychiatric Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-2055",
+   "title": "Surgical Technologists",
+   "observed": 0
+  },
+  {
+   "soc": "29-2056",
+   "title": "Veterinary Technologists and Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-2057",
+   "title": "Ophthalmic Medical Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "29-2061",
+   "title": "Licensed Practical and Licensed Vocational Nurses",
+   "observed": 0
+  },
+  {
+   "soc": "29-2072",
+   "title": "Medical Records Specialists",
+   "observed": 0.6674
+  },
+  {
+   "soc": "29-2081",
+   "title": "Opticians, Dispensing",
+   "observed": 0
+  },
+  {
+   "soc": "29-2091",
+   "title": "Orthotists and Prosthetists",
+   "observed": 0
+  },
+  {
+   "soc": "29-2092",
+   "title": "Hearing Aid Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "29-2099",
+   "title": "Health Technologists and Technicians, All Other",
+   "observed": 0.0445
+  },
+  {
+   "soc": "29-9021",
+   "title": "Health Information Technologists and Medical Registrars",
+   "observed": 0.3063
+  },
+  {
+   "soc": "29-9091",
+   "title": "Athletic Trainers",
+   "observed": 0.0531
+  },
+  {
+   "soc": "29-9092",
+   "title": "Genetic Counselors",
+   "observed": 0.0123
+  },
+  {
+   "soc": "29-9093",
+   "title": "Surgical Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "29-9099",
+   "title": "Healthcare Practitioners and Technical Workers, All Other",
+   "observed": 0
+  },
+  {
+   "soc": "31-1131",
+   "title": "Nursing Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "31-1132",
+   "title": "Orderlies",
+   "observed": 0
+  },
+  {
+   "soc": "31-1133",
+   "title": "Psychiatric Aides",
+   "observed": 0
+  },
+  {
+   "soc": "31-2011",
+   "title": "Occupational Therapy Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "31-2012",
+   "title": "Occupational Therapy Aides",
+   "observed": 0.0661
+  },
+  {
+   "soc": "31-2021",
+   "title": "Physical Therapist Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "31-2022",
+   "title": "Physical Therapist Aides",
+   "observed": 0
+  },
+  {
+   "soc": "31-9011",
+   "title": "Massage Therapists",
+   "observed": 0
+  },
+  {
+   "soc": "31-9091",
+   "title": "Dental Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "31-9092",
+   "title": "Medical Assistants",
+   "observed": 0.0476
+  },
+  {
+   "soc": "31-9093",
+   "title": "Medical Equipment Preparers",
+   "observed": 0
+  },
+  {
+   "soc": "31-9094",
+   "title": "Medical Transcriptionists",
+   "observed": 0.6365
+  },
+  {
+   "soc": "31-9095",
+   "title": "Pharmacy Aides",
+   "observed": 0.022
+  },
+  {
+   "soc": "31-9096",
+   "title": "Veterinary Assistants and Laboratory Animal Caretakers",
+   "observed": 0.0179
+  },
+  {
+   "soc": "31-9097",
+   "title": "Phlebotomists",
+   "observed": 0
+  },
+  {
+   "soc": "31-9099",
+   "title": "Healthcare Support Workers, All Other",
+   "observed": 0
+  },
+  {
+   "soc": "33-1011",
+   "title": "First-Line Supervisors of Correctional Officers",
+   "observed": 0.0315
+  },
+  {
+   "soc": "33-1012",
+   "title": "First-Line Supervisors of Police and Detectives",
+   "observed": 0
+  },
+  {
+   "soc": "33-1021",
+   "title": "First-Line Supervisors of Firefighting and Prevention Workers",
+   "observed": 0
+  },
+  {
+   "soc": "33-2011",
+   "title": "Firefighters",
+   "observed": 0
+  },
+  {
+   "soc": "33-2021",
+   "title": "Fire Inspectors and Investigators",
+   "observed": 0
+  },
+  {
+   "soc": "33-2022",
+   "title": "Forest Fire Inspectors and Prevention Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "33-3011",
+   "title": "Bailiffs",
+   "observed": 0
+  },
+  {
+   "soc": "33-3012",
+   "title": "Correctional Officers and Jailers",
+   "observed": 0
+  },
+  {
+   "soc": "33-3021",
+   "title": "Detectives and Criminal Investigators",
+   "observed": 0.0374
+  },
+  {
+   "soc": "33-3031",
+   "title": "Fish and Game Wardens",
+   "observed": 0
+  },
+  {
+   "soc": "33-3041",
+   "title": "Parking Enforcement Workers",
+   "observed": 0
+  },
+  {
+   "soc": "33-3051",
+   "title": "Police and Sheriff's Patrol Officers",
+   "observed": 0.1234
+  },
+  {
+   "soc": "33-3052",
+   "title": "Transit and Railroad Police",
+   "observed": 0
+  },
+  {
+   "soc": "33-9011",
+   "title": "Animal Control Workers",
+   "observed": 0
+  },
+  {
+   "soc": "33-9021",
+   "title": "Private Detectives and Investigators",
+   "observed": 0
+  },
+  {
+   "soc": "33-9031",
+   "title": "Gambling Surveillance Officers and Gambling Investigators",
+   "observed": 0
+  },
+  {
+   "soc": "33-9032",
+   "title": "Security Guards",
+   "observed": 0
+  },
+  {
+   "soc": "33-9091",
+   "title": "Crossing Guards and Flaggers",
+   "observed": 0
+  },
+  {
+   "soc": "33-9092",
+   "title": "Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers",
+   "observed": 0
+  },
+  {
+   "soc": "33-9093",
+   "title": "Transportation Security Screeners",
+   "observed": 0
+  },
+  {
+   "soc": "33-9099",
+   "title": "Protective Service Workers, All Other",
+   "observed": 0.0571
+  },
+  {
+   "soc": "35-1011",
+   "title": "Chefs and Head Cooks",
+   "observed": 0
+  },
+  {
+   "soc": "35-1012",
+   "title": "First-Line Supervisors of Food Preparation and Serving Workers",
+   "observed": 0.0564
+  },
+  {
+   "soc": "35-2011",
+   "title": "Cooks, Fast Food",
+   "observed": 0
+  },
+  {
+   "soc": "35-2012",
+   "title": "Cooks, Institution and Cafeteria",
+   "observed": 0
+  },
+  {
+   "soc": "35-2013",
+   "title": "Cooks, Private Household",
+   "observed": 0
+  },
+  {
+   "soc": "35-2014",
+   "title": "Cooks, Restaurant",
+   "observed": 0.0116
+  },
+  {
+   "soc": "35-2015",
+   "title": "Cooks, Short Order",
+   "observed": 0
+  },
+  {
+   "soc": "35-2021",
+   "title": "Food Preparation Workers",
+   "observed": 0
+  },
+  {
+   "soc": "35-3011",
+   "title": "Bartenders",
+   "observed": 0
+  },
+  {
+   "soc": "35-3023",
+   "title": "Fast Food and Counter Workers",
+   "observed": 0
+  },
+  {
+   "soc": "35-3031",
+   "title": "Waiters and Waitresses",
+   "observed": 0
+  },
+  {
+   "soc": "35-3041",
+   "title": "Food Servers, Nonrestaurant",
+   "observed": 0
+  },
+  {
+   "soc": "35-9011",
+   "title": "Dining Room and Cafeteria Attendants and Bartender Helpers",
+   "observed": 0
+  },
+  {
+   "soc": "35-9021",
+   "title": "Dishwashers",
+   "observed": 0
+  },
+  {
+   "soc": "35-9031",
+   "title": "Hosts and Hostesses, Restaurant, Lounge, and Coffee Shop",
+   "observed": 0.0734
+  },
+  {
+   "soc": "37-1011",
+   "title": "First-Line Supervisors of Housekeeping and Janitorial Workers",
+   "observed": 0.0436
+  },
+  {
+   "soc": "37-1012",
+   "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers",
+   "observed": 0.1083
+  },
+  {
+   "soc": "37-2011",
+   "title": "Janitors and Cleaners, Except Maids and Housekeeping Cleaners",
+   "observed": 0
+  },
+  {
+   "soc": "37-2012",
+   "title": "Maids and Housekeeping Cleaners",
+   "observed": 0
+  },
+  {
+   "soc": "37-2021",
+   "title": "Pest Control Workers",
+   "observed": 0.046
+  },
+  {
+   "soc": "37-3011",
+   "title": "Landscaping and Groundskeeping Workers",
+   "observed": 0
+  },
+  {
+   "soc": "37-3012",
+   "title": "Pesticide Handlers, Sprayers, and Applicators, Vegetation",
+   "observed": 0
+  },
+  {
+   "soc": "37-3013",
+   "title": "Tree Trimmers and Pruners",
+   "observed": 0
+  },
+  {
+   "soc": "39-1013",
+   "title": "First-Line Supervisors of Gambling Services Workers",
+   "observed": 0
+  },
+  {
+   "soc": "39-1014",
+   "title": "First-Line Supervisors of Entertainment and Recreation Workers, Except Gambling Services",
+   "observed": 0.0443
+  },
+  {
+   "soc": "39-1022",
+   "title": "First-Line Supervisors of Personal Service Workers",
+   "observed": 0.0407
+  },
+  {
+   "soc": "39-2011",
+   "title": "Animal Trainers",
+   "observed": 0
+  },
+  {
+   "soc": "39-2021",
+   "title": "Animal Caretakers",
+   "observed": 0
+  },
+  {
+   "soc": "39-3011",
+   "title": "Gambling Dealers",
+   "observed": 0
+  },
+  {
+   "soc": "39-3012",
+   "title": "Gambling and Sports Book Writers and Runners",
+   "observed": 0
+  },
+  {
+   "soc": "39-3021",
+   "title": "Motion Picture Projectionists",
+   "observed": 0
+  },
+  {
+   "soc": "39-3031",
+   "title": "Ushers, Lobby Attendants, and Ticket Takers",
+   "observed": 0
+  },
+  {
+   "soc": "39-3091",
+   "title": "Amusement and Recreation Attendants",
+   "observed": 0.0619
+  },
+  {
+   "soc": "39-3092",
+   "title": "Costume Attendants",
+   "observed": 0
+  },
+  {
+   "soc": "39-3093",
+   "title": "Locker Room, Coatroom, and Dressing Room Attendants",
+   "observed": 0
+  },
+  {
+   "soc": "39-4011",
+   "title": "Embalmers",
+   "observed": 0
+  },
+  {
+   "soc": "39-4021",
+   "title": "Funeral Attendants",
+   "observed": 0
+  },
+  {
+   "soc": "39-4031",
+   "title": "Morticians, Undertakers, and Funeral Arrangers",
+   "observed": 0
+  },
+  {
+   "soc": "39-5011",
+   "title": "Barbers",
+   "observed": 0
+  },
+  {
+   "soc": "39-5012",
+   "title": "Hairdressers, Hairstylists, and Cosmetologists",
+   "observed": 0.0304
+  },
+  {
+   "soc": "39-5091",
+   "title": "Makeup Artists, Theatrical and Performance",
+   "observed": 0
+  },
+  {
+   "soc": "39-5092",
+   "title": "Manicurists and Pedicurists",
+   "observed": 0
+  },
+  {
+   "soc": "39-5093",
+   "title": "Shampooers",
+   "observed": 0
+  },
+  {
+   "soc": "39-5094",
+   "title": "Skincare Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "39-6011",
+   "title": "Baggage Porters and Bellhops",
+   "observed": 0.073
+  },
+  {
+   "soc": "39-6012",
+   "title": "Concierges",
+   "observed": 0.1875
+  },
+  {
+   "soc": "39-9011",
+   "title": "Childcare Workers",
+   "observed": 0.0122
+  },
+  {
+   "soc": "39-9031",
+   "title": "Exercise Trainers and Group Fitness Instructors",
+   "observed": 0
+  },
+  {
+   "soc": "39-9032",
+   "title": "Recreation Workers",
+   "observed": 0
+  },
+  {
+   "soc": "39-9041",
+   "title": "Residential Advisors",
+   "observed": 0.067
+  },
+  {
+   "soc": "41-1011",
+   "title": "First-Line Supervisors of Retail Sales Workers",
+   "observed": 0.2627
+  },
+  {
+   "soc": "41-1012",
+   "title": "First-Line Supervisors of Non-Retail Sales Workers",
+   "observed": 0.2295
+  },
+  {
+   "soc": "41-2011",
+   "title": "Cashiers",
+   "observed": 0.0846
+  },
+  {
+   "soc": "41-2012",
+   "title": "Gambling Change Persons and Booth Cashiers",
+   "observed": 0
+  },
+  {
+   "soc": "41-2021",
+   "title": "Counter and Rental Clerks",
+   "observed": 0.2048
+  },
+  {
+   "soc": "41-2022",
+   "title": "Parts Salespersons",
+   "observed": 0
+  },
+  {
+   "soc": "41-2031",
+   "title": "Retail Salespersons",
+   "observed": 0.3222
+  },
+  {
+   "soc": "41-3011",
+   "title": "Advertising Sales Agents",
+   "observed": 0.1482
+  },
+  {
+   "soc": "41-3021",
+   "title": "Insurance Sales Agents",
+   "observed": 0.3188
+  },
+  {
+   "soc": "41-3031",
+   "title": "Securities, Commodities, and Financial Services Sales Agents",
+   "observed": 0.4413
+  },
+  {
+   "soc": "41-3041",
+   "title": "Travel Agents",
+   "observed": 0.4054
+  },
+  {
+   "soc": "41-4011",
+   "title": "Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products",
+   "observed": 0.2706
+  },
+  {
+   "soc": "41-4012",
+   "title": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+   "observed": 0.6279
+  },
+  {
+   "soc": "41-9011",
+   "title": "Demonstrators and Product Promoters",
+   "observed": 0.0788
+  },
+  {
+   "soc": "41-9012",
+   "title": "Models",
+   "observed": 0
+  },
+  {
+   "soc": "41-9021",
+   "title": "Real Estate Brokers",
+   "observed": 0.2609
+  },
+  {
+   "soc": "41-9022",
+   "title": "Real Estate Sales Agents",
+   "observed": 0.2828
+  },
+  {
+   "soc": "41-9031",
+   "title": "Sales Engineers",
+   "observed": 0.3224
+  },
+  {
+   "soc": "41-9041",
+   "title": "Telemarketers",
+   "observed": 0.2852
+  },
+  {
+   "soc": "41-9091",
+   "title": "Door-to-Door Sales Workers, News and Street Vendors, and Related Workers",
+   "observed": 0.1758
+  },
+  {
+   "soc": "43-1011",
+   "title": "First-Line Supervisors of Office and Administrative Support Workers",
+   "observed": 0.1856
+  },
+  {
+   "soc": "43-2011",
+   "title": "Switchboard Operators, Including Answering Service",
+   "observed": 0.3863
+  },
+  {
+   "soc": "43-2021",
+   "title": "Telephone Operators",
+   "observed": 0
+  },
+  {
+   "soc": "43-3011",
+   "title": "Bill and Account Collectors",
+   "observed": 0.2989
+  },
+  {
+   "soc": "43-3021",
+   "title": "Billing and Posting Clerks",
+   "observed": 0.1924
+  },
+  {
+   "soc": "43-3031",
+   "title": "Bookkeeping, Accounting, and Auditing Clerks",
+   "observed": 0.3104
+  },
+  {
+   "soc": "43-3041",
+   "title": "Gambling Cage Workers",
+   "observed": 0.0653
+  },
+  {
+   "soc": "43-3051",
+   "title": "Payroll and Timekeeping Clerks",
+   "observed": 0.0487
+  },
+  {
+   "soc": "43-3061",
+   "title": "Procurement Clerks",
+   "observed": 0.2436
+  },
+  {
+   "soc": "43-3071",
+   "title": "Tellers",
+   "observed": 0.0231
+  },
+  {
+   "soc": "43-4011",
+   "title": "Brokerage Clerks",
+   "observed": 0.1744
+  },
+  {
+   "soc": "43-4021",
+   "title": "Correspondence Clerks",
+   "observed": 0.2786
+  },
+  {
+   "soc": "43-4031",
+   "title": "Court, Municipal, and License Clerks",
+   "observed": 0.102
+  },
+  {
+   "soc": "43-4041",
+   "title": "Credit Authorizers, Checkers, and Clerks",
+   "observed": 0.1296
+  },
+  {
+   "soc": "43-4051",
+   "title": "Customer Service Representatives",
+   "observed": 0.7011
+  },
+  {
+   "soc": "43-4061",
+   "title": "Eligibility Interviewers, Government Programs",
+   "observed": 0.0597
+  },
+  {
+   "soc": "43-4071",
+   "title": "File Clerks",
+   "observed": 0.1568
+  },
+  {
+   "soc": "43-4081",
+   "title": "Hotel, Motel, and Resort Desk Clerks",
+   "observed": 0.1725
+  },
+  {
+   "soc": "43-4111",
+   "title": "Interviewers, Except Eligibility and Loan",
+   "observed": 0.3851
+  },
+  {
+   "soc": "43-4121",
+   "title": "Library Assistants, Clerical",
+   "observed": 0.0978
+  },
+  {
+   "soc": "43-4131",
+   "title": "Loan Interviewers and Clerks",
+   "observed": 0.2022
+  },
+  {
+   "soc": "43-4141",
+   "title": "New Accounts Clerks",
+   "observed": 0
+  },
+  {
+   "soc": "43-4151",
+   "title": "Order Clerks",
+   "observed": 0.0748
+  },
+  {
+   "soc": "43-4161",
+   "title": "Human Resources Assistants, Except Payroll and Timekeeping",
+   "observed": 0.4046
+  },
+  {
+   "soc": "43-4171",
+   "title": "Receptionists and Information Clerks",
+   "observed": 0.4338
+  },
+  {
+   "soc": "43-4181",
+   "title": "Reservation and Transportation Ticket Agents and Travel Clerks",
+   "observed": 0.2467
+  },
+  {
+   "soc": "43-5011",
+   "title": "Cargo and Freight Agents",
+   "observed": 0.0165
+  },
+  {
+   "soc": "43-5021",
+   "title": "Couriers and Messengers",
+   "observed": 0.0412
+  },
+  {
+   "soc": "43-5031",
+   "title": "Public Safety Telecommunicators",
+   "observed": 0.0465
+  },
+  {
+   "soc": "43-5032",
+   "title": "Dispatchers, Except Police, Fire, and Ambulance",
+   "observed": 0.2258
+  },
+  {
+   "soc": "43-5041",
+   "title": "Meter Readers, Utilities",
+   "observed": 0
+  },
+  {
+   "soc": "43-5051",
+   "title": "Postal Service Clerks",
+   "observed": 0
+  },
+  {
+   "soc": "43-5052",
+   "title": "Postal Service Mail Carriers",
+   "observed": 0
+  },
+  {
+   "soc": "43-5053",
+   "title": "Postal Service Mail Sorters, Processors, and Processing Machine Operators",
+   "observed": 0
+  },
+  {
+   "soc": "43-5061",
+   "title": "Production, Planning, and Expediting Clerks",
+   "observed": 0.0934
+  },
+  {
+   "soc": "43-5071",
+   "title": "Shipping, Receiving, and Inventory Clerks",
+   "observed": 0
+  },
+  {
+   "soc": "43-5111",
+   "title": "Weighers, Measurers, Checkers, and Samplers, Recordkeeping",
+   "observed": 0
+  },
+  {
+   "soc": "43-6011",
+   "title": "Executive Secretaries and Executive Administrative Assistants",
+   "observed": 0.2336
+  },
+  {
+   "soc": "43-6012",
+   "title": "Legal Secretaries and Administrative Assistants",
+   "observed": 0
+  },
+  {
+   "soc": "43-6013",
+   "title": "Medical Secretaries and Administrative Assistants",
+   "observed": 0.3623
+  },
+  {
+   "soc": "43-6014",
+   "title": "Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",
+   "observed": 0.4528
+  },
+  {
+   "soc": "43-9021",
+   "title": "Data Entry Keyers",
+   "observed": 0.6707
+  },
+  {
+   "soc": "43-9022",
+   "title": "Word Processors and Typists",
+   "observed": 0.2385
+  },
+  {
+   "soc": "43-9031",
+   "title": "Desktop Publishers",
+   "observed": 0.464
+  },
+  {
+   "soc": "43-9041",
+   "title": "Insurance Claims and Policy Processing Clerks",
+   "observed": 0.1467
+  },
+  {
+   "soc": "43-9051",
+   "title": "Mail Clerks and Mail Machine Operators, Except Postal Service",
+   "observed": 0
+  },
+  {
+   "soc": "43-9061",
+   "title": "Office Clerks, General",
+   "observed": 0.4504
+  },
+  {
+   "soc": "43-9071",
+   "title": "Office Machine Operators, Except Computer",
+   "observed": 0.0239
+  },
+  {
+   "soc": "43-9081",
+   "title": "Proofreaders and Copy Markers",
+   "observed": 0.1781
+  },
+  {
+   "soc": "43-9111",
+   "title": "Statistical Assistants",
+   "observed": 0.5099
+  },
+  {
+   "soc": "45-1011",
+   "title": "First-Line Supervisors of Farming, Fishing, and Forestry Workers",
+   "observed": 0
+  },
+  {
+   "soc": "45-2011",
+   "title": "Agricultural Inspectors",
+   "observed": 0
+  },
+  {
+   "soc": "45-2021",
+   "title": "Animal Breeders",
+   "observed": 0
+  },
+  {
+   "soc": "45-2041",
+   "title": "Graders and Sorters, Agricultural Products",
+   "observed": 0
+  },
+  {
+   "soc": "45-2091",
+   "title": "Agricultural Equipment Operators",
+   "observed": 0
+  },
+  {
+   "soc": "45-2092",
+   "title": "Farmworkers and Laborers, Crop, Nursery, and Greenhouse",
+   "observed": 0.0203
+  },
+  {
+   "soc": "45-2093",
+   "title": "Farmworkers, Farm, Ranch, and Aquacultural Animals",
+   "observed": 0
+  },
+  {
+   "soc": "45-4011",
+   "title": "Forest and Conservation Workers",
+   "observed": 0
+  },
+  {
+   "soc": "45-4021",
+   "title": "Fallers",
+   "observed": 0
+  },
+  {
+   "soc": "45-4022",
+   "title": "Logging Equipment Operators",
+   "observed": 0
+  },
+  {
+   "soc": "45-4023",
+   "title": "Log Graders and Scalers",
+   "observed": 0
+  },
+  {
+   "soc": "47-1011",
+   "title": "First-Line Supervisors of Construction Trades and Extraction Workers",
+   "observed": 0.0296
+  },
+  {
+   "soc": "47-2011",
+   "title": "Boilermakers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2021",
+   "title": "Brickmasons and Blockmasons",
+   "observed": 0
+  },
+  {
+   "soc": "47-2022",
+   "title": "Stonemasons",
+   "observed": 0
+  },
+  {
+   "soc": "47-2031",
+   "title": "Carpenters",
+   "observed": 0
+  },
+  {
+   "soc": "47-2041",
+   "title": "Carpet Installers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2042",
+   "title": "Floor Layers, Except Carpet, Wood, and Hard Tiles",
+   "observed": 0
+  },
+  {
+   "soc": "47-2043",
+   "title": "Floor Sanders and Finishers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2044",
+   "title": "Tile and Stone Setters",
+   "observed": 0
+  },
+  {
+   "soc": "47-2051",
+   "title": "Cement Masons and Concrete Finishers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2053",
+   "title": "Terrazzo Workers and Finishers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2061",
+   "title": "Construction Laborers",
+   "observed": 0.0281
+  },
+  {
+   "soc": "47-2071",
+   "title": "Paving, Surfacing, and Tamping Equipment Operators",
+   "observed": 0
+  },
+  {
+   "soc": "47-2072",
+   "title": "Pile Driver Operators",
+   "observed": 0
+  },
+  {
+   "soc": "47-2073",
+   "title": "Operating Engineers and Other Construction Equipment Operators",
+   "observed": 0
+  },
+  {
+   "soc": "47-2081",
+   "title": "Drywall and Ceiling Tile Installers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2082",
+   "title": "Tapers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2111",
+   "title": "Electricians",
+   "observed": 0
+  },
+  {
+   "soc": "47-2121",
+   "title": "Glaziers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2131",
+   "title": "Insulation Workers, Floor, Ceiling, and Wall",
+   "observed": 0
+  },
+  {
+   "soc": "47-2132",
+   "title": "Insulation Workers, Mechanical",
+   "observed": 0.0439
+  },
+  {
+   "soc": "47-2141",
+   "title": "Painters, Construction and Maintenance",
+   "observed": 0
+  },
+  {
+   "soc": "47-2142",
+   "title": "Paperhangers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2151",
+   "title": "Pipelayers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2152",
+   "title": "Plumbers, Pipefitters, and Steamfitters",
+   "observed": 0.0116
+  },
+  {
+   "soc": "47-2161",
+   "title": "Plasterers and Stucco Masons",
+   "observed": 0
+  },
+  {
+   "soc": "47-2171",
+   "title": "Reinforcing Iron and Rebar Workers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2181",
+   "title": "Roofers",
+   "observed": 0.0157
+  },
+  {
+   "soc": "47-2211",
+   "title": "Sheet Metal Workers",
+   "observed": 0
+  },
+  {
+   "soc": "47-2221",
+   "title": "Structural Iron and Steel Workers",
+   "observed": 0.0491
+  },
+  {
+   "soc": "47-2231",
+   "title": "Solar Photovoltaic Installers",
+   "observed": 0
+  },
+  {
+   "soc": "47-3011",
+   "title": "Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters",
+   "observed": 0
+  },
+  {
+   "soc": "47-3012",
+   "title": "Helpers--Carpenters",
+   "observed": 0
+  },
+  {
+   "soc": "47-3013",
+   "title": "Helpers--Electricians",
+   "observed": 0
+  },
+  {
+   "soc": "47-3014",
+   "title": "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons",
+   "observed": 0
+  },
+  {
+   "soc": "47-3015",
+   "title": "Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters",
+   "observed": 0
+  },
+  {
+   "soc": "47-3016",
+   "title": "Helpers--Roofers",
+   "observed": 0
+  },
+  {
+   "soc": "47-4011",
+   "title": "Construction and Building Inspectors",
+   "observed": 0.0481
+  },
+  {
+   "soc": "47-4021",
+   "title": "Elevator and Escalator Installers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "47-4031",
+   "title": "Fence Erectors",
+   "observed": 0
+  },
+  {
+   "soc": "47-4041",
+   "title": "Hazardous Materials Removal Workers",
+   "observed": 0
+  },
+  {
+   "soc": "47-4051",
+   "title": "Highway Maintenance Workers",
+   "observed": 0
+  },
+  {
+   "soc": "47-4061",
+   "title": "Rail-Track Laying and Maintenance Equipment Operators",
+   "observed": 0
+  },
+  {
+   "soc": "47-4071",
+   "title": "Septic Tank Servicers and Sewer Pipe Cleaners",
+   "observed": 0
+  },
+  {
+   "soc": "47-5011",
+   "title": "Derrick Operators, Oil and Gas",
+   "observed": 0
+  },
+  {
+   "soc": "47-5012",
+   "title": "Rotary Drill Operators, Oil and Gas",
+   "observed": 0
+  },
+  {
+   "soc": "47-5013",
+   "title": "Service Unit Operators, Oil and Gas",
+   "observed": 0
+  },
+  {
+   "soc": "47-5022",
+   "title": "Excavating and Loading Machine and Dragline Operators, Surface Mining",
+   "observed": 0
+  },
+  {
+   "soc": "47-5023",
+   "title": "Earth Drillers, Except Oil and Gas",
+   "observed": 0
+  },
+  {
+   "soc": "47-5032",
+   "title": "Explosives Workers, Ordnance Handling Experts, and Blasters",
+   "observed": 0
+  },
+  {
+   "soc": "47-5041",
+   "title": "Continuous Mining Machine Operators",
+   "observed": 0
+  },
+  {
+   "soc": "47-5043",
+   "title": "Roof Bolters, Mining",
+   "observed": 0
+  },
+  {
+   "soc": "47-5044",
+   "title": "Loading and Moving Machine Operators, Underground Mining",
+   "observed": 0
+  },
+  {
+   "soc": "47-5051",
+   "title": "Rock Splitters, Quarry",
+   "observed": 0
+  },
+  {
+   "soc": "47-5071",
+   "title": "Roustabouts, Oil and Gas",
+   "observed": 0
+  },
+  {
+   "soc": "47-5081",
+   "title": "Helpers--Extraction Workers",
+   "observed": 0
+  },
+  {
+   "soc": "49-1011",
+   "title": "First-Line Supervisors of Mechanics, Installers, and Repairers",
+   "observed": 0.1015
+  },
+  {
+   "soc": "49-2011",
+   "title": "Computer, Automated Teller, and Office Machine Repairers",
+   "observed": 0.1067
+  },
+  {
+   "soc": "49-2021",
+   "title": "Radio, Cellular, and Tower Equipment Installers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-2022",
+   "title": "Telecommunications Equipment Installers and Repairers, Except Line Installers",
+   "observed": 0.0333
+  },
+  {
+   "soc": "49-2091",
+   "title": "Avionics Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "49-2092",
+   "title": "Electric Motor, Power Tool, and Related Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-2093",
+   "title": "Electrical and Electronics Installers and Repairers, Transportation Equipment",
+   "observed": 0
+  },
+  {
+   "soc": "49-2094",
+   "title": "Electrical and Electronics Repairers, Commercial and Industrial Equipment",
+   "observed": 0
+  },
+  {
+   "soc": "49-2095",
+   "title": "Electrical and Electronics Repairers, Powerhouse, Substation, and Relay",
+   "observed": 0
+  },
+  {
+   "soc": "49-2096",
+   "title": "Electronic Equipment Installers and Repairers, Motor Vehicles",
+   "observed": 0
+  },
+  {
+   "soc": "49-2097",
+   "title": "Audiovisual Equipment Installers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-2098",
+   "title": "Security and Fire Alarm Systems Installers",
+   "observed": 0.0303
+  },
+  {
+   "soc": "49-3011",
+   "title": "Aircraft Mechanics and Service Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "49-3021",
+   "title": "Automotive Body and Related Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-3022",
+   "title": "Automotive Glass Installers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-3023",
+   "title": "Automotive Service Technicians and Mechanics",
+   "observed": 0
+  },
+  {
+   "soc": "49-3031",
+   "title": "Bus and Truck Mechanics and Diesel Engine Specialists",
+   "observed": 0
+  },
+  {
+   "soc": "49-3041",
+   "title": "Farm Equipment Mechanics and Service Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "49-3042",
+   "title": "Mobile Heavy Equipment Mechanics, Except Engines",
+   "observed": 0
+  },
+  {
+   "soc": "49-3043",
+   "title": "Rail Car Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-3051",
+   "title": "Motorboat Mechanics and Service Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "49-3052",
+   "title": "Motorcycle Mechanics",
+   "observed": 0
+  },
+  {
+   "soc": "49-3053",
+   "title": "Outdoor Power Equipment and Other Small Engine Mechanics",
+   "observed": 0
+  },
+  {
+   "soc": "49-3091",
+   "title": "Bicycle Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-3092",
+   "title": "Recreational Vehicle Service Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "49-3093",
+   "title": "Tire Repairers and Changers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9011",
+   "title": "Mechanical Door Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9012",
+   "title": "Control and Valve Installers and Repairers, Except Mechanical Door",
+   "observed": 0
+  },
+  {
+   "soc": "49-9021",
+   "title": "Heating, Air Conditioning, and Refrigeration Mechanics and Installers",
+   "observed": 0.0191
+  },
+  {
+   "soc": "49-9031",
+   "title": "Home Appliance Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9041",
+   "title": "Industrial Machinery Mechanics",
+   "observed": 0.0239
+  },
+  {
+   "soc": "49-9043",
+   "title": "Maintenance Workers, Machinery",
+   "observed": 0
+  },
+  {
+   "soc": "49-9044",
+   "title": "Millwrights",
+   "observed": 0
+  },
+  {
+   "soc": "49-9045",
+   "title": "Refractory Materials Repairers, Except Brickmasons",
+   "observed": 0
+  },
+  {
+   "soc": "49-9051",
+   "title": "Electrical Power-Line Installers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9052",
+   "title": "Telecommunications Line Installers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9061",
+   "title": "Camera and Photographic Equipment Repairers",
+   "observed": 0.0412
+  },
+  {
+   "soc": "49-9062",
+   "title": "Medical Equipment Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9063",
+   "title": "Musical Instrument Repairers and Tuners",
+   "observed": 0
+  },
+  {
+   "soc": "49-9064",
+   "title": "Watch and Clock Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9071",
+   "title": "Maintenance and Repair Workers, General",
+   "observed": 0
+  },
+  {
+   "soc": "49-9081",
+   "title": "Wind Turbine Service Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "49-9091",
+   "title": "Coin, Vending, and Amusement Machine Servicers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9092",
+   "title": "Commercial Divers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9094",
+   "title": "Locksmiths and Safe Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9095",
+   "title": "Manufactured Building and Mobile Home Installers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9096",
+   "title": "Riggers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9097",
+   "title": "Signal and Track Switch Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9098",
+   "title": "Helpers--Installation, Maintenance, and Repair Workers",
+   "observed": 0
+  },
+  {
+   "soc": "49-9099",
+   "title": "Installation, Maintenance, and Repair Workers, All Other",
+   "observed": 0
+  },
+  {
+   "soc": "51-1011",
+   "title": "First-Line Supervisors of Production and Operating Workers",
+   "observed": 0
+  },
+  {
+   "soc": "51-2011",
+   "title": "Aircraft Structure, Surfaces, Rigging, and Systems Assemblers",
+   "observed": 0.0494
+  },
+  {
+   "soc": "51-2021",
+   "title": "Coil Winders, Tapers, and Finishers",
+   "observed": 0
+  },
+  {
+   "soc": "51-2031",
+   "title": "Engine and Other Machine Assemblers",
+   "observed": 0
+  },
+  {
+   "soc": "51-2041",
+   "title": "Structural Metal Fabricators and Fitters",
+   "observed": 0
+  },
+  {
+   "soc": "51-2051",
+   "title": "Fiberglass Laminators and Fabricators",
+   "observed": 0
+  },
+  {
+   "soc": "51-2061",
+   "title": "Timing Device Assemblers and Adjusters",
+   "observed": 0.0392
+  },
+  {
+   "soc": "51-3011",
+   "title": "Bakers",
+   "observed": 0
+  },
+  {
+   "soc": "51-3021",
+   "title": "Butchers and Meat Cutters",
+   "observed": 0
+  },
+  {
+   "soc": "51-3022",
+   "title": "Meat, Poultry, and Fish Cutters and Trimmers",
+   "observed": 0
+  },
+  {
+   "soc": "51-3023",
+   "title": "Slaughterers and Meat Packers",
+   "observed": 0
+  },
+  {
+   "soc": "51-3091",
+   "title": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-3092",
+   "title": "Food Batchmakers",
+   "observed": 0
+  },
+  {
+   "soc": "51-3093",
+   "title": "Food Cooking Machine Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-4021",
+   "title": "Extruding and Drawing Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4022",
+   "title": "Forging Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4023",
+   "title": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4031",
+   "title": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4032",
+   "title": "Drilling and Boring Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4033",
+   "title": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4034",
+   "title": "Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4035",
+   "title": "Milling and Planing Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4041",
+   "title": "Machinists",
+   "observed": 0
+  },
+  {
+   "soc": "51-4051",
+   "title": "Metal-Refining Furnace Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-4052",
+   "title": "Pourers and Casters, Metal",
+   "observed": 0
+  },
+  {
+   "soc": "51-4061",
+   "title": "Model Makers, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4062",
+   "title": "Patternmakers, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4071",
+   "title": "Foundry Mold and Coremakers",
+   "observed": 0
+  },
+  {
+   "soc": "51-4072",
+   "title": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4081",
+   "title": "Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4111",
+   "title": "Tool and Die Makers",
+   "observed": 0
+  },
+  {
+   "soc": "51-4121",
+   "title": "Welders, Cutters, Solderers, and Brazers",
+   "observed": 0
+  },
+  {
+   "soc": "51-4122",
+   "title": "Welding, Soldering, and Brazing Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-4191",
+   "title": "Heat Treating Equipment Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4192",
+   "title": "Layout Workers, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4193",
+   "title": "Plating Machine Setters, Operators, and Tenders, Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-4194",
+   "title": "Tool Grinders, Filers, and Sharpeners",
+   "observed": 0
+  },
+  {
+   "soc": "51-5111",
+   "title": "Prepress Technicians and Workers",
+   "observed": 0.1018
+  },
+  {
+   "soc": "51-5112",
+   "title": "Printing Press Operators",
+   "observed": 0
+  },
+  {
+   "soc": "51-5113",
+   "title": "Print Binding and Finishing Workers",
+   "observed": 0
+  },
+  {
+   "soc": "51-6011",
+   "title": "Laundry and Dry-Cleaning Workers",
+   "observed": 0
+  },
+  {
+   "soc": "51-6021",
+   "title": "Pressers, Textile, Garment, and Related Materials",
+   "observed": 0
+  },
+  {
+   "soc": "51-6031",
+   "title": "Sewing Machine Operators",
+   "observed": 0
+  },
+  {
+   "soc": "51-6041",
+   "title": "Shoe and Leather Workers and Repairers",
+   "observed": 0
+  },
+  {
+   "soc": "51-6042",
+   "title": "Shoe Machine Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-6051",
+   "title": "Sewers, Hand",
+   "observed": 0
+  },
+  {
+   "soc": "51-6052",
+   "title": "Tailors, Dressmakers, and Custom Sewers",
+   "observed": 0.0342
+  },
+  {
+   "soc": "51-6061",
+   "title": "Textile Bleaching and Dyeing Machine Operators and Tenders",
+   "observed": 0.0211
+  },
+  {
+   "soc": "51-6062",
+   "title": "Textile Cutting Machine Setters, Operators, and Tenders",
+   "observed": 0.0152
+  },
+  {
+   "soc": "51-6063",
+   "title": "Textile Knitting and Weaving Machine Setters, Operators, and Tenders",
+   "observed": 0.032
+  },
+  {
+   "soc": "51-6064",
+   "title": "Textile Winding, Twisting, and Drawing Out Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-6091",
+   "title": "Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers",
+   "observed": 0
+  },
+  {
+   "soc": "51-6092",
+   "title": "Fabric and Apparel Patternmakers",
+   "observed": 0
+  },
+  {
+   "soc": "51-6093",
+   "title": "Upholsterers",
+   "observed": 0
+  },
+  {
+   "soc": "51-7011",
+   "title": "Cabinetmakers and Bench Carpenters",
+   "observed": 0
+  },
+  {
+   "soc": "51-7021",
+   "title": "Furniture Finishers",
+   "observed": 0
+  },
+  {
+   "soc": "51-7031",
+   "title": "Model Makers, Wood",
+   "observed": 0
+  },
+  {
+   "soc": "51-7032",
+   "title": "Patternmakers, Wood",
+   "observed": 0.0301
+  },
+  {
+   "soc": "51-7041",
+   "title": "Sawing Machine Setters, Operators, and Tenders, Wood",
+   "observed": 0
+  },
+  {
+   "soc": "51-7042",
+   "title": "Woodworking Machine Setters, Operators, and Tenders, Except Sawing",
+   "observed": 0
+  },
+  {
+   "soc": "51-8011",
+   "title": "Nuclear Power Reactor Operators",
+   "observed": 0
+  },
+  {
+   "soc": "51-8012",
+   "title": "Power Distributors and Dispatchers",
+   "observed": 0
+  },
+  {
+   "soc": "51-8013",
+   "title": "Power Plant Operators",
+   "observed": 0.0257
+  },
+  {
+   "soc": "51-8021",
+   "title": "Stationary Engineers and Boiler Operators",
+   "observed": 0
+  },
+  {
+   "soc": "51-8031",
+   "title": "Water and Wastewater Treatment Plant and System Operators",
+   "observed": 0
+  },
+  {
+   "soc": "51-8091",
+   "title": "Chemical Plant and System Operators",
+   "observed": 0
+  },
+  {
+   "soc": "51-8092",
+   "title": "Gas Plant Operators",
+   "observed": 0.0723
+  },
+  {
+   "soc": "51-8093",
+   "title": "Petroleum Pump System Operators, Refinery Operators, and Gaugers",
+   "observed": 0.0405
+  },
+  {
+   "soc": "51-8099",
+   "title": "Plant and System Operators, All Other",
+   "observed": 0
+  },
+  {
+   "soc": "51-9011",
+   "title": "Chemical Equipment Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9012",
+   "title": "Separating, Filtering, Clarifying, Precipitating, and Still Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9021",
+   "title": "Crushing, Grinding, and Polishing Machine Setters, Operators, and Tenders",
+   "observed": 0.0425
+  },
+  {
+   "soc": "51-9022",
+   "title": "Grinding and Polishing Workers, Hand",
+   "observed": 0
+  },
+  {
+   "soc": "51-9023",
+   "title": "Mixing and Blending Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9031",
+   "title": "Cutters and Trimmers, Hand",
+   "observed": 0
+  },
+  {
+   "soc": "51-9032",
+   "title": "Cutting and Slicing Machine Setters, Operators, and Tenders",
+   "observed": 0.0321
+  },
+  {
+   "soc": "51-9041",
+   "title": "Extruding, Forming, Pressing, and Compacting Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9051",
+   "title": "Furnace, Kiln, Oven, Drier, and Kettle Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9061",
+   "title": "Inspectors, Testers, Sorters, Samplers, and Weighers",
+   "observed": 0.0324
+  },
+  {
+   "soc": "51-9071",
+   "title": "Jewelers and Precious Stone and Metal Workers",
+   "observed": 0
+  },
+  {
+   "soc": "51-9081",
+   "title": "Dental Laboratory Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "51-9082",
+   "title": "Medical Appliance Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "51-9083",
+   "title": "Ophthalmic Laboratory Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "51-9111",
+   "title": "Packaging and Filling Machine Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9123",
+   "title": "Painting, Coating, and Decorating Workers",
+   "observed": 0
+  },
+  {
+   "soc": "51-9124",
+   "title": "Coating, Painting, and Spraying Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9141",
+   "title": "Semiconductor Processing Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "51-9151",
+   "title": "Photographic Process Workers and Processing Machine Operators",
+   "observed": 0.0108
+  },
+  {
+   "soc": "51-9161",
+   "title": "Computer Numerically Controlled Tool Operators",
+   "observed": 0.0215
+  },
+  {
+   "soc": "51-9162",
+   "title": "Computer Numerically Controlled Tool Programmers",
+   "observed": 0.1207
+  },
+  {
+   "soc": "51-9191",
+   "title": "Adhesive Bonding Machine Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9192",
+   "title": "Cleaning, Washing, and Metal Pickling Equipment Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9193",
+   "title": "Cooling and Freezing Equipment Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9194",
+   "title": "Etchers and Engravers",
+   "observed": 0
+  },
+  {
+   "soc": "51-9195",
+   "title": "Molders, Shapers, and Casters, Except Metal and Plastic",
+   "observed": 0
+  },
+  {
+   "soc": "51-9196",
+   "title": "Paper Goods Machine Setters, Operators, and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9197",
+   "title": "Tire Builders",
+   "observed": 0
+  },
+  {
+   "soc": "51-9198",
+   "title": "Helpers--Production Workers",
+   "observed": 0.0393
+  },
+  {
+   "soc": "53-1041",
+   "title": "Aircraft Cargo Handling Supervisors",
+   "observed": 0
+  },
+  {
+   "soc": "53-2011",
+   "title": "Airline Pilots, Copilots, and Flight Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "53-2012",
+   "title": "Commercial Pilots",
+   "observed": 0
+  },
+  {
+   "soc": "53-2021",
+   "title": "Air Traffic Controllers",
+   "observed": 0
+  },
+  {
+   "soc": "53-2022",
+   "title": "Airfield Operations Specialists",
+   "observed": 0.0476
+  },
+  {
+   "soc": "53-2031",
+   "title": "Flight Attendants",
+   "observed": 0.0913
+  },
+  {
+   "soc": "53-3011",
+   "title": "Ambulance Drivers and Attendants, Except Emergency Medical Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "53-3031",
+   "title": "Driver/Sales Workers",
+   "observed": 0.0281
+  },
+  {
+   "soc": "53-3032",
+   "title": "Heavy and Tractor-Trailer Truck Drivers",
+   "observed": 0
+  },
+  {
+   "soc": "53-3033",
+   "title": "Light Truck Drivers",
+   "observed": 0
+  },
+  {
+   "soc": "53-3051",
+   "title": "Bus Drivers, School",
+   "observed": 0
+  },
+  {
+   "soc": "53-3052",
+   "title": "Bus Drivers, Transit and Intercity",
+   "observed": 0
+  },
+  {
+   "soc": "53-3053",
+   "title": "Shuttle Drivers and Chauffeurs",
+   "observed": 0
+  },
+  {
+   "soc": "53-3054",
+   "title": "Taxi Drivers",
+   "observed": 0
+  },
+  {
+   "soc": "53-4011",
+   "title": "Locomotive Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "53-4013",
+   "title": "Rail Yard Engineers, Dinkey Operators, and Hostlers",
+   "observed": 0
+  },
+  {
+   "soc": "53-4022",
+   "title": "Railroad Brake, Signal, and Switch Operators and Locomotive Firers",
+   "observed": 0
+  },
+  {
+   "soc": "53-4031",
+   "title": "Railroad Conductors and Yardmasters",
+   "observed": 0
+  },
+  {
+   "soc": "53-4041",
+   "title": "Subway and Streetcar Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-5011",
+   "title": "Sailors and Marine Oilers",
+   "observed": 0
+  },
+  {
+   "soc": "53-5021",
+   "title": "Captains, Mates, and Pilots of Water Vessels",
+   "observed": 0
+  },
+  {
+   "soc": "53-5022",
+   "title": "Motorboat Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-5031",
+   "title": "Ship Engineers",
+   "observed": 0
+  },
+  {
+   "soc": "53-6011",
+   "title": "Bridge and Lock Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "53-6021",
+   "title": "Parking Attendants",
+   "observed": 0
+  },
+  {
+   "soc": "53-6031",
+   "title": "Automotive and Watercraft Service Attendants",
+   "observed": 0
+  },
+  {
+   "soc": "53-6041",
+   "title": "Traffic Technicians",
+   "observed": 0
+  },
+  {
+   "soc": "53-6051",
+   "title": "Transportation Inspectors",
+   "observed": 0
+  },
+  {
+   "soc": "53-6061",
+   "title": "Passenger Attendants",
+   "observed": 0.1169
+  },
+  {
+   "soc": "53-7011",
+   "title": "Conveyor Operators and Tenders",
+   "observed": 0
+  },
+  {
+   "soc": "53-7021",
+   "title": "Crane and Tower Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-7031",
+   "title": "Dredge Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-7041",
+   "title": "Hoist and Winch Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-7051",
+   "title": "Industrial Truck and Tractor Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-7061",
+   "title": "Cleaners of Vehicles and Equipment",
+   "observed": 0
+  },
+  {
+   "soc": "53-7062",
+   "title": "Laborers and Freight, Stock, and Material Movers, Hand",
+   "observed": 0
+  },
+  {
+   "soc": "53-7063",
+   "title": "Machine Feeders and Offbearers",
+   "observed": 0
+  },
+  {
+   "soc": "53-7064",
+   "title": "Packers and Packagers, Hand",
+   "observed": 0
+  },
+  {
+   "soc": "53-7065",
+   "title": "Stockers and Order Fillers",
+   "observed": 0
+  },
+  {
+   "soc": "53-7071",
+   "title": "Gas Compressor and Gas Pumping Station Operators",
+   "observed": 0
+  },
+  {
+   "soc": "53-7072",
+   "title": "Pump Operators, Except Wellhead Pumpers",
+   "observed": 0
+  },
+  {
+   "soc": "53-7073",
+   "title": "Wellhead Pumpers",
+   "observed": 0
+  },
+  {
+   "soc": "53-7081",
+   "title": "Refuse and Recyclable Material Collectors",
+   "observed": 0
+  },
+  {
+   "soc": "53-7121",
+   "title": "Tank Car, Truck, and Ship Loaders",
+   "observed": 0
+  }
+ ],
+ "roles": {
+  "43-3021": {
+   "taskCodes": [
+    "43-3021"
+   ],
+   "tasks": 30,
+   "tasksWithUse": 7,
+   "automationShare": 0.443
+  },
+  "43-3031": {
+   "taskCodes": [
+    "43-3031"
+   ],
+   "tasks": 30,
+   "tasksWithUse": 12,
+   "automationShare": 0.558
+  },
+  "13-2011": {
+   "taskCodes": [
+    "13-2011"
+   ],
+   "tasks": 36,
+   "tasksWithUse": 13,
+   "automationShare": 0.42
+  },
+  "13-2051": {
+   "taskCodes": [
+    "13-2051"
+   ],
+   "tasks": 18,
+   "tasksWithUse": 8,
+   "automationShare": 0.292
+  },
+  "13-1111": {
+   "taskCodes": [
+    "13-1111"
+   ],
+   "tasks": 11,
+   "tasksWithUse": 5,
+   "automationShare": 0.412
+  },
+  "15-2051": {
+   "taskCodes": [
+    "15-1199.08"
+   ],
+   "tasks": 17,
+   "tasksWithUse": 12,
+   "automationShare": 0.454
+  },
+  "15-1252": {
+   "taskCodes": [
+    "15-1132.00",
+    "15-1133.00"
+   ],
+   "tasks": 34,
+   "tasksWithUse": 23,
+   "automationShare": 0.576
+  },
+  "11-1011": {
+   "taskCodes": [
+    "11-1011"
+   ],
+   "tasks": 49,
+   "tasksWithUse": 14,
+   "automationShare": 0.26
+  }
+ }
 }
