@@ -77,6 +77,18 @@ function Home({ start, startWithRole, go, lang, setLang }: {
   setLang: (lang: Lang) => void;
 }) {
   const [role, setRole] = useState('Accounting assistant');
+  const routeRef = useRef<SVGSVGElement>(null);
+  useEffect(() => {
+    const route = routeRef.current;
+    if (!route) return;
+    let visible = true;
+    const update = () => route.classList.toggle('is-paused', !visible || document.hidden);
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); });
+    observer.observe(route);
+    document.addEventListener('visibilitychange', update);
+    update();
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', update); };
+  }, []);
   const t = useT();
   function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -103,12 +115,14 @@ function Home({ start, startWithRole, go, lang, setLang }: {
           <button type="submit">{t('Show me where it can lead')}</button>
         </form>
         <p className="quiet-proof">{t('Malaysian job-market evidence')} <span aria-hidden="true">·</span> {t('No CV required')}</p>
-        <div className="journey-route" aria-hidden="true">
-          <i className="route-segment route-a" /><i className="route-segment route-b" /><i className="route-segment route-c" />
-          <i className="route-segment route-d" /><i className="route-segment route-e" /><i className="route-segment route-f" />
-          <i className="route-segment route-g" /><i className="route-segment route-h" /><i className="route-segment route-i" />
-          <span className="route-marker" />
-        </div>
+        <svg ref={routeRef} className="journey-route" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <defs>
+            <path id="hero-route-path" pathLength="1000" d="M 970 94 H 1250 Q 1320 94 1320 164 V 238 Q 1320 300 1258 300 H 1116 Q 1056 300 1056 360 V 400 Q 1056 462 1118 462 H 1290 Q 1360 462 1360 532 V 584 Q 1360 650 1294 650 H 874 Q 808 650 808 584 V 540 Q 808 478 746 478 H 626 Q 564 478 564 416 V 304 Q 564 242 626 242 H 850 Q 910 242 910 182 V 154 Q 910 94 970 94 Z" />
+          </defs>
+          <use href="#hero-route-path" className="journey-route-track" />
+          <use href="#hero-route-path" className="journey-route-flow" />
+          <use href="#hero-route-path" className="journey-route-flow journey-route-flow-later" />
+        </svg>
       </section>
 
       <section className="quiet-next" id="how" aria-labelledby="next-title">

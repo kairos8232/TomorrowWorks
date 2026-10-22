@@ -341,6 +341,8 @@ The minimum source path and optional API roles are in [API_PLAN.md](API_PLAN.md)
 
 ## Optional improvements after the required functions
 
+- [x] Keep the homepage route as a looping hero background animation instead of a line into the next section. Checked at 1280 px and 390 px with no phone overflow; included a reduced-motion still route and offscreen pause.
+
 These are ideas from the Domain 1 brief, not submission blockers. Pick them only after the required journey works and there is time to verify them.
 
 - [ ] Employer view with a team skills-gap heatmap and group learning plan.
