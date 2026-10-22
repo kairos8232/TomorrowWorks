@@ -1,6 +1,6 @@
 // Workplace news: recent headlines from Malaysian outlets (GDELT snapshot).
 // Context only: news never changes any score. Built by scripts/import_gdelt_news.py.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDataSaver } from './dataSaver';
 import newsFile from '../data/sources/gdelt-news.json';
 import { useT, useTx } from './i18n';
@@ -10,29 +10,12 @@ type Brief = { picks: Record<string, string[]>; model: string };
 type NewsBody = { source: typeof newsFile.source & { covered?: { from: string; to: string }; fetchedAt?: string }; articles: Article[]; live?: boolean; brief?: Brief | null };
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
 
-/** Per topic: counts plus the most representative real headlines (picked by RunPod; nothing generated). */
-function TopicBrief({ articles, brief, topic }: { articles: Article[]; brief: Brief; topic: string }) {
-  const t = useT();
-  const byUrl = new Map(articles.map((a) => [a.url, a]));
-  const names = Object.keys(brief.picks).filter((x) => topic === 'All topics' || x === topic);
-  if (names.length === 0) return null;
-  return <section className="news-brief" aria-label={t('In brief')}>
-    <h2>{t('In brief')}</h2>
-    {names.map((name) => {
-      const list = articles.filter((a) => a.topics.includes(name));
-      const outlets = new Set(list.map((a) => a.outlet)).size;
-      const langs = [...new Set(list.map((a) => a.language))].map((l) => t(l)).join(', ');
-      return <div key={name} className="news-brief-topic">
-        <h3>{t(name)} <span>{t('{n} headlines · {m} outlets · {langs}', { n: list.length, m: outlets, langs })}</span></h3>
-        <ul>{brief.picks[name].map((url) => byUrl.get(url)).filter((a): a is Article => Boolean(a)).map((a) => <li key={a.url}><a href={a.url} target="_blank" rel="noreferrer">{a.title}</a> <small>{a.outlet}</small></li>)}</ul>
-      </div>;
-    })}
-    <p className="note">{t('Key headlines are the real headlines closest to the centre of each topic, picked by {model}. No text is written by AI.', { model: brief.model })}</p>
-  </section>;
-}
+const pageSize = 10;
 
 export function NewsView() {
   const [topic, setTopic] = useState('All topics');
+  const [page, setPage] = useState(1);
+  const feedRef = useRef<HTMLDivElement>(null);
   // Bundled snapshot first; the server may replace it with today's GDELT headlines (until 1 Nov 2026).
   const [news, setNews] = useState<NewsBody>(newsFile as NewsBody);
   const saver = useDataSaver();
@@ -54,7 +37,7 @@ export function NewsView() {
     return () => clearTimeout(timer);
   }, [saver, want]);
   const articles = news.articles;
-  const topics = ['All topics', ...new Set(articles.flatMap((a) => a.topics).filter((x) => x !== 'Other')), 'Other'];
+  const topics = [...new Set(articles.flatMap((a) => a.topics).filter((x) => x !== 'Other'))];
   const covered = news.source.covered;
   const t = useT();
   const tx = useTx();
@@ -63,20 +46,56 @@ export function NewsView() {
   }
   // "All topics" leaves out "Other": GDELT matches whole articles, so untagged headlines are often off-topic.
   const shown = topic === 'All topics' ? articles.filter((a) => !a.topics.includes('Other')) : articles.filter((a) => a.topics.includes(topic));
+  const pageCount = Math.max(1, Math.ceil(shown.length / pageSize));
+  const currentPage = Math.min(page, pageCount);
+  const first = (currentPage - 1) * pageSize;
+  const selectTopic = (next: string) => { setTopic(next); setPage(1); };
+  const changePage = (next: number) => {
+    setPage(next);
+    requestAnimationFrame(() => feedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  };
+  const byUrl = new Map(articles.map((a) => [a.url, a]));
   return <section className="data-table news" aria-label="Workplace news">
-    <div className="ledger-controls">
-      <fieldset><legend>{t('Topic')}</legend>
-        {topics.map((x) => <label key={x} className="choice"><input type="radio" name="topic" checked={topic === x} onChange={() => setTopic(x)} />{t(x)}</label>)}
-      </fieldset>
+    <div className="news-topics-head">
+      <div><h2>{t('Browse topics')}</h2><p className="note">{t('Choose a topic to focus the headlines below.')}</p></div>
+      <div className="news-topic-options">
+        <button type="button" aria-pressed={topic === 'All topics'} onClick={() => selectTopic('All topics')}>{t('All topics')}</button>
+        <button type="button" aria-pressed={topic === 'Other'} onClick={() => selectTopic('Other')}>{t('Other')}</button>
+      </div>
     </div>
-    {news.brief ? <TopicBrief articles={articles} brief={news.brief} topic={topic} />
-      : briefLoading && <p className="note news-brief-loading" aria-live="polite">{t('The summary of key headlines is loading. RunPod may be starting up, which can take a minute or two.')}</p>}
+    <div className="news-topic-grid">
+      {topics.map((name) => {
+        const list = articles.filter((a) => a.topics.includes(name));
+        const picked = news.brief?.picks[name]?.map((url) => byUrl.get(url)).filter((a): a is Article => Boolean(a)) ?? [];
+        const lead = picked.find((a) => a.topics.length === 1) ?? list.find((a) => a.topics.length === 1) ?? picked[0] ?? list[0];
+        return <button type="button" key={name} className="news-topic-card" aria-pressed={topic === name} onClick={() => selectTopic(name)}>
+          <span className="news-topic-count">{list.length}</span>
+          <strong>{t(name)}</strong>
+          {lead && <span className="news-topic-lead">{lead.title}</span>}
+        </button>;
+      })}
+    </div>
+    {news.brief && <p className="note news-topic-method">{t('Representative headlines use {model} picks where available. The headlines themselves come from the outlets.', { model: news.brief.model })}</p>}
+    {!news.brief && briefLoading && <p className="note news-topic-method" aria-live="polite">{t('The summary of key headlines is loading. RunPod may be starting up, which can take a minute or two.')}</p>}
+    <div className="news-feed-head" ref={feedRef}>
+      <h2>{topic === 'All topics' ? t('Latest headlines') : t(topic)}</h2>
+      <span className="note">{t('Showing {from}–{to} of {n}', { from: shown.length ? first + 1 : 0, to: Math.min(first + pageSize, shown.length), n: shown.length })}</span>
+    </div>
     <ul className="news-list">
-      {shown.map((a) => <li key={a.url}>
+      {shown.slice(first, first + pageSize).map((a) => <li key={a.url}>
+        <span className="news-item-topic">{t(a.topics[0] ?? 'Other')}</span>
         <a href={a.url} target="_blank" rel="noreferrer">{a.title}</a>
-        <span className="note">{a.outlet}, {day(a.seenAt)}{a.topics.length && !a.topics.includes('Other') ? `. ${a.topics.map((x) => t(x)).join(', ')}` : ''}</span>
+        <span className="note">{a.outlet} · {day(a.seenAt)}</span>
       </li>)}
     </ul>
-    <p className="note">{tx('Reported news, not job counts: it never changes your scores. {n} headlines from outlets in Malaysia found by {gdelt}, seen {from} to {to}, retrieved {date}. Topics come from topic words in each headline (English, Malay, Chinese); “Other” headlines matched the search only in the article text and are often off-topic.', { n: articles.length, gdelt: <a href={news.source.url} target="_blank" rel="noreferrer">GDELT</a>, from: covered?.from ?? '–', to: covered?.to ?? '–', date: news.source.retrievedAt })} {news.live ? t('Updated daily until 1 Nov 2026.') : t('Saved snapshot.')}{saver && !news.live && <> <button type="button" className="text-button" onClick={() => setWant(true)}>{t('Load today’s headlines')}</button></>}</p>
+    {pageCount > 1 && <nav className="news-pages" aria-label={t('Headline pages')}>
+      <button type="button" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>{t('Previous')}</button>
+      <span>{t('Page {page} of {total}', { page: currentPage, total: pageCount })}</span>
+      <button type="button" disabled={currentPage === pageCount} onClick={() => changePage(currentPage + 1)}>{t('Next')}</button>
+    </nav>}
+    <div className="news-source note">
+      <p>{t('News is context only. It does not change your scores.')}</p>
+      <p>{tx('{n} headlines from Malaysian outlets via {gdelt}, seen {from} to {to}, retrieved {date}. Topics use headline words; “Other” may be off-topic.', { n: articles.length, gdelt: <a href={news.source.url} target="_blank" rel="noreferrer">GDELT</a>, from: covered?.from ?? '–', to: covered?.to ?? '–', date: news.source.retrievedAt })} {news.live ? t('Updated daily until 1 Nov 2026.') : t('Saved snapshot.')}{saver && !news.live && <> <button type="button" className="text-button" onClick={() => setWant(true)}>{t('Load today’s headlines')}</button></>}</p>
+    </div>
   </section>;
 }
