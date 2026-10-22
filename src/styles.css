@@ -1132,15 +1132,22 @@ details.course-check { padding-block:0; }
 .team-view > * { min-width: 0; }
 
 /* Region view: what it is for, and the three levels of the SDG view. */
-.region-purpose p { margin: 0 0 14px; max-width: 70ch; }
-.sdg-levels { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: lvl; }
-.sdg-levels li { display: grid; gap: 4px; padding: 12px 14px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; font-size: 14px; position: relative; }
+.region-purpose h2 { margin: 0 0 6px; }
+.region-who { margin: 0; color: #5d6873; }
+.region-question { margin: 6px 0 20px; max-width: 46ch; font-size: 21px; line-height: 1.35; font-weight: 600; color: #1c2430; }
+.sdg-levels { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
+.sdg-levels li { display: grid; align-content: start; gap: 6px; padding: 14px 16px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; font-size: 14px; line-height: 1.45; position: relative; }
 .sdg-levels li strong { font-size: 15px; }
 .sdg-levels li span { color: #5d6873; }
 .sdg-levels li.here { border-color: #1e3d33; background: #1e3d33; color: #fff; }
 .sdg-levels li.here span { color: #d6e6dd; }
-.sdg-levels li + li::before { content: "→"; position: absolute; left: -10px; top: 50%; transform: translate(-50%, -50%); color: #5d6873; }
-@media (max-width: 620px) { .sdg-levels { grid-template-columns: minmax(0, 1fr); } .sdg-levels li + li::before { content: none; } }
+.sdg-levels li + li::before { content: ""; position: absolute; left: -27px; top: 50%; width: 18px; height: 2px; background: #9aa69f; }
+.sdg-levels li + li::after { content: ""; position: absolute; left: -14px; top: 50%; width: 7px; height: 7px; border-top: 2px solid #9aa69f; border-right: 2px solid #9aa69f; transform: translateY(-50%) translateY(1px) rotate(45deg); }
+@media (max-width: 620px) {
+  .sdg-levels { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .sdg-levels li + li::before { left: 50%; top: -20px; width: 2px; height: 14px; }
+  .sdg-levels li + li::after { left: 50%; top: -12px; transform: translateX(-4px) rotate(135deg); }
+}
 .routes-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .routes-table th, .routes-table td { text-align: left; padding: 10px 8px; border-top: 1px solid #e3e7e3; vertical-align: top; }
 .routes-table thead th { border-top: none; color: #5d6873; font-weight: 600; font-size: 13px; }

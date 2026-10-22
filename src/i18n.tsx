@@ -956,7 +956,6 @@ const dict: Record<string, Entry> = {
   'Fictional officer at a regional skills centre that funds training for three groups; sees SDG totals, not people.': { ms: 'Pegawai rekaan di pusat kemahiran wilayah yang membiayai latihan untuk tiga kumpulan; melihat jumlah SDG, bukan individu.', zh: '虚构的区域技能中心官员，为三个群体资助培训；只看 SDG 合计，不看个人。' },
   'A fictional regional skills centre that funds training for three groups: a finance team at a firm, a university graduating class and a logistics office.': { ms: 'Pusat kemahiran wilayah rekaan yang membiayai latihan untuk tiga kumpulan: pasukan kewangan di sebuah firma, kelas graduan universiti dan pejabat logistik.', zh: '一个虚构的区域技能中心，为三个群体资助培训：一家公司的财务团队、一个大学毕业班和一个物流办公室。' },
   'What this view is for': { ms: 'Tujuan paparan ini', zh: '此视图的用途' },
-  'A regional skills centre funds training for many employers and colleges. It needs one answer: which SDG targets does the training we fund reach, and which routes would reach more?': { ms: 'Pusat kemahiran wilayah membiayai latihan untuk banyak majikan dan kolej. Ia memerlukan satu jawapan: sasaran SDG manakah yang dicapai oleh latihan yang kami biayai, dan laluan manakah yang akan mencapai lebih banyak?', zh: '区域技能中心为众多雇主和院校资助培训。它需要一个答案：我们资助的培训触及哪些 SDG 具体目标，哪些路径能触及更多？' },
   'Your plan: one person’s best move and the skills they would build.': { ms: 'Pelan anda: langkah terbaik seseorang dan kemahiran yang akan dibinanya.', zh: '你的计划：一个人的最佳选择及其要培养的技能。' },
   'Team view: an HR manager or adviser sees only their own team or class.': { ms: 'Paparan pasukan: pengurus HR atau penasihat hanya melihat pasukan atau kelas mereka sendiri.', zh: '团队视图：人力资源经理或顾问只看到自己的团队或班级。' },
   'This view: the centre adds up every group it funds, with the same rule. Totals only, no names.': { ms: 'Paparan ini: pusat menjumlahkan setiap kumpulan yang dibiayainya, dengan peraturan yang sama. Jumlah sahaja, tiada nama.', zh: '此视图：中心以相同规则汇总其资助的每个群体。仅合计，不显示姓名。' },
@@ -968,6 +967,8 @@ const dict: Record<string, Entry> = {
   'People for whom it is a 2nd or 3rd move': { ms: 'Orang yang baginya ini langkah ke-2 atau ke-3', zh: '以此为第二或第三选择的人数' },
   'Adds': { ms: 'Menambah', zh: '新增' },
   'Each group’s own manager sees its Team view; this centre sees totals only. Open data on workers by occupation per Malaysian state is not published, so no state statistics are used or implied.': { ms: 'Pengurus setiap kumpulan melihat Paparan pasukannya sendiri; pusat ini hanya melihat jumlah. Data terbuka pekerja mengikut pekerjaan bagi setiap negeri di Malaysia tidak diterbitkan, jadi tiada statistik negeri digunakan atau dibayangkan.', zh: '每个群体由其自己的经理查看团队视图；本中心只看合计。马来西亚各州按职业划分的就业人数未公开发布，因此不使用也不暗示任何州统计数据。' },
+  'For a regional skills centre that funds training for many employers and colleges. Its question:': { ms: 'Untuk pusat kemahiran wilayah yang membiayai latihan bagi banyak majikan dan kolej. Soalannya:', zh: '面向为众多雇主和院校资助培训的区域技能中心。它的问题：' },
+  'Which SDG targets does the training we fund reach, and which routes would reach more?': { ms: 'Sasaran SDG manakah yang dicapai oleh latihan yang kami biayai, dan laluan manakah yang akan mencapai lebih banyak?', zh: '我们资助的培训触及哪些 SDG 具体目标？哪些路径能触及更多？' },
 };
 
 const LangContext = createContext<Lang>('en');
