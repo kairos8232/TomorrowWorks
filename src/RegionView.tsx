@@ -20,53 +20,44 @@ export function RegionView({ viewer }: { viewer: Viewer }) {
   const split = (byTeam: Record<string, number>) => data.groups.filter((g) => byTeam[g.id]).map((g) => `${t(g.name)} ${byTeam[g.id]}`).join(', ');
 
   return <div className="step-body region-view">
-    <div className="who"><p><strong>{t('Viewing as {name}', { name: viewer.name })}</strong> ({t(viewer.group)}). {t(region.description)}</p></div>
-
-    <section className="panel region-purpose" aria-labelledby="region-purpose-head">
-      <h2 id="region-purpose-head">{t('What this view is for')}</h2>
-      <p className="region-question">{t('Which SDG targets does our training reach, and which routes could reach more?')}</p>
-      <ol className="sdg-levels">
-        <li><strong>{t('Person')}</strong><span>{t('Your plan: one person’s best move and the skills they would build.')}</span></li>
-        <li><strong>{t('Group')}</strong><span>{t('Team view: an HR manager or adviser sees only their own team or class.')}</span></li>
-        <li className="here"><strong>{t('Region')}</strong><span>{t('This view: the centre adds up every group it funds, with the same rule. Totals only, no names.')}</span></li>
-      </ol>
-    </section>
-
-    <section className="panel region-sdg" aria-labelledby="region-sdg-head">
-      <h2 id="region-sdg-head">{t('Which SDG targets the funded training reaches')}</h2>
-      <p className="note">{t('{p} people in {g} groups. Each person counts once: their best move and the skills they would build for it.', { p: data.people, g: data.groups.length })}</p>
+    <header className="region-scope">
+      <div><p className="region-scope-name">{t(region.name)}</p><h2>{t('{p} people across {g} groups', { p: data.people, g: data.groups.length })}</h2><p>{t('Totals from each person’s best move and skills to build. No names are shown.')}</p></div>
       <ul className="region-legend">{data.groups.map((g) => <li key={g.id}><i style={{ background: colour(g.id) }} aria-hidden="true" />{t(g.name)} <small>{t('{n} people', { n: g.people })}</small></li>)}</ul>
+    </header>
+
+    <div className={`region-dashboard${data.routes.length ? '' : ' single'}`}>
+    <section className="panel region-sdg" aria-labelledby="region-sdg-head">
+      <div className="region-panel-head"><h2 id="region-sdg-head">{t('Current training reach')}</h2><span>{t('Reviewed links')}</span></div>
+      <p className="note">{t('Each person counts once for a target linked to their best move or skills.')}</p>
       <ul className="region-targets">
         {data.targets.map((row) => <li key={row.target}>
-          <div className="region-target-head"><SdgBadge target={row.target} short /><strong>{t(targetTitle(row.target))}</strong><span className="region-count">{t('{n} of {m} people', { n: row.people, m: data.people })}</span></div>
+          <div className="region-target-head"><SdgBadge target={row.target} short /><strong>{t(targetTitle(row.target))}</strong></div>
+          <div className="region-target-reach"><strong>{t('{n} of {m} people', { n: row.people, m: data.people })}</strong><small>{split(row.byTeam)}</small></div>
           <div className="region-bar" role="img" aria-label={split(row.byTeam)}>
             {data.groups.map((g) => row.byTeam[g.id] ? <span key={g.id} style={{ width: `${(row.byTeam[g.id] / data.people) * 100}%`, background: colour(g.id) }} /> : null)}
           </div>
-          <small>{split(row.byTeam)}</small>
         </li>)}
         {data.targets.length === 0 && <li><p>{t('No best move in these groups reaches a reviewed SDG target yet.')}</p></li>}
         <li className="sdg-baseline-row">
-          <div className="region-target-head"><SdgBadge target="4.4" short /><strong>{t(targetTitle('4.4'))}</strong><span className="region-count">{t('{n} of {m} people', { n: data.baseline, m: data.people })}</span></div>
-          <p><span className="sdg-source baseline">{t('Baseline')}</span> {t('Everyone with skills to build counts towards it.')}</p>
+          <div className="region-target-head"><SdgBadge target="4.4" short /><strong>{t('Skills for work')}</strong></div>
+          <div className="region-target-reach"><strong>{t('{n} of {m} people', { n: data.baseline, m: data.people })}</strong><small>{t('Baseline: everyone with skills to build')}</small></div>
         </li>
       </ul>
       <PossibleLinks skills={data.paths.flatMap((p) => p.skills)} exclude={data.targets.map((x) => x.target)} />
     </section>
 
     {data.routes.length > 0 && <section className="panel region-routes" aria-labelledby="region-routes-head">
-      <h2 id="region-routes-head">{t('Routes that would reach more targets')}</h2>
-      <p className="note">{t('Some people’s second or third move leads to a role linked to targets their best move does not reach. Funding training for these roles would add those targets.')}</p>
-      <table className="routes-table">
-        <thead><tr><th scope="col">{t('Training route')}</th><th scope="col">{t('People for whom it is a 2nd or 3rd move')}</th><th scope="col">{t('Adds')}</th></tr></thead>
-        <tbody>{data.routes.map((r) => <tr key={r.roleId}>
-          <th scope="row">{roleName(r.roleId)}</th>
-          <td><strong>{r.people}</strong> <small>{split(r.byTeam)}</small></td>
-          <td><span className="region-lever-targets">{r.targets.map((x) => <SdgBadge key={x} target={x} short />)}</span></td>
-        </tr>)}</tbody>
-      </table>
+      <div className="region-panel-head"><h2 id="region-routes-head">{t('Alternative training routes')}</h2><span>{t('Options to explore')}</span></div>
+      <p className="note">{t('Second or third moves that could connect more people to SDG targets.')}</p>
+      <ul className="region-route-list">{data.routes.map((r) => <li key={r.roleId}>
+        <div className="region-route-top"><h3>{roleName(r.roleId)}</h3><strong>{t('{n} people', { n: r.people })}</strong></div>
+        <p>{split(r.byTeam)}</p>
+        <div className="region-route-adds"><span>{t('Linked targets')}</span><div>{r.targets.map((x) => <SdgBadge key={x} target={x} short />)}</div></div>
+      </li>)}</ul>
     </section>}
+    </div>
 
-    <p className="note">{t('Each group’s own manager sees its Team view; this centre sees totals only. Open data on workers by occupation per Malaysian state is not published, so no state statistics are used or implied.')}</p>
+    <p className="note region-footnote">{t('Group managers see their own teams; this view shows totals only. No state employment statistics are used.')}</p>
     <SdgMethodNote />
   </div>;
 }
