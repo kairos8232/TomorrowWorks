@@ -12,25 +12,13 @@ export function LearningMilestones({courseUrls}:{courseUrls:string[]}) {
  ];
  return <section className="learning-milestones" aria-labelledby={id}>
   <h3 id={id}>{t('Learning milestones')}</h3>
-  <p className="note">{t('Complete courses to work towards these milestones. Badges stay locked until completion can be verified; verification is not connected in this demo.')}</p>
+  <p className="note">{t('Complete courses to work towards these milestones. Verification is not connected in this demo, so they remain locked.')}</p>
   <ul className="milestone-grid">{badges.map(badge=><li key={badge.name} className={'milestone milestone-'+badge.kind+(badge.earned?' earned':'')}>
-   <div className="milestone-heading"><span className="milestone-state"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><rect x="3.5" y="7" width="9" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>{badge.earned?<path d="M6 7V4a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.5"/>:<path d="M5 7V4a3 3 0 0 1 6 0v3" stroke="currentColor" strokeWidth="1.5"/>}</svg>{t(badge.earned?'Unlocked':'Locked')}</span></div>
-   <div className="milestone-art" aria-hidden="true"><svg viewBox="0 0 160 132" fill="none">
-    <path d="M29 68h-8m118 0h-8M39 36l-6-6m94 0-6 6M80 17V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    {badge.kind==='first'?<>
-     <path d="m56 79-8 44 22-10 10 13 6-43m18-4 8 44-22-10-10 13-6-43" fill="var(--badge-ribbon)" stroke="var(--badge-line)" strokeWidth="2"/>
-     <path d="m80 21 12 6 14 1 6 12 10 10-2 14 2 14-10 10-6 12-14 1-12 6-12-6-14-1-6-12-10-10 2-14-2-14 10-10 6-12 14-1 12-6Z" fill="var(--badge-fill)" stroke="var(--badge-line)" strokeWidth="2"/>
-     <circle cx="80" cy="64" r="28" fill="var(--badge-inner)" stroke="var(--badge-line)" strokeWidth="1.5"/>
-     <path d="m80 44 6 12 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2 6-12Z" fill="var(--badge-line)"/>
-    </>:<>
-     <path d="M59 38H43v13c0 14 10 21 22 21m36-34h16v13c0 14-10 21-22 21" stroke="var(--badge-line)" strokeWidth="5"/>
-     <path d="M56 29h48v25c0 20-11 31-24 31S56 74 56 54V29Z" fill="var(--badge-fill)" stroke="var(--badge-line)" strokeWidth="2"/>
-     <path d="M80 85v18m-19 9h38m-34-9h30v10H65v-10Z" stroke="var(--badge-line)" strokeWidth="4" strokeLinejoin="round"/>
-     <path d="m80 39 5 10 11 2-8 8 2 11-10-6-10 6 2-11-8-8 11-2 5-10Z" fill="var(--badge-line)"/>
-     <path d="M49 120h62" stroke="var(--badge-line)" strokeWidth="2" strokeLinecap="round"/>
-    </>}
-   </svg></div>
-   <h4>{t(badge.name)}</h4><details className="milestone-rule"><summary>{t('How to unlock')}</summary><p className="note">{t(badge.rule)}</p><p className="note">{t('Course badges do not certify skill mastery.')}</p></details>
+   <span className="milestone-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none">
+    {badge.kind==='first'?<><path d="m20 40-3 18 11-5 4 7 4-20m8 0 3 18-11-5-4 7-4-20" fill="var(--badge-ribbon)" stroke="var(--badge-line)" strokeWidth="1.5"/><path d="m32 5 6 3 7 1 3 6 5 5-1 7 1 7-5 5-3 6-7 1-6 3-6-3-7-1-3-6-5-5 1-7-1-7 5-5 3-6 7-1 6-3Z" fill="var(--badge-fill)" stroke="var(--badge-line)" strokeWidth="1.5"/><circle cx="32" cy="27" r="13" fill="var(--badge-inner)" stroke="var(--badge-line)"/><path d="m32 17 3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1 3-7Z" fill="var(--badge-line)"/></>:<><path d="M19 14H9v8c0 9 6 14 13 14m23-22h10v8c0 9-6 14-13 14" stroke="var(--badge-line)" strokeWidth="2.5"/><path d="M19 10h26v17c0 13-6 20-13 20s-13-7-13-20V10Z" fill="var(--badge-fill)" stroke="var(--badge-line)" strokeWidth="1.5"/><path d="m32 17 3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1 3-7Z" fill="var(--badge-line)"/><path d="M32 47v8m-11 4h22m-17-4h12v4H26v-4Z" stroke="var(--badge-line)" strokeWidth="2"/></>}
+   </svg></span>
+   <div className="milestone-copy"><h4>{t(badge.name)}</h4><details className="milestone-rule"><summary>{t('How to unlock')}</summary><p className="note">{t(badge.rule)}</p><p className="note">{t('Learning milestones do not certify skill mastery.')}</p></details></div>
+   <span className="milestone-state"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><rect x="3.5" y="7" width="9" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>{badge.earned?<path d="M6 7V4a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.5"/>:<path d="M5 7V4a3 3 0 0 1 6 0v3" stroke="currentColor" strokeWidth="1.5"/>}</svg>{t(badge.earned?'Unlocked':'Locked')}</span>
   </li>)}</ul>
  </section>;
 }

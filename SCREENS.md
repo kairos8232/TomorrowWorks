@@ -88,17 +88,17 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## Your plan usability refinement (22 Oct 2026)
 
-- User selected the whole Your plan page for a usability pass. Main order is gaps/time → compact progress summary → next Start/Continue action → Your courses → milestone badges → optional access/funding and course-selection details. Keep the next action directly under progress.
+- Current order is gaps/time → next Start/Continue action → compact progress summary → Your courses → learning milestones → optional Malaysian certification → access/funding and course-selection details. The next course is visible before the progress report.
 - Course evidence is optional and collapsed behind a keyboard-accessible summary. No evidence: Add completion evidence; submitted evidence: Evidence submitted — not verified, visible even while collapsed. Expanding reveals the fictional-only privacy notice before the form, validation, link and edit/remove controls. No evidence or verification behaviour changed.
 - Progress keeps the unavailable-verification notice visible. How progress works expands count coverage, mastery distinction and session/privacy limits. Funding, method and exact badge rules remain available in labelled native disclosures. Provider links, course-change warning and all gaps remain available.
-- Badges retain medal/trophy artwork at a more compact size and sit after courses. How to unlock reveals the exact rule and skill-mastery limit; lock state and verification availability remain visible.
+- Milestones use two separate cards with small medal/trophy artwork beside the title. How to unlock reveals the exact rule and skill-mastery limit; lock state and verification availability remain visible.
 - Build and 88 tests pass. Edge 1440 × 1000 and 390 × 844 screenshots reviewed; order, collapsed evidence, keyboard expansion, bad/good URL, removal, unchanged completion/locked badges, modal, badge/funding disclosures, Accountant switch and EN/MS/ZH phone fit pass. No page errors; pre-existing favicon 404 excluded. Translation review remains pending.
 
 ## Learning milestone badges — step 4 (22 Oct 2026, corrected)
 
 - User removed self-reporting. No completion-report checkbox, report state or self-reported badge text remains in the current UI. First course completed requires at least one authoritative verified course completion. Selected plan’s courses completed requires verification for every unique current-plan course URL, including AI suggestions and excluding NOSS. Empty plans never earn.
 - Provider/reviewer verification is not connected, so the current verified-course set is deliberately empty: both badges stay Locked. The app does not detect external course completion. Evidence links and opened pages never unlock badges; verified progress remains zero. Future trusted verification can drive the pure eligibility rule; badges do not establish skill mastery.
-- Visuals use two distinct SVG awards: a star medal with ribbons and a trophy, larger centred artwork, green/gold tints, rounded cards and readable lock-status chips. Locked badges remain subdued; earned styling uses stronger gold and ledger green. No invented earned demo state is exposed.
+- Visuals use two distinct SVG awards: a star medal with ribbons and a trophy. The awards are small icons in separate cards with green/gold tints and readable lock-status chips. Locked milestones remain subdued; earned styling uses stronger gold and ledger green. No invented earned demo state is exposed.
 - Build and 88 tests pass. Edge desktop 1440 × 1000 and phone 390 × 844: no self-report controls/text, locked state, evidence not unlocking, unchanged verified bar, role changes and EN/MS/ZH fit pass. No page errors. New translations need team review.
 
 ## Changing the highlighted course — step 3 refinement (22 Oct 2026)
@@ -110,7 +110,7 @@ My career (sidebar navigation)           The job market (browse any time)
 
 ## Next learning action — step 3 (22 Oct 2026)
 
-- A compact Your next learning step panel below the progress summary highlights the first course in the existing plan order without submitted evidence. Checked courses come before AI suggestions; the panel labels suggestions as not hand-checked. No independent claim that a course is unfinished: completion remains unverified.
+- A compact Your next learning step panel above the progress summary highlights the first course in the existing plan order without submitted evidence. Checked courses come before AI suggestions; the panel labels suggestions as not hand-checked. No independent claim that a course is unfinished: completion remains unverified.
 - Start learning opens the provider in a new tab; Continue learning reopens that same provider URL after a link was clicked this session. It does not restore lesson position. The provider name and each course's existing View course link remain visible; both actions record the visited URL only.
 - Visited links are in memory per profile owner, survive navigation/role changes and clear on refresh. They give no evidence or completion credit and do not alter skills, recommendations or SDG claims. Team cards do not get the next-action panel.
 - Submitting evidence advances the next-course selection without implying completion; removing it makes the earlier course eligible again. With evidence for every course, show an unverified-completion notice and retain every course link below; with no courses, omit the panel.

@@ -39,6 +39,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## Your plan usability — 22 Oct 2026
 
+- [x] Put the next course before progress, keep courses together, then show two milestone cards with small award icons and a separate optional SKM certification card. Check Aina's Bookkeeper plan and unlock details in the live desktop browser; build and all 114 tests pass.
 - [x] Prioritise course progress and learning action; move compact badges after courses; shorten repeated copy. Collapse optional evidence, funding, method and exact badge rules while preserving visible unverified status and demo limitations.
 - [x] Build and 88 tests pass. Edge desktop/phone screenshots and keyboard evidence interaction, URL validation/submission/removal, course modal, disclosures, role changes and translated fit checked. Verification behaviour unchanged.
 - [ ] User review of the simplified whole-page preview; team review of new translations.

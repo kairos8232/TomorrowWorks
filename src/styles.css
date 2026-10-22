@@ -786,7 +786,6 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .trio-col:first-child { padding-top: 0; border-top: 0; }
 }
 .trio-col .skill-tag { text-align: left; }
-.plan-noss-step .note { margin: 6px 0 0; } .plan-noss-step h3 { margin: 0 0 4px; } .plan-noss-step .tag-row .note { margin: 0; }
 /* Your plan: courses left, SDG contribution as a sticky right column on wide screens (Carson, 21 Oct). */
 .plan-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 16px; align-items: start; }
 .plan-main { min-width: 0; display: grid; gap: 16px; }
@@ -931,22 +930,24 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .change-course-dialog .evidence-actions { margin-top: 18px; }
 
 
-/* Award illustrations stay subdued until authoritative completion unlocks them. */
-.learning-milestones { margin-block: 20px; }
+/* Small award icons keep the milestones recognisable without dominating the plan. */
+.learning-milestones { margin: 22px 0 0; padding-top: 20px; border-top: 1px solid #d9ded9; }
 .learning-milestones h3 { font-size: 18px; margin: 0 0 8px; }
-.milestone-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; list-style: none; padding: 0; }
-.milestone { --badge-fill:#e0ebe5; --badge-inner:#f5f9f6; --badge-line:#708b7b; --badge-ribbon:#c5d6ca; position:relative; overflow:hidden; padding:16px 20px 20px; border:1px solid #c5d4ca; border-radius:12px; background:#f6faf7; text-align:center; }
-.milestone-plan { --badge-fill:#f1e6cf; --badge-inner:#fffaf1; --badge-line:#a48c5b; --badge-ribbon:#e2d1ad; border-color:#ded1b7; background:#fcfaf5; }
-.milestone-heading { display:flex; justify-content:flex-end; }
-.milestone-state { display:inline-flex; align-items:center; gap:5px; padding:4px 8px; border:1px solid #cbd3ce; border-radius:4px; background:#fff; color:#4e5c54; font-size:12px; font-weight:700; }
-.milestone-state svg { width:14px; height:14px; }
-.milestone-art { display:grid; place-items:center; margin:0 auto 8px; color:var(--badge-line); }
-.milestone-art>svg { width:160px; max-width:100%; height:132px; }
-.milestone h4 { margin:8px 0 10px; font-size:18px; line-height:1.35; }
-.milestone .note { margin:0; font-size:14px; line-height:1.55; }
-.milestone.earned { --badge-fill:#d8b052; --badge-inner:#fff3cd; --badge-line:#805814; --badge-ribbon:#1e6b4f; border-color:#1e6b4f; background:#edf6ef; }
-.milestone.earned .milestone-state { background:#1e6b4f; color:#fff; border-color:#1e6b4f; }
-@media(max-width:620px) { .milestone-grid { grid-template-columns:1fr; } }
+.learning-milestones > .note { margin: 0 0 12px; }
+.milestone-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.milestone { --badge-fill:#e0ebe5; --badge-inner:#f5f9f6; --badge-line:#708b7b; --badge-ribbon:#c5d6ca; display: grid; grid-template-columns: 52px minmax(0,1fr); align-content: start; align-items: start; gap: 10px 14px; min-height: 132px; padding: 18px; border: 1px solid #c5d4ca; border-radius: 10px; background: #f6faf7; }
+.milestone-plan { --badge-fill:#f1e6cf; --badge-line:#a48c5b; --badge-ribbon:#e2d1ad; }
+.milestone-art { display: grid; place-items: center; flex: none; width: 52px; height: 52px; color: var(--badge-line); }
+.milestone-art svg { display: block; width: 48px; height: 48px; }
+.milestone-copy { min-width: 0; }
+.milestone h4 { margin: 0; font-size: 16px; line-height: 1.3; }
+.milestone-state { display: inline-flex; grid-column: 2; justify-self: start; align-items: center; flex: none; gap: 5px; padding: 4px 8px; border: 1px solid #cbd3ce; border-radius: 4px; background: #fff; color: #4e5c54; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.milestone-state svg { width: 14px; height: 14px; }
+.milestone .note { margin: 0; font-size: 14px; line-height: 1.55; }
+.milestone.earned { --badge-fill:#d8b052; --badge-inner:#fff3cd; --badge-line:#805814; --badge-ribbon:#1e6b4f; background: #edf6ef; }
+.milestone.earned .milestone-state { background: #1e6b4f; color: #fff; border-color: #1e6b4f; }
+@media(max-width:850px) { .milestone-grid { grid-template-columns: 1fr; } }
+@media(max-width:440px) { .milestone { grid-template-columns: 42px minmax(0,1fr); gap: 10px; padding: 14px; } .milestone-art { width: 42px; height: 42px; } .milestone-art svg { width: 40px; height: 40px; } }
 
 /* Keep the learning action close; details expand only when needed. */
 .plan-explainer summary,.plan-support summary,.milestone-rule summary { cursor:pointer; font-size:14px; font-weight:600; min-height:36px; padding-block:8px; }
@@ -958,10 +959,7 @@ details.course-check { padding-block:0; }
 .evidence-optional { margin-left:auto; color:#5d6873; font-size:12px; font-weight:400; }
 .course-evidence-body { padding:4px 0 14px; }
 .plan-support { margin-top:12px; border-top:1px solid #d9ded9; }
-.learning-milestones { padding-top:20px; border-top:1px solid #d9ded9; }
-.milestone-art>svg { width:124px; height:104px; }
-.milestone-rule { text-align:left; }
-.milestone-rule summary { text-align:center; }
+.milestone-rule summary { color: #27684d; }
 .milestone-rule .note { margin:8px 0; }
 /* 1,000 possible futures (Handling uncertainty): the one dark, large panel on Your moves. */
 .futures-panel { background: #15302a; color: #eef4ee; border-radius: 16px; padding: 26px 28px 20px; display: grid; gap: 22px; }
