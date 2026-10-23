@@ -296,8 +296,10 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .skill-tag small { display: block; font-weight: 400; font-size: 14px; color: #5d6873; }
 .detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-left: 64px; }
 .role-focus { display: grid; gap: 16px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 30px); }
-.role-back { justify-self: start; }
-.role-back::before { content: '←'; margin-right: 8px; }
+.role-back { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 6px 13px 6px 7px; border: 1px solid #d9ded9; border-radius: 999px; background: #fff; color: #244d39; font-size: 15px; line-height: 1.2; text-decoration: none; cursor: pointer; }
+.role-back-icon { display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; background: #e6f0ea; color: #1e6b4f; font-size: 18px; line-height: 1; }
+.role-back:hover { border-color: #9fb3a8; background: #f7faf8; text-decoration: none; }
+.role-back:focus-visible { outline: 3px solid #2f8a66; outline-offset: 3px; }
 .role-focus-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
 .role-focus-heading h2 { margin: 2px 0 4px; font-size: clamp(27px, 3vw, 38px); text-transform: capitalize; }
 .role-focus-heading .note { margin: 0; }
@@ -1002,6 +1004,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-source.strong { background: #e6f0ea; color: #1e6b4f; }
 .sdg-source.baseline { background: #eef0f3; color: #3a4450; }
 .sdg-baseline { color: #3a4450; }
+.sdg-role-baseline { margin: 6px 0 0; padding: 12px 14px; border: 1px solid #e3e7e3; border-radius: 8px; background: #f7f8f6; }
 .sdg-baseline-row { background: #fafbfa; }
 .sdg-possible { margin-top: 14px; color: #3a4450; }
 .sdg-possible summary { cursor: pointer; font-size: 15px; font-weight: 700; }

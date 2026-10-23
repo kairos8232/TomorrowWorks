@@ -46,7 +46,7 @@ export function RoleSdgLine({ roleId }: { roleId: string }) {
   return <div className="sdg-line">
     {links.map((l) => <div key={l.target}><p><SdgBadge target={l.target} /> <strong>{t(targetTitle(l.target))}.</strong></p><LinkWhy link={l} total={role.essentialSkills.length} /></div>)}
     {links.length === 0 && <p>{t('No strong match to a specific SDG target yet.')}</p>}
-    <p className="sdg-baseline"><span className="sdg-source baseline">{t('Baseline')}</span> {t(BASELINE)}</p>
+    <p className="sdg-role-baseline">{t(BASELINE)}</p>
     <PossibleLinks skills={role.essentialSkills} exclude={links.map((l) => l.target)} />
   </div>;
 }

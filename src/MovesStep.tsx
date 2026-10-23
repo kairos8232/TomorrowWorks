@@ -121,7 +121,7 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
   const t = useT();
   const { role, fit, demand, resilience } = result;
   return <section className="role-focus" aria-label={t('View {role} details', { role: role.title })}>
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to ranking')}</button>
     <div className="role-focus-heading">
       <div><span className="role-focus-rank">{rank === null ? t('Now') : t('Rank {n}', { n: rank })}</span><h2>{role.title}</h2>
         <p className="note">{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''} · {t('{n} to build', { n: fit.missing.length })}</p>
@@ -163,7 +163,7 @@ function ChangesView({ changes, onBack }: { changes: ReturnType<typeof whatChang
   const rankMoves = changes.filter((c) => c.rankBefore !== c.rankAfter).length;
   const allDown = changes.length > 0 && changes.every((c) => c.scoreAfter < c.scoreBefore);
   return <section className="moves-focus" aria-label={t('Compare quarters')}>
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to ranking')}</button>
     <h2>{t('What changed with {q} job-ad data', { q: latest })}</h2>
     <p>{changes.length === 0 ? t('Nothing moved compared with {q} data.', { q: earlier }) : rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('Online job ads fell in every occupation group in {q}, so every score dropped.', { q: latest })}</p>
     {changes.length > 0 && <ul className="change-list">{[...changes].sort((a, b) => a.rankAfter - b.rankAfter).map((c) => <li key={c.role.id}>
@@ -178,7 +178,7 @@ function ChangesView({ changes, onBack }: { changes: ReturnType<typeof whatChang
 function MethodView({ onBack }: { onBack: () => void }) {
   const t = useT();
   return <section className="moves-focus" aria-label={t('How ranking works')}>
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to ranking')}</button>
     <h2>{t('How ranking works')}</h2>
     <p>{t('Scores are estimates for comparing roles, not hiring decisions.')}</p>
     <div className="method-grid">
