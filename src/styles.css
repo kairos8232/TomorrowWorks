@@ -307,7 +307,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .focus-score strong { color: #1c2430; font-size: 30px; font-weight: 700; }
 .focus-score small { margin-left: 4px; color: #5d6873; font-size: 15px; font-weight: 500; }
 .role-focus-summary { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; padding: 16px 0; border-top: 1px solid #d9ded9; border-bottom: 1px solid #d9ded9; }
-.role-focus-summary p { max-width: 72ch; margin: 0; font-size: 17px; line-height: 1.5; }
+.role-focus-summary p { flex: 1; min-width: 0; margin: 0; font-size: 17px; line-height: 1.5; }
 .role-focus-summary .primary-button { flex: none; }
 .role-focus .detail-actions, .role-focus .detail-facts, .role-focus .detail-skills, .role-focus .sdg-line, .role-focus .interest-line { margin-left: 0; }
 .role-focus .detail-facts { background: #f7f8f6; border-radius: 8px; padding: 16px; }
