@@ -663,6 +663,7 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 - Carson ran the importer in Replit (756 occupations, commit `02d000f`). First run gave 0 tasks for software developer and data analyst (the task file uses 2010 O*NET codes); fixed in `9136c71`, second run fills all eight SOC codes. Automates share: bookkeeping 56%, software developer 58%, data analyst 45%, financial analyst 29%.
 - The real file has a `source.files` object, which broke `npm run build` (type of `aeiData.source`); loosened the type. Build and 97 tests pass.
 - Effect on futures: Hakim is now Financial analyst 56% / Business analyst 40% / Data analyst 4% (was 80/14/5), because the Anthropic view places Financial analyst as the most exposed role. Aina unchanged (Bookkeeper 100%).
+- Signal sources page now shows the server's daily check for the next DOSM quarter (`server/dosm.mjs`, `/api/dosm-next`, same link rule as the script; memory only, until 1 Nov; never imports). Offline tests only; needs a look on the live app after republishing.
 - Open: republish on Replit and look at the AI impact page and the futures panel by eye.
 - Futures panel redesigned to stand out (Carson: every block looked the same): dark panel, big verdict, 1,000 dots (one per future, coloured by best move), AI-speed strip showing the tipping point. `simulateFutures` now also returns `winners` (best move per future; tested). Checked in a browser at 1440 px and 390 px for Aina (robust) and Hakim (no single best move). 98 tests pass.
 

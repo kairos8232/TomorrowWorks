@@ -19,6 +19,8 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] Fresh-graduate path: three-step bar, Next buttons, CV carried from step 1 to step 2, Try another role (browser-checked with mocked matching; real RunPod run still to do). MS/ZH text unreviewed.
 - [x] Step bar for the already-working start and sample people (Your skills, Your moves, Your plan); Next: Your plan on Your moves (browser-checked with Aina: Moves to Plan and back).
 - [x] `scripts/check_dosm_jmi.py` written; offline selftest passes.
+- [x] Signal sources page shows the server's daily DOSM check (`server/dosm.mjs`, `/api/dosm-next`); offline tests pass (140 total).
+- [ ] After republishing on Replit, open Signal sources: the line under the table must say "Checked <today>: DOSM has not published 2026 Q3 yet" (not "No result yet").
 - [ ] Re-run after pulling, on a computer with internet: `python3 scripts/check_dosm_jmi.py --check 2026-Q2` must print "2026-Q2 data file found" with the Data JMI Q2 2026 link; `python3 scripts/check_dosm_jmi.py` must say 2026-Q3 is not published yet. (First live run 24 Oct: both said "not published", and Q3 once "found" with no file; the rule was rewritten from the real Q2 page and tested offline against it.)
 - [ ] Read each source link once and confirm the wording matches (Carson).
 - [ ] Run *Try a fictional example* against the live Replit app (real RunPod matching) and check the matched skills make sense for both the ad and the CV; adjust `src/sampleAd.ts` if not. Not done: this workspace cannot reach RunPod.

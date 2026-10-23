@@ -20,6 +20,7 @@ import { readFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { briefService, newsService, NEWS_REFRESH_UNTIL } from './news.mjs';
 import { lfsService } from './lfs.mjs';
+import { dosmService } from './dosm.mjs';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -31,6 +32,8 @@ const MAX_TEXT = 500;
 const CV_MAX_LINES = 40;   // same limits as src/cv.ts
 const CV_MAX_LINE = 300;
 const lfs = lfsService({ snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'opendosm-lfs-month.json'), 'utf8')) });
+const dosmLatest = JSON.parse(readFileSync(join(root, 'data', 'sources', 'dosm-jmi-2026-q2.json'), 'utf8')).source;
+const dosm = dosmService({ latestQuarter: dosmLatest.latestQuarter, latestUrl: dosmLatest.url });
 const news = newsService({
   snapshot: JSON.parse(readFileSync(join(root, 'data', 'sources', 'gdelt-news.json'), 'utf8')),
   topics: JSON.parse(readFileSync(join(root, 'data', 'sources', 'news-topics.json'), 'utf8')),
@@ -131,6 +134,7 @@ createServer(async (req, res) => {
       return send(res, 200, { skills: index.items.length, model: index.model, runpod: Boolean(RUNPOD_API_KEY && RUNPOD_ENDPOINT_ID) });
     }
     if (req.url === '/api/lfs') return send(res, 200, await lfs.get());
+    if (req.url === '/api/dosm-next') return send(res, 200, await dosm.get());
     if (req.url === '/api/news') {
       const body = await news.get();
       return send(res, 200, { ...body, brief: brief.for(body) });
