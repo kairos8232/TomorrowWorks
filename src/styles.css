@@ -1522,9 +1522,14 @@ details.course-check { padding-block:0; }
 .posting-overview > .posting-role, .posting-overview > .posting-courses { min-width: 0; border: 1px solid #d9ded9; border-radius: 9px; padding: 18px; }
 .posting-overview > .posting-role h2, .posting-overview > .posting-courses h2 { margin-top: 0; font-size: 20px; }
 .posting-overview > .posting-role .note { margin: 0 0 12px; }
-.posting-overview > .posting-role .detail-facts { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 12px; }
+.posting-overview > .posting-role .detail-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 12px; padding: 14px; }
+.posting-role-overlap { margin: 4px 0 14px; }
+.posting-role-overlap p { margin: 0 0 8px; color: #4b5761; font-size: 15px; }
+.posting-role-overlap strong { color: #193f30; font-size: 24px; line-height: 1; }
+.posting-role-overlap-track { height: 10px; overflow: hidden; border-radius: 99px; background: #e5e9e6; }
+.posting-role-overlap-track span { display: block; height: 100%; border-radius: 99px; background: #477157; }
 .posting-overview > .posting-role .detail-find { margin-top: 14px; padding: 12px; }
-.posting-overview > .posting-role .detail-find ul { gap: 6px; }
+.posting-overview > .posting-role .detail-find ul { grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 6px; }
 .posting-overview > .posting-role .detail-find a { padding: 7px 9px; }
 .posting-overview > .posting-role .empty-state-actions { margin-top: 14px; }
 .posting-overview > .posting-courses .plan-order { margin-top: 12px; }
@@ -1533,22 +1538,51 @@ details.course-check { padding-block:0; }
 .posting-more-courses summary { color: #1e6b4f; font-weight: 700; cursor: pointer; }
 .posting-more-courses .plan-order { margin-top: 10px; }
 .posting-review-action { grid-column: 1 / -1; justify-self: start; }
-.posting-review { padding-top: 18px; }
+.posting-review { padding-top: 18px; container-type: inline-size; }
 .posting-review > .note { margin: 0 0 12px; }
-.posting-review .posting-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.posting-review-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.posting-review .posting-skills { grid-template-columns: 1fr; }
+.posting-review .posting-group { min-width: 0; }
+.posting-review .posting-group h3 { display: flex; align-items: center; gap: 8px; min-height: 28px; }
+.posting-review .posting-group h3 span { margin-left: 0; }
+.posting-review .posting-build { border-top: 4px solid #bd705e; }
+.posting-review .posting-related { border-top: 4px solid #c59a3f; }
+.posting-review .posting-have { border-top: 4px solid #477157; }
+.posting-group-meter { height: 6px; overflow: hidden; border-radius: 99px; background: #e8ece9; }
+.posting-group-meter span { display: block; height: 100%; border-radius: 99px; }
+.posting-build .posting-group-meter span { background: #bd705e; }
+.posting-related .posting-group-meter span { background: #c59a3f; }
+.posting-have .posting-group-meter span { background: #477157; }
 .posting-review .posting-group > .text-button { justify-self: start; }
-.posting-review .posting-have summary { cursor: pointer; font-size: 17px; font-weight: 700; }
-.posting-review .posting-have summary span { color: #315f46; margin-left: 6px; }
-.posting-review .posting-have[open] summary { margin-bottom: 12px; }
+@container (max-width: 940px) { .posting-review-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 620px) { .posting-review-groups { grid-template-columns: 1fr; } }
 .posting-cv { padding-top: 18px; }
 .posting-cv h2 { margin-top: 0; }
-.posting-cv .posting-groups { margin: 16px 0; }
-.posting-cv .posting-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.posting-cv-map { margin: 12px 0 18px; border: 1px solid #d9ded9; border-radius: 9px; overflow: hidden; }
+.posting-cv-map-numbers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.posting-cv-map-numbers > div { display: grid; gap: 2px; padding: 12px 16px; border-right: 1px solid #e3e7e3; }
+.posting-cv-map-numbers > div:last-child { border-right: 0; }
+.posting-cv-map-numbers strong { font-size: 26px; line-height: 1; color: #16233a; }
+.posting-cv-map-numbers span { font-size: 15px; color: #5d6873; }
+.posting-cv-map-bar { display: flex; height: 9px; background: #e8ece9; }
+.posting-cv-map-bar span { height: 100%; }
+.posting-cv-shown-bar { background: #477157; }
+.posting-cv-add-bar { background: #c59a3f; }
+.posting-cv-learn-bar { background: #bd705e; }
+.posting-cv-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 16px; align-items: start; }
+.posting-cv-skills { display: grid; gap: 12px; min-width: 0; }
+.posting-cv .posting-skills { grid-template-columns: 1fr; }
+.posting-cv .posting-cv-missing-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.posting-cv-missing-list .posting-card { align-content: start; }
+.posting-cv-missing-list .posting-card summary { line-height: 1.3; }
 .posting-cv-next { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 16px; border: 1px solid #d9ded9; border-radius: 8px; }
 .posting-cv-shown summary { cursor: pointer; font-size: 17px; font-weight: 700; }
 .posting-cv-shown[open] summary { margin-bottom: 12px; }
 .posting-cv-shown summary span { color: #315f46; margin-left: 6px; }
-.posting-cv .cv-avoid { margin-top: 18px; }
+.posting-cv .cv-avoid { min-width: 0; margin: 0; padding: 16px; }
+.posting-cv-evidence summary { cursor: pointer; font-weight: 700; }
+.posting-cv-evidence summary::marker { color: #477157; }
+.posting-cv-evidence[open] small { margin-top: 6px; }
 .posting-review-note { margin: 14px 0 0; }
 .posting-summary { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
 .posting-groups { display: grid; gap: 14px; margin-top: 8px; }
@@ -1576,8 +1610,12 @@ details.course-check { padding-block:0; }
 .posting-card .posting-from { font-style: italic; }
 .cv-avoid h3 { margin: 16px 0 6px; font-size: 17px; }
 .cv-avoid h3 span { color: #5d6873; font-weight: 400; font-size: 14px; }
+.cv-avoid-heading { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 14px; }
+.cv-avoid-heading h2 { margin: 0 0 3px; }
+.cv-avoid-heading .note { margin: 0; }
+.cv-avoid-heading > strong { display: grid; place-items: center; min-width: 38px; height: 38px; border-radius: 50%; background: #f5e5e0; color: #9a4b39; font-size: 20px; }
 .cv-avoid-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.cv-avoid-list li { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; }
+.cv-avoid-list li { display: grid; gap: 3px; padding: 9px 12px; border-left: 3px solid #c6735d; background: #faf7f6; }
 .cv-avoid-list small { color: #5d6873; font-size: 14px; }
 .cv-avoid-list a, .cv-avoid-sources a { color: #1e6b4f; }
 .cv-avoid-manual label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
@@ -1586,12 +1624,16 @@ details.course-check { padding-block:0; }
 .cv-avoid-checklist summary { cursor: pointer; font-weight: 700; }
 .cv-avoid-checklist summary span { margin-left: 5px; color: #5d6873; font-weight: 400; }
 .cv-avoid-checklist[open] .note { margin: 12px 0; }
+.cv-avoid-progress { height: 7px; margin-top: 12px; overflow: hidden; border-radius: 99px; background: #e8ece9; }
+.cv-avoid-progress span { display: block; height: 100%; border-radius: 99px; background: #477157; }
+.cv-avoid-manual li { border: 1px solid #d9ded9; background: #fff; }
 .cv-avoid-sources { margin-top: 14px; font-size: 14px; }
 .cv-avoid-sources ul { padding-left: 18px; }
 @media (max-width: 800px) {
   .posting-entry-grid { grid-template-columns: 1fr; }
   .posting-entry-main textarea { min-height: 210px; }
   .posting-overview { grid-template-columns: 1fr; }
+  .posting-cv-layout { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .posting-entry-head { flex-direction: column; }
@@ -1606,7 +1648,9 @@ details.course-check { padding-block:0; }
   .posting-result-counts > div:nth-child(even) { border-right: 0; }
   .posting-result-counts > div:nth-last-child(-n+2) { border-bottom: 0; }
   .posting-skills { grid-template-columns: 1fr; }
-  .posting-review .posting-skills, .posting-cv .posting-skills { grid-template-columns: 1fr; }
+  .posting-cv-map-numbers > div { padding: 10px; }
+  .posting-cv-map-numbers strong { font-size: 22px; }
+  .posting-cv-map-numbers span { font-size: 13px; }
 }
 
 /* Home: two starting choices side by side (fresh graduate, already working). */

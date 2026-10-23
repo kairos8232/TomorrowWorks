@@ -32,6 +32,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const [resultView, setResultView] = useState<ResultView>('overview');
   const [showEntry, setShowEntry] = useState(true);
   const [showAllBuild, setShowAllBuild] = useState(false);
+  const [showAllRelated, setShowAllRelated] = useState(false);
+  const [showAllHave, setShowAllHave] = useState(false);
   const [status, setStatus] = useState({ busy: false, message: '' });
   const requestVersion = useRef(0);
 
@@ -61,6 +63,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       setResultView('overview');
       setShowEntry(results.length === 0);
       setShowAllBuild(false);
+      setShowAllRelated(false);
+      setShowAllHave(false);
       setStatus({ busy: false, message: results.length ? '' : 'No close ESCO skills found in this ad. Try pasting the duties and requirements.' });
     } catch (err) {
       if (version !== requestVersion.current) return;
@@ -91,6 +95,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const close = (found ?? []).filter((s) => relatedBy.has(s.uri));
   const have = (found ?? []).filter((s) => heldUris.has(s.uri));
   const count = (list: Suggestion[]) => list.filter((s) => ticked.has(s.uri)).length;
+  const share = (n: number, total: number) => total ? `${n / total * 100}%` : '0%';
   const hasResult = Boolean(found?.length);
   const hasCvResult = Boolean(cvFound);
   const chooseView = (view: ResultView) => { setResultView(view); setShowEntry(false); };
@@ -144,7 +149,10 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       {resultView === 'overview' && <div className="posting-overview">
         {closest ? <div className="posting-role" aria-labelledby="posting-role-head">
       <h2 id="posting-role-head">{t('Closest role we track: {role}', { role: roleTitle(closest.role.title) })}</h2>
-      <p className="note">{t('This ad shares {n} skills with this role.', { n: closest.shared.length })}</p>
+      <div className="posting-role-overlap">
+        <p><strong>{closest.shared.length}</strong> {t('of {n} ad skills overlap with this role', { n: cmp.total })}</p>
+        <div className="posting-role-overlap-track" aria-hidden="true"><span style={{ width: share(closest.shared.length, cmp.total) }} /></div>
+      </div>
       <div className="detail-facts">
         <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small><a href={snapshots.q2.source.url} target="_blank" rel="noreferrer">DOSM</a> {t('{a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
         <span className="fact-r">{resilience ? <><a href={ilo.source.url} target="_blank" rel="noreferrer">{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}</a><small>{resilience.gradient}</small></> : t('No ILO data')}</span>
@@ -170,29 +178,49 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
 
       {resultView === 'skills' && <div className="posting-review" aria-label={t('Review skills')}>
         <p className="note">{t('Untick any AI match that is not in the ad. Counts and the plan update as you review.')}</p>
-        {profile.held.size > 0 ? <div className="posting-groups">
-          <div className="posting-group posting-build"><h3>{t('To build')} <span>{count(build)}</span></h3>{build.length ? rows(showAllBuild ? build : build.slice(0, 6)) : <p className="note">{t('Nothing to build.')}</p>}
+        {profile.held.size > 0 ? <div className="posting-groups posting-review-groups">
+          <div className="posting-group posting-build"><h3>{t('To build')} <span>{count(build)}</span></h3>
+            <div className="posting-group-meter" aria-hidden="true"><span style={{ width: share(count(build), cmp.total) }} /></div>
+            {build.length ? rows(showAllBuild ? build : build.slice(0, 6)) : <p className="note">{t('Nothing to build.')}</p>}
             {build.length > 6 && <button type="button" className="text-button" aria-expanded={showAllBuild} onClick={() => setShowAllBuild(!showAllBuild)}>{showAllBuild ? t('Show fewer') : t('Show all {n}', { n: build.length })}</button>}
           </div>
-          {close.length > 0 && <div className="posting-group"><h3>{t('Close to a skill you have')} <span>{count(close)}</span></h3>{rows(close)}</div>}
-          <details className="posting-group posting-have"><summary>{t('You have')} <span>{count(have)}</span></summary>{have.length ? rows(have) : <p className="note">{t('None of the ticked skills yet.')}</p>}</details>
+          <div className="posting-group posting-related"><h3>{t('Related')} <span>{count(close)}</span></h3>
+            <div className="posting-group-meter" aria-hidden="true"><span style={{ width: share(count(close), cmp.total) }} /></div>
+            {close.length ? rows(showAllRelated ? close : close.slice(0, 6)) : <p className="note">{t('No related skills in this ad.')}</p>}
+            {close.length > 6 && <button type="button" className="text-button" aria-expanded={showAllRelated} onClick={() => setShowAllRelated(!showAllRelated)}>{showAllRelated ? t('Show fewer') : t('Show all {n}', { n: close.length })}</button>}
+          </div>
+          <div className="posting-group posting-have"><h3>{t('You have')} <span>{count(have)}</span></h3>
+            <div className="posting-group-meter" aria-hidden="true"><span style={{ width: share(count(have), cmp.total) }} /></div>
+            {have.length ? rows(showAllHave ? have : have.slice(0, 6)) : <p className="note">{t('None of the ticked skills yet.')}</p>}
+            {have.length > 6 && <button type="button" className="text-button" aria-expanded={showAllHave} onClick={() => setShowAllHave(!showAllHave)}>{showAllHave ? t('Show fewer') : t('Show all {n}', { n: have.length })}</button>}
+          </div>
         </div> : rows(found ?? [])}
       </div>}
 
       {resultView === 'cv' && gap && <div className="posting-cv" aria-labelledby="posting-cv-head">
         <h2 id="posting-cv-head">{t('Does your CV show these skills?')}</h2>
-        <p className="posting-summary">{t('Your CV shows {a} of the {n} skills ticked from this ad.', { a: gap.shown.length, n: ad.length })}</p>
-        <div className="posting-groups">
-          {gap.addToCv.length > 0 && <div className="posting-group posting-build"><h3>{t('You have these, but your CV does not show them')} <span>{gap.addToCv.length}</span></h3>
+        <div className="posting-cv-map" aria-label={t('CV skill summary')}>
+          <div className="posting-cv-map-numbers">
+            <div><strong>{gap.shown.length}</strong><span>{t('Shown on CV')}</span></div>
+            <div><strong>{gap.addToCv.length}</strong><span>{t('Add evidence')}</span></div>
+            <div><strong>{gap.notYet.length}</strong><span>{t('Still to learn')}</span></div>
+          </div>
+          <div className="posting-cv-map-bar" role="img" aria-label={t('{shown} shown on CV, {add} need CV evidence, {learn} still to learn', { shown: gap.shown.length, add: gap.addToCv.length, learn: gap.notYet.length })}>
+            <span className="posting-cv-shown-bar" style={{ width: share(gap.shown.length, ad.length) }} />
+            <span className="posting-cv-add-bar" style={{ width: share(gap.addToCv.length, ad.length) }} />
+            <span className="posting-cv-learn-bar" style={{ width: share(gap.notYet.length, ad.length) }} />
+          </div>
+        </div>
+        <div className="posting-cv-layout"><div className="posting-cv-skills">
+          {gap.addToCv.length > 0 && <div className="posting-group posting-build"><h3>{t('Add these to your CV')} <span>{gap.addToCv.length}</span></h3>
             <p className="note">{t('Add evidence for these skills only if they are true for you.')}</p>
-            <ul className="posting-skills">{gap.addToCv.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('The ad says “{line}”', { line: (found ?? []).find((f) => f.uri === s.uri)?.from ?? '' })}</small></div></li>)}</ul></div>}
+            <ul className="posting-skills posting-cv-missing-list">{gap.addToCv.map((s) => <li key={s.uri}><details className="posting-card posting-cv-evidence"><summary>{s.label}</summary><small className="posting-from">{t('The ad says “{line}”', { line: (found ?? []).find((f) => f.uri === s.uri)?.from ?? '' })}</small></details></li>)}</ul></div>}
           {gap.notYet.length > 0 && <div className="posting-cv-next"><strong>{gap.notYet.length} {t('skills still to learn')}</strong><button type="button" className="text-button" onClick={() => chooseView('skills')}>{t('Review skills to build')}</button></div>}
           <details className="posting-group posting-cv-shown"><summary>{t('Your CV already shows')} <span>{gap.shown.length}</span></summary>
             {gap.shown.length === 0 ? <p className="note">{t('None of the ticked skills yet.')}</p>
-              : <ul className="posting-skills">{gap.shown.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('Your CV says “{line}”', { line: cvSkillBy.get(s.uri)?.from ?? '' })}</small></div></li>)}</ul>}
+              : <ul className="posting-skills">{gap.shown.map((s) => <li key={s.uri}><details className="posting-card posting-cv-evidence"><summary>{s.label}</summary><small className="posting-from">{t('Your CV says “{line}”', { line: cvSkillBy.get(s.uri)?.from ?? '' })}</small></details></li>)}</ul>}
           </details>
-        </div>
-        <CvAvoid cvText={cvText} />
+        </div><CvAvoid cvText={cvText} /></div>
       </div>}
     </section>}
   </div>;

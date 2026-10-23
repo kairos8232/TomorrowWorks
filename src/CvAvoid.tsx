@@ -14,19 +14,16 @@ export function CvAvoid({ cvText }: { cvText: string }) {
   const toggle = (id: string) => { const next = new Set(done); if (next.has(id)) next.delete(id); else next.add(id); setDone(next); };
 
   return <section className="panel cv-avoid" aria-labelledby="cv-avoid-head">
-    <h2 id="cv-avoid-head">{t('Things to avoid in your CV')}</h2>
-    <p className="note">{t('Text checks only. Review the file itself too.')}</p>
-
-    <h3>{t('Found in your text')} <span>{findings.length}</span></h3>
+    <div className="cv-avoid-heading"><div><h2 id="cv-avoid-head">{t('CV checks')}</h2><p className="note">{t('Text checks only. Review the file itself too.')}</p></div><strong aria-label={t('{n} text issues to review', { n: findings.length })}>{findings.length}</strong></div>
     {findings.length === 0
       ? <p className="note">{t('Nothing found in the text we can check. Now check the file itself below.')}</p>
       : <ul className="cv-avoid-list">{findings.map((f) => <li key={f.id}>
         <strong>{t(f.message)}</strong>
-        <small className="posting-from">{f.evidence.join(' · ')}</small>
-        <small>{src(f.source)}</small>
+        <small>{f.evidence.join(' · ')} <span aria-hidden="true">·</span> {src(f.source)}</small>
       </li>)}</ul>}
 
     <details className="cv-avoid-checklist"><summary>{t('Check the file yourself')} <span>{done.size}/{CV_MANUAL_CHECKS.length}</span></summary>
+      <div className="cv-avoid-progress" role="img" aria-label={t('{done} of {total} file checks reviewed', { done: done.size, total: CV_MANUAL_CHECKS.length })}><span style={{ width: `${done.size / CV_MANUAL_CHECKS.length * 100}%` }} /></div>
       <p className="note">{t('We cannot see columns, headers or the file type from pasted text.')}</p>
       <ul className="cv-avoid-list cv-avoid-manual">{CV_MANUAL_CHECKS.map((c) => <li key={c.id}>
         <label><input type="checkbox" checked={done.has(c.id)} onChange={() => toggle(c.id)} /> <span>{t(c.text)}</span></label>
