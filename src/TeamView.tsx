@@ -148,7 +148,10 @@ function TeamBody({ team }: { team: (typeof teams)[number] }) {
             <label htmlFor="team-role">{t('Plan for role')}</label>
             <select id="team-role" value={target.id} onChange={(event) => setTargetId(event.target.value)}>{ranked.map((item) => <option key={item.role.id} value={item.role.id}>{roleTitle(item.role.title)}</option>)}</select>
           </div>
-          <span>{t('{n} moving', { n: shared.movers })} · {t('{n} shared gaps', { n: shared.gaps.length })}</span>
+          <div className="team-target-stats" aria-live="polite">
+            <span>{t('{n} moving', { n: shared.movers })}</span>
+            <span>{t('{n} shared gaps', { n: shared.gaps.length })}</span>
+          </div>
         </div>}
       </div>
       <div className="team-modes" aria-label={t('Team view')}>

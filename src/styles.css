@@ -1003,10 +1003,14 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-source.baseline { background: #eef0f3; color: #3a4450; }
 .sdg-baseline { color: #3a4450; }
 .sdg-baseline-row { background: #fafbfa; }
-.sdg-possible { margin-top: 10px; font-size: 14px; color: #3a4450; }
-.sdg-possible summary { cursor: pointer; font-weight: 600; }
-.sdg-possible ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
-.sdg-possible small { color: #5d6873; }
+.sdg-possible { margin-top: 14px; color: #3a4450; }
+.sdg-possible summary { cursor: pointer; font-size: 15px; font-weight: 700; }
+.sdg-possible ul { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid #e3e7e3; }
+.sdg-possible li { display: grid; gap: 7px; padding: 13px 0; border-bottom: 1px solid #e3e7e3; }
+.sdg-possible-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 9px; }
+.sdg-possible-heading strong { min-width: 0; font-size: 15px; line-height: 1.4; }
+.sdg-possible-evidence { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; font-size: 14px; line-height: 1.45; }
+.sdg-possible-evidence small { color: #5d6873; font-size: 13px; white-space: nowrap; }
 
 /* Guided learning checks in individual plans. */
 .learning-progress { margin-top: 18px; padding: 16px 18px; border: 1px solid #d9ded9; border-radius: 8px; background: #f7f8f6; }
@@ -1418,7 +1422,8 @@ details.course-check { padding-block:0; }
 .team-target-field { display: grid; gap: 6px; }
 .team-target label { font-size: 17px; font-weight: 700; }
 .team-target select { width: min(100%, 340px); min-width: 260px; min-height: 46px; padding: 9px 12px; font: inherit; font-size: 18px; font-weight: 600; background: #fff; }
-.team-target span { padding-bottom: 11px; font-size: 15px; color: #5d6873; }
+.team-target-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 46px; }
+.team-target-stats span { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 10px; border-radius: 999px; background: #e9f1ea; color: #315f46; font-size: 15px; font-weight: 600; }
 .team-overview { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
 .team-overview .panel { min-width: 0; }
 .team-overview h2, .team-compare h2 { margin: 0 0 12px; font-size: 21px; }
@@ -1435,7 +1440,7 @@ details.course-check { padding-block:0; }
 .team-priority-note { color: #5d6873; font-size: 14px; margin: 12px 0 0; }
 .team-compare .note { margin: 0; }
 @media (max-width: 900px) { .team-overview { grid-template-columns: 1fr; } }
-@media (max-width: 700px) { .team-toolbar { align-items: stretch; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 6px; } .team-target select { width: 100%; min-width: 0; } .team-target span { padding-bottom: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
+@media (max-width: 700px) { .team-toolbar { align-items: stretch; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 6px; } .team-target select { width: 100%; min-width: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
 
 /* Low-data mode sits in the account menu, below the demo people. */
 .viewer-switch li.viewer-setting { margin-top: 4px; padding-top: 4px; border-top: 1px solid #d8ddd7; }

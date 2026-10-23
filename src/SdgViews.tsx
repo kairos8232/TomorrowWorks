@@ -29,7 +29,10 @@ export function PossibleLinks({ skills, exclude }: { skills: Skill[]; exclude: s
   if (list.length === 0) return null;
   return <details className="sdg-possible">
     <summary>{t('Possible links ({n}), not confirmed', { n: list.length })}</summary>
-    <ul>{list.map((p) => <li key={p.target}><SdgBadge target={p.target} short /> {t(targetTitle(p.target))} <small>· {names(p.skills, t)} · {t('similarity {x}', { x: p.best.toFixed(2) })}</small></li>)}</ul>
+    <ul>{list.map((p) => <li key={p.target}>
+      <div className="sdg-possible-heading"><SdgBadge target={p.target} short /><strong>{t(targetTitle(p.target))}</strong></div>
+      <div className="sdg-possible-evidence"><span>{names(p.skills, t)}</span><small>{t('similarity {x}', { x: p.best.toFixed(2) })}</small></div>
+    </li>)}</ul>
   </details>;
 }
 
