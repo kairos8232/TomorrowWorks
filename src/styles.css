@@ -1,7 +1,5 @@
 :root { font-family: 'Carlito', sans-serif; font-size: 17px; color: #1c2430; background: #f7f8f6; font-synthesis: none; }
 .data-saver { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
-.workspace-saver-toggle { border: 1px solid #cbd4cc; background: transparent; color: #455449; padding: 7px 10px; font-size: 14px; white-space: nowrap; }
-.workspace-saver-toggle[aria-checked="true"] { background: #e2eee5; color: #244d39; }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
 button { font: inherit; cursor: pointer; }
@@ -971,7 +969,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .workspace-utility .viewer-switch summary .avatar { width: 28px; height: 28px; font-size: 14px; }
 .workspace-utility .viewer-switch summary small { display: block; font-size: 13px; line-height: 1.2; color: #657069; }
 .workspace-utility .viewer-switch summary strong { font-size: 15px; line-height: 1.2; font-weight: 600; color: #0c182c; }
-.workspace-utility .viewer-switch ul { position: absolute; top: calc(100% + 10px); right: 0; width: 260px; max-height: 360px; overflow: auto; z-index: 50; box-shadow: 0 16px 40px rgba(12, 24, 44, .12); }
+.workspace-utility .viewer-switch ul { position: absolute; top: calc(100% + 10px); right: 0; width: 280px; max-height: calc(100vh - 120px); overflow: auto; z-index: 50; box-shadow: 0 16px 40px rgba(12, 24, 44, .12); }
 .workspace-utility .viewer-switch > .note { display: none; }
 .workspace-subnav { display: flex; align-items: center; gap: 8px; margin: -18px 0 38px; padding: 0 0 16px; border-bottom: 1px solid #cfd5cf; overflow-x: auto; scrollbar-width: none; }
 .workspace-subnav::-webkit-scrollbar { display: none; }
@@ -989,7 +987,6 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 
 @media (max-width: 1050px) {
   .workspace-primary { margin-left: 48px; gap: 24px; }
-  .workspace-utility .viewer-switch { display: none; }
 }
 
 @media (max-width: 760px) {
@@ -1002,9 +999,10 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
   .workspace-mobile-menu nav { position: absolute; top: calc(100% + 10px); right: 0; width: 230px; display: grid; padding: 10px; background: #fff; border: 1px solid #d8ddd7; box-shadow: 0 14px 36px rgba(12, 24, 44, .1); }
   .workspace-mobile-menu nav button { border: 0; background: transparent; padding: 12px; text-align: left; color: #0c182c; }
   .workspace-mobile-menu nav button:hover { background: #f0f3ef; }
-  .workspace-utility .workspace-saver-toggle { display: none; }
-  .workspace-mobile-menu .workspace-menu-saver { border-top: 1px solid #d8ddd7; color: #315f46; }
-  .workspace-utility .viewer-switch { display: none; }
+  .workspace-utility { gap: 6px; }
+  .workspace-utility .viewer-switch summary { padding: 6px 4px; gap: 4px; }
+  .workspace-utility .viewer-switch summary > span:nth-child(2) { display: none; }
+  .workspace-utility .viewer-switch ul { position: fixed; top: 84px; left: 16px; right: 16px; width: auto; max-height: calc(100vh - 100px); }
   .page-head { grid-template-columns: 1fr; gap: 20px; }
 }
 
@@ -1453,3 +1451,8 @@ details.course-check { padding-block:0; }
 .team-compare .note { margin: 0; }
 @media (max-width: 900px) { .team-overview { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .team-toolbar { align-items: flex-start; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 7px; } .team-target select { width: 100%; } .team-target span { margin-left: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
+
+/* Low-data mode sits in the account menu, below the demo people. */
+.viewer-switch li.viewer-setting { margin-top: 4px; padding-top: 4px; border-top: 1px solid #d8ddd7; }
+.viewer-setting-state { margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #eef0f3; color: #3a4450; font-size: 13px; font-weight: 600; }
+.viewer-setting button[aria-checked="true"] .viewer-setting-state { background: #dfeae3; color: #244d39; }

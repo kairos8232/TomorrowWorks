@@ -38,9 +38,9 @@ My career (sidebar navigation)           The job market (browse any time)
 - *Which SDG targets the funded training reaches*: per strong target, "n of m people" and a bar split by group colour with group counts; 4.4 baseline row; possible links collapsed. **Totals only, no names.**
 - *Routes that would reach more targets*: table by role of 2nd/3rd moves that add targets the best move does not reach (people count by group, targets added). Rule and tests: `src/region.ts` (`regionSdg`, `routesToFund`), `src/region.test.ts`.
 
-## Data saver (sidebar, 22 Oct)
+## Low-data mode (account menu, 23 Oct)
 
-- Switch under the language picker. On: no web font (system fonts), news and labour-force panels show the bundled snapshot and fetch live data only on request (*Load today's headlines*). Starts on when the browser reports save-data; the choice is remembered in this browser. Independently, screens other than Home, Your skills and Your moves load on demand, and the server gzips text files and caches `dist/assets/` for a year. First visit measured at 229 KB (Chromium, 390 px, via `server/index.mjs`, font excluded because it is blocked in Claude's workspace).
+- Lives in the account menu (the *View as* menu, now also shown on tablets and phones), in its own row below the demo people: *Low-data mode*, On/Off, "Uses system fonts. News and labour figures show the last saved copy until you load today's." It is not in the header or the language menu. Not switched on by connection speed; it starts on only when the device's own Data Saver is on (`navigator.connection.saveData`). On: no web font (system fonts), news and labour-force panels show the bundled snapshot and fetch live data only on request (*Load today's headlines*). Starts on when the browser reports save-data; the choice is remembered in this browser. Independently, screens other than Home, Your skills and Your moves load on demand, and the server gzips text files and caches `dist/assets/` for a year. First visit measured at 229 KB (Chromium, 390 px, via `server/index.mjs`, font excluded because it is blocked in Claude's workspace).
 
 ## Language (sidebar)
 

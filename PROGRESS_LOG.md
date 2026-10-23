@@ -1,5 +1,12 @@
 # Progress log
 
+## 23 Oct 2026 — Low-data mode moved into the account menu
+
+- Carson: remove the switch from the header; put it in the account menu; keep the language menu for language only; no auto-enable on slow connections (the device's own Data Saver is the only automatic trigger).
+- Done: *Low-data mode* is a row below the demo people in the *View as* menu, with On/Off and "Uses system fonts. News and labour figures show the last saved copy until you load today's." The header button and the phone Menu entry are gone. The account menu was hidden below 1050 px, so phones could not reach it; it now shows as an avatar on tablets and phones and opens full width.
+- Build and 115 tests pass; Chromium 1300 px and 390 px checked, no page errors, no horizontal overflow (the old 8 px header overflow is gone). New EN/MS/ZH strings (*Low-data mode*, its line, On/Off) need team review.
+- Pitch numbers still to measure on the Replit deployment, cache disabled, two journeys: Your skills → Your moves (font saving only, about 60 KB) and Your moves → Job ads → Workplace news (adds the news and labour-force requests). The earlier 247/278/309 KB figures came from a local server and must not be quoted as production.
+
 ## 23 Oct 2026 — Workplace news topics were too loose
 
 - Carson: headlines looked wrong. Nothing was hard-coded; the 21 Oct snapshot showed 19 "AI and automation" headlines that were mostly AI business news (Nvidia, stock markets, data centres), and "Hiring" matched "extremist recruitment" and a Roblox arrest story; GDELT titles had spaces before punctuation.

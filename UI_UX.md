@@ -14,7 +14,7 @@ This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.m
 
 The user preferred the compact plan redesign over the earlier attempt to move a long page into many expanders. **Reduce the content itself; do not simply hide the same copy.** Your plan now has one working surface: choose a course, see its provider, checked/AI status and linked skills, then open it. Switching courses changes that surface directly. The role selector sits above it; a short facts row holds optional SKM certification, access where relevant, linked SDG targets and two small locked milestone markers. The redundant large page title, repeated course cards, progress box and long explanatory stack were removed. Optional demo evidence remains with the selected course; the completion limitation stays visible beside it. Keep the source and verification distinctions that affect a person's decision, using short labels near the choice.
 
-On wide screens, the plan's main choice and action fit in the first view. On phones, controls stack without horizontal page overflow, and the action appears before supporting facts. The mobile Data saver switch lives in Menu so the header fits. See [SCREENS.md](SCREENS.md) for current behaviour.
+On wide screens, the plan's main choice and action fit in the first view. On phones, controls stack without horizontal page overflow, and the action appears before supporting facts. Low-data mode lives in the account menu, which is reachable on phones. See [SCREENS.md](SCREENS.md) for current behaviour.
 
 ## Screen design rules
 

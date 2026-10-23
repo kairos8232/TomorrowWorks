@@ -232,7 +232,7 @@ function NavGroup({ label, items, screen, go }: { label: string; items: NavItem[
 }
 
 /** "View as" switcher: looks like an account menu, but only swaps fictional demo data. */
-function ViewerSwitch({ viewer, choose }: { viewer: ViewerId; choose: (v: ViewerId) => void }) {
+function ViewerSwitch({ viewer, choose, saver, toggleSaver }: { viewer: ViewerId; choose: (v: ViewerId) => void; saver: boolean; toggleSaver: () => void }) {
   const t = useT();
   const ref = useRef<HTMLDetailsElement>(null);
   const current = viewerById(viewer);
@@ -242,7 +242,11 @@ function ViewerSwitch({ viewer, choose }: { viewer: ViewerId; choose: (v: Viewer
       <span><strong>{current.name}</strong><small>{t(viewType)}</small></span></summary>
     <ul>{viewers.map((v) => <li key={v.id}><button type="button" aria-current={v.id === viewer ? 'true' : undefined} onClick={() => { ref.current!.open = false; choose(v.id); }}>
       <strong>{v.id === 'me' ? t('Me (my own skills)') : v.name}</strong><small>{t(v.group)}</small>
-    </button></li>)}</ul>
+    </button></li>)}
+      <li className="viewer-setting"><button type="button" role="switch" aria-checked={saver} onClick={toggleSaver}>
+        <strong>{t('Low-data mode')}<span className="viewer-setting-state">{saver ? t('On') : t('Off')}</span></strong>
+        <small>{t('Uses system fonts. News and labour figures show the last saved copy until you load today’s.')}</small>
+      </button></li></ul>
     <p className="note">{t('Demo people are fictional. No sign-in in this prototype.')}</p>
   </details>;
 }
@@ -325,13 +329,11 @@ function App() {
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
-            <button type="button" className="workspace-menu-saver" role="switch" aria-checked={saver} onClick={toggleSaver}>{t('Data saver')}: {saver ? t('On') : t('Off')}</button>
           </nav>
         </details>
         <div className="workspace-utility">
-          <ViewerSwitch viewer={viewer} choose={start} />
+          <ViewerSwitch viewer={viewer} choose={start} saver={saver} toggleSaver={toggleSaver} />
           <LanguagePicker lang={lang} setLang={setLang} />
-          <button type="button" className="workspace-saver-toggle" role="switch" aria-checked={saver} onClick={toggleSaver}>{t('Data saver')}: {saver ? t('On') : t('Off')}</button>
         </div>
       </div>
     </header>
