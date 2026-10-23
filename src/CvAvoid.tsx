@@ -10,6 +10,7 @@ export function CvAvoid({ cvText }: { cvText: string }) {
   const [done, setDone] = useState<Set<string>>(new Set());
   const findings = useMemo(() => checkCvText(cvText), [cvText]);
   const used = new Set([...findings.map((f) => f.source), ...CV_MANUAL_CHECKS.map((c) => c.source)]);
+  const manualSources = [...new Set(CV_MANUAL_CHECKS.map((c) => c.source))];
   const src = (id: string) => <a href={CV_SOURCES[id].url} target="_blank" rel="noreferrer">{t(CV_SOURCES[id].name.split(':')[0])}</a>;
   const toggle = (id: string) => { const next = new Set(done); if (next.has(id)) next.delete(id); else next.add(id); setDone(next); };
 
@@ -25,10 +26,12 @@ export function CvAvoid({ cvText }: { cvText: string }) {
     <details className="cv-avoid-checklist"><summary>{t('Check the file yourself')} <span>{done.size}/{CV_MANUAL_CHECKS.length}</span></summary>
       <div className="cv-avoid-progress" role="img" aria-label={t('{done} of {total} file checks reviewed', { done: done.size, total: CV_MANUAL_CHECKS.length })}><span style={{ width: `${done.size / CV_MANUAL_CHECKS.length * 100}%` }} /></div>
       <p className="note">{t('We cannot see columns, headers or the file type from pasted text.')}</p>
-      <ul className="cv-avoid-list cv-avoid-manual">{CV_MANUAL_CHECKS.map((c) => <li key={c.id}>
-        <label><input type="checkbox" checked={done.has(c.id)} onChange={() => toggle(c.id)} /> <span>{t(c.text)}</span></label>
-        <small>{src(c.source)}</small>
-      </li>)}</ul>
+      <div className="cv-avoid-manual-groups">{manualSources.map((source) => <div className="cv-avoid-manual-group" key={source}>
+        <p className="cv-avoid-manual-source">{t('Guidance from')} {src(source)}</p>
+        <ul className="cv-avoid-list cv-avoid-manual">{CV_MANUAL_CHECKS.filter((c) => c.source === source).map((c) => <li key={c.id}>
+          <label><input type="checkbox" checked={done.has(c.id)} onChange={() => toggle(c.id)} /> <span>{t(c.text)}</span></label>
+        </li>)}</ul>
+      </div>)}</div>
     </details>
 
     <details className="cv-avoid-sources"><summary>{t('Sources')}</summary>

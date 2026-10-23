@@ -1579,6 +1579,7 @@ details.course-check { padding-block:0; }
 .posting-cv-shown summary { cursor: pointer; font-size: 17px; font-weight: 700; }
 .posting-cv-shown[open] summary { margin-bottom: 12px; }
 .posting-cv-shown summary span { color: #315f46; margin-left: 6px; }
+.posting-cv-shown .posting-skills { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
 .posting-cv .cv-avoid { min-width: 0; margin: 0; padding: 16px; }
 .posting-cv-evidence summary { cursor: pointer; font-weight: 700; }
 .posting-cv-evidence summary::marker { color: #477157; }
@@ -1626,7 +1627,12 @@ details.course-check { padding-block:0; }
 .cv-avoid-checklist[open] .note { margin: 12px 0; }
 .cv-avoid-progress { height: 7px; margin-top: 12px; overflow: hidden; border-radius: 99px; background: #e8ece9; }
 .cv-avoid-progress span { display: block; height: 100%; border-radius: 99px; background: #477157; }
-.cv-avoid-manual li { border: 1px solid #d9ded9; background: #fff; }
+.cv-avoid-manual-groups { display: grid; gap: 14px; }
+.cv-avoid-manual-source { margin: 0 0 5px; color: #5d6873; font-size: 14px; }
+.cv-avoid-manual-source a { color: #1e6b4f; }
+.cv-avoid-manual { gap: 0; }
+.cv-avoid-manual li { border: 0; border-bottom: 1px solid #e2e6e2; border-radius: 0; padding: 9px 2px; background: transparent; }
+.cv-avoid-manual li:last-child { border-bottom: 0; }
 .cv-avoid-sources { margin-top: 14px; font-size: 14px; }
 .cv-avoid-sources ul { padding-left: 18px; }
 @media (max-width: 800px) {

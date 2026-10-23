@@ -44,6 +44,7 @@ const dict: Record<string, Entry> = {
   'Still to learn': { ms: 'Masih perlu dipelajari', zh: '仍需学习' },
   '{shown} shown on CV, {add} need CV evidence, {learn} still to learn': { ms: '{shown} ditunjukkan pada CV, {add} perlukan bukti CV, {learn} masih perlu dipelajari', zh: '简历已体现 {shown} 项、需补充事例 {add} 项、仍需学习 {learn} 项' },
   'CV checks': { ms: 'Semakan CV', zh: '简历检查' },
+  'Guidance from': { ms: 'Panduan daripada', zh: '参考建议：' },
   '{n} text issues to review': { ms: '{n} isu teks untuk disemak', zh: '{n} 项文字问题待检查' },
   '{done} of {total} file checks reviewed': { ms: '{done} daripada {total} semakan fail telah disemak', zh: '已检查 {done}/{total} 项文件内容' },
   'From this ad': { ms: 'Daripada iklan ini', zh: '来自这则广告' },

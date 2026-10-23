@@ -218,7 +218,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
           {gap.notYet.length > 0 && <div className="posting-cv-next"><strong>{gap.notYet.length} {t('skills still to learn')}</strong><button type="button" className="text-button" onClick={() => chooseView('skills')}>{t('Review skills to build')}</button></div>}
           <details className="posting-group posting-cv-shown"><summary>{t('Your CV already shows')} <span>{gap.shown.length}</span></summary>
             {gap.shown.length === 0 ? <p className="note">{t('None of the ticked skills yet.')}</p>
-              : <ul className="posting-skills">{gap.shown.map((s) => <li key={s.uri}><details className="posting-card posting-cv-evidence"><summary>{s.label}</summary><small className="posting-from">{t('Your CV says “{line}”', { line: cvSkillBy.get(s.uri)?.from ?? '' })}</small></details></li>)}</ul>}
+              : <ul className="posting-skills">{gap.shown.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('Your CV says “{line}”', { line: cvSkillBy.get(s.uri)?.from ?? '' })}</small></div></li>)}</ul>}
           </details>
         </div><CvAvoid cvText={cvText} /></div>
       </div>}
