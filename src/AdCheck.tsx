@@ -25,7 +25,6 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const t = useT();
   const [text, setText] = useState('');
   const [cvText, setCvText] = useState(initialCv);
-  const [cvExpanded, setCvExpanded] = useState(false);
   const [found, setFound] = useState<Suggestion[] | null>(null);
   const [cvFound, setCvFound] = useState<Suggestion[] | null>(null);
   const [ticked, setTicked] = useState<Set<string>>(new Set());
@@ -62,7 +61,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
     }
   }
   const invalidate = () => { requestVersion.current += 1; setFound(null); setCvFound(null); setTicked(new Set()); setStatus({ busy: false, message: '' }); };
-  const clear = () => { setText(''); setCvText(''); setCvExpanded(false); invalidate(); };
+  const clear = () => { setText(''); setCvText(''); invalidate(); };
   const toggle = (uri: string) => { const next = new Set(ticked); if (next.has(uri)) next.delete(uri); else next.add(uri); setTicked(next); };
 
   const ad = useMemo(() => (found ?? []).filter((s) => ticked.has(s.uri)), [found, ticked]);
@@ -90,7 +89,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
     <section className="panel ad-entry" aria-labelledby="ad-head">
       <div className="ad-entry-head">
         <div><h2 id="ad-head">{t('Job ad')}</h2><p>{t('Paste the duties and requirements. We will find the skills to review.')}</p></div>
-        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); setCvExpanded(false); invalidate(); }}>{t('Try a fictional example')}</button>
+        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); invalidate(); }}>{t('Try a fictional example')}</button>
       </div>
       <div className="ad-entry-grid">
         <div className="ad-entry-main">
@@ -98,11 +97,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
           <textarea id="ad-text" value={text} onChange={(e) => { setText(e.target.value); invalidate(); }} rows={8} maxLength={20000} placeholder={t('Paste the duties and requirements here')} />
         </div>
         <div className="ad-entry-cv">
-          <div><h3>{t('Your CV')} <span className="optional-badge">{t('optional')}</span></h3><p>{t('Compare what your CV already shows.')}</p></div>
-          {cvExpanded ? <><label className="visually-hidden" htmlFor="ad-cv-text">{t('Paste your CV text')}</label>
-            <textarea id="ad-cv-text" value={cvText} onChange={(e) => { setCvText(e.target.value); invalidate(); }} rows={7} maxLength={20000} placeholder={t('Paste your experience and skills here')} /></>
-            : <div className="ad-cv-prompt">{cvText.trim() && <strong>{t('CV added for comparison')}</strong>}<button type="button" className="secondary-button" onClick={() => setCvExpanded(true)}>{t(cvText.trim() ? 'Edit CV' : 'Add CV text')}</button></div>}
-          {cvText.trim() && <button type="button" className="text-button ad-cv-remove" onClick={() => { setCvText(''); setCvExpanded(false); invalidate(); }}>{t('Remove CV')}</button>}
+          <div><h3>{t('Your CV')}</h3><p>{t('Optional · Compare the skills it shows.')}</p></div>
+          <textarea id="ad-cv-text" aria-label={t('Your CV')} value={cvText} onChange={(e) => { setCvText(e.target.value); invalidate(); }} rows={7} maxLength={20000} placeholder={t('Paste your experience and skills here')} />
         </div>
       </div>
       <div className="ad-entry-actions">

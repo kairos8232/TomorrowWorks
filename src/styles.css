@@ -1479,10 +1479,7 @@ details.course-check { padding-block:0; }
 .ad-entry-main textarea { flex: 1; min-height: 220px; }
 .ad-entry-cv { display: flex; flex-direction: column; min-width: 0; gap: 12px; padding: 18px; border: 1px solid #d9ded9; border-radius: 10px; background: #f7f9f7; }
 .ad-entry-cv h3 { margin: 0 0 4px; font-size: 18px; }
-.ad-entry-cv textarea { min-height: 180px; background: #fff; }
-.ad-cv-prompt { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; flex: 1; gap: 12px; min-height: 120px; color: #294b39; }
-.ad-cv-prompt strong { font-size: 18px; }
-.ad-cv-remove { align-self: flex-start; }
+.ad-entry-cv textarea { flex: 1; min-height: 180px; background: #fff; }
 .ad-entry-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding-top: 16px; margin-top: 18px; border-top: 1px solid #e3e7e3; }
 .ad-entry-actions p { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.4; }
 .ad-status { margin: 12px 0 0; }
@@ -1537,7 +1534,6 @@ details.course-check { padding-block:0; }
 @media (max-width: 800px) {
   .ad-entry-grid { grid-template-columns: 1fr; }
   .ad-entry-main textarea { min-height: 210px; }
-  .ad-cv-prompt { min-height: 0; }
 }
 @media (max-width: 560px) {
   .ad-entry-head { flex-direction: column; }
@@ -1576,12 +1572,24 @@ details.course-check { padding-block:0; }
 
 /* Fresh-graduate step bar: Your CV, A job ad, Your plan. */
 .grad-steps { margin: -18px 0 30px; padding: 0 0 16px; border-bottom: 1px solid #cfd5cf; }
-.grad-steps ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.grad-steps li + li::before { content: ''; display: inline-block; width: 24px; height: 1px; margin-right: 8px; vertical-align: middle; background: #b8c2ba; }
-.grad-steps li { display: flex; align-items: center; }
+.grad-steps ol { display: flex; flex-wrap: nowrap; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.grad-steps li + li::before { content: ''; display: block; flex: none; width: 8px; height: 8px; margin-right: 8px; border-top: 1.5px solid #849589; border-right: 1.5px solid #849589; transform: rotate(45deg); }
+.grad-steps li { display: flex; align-items: center; min-width: 0; }
 .grad-steps button { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; background: transparent; color: #59645e; padding: 8px 14px; font-size: 16px; cursor: pointer; }
 .grad-steps button:hover { background: #f0f3ef; color: #0c182c; }
 .grad-step-mark { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid #b8c2ba; font-size: 14px; }
 .grad-steps .current button { background: #dfeae3; color: #244d39; font-weight: 700; }
 .grad-steps .current .grad-step-mark { background: #477157; border-color: #477157; color: #fff; }
 .grad-steps .done .grad-step-mark { background: #dfeae3; border-color: #477157; color: #244d39; }
+@media (max-width: 560px) {
+  .grad-steps ol { gap: 3px; }
+  .grad-steps button { gap: 5px; padding: 7px 6px; font-size: 14px; white-space: nowrap; }
+  .grad-step-mark { width: 21px; height: 21px; font-size: 12px; }
+  .grad-steps li + li::before { width: 6px; height: 6px; margin-right: 3px; }
+}
+@media (max-width: 400px) {
+  .grad-steps ol { gap: 2px; }
+  .grad-steps button { gap: 4px; padding: 6px 4px; font-size: 14px; }
+  .grad-step-mark { width: 20px; height: 20px; }
+  .grad-steps li + li::before { width: 5px; height: 5px; margin-right: 2px; }
+}

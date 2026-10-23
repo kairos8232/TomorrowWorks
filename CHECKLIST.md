@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## Job-ad check and job-site links — 24 Oct 2026
 
+- [x] Keep the optional CV textarea visible beside the job-ad textarea, including after a fictional example fills both; remove the redundant CV status, edit and remove controls. Centre the guided three-step path with chevron separators. Verified the empty and example states in the local browser at desktop width; checked narrow-width CSS rules, build and 137 tests pass.
 - [x] Redesign *Check an ad* as a focused ad form with an optional CV card, concise privacy note, visual skill totals and fit bar, and CV file checks placed after matching. Keep input and results in the same step. Check the form and result states at 1440 px and 390 px with a local mocked matcher; unticking updates totals and the plan. Build and 137 tests pass. Real RunPod matching remains in the separate open item below.
 - [x] *Find this role* links on the Your moves role page (`src/jobSearch.ts`); address building covered by tests; build and tests pass; checked at 1440 px.
 - [x] *Check an ad* screen (`src/AdCheck.tsx`, rule in `src/adFit.ts`, `SIGNALS_AND_MATCHING.md`): same fit rule as a role, closest role with DOSM and ILO signals, checked courses for the gaps. Unit tests for the rule; browser check at 1440 px and 390 px with the match response mocked (grouping, untick updates the counts, 503 message, no skills yet, no horizontal overflow).
