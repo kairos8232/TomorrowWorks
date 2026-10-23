@@ -9,6 +9,7 @@ import { interestData, interestFit, topTypes, type InterestType } from './intere
 import { goalFit, roleGoalLink, sdgData } from './sdg';
 import { RoleSdgLine } from './SdgViews';
 import { FairnessNote } from './FairnessNote';
+import { JobLinks } from './JobLinks';
 import { recommendMoves, scenarios, type Extras, type RoleScore, type ScenarioId } from './scoring';
 import { useLang, useT, useTx } from './i18n';
 
@@ -155,6 +156,7 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
       </div>
       <div className="detail-evidence"><h3>{t('This move and the SDGs')}</h3><RoleSdgLine roleId={role.id} /><InterestLine roleId={role.id} picks={picks} /></div>
     </div>
+    <JobLinks title={role.title} />
   </section>;
 }
 

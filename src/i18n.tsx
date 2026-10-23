@@ -14,6 +14,8 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  "Find this role": { ms: "Cari peranan ini", zh: "查找这个职位" },
+  "Opens each site’s own search for “{role}”. We do not collect or count the ads.": { ms: "Membuka carian setiap laman untuk “{role}”. Kami tidak mengumpul atau mengira iklan.", zh: "打开各网站自己的“{role}”搜索。我们不收集也不统计这些招聘广告。" },
   "Your learning route": { ms: "Laluan pembelajaran anda", zh: "你的学习路线" },
   "Build {n} skills for {role}": { ms: "Bina {n} kemahiran untuk {role}", zh: "为 {role} 培养 {n} 项技能" },
   "{n} skills to build": { ms: "{n} kemahiran untuk dibina", zh: "需培养 {n} 项技能" },

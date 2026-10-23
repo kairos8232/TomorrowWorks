@@ -326,6 +326,11 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .role-focus .interest-line { border-top: 1px solid #d9ded9; padding-top: 12px; }
 .role-focus a { color: #1e6b4f; }
 @media (max-width: 900px) { .role-focus-content { grid-template-columns: minmax(0, 1fr); } }
+.detail-find { margin-top: 16px; border: 1px solid #d9ded9; border-radius: 8px; padding: 16px; display: grid; gap: 8px; }
+.detail-find h3 { margin: 0; font-size: 17px; }
+.detail-find .note { margin: 0; }
+.detail-find ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.detail-find a { color: #1e6b4f; font-weight: 700; }
 .moves-update { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 22px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 14px 18px; }
 .moves-update p { margin: 0; line-height: 1.5; }
 .moves-update > div { display: flex; flex-wrap: wrap; gap: 12px 22px; }

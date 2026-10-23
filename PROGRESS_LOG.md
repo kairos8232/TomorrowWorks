@@ -1,5 +1,13 @@
 # Progress log
 
+## 24 Oct 2026 — Find this role: job-site search links
+
+- Carson: combine Job market and Career path by pointing from a matched role to real job ads. We do not scrape LinkedIn or JobStreet (their terms forbid it, the competition allows only open data from the publisher, and open data has no per-skill vacancy counts, so any count would be invented).
+- Done: *Your moves* role page has a *Find this role* row: the role title goes into JobStreet, LinkedIn and Indeed search addresses (`src/jobLinks.ts`, tests in `src/jobLinks.test.ts`) and a MYFutureJobs link. Nothing is fetched or counted by us; the person sees each site's own results.
+- Not verified: the four links were built from each site's usual address format, but this workspace cannot open those sites. Carson to click-test them once from the live app. MYFutureJobs opens its home page (no search address known). New EN/MS/ZH strings need team review.
+
+---
+
 ## 23 Oct 2026 — Home: removed the "How it works" label
 
 - Carson: the label above *Choose where to start.* did not match the section (it is a chooser, not an explanation) and looked like selected text. Removed it and left-aligned the heading with the cards. The header link that jumped to this section is now *Where to start* (was *How it works*). New EN/MS/ZH string for review. Build and 115 tests pass; checked at 1300 px and 390 px, no overflow.
