@@ -289,6 +289,8 @@ const dict: Record<string, Entry> = {
   'Search the skill list': { ms: 'Cari dalam senarai kemahiran', zh: '搜索技能列表' },
   'No skills yet. Describe your work or search the list above.': { ms: 'Belum ada kemahiran. Terangkan kerja anda atau cari dalam senarai di atas.', zh: '还没有技能。请描述你的工作或搜索上面的列表。' },
   'See my moves': { ms: 'Lihat langkah saya', zh: '查看我的职业选择' },
+  'Personalise your moves': { ms: 'Peribadikan langkah anda', zh: '个性化你的职业选择' },
+  'These choices only affect ranking when you turn them on in Your moves.': { ms: 'Pilihan ini hanya mempengaruhi susunan apabila anda menghidupkannya dalam Langkah anda.', zh: '只有在“你的职业选择”中开启后，这些选项才会影响排名。' },
   'Add at least one skill first.': { ms: 'Tambah sekurang-kurangnya satu kemahiran dahulu.', zh: '请先添加至少一项技能。' },
 
   // Moves step
