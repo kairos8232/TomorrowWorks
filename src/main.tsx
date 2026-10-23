@@ -109,9 +109,10 @@ function randomHeroRoute(previous: number): { path: string; pattern: number } {
   return { path: roundedRoute(routes[pattern]), pattern };
 }
 
-function Home({ start, startWithRole, go, lang, setLang }: {
+function Home({ start, startWithRole, startFreshGrad, go, lang, setLang }: {
   start: (who: ViewerId) => void;
   startWithRole: (role: string) => void;
+  startFreshGrad: () => void;
   go: (screen: Screen) => void;
   lang: Lang;
   setLang: (lang: Lang) => void;
@@ -163,12 +164,24 @@ function Home({ start, startWithRole, go, lang, setLang }: {
     <main>
       <section className="quiet-hero" aria-labelledby="home-title">
         <h1 id="home-title">{t('Your experience can take you further.')}</h1>
-        <form className="direction-form" onSubmit={submit}>
-          <label htmlFor="current-role">{t('I work as')}</label>
-          <div className="role-field"><input id="current-role" value={role} onChange={(event) => setRole(event.target.value)} autoComplete="organization-title" /></div>
-          <button type="submit">{t('Show me where it can lead')}</button>
-        </form>
-        <p className="quiet-proof">{t('Malaysian job-market evidence')} <span aria-hidden="true">·</span> {t('No CV required')}</p>
+        <div className="hero-choices">
+          <div className="choice-grid">
+            <section className="choice-card choice-main" aria-labelledby="choice-grad">
+              <h2 id="choice-grad">{t("I'm a fresh graduate")}</h2>
+              <p>{t('Check my CV against a job ad and see what to fix.')}</p>
+              <button type="button" className="choice-button" onClick={startFreshGrad}>{t('Check my CV')}</button>
+            </section>
+            <section className="choice-card" aria-labelledby="choice-work">
+              <h2 id="choice-work">{t('I already work')}</h2>
+              <form className="direction-form" onSubmit={submit}>
+                <label htmlFor="current-role">{t('I work as')}</label>
+                <div className="role-field"><input id="current-role" value={role} onChange={(event) => setRole(event.target.value)} autoComplete="organization-title" /></div>
+                <button type="submit">{t('Show me where it can lead')}</button>
+              </form>
+            </section>
+          </div>
+          <p className="quiet-proof">{t('Malaysian job-market evidence')} <span aria-hidden="true">·</span> {t('Nothing you type is stored')}</p>
+        </div>
         <svg ref={routeRef} className="journey-route" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
           <path className="journey-route-line" pathLength="1000" d="M -120 450 H 760 Q 820 450 820 390 V 280 Q 820 220 880 220 H 1200 Q 1280 220 1280 300 V 340 Q 1280 400 1220 400 H 1100 Q 1040 400 1040 460 V 500 Q 1040 560 1100 560 H 1560" />
         </svg>
@@ -307,11 +320,18 @@ function App() {
     setProfile({ ...emptyProfile(), currentRoleId: match?.id ?? null });
     go('skills');
   }
+  /** Fresh graduate start: an empty profile, straight to Check an ad (CV box and ad box). */
+  function startFreshGrad() {
+    setViewer('me');
+    setPlanRoleId(null);
+    setProfile(emptyProfile());
+    go('adcheck');
+  }
   const kind = viewerById(viewer).kind;
   const page = screen === 'home' ? null : titles[screen];
 
   const t = translate(lang);
-  if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
+  if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} startFreshGrad={startFreshGrad} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
   const inMarket = marketNav.some(item => item.id === screen);
   const isOrganisation = kind === 'team' || kind === 'region';

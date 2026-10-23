@@ -1503,3 +1503,26 @@ details.course-check { padding-block:0; }
 .cv-avoid-manual input { margin-top: 4px; }
 .cv-avoid-sources { margin-top: 14px; font-size: 14px; }
 .cv-avoid-sources ul { padding-left: 18px; }
+
+/* Home: two starting choices side by side (fresh graduate, already working). */
+.hero-choices { position: absolute; z-index: 1; left: 13.93%; top: 49%; width: min(72%, 1020px); }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.choice-card { display: flex; flex-direction: column; gap: 12px; padding: 24px 26px 26px; border: 1px solid #bababd; background: #f8f8f8; }
+.choice-main { border-color: #477157; }
+.choice-card h2 { margin: 0; font: 400 32px/1.1 'Carlito', sans-serif; letter-spacing: -.02em; }
+.choice-card p { margin: 0; color: #59665c; font-size: 18px; line-height: 1.4; }
+.choice-button { margin-top: auto; height: 62px; border: 1px solid #477157; background: #477157; color: #fff; padding: 0 24px; font: 400 22px/1.1 'Carlito', sans-serif; cursor: pointer; }
+.choice-button:hover { background: #385d49; border-color: #385d49; }
+.hero-choices .direction-form { position: static; width: 100%; display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: auto; }
+.hero-choices .direction-form label { font-size: 18px; color: #59665c; }
+.hero-choices .role-field, .hero-choices .direction-form > button { height: 62px; }
+.hero-choices .direction-form > button { background: transparent; color: #17563f; font-size: 22px; }
+.hero-choices .direction-form > button:hover { background: #e8efea; border-color: #477157; }
+.hero-choices .quiet-proof { position: static; margin: 18px 0 0; }
+@media (max-width: 1350px) { .hero-choices { left: 10%; top: 48%; width: 80%; } }
+@media (max-width: 1050px) { .hero-choices { left: 8%; width: 84%; } }
+@media (max-width: 760px) {
+  .hero-choices { position: static; width: 100%; margin-top: 40px; }
+  .choice-grid { grid-template-columns: 1fr; gap: 16px; }
+  .choice-card h2 { font-size: 28px; }
+}

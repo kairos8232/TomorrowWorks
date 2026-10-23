@@ -8,6 +8,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] *Check an ad* screen (`src/AdCheck.tsx`, rule in `src/adFit.ts`, `SIGNALS_AND_MATCHING.md`): same fit rule as a role, closest role with DOSM and ILO signals, checked courses for the gaps. Unit tests for the rule; browser check at 1440 px and 390 px with the match response mocked (grouping, untick updates the counts, 503 message, no skills yet, no horizontal overflow).
 - [x] CV vs ad: optional CV box; ad skills grouped as shown on the CV / held but not on the CV / not yet (`cvGap`, tests); server `/api/cv-skills` accepts `max` up to 80. Browser check at 1440 px with mocked matches.
 - [x] Things to avoid in your CV: 8 text rules + 8-item file checklist, each with a source link (`src/cvChecks.ts`, 9 tests; panel `src/CvAvoid.tsx`, browser-checked at 1440 px).
+- [x] Home: two starting choices, fresh graduate and already working (browser-checked at 1440, 1100, 390 px; fresh-grad button opens Check an ad). MS/ZH text unreviewed.
 - [ ] Read each source link once and confirm the wording matches (Carson).
 - [ ] Run *Try a fictional example* against the live Replit app (real RunPod matching) and check the matched skills make sense for both the ad and the CV; adjust `src/sampleAd.ts` if not. Not done: this workspace cannot reach RunPod.
 - [ ] Click-test the JobStreet, LinkedIn, Indeed and MYFutureJobs links once (this workspace cannot open those sites).

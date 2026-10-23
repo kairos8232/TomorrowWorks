@@ -170,3 +170,7 @@ Footer with sources and the ESCO acknowledgement. Layout checked at 1440 px and 
 - **Your skills:** three cards, **Growing in value · Holding steady · At risk** (top, middle and bottom third of skill groups), listing only the viewer's own skills (first 5, then *+n more*), a one-line reason, and one next step: *Build on these in Your plan*, *See roles that use them*, *See moves that reuse them*. With no skills: a button to add them.
 - **The jobs behind these signals:** the nine roles as plain rows, best outlook first: job-ad change, AI exposure, ▲▼ move since the previous quarter, a band label, and *Show its n skills (you have m)*; skill tags appear only when opened. If job ads fell for all nine, a note says the labels compare the jobs with each other.
 - *How this is worked out* (collapsed): the method note, the Q1/Q2 data switch and the "estimate, not measured demand" note.
+
+## Home: two starting choices (24 Oct 2026)
+
+Two cards side by side under the headline: *I'm a fresh graduate* (green button *Check my CV*, opens *Check an ad* with an empty profile) and *I already work* (the existing "I work as" box, outlined button). On a phone they stack, fresh graduate first. The line under them says nothing typed is stored (only language and low-data choice are kept in the browser).
