@@ -1526,3 +1526,15 @@ details.course-check { padding-block:0; }
   .choice-grid { grid-template-columns: 1fr; gap: 16px; }
   .choice-card h2 { font-size: 28px; }
 }
+
+/* Fresh-graduate step bar: Your CV, A job ad, Your plan. */
+.grad-steps { margin: -18px 0 30px; padding: 0 0 16px; border-bottom: 1px solid #cfd5cf; }
+.grad-steps ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.grad-steps li + li::before { content: ''; display: inline-block; width: 24px; height: 1px; margin-right: 8px; vertical-align: middle; background: #b8c2ba; }
+.grad-steps li { display: flex; align-items: center; }
+.grad-steps button { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; background: transparent; color: #59645e; padding: 8px 14px; font-size: 16px; cursor: pointer; }
+.grad-steps button:hover { background: #f0f3ef; color: #0c182c; }
+.grad-step-mark { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid #b8c2ba; font-size: 14px; }
+.grad-steps .current button { background: #dfeae3; color: #244d39; font-weight: 700; }
+.grad-steps .current .grad-step-mark { background: #477157; border-color: #477157; color: #fff; }
+.grad-steps .done .grad-step-mark { background: #dfeae3; border-color: #477157; color: #244d39; }

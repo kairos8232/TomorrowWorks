@@ -7,6 +7,7 @@
 - Evidence (in `SIGNALS_AND_MATCHING.md`): Hays Malaysia (via The Edge and HRD Asia, Feb 2024): when AI is used in hiring, 54.3% use it for resume screening, but adoption was still limited (17% minimal, 39.4% no plans); Resume Genius 2026 via People Matters (US only): 71% ATS, 19% AI screens out before a human; SCU Career Center ATS formatting list. Do not write "most companies use AI to filter CVs": the Malaysian data says adoption is still limited.
 - Done (step 2): *Things to avoid in your CV* (`cvChecks.ts`, `CvAvoid.tsx`): rule checks with source links, no score; layout items as a checklist. Sources: Jobstreet Malaysia (30 Jul 2025), Jobscan (Apr 2026), SCU, Jobstreet Singapore (17 Oct 2025). Enhancv study: auto-rejection is rare, so the wording is "easy to skip", not "rejected by AI".
 - Done (step 3a): home hero now two side-by-side cards (fresh graduate / already working), same theme. Next: step labels and Next buttons (steps 3b, 3c), if time.
+- Done (step 3b): three-step bar for the fresh-graduate path (Your CV, A job ad, Your plan), shown only after "Check my CV" on Home; browser-checked that role-box and sample-person starts do not show it. Next: Next buttons and passing the CV text to the ad step.
 - Not verified: the real RunPod match for CV and ad together (this workspace cannot reach RunPod). Step 2 rules not built: waiting for Carson to approve each rule and its source.
 
 ---

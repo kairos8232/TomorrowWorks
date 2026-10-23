@@ -273,6 +273,8 @@ const dict: Record<string, Entry> = {
   'Check my CV': { ms: 'Semak CV saya', zh: '检查我的简历' },
   'I already work': { ms: 'Saya sudah bekerja', zh: '我已在工作' },
   'Nothing you type is stored': { ms: 'Tiada apa yang anda taip disimpan', zh: '你输入的内容不会被保存' },
+  'A job ad': { ms: 'Iklan kerja', zh: '一则招聘广告' },
+  'Your steps': { ms: 'Langkah anda', zh: '你的步骤' },
   'I work as': { ms: 'Saya bekerja sebagai', zh: '我的工作是' },
   'Show me where it can lead': { ms: 'Lihat hala tuju saya', zh: '看看下一步能走向哪里' },
   'Malaysian job-market evidence': { ms: 'Berdasarkan data pasaran kerja Malaysia', zh: '参考马来西亚就业市场数据' },

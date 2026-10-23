@@ -4,6 +4,7 @@ import { ainaProfile, emptyProfile, personaProfile, roles, viewerById, viewers, 
 import { MovesStep, SourcesFooter } from './MovesStep';
 import { advanceLearning, type CourseProgress, type LearningAction } from './learningCheck';
 import { SkillsStep } from './SkillsStep';
+import { GradSteps, type GradStep } from './GradSteps';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
 import { applyFonts, DataSaverProvider, initialDataSaver, saveDataSaver } from './dataSaver';
 import './styles.css';
@@ -271,6 +272,8 @@ function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [profile, setProfile] = useState<Profile>(ainaProfile);
   const [planRoleId, setPlanRoleId] = useState<string | null>(null);
+  // True only after "Check my CV" on Home: shows the three-step bar. In memory, so a refresh returns to Home without it.
+  const [gradPath, setGradPath] = useState(false);
   const [viewer, setViewer] = useState<ViewerId>('aina');
   // Kept above the screens so navigation preserves status; refresh clears it.
   // Use the actual profile owner because editing a sample makes it the visitor's profile.
@@ -302,8 +305,9 @@ function App() {
   const [saver, setSaver] = useState(initialDataSaver);
   useEffect(() => applyFonts(saver), [saver]);
   const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
-  const go = (s: Screen) => { setScreen(s); window.scrollTo({ top: 0 }); };
+  const go = (s: Screen) => { if (s === 'home') setGradPath(false); setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
+    setGradPath(false);
     const v = viewerById(who);
     setViewer(who);
     setPlanRoleId(null);
@@ -313,6 +317,7 @@ function App() {
     else go('team');
   }
   function startWithRole(role: string) {
+    setGradPath(false);
     const normalized = role.trim().toLowerCase();
     const match = roles.find((candidate) => candidate.title.toLowerCase() === normalized || candidate.title.toLowerCase().includes(normalized));
     setViewer('me');
@@ -320,12 +325,13 @@ function App() {
     setProfile({ ...emptyProfile(), currentRoleId: match?.id ?? null });
     go('skills');
   }
-  /** Fresh graduate start: an empty profile, straight to Check an ad (CV box and ad box). */
+  /** Fresh graduate start: an empty profile and the three-step path, beginning at Your CV. */
   function startFreshGrad() {
     setViewer('me');
     setPlanRoleId(null);
     setProfile(emptyProfile());
-    go('adcheck');
+    setGradPath(true);
+    go('skills');
   }
   const kind = viewerById(viewer).kind;
   const page = screen === 'home' ? null : titles[screen];
@@ -333,7 +339,8 @@ function App() {
   const t = translate(lang);
   if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} startFreshGrad={startFreshGrad} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
-  const inMarket = marketNav.some(item => item.id === screen);
+  const onGradPath = gradPath && (screen === 'skills' || screen === 'adcheck' || screen === 'plan');
+  const inMarket = marketNav.some(item => item.id === screen) && !onGradPath;
   const isOrganisation = kind === 'team' || kind === 'region';
   const primaryItems = kind === 'region' ? regionNav : kind === 'team' ? teamNav : careerNav;
 
@@ -363,9 +370,10 @@ function App() {
 
     <main className="main-content">
       <div className={`content-wrap${screen === 'plan' ? ' plan-page' : screen === 'moves' ? ' moves-page' : ''}`}>
-        <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
+        {onGradPath && <GradSteps current={screen as GradStep} onGo={go} />}
+        {!onGradPath && <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
-        </nav>
+        </nav>}
         {page && (screen !== 'moves' || profile.held.size === 0) && <header className="page-head">
           <h1>{t(page.title)}</h1>
           <p>{t(page.intro)}</p>
