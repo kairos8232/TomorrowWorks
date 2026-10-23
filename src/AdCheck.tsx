@@ -199,16 +199,13 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
 
       {resultView === 'cv' && gap && <div className="posting-cv" aria-labelledby="posting-cv-head">
         <h2 id="posting-cv-head">{t('Does your CV show these skills?')}</h2>
-        <div className="posting-cv-map" aria-label={t('CV skill summary')}>
-          <div className="posting-cv-map-numbers">
-            <div><strong>{gap.shown.length}</strong><span>{t('Shown on CV')}</span></div>
-            <div><strong>{gap.addToCv.length}</strong><span>{t('Add evidence')}</span></div>
-            <div><strong>{gap.notYet.length}</strong><span>{t('Still to learn')}</span></div>
+        <div className="posting-cv-map" role="group" aria-label={t('CV skill summary')}>
+          <div className="posting-cv-ring" role="img" aria-label={t('{shown} shown on CV, {add} need CV evidence, {learn} still to learn', { shown: gap.shown.length, add: gap.addToCv.length, learn: gap.notYet.length })} style={{ background: ad.length ? `conic-gradient(#477157 0 ${share(gap.shown.length, ad.length)}, #c59a3f ${share(gap.shown.length, ad.length)} ${share(gap.shown.length + gap.addToCv.length, ad.length)}, #bd705e ${share(gap.shown.length + gap.addToCv.length, ad.length)} 100%)` : '#e8ece9' }}>
+            <span className="posting-cv-ring-centre" aria-hidden="true"><strong>{gap.shown.length}<small>/{ad.length}</small></strong><span>{t('Shown on CV')}</span></span>
           </div>
-          <div className="posting-cv-map-bar" role="img" aria-label={t('{shown} shown on CV, {add} need CV evidence, {learn} still to learn', { shown: gap.shown.length, add: gap.addToCv.length, learn: gap.notYet.length })}>
-            <span className="posting-cv-shown-bar" style={{ width: share(gap.shown.length, ad.length) }} />
-            <span className="posting-cv-add-bar" style={{ width: share(gap.addToCv.length, ad.length) }} />
-            <span className="posting-cv-learn-bar" style={{ width: share(gap.notYet.length, ad.length) }} />
+          <div className="posting-cv-map-key" aria-hidden="true">
+            <div className="posting-cv-key-add"><span className="posting-cv-key-dot" /><span>{t('Add evidence')}</span><strong>{gap.addToCv.length}</strong></div>
+            <div className="posting-cv-key-learn"><span className="posting-cv-key-dot" /><span>{t('Still to learn')}</span><strong>{gap.notYet.length}</strong></div>
           </div>
         </div>
         <div className="posting-cv-layout"><div className="posting-cv-skills">

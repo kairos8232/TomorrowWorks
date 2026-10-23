@@ -1558,17 +1558,19 @@ details.course-check { padding-block:0; }
 @container (max-width: 620px) { .posting-review-groups { grid-template-columns: 1fr; } }
 .posting-cv { padding-top: 18px; }
 .posting-cv h2 { margin-top: 0; }
-.posting-cv-map { margin: 12px 0 18px; border: 1px solid #d9ded9; border-radius: 9px; overflow: hidden; }
-.posting-cv-map-numbers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.posting-cv-map-numbers > div { display: grid; gap: 2px; padding: 12px 16px; border-right: 1px solid #e3e7e3; }
-.posting-cv-map-numbers > div:last-child { border-right: 0; }
-.posting-cv-map-numbers strong { font-size: 26px; line-height: 1; color: #16233a; }
-.posting-cv-map-numbers span { font-size: 15px; color: #5d6873; }
-.posting-cv-map-bar { display: flex; height: 9px; background: #e8ece9; }
-.posting-cv-map-bar span { height: 100%; }
-.posting-cv-shown-bar { background: #477157; }
-.posting-cv-add-bar { background: #c59a3f; }
-.posting-cv-learn-bar { background: #bd705e; }
+.posting-cv-map { display: flex; align-items: center; gap: 28px; width: min(100%, 600px); margin: 12px 0 22px; padding: 18px 22px; border: 1px solid #d9ded9; border-radius: 10px; background: #f7f8f6; }
+.posting-cv-ring { flex: 0 0 124px; display: grid; place-items: center; width: 124px; height: 124px; border-radius: 50%; }
+.posting-cv-ring-centre { display: grid; align-content: center; justify-items: center; width: 94px; height: 94px; border-radius: 50%; background: #f7f8f6; color: #16233a; text-align: center; }
+.posting-cv-ring-centre strong { font-size: 30px; line-height: 1; }
+.posting-cv-ring-centre small { font-size: 16px; color: #5d6873; font-weight: 400; }
+.posting-cv-ring-centre > span { margin-top: 4px; color: #465850; font-size: 12px; line-height: 1.15; }
+.posting-cv-map-key { display: grid; gap: 10px; width: min(100%, 360px); }
+.posting-cv-map-key > div { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid #dfe5df; font-size: 16px; }
+.posting-cv-map-key > div:last-child { padding-bottom: 0; border-bottom: 0; }
+.posting-cv-map-key strong { color: #16233a; font-size: 19px; }
+.posting-cv-key-dot { width: 10px; height: 10px; border-radius: 50%; }
+.posting-cv-key-add .posting-cv-key-dot { background: #c59a3f; }
+.posting-cv-key-learn .posting-cv-key-dot { background: #bd705e; }
 .posting-cv-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 16px; align-items: start; }
 .posting-cv-skills { display: grid; gap: 12px; min-width: 0; }
 .posting-cv .posting-skills { grid-template-columns: 1fr; }
@@ -1658,9 +1660,13 @@ details.course-check { padding-block:0; }
   .posting-result-counts > div:nth-child(even) { border-right: 0; }
   .posting-result-counts > div:nth-last-child(-n+2) { border-bottom: 0; }
   .posting-skills { grid-template-columns: 1fr; }
-  .posting-cv-map-numbers > div { padding: 10px; }
-  .posting-cv-map-numbers strong { font-size: 22px; }
-  .posting-cv-map-numbers span { font-size: 13px; }
+  .posting-cv-map { gap: 16px; padding: 14px; }
+  .posting-cv-ring { flex-basis: 104px; width: 104px; height: 104px; }
+  .posting-cv-ring-centre { width: 78px; height: 78px; }
+  .posting-cv-ring-centre strong { font-size: 25px; }
+  .posting-cv-ring-centre small { font-size: 13px; }
+  .posting-cv-ring-centre > span { font-size: 11px; }
+  .posting-cv-map-key > div { gap: 8px; font-size: 14px; }
 }
 
 /* Home: two starting choices side by side (fresh graduate, already working). */

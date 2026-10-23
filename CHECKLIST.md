@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## Job-ad check and job-site links — 24 Oct 2026
 
+- [x] Distinguish CV feedback from the ad-wide totals: replace its repeated horizontal count strip with a proportioned circular CV evidence chart and two compact action counts. Verified the fictional ad and CV result in a local browser; build and 137 tests pass.
 - [x] Remove the second disclosure layer from *Your CV already shows*: one expansion now reveals skill names and CV evidence. Put the optional file checklist below both CV panels and group its items by publisher with one source link per group. Verified both expanded states with a fictional ad and CV in a local browser; build and 137 tests pass.
 - [x] Refine the checked-ad views: align the three skill groups in responsive columns, add proportional skill and CV evidence bars, condense CV findings and optional details, and make job-site links flow with the card width. Confirm the three-column review and condensed CV view in a local browser with fictional matching; build and tests pass.
 - [x] Rework the checked-ad result into an immediate overview, a focused skill review, and optional CV feedback. Keep the editable ad and CV on the same screen, reveal the detailed lists only on request, and surface the role, first course, and guided next step before the lists. Verified the overview and CV view in a local browser with mocked matching, including unticking a match and seeing totals update; build passes.
