@@ -4,13 +4,13 @@
     "publisher": "The GDELT Project",
     "url": "https://www.gdeltproject.org/",
     "terms": "https://gdeltproject.org/about.html",
-    "retrievedAt": "2026-10-21",
+    "retrievedAt": "2026-10-23",
     "window": "last 4 weeks before retrieval",
     "geography": "News outlets located in Malaysia (GDELT sourcecountry:MY)",
     "measure": "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline, with the 'requires' and 'exclude' rules in news-topics.json (AI without a work word = 'AI industry'); 'Other' = none.",
     "covered": {
-      "from": "2026-10-18",
-      "to": "2026-10-21"
+      "from": "2026-10-20",
+      "to": "2026-10-23"
     }
   },
   "queries": [
@@ -22,6 +22,486 @@
     }
   ],
   "articles": [
+    {
+      "title": "SpaceX - Tesla merger would need Elon Musk approval",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/23/spacex-tesla-merger-would-need-elon-musk-s-approval",
+      "outlet": "freemalaysiatoday.com",
+      "language": "English",
+      "seenAt": "2026-10-23T00:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Gangsterism among Msian Indians takes root in schools, says activist",
+      "url": "https://www.freemalaysiatoday.com/category/nation/2026/10/23/gangsterism-among-m-sian-indians-takes-root-in-school-says-activist",
+      "outlet": "freemalaysiatoday.com",
+      "language": "English",
+      "seenAt": "2026-10-23T00:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "U. S. stocks join global retreat as war drums start beating again",
+      "url": "http://www.bruneinews.net/news/279393163/u-s-stocks-join-global-retreat-as-war-drums-start-beating-again",
+      "outlet": "bruneinews.net",
+      "language": "English",
+      "seenAt": "2026-10-22T23:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Nasdaq dives 2. 6% as U. S. and Israel gear up for more attacks on Iran",
+      "url": "http://www.malaysiasun.com/news/279393163/nasdaq-dives-2-6-as-u-s-and-israel-gear-up-for-more-attacks-on-iran",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-22T23:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Klasifikasi umur bukan lesen tayang kandungan filem tanpa batasan - Kementerian Komunikasi",
+      "url": "https://www.astroawani.com/hiburan-malaysia/klasifikasi-umur-bukan-lesen-tayang-kandungan-filem-tanpa-batasan-kementerian-komunikasi",
+      "outlet": "astroawani.com",
+      "language": "Malay",
+      "seenAt": "2026-10-22T22:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "32 perkhidmatan kerajaan Britain terjejas susulan ancaman siber",
+      "url": "https://www.astroawani.com/berita-dunia/32-perkhidmatan-kerajaan-britain-terjejas-susulan-ancaman-siber",
+      "outlet": "astroawani.com",
+      "language": "Malay",
+      "seenAt": "2026-10-22T17:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "School safety, TVET direction among key issues on final day of Budget 2027 debate",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/school-safety-tvet-direction-among-key-issues-on-final-day-of-budget-2027-debate",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T16:00:00Z",
+      "topics": [
+        "Reskilling"
+      ]
+    },
+    {
+      "title": "Rush is on to patch software vulnerability that could impact 70% of websites worldwide",
+      "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/22/rush-is-on-to-patch-software-vulnerability-that-could-impact-70-of-websites-worldwide",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T16:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Ustazah Yusliza Raih Pengiktirafan Antarabangsa, Kejayaan Luar Biasa!",
+      "url": "https://www.keluarga.my/ustazah-yusliza-kejayaan-antarabangsa-smipa-2025/",
+      "outlet": "keluarga.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T15:30:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Malaysian lawyer elected to chair global network Multilaw",
+      "url": "https://www.freemalaysiatoday.com/category/nation/2026/10/22/malaysian-lawyer-elected-to-chair-global-network-multilaw",
+      "outlet": "freemalaysiatoday.com",
+      "language": "English",
+      "seenAt": "2026-10-22T14:30:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Retire from work, not life: Ramanan says retirees can still be mentors",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/retire-from-work-not-life-ramanan-says-retirees-can-still-be-mentors",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T10:30:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Malaysia calls for intellectual property to be recognised as bankable asset",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/malaysia-calls-for-intellectual-property-to-be-recognised-as-bankable-asset",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T10:30:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "PTFC action plan to be submitted to Finance Ministry in November, says Chow",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/ptfc-action-plan-to-be-submitted-to-finance-ministry-in-november-says-chow",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T09:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "eBay全球大裁员 逾1000人失饭碗 | 财经",
+      "url": "https://www.orientaldaily.com.my/news/business/2026/10/22/857141",
+      "outlet": "orientaldaily.com.my",
+      "language": "Chinese",
+      "seenAt": "2026-10-22T09:45:00Z",
+      "topics": [
+        "Layoffs"
+      ]
+    },
+    {
+      "title": "Data peribadi 125,000 polis Jepun berisiko bocor",
+      "url": "https://www.utusan.com.my/terkini/2026/10/data-peribadi-125000-polis-jepun-berisiko-bocor/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T09:30:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "39 peratus rakyat gaji bawah RM2,000 hanya mampu bertahan sebulan tanpa kerja",
+      "url": "https://www.utusan.com.my/ekonomi/2026/10/39-peratus-rakyat-gaji-bawah-rm2000-hanya-mampu-bertahan-sebulan-tanpa-kerja/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T09:30:00Z",
+      "topics": [
+        "Pay and wages"
+      ]
+    },
+    {
+      "title": "Masih Keliru Nak Sarapan Berat Atau Ringan? Ini Jawapannya",
+      "url": "https://www.therakyatpost.com/trpbm/info/2026/10/22/masih-keliru-nak-sarapan-berat-atau-ringan-ini-jawapannya/",
+      "outlet": "therakyatpost.com",
+      "language": "Malay",
+      "seenAt": "2026-10-22T07:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Sabah wants tighter border security amid Philippines arms build - up",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/sabah-wants-tighter-border-security-amid-philippines-arms-build-up",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T06:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Forrester 2027 B2C Marketing, CX, And Digital Predictions: Rising AI Costs Will Force B2C Leaders To Scale Back A Third Of AI Initiatives",
+      "url": "http://www.malaysiasun.com/news/279391276/forrester-2027-b2c-marketing-cx-and-digital-predictions-rising-ai-costs-will-force-b2c-leaders-to-scale-back-a-third-of-ai-initiatives",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-22T06:00:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Cognizant to Acquire DyFlex Solutions, Accelerating AI - Led Enterprise Transformation for SAP Clients in Australia and New Zealand",
+      "url": "http://www.malaysiasun.com/news/279391284/cognizant-to-acquire-dyflex-solutions-accelerating-ai-led-enterprise-transformation-for-sap-clients-in-australia-and-new-zealand",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-22T06:00:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Data Waze berisiko disalah guna jejak pergerakan penjawat awam",
+      "url": "https://www.utusan.com.my/nasional/2026/10/data-waze-berisiko-disalah-guna-jejak-pergerakan-penjawat-awam/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T06:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Taimei Technology and GreenLight Clinical Expand Strategic Partnership at AusBiotech 2026 to Pioneer AI - Native Trial Execution Across Asia - Pacific",
+      "url": "http://www.malaysiasun.com/news/279391283/taimei-technology-and-greenlight-clinical-expand-strategic-partnership-at-ausbiotech-2026-to-pioneer-ai-native-trial-execution-across-asia-pacific",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-22T06:00:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "大马雇主联合会促严管外劳审批 优先保障本地人就业 | 国内",
+      "url": "https://www.orientaldaily.com.my/news/nation/2026/10/22/857105",
+      "outlet": "orientaldaily.com.my",
+      "language": "Chinese",
+      "seenAt": "2026-10-22T05:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Researchers: AI agents on Tencent Cloud try to break into Alibaba Amap",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/22/researchers-ai-agents-on-tencent-cloud-try-to-break-into-alibabas-amap",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T05:15:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Asia - Pacific fight against poverty shows progress and promise",
+      "url": "http://www.bruneinews.net/news/279391286/asia-pacific-fight-against-poverty-shows-progress-and-promise",
+      "outlet": "bruneinews.net",
+      "language": "English",
+      "seenAt": "2026-10-22T04:30:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Dassault Systèmes expands Malaysia presence with new office",
+      "url": "https://www.thestar.com.my/business/business-news/2026/10/22/dassault-systmes-expands-malaysia-presence-with-new-office",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T04:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Websites worldwide taken offline as AI finds critical security flaw",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/22/websites-worldwide-taken-offline-as-ai-finds-critical-security-flaw",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T03:45:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Penjawat awam dilarang guna aplikasi Waze",
+      "url": "https://www.utusan.com.my/nasional/2026/10/penjawat-awam-dilarang-guna-aplikasi-waze-2/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T02:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Belanjawan 2027 perkukuh daya saing PMKS",
+      "url": "https://www.utusan.com.my/rencana/2026/10/belanjawan-2027-perkukuh-daya-saing-pmks/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T02:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Pendidikan membina jambatan persahabatan Malaysia - China",
+      "url": "https://www.utusan.com.my/rencana/forum/2026/10/pendidikan-membina-jambatan-persahabatan-malaysia-china/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T02:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Merapatkan jurang inovasi, amalan pertanian",
+      "url": "https://www.utusan.com.my/nasional/2026/10/merapatkan-jurang-inovasi-amalan-pertanian/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T02:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Kembalikan makna sebenar akademia",
+      "url": "https://www.utusan.com.my/rencana/forum/2026/10/kembalikan-makna-sebenar-akademia/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-22T02:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "AI challenges maths by solving the unsolvable",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/22/ai-challenges-maths-by-solving-the-unsolvable",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T01:45:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Walmart launches tools for AI agents to shop for customers",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/22/walmart-launches-tools-for-ai-agents-to-shop-for-customers",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T01:45:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Over 3,500 medical officers quit since 2024, Parliament told",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/over-3500-medical-officers-quit-since-2024-parliament-told",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T01:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Airport scanners not designed to detect drugs, says Saifuddin",
+      "url": "https://www.thestar.com.my/news/nation/2026/10/22/airport-scanners-not-designed-to-detect-drugs-says-saifuddin",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T01:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "COMMENT | PKR must translate former leader return into grassroots renewal",
+      "url": "https://www.malaysiakini.com/columns/887602-comment-pkr-must-translate-former-leaders-return-into-grassroots-renewal",
+      "outlet": "malaysiakini.com",
+      "language": "English",
+      "seenAt": "2026-10-22T01:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Wall St sees Tesla - SpaceX merger as inevitable, but split on price",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/22/wall-st-sees-tesla-spacex-merger-as-inevitable-but-split-on-price",
+      "outlet": "thestar.com.my",
+      "language": "English",
+      "seenAt": "2026-10-22T00:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Nasdaq leads Wall Street gains as SpaceX, Super Micro boost AI sentiment",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/22/nasdaq-leads-wall-street-gains-as-spacex-super-micro-boost-ai-sentiment",
+      "outlet": "freemalaysiatoday.com",
+      "language": "English",
+      "seenAt": "2026-10-22T00:30:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Tesla profits drop but top analyst estimates",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/22/tesla-profits-drop-but-top-analyst-estimates",
+      "outlet": "freemalaysiatoday.com",
+      "language": "English",
+      "seenAt": "2026-10-22T00:00:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "MEF gesa penguatkuasaan lebih tegas terhadap pekerja asing, utamakan pekerja tempatan",
+      "url": "https://www.astroawani.com/berita-malaysia/mef-gesa-penguatkuasaan-lebih-tegas-terhadap-pekerja-asing-utamakan-pekerja-tempatan",
+      "outlet": "astroawani.com",
+      "language": "Malay",
+      "seenAt": "2026-10-21T22:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "Malaysia kekal status eliminasi HIV dan sifilis daripada ibu kepada anak, terima pengiktirafan WHO",
+      "url": "https://www.astroawani.com/berita-malaysia/malaysia-kekal-status-eliminasi-hiv-dan-sifilis-daripada-ibu-kepada-anak-terima-pengiktirafan-who",
+      "outlet": "astroawani.com",
+      "language": "Malay",
+      "seenAt": "2026-10-21T22:45:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "New literary prize launched for books written with AI",
+      "url": "https://www.freemalaysiatoday.com/category/leisure/2026/10/22/new-literary-prize-launched-for-books-written-with-ai",
+      "outlet": "freemalaysiatoday.com",
+      "language": "English",
+      "seenAt": "2026-10-21T22:15:00Z",
+      "topics": [
+        "AI industry"
+      ]
+    },
+    {
+      "title": "Wall Street climbs after SpaceX third - quarters earnings",
+      "url": "http://www.malaysiasun.com/news/279390725/wall-street-climbs-after-spacex-third-quarters-earnings",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-21T21:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "14th India Chem 2026 to bring global chemicals and petrochemicals industry together in Mumbai from October 22; JP Nadda to inaugrate",
+      "url": "http://www.malaysiasun.com/news/279390484/14th-india-chem-2026-to-bring-global-chemicals-and-petrochemicals-industry-together-in-mumbai-from-october-22-jp-nadda-to-inaugrate",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-21T21:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "MAPIM gesa kerajaan jelaskan asas larangan Waze",
+      "url": "https://www.utusan.com.my/nasional/2026/10/mapim-gesa-kerajaan-jelaskan-asas-larangan-waze/",
+      "outlet": "utusan.com.my",
+      "language": "Malay",
+      "seenAt": "2026-10-21T17:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "ESTEVE CDMO expands its presence in Asia with a major investment and new manufacturing site in China",
+      "url": "http://www.malaysiasun.com/news/279389874/esteve-cdmo-expands-its-presence-in-asia-with-a-major-investment-and-new-manufacturing-site-in-china",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-21T16:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
+    {
+      "title": "China - initiated Luban Workshops empower global youth with practical skills",
+      "url": "http://www.malaysiasun.com/news/279390221/china-initiated-luban-workshops-empower-global-youth-with-practical-skills",
+      "outlet": "malaysiasun.com",
+      "language": "English",
+      "seenAt": "2026-10-21T16:15:00Z",
+      "topics": [
+        "Other"
+      ]
+    },
     {
       "title": "OpenAI to sell its top models on Google Cloud in latest enterprise push",
       "url": "https://www.thestar.com.my/tech/tech-news/2026/10/21/openai-to-sell-its-top-models-on-google-cloud-in-latest-enterprise-push",
@@ -530,466 +1010,6 @@
       "seenAt": "2026-10-20T03:30:00Z",
       "topics": [
         "Other"
-      ]
-    },
-    {
-      "title": "Meta has 24 hours to prove equal treatment of Lula, Bolsonaro",
-      "url": "https://www.freemalaysiatoday.com/category/world/2026/10/20/meta-has-24-hours-to-prove-equal-treatment-of-lula-bolsonaro",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-20T03:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Nvidia CEO urges German manufacturers to adopt AI",
-      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/20/nvidia-ceo-urges-german-manufacturers-to-adopt-ai-saying-digital-tech-won039t-replace-heavy-industry",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-20T03:00:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "European stocks fall on unrest in France as Nasdaq bounces",
-      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/20/european-stocks-fall-on-unrest-in-france-as-nasdaq-bounces",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-20T01:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Bukan semua masalah infrastruktur tanggungjawab Putrajaya, kata ahli akademik",
-      "url": "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/20/bukan-semua-masalah-infrastruktur-tanggungjawab-putrajaya-kata-ahli-akademik",
-      "outlet": "freemalaysiatoday.com",
-      "language": "Malay",
-      "seenAt": "2026-10-20T01:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Msia can weather economic pressures",
-      "url": "https://www.thestar.com.my/news/nation/2026/10/20/msia-can-weather-economic-pressures",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-20T01:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "World Bank seeks to boost connectivity in developing countries",
-      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/20/world-bank-seeks-to-boost-connectivity-in-developing-countries",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-20T00:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "German government partnering with Nvidia on industrial AI",
-      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/20/german-government-partnering-with-nvidia-on-industrial-ai",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-20T00:45:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "Wall Street Ends Mixed: NASDAQ Surges, S & P 500 Rises, Dow Dips",
-      "url": "http://www.bruneinews.net/news/279385926/wall-street-ends-mixed-nasdaq-surges-s-p-500-rises-dow-dips",
-      "outlet": "bruneinews.net",
-      "language": "English",
-      "seenAt": "2026-10-20T00:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Musk ikrar berikan satu saham SpaceX kepada setiap kanak - kanak AS tahun depan",
-      "url": "https://www.astroawani.com/berita-dunia/musk-ikrar-berikan-satu-saham-spacex-kepada-setiap-kanak-kanak-tahun-depan",
-      "outlet": "astroawani.com",
-      "language": "Malay",
-      "seenAt": "2026-10-19T18:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Pentadbiran Anwar pacu Malaysia ke peringkat lebih tinggi, potensi sambung terajui negara – Penganalisis",
-      "url": "https://www.astroawani.com/berita-malaysia/pentadbiran-anwar-pacu-malaysia-ke-peringkat-lebih-tinggi-potensi-sambung-terajui-negara-",
-      "outlet": "astroawani.com",
-      "language": "Malay",
-      "seenAt": "2026-10-19T18:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Detained Suu Kyi receives united kingdom royal package, says Myanmar govt",
-      "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/19/detained-suu-kyi-receives-uk-royal-package-says-myanmar-govt",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-19T17:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Microsoft exits data centre deal in blow to united kingdom AI ambitions",
-      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/19/microsoft-exits-data-centre-deal-in-blow-to-uk-ai-ambitions",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-19T17:00:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "Singapore firm plans for up to 500MW AI data center capacity in Malaysia",
-      "url": "http://www.malaysiasun.com/news/279385015/singapore-firm-plans-for-up-to-500mw-ai-data-center-capacity-in-malaysia",
-      "outlet": "malaysiasun.com",
-      "language": "English",
-      "seenAt": "2026-10-19T16:00:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "BML Munjal University hosts ICATS 2026 to explore how AI is reshaping trade and sustainable growth",
-      "url": "http://www.bruneinews.net/news/279384964/bml-munjal-university-hosts-icats-2026-to-explore-how-ai-is-reshaping-trade-and-sustainable-growth",
-      "outlet": "bruneinews.net",
-      "language": "English",
-      "seenAt": "2026-10-19T15:45:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "Project Pathways: How Yukti Dahiya Is Bridging the Career - Guidance Gap for Underserved Students",
-      "url": "http://www.bruneinews.net/news/279385128/project-pathways-how-yukti-dahiya-is-bridging-the-career-guidance-gap-for-underserved-students",
-      "outlet": "bruneinews.net",
-      "language": "English",
-      "seenAt": "2026-10-19T15:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Malaysia unveils circular economy framework, moves to regulate data centers",
-      "url": "http://www.bruneinews.net/news/279385312/malaysia-unveils-circular-economy-framework-moves-to-regulate-data-centers",
-      "outlet": "bruneinews.net",
-      "language": "English",
-      "seenAt": "2026-10-19T15:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Malaysia sasar 50% lebuh raya dilengkapi teknologi pintar",
-      "url": "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/19/malaysia-sasar-50-lebuh-raya-dilengkapi-teknologi-pintar",
-      "outlet": "freemalaysiatoday.com",
-      "language": "Malay",
-      "seenAt": "2026-10-19T15:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "黄日昇：2027财案须替企业减负 替打工族松绑 | 国内",
-      "url": "https://www.orientaldaily.com.my/news/nation/2026/10/19/856456",
-      "outlet": "orientaldaily.com.my",
-      "language": "Chinese",
-      "seenAt": "2026-10-19T12:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "从精算学走向国际反洗钱 陈汉武以跨领域知识打击金融犯罪光华日报 | 1910年创刊 创新每一天生活",
-      "url": "https://www.kwongwah.com.my/20261019/%E4%BB%8E%E7%B2%BE%E7%AE%97%E5%AD%A6%E8%B5%B0%E5%90%91%E5%9B%BD%E9%99%85%E5%8F%8D%E6%B4%97%E9%92%B1-%E9%99%88%E6%B1%89%E6%AD%A6%E4%BB%A5%E8%B7%A8%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%E6%89%93%E5%87%BB/",
-      "outlet": "kwongwah.com.my",
-      "language": "Chinese",
-      "seenAt": "2026-10-19T11:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Radzi gesa semua parti bincang, tentukan sistem cukai tak ubah ikut politik",
-      "url": "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/19/radzi-gesa-semua-parti-bincang-tentukan-sistem-cukai-tak-ubah-ikut-politik",
-      "outlet": "freemalaysiatoday.com",
-      "language": "Malay",
-      "seenAt": "2026-10-19T11:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "2,829 graduan UMT disasar jadi pemacu ekonomi biru",
-      "url": "https://www.utusan.com.my/nasional/2026/10/2829-graduan-umt-disasar-jadi-pemacu-ekonomi-biru-dan-kelestarian/",
-      "outlet": "utusan.com.my",
-      "language": "Malay",
-      "seenAt": "2026-10-19T08:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "An alleged spy device was hidden at OpenAI. Check this overlooked spot in your office today",
-      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/19/an-alleged-spy-device-was-hidden-at-openai-check-this-overlooked-spot-in-your-office-today",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-19T08:15:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Sean McGirr exits Alexander McQueen as luxury fashion faces a shake - up",
-      "url": "https://www.thestar.com.my/lifestyle/style/2026/10/19/sean-mcgirr-exits-alexander-mcqueen-as-luxury-fashion-faces-a-shake-up",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-19T08:15:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "HKU and Global Cybersecurity Alliance jointly establish Centre for AI and Cybersecurity Research",
-      "url": "http://www.malaysiasun.com/news/279384150/hku-and-global-cybersecurity-alliance-jointly-establish-centre-for-ai-and-cybersecurity-research",
-      "outlet": "malaysiasun.com",
-      "language": "English",
-      "seenAt": "2026-10-19T08:00:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "Amardeep Sharma Honoured for Banking Excellence at London House of Lords",
-      "url": "http://www.malaysiasun.com/news/279384288/amardeep-sharma-honoured-for-banking-excellence-at-london-house-of-lords",
-      "outlet": "malaysiasun.com",
-      "language": "English",
-      "seenAt": "2026-10-19T08:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Bitcoin rebounds above US$82,000 as oil retreat lifts risk mood",
-      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/19/bitcoin-rebounds-above-us-82-000-as-oil-s-retreat-lifts-risk-mood",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-19T07:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Children Aged 12, 14, And 15 Arrested After Roblox Recruitment, Former Top Cop Says",
-      "url": "https://www.therakyatpost.com/news/2026/10/19/children-aged-12-14-and-15-arrested-after-roblox-recruitment-former-top-cop-says/",
-      "outlet": "therakyatpost.com",
-      "language": "English",
-      "seenAt": "2026-10-19T06:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "FBM KLCI eases in early trade, tracks Wall Street losses",
-      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/19/fbm-klci-eases-in-early-trade-tracks-wall-street-losses",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-19T04:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "I call it a bribe: Pennsylvania residents spurn US$10,000 data centre checks",
-      "url": "https://www.freemalaysiatoday.com/category/world/2026/10/19/i-call-it-a-bribe-pennsylvania-residents-spurn-us-10-000-data-centre-checks",
-      "outlet": "freemalaysiatoday.com",
-      "language": "English",
-      "seenAt": "2026-10-19T04:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Samsung dilapor rancang rombakan besar One UI 10 menjelang 2027",
-      "url": "https://www.astroawani.com/berita-teknologi/samsung-dilapor-rancang-rombakan-besar-one-ui-10-menjelang-2027",
-      "outlet": "astroawani.com",
-      "language": "Malay",
-      "seenAt": "2026-10-19T03:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Ringgit dibuka kebanyakannya tinggi susulan pertumbuhan KDNK mengatasi jangkaan",
-      "url": "https://www.astroawani.com/berita-bisnes/ringgit-dibuka-kebanyakannya-tinggi-susulan-pertumbuhan-kdnk-mengatasi-jangkaan",
-      "outlet": "astroawani.com",
-      "language": "Malay",
-      "seenAt": "2026-10-19T03:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Ringgit opens mostly higher as GDP growth beats forecasts",
-      "url": "https://www.thestar.com.my/business/business-news/2026/10/19/ringgit-opens-mostly-higher-as-gdp-growth-beats-forecasts",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-19T03:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Budget 2027: Sandwich generation appreciates tax breaks, but is it enough?",
-      "url": "https://www.malaysiakini.com/news/887364-budget-2027-sandwich-generation-appreciates-tax-breaks-but-is-it-enough",
-      "outlet": "malaysiakini.com",
-      "language": "English",
-      "seenAt": "2026-10-19T01:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Kesihatan tulang belakang perlu diberi perhatian",
-      "url": "https://www.utusan.com.my/nasional/2026/10/kesihatan-tulang-belakang-perlu-diberi-perhatian/",
-      "outlet": "utusan.com.my",
-      "language": "Malay",
-      "seenAt": "2026-10-18T17:45:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Kes sunting gambar pelajar: Mangsa tidak patut berdepan suspek, polis diberitahu",
-      "url": "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/18/kes-sunting-gambar-pelajar-mangsa-tidak-patut-berdepan-suspek-polis-diberitahu",
-      "outlet": "freemalaysiatoday.com",
-      "language": "Malay",
-      "seenAt": "2026-10-18T13:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "TSMC posts sixth straight record profit as AI demand surges",
-      "url": "http://www.malaysiasun.com/news/279377189/tsmc-posts-sixth-straight-record-profit-as-ai-demand-surges",
-      "outlet": "malaysiasun.com",
-      "language": "English",
-      "seenAt": "2026-10-18T13:00:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "Cook says China is key to success of Apple first foldable iPhone",
-      "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/18/cook-says-china-is-key-to-success-of-apple039s-first-foldable-iphone",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-18T10:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Kabinet Sabah lulus operasi 24 jam pelabuhan Sepanggar",
-      "url": "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/18/kabinet-sabah-lulus-operasi-24-jam-pelabuhan-sepanggar",
-      "outlet": "freemalaysiatoday.com",
-      "language": "Malay",
-      "seenAt": "2026-10-18T10:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "SKMM siasat akaun palsu hina Agong, Yang Dipertuan Besar",
-      "url": "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/18/skmm-siasat-akaun-palsu-hina-agong-yang-dipertuan-besar",
-      "outlet": "freemalaysiatoday.com",
-      "language": "Malay",
-      "seenAt": "2026-10-18T10:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Fahmi condemns cyberbullying of UM student, urges victims to lodge reports",
-      "url": "https://www.thestar.com.my/news/nation/2026/10/18/fahmi-condemns-cyberbullying-of-um-student-urges-victims-to-lodge-reports",
-      "outlet": "thestar.com.my",
-      "language": "English",
-      "seenAt": "2026-10-18T10:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Abbe Hae, 15 individu bermalam di lokap selepas hadir ke IPD Kota Bharu",
-      "url": "https://www.sinarharian.com.my/article/800938/edisi/kelantan/abbe-hae-15-individu-bermalam-di-lokap-selepas-hadir-ke-ipd-kota-bharu",
-      "outlet": "sinarharian.com.my",
-      "language": "Malay",
-      "seenAt": "2026-10-18T09:30:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Kabinet Sabah lulus operasi 24 jam Pelabuhan Sepanggar - Ewon",
-      "url": "https://www.astroawani.com/berita-malaysia/kabinet-sabah-lulus-operasi-24-jam-pelabuhan-sepanggar-ewon",
-      "outlet": "astroawani.com",
-      "language": "Malay",
-      "seenAt": "2026-10-18T09:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Sabah beralih ke fasa baharu perkasa pembangunan",
-      "url": "https://www.utusan.com.my/nasional/2026/10/sabah-beralih-ke-fasa-baharu-perkasa-pembangunan-hajiji/",
-      "outlet": "utusan.com.my",
-      "language": "Malay",
-      "seenAt": "2026-10-18T08:00:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "Seni tanpa jiwa ibarat hasil seni AI - Artober pentas penggiat seni luah rasa",
-      "url": "https://www.kosmo.com.my/2026/10/18/seni-tanpa-jiwa-ibarat-hasil-seni-ai-artober-pentas-penggiat-seni-luah-rasa/",
-      "outlet": "kosmo.com.my",
-      "language": "Malay",
-      "seenAt": "2026-10-18T04:15:00Z",
-      "topics": [
-        "AI industry"
-      ]
-    },
-    {
-      "title": "Bukan tidak mampu tetapi ego, dendam",
-      "url": "https://www.kosmo.com.my/2026/10/18/bukan-tidak-mampu-tetapi-ego-dendam/",
-      "outlet": "kosmo.com.my",
-      "language": "Malay",
-      "seenAt": "2026-10-18T04:15:00Z",
-      "topics": [
-        "Other"
-      ]
-    },
-    {
-      "title": "AI credit fears mount as default protection hits record highs",
-      "url": "http://www.bruneinews.net/news/279377187/ai-credit-fears-mount-as-default-protection-hits-record-highs",
-      "outlet": "bruneinews.net",
-      "language": "English",
-      "seenAt": "2026-10-18T01:00:00Z",
-      "topics": [
-        "AI industry"
       ]
     }
   ]
