@@ -19,6 +19,7 @@ import { useT } from './i18n';
 
 const resources = resourcesFile.resources as Resource[];
 type Suggestion = Skill & { similarity: number; from: string };
+type ResultView = 'overview' | 'skills' | 'cv';
 const pct = (x: number) => `${x >= 0 ? '+' : '−'}${Math.abs(x * 100).toFixed(1)}%`;
 
 export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Profile; onGo: (screen: 'skills' | 'moves') => void; onNext?: (roleId: string | null) => void; initialCv?: string }) {
@@ -28,6 +29,9 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const [found, setFound] = useState<Suggestion[] | null>(null);
   const [cvFound, setCvFound] = useState<Suggestion[] | null>(null);
   const [ticked, setTicked] = useState<Set<string>>(new Set());
+  const [resultView, setResultView] = useState<ResultView>('overview');
+  const [showEntry, setShowEntry] = useState(true);
+  const [showAllBuild, setShowAllBuild] = useState(false);
   const [status, setStatus] = useState({ busy: false, message: '' });
   const requestVersion = useRef(0);
 
@@ -54,13 +58,16 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       if (version !== requestVersion.current) return;
       setFound(results); setCvFound(cvResults);
       setTicked(new Set(results.map((s) => s.uri)));
+      setResultView('overview');
+      setShowEntry(results.length === 0);
+      setShowAllBuild(false);
       setStatus({ busy: false, message: results.length ? '' : 'No close ESCO skills found in this ad. Try pasting the duties and requirements.' });
     } catch (err) {
       if (version !== requestVersion.current) return;
       setStatus({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Ad matching is unavailable right now. Try again in a minute.' });
     }
   }
-  const invalidate = () => { requestVersion.current += 1; setFound(null); setCvFound(null); setTicked(new Set()); setStatus({ busy: false, message: '' }); };
+  const invalidate = () => { requestVersion.current += 1; setFound(null); setCvFound(null); setTicked(new Set()); setShowEntry(true); setStatus({ busy: false, message: '' }); };
   const clear = () => { setText(''); setCvText(''); invalidate(); };
   const toggle = (uri: string) => { const next = new Set(ticked); if (next.has(uri)) next.delete(uri); else next.add(uri); setTicked(next); };
 
@@ -84,13 +91,19 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const close = (found ?? []).filter((s) => relatedBy.has(s.uri));
   const have = (found ?? []).filter((s) => heldUris.has(s.uri));
   const count = (list: Suggestion[]) => list.filter((s) => ticked.has(s.uri)).length;
+  const hasResult = Boolean(found?.length);
+  const hasCvResult = Boolean(cvFound);
+  const chooseView = (view: ResultView) => { setResultView(view); setShowEntry(false); };
 
   return <div className="step-body posting-check">
-    <section className="panel posting-entry" aria-labelledby="posting-head">
+    <section className={`panel posting-entry${hasResult && !showEntry ? ' posting-entry-compact' : ''}`} aria-labelledby="posting-head">
       <div className="posting-entry-head">
-        <div><h2 id="posting-head">{t('Job ad')}</h2><p>{t('Paste the duties and requirements. We will find the skills to review.')}</p></div>
-        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); invalidate(); }}>{t('Try a fictional example')}</button>
+        <div><h2 id="posting-head">{t('Job ad')}</h2><p>{hasResult && !showEntry ? t('Ad checked{cv}', { cv: cvText.trim() ? t(' · CV included') : '' }) : t('Paste the duties and requirements. We will find the skills to review.')}</p></div>
+        {hasResult && !showEntry
+          ? <button type="button" className="secondary-button" onClick={() => setShowEntry(true)}>{t('Edit ad and CV')}</button>
+          : <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); invalidate(); }}>{t('Try a fictional example')}</button>}
       </div>
+      {showEntry && <>
       <div className="posting-entry-grid">
         <div className="posting-entry-main">
           <label htmlFor="posting-text">{t('Duties and requirements')}</label>
@@ -106,11 +119,14 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
           {(text || cvText || found) && <button type="button" className="text-button" onClick={clear}>{t('Clear')}</button>}</div>
         <p>{t('Contact details are removed before matching. Your text is not stored.')}</p>
       </div>
+      </>}
       {status.message && <p className="note posting-status" role={status.busy ? 'status' : 'alert'}>{t(status.message)}</p>}
     </section>
 
-    {found && found.length > 0 && <section className="panel posting-result" aria-labelledby="posting-result-head">
-      <h2 id="posting-result-head">{t('Skills this ad asks for')}</h2>
+    {hasResult && <section className="panel posting-result" aria-labelledby="posting-result-head">
+      <div className="posting-result-heading"><div><h2 id="posting-result-head">{t('Your ad at a glance')}</h2><p className="note">{t('AI-matched skills. Check the matches before relying on this result.')}</p></div>
+        {onNext && <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>}
+      </div>
       <div className="posting-result-counts" aria-label={t('Skill summary')}>
         <div><strong>{cmp.total}</strong><span>{t('From this ad')}</span></div>
         {profile.held.size > 0 && <><div><strong>{cmp.matched.length}</strong><span>{t('You have')}</span></div><div><strong>{cmp.transferable.length}</strong><span>{t('Related')}</span></div><div><strong>{cmp.missing.length}</strong><span>{t('To build')}</span></div></>}
@@ -119,36 +135,16 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
         <span className="posting-fit-held" style={{ width: `${cmp.matched.length / cmp.total * 100}%` }} /><span className="posting-fit-related" style={{ width: `${cmp.transferable.length / cmp.total * 100}%` }} /><span className="posting-fit-missing" style={{ width: `${cmp.missing.length / cmp.total * 100}%` }} />
       </div>}
       {profile.held.size === 0 && <div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => onGo('skills')}>{t('Add skills')}</button></div>}
-      <p className="note posting-review-note">{t('Review the AI-matched skills. Untick anything missing from the ad.')}</p>
-      {profile.held.size > 0 && <div className="posting-groups">
-        <div className="posting-group posting-build"><h3>{t('To build')} <span>{count(build)}</span></h3>{build.length ? rows(build) : <p className="note">{t('Nothing to build.')}</p>}</div>
-        {close.length > 0 && <div className="posting-group"><h3>{t('Close to a skill you have')} <span>{count(close)}</span></h3>{rows(close)}</div>}
-        <div className="posting-group posting-have"><h3>{t('You have')} <span>{count(have)}</span></h3>{have.length ? rows(have) : <p className="note">{t('None of the ticked skills yet.')}</p>}</div>
-      </div>}
-      {profile.held.size === 0 && rows(found)}
-    </section>}
+      <nav className="posting-result-nav" aria-label={t('Result sections')}>
+        <button type="button" aria-pressed={resultView === 'overview'} onClick={() => chooseView('overview')}>{t('Overview')}</button>
+        <button type="button" aria-pressed={resultView === 'skills'} onClick={() => chooseView('skills')}>{t('Review skills')} <span>{found?.length}</span></button>
+        {hasCvResult && <button type="button" aria-pressed={resultView === 'cv'} onClick={() => chooseView('cv')}>{t('CV feedback')}</button>}
+      </nav>
 
-    {found && found.length > 0 && gap && <section className="panel posting-cv" aria-labelledby="posting-cv-head">
-      <h2 id="posting-cv-head">{t('Does your CV show these skills?')}</h2>
-      <p className="posting-summary">{t('Your CV shows {a} of the {n} skills ticked from this ad.', { a: gap.shown.length, n: ad.length })}</p>
-      <p className="note">{t('Only skills your CV actually says can be seen by a screener, whether a person or software.')}</p>
-      <div className="posting-groups">
-        {gap.addToCv.length > 0 && <div className="posting-group posting-build"><h3>{t('You have these, but your CV does not show them')} <span>{gap.addToCv.length}</span></h3>
-          <ul className="posting-skills">{gap.addToCv.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('The ad says “{line}”', { line: (found ?? []).find((f) => f.uri === s.uri)?.from ?? '' })}</small><small>{t('Add a line about this to your CV.')}</small></div></li>)}</ul></div>}
-        {gap.notYet.length > 0 && <div className="posting-group"><h3>{t('Not on your CV or in your skills yet')} <span>{gap.notYet.length}</span></h3>
-          <ul className="posting-skills">{gap.notYet.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('The ad says “{line}”', { line: (found ?? []).find((f) => f.uri === s.uri)?.from ?? '' })}</small></div></li>)}</ul></div>}
-        <div className="posting-group posting-have"><h3>{t('Your CV already shows')} <span>{gap.shown.length}</span></h3>
-          {gap.shown.length === 0 ? <p className="note">{t('None of the ticked skills yet.')}</p>
-            : <ul className="posting-skills">{gap.shown.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('Your CV says “{line}”', { line: cvSkillBy.get(s.uri)?.from ?? '' })}</small></div></li>)}</ul>}</div>
-      </div>
-      {profile.held.size === 0 && gap.notYet.length > 0 && <div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => onGo('skills')}>{t('Add your skills')}</button></div>}
-    </section>}
-
-    {found && cvText.trim() && <CvAvoid cvText={cvText} />}
-
-    {found && found.length > 0 && closest && <section className="panel posting-role" aria-labelledby="posting-role-head">
+      {resultView === 'overview' && <div className="posting-overview">
+        {closest ? <div className="posting-role" aria-labelledby="posting-role-head">
       <h2 id="posting-role-head">{t('Closest role we track: {role}', { role: roleTitle(closest.role.title) })}</h2>
-      <p className="note">{t('This ad shares {n} skills with it. The signals below are the same ones used in Your moves.', { n: closest.shared.length })}</p>
+      <p className="note">{t('This ad shares {n} skills with this role.', { n: closest.shared.length })}</p>
       <div className="detail-facts">
         <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small><a href={snapshots.q2.source.url} target="_blank" rel="noreferrer">DOSM</a> {t('{a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
         <span className="fact-r">{resilience ? <><a href={ilo.source.url} target="_blank" rel="noreferrer">{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}</a><small>{resilience.gradient}</small></> : t('No ILO data')}</span>
@@ -156,21 +152,48 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       </div>
       <JobLinks title={closest.role.title} />
       {profile.held.size > 0 && <div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => onGo('moves')}>{t('Compare all roles in Your moves')}</button></div>}
-    </section>}
-
-    {found && found.length > 0 && closest === null && <section className="panel"><p className="note">{t('No role we track shares enough skills with this ad to compare its demand and AI signals.')}</p></section>}
-
-    {found && found.length > 0 && profile.held.size > 0 && cmp.gaps.length > 0 && <section className="panel posting-courses" aria-labelledby="posting-courses-head">
+        </div> : <p className="note">{t('No role we track shares enough skills with this ad to compare its demand and AI signals.')}</p>}
+        {profile.held.size > 0 && cmp.gaps.length > 0 && <div className="posting-courses" aria-labelledby="posting-courses-head">
       <h2 id="posting-courses-head">{t('Checked courses for these gaps')}</h2>
       {plan.steps.length === 0
         ? <p className="note">{t('No hand-checked course covers these gaps yet.')}</p>
-        : <ol className="plan-order">{plan.steps.map((s) => <li key={s.resource.id}><a href={s.resource.url} target="_blank" rel="noreferrer">
-          <span className="plan-order-text"><strong>{s.resource.title}</strong><small>{s.resource.provider} · {s.resource.hours === null ? t('time not stated') : t('{n} hours', { n: s.resource.hours })} · {t('Builds')}: {s.closes.map((g) => g.skill.label).join(', ')}</small></span></a></li>)}</ol>}
+        : <><ol className="plan-order">{plan.steps.slice(0, 1).map((s) => <li key={s.resource.id}><a href={s.resource.url} target="_blank" rel="noreferrer">
+          <span className="plan-order-text"><strong>{s.resource.title}</strong><small>{s.resource.provider} · {s.resource.hours === null ? t('time not stated') : t('{n} hours', { n: s.resource.hours })} · {t('Builds')}: {s.closes.map((g) => g.skill.label).join(', ')}</small></span></a></li>)}</ol>
+          {plan.steps.length > 1 && <details className="posting-more-courses"><summary>{t('Show all {n} courses', { n: plan.steps.length })}</summary>
+            <ol className="plan-order" start={2}>{plan.steps.slice(1).map((s) => <li key={s.resource.id}><a href={s.resource.url} target="_blank" rel="noreferrer">
+              <span className="plan-order-text"><strong>{s.resource.title}</strong><small>{s.resource.provider} · {s.resource.hours === null ? t('time not stated') : t('{n} hours', { n: s.resource.hours })} · {t('Builds')}: {s.closes.map((g) => g.skill.label).join(', ')}</small></span></a></li>)}</ol>
+          </details>}</>}
       {plan.uncovered.length > 0 && <p className="note">{t('{n} of these skills have no checked course yet.', { n: plan.uncovered.length })}</p>}
-    </section>}
+        </div>}
+        <button type="button" className="secondary-button posting-review-action" onClick={() => chooseView('skills')}>{t('Review the {n} matched skills', { n: found?.length ?? 0 })}</button>
+      </div>}
 
-    {onNext && found && found.length > 0 && <div className="step-actions grad-next">
-      <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>
-    </div>}
+      {resultView === 'skills' && <div className="posting-review" aria-label={t('Review skills')}>
+        <p className="note">{t('Untick any AI match that is not in the ad. Counts and the plan update as you review.')}</p>
+        {profile.held.size > 0 ? <div className="posting-groups">
+          <div className="posting-group posting-build"><h3>{t('To build')} <span>{count(build)}</span></h3>{build.length ? rows(showAllBuild ? build : build.slice(0, 6)) : <p className="note">{t('Nothing to build.')}</p>}
+            {build.length > 6 && <button type="button" className="text-button" aria-expanded={showAllBuild} onClick={() => setShowAllBuild(!showAllBuild)}>{showAllBuild ? t('Show fewer') : t('Show all {n}', { n: build.length })}</button>}
+          </div>
+          {close.length > 0 && <div className="posting-group"><h3>{t('Close to a skill you have')} <span>{count(close)}</span></h3>{rows(close)}</div>}
+          <details className="posting-group posting-have"><summary>{t('You have')} <span>{count(have)}</span></summary>{have.length ? rows(have) : <p className="note">{t('None of the ticked skills yet.')}</p>}</details>
+        </div> : rows(found ?? [])}
+      </div>}
+
+      {resultView === 'cv' && gap && <div className="posting-cv" aria-labelledby="posting-cv-head">
+        <h2 id="posting-cv-head">{t('Does your CV show these skills?')}</h2>
+        <p className="posting-summary">{t('Your CV shows {a} of the {n} skills ticked from this ad.', { a: gap.shown.length, n: ad.length })}</p>
+        <div className="posting-groups">
+          {gap.addToCv.length > 0 && <div className="posting-group posting-build"><h3>{t('You have these, but your CV does not show them')} <span>{gap.addToCv.length}</span></h3>
+            <p className="note">{t('Add evidence for these skills only if they are true for you.')}</p>
+            <ul className="posting-skills">{gap.addToCv.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('The ad says “{line}”', { line: (found ?? []).find((f) => f.uri === s.uri)?.from ?? '' })}</small></div></li>)}</ul></div>}
+          {gap.notYet.length > 0 && <div className="posting-cv-next"><strong>{gap.notYet.length} {t('skills still to learn')}</strong><button type="button" className="text-button" onClick={() => chooseView('skills')}>{t('Review skills to build')}</button></div>}
+          <details className="posting-group posting-cv-shown"><summary>{t('Your CV already shows')} <span>{gap.shown.length}</span></summary>
+            {gap.shown.length === 0 ? <p className="note">{t('None of the ticked skills yet.')}</p>
+              : <ul className="posting-skills">{gap.shown.map((s) => <li key={s.uri}><div className="posting-card"><strong>{s.label}</strong><small className="posting-from">{t('Your CV says “{line}”', { line: cvSkillBy.get(s.uri)?.from ?? '' })}</small></div></li>)}</ul>}
+          </details>
+        </div>
+        <CvAvoid cvText={cvText} />
+      </div>}
+    </section>}
   </div>;
 }

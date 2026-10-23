@@ -1497,6 +1497,13 @@ details.course-check { padding-block:0; }
 .posting-entry-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding-top: 16px; margin-top: 18px; border-top: 1px solid #e3e7e3; }
 .posting-entry-actions p { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.4; }
 .posting-status { margin: 12px 0 0; }
+.posting-entry-compact { padding-block: 16px; }
+.posting-entry-compact .posting-entry-head { align-items: center; margin-bottom: 0; }
+.posting-entry-compact .posting-entry-head h2 { margin-bottom: 2px; }
+.posting-result-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; }
+.posting-result-heading h2 { margin-bottom: 4px; }
+.posting-result-heading .note { margin: 0; }
+.posting-result-heading .primary-button { flex: none; }
 .posting-result-counts { display: flex; flex-wrap: wrap; gap: 0; margin: 16px 0 0; border: 1px solid #d9ded9; border-radius: 10px; overflow: hidden; }
 .posting-result-counts > div { display: grid; gap: 1px; flex: 1; min-width: 120px; padding: 12px 18px; border-right: 1px solid #e3e7e3; }
 .posting-result-counts > div:last-child { border-right: 0; }
@@ -1506,6 +1513,42 @@ details.course-check { padding-block:0; }
 .posting-fit-held { background: #2c7153; }
 .posting-fit-related { background: #c99a37; }
 .posting-fit-missing { background: #c6735d; }
+.posting-result-nav { display: flex; gap: 4px; margin-top: 16px; border-bottom: 1px solid #d9ded9; }
+.posting-result-nav button { border: 0; border-bottom: 3px solid transparent; background: transparent; padding: 10px 14px; color: #5d6873; font-size: 16px; font-weight: 700; }
+.posting-result-nav button:hover { color: #244d39; background: #f3f6f3; }
+.posting-result-nav button[aria-pressed="true"] { border-color: #477157; color: #244d39; }
+.posting-result-nav span { margin-left: 4px; font-size: 14px; color: #5d6873; }
+.posting-overview { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(290px, .8fr); gap: 16px; align-items: start; margin-top: 18px; }
+.posting-overview > .posting-role, .posting-overview > .posting-courses { min-width: 0; border: 1px solid #d9ded9; border-radius: 9px; padding: 18px; }
+.posting-overview > .posting-role h2, .posting-overview > .posting-courses h2 { margin-top: 0; font-size: 20px; }
+.posting-overview > .posting-role .note { margin: 0 0 12px; }
+.posting-overview > .posting-role .detail-facts { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 12px; }
+.posting-overview > .posting-role .detail-find { margin-top: 14px; padding: 12px; }
+.posting-overview > .posting-role .detail-find ul { gap: 6px; }
+.posting-overview > .posting-role .detail-find a { padding: 7px 9px; }
+.posting-overview > .posting-role .empty-state-actions { margin-top: 14px; }
+.posting-overview > .posting-courses .plan-order { margin-top: 12px; }
+.posting-overview > .posting-courses .note { margin: 10px 0 0; }
+.posting-more-courses { margin-top: 10px; }
+.posting-more-courses summary { color: #1e6b4f; font-weight: 700; cursor: pointer; }
+.posting-more-courses .plan-order { margin-top: 10px; }
+.posting-review-action { grid-column: 1 / -1; justify-self: start; }
+.posting-review { padding-top: 18px; }
+.posting-review > .note { margin: 0 0 12px; }
+.posting-review .posting-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.posting-review .posting-group > .text-button { justify-self: start; }
+.posting-review .posting-have summary { cursor: pointer; font-size: 17px; font-weight: 700; }
+.posting-review .posting-have summary span { color: #315f46; margin-left: 6px; }
+.posting-review .posting-have[open] summary { margin-bottom: 12px; }
+.posting-cv { padding-top: 18px; }
+.posting-cv h2 { margin-top: 0; }
+.posting-cv .posting-groups { margin: 16px 0; }
+.posting-cv .posting-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.posting-cv-next { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 16px; border: 1px solid #d9ded9; border-radius: 8px; }
+.posting-cv-shown summary { cursor: pointer; font-size: 17px; font-weight: 700; }
+.posting-cv-shown[open] summary { margin-bottom: 12px; }
+.posting-cv-shown summary span { color: #315f46; margin-left: 6px; }
+.posting-cv .cv-avoid { margin-top: 18px; }
 .posting-review-note { margin: 14px 0 0; }
 .posting-summary { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
 .posting-groups { display: grid; gap: 14px; margin-top: 8px; }
@@ -1548,10 +1591,14 @@ details.course-check { padding-block:0; }
 @media (max-width: 800px) {
   .posting-entry-grid { grid-template-columns: 1fr; }
   .posting-entry-main textarea { min-height: 210px; }
+  .posting-overview { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .posting-entry-head { flex-direction: column; }
   .posting-entry-head .secondary-button { order: 1; }
+  .posting-result-heading { align-items: stretch; flex-direction: column; }
+  .posting-result-nav { overflow-x: auto; white-space: nowrap; }
+  .posting-result-nav button { padding-inline: 10px; font-size: 15px; }
   .posting-entry-cv { padding: 14px; }
   .posting-entry-actions { align-items: stretch; flex-direction: column; }
   .posting-entry-actions .primary-button { flex: 1; }
@@ -1559,6 +1606,7 @@ details.course-check { padding-block:0; }
   .posting-result-counts > div:nth-child(even) { border-right: 0; }
   .posting-result-counts > div:nth-last-child(-n+2) { border-bottom: 0; }
   .posting-skills { grid-template-columns: 1fr; }
+  .posting-review .posting-skills, .posting-cv .posting-skills { grid-template-columns: 1fr; }
 }
 
 /* Home: two starting choices side by side (fresh graduate, already working). */
