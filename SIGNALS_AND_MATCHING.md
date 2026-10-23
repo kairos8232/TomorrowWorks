@@ -264,6 +264,10 @@ Code: `src/futures.ts`; tests: `src/futures.test.ts`; screen: *1,000 possible fu
 
 No score, vacancy count or ad list is produced by us. *Find this role* links (`src/jobSearch.ts`) only put the role title into JobStreet, LinkedIn and Indeed search addresses (plus the MYFutureJobs home page); nothing is fetched or scraped, because those sites' terms forbid scraping and open data has no per-skill vacancy counts.
 
+### Checking for a new DOSM quarter (added 24 Oct 2026)
+
+`scripts/check_dosm_jmi.py` (internet needed; run on Carson's Mac or in Replit's Shell) reads the newest `data/sources/dosm-jmi-*.json`, builds the release URL of the next quarter (DOSM names it `...-job-market-insights-q<Q><YEAR>`), and asks DOSM for it: 404 = not published yet; 200 = it lists the .xlsx links (`--download` saves the first to `data/raw/`) and prints the exact `import_dosm_jmi.py` command. It never imports by itself, so a person checks the file and the release date first. `--selftest` tests the helper functions offline. **Not yet run against the live DOSM site** (blocked in Claude's workspace; the page naming comes from the Q2 2026 URL), so the first run on Carson's Mac is the test.
+
 ### CV vs ad (added 24 Oct 2026)
 
 The person can also paste their CV. The CV's lines are matched to ESCO skills the same way (`/api/cv-skills`, up to 80 skills so none is cut off), and each ticked ad skill is placed in one group by `cvGap` (`src/adFit.ts`): *Your CV already shows* (the CV matched the same ESCO skill; the CV line is shown), *You have these, but your CV does not show them* (held in Your skills, not matched in the CV: add a line), or *Not on your CV or in your skills yet*. Exact ESCO match only; no score, no rewritten text. The CV is not stored; contact lines and name/age/identity phrases are removed in the browser first.
