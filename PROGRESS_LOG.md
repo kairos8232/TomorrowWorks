@@ -14,7 +14,7 @@
 - Entry points to the CV check: header item Check my CV (individuals), Job market tab renamed Check a job ad, and a pointer line on Job ads. Browser-checked at 1440 and 390 px.
 - Job market sub-menu in three zones (tool left, data centre, reference right); browser-checked at 1440 and 390 px.
 - Workplace news: status line while the saved headlines are replaced by today's, plus a fade on the topic cards (Carson saw them change a moment after load). Browser-checked with a delayed mocked /api/news.
-- Added `scripts/check_dosm_jmi.py`: checks DOSM for a newer JMI quarter and prints the import command (no auto-import). Offline selftest passes; not run against live DOSM (blocked here). Answers the "updatable source" question: one import command updates every score; this script finds the new release.
+- Added `scripts/check_dosm_jmi.py`: checks DOSM for a newer JMI quarter and prints the import command (no auto-import). Offline selftest passes. First live run (Carson, Replit) reported Q3 as found with no file: false positive, so the script now needs a file named for the quarter and has --check <quarter> to test on Q2. Answers the "updatable source" question: one import command updates every score; this script finds the new release.
 - Not verified: the real RunPod match for CV and ad together (this workspace cannot reach RunPod). Step 2 rules not built: waiting for Carson to approve each rule and its source.
 
 ---

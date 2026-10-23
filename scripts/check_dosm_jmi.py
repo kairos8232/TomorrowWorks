@@ -3,14 +3,19 @@
 Usage:
     python3 scripts/check_dosm_jmi.py              # check, print what to do next
     python3 scripts/check_dosm_jmi.py --download   # also save the xlsx to data/raw/
+    python3 scripts/check_dosm_jmi.py --check 2026-Q2   # test on a quarter you know exists
     python3 scripts/check_dosm_jmi.py --selftest   # offline tests of the helper functions
 
 How it works (plain steps, nothing is imported automatically):
   1. Read the newest snapshot in data/sources/dosm-jmi-*.json (its latestQuarter and release URL).
   2. Work out the next quarter and its release page URL. DOSM names the page
      big-data-analytics-job-market-insights-q<Q><YEAR> (for example ...-q22026).
-  3. Ask DOSM for that page. 404 means the quarter is not published yet.
-  4. If the page exists, list its .xlsx links and print the import command to run.
+  3. Ask DOSM for that page.
+  4. A quarter counts as published only if the page lists an .xlsx file whose name mentions
+     that quarter and year (for example Data_JMI_Q3_2026.xlsx). A page address that answers
+     but lists no such file (DOSM's site may answer for any address) is reported as not published.
+  5. If it is published, print the links and the import command to run.
+Test it on a quarter that exists: --check 2026-Q2 must find Data_JMI_Q2_2026.xlsx.
 A person still downloads/checks the file and runs scripts/import_dosm_jmi.py, so every
 number in the app stays traceable to a file someone looked at.
 
@@ -60,6 +65,13 @@ def find_xlsx_links(html: str, base: str) -> list[str]:
     return links
 
 
+def quarter_files(links: list[str], quarter: str) -> list[str]:
+    """Links whose file name mentions the quarter and year, e.g. Data_JMI_Q3_2026.xlsx for 2026-Q3."""
+    year, q = quarter.split("-Q")
+    pattern = re.compile(rf"Q{q}\D*{year}|{year}\D*Q{q}", re.I)
+    return [link for link in links if pattern.search(link.rsplit("/", 1)[-1])]
+
+
 def newest_snapshot() -> dict:
     files = sorted(SOURCES.glob("dosm-jmi-*.json"))
     if not files:
@@ -82,6 +94,8 @@ def selftest() -> None:
     base = "https://www.dosm.gov.my/portal-main/release-content/big-data-analytics-job-market-insights-q22026"
     assert release_url(base, "2026-Q2", "2026-Q3").endswith("insights-q32026")
     assert release_url(base, "2026-Q2", "2027-Q1").endswith("insights-q12027")
+    assert quarter_files(["https://x.test/Data_JMI_Q3_2026.xlsx", "https://x.test/Data_JMI_Q2_2026.xlsx"], "2026-Q3") == ["https://x.test/Data_JMI_Q3_2026.xlsx"]
+    assert quarter_files(["https://x.test/other.xlsx"], "2026-Q3") == []
     html = '<a href="/uploads/Data_JMI_Q3_2026.xlsx?x=1">a</a> <a href="https://x.test/b.xlsx">b</a> <a href="/uploads/Data_JMI_Q3_2026.xlsx">dup</a>'
     assert find_xlsx_links(html, base) == ["https://www.dosm.gov.my/uploads/Data_JMI_Q3_2026.xlsx", "https://x.test/b.xlsx"]
     try:
@@ -98,7 +112,7 @@ def main() -> None:
         return
     source = newest_snapshot()
     latest = source["latestQuarter"]
-    wanted = next_quarter(latest)
+    wanted = sys.argv[sys.argv.index("--check") + 1] if "--check" in sys.argv else next_quarter(latest)
     url = release_url(source["url"], latest, wanted)
     print(f"Imported: {latest} ({source['name']}, published {source['publishedAt']}).")
     print(f"Checking for {wanted}: {url}")
@@ -106,16 +120,14 @@ def main() -> None:
         status, html = fetch(url)
     except urllib.error.URLError as err:
         sys.exit(f"Could not reach DOSM: {err.reason}. Run this on a computer with internet access (it is blocked in Claude's workspace).")
-    if status == 404:
-        print(f"{wanted} is not published yet (HTTP 404). Nothing to import.")
-        return
-    if status != 200:
+    if status not in (200, 404):
         sys.exit(f"Unexpected answer from DOSM: HTTP {status}. Open the page in a browser to check.")
-    links = find_xlsx_links(html, url)
-    print(f"{wanted} release page found.")
+    links = quarter_files(find_xlsx_links(html, url), wanted) if status == 200 else []
     if not links:
-        print("No .xlsx link found on the page. Open it in a browser and download the data file by hand.")
+        print(f"{wanted} is not published yet: HTTP {status}, and no {wanted} data file is listed on the page. Nothing to import.")
+        print(f"(Page size {len(html)} characters. If you know {wanted} exists, open the page in a browser and tell the team.)")
         return
+    print(f"{wanted} data file found.")
     for link in links:
         print("  file:", link)
     if "--download" in sys.argv:
