@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDataSaver } from './dataSaver';
 import newsFile from '../data/sources/gdelt-news.json';
+import topicFile from '../data/sources/news-topics.json';
 import { useT, useTx } from './i18n';
 
 type Article = { title: string; url: string; outlet: string; language: string; seenAt: string; topics: string[] };
@@ -11,6 +12,8 @@ type NewsBody = { source: typeof newsFile.source & { covered?: { from: string; t
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
 
 const pageSize = 10;
+// Topic order: the workplace topics as listed in news-topics.json, then the 'otherwise' topics (AI industry).
+const topicOrder = [...new Set([...Object.keys(topicFile.query), ...Object.keys(topicFile.tagOnly), ...Object.values(topicFile.requires).map((r) => r.otherwise)])];
 
 export function NewsView() {
   const [topic, setTopic] = useState('All topics');
@@ -37,7 +40,8 @@ export function NewsView() {
     return () => clearTimeout(timer);
   }, [saver, want]);
   const articles = news.articles;
-  const topics = [...new Set(articles.flatMap((a) => a.topics).filter((x) => x !== 'Other'))];
+  const topics = [...new Set(articles.flatMap((a) => a.topics).filter((x) => x !== 'Other'))]
+    .sort((a, b) => (topicOrder.indexOf(a) + 1 || 99) - (topicOrder.indexOf(b) + 1 || 99));
   const covered = news.source.covered;
   const t = useT();
   const tx = useTx();

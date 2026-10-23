@@ -1053,6 +1053,7 @@ const dict: Record<string, Entry> = {
   'Learning order': { ms: 'Urutan pembelajaran', zh: '学习顺序' },
   'About {h} hours of checked courses': { ms: 'Kira-kira {h} jam kursus yang disemak', zh: '已核对课程约 {h} 小时' },
   'Time as stated by each provider. AI suggestions are not checked by hand.': { ms: 'Masa seperti yang dinyatakan oleh setiap penyedia. Cadangan AI tidak disemak secara manual.', zh: '时间以各提供方公布为准。AI 建议未经人工核对。' },
+  'AI industry': { ms: 'Industri AI', zh: 'AI 行业' },
 };
 
 const LangContext = createContext<Lang>('en');

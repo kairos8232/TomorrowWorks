@@ -745,7 +745,7 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .news-topic-options { display: flex; gap: 6px; }
 .news-topic-options button { border: 1px solid #cbd4cc; border-radius: 999px; background: #fff; color: #3a4450; padding: 8px 13px; font: inherit; font-size: 15px; }
 .news-topic-options button[aria-pressed="true"] { border-color: #1e6b4f; background: #e6f0ea; color: #1e6b4f; font-weight: 700; }
-.news-topic-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+.news-topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 20px; }
 .news-topic-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; min-height: 166px; padding: 16px; border: 1px solid #d9ded9; border-radius: 8px; background: #fbfcfa; color: #1c2430; font: inherit; text-align: left; cursor: pointer; }
 .news-topic-card:hover { border-color: #8baa98; }
 .news-topic-card[aria-pressed="true"] { border-color: #477157; background: #eef5ef; }
