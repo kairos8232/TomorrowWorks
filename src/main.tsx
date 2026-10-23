@@ -171,31 +171,31 @@ function Home({ start, startWithRole, go, lang, setLang }: {
         </svg>
       </section>
 
-      <section className="quiet-next" id="how" aria-labelledby="next-title">
-        <div className="quiet-section-head">
+      <section className="quiet-paths" id="how" aria-labelledby="paths-title">
+        <div className="quiet-paths-head">
           <p>{t('How it works')}</p>
-          <h2 id="next-title">{t('One role. More than one possible future.')}</h2>
+          <h2 id="paths-title">{t('Choose where to start.')}</h2>
         </div>
-        <ol className="quiet-steps">
-          <li><span>01</span><div><h3>{t('Start with the work you already do')}</h3><p>{t('Choose your role, then keep only the skills that feel true to your experience.')}</p></div></li>
-          <li><span>02</span><div><h3>{t('See realistic next moves')}</h3><p>{t('Compare nearby roles using skill fit, Malaysian demand and likely AI change.')}</p></div></li>
-          <li><span>03</span><div><h3>{t('Leave with one practical plan')}</h3><p>{t('See the gaps to close and the learning route that can move you forward.')}</p></div></li>
-        </ol>
-      </section>
-
-      <section className="quiet-evidence" aria-labelledby="evidence-title">
-        <p className="quiet-kicker">{t('Built for decisions in Malaysia')}</p>
-        <h2 id="evidence-title">{t('A clearer view of where work is moving.')}</h2>
-        <div className="evidence-row">
-          <p>{t('Explore job-ad demand, workplace signals and changing skill needs without starting from a blank search box.')}</p>
-          <button type="button" onClick={() => go('demand')}>{t('Explore the job market')} <span aria-hidden="true">↗</span></button>
+        <div className="quiet-paths-grid">
+          <article className="quiet-path">
+            <span className="quiet-path-number">01 / {t('Career path')}</span>
+            <h3>{t('Find your next move')}</h3>
+            <p>{t('Start with your skills, compare nearby roles, then make a learning plan.')}</p>
+            <button type="button" onClick={() => go('skills')}>{t('Explore careers')} <span aria-hidden="true">↗</span></button>
+          </article>
+          <article className="quiet-path">
+            <span className="quiet-path-number">02 / {t('Job market')}</span>
+            <h3>{t('See how work is changing')}</h3>
+            <p>{t('Explore Malaysian job ads, AI impact, workplace news and future skills.')}</p>
+            <button type="button" onClick={() => go('demand')}>{t('Explore the job market')} <span aria-hidden="true">↗</span></button>
+          </article>
+          <article className="quiet-path">
+            <span className="quiet-path-number">03 / {t('For organisations')}</span>
+            <h3>{t('Plan for your team')}</h3>
+            <p>{t('Compare role fit across a team and see which skills to build first.')}</p>
+            <button type="button" onClick={() => start('hr')}>{t('Explore organisations')} <span aria-hidden="true">↗</span></button>
+          </article>
         </div>
-      </section>
-
-      <section className="quiet-organisations" aria-labelledby="organisations-title">
-        <p>{t('For employers and educators')}</p>
-        <h2 id="organisations-title">{t('Help more people make their next move.')}</h2>
-        <button type="button" onClick={() => start('hr')}>{t('Open the organisation view')} <span aria-hidden="true">→</span></button>
       </section>
     </main>
     <footer className="public-footer"><span>TomorrowWorks</span><span>{t('Career direction, grounded in evidence.')}</span><small className="public-footer-esco">This service uses the ESCO classification of the European Commission.</small></footer>
