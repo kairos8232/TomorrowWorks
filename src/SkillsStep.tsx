@@ -58,7 +58,9 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
   const needle = query.trim().toLowerCase();
   const listHits = needle.length >= 2 ? allSkills.filter((s) => s.label.toLowerCase().includes(needle)).slice(0, 12) : [];
   const heldSkills = [...profile.held].map((u) => skillByUri.get(u) ?? profile.extra.get(u)).filter((s): s is Skill => Boolean(s)).sort((a, b) => a.label.localeCompare(b.label));
-  const visibleHeld = showAllHeld ? heldSkills : heldSkills.slice(0, 8);
+  const visibleHeld = showAllHeld ? heldSkills : heldSkills.slice(0, 4);
+  const currentRole = roles.find((role) => role.id === profile.currentRoleId);
+  const currentRoleHeld = currentRole?.essentialSkills.filter((skill) => profile.held.has(skill.uri)).length ?? 0;
   const pick = (s: Skill, extra?: React.ReactNode) => <button type="button" key={s.uri} className={`skill-tag${profile.held.has(s.uri) ? '' : ' skill-add'}`} onClick={() => toggle(s)} aria-pressed={profile.held.has(s.uri)}>
     {profile.held.has(s.uri) ? '✓ ' : '+ '}{s.label}{extra}
   </button>;
@@ -67,7 +69,7 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
     <div className="skills-intake">
     <section className="panel job-panel">
       <div><h2>{t('Your current job')}</h2>
-        <p className="note">{t('Shown as “Now” beside ranked moves.')}</p></div>
+        <p className="note">{t('Shown as “Now” in Your moves.')}</p></div>
       <select value={profile.currentRoleId ?? ''} onChange={(e) => update({ currentRoleId: e.target.value || null })} aria-label={t('Your current job')}>
         <option value="">{t('Not in this list')}</option>
         {roles.map((r) => <option key={r.id} value={r.id}>{roleTitle(r.title)}</option>)}
@@ -82,7 +84,7 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
     <div className="skills-main-entry">
     <section className="panel describe-panel">
       <h2>{t('Describe your work')}</h2>
-      <p className="note">{t('Describe a task in English, Bahasa Malaysia or Chinese. Choose which suggested skills to add.')}</p>
+      <p className="note">{t('Describe a task in English, Malay or Chinese.')}</p>
       <form className="skill-search" onSubmit={findSkills}>
         <textarea aria-label={t('Describe your work')} value={description} onChange={(e) => setDescription(e.target.value)} maxLength={500} rows={2} placeholder={t('e.g. I reconcile bank statements and prepare month-end reports')} />
         <button type="submit" className="primary-button" disabled={search.busy || !description.trim()}>{search.busy ? t('Searching…') : t('Find my skills')}</button>
@@ -97,10 +99,19 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
 
     <section className="panel selected-skills">
       <div className="skills-summary-main">
-        <h2>{t('Your skills')} <span className="count">{heldSkills.length}</span></h2>
+        <h2>{t('Your skills')}</h2>
+        <div className="skills-overview">
+          <div className="skills-total"><strong>{heldSkills.length}</strong><span>{t('skills selected')}</span></div>
+          {currentRole && <div className="skills-coverage">
+            <div className="skills-coverage-label"><span>{t('Essential skills for {role}', { role: roleTitle(currentRole.title) })}</span><strong>{currentRoleHeld} / {currentRole.essentialSkills.length}</strong></div>
+            <div className="skills-coverage-track" role="img" aria-label={t('{held} of {total} essential skills selected for {role}', { held: currentRoleHeld, total: currentRole.essentialSkills.length, role: roleTitle(currentRole.title) })}>
+              <span style={{ width: `${currentRoleHeld / currentRole.essentialSkills.length * 100}%` }} />
+            </div>
+          </div>}
+        </div>
         {heldSkills.length === 0 ? <p className="note">{t('No skills yet. Describe your work or search the list above.')}</p>
           : <div className="tag-row">{visibleHeld.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
-        {heldSkills.length > 8 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
+        {heldSkills.length > 4 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
       </div>
       <div className="step-actions">
         <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t(nextLabel ?? 'See my moves')}</button>

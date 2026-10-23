@@ -15,7 +15,7 @@ export function GradSteps({ current, onGo }: { current: GradStep; onGo: (step: G
   return <nav className="grad-steps" aria-label={t('Your steps')}>
     <ol>{STEPS.map((s, i) => <li key={s.id} className={i < at ? 'done' : i === at ? 'current' : ''}>
       <button type="button" aria-current={i === at ? 'step' : undefined} onClick={() => onGo(s.id)}>
-        <span className="grad-step-mark" aria-hidden="true">{i < at ? '✓' : i + 1}</span>
+        <span className="grad-step-mark" aria-hidden="true">{i + 1}</span>
         {t(s.label)}
       </button>
     </li>)}</ol>

@@ -6,7 +6,7 @@ export function JobLinks({ title }: { title: string }) {
   const t = useT();
   return <div className="detail-find">
     <h3>{t('Find this role')}</h3>
-    <p className="note">{t('Opens each site’s own search for “{role}”. We do not collect or count the ads.', { role: title })}</p>
-    <ul>{jobSearchLinks(title).map((l) => <li key={l.id}><a href={l.url} target="_blank" rel="noreferrer">{l.name} ↗</a></li>)}</ul>
+    <p className="note">{t('Search for “{role}” on these job sites.', { role: title })}</p>
+    <ul>{jobSearchLinks(title).map((l) => <li key={l.id}><a href={l.url} target="_blank" rel="noreferrer">{l.name}</a></li>)}</ul>
   </div>;
 }

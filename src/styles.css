@@ -315,6 +315,7 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .role-focus .detail-facts { background: #f7f8f6; border-radius: 8px; padding: 16px; }
 @media (max-width: 680px) { .role-focus-heading { align-items: start; } .focus-score strong { font-size: 24px; } .role-focus-summary { align-items: start; flex-direction: column; } }
 .role-focus-content { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 16px; align-items: start; }
+.role-focus-aside { display: grid; gap: 16px; min-width: 0; }
 .role-focus .detail-skills { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .role-focus .skill-list { min-width: 0; border: 1px solid #d9ded9; border-radius: 8px; padding: 16px; }
 .role-focus .skill-list:first-child { background: #faf7f5; }
@@ -326,11 +327,13 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .role-focus .interest-line { border-top: 1px solid #d9ded9; padding-top: 12px; }
 .role-focus a { color: #1e6b4f; }
 @media (max-width: 900px) { .role-focus-content { grid-template-columns: minmax(0, 1fr); } }
-.detail-find { margin-top: 16px; border: 1px solid #d9ded9; border-radius: 8px; padding: 16px; display: grid; gap: 8px; }
+.detail-find { border: 1px solid #d9ded9; border-radius: 8px; padding: 16px; display: grid; gap: 10px; background: #f7f9f7; }
+.role-focus-aside .detail-find { margin: 0; }
 .detail-find h3 { margin: 0; font-size: 17px; }
 .detail-find .note { margin: 0; }
-.detail-find ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
-.detail-find a { color: #1e6b4f; font-weight: 700; }
+.detail-find ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.detail-find a { display: block; padding: 9px 10px; border: 1px solid #cbd6ce; border-radius: 6px; background: #fff; color: #1e6b4f; font-weight: 700; text-decoration: none; }
+.detail-find a:hover { border-color: #477157; background: #eef4ef; }
 .moves-update { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 22px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 10px; padding: 14px 18px; }
 .moves-update p { margin: 0; line-height: 1.5; }
 .moves-update > div { display: flex; flex-wrap: wrap; gap: 12px 22px; }
@@ -1341,6 +1344,15 @@ details.course-check { padding-block:0; }
 .skills-body .selected-skills { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
 .skills-summary-main { min-width: 0; }
 .skills-summary-main h2 { display: flex; align-items: baseline; gap: 8px; }
+.skills-overview { display: flex; align-items: center; gap: 22px; margin: 12px 0 14px; }
+.skills-total { display: flex; align-items: baseline; gap: 8px; flex: none; }
+.skills-total strong { color: #244d39; font-size: 34px; line-height: 1; }
+.skills-total span { color: #5d6873; font-size: 16px; }
+.skills-coverage { display: grid; gap: 8px; width: min(100%, 440px); border-left: 1px solid #d9ded9; padding-left: 22px; }
+.skills-coverage-label { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font-size: 15px; }
+.skills-coverage-label strong { white-space: nowrap; color: #244d39; }
+.skills-coverage-track { height: 9px; border-radius: 999px; background: #e5ece7; overflow: hidden; }
+.skills-coverage-track span { display: block; height: 100%; border-radius: inherit; background: #477157; }
 .skills-summary-main .tag-row { margin: 12px 0 8px; }
 .skills-summary-main .skill-tag { text-align: left; }
 .skills-body .selected-skills .step-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
@@ -1361,6 +1373,8 @@ details.course-check { padding-block:0; }
 @media (max-width: 620px) {
   .skills-body .skills-intake { grid-template-columns: 1fr; }
   .skills-body .selected-skills { grid-template-columns: 1fr; gap: 16px; }
+  .skills-overview { align-items: stretch; flex-direction: column; gap: 12px; }
+  .skills-coverage { width: 100%; border-left: 0; padding: 0; }
   .skills-body .selected-skills .step-actions { align-items: flex-start; border-top: 1px solid #d9ded9; padding-top: 16px; }
   .skills-body .selected-skills .step-actions .note { text-align: left; }
   .skills-body .choice-list { grid-template-columns: 1fr; }

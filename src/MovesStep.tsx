@@ -154,9 +154,11 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
             ...fit.matched.map((skill) => <span className="skill-tag" key={skill.uri}>{skill.label}</span>)]}
         </SkillList>
       </div>
-      <div className="detail-evidence"><h3>{t('This move and the SDGs')}</h3><RoleSdgLine roleId={role.id} /><InterestLine roleId={role.id} picks={picks} /></div>
+      <div className="role-focus-aside">
+        <JobLinks title={role.title} />
+        <div className="detail-evidence"><h3>{t('This move and the SDGs')}</h3><RoleSdgLine roleId={role.id} /><InterestLine roleId={role.id} picks={picks} /></div>
+      </div>
     </div>
-    <JobLinks title={role.title} />
   </section>;
 }
 

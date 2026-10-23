@@ -27,7 +27,7 @@ My career (sidebar navigation)           The job market (browse any time)
 ## 1. Your skills
 
 - **Start from your CV** (22 Oct, top of the step, optional): *Choose CV file* (PDF or .txt, read in the browser with pdf.js, max 5 MB, first 10 pages), *Paste text*, or *Try a fictional CV* (Aina). `src/cv.ts` splits the text into lines, removes contact lines (email, links, phone numbers) and headings/names (all capitals, under three words), and caps at 40 lines. The person sees "n lines to match · n contact lines removed" and can open *Check what will be sent* to remove any line. *Find skills in my CV* sends only those lines once to `/api/cv-skills` (RunPod Job B, top 3 ESCO skills per line ≥ 0.55, best per skill, up to 25). Results are tick boxes with "match n%" and *from "line"*; nothing is added until the person ticks skills and presses *Add n selected skills*. Nothing is stored or logged.
-- **Current:** *Your current job* (ESCO role or "Not in this list"; shown as "Now" outside the ranking) and *Search the skill list* share the left side of the intake area on wide screens. *Describe your work* sits beside them and uses RunPod skill search (shows "match n%", user adds what is true; clear message if search is not connected). The intake stacks on phones. Below it are optional work interests and *Your skills* (removable chips, first eight shown until expanded), with *See my moves* beside the selected skills (disabled until one skill is added).
+- **Current:** *Your current job* (ESCO role or "Not in this list"; shown as "Now" outside the ranking) and *Search the skill list* share the left side of the intake area on wide screens. *Describe your work* sits beside them and uses RunPod skill search (shows "match n%", user adds what is true; clear message if search is not connected). The intake stacks on phones. *Your skills* shows a large selected count and, when a current role is selected, a bar for its essential skills. It shows four removable chips until expanded and keeps *See my moves* beside the summary (disabled until one skill is added). Optional interests and goals follow.
 - Editing Aina's skills turns the profile into the visitor's own (the "Viewing as Aina" banner disappears).
 - Nothing is stored; the profile lives in the browser tab only.
 
@@ -143,7 +143,7 @@ For HR / L&D managers (a fictional five-person finance team) and career centres 
 
 ## Your moves: Find this role (24 Oct)
 
-- Role page ends with *Find this role*: JobStreet, LinkedIn, Indeed and MYFutureJobs links built from the role title. The line under it says we do not collect or count the ads.
+- *Find this role* sits in the role page's right column above the SDG evidence: JobStreet, LinkedIn, Indeed and MYFutureJobs links built from the role title. On narrow screens the column stacks below the skill comparison. Links open job sites; this panel shows no ad counts.
 
 ## Job ads / AI exposure
 
@@ -181,6 +181,6 @@ Two cards side by side under the headline: *I'm a fresh graduate* (green button 
 
 On the path each step ends with one green **Next** button: *Next: A job ad* (disabled until a skill is added), *Next: Your plan* (shown after an ad is checked; opens the plan for the ad's closest role, or the role picker if none), and after the plan a panel *Want to try another role?* that opens *Your moves*.
 
-The CV read in step 1 (file or pasted text) is kept in memory and fills the *Your CV* box in step 2, so it is pasted once. It is cleared when the person goes Home or starts again, and never stored.
+The step bar keeps **1, 2, 3** visible for completed and current steps; it does not replace completed numbers with ticks. The CV read in step 1 (file or pasted text) is kept in memory and fills the *Your CV* box in step 2, so it is pasted once. It is cleared when the person goes Home or starts again, and never stored.
 
 *A job ad* starts with one main text box for duties and requirements and a smaller optional CV text box beside it (stacked on phones). Both fields stay visible; a fictional example fills both. The three-step path is centred with chevrons between the labelled steps. After matching, a count strip and proportional bar show skills held, related, and to build; visitors review and untick AI matches before using the closest-role and course information. CV text checks and the optional file checklist appear with results, where they are relevant. This remains one step: the input and its results need to stay together for reviewing matches.

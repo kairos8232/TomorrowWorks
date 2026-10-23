@@ -64,7 +64,7 @@ export function CvPanel({ held, onAdd, onText }: { held: ReadonlySet<string>; on
     <div className="cv-head">
       <div>
         <h2 id="cv-head">{t('Add skills from a CV')} <span className="optional-badge">{t('optional')}</span></h2>
-        <p className="note">{t('Review work lines before sending them for skill matching. Contact details are removed; the file is never stored.')}</p>
+        <p className="note">{t('Review lines before matching. Contact details are removed; the file is not stored.')}</p>
       </div>
       <div className="cv-actions">
         <input ref={fileRef} type="file" accept=".pdf,.txt,application/pdf,text/plain" className="visually-hidden" id="cv-file" onChange={(e) => onFile(e.target.files?.[0])} />
