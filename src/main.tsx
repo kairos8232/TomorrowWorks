@@ -44,6 +44,9 @@ const marketNav: NavItem[] = [
   { id: 'signals', label: 'Signal sources', hint: 'Every source and its date' },
 ];
 
+// Job market tabs in three zones: the tool on the left, the market data in the middle, the reference on the right.
+const marketZone: Record<string, 'tool' | 'data' | 'reference'> = { adcheck: 'tool', demand: 'data', outlook: 'data', news: 'data', trending: 'data', signals: 'reference' };
+
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
   moves: { title: 'Your moves', intro: 'Compare roles by skill fit, demand and AI change.' },
@@ -345,6 +348,7 @@ function App() {
 
   const onGradPath = path !== null && isStepScreen(path, screen);
   const inMarket = marketNav.some(item => item.id === screen) && !onGradPath;
+  const subnavButton = (item: NavItem) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>;
   const isOrganisation = kind === 'team' || kind === 'region';
   const primaryItems = kind === 'region' ? regionNav : kind === 'team' ? teamNav : careerNav;
 
@@ -377,8 +381,10 @@ function App() {
     <main className="main-content">
       <div className={`content-wrap${screen === 'plan' ? ' plan-page' : screen === 'moves' ? ' moves-page' : ''}`}>
         {onGradPath && path && <GradSteps path={path} current={screen as GradStep} onGo={go} />}
-        {!onGradPath && <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
-          {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
+        {!onGradPath && <nav className={`workspace-subnav${inMarket ? ' market-subnav' : ''}`} aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
+          {inMarket
+            ? (['tool', 'data', 'reference'] as const).map((zone) => <div key={zone} className={`subnav-zone subnav-${zone}`}>{marketNav.filter((item) => marketZone[item.id] === zone).map(subnavButton)}</div>)
+            : primaryItems.map(subnavButton)}
         </nav>}
         {page && (screen !== 'moves' || profile.held.size === 0) && <header className="page-head">
           <h1>{t(page.title)}</h1>

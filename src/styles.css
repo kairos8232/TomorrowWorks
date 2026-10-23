@@ -1723,3 +1723,14 @@ details.course-check { padding-block:0; }
 /* Job ads: a pointer to the CV check. */
 .demand-cta { margin: 0 0 14px; color: #59645e; font-size: 16px; }
 .demand-cta .text-button { font-size: 16px; }
+
+/* Job market sub-menu in three zones: tool (left), data (centre), reference (right). */
+.market-subnav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; overflow: visible; }
+.subnav-zone { display: flex; align-items: center; gap: 8px; }
+.subnav-tool { justify-self: start; }
+.subnav-reference { justify-self: end; }
+@media (max-width: 900px) {
+  .market-subnav { display: flex; overflow-x: auto; }
+  .subnav-zone { flex: none; }
+  .subnav-reference { order: 3; } .subnav-tool { order: 1; } .subnav-data { order: 2; }
+}

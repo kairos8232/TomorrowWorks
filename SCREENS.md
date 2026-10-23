@@ -193,3 +193,7 @@ One step bar, three steps, for all individual starts: *fresh graduate* = Your CV
 ### Entry points to the CV check (24 Oct 2026)
 
 Individuals get a third header item, **Check my CV** (also in the mobile menu), next to Career path and Job market; it opens *Check a job ad* and is highlighted there. Organisation views do not show it. The Job market tab is renamed *Check a job ad* to match the screen heading, and *Job ads* starts with a line: "Applying for a job? Check an ad against your CV."
+
+### Job market tabs in three zones (24 Oct 2026)
+
+Left: *Check a job ad* (the tool). Centre: *Job ads*, *AI impact*, *Workplace news*, *Future skills radar* (market data). Right: *Signal sources* (reference). Below 900 px the bar is one scrolling row in the order tool, data, reference. Zones are set in `marketZone` in `src/main.tsx`.
