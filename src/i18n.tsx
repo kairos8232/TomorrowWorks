@@ -326,6 +326,8 @@ const dict: Record<string, Entry> = {
   'Check my CV': { ms: 'Semak CV saya', zh: '检查我的简历' },
   'Applying for a job?': { ms: 'Memohon kerja?', zh: '正在申请工作？' },
   'Check an ad against your CV': { ms: 'Semak iklan dengan CV anda', zh: '用你的简历对照招聘广告' },
+  "Showing saved headlines from {date}. Checking for today’s headlines…": { ms: "Menunjukkan tajuk tersimpan dari {date}. Menyemak tajuk hari ini…", zh: "显示 {date} 保存的标题。正在检查今天的标题…" },
+  "Today’s headlines loaded.": { ms: "Tajuk hari ini telah dimuatkan.", zh: "已载入今天的标题。" },
   'I work as': { ms: 'Saya bekerja sebagai', zh: '我的工作是' },
   'Show me where it can lead': { ms: 'Lihat hala tuju saya', zh: '看看下一步能走向哪里' },
   'Malaysian job-market evidence': { ms: 'Berdasarkan data pasaran kerja Malaysia', zh: '参考马来西亚就业市场数据' },

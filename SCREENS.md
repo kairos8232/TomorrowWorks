@@ -197,3 +197,7 @@ Individuals get a third header item, **Check my CV** (also in the mobile menu), 
 ### Job market tabs in three zones (24 Oct 2026)
 
 Left: *Check a job ad* (the tool). Centre: *Job ads*, *AI impact*, *Workplace news*, *Future skills radar* (market data). Right: *Signal sources* (reference). Below 900 px the bar is one scrolling row in the order tool, data, reference. Zones are set in `marketZone` in `src/main.tsx`.
+
+### Workplace news loading note (24 Oct 2026)
+
+The page paints the saved headlines first, then swaps in today's from `/api/news`, and the topic cards used to change without warning. A line above the cards now says "Showing saved headlines from {date}. Checking for today's headlines…", then "Today's headlines loaded." (or the saved-headlines line if the server has nothing newer). The cards fade in when the live headlines or the RunPod key-headline picks replace the saved ones (no fade with reduced motion).

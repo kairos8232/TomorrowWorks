@@ -24,18 +24,21 @@ export function NewsView() {
   const saver = useDataSaver();
   const [want, setWant] = useState(false);   // data saver: fetch today's headlines only when asked
   const [briefLoading, setBriefLoading] = useState(false);
+  const [fetching, setFetching] = useState(!saver);   // true until the first request for today's headlines finishes
   useEffect(() => {
     if (saver && !want) return;
+    setFetching(true);
     let tries = 0;
     let timer: ReturnType<typeof setTimeout>;
     const load = () => fetch('/api/news').then((r) => (r.ok ? r.json() : null)).then((body: NewsBody | null) => {
+      setFetching(false);
       if (body?.articles?.length) setNews(body);
       // The brief is computed on RunPod in the background; a sleeping worker can take
       // 1-2 minutes to start, so ask again every 20 s for up to 3 minutes.
       const waiting = Boolean(body && !body.brief && tries++ < 9);
       setBriefLoading(waiting);
       if (waiting) timer = setTimeout(load, 20_000);
-    }).catch(() => setBriefLoading(false));
+    }).catch(() => { setBriefLoading(false); setFetching(false); });
     load();
     return () => clearTimeout(timer);
   }, [saver, want]);
@@ -67,7 +70,10 @@ export function NewsView() {
         <button type="button" aria-pressed={topic === 'Other'} onClick={() => selectTopic('Other')}>{t('Other')}</button>
       </div>
     </div>
-    <div className="news-topic-grid">
+    <p className="note news-status" aria-live="polite">{fetching
+      ? t('Showing saved headlines from {date}. Checking for today’s headlines…', { date: day(newsFile.source.retrievedAt) })
+      : news.live ? t('Today’s headlines loaded.') : t('Showing saved headlines from {date}.', { date: day(newsFile.source.retrievedAt) })}</p>
+    <div className="news-topic-grid news-fade" key={`${news.live ? 'live' : 'saved'}-${news.brief ? 'brief' : 'plain'}`}>
       {topics.map((name) => {
         const list = articles.filter((a) => a.topics.includes(name));
         const picked = news.brief?.picks[name]?.map((url) => byUrl.get(url)).filter((a): a is Article => Boolean(a)) ?? [];

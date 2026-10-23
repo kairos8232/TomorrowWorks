@@ -1734,3 +1734,9 @@ details.course-check { padding-block:0; }
   .subnav-zone { flex: none; }
   .subnav-reference { order: 3; } .subnav-tool { order: 1; } .subnav-data { order: 2; }
 }
+
+/* News: the topic cards fade in when the live headlines or the key-headline picks replace the saved ones. */
+.news-status { margin: 12px 0 8px; }
+.news-fade { animation: news-fade .45s ease-out; }
+@keyframes news-fade { from { opacity: .35; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .news-fade { animation: none; } }
