@@ -1430,7 +1430,7 @@ details.course-check { padding-block:0; }
 .team-modes { display: flex; gap: 4px; padding: 3px; border: 1px solid #d9ded9; border-radius: 9px; background: #fff; }
 .team-modes button { border: 0; border-radius: 6px; background: transparent; padding: 7px 14px; color: #3a4450; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
 .team-modes button.on { background: #1c2430; color: #fff; }
-.team-target { display: flex; align-items: flex-end; gap: 12px 18px; flex-wrap: wrap; }
+.team-target { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; }
 .team-target-field { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .team-target label { flex: none; font-size: 17px; font-weight: 700; white-space: nowrap; }
 .team-target select { width: min(100%, 340px); min-width: 260px; min-height: 46px; padding: 9px 12px; font: inherit; font-size: 18px; font-weight: 600; background: #fff; }
