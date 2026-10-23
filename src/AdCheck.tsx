@@ -2,12 +2,12 @@
 // ESCO skills on RunPod (same service as the CV intake, /api/cv-skills) and the person
 // ticks the ones that really are in the ad. We then show which of those skills they
 // hold, which are close, which to build, the closest of our roles with its demand and
-// AI-exposure signals, and checked courses for the gaps. Rule: src/adcheck.ts.
+// AI-exposure signals, and checked courses for the gaps. Rule: src/adFit.ts.
 // The ad is not stored. No score is made up: only counts and existing signals.
 import { useMemo, useState } from 'react';
 import { ilo, roles, roleTitle, snapshots, transferable, type Profile } from './data';
 import { aiResilience, demandTrend, type Skill } from './scoring';
-import { closestRole, compareAd } from './adcheck';
+import { closestRole, compareAd } from './adFit';
 import { planForGaps, type Resource } from './pathway';
 import resourcesFile from '../data/pathway/resources.json';
 import { cvLines } from './cv';

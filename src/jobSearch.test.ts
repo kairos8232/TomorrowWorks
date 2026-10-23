@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import rolesFile from '../data/roles.json';
-import { jobSearchLinks, slug } from './jobLinks';
+import { jobSearchLinks, slug } from './jobSearch';
 
 describe('job search links', () => {
   it('puts the role title into each site search', () => {

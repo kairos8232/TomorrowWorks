@@ -1,6 +1,6 @@
-// "Find this role": links to each job site's own search for a role title (src/jobLinks.ts).
+// "Find this role": links to each job site's own search for a role title (src/jobSearch.ts).
 import { useT } from './i18n';
-import { jobSearchLinks } from './jobLinks';
+import { jobSearchLinks } from './jobSearch';
 
 export function JobLinks({ title }: { title: string }) {
   const t = useT();

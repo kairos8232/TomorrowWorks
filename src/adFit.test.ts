@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import rolesFile from '../data/roles.json';
 import transferableFile from '../data/derived/transferable-skills.json';
 import { personaProfile } from './data';
-import { AD_ROLE_MIN, closestRole, compareAd } from './adcheck';
+import { AD_ROLE_MIN, closestRole, compareAd } from './adFit';
 import { noTransferableSkills, skillFit, type Role, type TransferableSkills } from './scoring';
 
 const roles = rolesFile.roles as Role[];
