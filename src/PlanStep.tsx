@@ -10,7 +10,7 @@ import { learningPlan, suggestedSteps, type Gap, type Resource, type SuggestedCo
 import { recommendMoves, scenarios } from './scoring';
 import { useLang, useT } from './i18n';
 import { SdgBadge } from './SdgViews';
-import { roleSdgs, sdgTotals } from './sdg';
+import { roleSdgs, sdgData, sdgTotals, targetGoal } from './sdg';
 import matchesFile from '../data/derived/coursera-skill-matches.json';
 import { CourseProgressControl } from './CourseProgress';
 import { MilestoneIcon } from './LearningMilestones';
@@ -137,7 +137,7 @@ export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus
         <div className="plan-facts">
           <NossRoute roleId={role.id} />
           {nextCourse?.accessId && access[nextCourse.accessId] && <div className="plan-fact"><span>{t('Access')}</span><a href={access[nextCourse.accessId].url} target="_blank" rel="noreferrer">{t(access[nextCourse.accessId].name)} ↗</a></div>}
-          <div className="plan-fact"><span>{t('Linked goals')}</span><div className="plan-sdg-badges">{[...sdgTargets, '4.4'].map(target => <SdgBadge key={target} target={target} short />)}</div></div>
+          <div className="plan-fact"><span>{t('Linked goals')}</span><div className="plan-sdg-badges">{[...sdgTargets, '4.4'].map(target => <div className="plan-sdg-item" key={target}><SdgBadge target={target} short /><span>{t(sdgData.goals[targetGoal(target)].short)}</span></div>)}</div></div>
           <div className="plan-fact plan-milestone-fact"><span>{t('Milestones')} · {t('Locked until verification')}</span><div className="plan-mini-milestones"><span className="mini-milestone mini-milestone-first"><MilestoneIcon kind="first" />{t('First course')}</span><span className="mini-milestone mini-milestone-plan"><MilestoneIcon kind="plan" />{t('Full plan')}</span></div></div>
         </div>
       </section>}

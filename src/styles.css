@@ -908,7 +908,9 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .plan-fact:last-child { border-right: 0; }
 .plan-fact > span:first-child { color: #5d6873; font-size: 14px; }
 .plan-fact a { color: #216548; overflow-wrap: anywhere; }
-.plan-sdg-badges { display: flex; flex-wrap: wrap; gap: 4px; }
+.plan-sdg-badges { display: grid; gap: 7px; }
+.plan-sdg-item { display: grid; grid-template-columns: max-content minmax(0, 1fr); align-items: center; gap: 8px; }
+.plan-sdg-item > span { overflow-wrap: anywhere; }
 .plan-sdg-badges .sdg-badge { font-size: 14px; }
 .plan-mini-milestones { display: flex; flex-wrap: wrap; gap: 8px; }
 .plan-mini-milestones span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
