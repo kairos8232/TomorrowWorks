@@ -192,7 +192,7 @@ One step bar, three steps, for all individual starts: *fresh graduate* = Your CV
 
 ### Entry points to the CV check (24 Oct 2026)
 
-Individuals get a third header item, **Check my CV** (also in the mobile menu), next to Career path and Job market; since 24 Oct it opens the CV-only screen below (it used to open *Check a job ad*, which needs an ad). *Check a job ad* stays under Job market and on the fresh-graduate path. Organisation views do not show it. The Job market tab is renamed *Check a job ad* to match the screen heading, and *Job ads* starts with a line: "Applying for a job? Check an ad against your CV."
+**Check my CV** is the first Job market tab, left zone beside *Check a job ad* (Carson, 24 Oct; the header briefly had its own item, now removed so the header is Career path and Job market). It opens the CV-only screen below. Organisation views do not show it. The Job market tab is renamed *Check a job ad* to match the screen heading, and *Job ads* starts with a line: "Applying for a job? Check an ad against your CV."
 
 ### Job market tabs in three zones (24 Oct 2026)
 
@@ -205,4 +205,4 @@ The page paints the saved headlines first, then swaps in today's from `/api/news
 
 ## Check my CV (CV only, added 24 Oct 2026)
 
-`src/CvCheck.tsx`, screen `cvcheck`, header item for individuals, no sub-navigation. For anyone, including people who already work, who only want feedback on their CV and have no ad. One box for the CV text (or *Try a fictional example*) and, once there is text, the same *CV checks* and *Check the file yourself* panels used in *Check a job ad* (`CvAvoid`, rules in `src/cvChecks.ts`). It runs in the browser only: no RunPod call, nothing sent or stored, no skill matching and no score. *Compare with a job ad* opens *Check a job ad* with the CV text already in its CV box (kept in memory only for that hand-over).
+`src/CvCheck.tsx`, screen `cvcheck`, a Job market tab. For anyone, including people who already work, who only want feedback on their CV and have no ad. One box for the CV text (or *Try a fictional example*) and, once there is text, the same *CV checks* and *Check the file yourself* panels used in *Check a job ad* (`CvAvoid`, rules in `src/cvChecks.ts`). It runs in the browser only: no RunPod call, nothing sent or stored, no skill matching and no score. *Compare with a job ad* opens *Check a job ad* with the CV text already in its CV box (kept in memory only for that hand-over).

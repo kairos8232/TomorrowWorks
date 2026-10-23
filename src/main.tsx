@@ -38,6 +38,7 @@ const teamNav: NavItem[] = [
 ];
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
+  { id: 'cvcheck', label: 'Check my CV', hint: 'Paste your CV, see what to fix' },
   { id: 'adcheck', label: 'Check a job ad', hint: 'Paste an ad, see skills and signals' },
   { id: 'outlook', label: 'AI impact', hint: 'Three views of AI by role' },
   { id: 'news', label: 'Workplace news', hint: 'Latest reported changes' },
@@ -46,7 +47,7 @@ const marketNav: NavItem[] = [
 ];
 
 // Job market tabs in three zones: the tool on the left, the market data in the middle, the reference on the right.
-const marketZone: Record<string, 'tool' | 'data' | 'reference'> = { adcheck: 'tool', demand: 'data', outlook: 'data', news: 'data', trending: 'data', signals: 'reference' };
+const marketZone: Record<string, 'tool' | 'data' | 'reference'> = { cvcheck: 'tool', adcheck: 'tool', demand: 'data', outlook: 'data', news: 'data', trending: 'data', signals: 'reference' };
 
 const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> = {
   skills: { title: 'Your skills', intro: 'Tell us what you do. Your moves are ranked from these skills only.' },
@@ -361,9 +362,8 @@ function App() {
       <div className="workspace-header-main">
         <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
-          {!isOrganisation && <button type="button" className={!inMarket && screen !== 'cvcheck' ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
+          {!isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
           {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
-          {!isOrganisation && <button type="button" className={screen === 'cvcheck' ? 'active' : ''} onClick={() => go('cvcheck')}>{t('Check my CV')}</button>}
           <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
         </nav>
         <details className="workspace-mobile-menu">
@@ -371,7 +371,6 @@ function App() {
           <nav aria-label={t('Main navigation')}>
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
-            {!isOrganisation && <button type="button" onClick={() => go('cvcheck')}>{t('Check my CV')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
           </nav>
         </details>
@@ -385,7 +384,7 @@ function App() {
     <main className="main-content">
       <div className={`content-wrap${screen === 'plan' ? ' plan-page' : screen === 'moves' ? ' moves-page' : ''}`}>
         {onGradPath && path && <GradSteps path={path} current={screen as GradStep} onGo={go} />}
-        {!onGradPath && screen !== 'cvcheck' && <nav className={`workspace-subnav${inMarket ? ' market-subnav' : ''}`} aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
+        {!onGradPath && <nav className={`workspace-subnav${inMarket ? ' market-subnav' : ''}`} aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {inMarket
             ? (['tool', 'data', 'reference'] as const).map((zone) => <div key={zone} className={`subnav-zone subnav-${zone}`}>{marketNav.filter((item) => marketZone[item.id] === zone).map(subnavButton)}</div>)
             : primaryItems.map(subnavButton)}
