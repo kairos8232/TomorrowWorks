@@ -1431,8 +1431,8 @@ details.course-check { padding-block:0; }
 .team-modes button { border: 0; border-radius: 6px; background: transparent; padding: 7px 14px; color: #3a4450; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
 .team-modes button.on { background: #1c2430; color: #fff; }
 .team-target { display: flex; align-items: flex-end; gap: 12px 18px; flex-wrap: wrap; }
-.team-target-field { display: grid; gap: 6px; }
-.team-target label { font-size: 17px; font-weight: 700; }
+.team-target-field { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.team-target label { flex: none; font-size: 17px; font-weight: 700; white-space: nowrap; }
 .team-target select { width: min(100%, 340px); min-width: 260px; min-height: 46px; padding: 9px 12px; font: inherit; font-size: 18px; font-weight: 600; background: #fff; }
 .team-target-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 46px; }
 .team-target-stats span { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 10px; border-radius: 999px; background: #e9f1ea; color: #315f46; font-size: 15px; font-weight: 600; }
@@ -1452,7 +1452,7 @@ details.course-check { padding-block:0; }
 .team-priority-note { color: #5d6873; font-size: 14px; margin: 12px 0 0; }
 .team-compare .note { margin: 0; }
 @media (max-width: 900px) { .team-overview { grid-template-columns: 1fr; } }
-@media (max-width: 700px) { .team-toolbar { align-items: stretch; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 6px; } .team-target select { width: 100%; min-width: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
+@media (max-width: 700px) { .team-toolbar { align-items: stretch; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 6px; } .team-target-field { display: grid; gap: 6px; } .team-target select { width: 100%; min-width: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
 
 /* Low-data mode sits in the account menu, below the demo people. */
 .viewer-switch li.viewer-setting { margin-top: 4px; padding-top: 4px; border-top: 1px solid #d8ddd7; }
