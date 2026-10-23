@@ -9,7 +9,7 @@
 - Done (step 3a): home hero now two side-by-side cards (fresh graduate / already working), same theme. Next: step labels and Next buttons (steps 3b, 3c), if time.
 - Done (step 3b): three-step bar for the fresh-graduate path (Your CV, A job ad, Your plan), shown only after "Check my CV" on Home; browser-checked that role-box and sample-person starts do not show it. Then: Next buttons on each step (disabled until the step has something) and a *Try another role* panel after the plan; browser-checked with mocked matching. The CV text from step 1 now fills the CV box in step 2 (memory only).
 - Home card wording (Carson's pick): "From your CV to your first job: your skills, the gaps and what to learn.", button "Start here" (the path is not only the CV).
-- Carson saw the job-ad box blank on Replit in Safari (CV box fine). Not reproducible in Chromium here (box filled, 711 characters). Changed both boxes from flexible (flex: 1) to fixed height as a Safari-safe fix; not verified in Safari.
+- Carson saw the job-ad box blank on Replit in Safari (CV box fine). Not reproducible in Chromium here (box filled, 711 characters). Fixed height did not help (still blank on his Mac). The DOM he pasted shows the box exists, so the likely cause is a browser ad blocker hiding the element with id="ad-text" (ids and classes starting with "ad-" are common blocker targets). Renamed the textarea ids to posting-text and cv-box-text; not verified on his Mac.
 - Not verified: the real RunPod match for CV and ad together (this workspace cannot reach RunPod). Step 2 rules not built: waiting for Carson to approve each rule and its source.
 
 ---

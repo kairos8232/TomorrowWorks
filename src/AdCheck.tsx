@@ -93,12 +93,12 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       </div>
       <div className="ad-entry-grid">
         <div className="ad-entry-main">
-          <label htmlFor="ad-text">{t('Duties and requirements')}</label>
-          <textarea id="ad-text" value={text} onChange={(e) => { setText(e.target.value); invalidate(); }} rows={8} maxLength={20000} placeholder={t('Paste the duties and requirements here')} />
+          <label htmlFor="posting-text">{t('Duties and requirements')}</label>
+          <textarea id="posting-text" value={text} onChange={(e) => { setText(e.target.value); invalidate(); }} rows={8} maxLength={20000} placeholder={t('Paste the duties and requirements here')} />
         </div>
         <div className="ad-entry-cv">
           <div><h3>{t('Your CV')}</h3><p>{t('Optional · Compare the skills it shows.')}</p></div>
-          <textarea id="ad-cv-text" aria-label={t('Your CV')} value={cvText} onChange={(e) => { setCvText(e.target.value); invalidate(); }} rows={7} maxLength={20000} placeholder={t('Paste your experience and skills here')} />
+          <textarea id="cv-box-text" aria-label={t('Your CV')} value={cvText} onChange={(e) => { setCvText(e.target.value); invalidate(); }} rows={7} maxLength={20000} placeholder={t('Paste your experience and skills here')} />
         </div>
       </div>
       <div className="ad-entry-actions">
