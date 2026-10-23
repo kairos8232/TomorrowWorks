@@ -1049,6 +1049,10 @@ const dict: Record<string, Entry> = {
   'Each group’s own manager sees its Team view; this centre sees totals only. Open data on workers by occupation per Malaysian state is not published, so no state statistics are used or implied.': { ms: 'Pengurus setiap kumpulan melihat Paparan pasukannya sendiri; pusat ini hanya melihat jumlah. Data terbuka pekerja mengikut pekerjaan bagi setiap negeri di Malaysia tidak diterbitkan, jadi tiada statistik negeri digunakan atau dibayangkan.', zh: '每个群体由其自己的经理查看团队视图；本中心只看合计。马来西亚各州按职业划分的就业人数未公开发布，因此不使用也不暗示任何州统计数据。' },
   'Which SDG targets does our training reach, and which routes could reach more?': { ms: 'Sasaran SDG manakah dicapai latihan kami, dan laluan mana boleh mencapai lebih banyak?', zh: '我们的培训触及哪些 SDG 具体目标？哪些路径能触及更多？' },
   'The summary of key headlines is loading. RunPod may be starting up, which can take a minute or two.': { ms: 'Ringkasan tajuk utama sedang dimuatkan. RunPod mungkin sedang dimulakan, yang boleh mengambil masa satu atau dua minit.', zh: '要点标题摘要正在加载。RunPod 可能正在启动，可能需要一两分钟。' },
+  '{n} courses, in order': { ms: '{n} kursus, mengikut urutan', zh: '{n} 门课程，按顺序' },
+  'Learning order': { ms: 'Urutan pembelajaran', zh: '学习顺序' },
+  'About {h} hours of checked courses': { ms: 'Kira-kira {h} jam kursus yang disemak', zh: '已核对课程约 {h} 小时' },
+  'Time as stated by each provider. AI suggestions are not checked by hand.': { ms: 'Masa seperti yang dinyatakan oleh setiap penyedia. Cadangan AI tidak disemak secara manual.', zh: '时间以各提供方公布为准。AI 建议未经人工核对。' },
 };
 
 const LangContext = createContext<Lang>('en');

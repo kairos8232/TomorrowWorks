@@ -2,7 +2,7 @@
 // Rule: src/pathway.ts (documented in SIGNALS_AND_MATCHING.md, "Learning plan rule").
 // Courses: data/pathway/resources.json. NOSS: data/pathway/noss.json. Both checked by hand.
 import type React from 'react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import resourcesFile from '../data/pathway/resources.json';
 import nossFile from '../data/pathway/noss.json';
 import { ilo, personaById, roles, snapshots, transferable, type Profile } from './data';
@@ -75,6 +75,7 @@ export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus
   progress: CourseProgress; onCourseStatus: (course: string, action: LearningAction) => void;
 }) {
   const t = useT();
+  const [showAllSteps, setShowAllSteps] = useState(false);
   // Only the skill-fit part matters here; demand and scenario do not change the gaps.
   const { moves } = useMemo(
     () => recommendMoves(roles, profile.currentRoleId, profile.held, snapshots.q2, ilo, scenarios.moderate, transferable),
@@ -106,16 +107,23 @@ export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus
       : <section className="panel plan-dashboard" aria-labelledby="plan-skills-heading">
         <div className="plan-dashboard-top">
           <div><h2 id="plan-skills-heading">{t('{n} skills to build', { n: plan.gaps.length })}</h2>
-          <p>{total > 0 ? t('{n} courses to choose from', { n: total }) : t('No course found yet')}</p></div>
+          <p>{total > 0 ? t('{n} courses, in order', { n: total }) : t('No course found yet')}</p></div>
           {rolePicker}
         </div>
         {nextCourse && <div className="plan-dashboard-body">
+          {/* Must-have 4: an ordered plan with estimated time. Checked courses first (pathway.ts), then AI suggestions. */}
           <div className="plan-course-picker">
-            <label htmlFor="plan-course-choice">{t('Choose a course')}</label>
-            <select id="plan-course-choice" value={nextCourse.url} onChange={event => onChooseLearningCourse(role.id, event.target.value)}>
-              {courseChoices.map((course, index) => <option key={course.url} value={course.url}>{index + 1}. {course.title}{course.suggested ? ` · ${t('AI suggestion')}` : ''}</option>)}
-            </select>
-            <p className="plan-course-source">{nextCourse.provider} · {nextCourse.time ?? t('time not stated')} · {t(nextCourse.suggested ? 'AI suggestion · not checked by hand' : 'Checked course')}</p>
+            <div className="plan-order-head"><h3>{t('Learning order')}</h3>
+              {plan.statedHours > 0 && <span>{t('About {h} hours of checked courses', { h: plan.statedHours })}</span>}</div>
+            <ol className="plan-order">{(showAllSteps ? courseChoices : courseChoices.slice(0, 5)).map((course, index) => <li key={course.url}>
+              <button type="button" aria-pressed={course.url === nextCourse.url} onClick={() => onChooseLearningCourse(role.id, course.url)}>
+                <span className="plan-order-num" aria-hidden="true">{index + 1}</span>
+                <span className="plan-order-text"><strong>{course.title}</strong>
+                  <small>{course.provider} · {course.time ?? t('time not stated')} · {t(course.suggested ? 'AI suggestion' : 'Checked course')}</small></span>
+              </button>
+            </li>)}</ol>
+            {courseChoices.length > 5 && <button type="button" className="text-button" onClick={() => setShowAllSteps(!showAllSteps)}>{showAllSteps ? t('Show fewer') : t('Show all {n}', { n: courseChoices.length })}</button>}
+            {plan.statedHours > 0 && <p className="plan-course-source">{t('Time as stated by each provider. AI suggestions are not checked by hand.')}</p>}
           </div>
           <div className="plan-selected-course">
             <div className="plan-selected-heading"><div><h3>{nextCourse.title}</h3></div>

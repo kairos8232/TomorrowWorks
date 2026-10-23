@@ -1,5 +1,13 @@
 # Progress log
 
+## 23 Oct 2026 — Review fixes before submission
+
+- Full review against the Domain 1 brief, handbooks and T&C (read from Carson's folder): all six must-haves and all six good-to-haves present; build and 114 tests pass; no page errors on any screen or viewer.
+- Fixed (Carson's go-ahead): home headline overlapped the role form at 1351–1439 px (now 2 lines; checked 1280–1920 px in EN/BM/中文); ESCO notice added to the Home footer (licence requirement); Your plan shows a numbered **Learning order** with each step's stated time and the total hours of checked courses instead of a course dropdown (must-have 4: "ordered learning plan with estimated time"). New EN/MS/ZH strings need team review.
+- Open (Carson): live app password vs "judges must be able to interact"; repo still private (must be public with committee collaborators); keep RunPod warm 25–28 Oct; refresh news snapshot before 25 Oct 07:59. Demo tip: Aina's ranking does not change with quarter or AI speed; Hakim's #1 flips with AI speed and Mei Ling's (Team view) with the quarter.
+
+---
+
 ## 23 Oct 2026 — Live news: stale snapshot and missing summary
 
 - Carson saw 21 Oct news and no *In brief* on the live app. Diagnosed with him (browser console + Replit Shell + deployment logs): GDELT answered 429 once at 22 Oct 23:26 and the server then waited 6 hours; RunPod requests timed out (worker asleep, cold start > 90 s), so skill search gave 502 and the brief failed. RunPod itself worked (HTTP 200 from Shell); the brief appeared once the worker was warm.
