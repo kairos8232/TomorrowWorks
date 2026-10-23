@@ -274,6 +274,8 @@ function App() {
   const [planRoleId, setPlanRoleId] = useState<string | null>(null);
   // True only after "Check my CV" on Home: shows the three-step bar. In memory, so a refresh returns to Home without it.
   const [gradPath, setGradPath] = useState(false);
+  // The CV text read in step 1, so step 2 does not ask for it again. Memory only; cleared with the path.
+  const [gradCv, setGradCv] = useState('');
   const [viewer, setViewer] = useState<ViewerId>('aina');
   // Kept above the screens so navigation preserves status; refresh clears it.
   // Use the actual profile owner because editing a sample makes it the visitor's profile.
@@ -305,7 +307,7 @@ function App() {
   const [saver, setSaver] = useState(initialDataSaver);
   useEffect(() => applyFonts(saver), [saver]);
   const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
-  const go = (s: Screen) => { if (s === 'home') setGradPath(false); setScreen(s); window.scrollTo({ top: 0 }); };
+  const go = (s: Screen) => { if (s === 'home') { setGradPath(false); setGradCv(''); } setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
     setGradPath(false);
     const v = viewerById(who);
@@ -331,6 +333,7 @@ function App() {
     setPlanRoleId(null);
     setProfile(emptyProfile());
     setGradPath(true);
+    setGradCv('');
     go('skills');
   }
   const kind = viewerById(viewer).kind;
@@ -379,7 +382,7 @@ function App() {
           <p>{t(page.intro)}</p>
         </header>}
         <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
-        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : undefined} />}
+        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : undefined} onCvText={gradPath ? setGradCv : undefined} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
@@ -390,7 +393,7 @@ function App() {
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
-        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
+        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} initialCv={gradPath ? gradCv : ''} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}

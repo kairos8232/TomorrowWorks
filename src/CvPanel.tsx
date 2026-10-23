@@ -11,7 +11,7 @@ import { sampleCv } from './sampleCv';
 
 type Suggestion = Skill & { similarity: number; from: string };
 
-export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (skills: Skill[]) => void }) {
+export function CvPanel({ held, onAdd, onText }: { held: ReadonlySet<string>; onAdd: (skills: Skill[]) => void; onText?: (text: string) => void }) {
   const t = useT();
   const fileRef = useRef<HTMLInputElement>(null);
   const [lines, setLines] = useState<string[]>([]);
@@ -25,6 +25,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
 
   function load(text: string, name: string) {
     const out = cvLines(text);
+    onText?.(text);   // lets the fresh-graduate path reuse the CV in the ad step (kept in memory only)
     setLines(out.lines); setRemoved(out.contactRemoved); setIdentity(out.identityRemoved); setSource(name);
     setFound([]); setPicked(new Set()); setPaste(null);
     setStatus({ busy: false, message: out.lines.length ? '' : 'No work lines found. Paste the text of your experience instead.', vars: {} });
@@ -36,7 +37,7 @@ export function CvPanel({ held, onAdd }: { held: ReadonlySet<string>; onAdd: (sk
     catch (err) { setStatus({ busy: false, message: err instanceof Error ? err.message : 'Could not read this file. Paste the text instead.', vars: {} }); }
     if (fileRef.current) fileRef.current.value = '';
   }
-  function clear() { setLines([]); setRemoved(0); setIdentity(0); setSource(''); setFound([]); setPicked(new Set()); setPaste(null); setStatus({ busy: false, message: '', vars: {} }); }
+  function clear() { onText?.(''); setLines([]); setRemoved(0); setIdentity(0); setSource(''); setFound([]); setPicked(new Set()); setPaste(null); setStatus({ busy: false, message: '', vars: {} }); }
 
   async function match() {
     setFound([]); setPicked(new Set());

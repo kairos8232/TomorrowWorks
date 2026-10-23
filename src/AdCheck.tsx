@@ -21,10 +21,10 @@ const resources = resourcesFile.resources as Resource[];
 type Suggestion = Skill & { similarity: number; from: string };
 const pct = (x: number) => `${x >= 0 ? '+' : '−'}${Math.abs(x * 100).toFixed(1)}%`;
 
-export function AdCheck({ profile, onGo, onNext }: { profile: Profile; onGo: (screen: 'skills' | 'moves') => void; onNext?: (roleId: string | null) => void }) {
+export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Profile; onGo: (screen: 'skills' | 'moves') => void; onNext?: (roleId: string | null) => void; initialCv?: string }) {
   const t = useT();
   const [text, setText] = useState('');
-  const [cvText, setCvText] = useState('');
+  const [cvText, setCvText] = useState(initialCv);
   const [found, setFound] = useState<Suggestion[] | null>(null);
   const [cvFound, setCvFound] = useState<Suggestion[] | null>(null);
   const [ticked, setTicked] = useState<Set<string>>(new Set());

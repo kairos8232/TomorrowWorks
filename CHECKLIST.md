@@ -9,6 +9,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] CV vs ad: optional CV box; ad skills grouped as shown on the CV / held but not on the CV / not yet (`cvGap`, tests); server `/api/cv-skills` accepts `max` up to 80. Browser check at 1440 px with mocked matches.
 - [x] Things to avoid in your CV: 8 text rules + 8-item file checklist, each with a source link (`src/cvChecks.ts`, 9 tests; panel `src/CvAvoid.tsx`, browser-checked at 1440 px).
 - [x] Home: two starting choices, fresh graduate and already working (browser-checked at 1440, 1100, 390 px; fresh-grad button opens Check an ad). MS/ZH text unreviewed.
+- [x] Fresh-graduate path: three-step bar, Next buttons, CV carried from step 1 to step 2, Try another role (browser-checked with mocked matching; real RunPod run still to do). MS/ZH text unreviewed.
 - [ ] Read each source link once and confirm the wording matches (Carson).
 - [ ] Run *Try a fictional example* against the live Replit app (real RunPod matching) and check the matched skills make sense for both the ad and the CV; adjust `src/sampleAd.ts` if not. Not done: this workspace cannot reach RunPod.
 - [ ] Click-test the JobStreet, LinkedIn, Indeed and MYFutureJobs links once (this workspace cannot open those sites).

@@ -13,7 +13,7 @@ import { stripIdentity } from '../server/identity.mjs';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
-export function SkillsStep({ profile, setProfile, onNext, nextLabel }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void; nextLabel?: string }) {
+export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void; nextLabel?: string; onCvText?: (text: string) => void }) {
   const t = useT();
   const [description, setDescription] = useState('');
   const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
@@ -90,7 +90,7 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel }: { profile
       {search.message && <p className="note" aria-live="polite">{t(search.message, search.vars)}</p>}
       {found.length > 0 && <div className="tag-row">{found.map((s) => pick(s, <small>{t('match {n}%', { n: Math.round(s.similarity * 100) })}</small>))}</div>}
     </section>
-    <CvPanel held={profile.held} onAdd={addMany} />
+    <CvPanel held={profile.held} onAdd={addMany} onText={onCvText} />
     </div>
 
     </div>
