@@ -13,7 +13,7 @@ import { stripIdentity } from '../server/identity.mjs';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
-export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void }) {
+export function SkillsStep({ profile, setProfile, onNext, nextLabel }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void; nextLabel?: string }) {
   const t = useT();
   const [description, setDescription] = useState('');
   const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
@@ -103,7 +103,7 @@ export function SkillsStep({ profile, setProfile, onNext }: { profile: Profile; 
         {heldSkills.length > 8 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
       </div>
       <div className="step-actions">
-        <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t('See my moves')}</button>
+        <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t(nextLabel ?? 'See my moves')}</button>
         {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
       </div>
     </section>

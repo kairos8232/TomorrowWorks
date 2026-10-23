@@ -21,7 +21,7 @@ const resources = resourcesFile.resources as Resource[];
 type Suggestion = Skill & { similarity: number; from: string };
 const pct = (x: number) => `${x >= 0 ? '+' : '−'}${Math.abs(x * 100).toFixed(1)}%`;
 
-export function AdCheck({ profile, onGo }: { profile: Profile; onGo: (screen: 'skills' | 'moves') => void }) {
+export function AdCheck({ profile, onGo, onNext }: { profile: Profile; onGo: (screen: 'skills' | 'moves') => void; onNext?: (roleId: string | null) => void }) {
   const t = useT();
   const [text, setText] = useState('');
   const [cvText, setCvText] = useState('');
@@ -153,5 +153,10 @@ export function AdCheck({ profile, onGo }: { profile: Profile; onGo: (screen: 's
           <span className="plan-order-text"><strong>{s.resource.title}</strong><small>{s.resource.provider} · {s.resource.hours === null ? t('time not stated') : t('{n} hours', { n: s.resource.hours })} · {t('Builds')}: {s.closes.map((g) => g.skill.label).join(', ')}</small></span></a></li>)}</ol>}
       {plan.uncovered.length > 0 && <p className="note">{t('{n} of these skills have no checked course yet.', { n: plan.uncovered.length })}</p>}
     </section>}
+
+    {onNext && <div className="step-actions grad-next">
+      <button type="button" className="primary-button" disabled={!found || found.length === 0} onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>
+      {(!found || found.length === 0) && <span className="note">{t('Check an ad first.')}</span>}
+    </div>}
   </div>;
 }

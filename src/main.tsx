@@ -379,17 +379,18 @@ function App() {
           <p>{t(page.intro)}</p>
         </header>}
         <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
-        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go('moves')} />}
+        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : undefined} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
+        {screen === 'plan' && gradPath && profile.held.size > 0 && <section className="panel"><h2>{t('Want to try another role?')}</h2><p className="note">{t('Compare every role we track against your skills.')}</p><div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => go('moves')}>{t('Try another role')}</button></div></section>}
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
-        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} />}
+        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}

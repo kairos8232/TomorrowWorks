@@ -178,3 +178,5 @@ Two cards side by side under the headline: *I'm a fresh graduate* (green button 
 ### Fresh-graduate path (24 Oct 2026)
 
 "Check my CV" on Home sets an in-memory flag and opens *Your skills* with a three-step bar: **1 Your CV** (Your skills), **2 A job ad** (Check an ad), **3 Your plan**. The bar replaces the usual sub-menu on those three screens only, and the header shows *Career path* as active. The flag is cleared by choosing any other start (role box, sample person, organisation view) or by going Home; a refresh or server restart opens Home without it. Job market pages are unchanged.
+
+On the path each step ends with one green **Next** button: *Next: A job ad* (disabled until a skill is added), *Next: Your plan* (disabled until an ad is checked; opens the plan for the ad's closest role, or the role picker if none), and after the plan a panel *Want to try another role?* that opens *Your moves*.
