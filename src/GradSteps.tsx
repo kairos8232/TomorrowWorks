@@ -1,5 +1,5 @@
 // The three-step path for a fresh graduate: Your CV, A job ad, Your plan.
-// Shown only after "Check my CV" on the home screen (state in main.tsx, not stored).
+// Shown only after "Start here" on the home screen (state in main.tsx, not stored).
 import { useT } from './i18n';
 
 export type GradStep = 'skills' | 'adcheck' | 'plan';

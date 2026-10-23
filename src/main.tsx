@@ -169,8 +169,8 @@ function Home({ start, startWithRole, startFreshGrad, go, lang, setLang }: {
           <div className="choice-grid">
             <section className="choice-card choice-main" aria-labelledby="choice-grad">
               <h2 id="choice-grad">{t("I'm a fresh graduate")}</h2>
-              <p>{t('Check my CV against a job ad and see what to fix.')}</p>
-              <button type="button" className="choice-button" onClick={startFreshGrad}>{t('Check my CV')}</button>
+              <p>{t('From your CV to your first job: your skills, the gaps and what to learn.')}</p>
+              <button type="button" className="choice-button" onClick={startFreshGrad}>{t('Start here')}</button>
             </section>
             <section className="choice-card" aria-labelledby="choice-work">
               <h2 id="choice-work">{t('I already work')}</h2>
@@ -272,7 +272,7 @@ function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [profile, setProfile] = useState<Profile>(ainaProfile);
   const [planRoleId, setPlanRoleId] = useState<string | null>(null);
-  // True only after "Check my CV" on Home: shows the three-step bar. In memory, so a refresh returns to Home without it.
+  // True only after "Start here" on Home: shows the three-step bar. In memory, so a refresh returns to Home without it.
   const [gradPath, setGradPath] = useState(false);
   // The CV text read in step 1, so step 2 does not ask for it again. Memory only; cleared with the path.
   const [gradCv, setGradCv] = useState('');
