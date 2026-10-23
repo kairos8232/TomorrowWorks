@@ -1615,7 +1615,7 @@ details.course-check { padding-block:0; }
 .cv-avoid-heading .note { margin: 0; }
 .cv-avoid-heading > strong { display: grid; place-items: center; min-width: 38px; height: 38px; border-radius: 50%; background: #f5e5e0; color: #9a4b39; font-size: 20px; }
 .cv-avoid-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.cv-avoid-list li { display: grid; gap: 3px; padding: 9px 12px; border-left: 3px solid #c6735d; background: #faf7f6; }
+.cv-avoid-list li { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid #e5dedb; border-radius: 6px; background: #faf7f6; }
 .cv-avoid-list small { color: #5d6873; font-size: 14px; }
 .cv-avoid-list a, .cv-avoid-sources a { color: #1e6b4f; }
 .cv-avoid-manual label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
