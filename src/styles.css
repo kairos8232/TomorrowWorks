@@ -33,7 +33,7 @@ html { scrollbar-color: #477157 #ecece8; }
 .language-options button[aria-pressed="true"] { color: #244d39; font-weight: 700; }
 
 .quiet-hero { position: relative; isolation: isolate; overflow: hidden; height: max(712px, calc(100svh - 280px)); min-height: 712px; }
-.quiet-hero h1 { position: absolute; z-index: 1; left: 13.87%; top: 20.6%; width: min(640px, 40.35%); margin: 0; color: #0c182c; font: 400 74px/1.05 'Carlito', sans-serif; letter-spacing: -.025em; text-wrap: balance; }
+.quiet-hero h1 { position: absolute; z-index: 1; left: 13.87%; top: 20.6%; width: min(640px, 46%); margin: 0; color: #0c182c; font: 400 74px/1.05 'Carlito', sans-serif; letter-spacing: -.025em; text-wrap: balance; }
 .direction-form { position: absolute; z-index: 1; left: 13.93%; top: 48.4%; width: 62.9%; display: grid; grid-template-columns: max-content minmax(300px, 527px) minmax(265px, 307px); gap: 10px; align-items: center; }
 .direction-form label { font: 400 38px/1 'Carlito', sans-serif; letter-spacing: -.02em; white-space: nowrap; }
 .role-field { height: 69px; border: 1px solid #bababd; background: #f8f8f8; }
