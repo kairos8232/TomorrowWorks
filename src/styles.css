@@ -1408,15 +1408,17 @@ details.course-check { padding-block:0; }
 
 .team-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
 .team-view > * { min-width: 0; }
-.team-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid #d9ded9; }
+.team-toolbar { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid #d9ded9; }
+.team-toolbar-context { display: grid; gap: 14px; min-width: 0; }
 .team-toolbar p { margin: 0; font-size: 15px; color: #5d6873; }
 .team-modes { display: flex; gap: 4px; padding: 3px; border: 1px solid #d9ded9; border-radius: 9px; background: #fff; }
 .team-modes button { border: 0; border-radius: 6px; background: transparent; padding: 7px 14px; color: #3a4450; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
 .team-modes button.on { background: #1c2430; color: #fff; }
-.team-target { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.team-target label { font-size: 15px; font-weight: 700; }
-.team-target select { width: min(100%, 290px); padding: 8px 10px; }
-.team-target span { margin-left: auto; font-size: 15px; color: #5d6873; }
+.team-target { display: flex; align-items: flex-end; gap: 12px 18px; flex-wrap: wrap; }
+.team-target-field { display: grid; gap: 6px; }
+.team-target label { font-size: 17px; font-weight: 700; }
+.team-target select { width: min(100%, 340px); min-width: 260px; min-height: 46px; padding: 9px 12px; font: inherit; font-size: 18px; font-weight: 600; background: #fff; }
+.team-target span { padding-bottom: 11px; font-size: 15px; color: #5d6873; }
 .team-overview { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
 .team-overview .panel { min-width: 0; }
 .team-overview h2, .team-compare h2 { margin: 0 0 12px; font-size: 21px; }
@@ -1433,7 +1435,7 @@ details.course-check { padding-block:0; }
 .team-priority-note { color: #5d6873; font-size: 14px; margin: 12px 0 0; }
 .team-compare .note { margin: 0; }
 @media (max-width: 900px) { .team-overview { grid-template-columns: 1fr; } }
-@media (max-width: 600px) { .team-toolbar { align-items: flex-start; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 7px; } .team-target select { width: 100%; } .team-target span { margin-left: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
+@media (max-width: 700px) { .team-toolbar { align-items: stretch; flex-direction: column; } .team-modes { width: 100%; } .team-modes button { flex: 1; } .team-target { align-items: stretch; flex-direction: column; gap: 6px; } .team-target select { width: 100%; min-width: 0; } .team-target span { padding-bottom: 0; } .team-fit-person { grid-template-columns: auto minmax(0, 1fr) auto; } .team-fit-gap { grid-column: 2; } .team-fit-score { grid-column: 3; grid-row: 1 / span 2; } }
 
 /* Low-data mode sits in the account menu, below the demo people. */
 .viewer-switch li.viewer-setting { margin-top: 4px; padding-top: 4px; border-top: 1px solid #d8ddd7; }

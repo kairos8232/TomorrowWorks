@@ -141,7 +141,16 @@ function TeamBody({ team }: { team: (typeof teams)[number] }) {
   }
   return <div className="team-body">
     <div className="team-toolbar">
-      <p>{t(team.name)} · {t('{n} people', { n: members.length })}</p>
+      <div className="team-toolbar-context">
+        <p>{t(team.name)} · {t('{n} people', { n: members.length })}</p>
+        {mode === 'plan' && <div className="team-target">
+          <div className="team-target-field">
+            <label htmlFor="team-role">{t('Plan for role')}</label>
+            <select id="team-role" value={target.id} onChange={(event) => setTargetId(event.target.value)}>{ranked.map((item) => <option key={item.role.id} value={item.role.id}>{roleTitle(item.role.title)}</option>)}</select>
+          </div>
+          <span>{t('{n} moving', { n: shared.movers })} · {t('{n} shared gaps', { n: shared.gaps.length })}</span>
+        </div>}
+      </div>
       <div className="team-modes" aria-label={t('Team view')}>
         <button type="button" className={mode === 'plan' ? 'on' : ''} aria-pressed={mode === 'plan'} onClick={() => setMode('plan')}>{t('Team plan')}</button>
         <button type="button" className={mode === 'compare' ? 'on' : ''} aria-pressed={mode === 'compare'} onClick={() => setMode('compare')}>{t('Compare roles')}</button>
@@ -161,12 +170,6 @@ function TeamBody({ team }: { team: (typeof teams)[number] }) {
         </tbody>
       </table></div>
     </section> : <>
-      <div className="team-target">
-        <label htmlFor="team-role">{t('Plan for role')}</label>
-        <select id="team-role" value={target.id} onChange={(event) => setTargetId(event.target.value)}>{ranked.map((item) => <option key={item.role.id} value={item.role.id}>{roleTitle(item.role.title)}</option>)}</select>
-        <span>{t('{n} moving', { n: shared.movers })} · {t('{n} shared gaps', { n: shared.gaps.length })}</span>
-      </div>
-
       <div className="team-overview">
         <section className="panel team-fit" aria-labelledby="team-fit-head">
           <h2 id="team-fit-head">{t('Fit for {role}', { role: roleTitle(target.title) })}</h2>
