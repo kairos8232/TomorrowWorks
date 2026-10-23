@@ -7,6 +7,8 @@
 //   3. The closest role is the one of our 9 roles that shares the most ticked skills
 //      (essential or optional), and only if it shares at least AD_ROLE_MIN. Its demand
 //      and AI-exposure signals are the same figures used in Your moves.
+//   4. CV vs ad (cvGap): the person's CV is matched the same way; each ad skill is shown by the
+//      CV, held but missing from the CV, or not there yet.
 // No score is invented: the output is counts, the person's own skills, and existing signals.
 import { skillFit, type Role, type Skill, type TransferableSkills } from './scoring';
 import type { Gap } from './pathway';
@@ -40,4 +42,16 @@ export function closestRole(adSkills: Skill[], roles: Role[]) {
     if (better) best = { role, shared, essentialShared };
   }
   return best && best.shared.length >= AD_ROLE_MIN ? best : null;
+}
+
+/**
+ * CV vs ad. For the ad's (ticked) skills: which the CV already shows, which the person has
+ * in Your skills but the CV does not show (add them to the CV), and which are not there yet.
+ * "Shows" means the CV's lines matched the same ESCO skill; nothing is guessed.
+ */
+export function cvGap(adSkills: Skill[], cvUris: ReadonlySet<string>, held: ReadonlySet<string>) {
+  const shown = adSkills.filter((s) => cvUris.has(s.uri));
+  const addToCv = adSkills.filter((s) => !cvUris.has(s.uri) && held.has(s.uri));
+  const notYet = adSkills.filter((s) => !cvUris.has(s.uri) && !held.has(s.uri));
+  return { shown, addToCv, notYet };
 }

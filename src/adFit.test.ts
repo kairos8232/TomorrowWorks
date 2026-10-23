@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import rolesFile from '../data/roles.json';
 import transferableFile from '../data/derived/transferable-skills.json';
 import { personaProfile } from './data';
-import { AD_ROLE_MIN, closestRole, compareAd } from './adFit';
+import { AD_ROLE_MIN, closestRole, compareAd, cvGap } from './adFit';
 import { noTransferableSkills, skillFit, type Role, type TransferableSkills } from './scoring';
 
 const roles = rolesFile.roles as Role[];
@@ -58,5 +58,28 @@ describe('closestRole', () => {
   it('counts a shared skill once, even if a role lists it as essential and optional', () => {
     const hit = closestRole(bookkeeper.essentialSkills, roles)!;
     expect(new Set(hit.shared.map((s) => s.uri)).size).toBe(hit.shared.length);
+  });
+});
+
+describe('cvGap', () => {
+  const ad = bookkeeper.essentialSkills.slice(0, 6);
+  const uris = (list: { uri: string }[]) => list.map((s) => s.uri);
+  it('splits ad skills into shown on the CV, held but not on the CV, and not yet', () => {
+    const cv = new Set([ad[0].uri, ad[1].uri]);
+    const held = new Set([ad[1].uri, ad[2].uri, ad[3].uri]);
+    const got = cvGap(ad, cv, held);
+    expect(uris(got.shown)).toEqual([ad[0].uri, ad[1].uri]);   // on the CV, whether or not held
+    expect(uris(got.addToCv)).toEqual([ad[2].uri, ad[3].uri]); // held, CV does not show
+    expect(uris(got.notYet)).toEqual([ad[4].uri, ad[5].uri]);
+  });
+  it('every ad skill lands in exactly one group', () => {
+    const got = cvGap(ad, new Set([ad[0].uri]), new Set([ad[2].uri]));
+    expect(got.shown.length + got.addToCv.length + got.notYet.length).toBe(ad.length);
+    expect(new Set([...uris(got.shown), ...uris(got.addToCv), ...uris(got.notYet)]).size).toBe(ad.length);
+  });
+  it('an empty CV shows nothing and everything held is to add', () => {
+    const got = cvGap(ad, new Set(), new Set([ad[0].uri]));
+    expect(got.shown).toEqual([]);
+    expect(uris(got.addToCv)).toEqual([ad[0].uri]);
   });
 });

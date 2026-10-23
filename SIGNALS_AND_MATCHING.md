@@ -264,6 +264,16 @@ Code: `src/futures.ts`; tests: `src/futures.test.ts`; screen: *1,000 possible fu
 
 No score, vacancy count or ad list is produced by us. *Find this role* links (`src/jobSearch.ts`) only put the role title into JobStreet, LinkedIn and Indeed search addresses (plus the MYFutureJobs home page); nothing is fetched or scraped, because those sites' terms forbid scraping and open data has no per-skill vacancy counts.
 
+### CV vs ad (added 24 Oct 2026)
+
+The person can also paste their CV. The CV's lines are matched to ESCO skills the same way (`/api/cv-skills`, up to 80 skills so none is cut off), and each ticked ad skill is placed in one group by `cvGap` (`src/adFit.ts`): *Your CV already shows* (the CV matched the same ESCO skill; the CV line is shown), *You have these, but your CV does not show them* (held in Your skills, not matched in the CV: add a line), or *Not on your CV or in your skills yet*. Exact ESCO match only; no score, no rewritten text. The CV is not stored; contact lines and name/age/identity phrases are removed in the browser first.
+
+### Evidence for the fresh-graduate CV story (retrieved 24 Oct 2026, to cite in the PRD and pitch; nothing here feeds a score)
+
+- **Hays Malaysia survey** (832 employers, 2,014 professionals), reported by [The Edge Malaysia, 6 Feb 2024](https://theedgemalaysia.com/node/699955) and [HRD Asia, 8 Feb 2024](https://hcamag.com/asia/specialisation/hr-technology/nearly-half-of-malaysian-employers-dont-plan-to-use-ai-in-recruitment-survey/476216): among employers using AI in recruitment, resume screening and shortlisting is the most common use (54.3%); 17% use AI minimally, 11.5% moderately, 2.3% heavily; 39.4% had no plans to use it in the coming year; 57.4% think AI resume screening can still be biased. **Say it honestly:** AI use in Malaysian hiring was still limited in 2024; when it is used it is mostly for screening CVs.
+- **Resume Genius 2026 Hiring Insights Report** (1,000 US hiring managers), reported by [People Matters SEA, 25 Mar 2026](https://sea.peoplemattersglobal.com/amp/news/recruiting-and-onboarding/ai-ats-reshape-hiring-in-2026-as-employers-prioritise-skills-experience-and-human-abilities-48949): 71% use an applicant tracking system; 19% use AI to screen out applications before a human sees them; 6% let AI move candidates forward or reject them with limited human review; 33% say ATS over-emphasises keyword matching. **US data, label it so.**
+- **Santa Clara University Career Center**, [Common ATS Resume Formatting Mistakes](https://scu.edu/careercenter/toolkit/job-scan-common-ats-resume-formatting-mistakes) (no date shown): avoid tables, complex graphics, critical information in headers or footers, image-based PDFs; keep dates in one format; spell out acronyms; use conventional section headings. Guidance from one university, not a measured rule. Candidate source for the "avoid these" list; each item needs Carson's approval before it is built.
+
 ## Future Skills Radar (built 21 Oct 2026)
 
 Code: `src/radar.ts`, `src/RadarView.tsx`; tests: `src/radar.test.ts`. Screen: *Future skills radar* (was "Skills in demand · Soon").

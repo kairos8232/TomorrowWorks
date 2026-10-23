@@ -14,6 +14,19 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  "Your CV": { ms: "CV anda", zh: "你的简历" },
+  "Add your CV to see which of these skills it already shows. Contact details and personal details are removed, and it is not stored.": { ms: "Tambah CV anda untuk melihat kemahiran mana yang sudah ditunjukkan. Butiran hubungan dan butiran peribadi dibuang, dan CV tidak disimpan.", zh: "添加你的简历，看看它已经体现了其中哪些技能。联系方式和个人信息会被删除，也不会被保存。" },
+  "Try a fictional example": { ms: "Cuba contoh rekaan", zh: "试用虚构示例" },
+  "Does your CV show these skills?": { ms: "Adakah CV anda menunjukkan kemahiran ini?", zh: "你的简历体现了这些技能吗？" },
+  "Your CV shows {a} of the {n} skills ticked from this ad.": { ms: "CV anda menunjukkan {a} daripada {n} kemahiran yang ditandakan daripada iklan ini.", zh: "你的简历体现了从这则广告勾选的 {n} 项技能中的 {a} 项。" },
+  "Only skills your CV actually says can be seen by a screener, whether a person or software.": { ms: "Hanya kemahiran yang benar-benar ditulis dalam CV anda boleh dilihat oleh penyaring, sama ada manusia atau perisian.", zh: "只有简历里真正写出来的技能，才能被筛选者看到，无论是人还是软件。" },
+  "You have these, but your CV does not show them": { ms: "Anda ada kemahiran ini, tetapi CV anda tidak menunjukkannya", zh: "你有这些技能，但简历没有体现" },
+  "Not on your CV or in your skills yet": { ms: "Belum ada dalam CV atau kemahiran anda", zh: "简历和你的技能里都还没有" },
+  "Your CV already shows": { ms: "CV anda sudah menunjukkan", zh: "你的简历已经体现" },
+  "Add a line about this to your CV.": { ms: "Tambah satu baris tentang ini dalam CV anda.", zh: "在简历里加一行关于这项技能的内容。" },
+  "The ad says “{line}”": { ms: "Iklan menyatakan “{line}”", zh: "广告写道“{line}”" },
+  "Your CV says “{line}”": { ms: "CV anda menyatakan “{line}”", zh: "你的简历写道“{line}”" },
+  "Add your skills": { ms: "Tambah kemahiran anda", zh: "添加你的技能" },
   "Check an ad": { ms: "Semak iklan", zh: "查看招聘广告" },
   "Check a job ad": { ms: "Semak iklan kerja", zh: "查看招聘广告" },
   "Paste an ad to see which of its skills you have, which to build, and how demand and AI change look for that kind of role.": { ms: "Tampal iklan untuk melihat kemahiran yang anda ada, yang perlu dibina, serta permintaan dan perubahan AI bagi jenis peranan itu.", zh: "粘贴一则招聘广告，查看你已具备哪些技能、哪些需要培养，以及这类职位的需求和 AI 变化。" },

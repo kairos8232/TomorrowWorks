@@ -1,5 +1,14 @@
 # Progress log
 
+## 24 Oct 2026 — CV vs ad, and evidence for the fresh-graduate direction
+
+- Carson: aim at fresh graduates; many companies use AI to filter CVs, so help them see what to avoid and get more offers; keep the other roles inside the system as "try another"; make the flow one path (一条龙) and easier for non-technical users. Plan agreed: (1) CV vs ad gap, (2) a short, sourced "avoid these" list, (3) fresh-grad-first UI, (4) freeze the UI. Cutoff: if 1 to 3 are not done by Saturday afternoon, ship what exists and put the rest in the pitch as Phase 2.
+- Done (step 1): *Check an ad* takes an optional CV. Each ticked ad skill is shown on the CV, held-but-not-on-the-CV, or not there yet (`cvGap`, tests). Server `/api/cv-skills` now accepts `max` (up to 80) so a long CV is not cut off. Fictional example fills both boxes.
+- Evidence (in `SIGNALS_AND_MATCHING.md`): Hays Malaysia (via The Edge and HRD Asia, Feb 2024): when AI is used in hiring, 54.3% use it for resume screening, but adoption was still limited (17% minimal, 39.4% no plans); Resume Genius 2026 via People Matters (US only): 71% ATS, 19% AI screens out before a human; SCU Career Center ATS formatting list. Do not write "most companies use AI to filter CVs": the Malaysian data says adoption is still limited.
+- Not verified: the real RunPod match for CV and ad together (this workspace cannot reach RunPod). Step 2 rules not built: waiting for Carson to approve each rule and its source.
+
+---
+
 ## 24 Oct 2026 — Check an ad (Job market)
 
 - Carson: we lack a clear USP; combine Job market and Career path using real job ads. Chosen: paste-an-ad check (no scraping) plus the search links above.

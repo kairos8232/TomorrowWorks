@@ -1489,3 +1489,7 @@ details.course-check { padding-block:0; }
 .ad-courses .plan-order small { display: block; color: #5d6873; font-size: 14px; }
 .ad-role .detail-facts a { color: #1e6b4f; font-weight: 700; }
 .ad-role .detail-facts a[href*='dosm'], .ad-role .detail-facts small a { font-weight: 400; }
+.ad-cv-label { margin: 18px 0 2px; font-size: 17px; }
+.ad-card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; height: 100%; }
+.ad-card small { color: #5d6873; font-size: 14px; }
+.ad-card .ad-from { font-style: italic; }

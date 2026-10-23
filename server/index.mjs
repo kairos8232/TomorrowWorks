@@ -139,11 +139,12 @@ createServer(async (req, res) => {
       if (req.method !== 'POST') return send(res, 405, { error: 'Use POST' });
       if (!RUNPOD_API_KEY || !RUNPOD_ENDPOINT_ID) return send(res, 503, { error: 'CV matching is not connected yet. Pick skills from the list instead.' });
       if (!allowed(req.socket.remoteAddress ?? '')) return send(res, 429, { error: 'Too many searches. Wait a minute and try again.' });
-      const { lines } = await readJson(req, 20_000);
+      const { lines, max } = await readJson(req, 40_000);
       if (!Array.isArray(lines) || lines.length === 0 || !lines.every((l) => typeof l === 'string' && l.trim())) return send(res, 400, { error: 'No lines to match. Paste your CV text or choose a file.' });
       if (lines.length > CV_MAX_LINES || lines.some((l) => l.length > CV_MAX_LINE)) return send(res, 400, { error: `Send at most ${CV_MAX_LINES} lines of up to ${CV_MAX_LINE} characters.` });
       const started = Date.now();
-      const results = cvSuggestions(index, await embedMany(lines), lines);
+      // A CV can show more than the default 25 skills; the CV-vs-ad check asks for up to 80 so no skill is cut off.
+      const results = cvSuggestions(index, await embedMany(lines), lines, { max: Number.isInteger(max) ? Math.min(Math.max(max, 1), 80) : 25 });
       return send(res, 200, { results, lines: lines.length, model: index.model, ms: Date.now() - started });
     }
     if (req.url === '/api/skill-search') {
