@@ -118,7 +118,7 @@ function LedgerRow({ result, rank, delta, onInspect, picks, goals, future, close
   </li>;
 }
 
-function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void }) {
+function RoleDetail({ result, rank, picks, onBack, onPlan, planLabel }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void; planLabel?: string }) {
   const t = useT();
   const { role, fit, demand, resilience } = result;
   const allSkillsHeld = fit.matched.length === role.essentialSkills.length && fit.missing.length === 0 && fit.transferable.length === 0;
@@ -137,7 +137,7 @@ function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore
     </div>
     <div className="role-focus-summary">
       <p>{skillSummary}</p>
-      {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('See a learning plan')}</button>}
+      {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t(planLabel ?? 'See a learning plan')}</button>}
     </div>
     <div className="detail-facts">
       <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}<small><a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a></small></span>
@@ -214,7 +214,7 @@ function MethodView({ onBack }: { onBack: () => void }) {
   </section>;
 }
 
-export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void }) {
+export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void; showNext?: boolean }) {
   const t = useT();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
@@ -262,7 +262,7 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
   if (selectedResult) {
     const rank = moves.findIndex((result) => result.role.id === selectedRoleId);
     return <div className="step-body"><RoleDetail result={selectedResult} rank={rank < 0 ? null : rank + 1} picks={picks}
-      onBack={backToRanking}
+      onBack={backToRanking} planLabel={showNext ? 'Next: Your plan' : undefined}
       onPlan={rank < 0 ? undefined : () => onPlan(selectedResult.role.id)} /></div>;
   }
   if (panel === 'changes') return <div className="step-body"><ChangesView changes={changes} onBack={backToRanking} /></div>;
@@ -282,7 +282,10 @@ export function MovesStep({ profile, onEditSkills, onPlan }: { profile: Profile;
     </header>
 
     <div className="moves-workbench">
-      <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
+      <div className="moves-main">
+        <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
+        {showNext && moves[0] && <div className="step-actions moves-next"><button type="button" className="primary-button" onClick={() => onPlan(moves[0].role.id)}>{t('Next: Your plan for {role}', { role: roleTitle(moves[0].role.title) })}</button><span className="note">{t('Or select any role below to see its details first.')}</span></div>}
+      </div>
       <div className="moves-sidebar">
         <section className="moves-update" aria-labelledby="moves-update-title">
           <h2 id="moves-update-title">{t('{q} update', { q: quarter(snapshots.q2.source.latestQuarter) })}</h2>

@@ -4,7 +4,7 @@ import { ainaProfile, emptyProfile, personaProfile, roles, viewerById, viewers, 
 import { MovesStep, SourcesFooter } from './MovesStep';
 import { advanceLearning, type CourseProgress, type LearningAction } from './learningCheck';
 import { SkillsStep } from './SkillsStep';
-import { GradSteps, type GradStep } from './GradSteps';
+import { GradSteps, isStepScreen, type GradStep, type StepPath } from './GradSteps';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
 import { applyFonts, DataSaverProvider, initialDataSaver, saveDataSaver } from './dataSaver';
 import './styles.css';
@@ -273,7 +273,8 @@ function App() {
   const [profile, setProfile] = useState<Profile>(ainaProfile);
   const [planRoleId, setPlanRoleId] = useState<string | null>(null);
   // True only after "Start here" on Home: shows the three-step bar. In memory, so a refresh returns to Home without it.
-  const [gradPath, setGradPath] = useState(false);
+  const [path, setPath] = useState<StepPath | null>(null);
+  const gradPath = path === 'grad';
   // The CV text read in step 1, so step 2 does not ask for it again. Memory only; cleared with the path.
   const [gradCv, setGradCv] = useState('');
   const [viewer, setViewer] = useState<ViewerId>('aina');
@@ -307,10 +308,10 @@ function App() {
   const [saver, setSaver] = useState(initialDataSaver);
   useEffect(() => applyFonts(saver), [saver]);
   const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
-  const go = (s: Screen) => { if (s === 'home') { setGradPath(false); setGradCv(''); } setScreen(s); window.scrollTo({ top: 0 }); };
+  const go = (s: Screen) => { if (s === 'home') { setPath(null); setGradCv(''); } setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
-    setGradPath(false);
     const v = viewerById(who);
+    setPath(v.kind === 'person' || v.kind === 'me' ? 'work' : null);
     setViewer(who);
     setPlanRoleId(null);
     if (v.kind === 'person') { setProfile(personaProfile(who as PersonaId)); go('moves'); }
@@ -319,7 +320,7 @@ function App() {
     else go('team');
   }
   function startWithRole(role: string) {
-    setGradPath(false);
+    setPath('work');
     const normalized = role.trim().toLowerCase();
     const match = roles.find((candidate) => candidate.title.toLowerCase() === normalized || candidate.title.toLowerCase().includes(normalized));
     setViewer('me');
@@ -332,7 +333,7 @@ function App() {
     setViewer('me');
     setPlanRoleId(null);
     setProfile(emptyProfile());
-    setGradPath(true);
+    setPath('grad');
     setGradCv('');
     go('skills');
   }
@@ -342,7 +343,7 @@ function App() {
   const t = translate(lang);
   if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} startFreshGrad={startFreshGrad} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
-  const onGradPath = gradPath && (screen === 'skills' || screen === 'adcheck' || screen === 'plan');
+  const onGradPath = path !== null && isStepScreen(path, screen);
   const inMarket = marketNav.some(item => item.id === screen) && !onGradPath;
   const isOrganisation = kind === 'team' || kind === 'region';
   const primaryItems = kind === 'region' ? regionNav : kind === 'team' ? teamNav : careerNav;
@@ -373,7 +374,7 @@ function App() {
 
     <main className="main-content">
       <div className={`content-wrap${screen === 'plan' ? ' plan-page' : screen === 'moves' ? ' moves-page' : ''}`}>
-        {onGradPath && <GradSteps current={screen as GradStep} onGo={go} />}
+        {onGradPath && path && <GradSteps path={path} current={screen as GradStep} onGo={go} />}
         {!onGradPath && <nav className="workspace-subnav" aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {(inMarket ? marketNav : primaryItems).map((item) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>)}
         </nav>}
@@ -382,14 +383,14 @@ function App() {
           <p>{t(page.intro)}</p>
         </header>}
         <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
-        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : undefined} onCvText={gradPath ? setGradCv : undefined} />}
+        {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : path === 'work' ? 'Next: Your moves' : undefined} onCvText={gradPath ? setGradCv : undefined} />}
         {screen === 'moves' && (profile.held.size > 0
-          ? <MovesStep profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
+          ? <MovesStep showNext={path === 'work'} profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} />
           : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
-        {screen === 'plan' && gradPath && profile.held.size > 0 && <section className="panel"><h2>{t('Want to try another role?')}</h2><p className="note">{t('Compare every role we track against your skills.')}</p><div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => go('moves')}>{t('Try another role')}</button></div></section>}
+        {screen === 'plan' && path !== null && profile.held.size > 0 && <section className="panel"><h2>{t('Want to try another role?')}</h2><p className="note">{t('Compare every role we track against your skills.')}</p><div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => go('moves')}>{t('Try another role')}</button></div></section>}
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
