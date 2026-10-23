@@ -23,3 +23,10 @@ Diploma in Accounting, 2019
 SKILLS
 Microsoft Excel, including pivot tables; basic SQL; preparing simple budgets
 `;
+
+// The same fictional CV with three habits the "avoid these" check looks for, so the
+// Check an ad demo has something to show: an apostrophe year, an acronym, an expected salary.
+export const sampleCvWithHabits = sampleCv
+  .replace('(2021 to now)', "(Jan '21 to now)")
+  .replace('Prepare month-end reports for the finance manager', 'Prepare month-end KPI reports for the finance manager')
+  .replace('EDUCATION', 'Expected salary: RM 3,500\n\nEDUCATION');

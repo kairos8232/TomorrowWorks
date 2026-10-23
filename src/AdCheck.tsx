@@ -12,7 +12,8 @@ import { planForGaps, type Resource } from './pathway';
 import resourcesFile from '../data/pathway/resources.json';
 import { cvLines } from './cv';
 import { sampleAd } from './sampleAd';
-import { sampleCv } from './sampleCv';
+import { sampleCvWithHabits } from './sampleCv';
+import { CvAvoid } from './CvAvoid';
 import { JobLinks } from './JobLinks';
 import { useT } from './i18n';
 
@@ -89,11 +90,13 @@ export function AdCheck({ profile, onGo }: { profile: Profile; onGo: (screen: 's
       <textarea aria-label={t('Paste your CV text')} value={cvText} onChange={(e) => setCvText(e.target.value)} rows={5} maxLength={20000} placeholder={t('Paste your experience and skills here')} />
       <div className="cv-go">
         <button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>
-        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCv); setFound(null); setCvFound(null); setStatus({ busy: false, message: '' }); }}>{t('Try a fictional example')}</button>
+        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); setFound(null); setCvFound(null); setStatus({ busy: false, message: '' }); }}>{t('Try a fictional example')}</button>
         {(text || cvText || found) && <button type="button" className="text-button" onClick={clear}>{t('Clear')}</button>}
       </div>
       {status.message && <p className="note" aria-live="polite">{t(status.message)}</p>}
     </section>
+
+    {cvText.trim() && <CvAvoid cvText={cvText} />}
 
     {found && found.length > 0 && <section className="panel ad-result" aria-labelledby="ad-result-head">
       <h2 id="ad-result-head">{t('Skills this ad asks for')}</h2>

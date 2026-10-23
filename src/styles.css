@@ -1493,3 +1493,13 @@ details.course-check { padding-block:0; }
 .ad-card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; height: 100%; }
 .ad-card small { color: #5d6873; font-size: 14px; }
 .ad-card .ad-from { font-style: italic; }
+.cv-avoid h3 { margin: 16px 0 6px; font-size: 17px; }
+.cv-avoid h3 span { color: #5d6873; font-weight: 400; font-size: 14px; }
+.cv-avoid-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cv-avoid-list li { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; }
+.cv-avoid-list small { color: #5d6873; font-size: 14px; }
+.cv-avoid-list a, .cv-avoid-sources a { color: #1e6b4f; }
+.cv-avoid-manual label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+.cv-avoid-manual input { margin-top: 4px; }
+.cv-avoid-sources { margin-top: 14px; font-size: 14px; }
+.cv-avoid-sources ul { padding-left: 18px; }

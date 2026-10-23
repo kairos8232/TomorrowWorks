@@ -138,6 +138,7 @@ For HR / L&D managers (a fictional five-person finance team) and career centres 
 - After matching: *Skills this ad asks for* with one checkbox per matched skill, grouped *To build* / *Close to a skill you have* / *You have* (only when the person has skills; otherwise one list and *Add skills*). One summary line: "You have 9 of the 12 skills ticked from this ad. 3 to build."
 - *Closest role we track* card: demand change (DOSM), ILO exposure, ESCO link, and the *Find this role* links. *Checked courses for these gaps* uses the Your plan course rule.
 - Optional *Your CV* box under the ad (fictional example fills both). With a CV, a panel *Does your CV show these skills?* groups the ticked ad skills: *You have these, but your CV does not show them* (add a line), *Not on your CV or in your skills yet*, *Your CV already shows* (with the CV line). Exact ESCO match.
+- Once a CV is pasted, a panel *Things to avoid in your CV* shows the text rules that fired (with the matched text and a source link) and an 8-item *Check the file yourself* checklist. Works without RunPod.
 - Errors and empty states are plain sentences; if the match service is down the screen says so and nothing is invented.
 
 ## Your moves: Find this role (24 Oct)
