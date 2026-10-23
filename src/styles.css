@@ -1581,6 +1581,9 @@ details.course-check { padding-block:0; }
 .posting-cv-shown summary span { color: #315f46; margin-left: 6px; }
 .posting-cv-shown .posting-skills { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
 .posting-cv .cv-avoid { min-width: 0; margin: 0; padding: 16px; }
+.posting-cv .cv-avoid-file { grid-column: 1 / -1; margin: 0; padding: 0; }
+.cv-avoid-file .cv-avoid-checklist { margin: 0; border: 0; }
+.cv-avoid-file .cv-avoid-sources { padding: 0 16px 16px; margin: 0; }
 .posting-cv-evidence summary { cursor: pointer; font-weight: 700; }
 .posting-cv-evidence summary::marker { color: #477157; }
 .posting-cv-evidence[open] small { margin-top: 6px; }
@@ -1627,7 +1630,7 @@ details.course-check { padding-block:0; }
 .cv-avoid-checklist[open] .note { margin: 12px 0; }
 .cv-avoid-progress { height: 7px; margin-top: 12px; overflow: hidden; border-radius: 99px; background: #e8ece9; }
 .cv-avoid-progress span { display: block; height: 100%; border-radius: 99px; background: #477157; }
-.cv-avoid-manual-groups { display: grid; gap: 14px; }
+.cv-avoid-manual-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
 .cv-avoid-manual-source { margin: 0 0 5px; color: #5d6873; font-size: 14px; }
 .cv-avoid-manual-source a { color: #1e6b4f; }
 .cv-avoid-manual { gap: 0; }
@@ -1640,6 +1643,7 @@ details.course-check { padding-block:0; }
   .posting-entry-main textarea { min-height: 210px; }
   .posting-overview { grid-template-columns: 1fr; }
   .posting-cv-layout { grid-template-columns: 1fr; }
+  .cv-avoid-manual-groups { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .posting-entry-head { flex-direction: column; }
