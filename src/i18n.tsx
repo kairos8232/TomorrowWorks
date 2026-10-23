@@ -14,6 +14,22 @@ export const languages: { id: Lang; label: string }[] = [
 
 type Entry = { ms: string; zh: string };
 const dict: Record<string, Entry> = {
+  'Job ad': { ms: 'Iklan kerja', zh: '招聘广告' },
+  'Paste the duties and requirements. We will find the skills to review.': { ms: 'Tampal tugas dan syarat kerja. Kami akan cari kemahiran untuk anda semak.', zh: '粘贴工作职责和要求，我们会找出技能供你核对。' },
+  'Duties and requirements': { ms: 'Tugas dan syarat kerja', zh: '工作职责和要求' },
+  'Compare what your CV already shows.': { ms: 'Bandingkan kemahiran yang sudah ditunjukkan dalam CV anda.', zh: '比较简历中已体现的技能。' },
+  'CV added for comparison': { ms: 'CV telah ditambah untuk perbandingan', zh: '已添加简历进行比较' },
+  'Edit CV': { ms: 'Edit CV', zh: '编辑简历' },
+  'Add CV text': { ms: 'Tambah teks CV', zh: '添加简历文字' },
+  'Remove CV': { ms: 'Buang CV', zh: '移除简历' },
+  'Contact details are removed before matching. Your text is not stored.': { ms: 'Butiran hubungan dibuang sebelum pemadanan. Teks anda tidak disimpan.', zh: '匹配前会移除联系方式。你的文字不会被保存。' },
+  'Skill summary': { ms: 'Ringkasan kemahiran', zh: '技能概览' },
+  'From this ad': { ms: 'Daripada iklan ini', zh: '来自这则广告' },
+  'Related': { ms: 'Berkaitan', zh: '相关' },
+  '{held} held, {related} related, {missing} to build': { ms: '{held} dimiliki, {related} berkaitan, {missing} perlu dibina', zh: '已具备 {held} 项、相关 {related} 项、需培养 {missing} 项' },
+  'Review the AI-matched skills. Untick anything missing from the ad.': { ms: 'Semak kemahiran yang dipadankan AI. Nyahtanda yang tiada dalam iklan.', zh: '核对 AI 匹配的技能，取消勾选广告中没有的内容。' },
+  'See the skills it asks for, where you stand, and what to learn next.': { ms: 'Lihat kemahiran yang diminta, kedudukan anda, dan apa yang boleh dipelajari seterusnya.', zh: '查看职位要求的技能、你目前的情况，以及下一步该学什么。' },
+  'Text checks only. Review the file itself too.': { ms: 'Semakan teks sahaja. Semak juga fail asal.', zh: '这里只检查文字，也请检查原始文件。' },
   "Your CV": { ms: "CV anda", zh: "你的简历" },
   "Add your CV to see which of these skills it already shows. Contact details and personal details are removed, and it is not stored.": { ms: "Tambah CV anda untuk melihat kemahiran mana yang sudah ditunjukkan. Butiran hubungan dan butiran peribadi dibuang, dan CV tidak disimpan.", zh: "添加你的简历，看看它已经体现了其中哪些技能。联系方式和个人信息会被删除，也不会被保存。" },
   "Try a fictional example": { ms: "Cuba contoh rekaan", zh: "试用虚构示例" },

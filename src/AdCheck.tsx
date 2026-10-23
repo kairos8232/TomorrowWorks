@@ -4,7 +4,7 @@
 // hold, which are close, which to build, the closest of our roles with its demand and
 // AI-exposure signals, and checked courses for the gaps. Rule: src/adFit.ts.
 // The ad is not stored. No score is made up: only counts and existing signals.
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { ilo, roles, roleTitle, snapshots, transferable, type Profile } from './data';
 import { aiResilience, demandTrend, type Skill } from './scoring';
 import { closestRole, compareAd, cvGap } from './adFit';
@@ -25,10 +25,12 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const t = useT();
   const [text, setText] = useState('');
   const [cvText, setCvText] = useState(initialCv);
+  const [cvExpanded, setCvExpanded] = useState(false);
   const [found, setFound] = useState<Suggestion[] | null>(null);
   const [cvFound, setCvFound] = useState<Suggestion[] | null>(null);
   const [ticked, setTicked] = useState<Set<string>>(new Set());
   const [status, setStatus] = useState({ busy: false, message: '' });
+  const requestVersion = useRef(0);
 
   /** Match lines to ESCO skills on RunPod (same call as the CV import). */
   async function match(lines: string[], max?: number): Promise<Suggestion[]> {
@@ -42,6 +44,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   async function check() {
     const lines = cvLines(text).lines;
     if (lines.length === 0) { setStatus({ busy: false, message: 'No requirements found. Paste the duties and requirements of the ad.' }); return; }
+    const version = ++requestVersion.current;
     const cvL = cvText.trim() ? cvLines(cvText).lines : [];
     setFound(null); setCvFound(null);
     setStatus({ busy: true, message: 'Reading the ad. The first search after a pause can take up to a minute.' });
@@ -49,14 +52,17 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       const results = await match(lines);
       // The CV can show more skills than the default 25, so ask for up to 80: nothing is cut off.
       const cvResults = cvL.length > 0 ? await match(cvL, 80) : null;
+      if (version !== requestVersion.current) return;
       setFound(results); setCvFound(cvResults);
       setTicked(new Set(results.map((s) => s.uri)));
       setStatus({ busy: false, message: results.length ? '' : 'No close ESCO skills found in this ad. Try pasting the duties and requirements.' });
     } catch (err) {
+      if (version !== requestVersion.current) return;
       setStatus({ busy: false, message: err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Ad matching is unavailable right now. Try again in a minute.' });
     }
   }
-  const clear = () => { setText(''); setCvText(''); setFound(null); setCvFound(null); setTicked(new Set()); setStatus({ busy: false, message: '' }); };
+  const invalidate = () => { requestVersion.current += 1; setFound(null); setCvFound(null); setTicked(new Set()); setStatus({ busy: false, message: '' }); };
+  const clear = () => { setText(''); setCvText(''); setCvExpanded(false); invalidate(); };
   const toggle = (uri: string) => { const next = new Set(ticked); if (next.has(uri)) next.delete(uri); else next.add(uri); setTicked(next); };
 
   const ad = useMemo(() => (found ?? []).filter((s) => ticked.has(s.uri)), [found, ticked]);
@@ -81,32 +87,43 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
   const count = (list: Suggestion[]) => list.filter((s) => ticked.has(s.uri)).length;
 
   return <div className="step-body ad-check">
-    <section className="panel" aria-labelledby="ad-head">
-      <h2 id="ad-head">{t('Paste a job ad')}</h2>
-      <p className="note">{t('Copy the duties and requirements from any job site. Contact details are removed, and the ad is not stored. Use a fictional ad if you prefer.')}</p>
-      <textarea aria-label={t('Paste the job ad text')} value={text} onChange={(e) => setText(e.target.value)} rows={8} maxLength={20000} placeholder={t('Paste the duties and requirements here')} />
-      <h3 className="ad-cv-label">{t('Your CV')} <span className="optional-badge">{t('optional')}</span></h3>
-      <p className="note">{t('Add your CV to see which of these skills it already shows. Contact details and personal details are removed, and it is not stored.')}</p>
-      <textarea aria-label={t('Paste your CV text')} value={cvText} onChange={(e) => setCvText(e.target.value)} rows={5} maxLength={20000} placeholder={t('Paste your experience and skills here')} />
-      <div className="cv-go">
-        <button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>
-        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); setFound(null); setCvFound(null); setStatus({ busy: false, message: '' }); }}>{t('Try a fictional example')}</button>
-        {(text || cvText || found) && <button type="button" className="text-button" onClick={clear}>{t('Clear')}</button>}
+    <section className="panel ad-entry" aria-labelledby="ad-head">
+      <div className="ad-entry-head">
+        <div><h2 id="ad-head">{t('Job ad')}</h2><p>{t('Paste the duties and requirements. We will find the skills to review.')}</p></div>
+        <button type="button" className="secondary-button" onClick={() => { setText(sampleAd); setCvText(sampleCvWithHabits); setCvExpanded(false); invalidate(); }}>{t('Try a fictional example')}</button>
       </div>
-      {status.message && <p className="note" aria-live="polite">{t(status.message)}</p>}
+      <div className="ad-entry-grid">
+        <div className="ad-entry-main">
+          <label htmlFor="ad-text">{t('Duties and requirements')}</label>
+          <textarea id="ad-text" value={text} onChange={(e) => { setText(e.target.value); invalidate(); }} rows={8} maxLength={20000} placeholder={t('Paste the duties and requirements here')} />
+        </div>
+        <div className="ad-entry-cv">
+          <div><h3>{t('Your CV')} <span className="optional-badge">{t('optional')}</span></h3><p>{t('Compare what your CV already shows.')}</p></div>
+          {cvExpanded ? <><label className="visually-hidden" htmlFor="ad-cv-text">{t('Paste your CV text')}</label>
+            <textarea id="ad-cv-text" value={cvText} onChange={(e) => { setCvText(e.target.value); invalidate(); }} rows={7} maxLength={20000} placeholder={t('Paste your experience and skills here')} /></>
+            : <div className="ad-cv-prompt">{cvText.trim() && <strong>{t('CV added for comparison')}</strong>}<button type="button" className="secondary-button" onClick={() => setCvExpanded(true)}>{t(cvText.trim() ? 'Edit CV' : 'Add CV text')}</button></div>}
+          {cvText.trim() && <button type="button" className="text-button ad-cv-remove" onClick={() => { setCvText(''); setCvExpanded(false); invalidate(); }}>{t('Remove CV')}</button>}
+        </div>
+      </div>
+      <div className="ad-entry-actions">
+        <div className="cv-go"><button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>
+          {(text || cvText || found) && <button type="button" className="text-button" onClick={clear}>{t('Clear')}</button>}</div>
+        <p>{t('Contact details are removed before matching. Your text is not stored.')}</p>
+      </div>
+      {status.message && <p className="note ad-status" role={status.busy ? 'status' : 'alert'}>{t(status.message)}</p>}
     </section>
-
-    {cvText.trim() && <CvAvoid cvText={cvText} />}
 
     {found && found.length > 0 && <section className="panel ad-result" aria-labelledby="ad-result-head">
       <h2 id="ad-result-head">{t('Skills this ad asks for')}</h2>
-      <p className="ad-summary">{profile.held.size === 0
-        ? t('The ad asks for {n} skills. Add your skills to see how many you already have.', { n: cmp.total })
-        : [t('You have {held} of the {total} skills ticked from this ad.', { held: cmp.matched.length, total: cmp.total }),
-          cmp.transferable.length > 0 ? t('{n} related skills could help.', { n: cmp.transferable.length }) : null,
-          cmp.missing.length > 0 ? t('{n} to build.', { n: cmp.missing.length }) : null].filter(Boolean).join(' ')}</p>
+      <div className="ad-result-counts" aria-label={t('Skill summary')}>
+        <div><strong>{cmp.total}</strong><span>{t('From this ad')}</span></div>
+        {profile.held.size > 0 && <><div><strong>{cmp.matched.length}</strong><span>{t('You have')}</span></div><div><strong>{cmp.transferable.length}</strong><span>{t('Related')}</span></div><div><strong>{cmp.missing.length}</strong><span>{t('To build')}</span></div></>}
+      </div>
+      {profile.held.size > 0 && cmp.total > 0 && <div className="ad-fit-bar" role="img" aria-label={t('{held} held, {related} related, {missing} to build', { held: cmp.matched.length, related: cmp.transferable.length, missing: cmp.missing.length })}>
+        <span className="ad-fit-held" style={{ width: `${cmp.matched.length / cmp.total * 100}%` }} /><span className="ad-fit-related" style={{ width: `${cmp.transferable.length / cmp.total * 100}%` }} /><span className="ad-fit-missing" style={{ width: `${cmp.missing.length / cmp.total * 100}%` }} />
+      </div>}
       {profile.held.size === 0 && <div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => onGo('skills')}>{t('Add skills')}</button></div>}
-      <p className="note">{t('Skills are matched by AI (BAAI/bge-m3 on RunPod) to the ESCO list. Untick any that are not really in the ad.')}</p>
+      <p className="note ad-review-note">{t('Review the AI-matched skills. Untick anything missing from the ad.')}</p>
       {profile.held.size > 0 && <div className="ad-groups">
         <div className="ad-group ad-build"><h3>{t('To build')} <span>{count(build)}</span></h3>{build.length ? rows(build) : <p className="note">{t('Nothing to build.')}</p>}</div>
         {close.length > 0 && <div className="ad-group"><h3>{t('Close to a skill you have')} <span>{count(close)}</span></h3>{rows(close)}</div>}
@@ -131,6 +148,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       {profile.held.size === 0 && gap.notYet.length > 0 && <div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => onGo('skills')}>{t('Add your skills')}</button></div>}
     </section>}
 
+    {found && cvText.trim() && <CvAvoid cvText={cvText} />}
+
     {found && found.length > 0 && closest && <section className="panel ad-role" aria-labelledby="ad-role-head">
       <h2 id="ad-role-head">{t('Closest role we track: {role}', { role: roleTitle(closest.role.title) })}</h2>
       <p className="note">{t('This ad shares {n} skills with it. The signals below are the same ones used in Your moves.', { n: closest.shared.length })}</p>
@@ -154,9 +173,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
       {plan.uncovered.length > 0 && <p className="note">{t('{n} of these skills have no checked course yet.', { n: plan.uncovered.length })}</p>}
     </section>}
 
-    {onNext && <div className="step-actions grad-next">
-      <button type="button" className="primary-button" disabled={!found || found.length === 0} onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>
-      {(!found || found.length === 0) && <span className="note">{t('Check an ad first.')}</span>}
+    {onNext && found && found.length > 0 && <div className="step-actions grad-next">
+      <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>
     </div>}
   </div>;
 }

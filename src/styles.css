@@ -1468,13 +1468,40 @@ details.course-check { padding-block:0; }
 
 /* Check an ad (Job market) */
 .ad-check { display: grid; gap: 16px; }
-.ad-check textarea { width: 100%; padding: 10px 12px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 17px; resize: vertical; margin: 4px 0 12px; }
+.ad-check textarea { width: 100%; min-width: 0; padding: 12px 14px; border: 1px solid #c5ccc6; border-radius: 8px; font: inherit; font-size: 17px; line-height: 1.5; resize: vertical; }
+.ad-entry-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 20px; }
+.ad-entry-head h2 { margin: 0 0 4px; }
+.ad-entry-head p, .ad-entry-cv p { margin: 0; color: #5d6873; font-size: 16px; line-height: 1.4; }
+.ad-entry-head .secondary-button { flex: none; }
+.ad-entry-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr); gap: 18px; align-items: stretch; }
+.ad-entry-main { display: flex; flex-direction: column; min-width: 0; gap: 9px; }
+.ad-entry-main label { font-size: 16px; font-weight: 700; }
+.ad-entry-main textarea { flex: 1; min-height: 220px; }
+.ad-entry-cv { display: flex; flex-direction: column; min-width: 0; gap: 12px; padding: 18px; border: 1px solid #d9ded9; border-radius: 10px; background: #f7f9f7; }
+.ad-entry-cv h3 { margin: 0 0 4px; font-size: 18px; }
+.ad-entry-cv textarea { min-height: 180px; background: #fff; }
+.ad-cv-prompt { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; flex: 1; gap: 12px; min-height: 120px; color: #294b39; }
+.ad-cv-prompt strong { font-size: 18px; }
+.ad-cv-remove { align-self: flex-start; }
+.ad-entry-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding-top: 16px; margin-top: 18px; border-top: 1px solid #e3e7e3; }
+.ad-entry-actions p { margin: 0; color: #5d6873; font-size: 14px; line-height: 1.4; }
+.ad-status { margin: 12px 0 0; }
+.ad-result-counts { display: flex; flex-wrap: wrap; gap: 0; margin: 16px 0 0; border: 1px solid #d9ded9; border-radius: 10px; overflow: hidden; }
+.ad-result-counts > div { display: grid; gap: 1px; flex: 1; min-width: 120px; padding: 12px 18px; border-right: 1px solid #e3e7e3; }
+.ad-result-counts > div:last-child { border-right: 0; }
+.ad-result-counts strong { font-size: 28px; line-height: 1; color: #16233a; }
+.ad-result-counts span { color: #5d6873; font-size: 15px; }
+.ad-fit-bar { display: flex; height: 8px; overflow: hidden; border-radius: 0 0 9px 9px; margin: -8px 1px 14px; background: #ebeeeb; }
+.ad-fit-held { background: #2c7153; }
+.ad-fit-related { background: #c99a37; }
+.ad-fit-missing { background: #c6735d; }
+.ad-review-note { margin: 14px 0 0; }
 .ad-summary { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
 .ad-groups { display: grid; gap: 14px; margin-top: 8px; }
 .ad-group { border: 1px solid #d9ded9; border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; }
 .ad-group.ad-build { background: #faf5f3; }
 .ad-group h3 { margin: 0; font-size: 17px; }
-.ad-group h3 span { color: #5d6873; font-weight: 400; margin-left: 4px; }
+.ad-group h3 span { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 99px; background: #eef2ef; color: #315f46; font-size: 14px; margin-left: 5px; }
 .ad-skills { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
 .ad-skills label { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; padding: 9px 12px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; cursor: pointer; height: 100%; }
 .ad-skills label:has(input:not(:checked)) { opacity: .55; }
@@ -1501,8 +1528,28 @@ details.course-check { padding-block:0; }
 .cv-avoid-list a, .cv-avoid-sources a { color: #1e6b4f; }
 .cv-avoid-manual label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
 .cv-avoid-manual input { margin-top: 4px; }
+.cv-avoid-checklist { margin-top: 18px; padding: 13px 16px; border: 1px solid #d9ded9; border-radius: 10px; }
+.cv-avoid-checklist summary { cursor: pointer; font-weight: 700; }
+.cv-avoid-checklist summary span { margin-left: 5px; color: #5d6873; font-weight: 400; }
+.cv-avoid-checklist[open] .note { margin: 12px 0; }
 .cv-avoid-sources { margin-top: 14px; font-size: 14px; }
 .cv-avoid-sources ul { padding-left: 18px; }
+@media (max-width: 800px) {
+  .ad-entry-grid { grid-template-columns: 1fr; }
+  .ad-entry-main textarea { min-height: 210px; }
+  .ad-cv-prompt { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .ad-entry-head { flex-direction: column; }
+  .ad-entry-head .secondary-button { order: 1; }
+  .ad-entry-cv { padding: 14px; }
+  .ad-entry-actions { align-items: stretch; flex-direction: column; }
+  .ad-entry-actions .primary-button { flex: 1; }
+  .ad-result-counts > div { min-width: 50%; border-bottom: 1px solid #e3e7e3; }
+  .ad-result-counts > div:nth-child(even) { border-right: 0; }
+  .ad-result-counts > div:nth-last-child(-n+2) { border-bottom: 0; }
+  .ad-skills { grid-template-columns: 1fr; }
+}
 
 /* Home: two starting choices side by side (fresh graduate, already working). */
 .hero-choices { position: absolute; z-index: 1; left: 13.93%; top: 49%; width: min(72%, 1020px); }

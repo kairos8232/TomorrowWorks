@@ -51,7 +51,7 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
-  adcheck: { title: 'Check a job ad', intro: 'Paste an ad to see which of its skills you have, which to build, and how demand and AI change look for that kind of role.' },
+  adcheck: { title: 'Check a job ad', intro: 'See the skills it asks for, where you stand, and what to learn next.' },
   outlook: { title: 'AI impact by role', intro: 'How much AI could change each role, how applicable it is, and how it is already used.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
   trending: { title: 'Future skills radar', intro: 'Which skills are gaining value as AI changes work, and where yours stand.' },
