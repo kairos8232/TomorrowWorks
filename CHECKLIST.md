@@ -2,6 +2,14 @@
 
 This checklist tracks the hackathon prototype. Complete one stage at a time. Check an item only after the work is present and verified. Commit the stage's implementation and its checklist updates together; split a stage into smaller commits if needed. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the broad audience and evidence rules, [SCREENS.md](SCREENS.md) explains each screen, and [BUILD_STAGES.md](BUILD_STAGES.md) lists small commit slices. The ChatGPT reference PDFs stay outside this repository.
 
+## Job-ad check and job-site links — 24 Oct 2026
+
+- [x] *Find this role* links on the Your moves role page (`src/jobLinks.ts`); address building covered by tests; build and tests pass; checked at 1440 px.
+- [x] *Check an ad* screen (`src/AdCheck.tsx`, rule in `src/adcheck.ts`, `SIGNALS_AND_MATCHING.md`): same fit rule as a role, closest role with DOSM and ILO signals, checked courses for the gaps. Unit tests for the rule; browser check at 1440 px and 390 px with the match response mocked (grouping, untick updates the counts, 503 message, no skills yet, no horizontal overflow).
+- [ ] Run *Try a fictional ad* against the live Replit app (real RunPod matching) and check the matched skills make sense; adjust `src/sampleAd.ts` if not. Not done: this workspace cannot reach RunPod.
+- [ ] Click-test the JobStreet, LinkedIn, Indeed and MYFutureJobs links once (this workspace cannot open those sites).
+- [ ] Team review of the new EN/MS/ZH strings.
+
 ## UI refinement — 21 Oct 2026
 
 - [x] Put the viewer's Career path or For organisations section before Job market in desktop and mobile workspace navigation, and add the workspace-style bottom divider to the Home header. Check Home, Aina, and Puan Rosnah in the live browser; production build passes.

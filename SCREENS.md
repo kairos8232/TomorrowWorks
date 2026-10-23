@@ -132,6 +132,17 @@ For HR / L&D managers (a fictional five-person finance team) and career centres 
 - **Profile page** (22 Oct): opens as its own page, like a role in Your moves, with *Back to {team}*. It starts on the person's best move: header (initial, name, job, skills); *Where {name} fits best*: three role cards with score and "Best move in n% of futures" (clicking one switches the role on this page only); *Getting to {role}*: the skill-bridge bar (have / related / to learn); *Skills to learn* (neutral tags, first 6, *Show all*) beside *Start with* ("About n hours", numbered course steps with time chips, step 1 highlighted with *Open course*). A note says each person confirms their own skills and decides their own move.
 - Footer: everyone is fictional; in real use each person confirms their own skills and the manager sees the group view, not CVs.
 
+## Check an ad (The job market, 24 Oct)
+
+- Sub-tab between *Job ads* and *AI impact*. A text box for pasting an ad, *Try a fictional ad*, *Check this ad*, *Clear*.
+- After matching: *Skills this ad asks for* with one checkbox per matched skill, grouped *To build* / *Close to a skill you have* / *You have* (only when the person has skills; otherwise one list and *Add skills*). One summary line: "You have 9 of the 12 skills ticked from this ad. 3 to build."
+- *Closest role we track* card: demand change (DOSM), ILO exposure, ESCO link, and the *Find this role* links. *Checked courses for these gaps* uses the Your plan course rule.
+- Errors and empty states are plain sentences; if the match service is down the screen says so and nothing is invented.
+
+## Your moves: Find this role (24 Oct)
+
+- Role page ends with *Find this role*: JobStreet, LinkedIn, Indeed and MYFutureJobs links built from the role title. The line under it says we do not collect or count the ads.
+
 ## Job ads / AI exposure
 
 - **Job ads:** latest monthly unemployment rate from OpenDOSM as a context line (a different measure; hidden until imported), then DOSM online job ads by occupation group, Q1 → Q2 2026, one table, source stated once.

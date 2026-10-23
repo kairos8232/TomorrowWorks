@@ -15,11 +15,12 @@ const RegionView = lazy(() => import('./RegionView').then((m) => ({ default: m.R
 const TeamView = lazy(() => import('./TeamView').then((m) => ({ default: m.TeamView })));
 const DemandTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.DemandTable })));
 const OutlookTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.OutlookTable })));
+const AdCheck = lazy(() => import('./AdCheck').then((m) => ({ default: m.AdCheck })));
 const NewsView = lazy(() => import('./NewsView').then((m) => ({ default: m.NewsView })));
 const RadarView = lazy(() => import('./RadarView').then((m) => ({ default: m.RadarView })));
 const SignalSources = lazy(() => import('./SignalSources').then((m) => ({ default: m.SignalSources })));
 
-type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'region' | 'demand' | 'outlook' | 'news' | 'trending' | 'signals';
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'region' | 'demand' | 'adcheck' | 'outlook' | 'news' | 'trending' | 'signals';
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
@@ -35,6 +36,7 @@ const teamNav: NavItem[] = [
 ];
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
+  { id: 'adcheck', label: 'Check an ad', hint: 'Paste an ad, see skills and signals' },
   { id: 'outlook', label: 'AI impact', hint: 'Three views of AI by role' },
   { id: 'news', label: 'Workplace news', hint: 'Latest reported changes' },
   { id: 'trending', label: 'Future skills radar', hint: 'Skills rising or at risk' },
@@ -48,6 +50,7 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
+  adcheck: { title: 'Check a job ad', intro: 'Paste an ad to see which of its skills you have, which to build, and how demand and AI change look for that kind of role.' },
   outlook: { title: 'AI impact by role', intro: 'How much AI could change each role, how applicable it is, and how it is already used.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
   trending: { title: 'Future skills radar', intro: 'Which skills are gaining value as AI changes work, and where yours stand.' },
@@ -209,6 +212,7 @@ function NavIcon({ id }: { id: Screen }) {
     region: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></>,
     team: <><circle cx="9" cy="8" r="3" /><path d="M3.5 19v-2a5.5 5.5 0 0 1 11 0v2M17 6a3 3 0 0 1 0 6m1 3a4 4 0 0 1 2.5 4" /></>,
     demand: <><path d="M4 20V11m5 9V6m5 14v-8m5 8V4M2 20h20" /></>,
+    adcheck: <><path d="M6 3h9l4 4v14H6z" /><path d="M15 3v4h4M9 12h6m-6 4h4" /></>,
     outlook: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3" /></>,
     news: <><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5" /></>,
     trending: <><path d="M3 17h5v-5h5V8h8m-4-4 4 4-4 4" /></>,
@@ -357,13 +361,14 @@ function App() {
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable />}
+        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
         {screen === 'signals' && <SignalSources />}
         </Suspense>
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
-        <SourcesFooter showSourceSummary={!['home', 'moves', 'plan', 'demand', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
+        <SourcesFooter showSourceSummary={!['home', 'moves', 'plan', 'demand', 'adcheck', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
       </div>
     </main>
   </div></DataSaverProvider></LangProvider>;

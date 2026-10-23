@@ -1,5 +1,14 @@
 # Progress log
 
+## 24 Oct 2026 — Check an ad (Job market)
+
+- Carson: we lack a clear USP; combine Job market and Career path using real job ads. Chosen: paste-an-ad check (no scraping) plus the search links above.
+- Done: *Check an ad* sub-tab. Paste an ad → lines matched to ESCO skills with the existing CV matcher → tick/untick → held / close / to build with the same `skillFit` rule as roles → closest of the 9 roles with its DOSM demand change and ILO exposure → hand-checked courses for the gaps. Pure rule in `src/adcheck.ts` with tests (one rule for roles and ads; closest-role minimum 3 shared skills). Fictional sample ad in `src/sampleAd.ts`.
+- Verified: build; 125 tests pass; Chromium at 1440 px and 390 px with the match response mocked (grouping, unticking recounts, 503 message, no-skills state, no overflow).
+- Not verified (this workspace cannot reach RunPod): the real match on the fictional ad. Carson to try it on Replit and tell me if the matched skills look wrong. New EN/MS/ZH strings need team review.
+
+---
+
 ## 24 Oct 2026 — Find this role: job-site search links
 
 - Carson: combine Job market and Career path by pointing from a matched role to real job ads. We do not scrape LinkedIn or JobStreet (their terms forbid it, the competition allows only open data from the publisher, and open data has no per-skill vacancy counts, so any count would be invented).

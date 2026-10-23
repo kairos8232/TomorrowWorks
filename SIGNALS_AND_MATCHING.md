@@ -252,6 +252,18 @@ Code: `src/futures.ts`; tests: `src/futures.test.ts`; screen: *1,000 possible fu
 
 **Shown:** the share of futures in which each move is the best (robust when ≥ 80%, otherwise "no single best move" with the shares); per row, *Top 3 in n% of futures* and the score range covering 90% of futures (5th–95th percentile); **close call** when the row below beats the row above in ≥ 30% of futures; and the **tipping point**: AI speed swept from Gradually to Quickly with the published ILO means and the chosen quarter, reporting where the best move changes. Examples (all three views, 22 Oct 2026): Aina, Bookkeeper best in 100% of futures; Hakim, Financial analyst 56%, Business analyst 40%, Data analyst 4%, so no single best move (with ILO and Microsoft only it was 80% / 14% / 5%: the Anthropic view rates Financial analyst as the most exposed of the nine roles, 0.83 on the ILO scale, which moves futures towards Business analyst). These are estimates for comparing options, not predictions (stated on screen).
 
+## Job-ad check (added 24 Oct 2026)
+
+*Check an ad* (Job market) connects a real job ad to the same evidence as Your moves. Code: `src/adcheck.ts`, `src/AdCheck.tsx`; tests `src/adcheck.test.ts`.
+
+1. The person pastes the ad (or a fictional sample). Contact lines and name/age/identity phrases are removed in the browser (`src/cv.ts`, `server/identity.mjs`); the ad is not stored.
+2. Lines are matched to ESCO skills on RunPod with the same call as the CV intake (`/api/cv-skills`, BAAI/bge-m3, top 3 per line, similarity ≥ 0.55). The person ticks or unticks skills; the AI only maps text onto the known ESCO list.
+3. The ticked skills are treated as the essential skills of a one-off role and compared with the person's skills by `skillFit`: held, close (transferable, half credit) or to build. Same rule as a role, so the two cannot disagree.
+4. Closest role = the one of our 9 roles sharing the most ticked skills (essential or optional), at least 3 shared, ties by essential skills. Its demand change (DOSM) and AI exposure (ILO) are the same figures shown in Your moves.
+5. Gaps go to the same course rule as Your plan (`planForGaps`, hand-checked courses only).
+
+No score, vacancy count or ad list is produced by us. *Find this role* links (`src/jobLinks.ts`) only put the role title into JobStreet, LinkedIn and Indeed search addresses (plus the MYFutureJobs home page); nothing is fetched or scraped, because those sites' terms forbid scraping and open data has no per-skill vacancy counts.
+
 ## Future Skills Radar (built 21 Oct 2026)
 
 Code: `src/radar.ts`, `src/RadarView.tsx`; tests: `src/radar.test.ts`. Screen: *Future skills radar* (was "Skills in demand · Soon").

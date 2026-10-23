@@ -1465,3 +1465,27 @@ details.course-check { padding-block:0; }
 .viewer-switch li.viewer-setting { margin-top: 4px; padding-top: 4px; border-top: 1px solid #d8ddd7; }
 .viewer-setting-state { margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #eef0f3; color: #3a4450; font-size: 13px; font-weight: 600; }
 .viewer-setting button[aria-checked="true"] .viewer-setting-state { background: #dfeae3; color: #244d39; }
+
+/* Check an ad (Job market) */
+.ad-check { display: grid; gap: 16px; }
+.ad-check textarea { width: 100%; padding: 10px 12px; border: 1px solid #c5ccc6; border-radius: 6px; font: inherit; font-size: 17px; resize: vertical; margin: 4px 0 12px; }
+.ad-summary { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
+.ad-groups { display: grid; gap: 14px; margin-top: 8px; }
+.ad-group { border: 1px solid #d9ded9; border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; }
+.ad-group.ad-build { background: #faf5f3; }
+.ad-group h3 { margin: 0; font-size: 17px; }
+.ad-group h3 span { color: #5d6873; font-weight: 400; margin-left: 4px; }
+.ad-skills { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+.ad-skills label { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; padding: 9px 12px; border: 1px solid #d9ded9; border-radius: 10px; background: #fff; cursor: pointer; height: 100%; }
+.ad-skills label:has(input:not(:checked)) { opacity: .55; }
+.ad-skills input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: #1e6b4f; }
+.ad-skills small { display: block; color: #5d6873; font-size: 14px; }
+.ad-skills .ad-from { font-style: italic; margin-top: 2px; }
+.ad-role .detail-facts, .ad-check .detail-facts { margin-left: 0; background: #f7f8f6; border-radius: 8px; padding: 16px; }
+.ad-role .detail-find { margin-top: 14px; }
+.ad-courses .plan-order { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ad-courses .plan-order a { display: block; padding: 10px 12px; border: 1px solid #d9ded9; border-radius: 10px; text-decoration: none; color: inherit; }
+.ad-courses .plan-order a:hover { border-color: #1e6b4f; }
+.ad-courses .plan-order small { display: block; color: #5d6873; font-size: 14px; }
+.ad-role .detail-facts a { color: #1e6b4f; font-weight: 700; }
+.ad-role .detail-facts a[href*='dosm'], .ad-role .detail-facts small a { font-weight: 400; }
