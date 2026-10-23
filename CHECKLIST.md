@@ -20,6 +20,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 - [x] Step bar for the already-working start and sample people (Your skills, Your moves, Your plan); Next: Your plan on Your moves (browser-checked with Aina: Moves to Plan and back).
 - [x] `scripts/check_dosm_jmi.py` written; offline selftest passes.
 - [x] Signal sources page shows the server's daily DOSM check (`server/dosm.mjs`, `/api/dosm-next`); offline tests pass (140 total).
+- [x] *Check my CV* is a CV-only screen (`src/CvCheck.tsx`); clicked through in a test browser (header, example CV, 3 findings, hand-over to Check a job ad). Not yet seen on the live app.
 - [ ] After republishing on Replit, open Signal sources: the line under the table must say "Checked <today>: DOSM has not published 2026 Q3 yet" (not "No result yet").
 - [ ] Re-run after pulling, on a computer with internet: `python3 scripts/check_dosm_jmi.py --check 2026-Q2` must print "2026-Q2 data file found" with the Data JMI Q2 2026 link; `python3 scripts/check_dosm_jmi.py` must say 2026-Q3 is not published yet. (First live run 24 Oct: both said "not published", and Q3 once "found" with no file; the rule was rewritten from the real Q2 page and tested offline against it.)
 - [ ] Read each source link once and confirm the wording matches (Carson).

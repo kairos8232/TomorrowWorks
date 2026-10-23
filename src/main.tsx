@@ -16,12 +16,13 @@ const RegionView = lazy(() => import('./RegionView').then((m) => ({ default: m.R
 const TeamView = lazy(() => import('./TeamView').then((m) => ({ default: m.TeamView })));
 const DemandTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.DemandTable })));
 const OutlookTable = lazy(() => import('./PublicTables').then((m) => ({ default: m.OutlookTable })));
+const CvCheck = lazy(() => import('./CvCheck').then((m) => ({ default: m.CvCheck })));
 const AdCheck = lazy(() => import('./AdCheck').then((m) => ({ default: m.AdCheck })));
 const NewsView = lazy(() => import('./NewsView').then((m) => ({ default: m.NewsView })));
 const RadarView = lazy(() => import('./RadarView').then((m) => ({ default: m.RadarView })));
 const SignalSources = lazy(() => import('./SignalSources').then((m) => ({ default: m.SignalSources })));
 
-type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'region' | 'demand' | 'adcheck' | 'outlook' | 'news' | 'trending' | 'signals';
+type Screen = 'home' | 'skills' | 'moves' | 'plan' | 'team' | 'region' | 'demand' | 'adcheck' | 'cvcheck' | 'outlook' | 'news' | 'trending' | 'signals';
 
 type NavItem = { id: Screen; label: string; hint: string; soon?: boolean };
 const careerNav: NavItem[] = [
@@ -54,6 +55,7 @@ const titles: Record<Exclude<Screen, 'home'>, { title: string; intro: string }> 
   team: { title: 'Team view', intro: 'For HR and learning managers planning how to reskill a team, and career centres advising a class.' },
   plan: { title: 'Your plan', intro: 'Courses for the skills a move needs, in a sensible order, and the Malaysian certification route where one exists.' },
   demand: { title: 'Job ads in Malaysia', intro: 'Online job ads by occupation group, Q1 to Q2 2026.' },
+  cvcheck: { title: 'Check my CV', intro: 'See what to fix in your CV before you send it. No job ad needed.' },
   adcheck: { title: 'Check a job ad', intro: 'See the skills it asks for, where you stand, and what to learn next.' },
   outlook: { title: 'AI impact by role', intro: 'How much AI could change each role, how applicable it is, and how it is already used.' },
   news: { title: 'Workplace news', intro: 'What Malaysian outlets reported recently about AI, layoffs, hiring and reskilling.' },
@@ -230,6 +232,7 @@ function NavIcon({ id }: { id: Screen }) {
     team: <><circle cx="9" cy="8" r="3" /><path d="M3.5 19v-2a5.5 5.5 0 0 1 11 0v2M17 6a3 3 0 0 1 0 6m1 3a4 4 0 0 1 2.5 4" /></>,
     demand: <><path d="M4 20V11m5 9V6m5 14v-8m5 8V4M2 20h20" /></>,
     adcheck: <><path d="M6 3h9l4 4v14H6z" /><path d="M15 3v4h4M9 12h6m-6 4h4" /></>,
+    cvcheck: <><path d="M6 3h9l4 4v14H6z" /><path d="M15 3v4h4M9 13l2 2 4-4" /></>,
     outlook: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3" /></>,
     news: <><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5" /></>,
     trending: <><path d="M3 17h5v-5h5V8h8m-4-4 4 4-4 4" /></>,
@@ -280,6 +283,7 @@ function App() {
   const gradPath = path === 'grad';
   // The CV text read in step 1, so step 2 does not ask for it again. Memory only; cleared with the path.
   const [gradCv, setGradCv] = useState('');
+  const [carryCv, setCarryCv] = useState('');   // CV text handed from Check my CV to Check a job ad (memory only)
   const [viewer, setViewer] = useState<ViewerId>('aina');
   // Kept above the screens so navigation preserves status; refresh clears it.
   // Use the actual profile owner because editing a sample makes it the visitor's profile.
@@ -311,7 +315,7 @@ function App() {
   const [saver, setSaver] = useState(initialDataSaver);
   useEffect(() => applyFonts(saver), [saver]);
   const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
-  const go = (s: Screen) => { if (s === 'home') { setPath(null); setGradCv(''); } setScreen(s); window.scrollTo({ top: 0 }); };
+  const go = (s: Screen) => { if (s === 'home') { setPath(null); setGradCv(''); } if (s !== 'adcheck') setCarryCv(''); setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
     const v = viewerById(who);
     setPath(v.kind === 'person' || v.kind === 'me' ? 'work' : null);
@@ -357,17 +361,17 @@ function App() {
       <div className="workspace-header-main">
         <button type="button" className="workspace-brand" onClick={() => go('home')}>TomorrowWorks</button>
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
-          {!isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
+          {!isOrganisation && <button type="button" className={!inMarket && screen !== 'cvcheck' ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
           {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
-          {!isOrganisation && <button type="button" className={screen === 'adcheck' && !onGradPath ? 'active' : ''} onClick={() => go('adcheck')}>{t('Check my CV')}</button>}
-          <button type="button" className={inMarket && screen !== 'adcheck' ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
+          {!isOrganisation && <button type="button" className={screen === 'cvcheck' ? 'active' : ''} onClick={() => go('cvcheck')}>{t('Check my CV')}</button>}
+          <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
         </nav>
         <details className="workspace-mobile-menu">
           <summary>{t('Menu')}</summary>
           <nav aria-label={t('Main navigation')}>
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
-            {!isOrganisation && <button type="button" onClick={() => go('adcheck')}>{t('Check my CV')}</button>}
+            {!isOrganisation && <button type="button" onClick={() => go('cvcheck')}>{t('Check my CV')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
           </nav>
         </details>
@@ -381,7 +385,7 @@ function App() {
     <main className="main-content">
       <div className={`content-wrap${screen === 'plan' ? ' plan-page' : screen === 'moves' ? ' moves-page' : ''}`}>
         {onGradPath && path && <GradSteps path={path} current={screen as GradStep} onGo={go} />}
-        {!onGradPath && <nav className={`workspace-subnav${inMarket ? ' market-subnav' : ''}`} aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
+        {!onGradPath && screen !== 'cvcheck' && <nav className={`workspace-subnav${inMarket ? ' market-subnav' : ''}`} aria-label={inMarket ? t('The job market') : kind === 'region' ? t('My region') : kind === 'team' ? t('My team') : t('My career')}>
           {inMarket
             ? (['tool', 'data', 'reference'] as const).map((zone) => <div key={zone} className={`subnav-zone subnav-${zone}`}>{marketNav.filter((item) => marketZone[item.id] === zone).map(subnavButton)}</div>)
             : primaryItems.map(subnavButton)}
@@ -402,14 +406,15 @@ function App() {
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable onCheckAd={() => go('adcheck')} />}
-        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} initialCv={gradPath ? gradCv : ''} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
+        {screen === 'cvcheck' && <CvCheck onCompare={(cv) => { setCarryCv(cv); go('adcheck'); }} />}
+        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} initialCv={carryCv || (gradPath ? gradCv : '')} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
         {screen === 'signals' && <SignalSources />}
         </Suspense>
         {comingSoon[screen] && <section className="panel soon-panel"><h2>{t('Coming soon')}</h2><p>{t(comingSoon[screen]!)}</p></section>}
-        <SourcesFooter showSourceSummary={!['home', 'moves', 'plan', 'demand', 'adcheck', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
+        <SourcesFooter showSourceSummary={!['home', 'moves', 'plan', 'demand', 'adcheck', 'cvcheck', 'outlook', 'news', 'trending', 'signals'].includes(screen)} />
       </div>
     </main>
   </div></DataSaverProvider></LangProvider>;

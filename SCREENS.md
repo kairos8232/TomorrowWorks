@@ -192,7 +192,7 @@ One step bar, three steps, for all individual starts: *fresh graduate* = Your CV
 
 ### Entry points to the CV check (24 Oct 2026)
 
-Individuals get a third header item, **Check my CV** (also in the mobile menu), next to Career path and Job market; it opens *Check a job ad* and is highlighted there. Organisation views do not show it. The Job market tab is renamed *Check a job ad* to match the screen heading, and *Job ads* starts with a line: "Applying for a job? Check an ad against your CV."
+Individuals get a third header item, **Check my CV** (also in the mobile menu), next to Career path and Job market; since 24 Oct it opens the CV-only screen below (it used to open *Check a job ad*, which needs an ad). *Check a job ad* stays under Job market and on the fresh-graduate path. Organisation views do not show it. The Job market tab is renamed *Check a job ad* to match the screen heading, and *Job ads* starts with a line: "Applying for a job? Check an ad against your CV."
 
 ### Job market tabs in three zones (24 Oct 2026)
 
@@ -201,3 +201,8 @@ Left: *Check a job ad* (the tool). Centre: *Job ads*, *AI impact*, *Workplace ne
 ### Workplace news loading note (24 Oct 2026)
 
 The page paints the saved headlines first, then swaps in today's from `/api/news`, and the topic cards used to change without warning. A line above the cards now says "Showing saved headlines from {date}. Checking for today's headlines…", then "Today's headlines loaded." (or the saved-headlines line if the server has nothing newer). The cards fade in when the live headlines or the RunPod key-headline picks replace the saved ones (no fade with reduced motion).
+
+
+## Check my CV (CV only, added 24 Oct 2026)
+
+`src/CvCheck.tsx`, screen `cvcheck`, header item for individuals, no sub-navigation. For anyone, including people who already work, who only want feedback on their CV and have no ad. One box for the CV text (or *Try a fictional example*) and, once there is text, the same *CV checks* and *Check the file yourself* panels used in *Check a job ad* (`CvAvoid`, rules in `src/cvChecks.ts`). It runs in the browser only: no RunPod call, nothing sent or stored, no skill matching and no score. *Compare with a job ad* opens *Check a job ad* with the CV text already in its CV box (kept in memory only for that hand-over).
