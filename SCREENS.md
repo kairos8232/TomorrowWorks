@@ -20,7 +20,7 @@ My career (sidebar navigation)           The job market (browse any time)
 ## Home
 
 - **Question it answers:** what is this, who is it for, how does it work, can I trust the numbers?
-- **Current:** headline "AI is changing your job. See where you can move next."; one-sentence method; two actions (*Start with my own skills*, *Try a sample person*); privacy line; numbered **How it works**; four fictional viewer cards, with live top moves for Aina and Hakim; **Where the numbers come from** (DOSM, ILO, ESCO in plain words, linked).
+- **Current:** headline "AI is changing your job. See where you can move next."; one-sentence method; two actions (*Start with my own skills*, *Try a sample person*); privacy line; one **Choose where to start.** section with three paths (Career path, Job market, For organisations; header link *Where to start*); four fictional viewer cards, with live top moves for Aina and Hakim; **Where the numbers come from** (DOSM, ILO, ESCO in plain words, linked).
 - On wide screens the introduction and steps sit side by side, followed by four viewer cards. On medium screens the cards form two columns; on phones one column. The repeated source summary is omitted from the Home footer, while the ESCO acknowledgement remains.
 - Aina is **fictional**, labelled as such everywhere. Her skills are ESCO's essential skills for *accounting assistant*.
 

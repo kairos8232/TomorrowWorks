@@ -1,5 +1,9 @@
 # Progress log
 
+## 23 Oct 2026 — Home: removed the "How it works" label
+
+- Carson: the label above *Choose where to start.* did not match the section (it is a chooser, not an explanation) and looked like selected text. Removed it and left-aligned the heading with the cards. The header link that jumped to this section is now *Where to start* (was *How it works*). New EN/MS/ZH string for review. Build and 115 tests pass; checked at 1300 px and 390 px, no overflow.
+
 ## 23 Oct 2026 — Low-data mode moved into the account menu
 
 - Carson: remove the switch from the header; put it in the account menu; keep the language menu for language only; no auto-enable on slow connections (the device's own Data Saver is the only automatic trigger).

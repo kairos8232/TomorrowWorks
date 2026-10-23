@@ -151,7 +151,7 @@ function Home({ start, startWithRole, go, lang, setLang }: {
       <nav className="public-nav" aria-label={t('Explore TomorrowWorks')}>
         <button type="button" onClick={() => go('skills')}>{t('Explore careers')}</button>
         <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
-        <a href="#how">{t('How it works')}</a>
+        <a href="#how">{t('Where to start')}</a>
       </nav>
       <button type="button" className="organisation-link" onClick={() => start('hr')}>{t('For organisations')}</button>
       <LanguagePicker lang={lang} setLang={setLang} />
@@ -173,7 +173,6 @@ function Home({ start, startWithRole, go, lang, setLang }: {
 
       <section className="quiet-paths" id="how" aria-labelledby="paths-title">
         <div className="quiet-paths-head">
-          <p>{t('How it works')}</p>
           <h2 id="paths-title">{t('Choose where to start.')}</h2>
         </div>
         <div className="quiet-paths-grid">

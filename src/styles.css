@@ -53,8 +53,7 @@ html { scrollbar-color: #477157 #ecece8; }
 }
 
 .quiet-paths { padding: 82px 6.05% 96px; background: #f2f3f0; scroll-margin-top: 24px; }
-.quiet-paths-head { display: flex; align-items: baseline; gap: 34px; margin-bottom: 34px; }
-.quiet-paths-head > p { flex: 0 0 26%; margin: 0; color: #477157; font-size: 17px; }
+.quiet-paths-head { margin-bottom: 34px; }
 .quiet-paths h2 { margin: 0; color: #0c182c; font: 400 clamp(40px, 4vw, 58px)/1.06 'Carlito', sans-serif; letter-spacing: -.025em; }
 .quiet-paths-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #cdd2cc; border-bottom: 1px solid #cdd2cc; }
 .quiet-path { display: flex; flex-direction: column; min-width: 0; padding: 28px clamp(20px, 2.7vw, 48px) 30px 0; }
@@ -111,8 +110,7 @@ html { scrollbar-color: #477157 #ecece8; }
   .quiet-proof { position: static; margin: 24px 0 0; font-size: 17px; }
   .journey-route { opacity: .65; }
   .quiet-paths { padding: 58px 20px 66px; }
-  .quiet-paths-head { display: block; margin-bottom: 26px; }
-  .quiet-paths-head > p { margin-bottom: 14px; }
+  .quiet-paths-head { margin-bottom: 26px; }
   .quiet-paths h2 { font-size: clamp(40px, 11vw, 54px); }
   .quiet-paths-grid { grid-template-columns: 1fr; }
   .quiet-path, .quiet-path + .quiet-path { padding: 24px 0 26px; border-left: 0; }

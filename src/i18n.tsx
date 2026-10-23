@@ -255,7 +255,7 @@ const dict: Record<string, Entry> = {
   'Start with my own skills': { ms: 'Mula dengan kemahiran saya', zh: '从我自己的技能开始' },
   'Try a sample person': { ms: 'Cuba contoh orang', zh: '试用示例人物' },
   'No account, no CV. Nothing you enter leaves your browser tab except the words you send to the skill search.': { ms: 'Tiada akaun, tiada CV. Tiada apa yang anda masukkan keluar dari tab pelayar kecuali perkataan yang dihantar ke carian kemahiran.', zh: '无需账户，无需简历。除了发送给技能搜索的文字，你输入的内容不会离开浏览器。' },
-  'How it works': { ms: 'Cara ia berfungsi', zh: '如何运作' },
+  'Where to start': { ms: 'Bermula di mana', zh: '从哪里开始' },
   'Your skills.': { ms: 'Kemahiran anda.', zh: '你的技能。' },
   'Describe your work and confirm the skills it finds.': { ms: 'Terangkan kerja anda dan sahkan kemahiran yang ditemui.', zh: '描述你的工作并确认找到的技能。' },
   'Your moves.': { ms: 'Langkah anda.', zh: '你的职业选择。' },
