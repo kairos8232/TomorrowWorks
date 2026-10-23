@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { briefService, keyHeadlines, newsService, topicsFor, toArticles } from './news.mjs';
+import { briefService, cleanTitle, keyHeadlines, newsService, topicsFor, toArticles } from './news.mjs';
 
 const topics = JSON.parse(readFileSync(new URL('../data/sources/news-topics.json', import.meta.url), 'utf8'));
 const snapshot = { source: { name: 'snapshot', retrievedAt: '2026-10-21' }, articles: [{ title: 'old', topics: ['Other'] }] };
@@ -11,8 +11,16 @@ describe('news topic tagging (same rule as the Python script)', () => {
   it('tags English, Malay and Chinese headlines; untagged become Other', () => {
     expect(topicsFor('Bersedia gaji minimum RM2,000', topics)).toEqual(['Pay and wages']);
     expect(topicsFor('高通11月起全球裁员', topics)).toEqual(['Layoffs']);
-    expect(topicsFor('Nvidia urges firms to adopt AI', topics)).toEqual(['AI and automation']);
+    expect(topicsFor('Nvidia urges firms to adopt AI', topics)).toEqual(['AI industry']);
+    expect(topicsFor('Brunei minister urges graduates to use AI to enhance skills', topics)).toEqual(['AI and automation']);
+    expect(topicsFor('AI deepfakes, extremist recruitment: PAS MP sounds alarm', topics)).toEqual(['AI industry']);
+    expect(topicsFor('Did KTMB appoint a third party to handle recruitment?', topics)).toEqual(['Hiring']);
     expect(topicsFor('Brazil election news', topics)).toEqual(['Other']);
+  });
+  it('undoes GDELT spacing without changing words', () => {
+    expect(cleanTitle('Bersedia gaji minimum RM2 , 000 tahun depan')).toBe('Bersedia gaji minimum RM2,000 tahun depan');
+    expect(cleanTitle('AI deepfakes , extremist recruitment : PAS MP')).toBe('AI deepfakes, extremist recruitment: PAS MP');
+    expect(cleanTitle('最低薪金涨至两千 ： 惠及逾400万人之后 ， 成本由谁承担 ？ | 八方论见')).toBe('最低薪金涨至两千：惠及逾400万人之后，成本由谁承担？| 八方论见');
   });
   it('drops repeated headlines and sorts newest first', () => {
     const a = toArticles([{ url: 'a', title: 'AI rules', seendate: '20261020T010000Z', domain: 'x' }, { url: 'b', title: 'AI  rules', seendate: '20261021T010000Z', domain: 'y' }], topics);

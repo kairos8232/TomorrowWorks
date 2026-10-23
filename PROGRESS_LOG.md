@@ -1,5 +1,12 @@
 # Progress log
 
+## 23 Oct 2026 — Workplace news topics were too loose
+
+- Carson: headlines looked wrong. Nothing was hard-coded; the 21 Oct snapshot showed 19 "AI and automation" headlines that were mostly AI business news (Nvidia, stock markets, data centres), and "Hiring" matched "extremist recruitment" and a Roblox arrest story; GDELT titles had spaces before punctuation.
+- Rule now (news-topics.json `requires` / `exclude`, same in server and importer, tests added): AI needs a work word or it is *AI industry*; Hiring excludes arrested/extremist/militant/terror; titles cleaned. Snapshot re-tagged (`--retag`): AI and automation 1, AI industry 18, Hiring 2, Layoffs 1, Pay and wages 3. Topic cards list workplace topics first and fit one row. Python and server agree on all 97 headlines. Live data still pending (GDELT 429 on Replit).
+
+---
+
 ## 23 Oct 2026 — Review fixes before submission
 
 - Full review against the Domain 1 brief, handbooks and T&C (read from Carson's folder): all six must-haves and all six good-to-haves present; build and 114 tests pass; no page errors on any screen or viewer.

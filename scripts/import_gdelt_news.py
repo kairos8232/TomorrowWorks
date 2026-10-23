@@ -37,6 +37,8 @@ MAX_RECORDS = 100     # one request for all topics
 _TOPIC_FILE = json.loads(Path(__file__).resolve().parent.parent.joinpath("data/sources/news-topics.json").read_text(encoding="utf-8"))
 TOPICS = _TOPIC_FILE["query"]
 TAG_ONLY = _TOPIC_FILE["tagOnly"]
+REQUIRES = _TOPIC_FILE.get("requires", {})
+EXCLUDE = _TOPIC_FILE.get("exclude", {})
 QUERY = "(" + " OR ".join(f'"{t}"' if " " in t else t for terms in TOPICS.values() for t in terms) + ")"
 
 
@@ -48,10 +50,27 @@ def has_term(title, term):
 
 
 def topics_for(title):
-    """Topics whose terms appear in the headline; "Other" if none (not shown by default)."""
-    names = list(dict.fromkeys([*TOPICS, *TAG_ONLY]))
-    found = [n for n in names if any(has_term(title, t) for t in TOPICS.get(n, []) + TAG_ONLY.get(n, []))]
+    """Topics whose terms appear in the headline, after the 'requires' and 'exclude' rules in
+    news-topics.json (same rule as server/news.mjs); "Other" if none."""
+    has = lambda words: any(has_term(title, t) for t in words or [])
+    found = []
+    for n in dict.fromkeys([*TOPICS, *TAG_ONLY]):
+        if not has(TOPICS.get(n, []) + TAG_ONLY.get(n, [])) or has(EXCLUDE.get(n)):
+            continue
+        need = REQUIRES.get(n)
+        found.append(need["otherwise"] if need and not has(need["words"]) else n)
+    found = list(dict.fromkeys(x for x in found if x))
     return found or ["Other"]
+
+
+def clean_title(title):
+    """Undo GDELT's tokenised spacing ("RM2 , 000", "deepfakes , extremist") without changing words."""
+    t = re.sub(r"\s+", " ", title)
+    t = re.sub(r"(\d) , (\d{3})\b", r"\1,\2", t)
+    t = re.sub(r" ([,.:;?!%)])", r"\1", t)
+    t = t.replace("( ", "(")
+    t = re.sub(r"\s*([，。：；？！、])\s*", r"\1", t)
+    return t.strip()
 
 
 def dedupe(articles):
@@ -107,13 +126,14 @@ def retag(path):
         if key in seen:
             continue
         seen.add(key)
+        a["title"] = clean_title(a["title"])
         a["topics"] = topics_for(a["title"])
         kept.append(a)
     snap["articles"] = kept
     snap["source"]["covered"] = coverage(snap["articles"])
-    snap["source"]["measure"] = "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline; 'Other' = none."
+    snap["source"]["measure"] = "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline, with the 'requires' and 'exclude' rules in news-topics.json (AI without a work word = 'AI industry'); 'Other' = none."
     Path("data/sources/gdelt-news.json").write_text(json.dumps(snap, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    for topic in [*dict.fromkeys([*TOPICS, *TAG_ONLY]), "Other"]:
+    for topic in [*dict.fromkeys([*TOPICS, *TAG_ONLY, *(r["otherwise"] for r in REQUIRES.values())]), "Other"]:
         print(f"{topic}: {sum(topic in a['topics'] for a in snap['articles'])} headlines")
 
 
@@ -126,7 +146,7 @@ def main():
         for field in ("url", "title", "seendate", "domain"):
             if field not in a:
                 sys.exit(f"GDELT article is missing {field!r}; fields were {sorted(a)}")
-        title = a["title"].strip()
+        title = clean_title(a["title"])
         articles.setdefault(a["url"], {
             "title": title,
             "url": a["url"],
@@ -148,7 +168,7 @@ def main():
             "retrievedAt": date.today().isoformat(),
             "window": "last 4 weeks before retrieval",
             "geography": "News outlets located in Malaysia (GDELT sourcecountry:MY)",
-            "measure": "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline; 'Other' = none.",
+            "measure": "Headlines reported; not job counts. Topic = topic words (English, Malay, Chinese) found in the headline, with the 'requires' and 'exclude' rules in news-topics.json (AI without a work word = 'AI industry'); 'Other' = none.",
             "covered": coverage(list(articles.values())),
         },
         "queries": queries,

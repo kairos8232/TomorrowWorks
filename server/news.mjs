@@ -22,10 +22,33 @@ export function hasTerm(title, term) {
   return hasChinese(term) ? title.includes(term) : new RegExp(`\\b${escape(term)}\\b`, 'i').test(title);
 }
 
+/**
+ * Topics whose words appear in the headline, after two rules from news-topics.json:
+ * 'requires' (e.g. an AI headline counts as workplace news only with a work word such as
+ * jobs or skills; otherwise it is 'AI industry') and 'exclude' (e.g. 'extremist recruitment'
+ * is not hiring). 'Other' if nothing is left. Same rule as the Python script.
+ */
 export function topicsFor(title, topics) {
   const names = [...new Set([...Object.keys(topics.query), ...Object.keys(topics.tagOnly)])];
-  const found = names.filter((n) => [...(topics.query[n] ?? []), ...(topics.tagOnly[n] ?? [])].some((t) => hasTerm(title, t)));
-  return found.length ? found : ['Other'];
+  const has = (words) => (words ?? []).some((t) => hasTerm(title, t));
+  const found = [];
+  for (const n of names) {
+    if (!has([...(topics.query[n] ?? []), ...(topics.tagOnly[n] ?? [])]) || has(topics.exclude?.[n])) continue;
+    const need = topics.requires?.[n];
+    found.push(need && !has(need.words) ? need.otherwise : n);
+  }
+  const unique = [...new Set(found.filter(Boolean))];
+  return unique.length ? unique : ['Other'];
+}
+
+/** Undo GDELT's tokenised spacing ("RM2 , 000", "deepfakes , extremist", "成本 ？") without changing words. */
+export function cleanTitle(title) {
+  return title.replace(/\s+/g, ' ')
+    .replace(/(\d) , (\d{3})\b/g, '$1,$2')
+    .replace(/ ([,.:;?!%)])/g, '$1')
+    .replace(/\( /g, '(')
+    .replace(/\s*([，。：；？！、])\s*/g, '$1')
+    .trim();
 }
 
 export function gdeltQuery(topics) {
@@ -39,7 +62,7 @@ export function toArticles(raw, topics) {
   const seen = new Set();
   return raw
     .filter((a) => a.url && a.title && a.seendate && a.domain)
-    .map((a) => ({ title: a.title.trim(), url: a.url, outlet: a.domain, language: a.language ?? '', seenAt: seenIso(a.seendate), topics: topicsFor(a.title, topics) }))
+    .map((a) => ({ title: cleanTitle(a.title), url: a.url, outlet: a.domain, language: a.language ?? '', seenAt: seenIso(a.seendate), topics: topicsFor(a.title, topics) }))
     .sort((a, b) => b.seenAt.localeCompare(a.seenAt))
     .filter((a) => { const k = a.title.toLowerCase().split(/\s+/).join(' '); if (seen.has(k)) return false; seen.add(k); return true; });
 }
