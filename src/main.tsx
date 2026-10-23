@@ -37,7 +37,7 @@ const teamNav: NavItem[] = [
 ];
 const marketNav: NavItem[] = [
   { id: 'demand', label: 'Job ads', hint: 'Demand by occupation' },
-  { id: 'adcheck', label: 'Check an ad', hint: 'Paste an ad, see skills and signals' },
+  { id: 'adcheck', label: 'Check a job ad', hint: 'Paste an ad, see skills and signals' },
   { id: 'outlook', label: 'AI impact', hint: 'Three views of AI by role' },
   { id: 'news', label: 'Workplace news', hint: 'Latest reported changes' },
   { id: 'trending', label: 'Future skills radar', hint: 'Skills rising or at risk' },
@@ -355,13 +355,15 @@ function App() {
         <nav className="workspace-primary" aria-label={t('Main navigation')}>
           {!isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go('skills')}>{t('Career path')}</button>}
           {isOrganisation && <button type="button" className={!inMarket ? 'active' : ''} onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
-          <button type="button" className={inMarket ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
+          {!isOrganisation && <button type="button" className={screen === 'adcheck' && !onGradPath ? 'active' : ''} onClick={() => go('adcheck')}>{t('Check my CV')}</button>}
+          <button type="button" className={inMarket && screen !== 'adcheck' ? 'active' : ''} onClick={() => go('demand')}>{t('Job market')}</button>
         </nav>
         <details className="workspace-mobile-menu">
           <summary>{t('Menu')}</summary>
           <nav aria-label={t('Main navigation')}>
             {!isOrganisation && <button type="button" onClick={() => go('skills')}>{t('Career path')}</button>}
             {isOrganisation && <button type="button" onClick={() => go(kind === 'region' ? 'region' : 'team')}>{t('For organisations')}</button>}
+            {!isOrganisation && <button type="button" onClick={() => go('adcheck')}>{t('Check my CV')}</button>}
             <button type="button" onClick={() => go('demand')}>{t('Job market')}</button>
           </nav>
         </details>
@@ -393,7 +395,7 @@ function App() {
         {screen === 'plan' && path !== null && profile.held.size > 0 && <section className="panel"><h2>{t('Want to try another role?')}</h2><p className="note">{t('Compare every role we track against your skills.')}</p><div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => go('moves')}>{t('Try another role')}</button></div></section>}
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
-        {screen === 'demand' && <DemandTable />}
+        {screen === 'demand' && <DemandTable onCheckAd={() => go('adcheck')} />}
         {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} initialCv={gradPath ? gradCv : ''} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}

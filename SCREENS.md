@@ -189,3 +189,7 @@ The step bar keeps **1, 2, 3** visible for completed and current steps; it does 
 ### Step bar for every start (24 Oct 2026)
 
 One step bar, three steps, for all individual starts: *fresh graduate* = Your CV, A job ad, Your plan; *I already work* and the sample people = Your skills, Your moves, Your plan. State is a path value in `main.tsx` (`grad`, `work` or none); organisation views and Job market pages never show it. On *Your moves* a green **Next: Your plan for {best role}** button sits under the best-move card (opens the plan for the top-ranked move; the plan screen still has its role picker). On a selected role's detail page the plan button reads **Next: Your plan**. *Your skills* ends with **Next: Your moves** on the work path. The plan screen's *Want to try another role?* panel goes back to *Your moves*.
+
+### Entry points to the CV check (24 Oct 2026)
+
+Individuals get a third header item, **Check my CV** (also in the mobile menu), next to Career path and Job market; it opens *Check a job ad* and is highlighted there. Organisation views do not show it. The Job market tab is renamed *Check a job ad* to match the screen heading, and *Job ads* starts with a line: "Applying for a job? Check an ad against your CV."

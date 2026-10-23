@@ -38,12 +38,13 @@ function LabourContext() {
   </div>;
 }
 
-export function DemandTable() {
+export function DemandTable({ onCheckAd }: { onCheckAd?: () => void }) {
   const t = useT();
   const tx = useTx();
   const rows = dosmQ2.occupationMajorGroups.filter((g) => g.iscoMajorGroup && g.quarterly['2026-Q1'] != null && g.quarterly['2026-Q2'] != null);
   const src = dosmQ2.source;
   return <section className="data-table" aria-label="Online job ads by occupation group">
+    {onCheckAd && <p className="demand-cta">{t('Applying for a job?')} <button type="button" className="text-button" onClick={onCheckAd}>{t('Check an ad against your CV')}</button></p>}
     <LabourContext />
     <p className="table-scroll-hint">{t('Swipe sideways to see all columns.')}</p>
     <table>

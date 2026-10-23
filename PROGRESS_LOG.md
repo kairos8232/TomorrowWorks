@@ -11,6 +11,7 @@
 - Home card wording (Carson's pick): "From your CV to your first job: your skills, the gaps and what to learn.", button "Start here" (the path is not only the CV).
 - Carson saw the job-ad box blank on Replit in Safari (CV box fine). Not reproducible in Chromium here (box filled, 711 characters). Fixed height did not help (still blank on his Mac). The DOM he pasted shows the box exists, so the likely cause is a browser ad blocker hiding the element with id="ad-text" (ids and classes starting with "ad-" are common blocker targets). Renamed the textarea ids to posting-text and cv-box-text: confirmed fixed on his Mac (ad blocker). The same blocker also hid the skill lists in the CV-vs-ad panel (class ad-groups), so every ad- class and id on Check an ad is now posting- (52 + 67 renames). Real RunPod matching worked on Replit for the fictional ad and CV (24 skills, CV shows 7, closest role Accounting assistant).
 - Step bar now for every individual start (path value `grad`/`work` instead of a yes/no flag); Next: Your plan button under the best-move card on Your moves. Built with Carson after he asked how Moves links to Plan.
+- Entry points to the CV check: header item Check my CV (individuals), Job market tab renamed Check a job ad, and a pointer line on Job ads. Browser-checked at 1440 and 390 px.
 - Not verified: the real RunPod match for CV and ad together (this workspace cannot reach RunPod). Step 2 rules not built: waiting for Carson to approve each rule and its source.
 
 ---

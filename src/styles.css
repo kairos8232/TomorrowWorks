@@ -1719,3 +1719,7 @@ details.course-check { padding-block:0; }
 /* Your moves: the Next button sits under the best-move card. */
 .moves-main { display: grid; gap: 14px; align-content: start; min-width: 0; }
 .moves-next { flex-wrap: wrap; }
+
+/* Job ads: a pointer to the CV check. */
+.demand-cta { margin: 0 0 14px; color: #59645e; font-size: 16px; }
+.demand-cta .text-button { font-size: 16px; }
