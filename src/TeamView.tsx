@@ -39,7 +39,7 @@ function PersonPage({ member, teamName, onBack }: { member: Member; teamName: st
   const current = member.roleId ? roleTitle(roles.find((r) => r.id === member.roleId)!.title) : t('No job yet');
   const pct = (n: number) => `${(n / total) * 100}%`;
   return <section className="panel person-panel" aria-labelledby="person-head">
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to {team}', { team: teamName })}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to {team}', { team: teamName })}</button>
     <header className="person-head">
       <span className="person-avatar" aria-hidden="true">{member.name[0]}</span>
       <div>

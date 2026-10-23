@@ -296,19 +296,21 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .skill-tag small { display: block; font-weight: 400; font-size: 14px; color: #5d6873; }
 .detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-left: 64px; }
 .role-focus { display: grid; gap: 16px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 30px); }
-.role-back { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 6px 13px 6px 7px; border: 1px solid #d9ded9; border-radius: 999px; background: #fff; color: #244d39; font-size: 15px; line-height: 1.2; text-decoration: none; cursor: pointer; }
-.role-back-icon { display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; background: #e6f0ea; color: #1e6b4f; font-size: 18px; line-height: 1; }
-.role-back:hover { border-color: #9fb3a8; background: #f7faf8; text-decoration: none; }
+.role-back { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 1px; border: 0; border-bottom: 1px solid #9fb3a8; border-radius: 0; background: transparent; color: #244d39; font-size: 15px; line-height: 1.2; text-decoration: none; cursor: pointer; }
+.role-back:hover { border-bottom-color: #1e6b4f; color: #17563f; text-decoration: none; }
 .role-back:focus-visible { outline: 3px solid #2f8a66; outline-offset: 3px; }
-.role-focus-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+.role-focus-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
 .role-focus-heading h2 { margin: 2px 0 4px; font-size: clamp(27px, 3vw, 38px); text-transform: capitalize; }
-.role-focus-heading .note { margin: 0; }
-.role-focus-heading .detail-actions { margin-top: 16px; }
 .role-focus-rank { color: #5d6873; font-size: 15px; font-weight: 700; }
-.focus-score { display: grid; justify-items: end; font-size: 38px; line-height: 1; }
-.focus-score small { color: #5d6873; font-size: 14px; font-weight: 600; }
+.focus-score { display: grid; justify-items: end; gap: 4px; flex: none; color: #5d6873; font-size: 15px; line-height: 1.1; }
+.focus-score strong { color: #1c2430; font-size: 30px; font-weight: 700; }
+.focus-score small { margin-left: 4px; color: #5d6873; font-size: 15px; font-weight: 500; }
+.role-focus-summary { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; padding: 16px 0; border-top: 1px solid #d9ded9; border-bottom: 1px solid #d9ded9; }
+.role-focus-summary p { max-width: 72ch; margin: 0; font-size: 17px; line-height: 1.5; }
+.role-focus-summary .primary-button { flex: none; }
 .role-focus .detail-actions, .role-focus .detail-facts, .role-focus .detail-skills, .role-focus .sdg-line, .role-focus .interest-line { margin-left: 0; }
 .role-focus .detail-facts { background: #f7f8f6; border-radius: 8px; padding: 16px; }
+@media (max-width: 680px) { .role-focus-heading { align-items: start; } .focus-score strong { font-size: 24px; } .role-focus-summary { align-items: start; flex-direction: column; } }
 .role-focus-content { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 16px; align-items: start; }
 .role-focus .detail-skills { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .role-focus .skill-list { min-width: 0; border: 1px solid #d9ded9; border-radius: 8px; padding: 16px; }

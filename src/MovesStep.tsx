@@ -120,20 +120,26 @@ function LedgerRow({ result, rank, delta, onInspect, picks, goals, future, close
 function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void }) {
   const t = useT();
   const { role, fit, demand, resilience } = result;
+  const skillSummary = [
+    fit.matched.length === 0
+      ? t('You have not confirmed any of this role’s {total} essential skills yet.', { total: role.essentialSkills.length })
+      : t('You have {held} of {total} essential skills for this role.', { held: fit.matched.length, total: role.essentialSkills.length }),
+    fit.transferable.length > 0 ? t('{n} related skills could help.', { n: fit.transferable.length }) : null,
+    fit.matched.length > 0 && fit.missing.length > 0 ? t('{n} essential skills to build.', { n: fit.missing.length }) : null,
+    fit.matched.length > 0 && fit.missing.length === 0 && fit.transferable.length === 0 ? t('You already have every essential ESCO skill for this role.') : null,
+  ].filter(Boolean).join(' ');
   return <section className="role-focus" aria-label={t('View {role} details', { role: role.title })}>
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to ranking')}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
     <div className="role-focus-heading">
-      <div><span className="role-focus-rank">{rank === null ? t('Now') : t('Rank {n}', { n: rank })}</span><h2>{role.title}</h2>
-        <p className="note">{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''} · {t('{n} to build', { n: fit.missing.length })}</p>
-        <div className="detail-actions">
-          {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('Plan this move')}</button>}
-          <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a>
-        </div>
-      </div>
-      <strong className="focus-score">{result.score100}<small>{t('Score')}</small></strong>
+      <div><span className="role-focus-rank">{rank === null ? t('Now') : t('Rank {n}', { n: rank })}</span><h2>{role.title}</h2></div>
+      <div className="focus-score"><span>{t('Comparison score')}</span><strong>{result.score100}<small>/ 100</small></strong></div>
+    </div>
+    <div className="role-focus-summary">
+      <p>{skillSummary}</p>
+      {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t('See a learning plan')}</button>}
     </div>
     <div className="detail-facts">
-      <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}</span>
+      <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}<small><a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a></small></span>
       <span className="fact-d">{demand ? <>{t(demand.group)} {pct(demand.change)}<small><a href={snapshots[demand.current === snapshots.q1.source.latestQuarter ? 'q1' : 'q2'].source.url} target="_blank" rel="noreferrer">DOSM</a> {t('{a} to {b}', { a: demand.previous, b: demand.current })}</small></> : t('No DOSM data')}</span>
       <span className="fact-r">{resilience ? <><a href={ilo.source.url} target="_blank" rel="noreferrer">{t('ILO exposure {x}', { x: resilience.exposure.toFixed(2) })}</a><small>{resilience.gradient}</small></> : t('No ILO data')}</span>
     </div>
@@ -163,7 +169,7 @@ function ChangesView({ changes, onBack }: { changes: ReturnType<typeof whatChang
   const rankMoves = changes.filter((c) => c.rankBefore !== c.rankAfter).length;
   const allDown = changes.length > 0 && changes.every((c) => c.scoreAfter < c.scoreBefore);
   return <section className="moves-focus" aria-label={t('Compare quarters')}>
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to ranking')}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
     <h2>{t('What changed with {q} job-ad data', { q: latest })}</h2>
     <p>{changes.length === 0 ? t('Nothing moved compared with {q} data.', { q: earlier }) : rankMoves === 0 ? t('Your order of moves stayed the same.') : rankMoves === 1 ? t('1 move changed place.') : t('{n} moves changed place.', { n: rankMoves })} {allDown && t('Online job ads fell in every occupation group in {q}, so every score dropped.', { q: latest })}</p>
     {changes.length > 0 && <ul className="change-list">{[...changes].sort((a, b) => a.rankAfter - b.rankAfter).map((c) => <li key={c.role.id}>
@@ -178,7 +184,7 @@ function ChangesView({ changes, onBack }: { changes: ReturnType<typeof whatChang
 function MethodView({ onBack }: { onBack: () => void }) {
   const t = useT();
   return <section className="moves-focus" aria-label={t('How ranking works')}>
-    <button type="button" className="text-button role-back" onClick={onBack} autoFocus><span className="role-back-icon" aria-hidden="true">←</span>{t('Back to ranking')}</button>
+    <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>
     <h2>{t('How ranking works')}</h2>
     <p>{t('Scores are estimates for comparing roles, not hiring decisions.')}</p>
     <div className="method-grid">
