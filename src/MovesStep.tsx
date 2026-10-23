@@ -120,13 +120,13 @@ function LedgerRow({ result, rank, delta, onInspect, picks, goals, future, close
 function RoleDetail({ result, rank, picks, onBack, onPlan }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void }) {
   const t = useT();
   const { role, fit, demand, resilience } = result;
-  const skillSummary = [
+  const allSkillsHeld = fit.matched.length === role.essentialSkills.length && fit.missing.length === 0 && fit.transferable.length === 0;
+  const skillSummary = allSkillsHeld ? t('You have all {n} essential skills for this role.', { n: role.essentialSkills.length }) : [
     fit.matched.length === 0
       ? t('You have not confirmed any of this role’s {total} essential skills yet.', { total: role.essentialSkills.length })
       : t('You have {held} of {total} essential skills for this role.', { held: fit.matched.length, total: role.essentialSkills.length }),
     fit.transferable.length > 0 ? t('{n} related skills could help.', { n: fit.transferable.length }) : null,
     fit.matched.length > 0 && fit.missing.length > 0 ? t('{n} essential skills to build.', { n: fit.missing.length }) : null,
-    fit.matched.length > 0 && fit.missing.length === 0 && fit.transferable.length === 0 ? t('You already have every essential ESCO skill for this role.') : null,
   ].filter(Boolean).join(' ');
   return <section className="role-focus" aria-label={t('View {role} details', { role: role.title })}>
     <button type="button" className="text-button role-back" onClick={onBack} autoFocus>{t('Back to ranking')}</button>

@@ -296,7 +296,8 @@ h1 { margin: 0; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.13; letter-s
 .skill-tag small { display: block; font-weight: 400; font-size: 14px; color: #5d6873; }
 .detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-left: 64px; }
 .role-focus { display: grid; gap: 16px; background: #ffffff; border: 1px solid #d9ded9; border-radius: 12px; padding: clamp(18px, 3vw, 30px); }
-.role-back { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 1px; border: 0; border-bottom: 1px solid #9fb3a8; border-radius: 0; background: transparent; color: #244d39; font-size: 15px; line-height: 1.2; text-decoration: none; cursor: pointer; }
+.role-back { justify-self: start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 1px; border: 0; border-bottom: 1px solid #9fb3a8; border-radius: 0; background: transparent; color: #244d39; font-size: 15px; line-height: 1.2; text-decoration: none; cursor: pointer; }
+.role-back::before { content: ''; width: 7px; height: 7px; flex: none; margin-left: 2px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
 .role-back:hover { border-bottom-color: #1e6b4f; color: #17563f; text-decoration: none; }
 .role-back:focus-visible { outline: 3px solid #2f8a66; outline-offset: 3px; }
 .role-focus-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; }

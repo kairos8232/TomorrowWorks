@@ -314,6 +314,7 @@ const dict: Record<string, Entry> = {
   'See a learning plan': { ms: 'Lihat pelan pembelajaran', zh: '查看学习计划' },
   'You have not confirmed any of this role’s {total} essential skills yet.': { ms: 'Anda belum mengesahkan mana-mana daripada {total} kemahiran penting untuk peranan ini.', zh: '你尚未确认具备此职位所需的 {total} 项核心技能。' },
   'You have {held} of {total} essential skills for this role.': { ms: 'Anda mempunyai {held} daripada {total} kemahiran penting untuk peranan ini.', zh: '你已具备此职位所需 {total} 项核心技能中的 {held} 项。' },
+  'You have all {n} essential skills for this role.': { ms: 'Anda mempunyai kesemua {n} kemahiran penting untuk peranan ini.', zh: '你已具备此职位所需的全部 {n} 项核心技能。' },
   '{n} related skills could help.': { ms: '{n} kemahiran berkaitan mungkin membantu.', zh: '另有 {n} 项相关技能可能有所帮助。' },
   'View {role} details': { ms: 'Lihat butiran {role}', zh: '查看 {role} 详情' },
   'View details': { ms: 'Lihat butiran', zh: '查看详情' },
