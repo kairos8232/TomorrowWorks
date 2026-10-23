@@ -77,6 +77,8 @@ html { scrollbar-color: #477157 #ecece8; }
 .quiet-organisations button { color: #0c182c; }
 .public-footer { display: flex; justify-content: space-between; gap: 24px; padding: 34px 4.73%; background: #f8f8f8; color: #667067; font-size: 15px; }
 .public-footer span:first-child { color: #0c182c; font-size: 20px; }
+.public-footer { flex-wrap: wrap; }
+.public-footer-esco { flex-basis: 100%; font-size: 13px; color: #667067; }
 
 @media (prefers-reduced-motion: reduce) {
   .journey-route-line { animation: none; stroke-dashoffset: 0; opacity: .2; }

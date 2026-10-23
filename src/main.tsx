@@ -198,7 +198,7 @@ function Home({ start, startWithRole, go, lang, setLang }: {
         <button type="button" onClick={() => start('hr')}>{t('Open the organisation view')} <span aria-hidden="true">→</span></button>
       </section>
     </main>
-    <footer className="public-footer"><span>TomorrowWorks</span><span>{t('Career direction, grounded in evidence.')}</span></footer>
+    <footer className="public-footer"><span>TomorrowWorks</span><span>{t('Career direction, grounded in evidence.')}</span><small className="public-footer-esco">This service uses the ESCO classification of the European Commission.</small></footer>
   </div>;
 }
 
