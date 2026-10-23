@@ -1021,8 +1021,8 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .sdg-possible li { display: grid; gap: 7px; padding: 13px 0; border-bottom: 1px solid #e3e7e3; }
 .sdg-possible-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 9px; }
 .sdg-possible-heading strong { min-width: 0; font-size: 15px; line-height: 1.4; }
-.sdg-possible-evidence { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; font-size: 14px; line-height: 1.45; }
-.sdg-possible-evidence small { color: #5d6873; font-size: 13px; white-space: nowrap; }
+.sdg-possible-evidence { font-size: 14px; line-height: 1.45; }
+.sdg-possible-evidence small { display: block; margin-top: 4px; color: #5d6873; font-size: 13px; }
 
 /* Guided learning checks in individual plans. */
 .learning-progress { margin-top: 18px; padding: 16px 18px; border: 1px solid #d9ded9; border-radius: 8px; background: #f7f8f6; }
