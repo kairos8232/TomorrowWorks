@@ -868,20 +868,20 @@ summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus
 .plan-course-picker { min-width: 0; }
 .plan-course-picker label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 16px; }
 .plan-dashboard .plan-course-picker select { display: block; box-sizing: border-box; width: 100%; min-width: 0; padding: 11px 12px; background: #fff; }
-.plan-course-source { margin: 10px 0 0; color: #5d6873; font-size: 14px; line-height: 1.4; }
+.plan-course-source { margin: 12px 0 0; color: #5d6873; font-size: 15px; line-height: 1.45; }
 .plan-order-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin-bottom: 10px; }
-.plan-order-head h3 { margin: 0; font-size: 16px; }
-.plan-order-head span { color: #1e6b4f; font-weight: 700; font-size: 14px; }
-.plan-order { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.plan-order button { display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 9px 10px; border: 1px solid #d9ded9; border-radius: 8px; background: #fff; color: #1c2430; font: inherit; text-align: left; cursor: pointer; }
+.plan-order-head h3 { margin: 0; font-size: 18px; }
+.plan-order-head span { color: #1e6b4f; font-weight: 700; font-size: 15px; }
+.plan-order { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.plan-order button { display: flex; align-items: flex-start; gap: 12px; width: 100%; padding: 12px; border: 1px solid #d9ded9; border-radius: 8px; background: #fff; color: #1c2430; font: inherit; text-align: left; cursor: pointer; }
 .plan-order button:hover { border-color: #9fb3a8; }
 .plan-order button[aria-pressed="true"] { border-color: #1e3d33; box-shadow: inset 3px 0 0 #1e3d33; background: #f3f7f4; }
 .plan-order button:focus-visible { outline: 3px solid #7fd6a8; outline-offset: 2px; }
-.plan-order-num { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #e6ece8; font-size: 13px; font-weight: 700; }
+.plan-order-num { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #e6ece8; font-size: 15px; font-weight: 700; }
 .plan-order button[aria-pressed="true"] .plan-order-num { background: #1e3d33; color: #fff; }
-.plan-order-text { display: grid; gap: 2px; min-width: 0; }
-.plan-order-text strong { font-size: 14px; line-height: 1.3; }
-.plan-order-text small { color: #5d6873; font-size: 12.5px; }
+.plan-order-text { display: grid; gap: 3px; min-width: 0; }
+.plan-order-text strong { font-size: 17px; line-height: 1.3; }
+.plan-order-text small { color: #5d6873; font-size: 15px; line-height: 1.35; }
 .plan-selected-course { min-width: 0; padding-left: 28px; border-left: 1px solid #d8ddd7; }
 .plan-selected-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .plan-selected-heading h3 { margin: 5px 0 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.2; }
