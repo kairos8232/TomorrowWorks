@@ -61,10 +61,10 @@ function LanguagePicker({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) =
   const t = useT();
   const picker = useRef<HTMLDetailsElement>(null);
   const current = languages.find((option) => option.id === lang)!;
-  return <details className="language-picker" ref={picker}>
+  return <details className="language-picker" name="header-dropdown" ref={picker}>
     <summary aria-label={`${t('Language')}: ${current.label}`}><span className="language-full">{current.label}</span><span className="language-short">{lang === 'en' ? 'EN' : lang === 'ms' ? 'BM' : '中文'}</span></summary>
     <div className="language-options" aria-label={t('Language')}>
-      {languages.map((option) => <button key={option.id} type="button" aria-pressed={lang === option.id} onClick={() => { setLang(option.id); picker.current!.open = false; }}><span>{option.label}</span><span aria-hidden="true">{lang === option.id ? '✓' : ''}</span></button>)}
+      {languages.map((option) => <button key={option.id} type="button" aria-pressed={lang === option.id} onClick={() => { setLang(option.id); picker.current!.open = false; }}>{option.label}</button>)}
     </div>
   </details>;
 }
@@ -236,7 +236,7 @@ function ViewerSwitch({ viewer, choose, saver, toggleSaver }: { viewer: ViewerId
   const ref = useRef<HTMLDetailsElement>(null);
   const current = viewerById(viewer);
   const viewType = current.kind === 'team' ? 'Team' : current.kind === 'region' ? 'Region' : 'Individual';
-  return <details className="viewer-switch" ref={ref}>
+  return <details className="viewer-switch" name="header-dropdown" ref={ref}>
     <summary><span className="avatar" aria-hidden="true">{current.name[0]}</span>
       <span><strong>{current.name}</strong><small>{t(viewType)}</small></span></summary>
     <ul>{viewers.map((v) => <li key={v.id}><button type="button" aria-current={v.id === viewer ? 'true' : undefined} onClick={() => { ref.current!.open = false; choose(v.id); }}>
