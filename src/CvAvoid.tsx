@@ -22,7 +22,7 @@ export function CvAvoid({ cvText }: { cvText: string }) {
       ? <p className="note">{t('Nothing found in the text we can check. Now check the file itself below.')}</p>
       : <ul className="cv-avoid-list">{findings.map((f) => <li key={f.id}>
         <strong>{t(f.message)}</strong>
-        <small className="ad-from">{f.evidence.join(' · ')}</small>
+        <small className="posting-from">{f.evidence.join(' · ')}</small>
         <small>{src(f.source)}</small>
       </li>)}</ul>}
 
