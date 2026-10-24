@@ -109,12 +109,11 @@ function LedgerRow({ result, rank, delta, onInspect, picks, goals, future, close
   return <li className={`ledger-row${rank === null ? ' current' : ''}`}>
     <button type="button" className="ledger-line" onClick={onInspect}>
       <span className="rank">{rank === null ? t('Now') : rank}</span>
-      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="sdg-tag" title={roleGoalLink(role, g) === 'role' ? t('This role is linked to SDG {n}', { n: g }) : t('Some skills of this role are linked to SDG {n}', { n: g })}><span className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>{t(sdgData.goals[g].short)}{roleGoalLink(role, g) === 'skills' ? ` · ${t('via skills')}` : ''}</em>)}{future && <span className="future-line">{future.top3 > 0 ? `${t('Top 3 in {n}% of futures', { n: Math.round(future.top3 * 100) })} · ` : ''}{t('score {a}–{b} across futures', { a: future.low, b: future.high })}{closeTo ? <em className="close-call">{t('close call with #{n}', { n: closeTo })}</em> : null}</span>}</small></span>
+      <span className="role-name">{role.title}<small>{t('{n} held', { n: fit.matched.length })}{fit.transferable.length ? `, ${t('{n} transferable', { n: fit.transferable.length })}` : ''}, {t('{n} to build', { n: fit.missing.length })}{picks.length > 0 && (interestFit(role.id, picks) ?? 0) >= 0.75 ? <em className="fits">{t('fits your interests')}</em> : null}{goals.filter((g) => roleGoalLink(role, g)).map((g) => <em key={g} className="sdg-tag" title={roleGoalLink(role, g) === 'role' ? t('This role is linked to SDG {n}', { n: g }) : t('Some skills of this role are linked to SDG {n}', { n: g })}><span className="sdg-square" style={{ background: sdgData.goals[g].colour }}>{g}</span>{t(sdgData.goals[g].short)}{roleGoalLink(role, g) === 'skills' ? ` · ${t('via skills')}` : ''}</em>)}{future && <span className="future-line">{future.top3 > 0 ? `${t('Top 3 in {n}% of futures', { n: Math.round(future.top3 * 100) })} · ` : ''}{t('score {a}–{b} across futures', { a: future.low, b: future.high })}{closeTo ? <em className="close-call">{t('close call with #{n}', { n: closeTo })}</em> : null}</span>}</small><span className="row-open" aria-hidden="true">{t('View details')} ›</span></span>
       <Part value={part('F')} label={t('Skill fit')} area="f" />
       <Part value={part('D')} label={t('Demand')} area="d" />
       <Part value={part('R')} label={t('AI resilience')} area="r" />
       <span className="score"><Delta value={delta} />{result.score100}</span>
-      <span className="visually-hidden">{t('View details')}</span>
     </button>
   </li>;
 }
@@ -135,6 +134,11 @@ function RoleDetail({ result, rank, picks, onBack, onPlan, planLabel, inlinePlan
     <div className="role-focus-heading">
       <div><span className="role-focus-rank">{rank === null ? t('Now') : t('Rank {n}', { n: rank })}</span><h2>{role.title}</h2></div>
       <div className="focus-score"><span>{t('Comparison score')}</span><strong>{result.score100}<small>/ 100</small></strong></div>
+    </div>
+    <div className="role-about">
+      <h3>{t('What this job is')}</h3>
+      <p>{role.description}</p>
+      <small>{t('Description from ESCO, adapted.')} <a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a></small>
     </div>
     <div className="role-focus-summary">
       <p>{skillSummary}</p>
@@ -314,7 +318,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
     </div>
 
     <section className="ledger" aria-label="Ranked moves">
-      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see details.')}</p></div>
+      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see what the job is and which skills you would need.')}</p></div>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => { setSelectedRoleId(current.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />}

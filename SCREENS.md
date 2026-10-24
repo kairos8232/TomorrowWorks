@@ -208,3 +208,8 @@ The page paints the saved headlines first, then swaps in today's from `/api/news
 ## Check my CV (CV only, added 24 Oct 2026)
 
 `src/CvCheck.tsx`, screen `cvcheck`, a Job market tab. For anyone, including people who already work, who only want feedback on their CV and have no ad. One box for the CV text (or *Try a fictional example*) and, once there is text, the same *CV checks* and *Check the file yourself* panels used in *Check a job ad* (`CvAvoid`, rules in `src/cvChecks.ts`). It runs in the browser only: no RunPod call, nothing sent or stored, no skill matching and no score. *Compare with a job ad* opens *Check a job ad* with the CV text already in its CV box (kept in memory only for that hand-over).
+
+
+## Your moves: rows say they open, role page says what the job is (added 24 Oct 2026)
+
+Each row in *Compare roles* ends with a visible "View details ›" (it was a hidden label), and the hint above the table says what the click shows. The role page now opens with *What this job is*: the ESCO occupation description from `data/roles.json`, labelled "Description from ESCO, adapted" with the ESCO link (licence rule). Nothing is written by AI. *Find this role* (JobStreet, LinkedIn, Indeed, MYFutureJobs search links) was already on the role page.
