@@ -6,7 +6,8 @@
 - Added `.env.example` and `submission/` (PDFs are added by the team after the final check and signature).
 - Moved the 12 planning docs from the repo root into `docs/` and updated every reference (CLAUDE.md, README, code comments); all relative markdown links resolve, 140 tests pass, build passes.
 - Secret scan of tracked files: no key-like strings, no `.env`.
-- Open: submission branch and PR, default branch on GitHub, public repo with committee collaborators, PDFs, video and deck links.
+- README detailed notes rewritten to match the current app (fresh-graduate flow, Check my CV, DOSM daily check, measured rank changes from the 24 Oct live dry run); stale 21 Oct status, old file tree and the Codex design workflow removed.
+- Done: `submission` branch created and PR #2 merged from `dev`. Open: default branch on GitHub, public repo with committee collaborators, PDFs, video and deck links.
 
 ## 24 Oct 2026 — CV vs ad, and evidence for the fresh-graduate direction
 

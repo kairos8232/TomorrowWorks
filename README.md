@@ -188,289 +188,104 @@ This project is licensed under the [Apache License 2.0](LICENSE).
 
 ## Detailed Project Notes
 
-### Overview
+### How people use the app
 
-AI and other industry changes affect people across ages, occupations, and career stages. **TomorrowWorks** aims to help anyone explore what is happening at work, which skills and roles have supported demand signals, and what might change. The first source coverage is Malaysia-first; visitors can browse without an account.
+A **fresh graduate** follows three steps: *Your CV* (paste or upload a CV; it is read in the browser, contact details are removed, and the app suggests ESCO skills for the person to tick), *A job ad* (paste an ad; its skills are sorted into on the CV, held but not shown, and still to build), and *Your plan* (ordered, checked courses and a Malaysian NOSS/SKM route where one exists). **Check my CV** works on its own, with no job ad. **Your moves** ranks nine ESCO roles with visible skill-fit, demand and AI-resilience parts, so a graduate can try another role. **Job market** holds the public tables (DOSM job ads, ILO AI exposure, AI impact by role, Signal sources).
 
-Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
+Someone **already working** picks their skills and a current role, then follows the same ranking and plan. **Team view** (HR and career centres) and **Region view** (a regional skills centre) use fictional groups only; the Region view shows SDG contribution in totals with no names. The interface supports English, Bahasa Malaysia and Chinese; ESCO names and provider course titles stay in English. There are no accounts and nothing is saved. Screen-by-screen behaviour is in [docs/SCREENS.md](docs/SCREENS.md).
 
-> **Project stage (24 Oct 2026):** a working React, TypeScript and Vite prototype runs on Replit with a RunPod-backed ESCO skill search. A fresh graduate follows *Your CV → A job ad → Your plan*; *Check my CV* works on its own; role rankings come from sourced DOSM and ILO data, with a daily DOSM new-quarter check. All people and teams are fictional. See [docs/SCREENS.md](docs/SCREENS.md), [docs/CHECKLIST.md](docs/CHECKLIST.md) and [docs/PROGRESS_LOG.md](docs/PROGRESS_LOG.md) for current behaviour and open items.
+### Required features
 
-## The Problem
+| Feature | Working in the prototype |
+| --- | --- |
+| Skills profile intake | Paste or upload a CV, or pick skills by a RunPod-assisted ESCO search or a searchable list; fictional profiles can be loaded |
+| AI-trend signal layer | Dated DOSM Q1 and Q2 2026 job-ad snapshots and ILO occupation exposure feed the role score; a daily check shows whether DOSM has published a newer quarter |
+| Future-role matching | Nine ESCO roles ranked with visible skill fit, demand and AI-resilience parts; exact, transferable and missing skills shown |
+| Personalised reskilling | Selected move produces ordered steps from hand-checked course records with provider-stated times, uncovered gaps and a sourced NOSS/SKM route where found |
+| SDG mapping | Skill and role links come from the team's blind review of two reviewers; chosen goals show in moves, plans and the Team and Region views |
+| Handling uncertainty | DOSM quarter and AI-speed switches show score and rank changes; 1,000 seeded simulated futures show how stable the top move is |
 
-- Workers may not know which AI-related skills to learn next.
-- Graduates and career switchers struggle to identify resilient career pathways.
-- Employers and educators need clearer evidence for reskilling decisions.
-- Static career advice becomes outdated as AI capabilities and hiring needs evolve.
-
-**Our question:** How can we turn changing AI and job-market signals into understandable, personalised, and human-centred career guidance?
-
-## Who It Is For
-
-Anyone interested in work and skills, including students, employed or unemployed people, people returning to work, career switchers, advisers, and employers. The product does not ask for age to browse. Initial source coverage may be limited; the app must show those limits clearly. See [docs/PRODUCT_SCOPE.md](docs/PRODUCT_SCOPE.md) for the full product promise and evidence rules.
-
-## How People Use the App
-
-```mermaid
-flowchart LR
-    H[Home] -->|Try a sample person| M[2. Your moves]
-    H -->|Start with my own skills| S[1. Your skills]
-    S --> M
-    M --> P[3. Your plan]
-    H --> T[Team view for sample groups]
-    H --- J[Job ads]
-    H --- A[AI exposure]
-```
-
-New visitors start on **Home** and can enter their own skills or use **View as** to explore fictional examples: Aina (working adult), Hakim (fresh graduate), Puan Rosnah (HR manager), Encik Lim (career adviser) and Encik Faizal (regional skills centre officer, Region view). Individuals follow **Your skills** (confirm ESCO skills from a RunPod search or the searchable list), **Your moves** (a compact ranking with visible personalisation controls and focused role, quarter-comparison and method views) and **Your plan** (ordered courses, uncovered gaps and NOSS/SKM routes). Role details keep skills and evidence links together; the method view holds the longer source and fairness explanations. Team view shows a manager's own group only (score heatmap, shared gaps); the Region view adds up the SDG contribution of all groups a regional skills centre funds, in totals with no names. Everyone can browse Job ads, AI exposure and the currently empty Workplace news page. The interface supports English, Bahasa Malaysia and Chinese; ESCO names and provider course titles remain in English. These are demo views, not accounts; no profile is saved. See [docs/SCREENS.md](docs/SCREENS.md).
-
-## Required Features
-
-| Feature | Working in the prototype | Remaining check |
-| --- | --- | --- |
-| Skills profile intake | Upload or paste a CV (read in the browser, contact details removed, lines matched to ESCO skills on RunPod, user ticks what is true), or confirm skills from RunPod-assisted ESCO search or the list, choose a current role and up to two optional work interests; fictional profiles can be loaded | Real accounts and saved CVs need separate privacy decisions |
-| AI-trend signal layer | Dated DOSM Q1/Q2 2026 job-ad snapshots and ILO occupation exposure feed the role score; OpenDOSM monthly unemployment appears as separate context | Check DOSM reuse terms and refresh workflow before submission |
-| Future-role matching | Nine ESCO roles ranked with visible skill fit, demand and AI-resilience parts; current job shown separately; exact, transferable and missing skills shown | Verify the complete live demo and source claims |
-| Personalised reskilling | Selected move produces ordered steps from 21 checked course records, provider-stated times, uncovered gaps and a sourced NOSS/SKM route where found | Course coverage remains partial; a certification route is not a job requirement |
-| SDG mapping | Role and skill links with reasons appear in moves, plans and team views; a person's chosen goals may optionally count in ranking | Team review of the drafted mappings is pending |
-| Handling uncertainty | Q1/Q2 data switch and gradual/fast AI-change scenario switch show score and rank changes | Results are estimates based on stated weights, not forecasts of job loss |
-
-### Suggested differentiator: Future Signal Engine
-
-**Public market evidence → Current skills demand and future outlook → Personal fit → Skill gap → Learning plan**
-
-The key prototype goal is to show that **changing trend evidence changes a career recommendation or its explanation**. This distinguishes TomorrowWorks from a static list of jobs or a generic CV chatbot.
-
-## Chosen Signals and Matching (Preliminary Build)
-
-Details, data shapes, findings and the worked example are in [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md).
-
-**Demo user:** a junior accounting assistant in the Klang Valley, 1–5 years in, whose routine tasks (data entry, billing, reconciliation, reports) are increasingly done by AI tools, deciding what to learn next. The clerical accounting work around this job (ISCO 4311) is in the ILO's highest GenAI-exposure gradient, while accountants are among DOSM's top advertised jobs.
+**What makes it different:** public market evidence → demand and AI exposure → personal fit → skill gap → learning plan, with proof on screen that **changing the trend data changes the result**.
 
 ### Data sources (all public, dated, attributed)
 
-| Signal | Source | In the repo | Status |
-| --- | --- | --- | --- |
-| **Demand now** (the required updatable source) | DOSM *Big Data Analytics: Job Market Insights*, quarterly online job offerings by occupation major group | `data/sources/dosm-jmi-2026-q1.json`, `-q2.json` (`scripts/import_dosm_jmi.py`) | Imported; totals match DOSM's release (Q2 2026: 555,509) |
-| **AI exposure** | ILO Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025), Table A1 | `data/sources/ilo-genai-exposure-2025.json` (`scripts/import_ilo_exposure.py`) | Imported; 427 occupations, 112 exposed, 13 in Gradient 4 (match the paper) |
-| **Roles and skills** | ESCO v1.2.1 (European Commission) | `data/roles.json` (`scripts/build_roles.py`) | Built; 9 ESCO occupations with essential/optional skills and green/digital flags |
-| **Skill search index** | ESCO v1.2.1 skills embedded with `BAAI/bge-m3` on a **RunPod GPU** | `data/derived/esco/` (`runpod/embed_esco_skills.py`) | Done: 13,960 skills in 92.5 s on an NVIDIA RTX A5000 |
-| **Labour context** | OpenDOSM monthly Labour Force Survey | `data/sources/opendosm-lfs-month.json` (`scripts/import_lfs_month.py`) | Imported through Aug 2026; shown separately from job-ad scoring |
-| **Workplace news** | GDELT metadata for Malaysian outlets | `data/sources/gdelt-news.json` (`scripts/import_gdelt_news.py`) | Page and importer built; no headlines imported yet; news never affects scores |
+| Signal | Source | In the repo |
+| --- | --- | --- |
+| Demand now (the updatable source) | DOSM *Big Data Analytics: Job Market Insights*, quarterly online job offers by occupation major group (Q2 2026 total: 555,509) | `data/sources/dosm-jmi-2026-q1.json`, `-q2.json` (`scripts/import_dosm_jmi.py`; `scripts/check_dosm_jmi.py` and `server/dosm.mjs` check for a new quarter) |
+| AI exposure | ILO Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025), Table A1: 427 occupations, 112 exposed | `data/sources/ilo-genai-exposure-2025.json` (`scripts/import_ilo_exposure.py`) |
+| Other AI-impact views | Microsoft *Working with AI* applicability; Anthropic Economic Index (shown beside ILO, not in the score) | `data/sources/ms-ai-applicability.json`, `anthropic-economic-index.json` |
+| Roles and skills | ESCO v1.2.1 (European Commission), nine adapted occupations | `data/roles.json` (`scripts/build_roles.py`) |
+| Skill search index | ESCO skills embedded with `BAAI/bge-m3` on a RunPod GPU: 13,960 skills in 92.5 s on an NVIDIA RTX A5000 | `data/derived/esco/` (`runpod/embed_esco_skills.py`) |
+| Labour and news context | OpenDOSM monthly labour force survey; GDELT headline metadata. Shown separately, never in a score | `data/sources/opendosm-lfs-month.json`, `gdelt-news.json` |
+| SDG targets | UN SDG target list (UNSD SDG API), reviewed by the team | `data/sources/un-sdg-targets.json`, `data/sdg/` |
 
-**Known limits:** DOSM's data file gives vacancies by major group only (not per job), so roles in one group share a demand signal; year-on-year DOSM changes are distorted by wider source coverage, so only quarter-on-quarter change is used. ILO exposure means tasks *could* change, not that jobs disappear.
+Every number on screen carries its source, date and geography. The *Signal sources* page lists them with dates read from the files.
 
-### Role set
-
-| Role (ESCO) | ISCO | ILO exposure | Essential skills |
-| --- | --- | --- | --- |
-| billing clerk | 4311 | 0.64 (Gradient 4) | 12 |
-| **accounting assistant** (demo user's job) | 3313 | 0.49 (Gradient 2) | 20 |
-| bookkeeper | 3313 | 0.49 (Gradient 2) | 18 |
-| accountant | 2411 | 0.51 (Gradient 3) | 26 |
-| financial analyst | 2413 | 0.62 (Gradient 4) | 23 |
-| business analyst | 2421 | 0.46 (Gradient 2) | 26 |
-| data analyst | 2511 | 0.49 (Gradient 2) | 36 |
-| software developer | 2512 | 0.53 (Gradient 3) | 24 |
-| sustainability manager | 1213 | 0.36 (Not exposed) | 48 |
+**Known limits:** DOSM gives vacancies by occupation major group only, so roles in one group share a demand signal, and only quarter-on-quarter change is used. ILO exposure means tasks *could* change, not that jobs disappear. Scores are estimates from stated weights, not forecasts of job loss.
 
 ### Scoring
 
 The default score is `wF·F + wD·D + wR·R`, with every part shown on screen:
 
-- **F, skill fit:** `(exact + 0.5 × transferable) / essential skills`. *Transferable* means the person holds a different ESCO skill whose RunPod embedding is ≥ 0.85 similar; the pair is shown. The person's current job is listed separately and only other roles are ranked.
+- **F, skill fit:** `(exact + 0.5 × transferable) / essential skills`. *Transferable* means the person holds a different ESCO skill whose embedding is at least 0.85 similar; the pair is shown.
 - **D, demand trend:** `clamp(0.5 + quarter-on-quarter change, 0, 1)` for the role's DOSM major group.
 - **R, AI resilience:** `1 − ILO mean exposure`.
 
-| Scenario (estimate) | wF | wD | wR |
+| Scenario | wF | wD | wR |
 | --- | --- | --- | --- |
-| Moderate AI change | 0.60 | 0.25 | 0.15 |
-| Fast AI change | 0.50 | 0.20 | 0.30 |
+| Gradually (moderate AI change) | 0.60 | 0.25 | 0.15 |
+| Quickly (fast AI change) | 0.50 | 0.20 | 0.30 |
 
-Two **optional, off-by-default** switches can add work-interest fit and chosen-SDG fit to the ranking. Interest profiles use job tag for eight roles and O*NET for one; SDG links use documented role reasons and skill rules. Each optional part has weight 0.20 before all weights are rescaled. The user can inspect the resulting change in rank. See [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md#interest-fit-optional-fourth-part-added-21-oct-2026) for the rules and source limits.
+Two optional, off-by-default switches can add work-interest fit and chosen-SDG fit. The full rule, data shapes and worked example are in [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md).
 
-**Real result for the demo user (Q2 2026):** bookkeeper 58, accountant 45, billing clerk 36, financial analyst 21 under moderate change; under fast change sustainability manager rises from 6th to 4th. Details in [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md#demo-result-with-real-data-accounting-assistants-20-esco-skills).
-
-**Proof that trends matter:** a *Job-ad data* switch (DOSM Q1 ↔ Q2 2026) changes D for the same profile. Real example: Professionals +15.8% → −9.5% (D 0.66 → 0.41); Clerical support −1.8% → −17.2% (D 0.48 → 0.33). The importer can convert a future DOSM release; exposing a new snapshot in the current two-option interface also requires a small code update.
+**Proof that trends matter** (measured on the live app, 24 Oct 2026, with the fictional graduate's skills): switching the DOSM quarter from Q2 to Q1 moves Accountant from 3rd to 2nd and Financial analyst from 5th to 3rd; switching the AI speed from Gradually to Quickly moves Sustainability manager from 6th to 2nd. The best-move shares from the 1,000 simulated futures stay the same, because those futures already cover every AI speed and both quarters. The DOSM data itself changes between quarters: for example Professionals −9.5% and Clerical support −17.2% from Q1 to Q2 2026.
 
 ### Where AI is used: RunPod
 
-RunPod is a required part of the build ([docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md)). One open-weights multilingual model, `BAAI/bge-m3`:
+RunPod is a required part of the build ([docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md)). One open-weights multilingual model, `BAAI/bge-m3`, is used only to match text to existing records:
 
-1. **Job A (GPU Pod, done):** embedded every ESCO skill once (Pod `40jrr8aulh76tb`, RTX A5000, 92.5 s).
-2. **Job B (Serverless, live):** embeds the person's own description (English, Bahasa Malaysia or Chinese); the backend returns the nearest real ESCO skills and the person confirms which are true. A Chinese search was verified on the published Replit app on 21 Oct 2026; English and Malay live checks remain to be recorded.
+1. **Job A (GPU Pod, run once):** embedded every ESCO skill (RTX A5000, 92.5 s).
+2. **Job B (Serverless endpoint, live):** embeds the person's CV lines, job-ad lines or own description (English, Bahasa Malaysia or Chinese); the server returns the nearest real ESCO skills and the person confirms which are true. It also picks key news headlines and matches Coursera courses and SDG targets to skills offline.
 
-The model only retrieves existing ESCO records. It never creates roles, courses, statistics or scores. If the endpoint is unavailable, the person picks skills from a searchable list.
+The model never creates roles, courses, statistics or scores. If the endpoint is unavailable, the person picks skills from a searchable list. A published fairness audit of the text intake is in [data/derived/fairness-audit.md](data/derived/fairness-audit.md).
 
-## Example Demo (Synthetic Profile)
+### Data, evidence and AI guardrails
 
-**Sample profile (fictional):** accounting assistant; confirms ESCO skills such as *accounting entries*, *maintain financial records*, *use accounting systems*, *issue sales invoices*; interested in analytics.
+- **Public, open or synthetic data only;** no real CVs or personal records anywhere.
+- **Every signal shows** name, date, geography and link; scoring rules and limits are documented.
+- **No invented data:** job titles, courses, statistics and SDG links are checked or reviewed, never generated.
+- **AI forecasts** are shown as scenarios and estimates, and human career decisions stay with the person; the app does not automate hiring decisions.
+- **Disclosure:** `BAAI/bge-m3` and its retrieval-only purpose, and the AI development tools used, are declared in the Technical & Tools Declaration.
 
-**How a match is explained:** for *data analyst*, the app lists which of its 36 ESCO essential skills the profile already holds and which are missing (for example *query languages*, *data visualisation software*, *perform data cleansing*), shows D from the DOSM Professionals group and R from ILO code 2511, and shows the scenario weights. The learning plan orders checked courses against the gaps, shows provider-stated time and leaves uncovered skills visible. A related NOSS/SKM route appears when sourced, without claiming it is required for employment.
-
-> The profile is **synthetic**. Match scores are estimates calculated from the documented rule and sources; course links and study times come from checked provider pages. SDG links describe connections, not measured impact.
-
-## Data, Evidence and AI Guardrails
-
-Candidate news, vacancy, official-statistics, and skills sources are documented in [docs/API_PLAN.md](docs/API_PLAN.md). These sources must pass the Stage 1 access and suitability checks before the app presents their data.
-
-- Use **public, open or synthetic data only**; no real CVs or personal records in demos.
-- Show the **name, date and link/reference** for each underlying trend source.
-- Document the scoring methodology, assumptions and limitations.
-- Verify job titles, courses, and statistics rather than allowing a language model to invent them.
-- Disclose `BAAI/bge-m3` and its retrieval-only purpose, plus the AI development tools actually used, in the Technical & Tools Declaration.
-- Present AI forecasts as scenarios/estimates, not guaranteed outcomes.
-- Support human career decisions; do not automate final hiring decisions.
-- Avoid making recommendations based on protected or irrelevant personal attributes.
-- Disclose development assistance from AI tools, including Codex, in the required Technical & Tools Declaration. The team must review and be able to explain all submitted work.
-
-## Current App Structure
+### Repository map
 
 ```text
-TomorrowWorks/
-├── index.html              # Browser entry point
-├── src/
-│   ├── main.tsx            # App shell, navigation and fictional View as options
-│   ├── data.ts             # Source data and fictional people and teams
-│   ├── SkillsStep.tsx      # 1. Your skills: RunPod search and skill list
-│   ├── MovesStep.tsx       # 2. Your moves: ranked ledger and switches
-│   ├── PlanStep.tsx        # 3. Your plan: courses, gaps and NOSS/SKM route
-│   ├── TeamView.tsx        # Fictional team and class heatmaps
-│   ├── PublicTables.tsx    # DOSM job ads and ILO exposure
-│   ├── NewsView.tsx        # GDELT headlines or honest empty state
-│   ├── i18n.tsx            # English, Bahasa Malaysia and Chinese interface text
-│   ├── scoring.ts          # Explainable skill, demand and resilience score
-│   ├── pathway.ts          # Course selection and order
-│   ├── interests.ts, sdg.ts # Optional interest and SDG fit
-│   └── styles.css          # Responsive styles
-├── package.json            # Scripts and pinned dependencies
-├── docs/CHECKLIST.md            # Staged build and submission tasks
-├── docs/BUILD_STAGES.md         # Small commit slices for each stage
-├── docs/SCREENS.md              # Purpose and behaviour of each screen
-├── docs/PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
-├── docs/PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
-├── docs/UI_UX.md                # Screen layout and usability decisions
-├── docs/DESIGN.md               # Visual and component consistency rules
-├── docs/RUNPOD_SETUP.md         # RunPod GPU jobs, evidence, and agent tooling status
-├── runpod/
-│   └── embed_esco_skills.py # RunPod GPU job: embed ESCO skills
-├── docs/SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
-├── CLAUDE.md               # Context and rules for coding agents
-├── docs/PROGRESS_LOG.md         # What was done, findings, and open items
-├── scripts/
-│   ├── import_dosm_jmi.py      # DOSM xlsx → data/sources/dosm-jmi-<quarter>.json
-│   ├── import_ilo_exposure.py  # ILO WP140 PDF → data/sources/ilo-genai-exposure-2025.json
-│   ├── build_roles.py          # ESCO CSV → data/roles.json
-│   ├── build_transferable_skills.py # RunPod vectors → transferable skills
-│   ├── import_lfs_month.py     # OpenDOSM monthly labour context
-│   ├── import_gdelt_news.py    # Malaysian workplace news metadata
-│   ├── import_coursera_catalog.py, match_courses_runpod.py # Coursera courses matched to skills on RunPod
-│   ├── match_sdg_runpod.py, calibrate_sdg_osdg.py # UN SDG targets matched to skills on RunPod; optional OSDG check
-│   └── build_sdg_review.py, evaluate_sdg_review.py # Blind SDG review kit and keyword-baseline comparison
-├── data/
-│   ├── sources/            # Attributed DOSM, ILO, OpenDOSM and empty GDELT snapshots
-│   ├── roles.json          # Nine ESCO roles with skills (adapted ESCO selection)
-│   ├── derived/esco/       # ESCO skill vectors from the RunPod GPU run
-│   ├── pathway/            # Checked courses and sourced NOSS/SKM routes
-│   ├── interests/          # Role interest profiles and sources
-│   ├── sdg/                # SDG goal names and the review of RunPod SDG matches
-│   └── raw/                # Original downloads (gitignored)
-├── .replit, replit.md      # Replit run workflow and notes
-├── vite.config.ts          # Allows Replit's preview proxy; proxies /api in development
-├── server/                 # Node server: built app + RunPod skill search (Job B)
-├── skills/                 # Project-specific Codex UX skill
-└── docs/API_PLAN.md             # Proposed sources and validation steps
+├── src/            # React app: screens, scoring, CV checks, learning plan, futures simulator (+ tests)
+├── server/         # Node server: static site and API routes (skills, news, labour force, DOSM check) (+ tests)
+├── data/           # Source snapshots, ESCO roles and vectors, courses, SDG review, fairness audit
+├── scripts/        # Importers, RunPod matchers, SDG review kit, fairness audit
+├── runpod/         # Job A: embed ESCO skills on a GPU Pod
+├── docs/           # Product scope, screens, scoring rules, checklist and progress log
+├── submission/     # Required submission PDFs
+├── skills/         # Project UX notes for coding agents
+├── CLAUDE.md       # Context and rules for coding agents
+└── replit.md       # Replit run and publish notes
 ```
 
-**Current stack:** React, TypeScript and Vite on Replit, with a Node backend for skill search. RunPod is a required part of the build: a GPU Pod embedded the ESCO skill taxonomy with `BAAI/bge-m3`, and a Serverless endpoint serves query embeddings ([docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md)).
+### Running locally and rebuilding data
 
-## Current Status and Next Work
+Use Node.js 20 or newer: `npm ci`, then `npm start` (development, port 5173), `npm test`, `npm run build`, and `npm run serve` (production server on port 5000). Live skill search needs `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` in the server environment; without them the person picks skills from the list. On Replit, press **Pull** and then **Run**; do not commit lockfile changes that point to Replit's internal package mirror.
 
-- **Working (21 Oct):** fictional individual and team views ("View as"); ESCO skill intake with RunPod skill search, interests and SDG goals; nine-role ranking with DOSM Q1/Q2 and gradual/fast switches and "what changed"; learning plans (21 checked courses plus RunPod-matched Coursera suggestions, estimated time, HRD Corp note, NOSS/SKM step); Future Skills Radar; Team view with heatmap and group course plan; SDG links from RunPod matches with strong/possible levels and a 4.4 baseline; Workplace news (GDELT, refreshed daily until 1 Nov, key headlines picked by RunPod); English, Bahasa Malaysia and Chinese.
-- **Review pending (team):** translations (`translation-review.csv`), SDG matches (blind review kit in `data/sdg/review/`, two reviewers), checked courses and NOSS codes, Coursera spot-check; DOSM reuse terms; live, mobile and link checks; Replit and RunPod evidence for the Tools Declaration. Optional: `scripts/calibrate_sdg_osdg.py` (OSDG) for goal-level accuracy.
-- **Submission pending:** PRD in the official template, pitch slides, declaration, 5–7 minute video, public repository and judge access. Follow [docs/CHECKLIST.md](docs/CHECKLIST.md) for verified status and [docs/PROGRESS_LOG.md](docs/PROGRESS_LOG.md) for recent decisions.
+Raw source files go in `data/raw/` (gitignored); each snapshot's `source` block has the download link. Importer commands are listed at the top of each script, for example `python3 scripts/import_dosm_jmi.py <xlsx> <release date> <download date>`.
 
-## Running Locally
+### Hackathon deliverables
 
-Use Node.js 20 or newer. From this repository:
-
-```bash
-npm ci
-npm start
-npm test       # scoring, pathway, interests, SDG, team, i18n and search checks
-npm run build  # type-check and build dist/
-npm run serve  # Node server on :5000, serving dist/ and /api/skill-search
-```
-
-For Vite development, run `npm start` and open [http://127.0.0.1:5173/](http://127.0.0.1:5173/). For the production-style server, run `npm run build` followed by `npm run serve` and open [http://127.0.0.1:5000/](http://127.0.0.1:5000/). Live skill search needs `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` in the server environment; without them, visitors can still pick ESCO skills from the list. The demo keeps skills in the browser tab and does not offer accounts or résumé upload. NOSS/SKM entries show possible certification routes, not verified job requirements.
-
-**On Replit:** the project is imported from branch `dev`; press **Pull** in Replit's Git tool, then **Run** (port 5000, see `replit.md`). Do not commit lockfile changes that point to Replit's internal package mirror.
-
-**Rebuilding the data** (raw files go in `data/raw/`, which is gitignored; download links are in each JSON's `source` block):
-
-```bash
-pip install openpyxl                       # DOSM importer
-brew install poppler                       # pdftotext, for the ILO importer (macOS)
-python3 scripts/import_dosm_jmi.py data/raw/Data_JMI_Q2_2026.xlsx 2026-08-18 <download date>
-python3 scripts/import_ilo_exposure.py "data/raw/Generative AI and Jobs: A Refined Global Index of Occupational Exposure.pdf" <download date>
-python3 scripts/build_roles.py "data/raw/ESCO dataset - v1.2.1 - classification - en - csv"
-python3 scripts/build_transferable_skills.py   # needs numpy; uses data/derived/esco/
-python3 scripts/import_lfs_month.py            # OpenDOSM monthly labour force (internet; standard library)
-python3 scripts/import_gdelt_news.py           # GDELT Malaysian workplace headlines (internet; standard library)
-```
-
-The ESCO embedding runs on a RunPod GPU Pod; see [docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md#part-2-project-gpu-work-required).
-
-## UI design workflow
-
-[docs/DESIGN.md](docs/DESIGN.md) records visual consistency rules; [docs/UI_UX.md](docs/UI_UX.md) records screen and usability decisions. The optional [Impeccable](https://impeccable.style/docs/) skill can be installed locally for Codex from this repository:
-
-```bash
-npx impeccable install -y --providers=codex --scope=project
-```
-
-The generated `.agents/skills/impeccable/` skill and `.codex/hooks.json` are local tooling, ignored by Git so design-tool downloads do not become a large project commit. Re-run the command on a new checkout before using the skill. Review its suggestions against Domain 1, the current product scope, and the source rules before editing the website.
-
-## Hackathon Submission Requirements
-
-The **Domain 1: Aiversecity Future-Ready Workforce** brief requires a final product with all six features listed above. For the preliminary round, the proposal must explain how each will be delivered, and the demonstration must show a rough, working version of the most important feature. The trend signal layer feeding role matching is the suggested focus.
-
-The **Participant Handbook** specifies six preliminary deliverables, due **25 October 2026 at 7:59:59 AM MYT (UTC+8)** through [sdchack.my](https://sdchack.my/):
-
-1. Product Requirement Documentation using the official submission template, covering the problem, target users, scope, features and SDG alignment.
-2. Pitch deck slides covering the problem, solution, technical approach and expected impact.
-3. A working prototype link or accessible build with a functional interface. A video or static mockup alone does not satisfy this requirement.
-4. Technical & Tools Declaration listing major APIs, cloud services, AI tools, datasets, models, sponsor resources and pre-existing materials.
-5. An accessible GitHub repository and source-code link with a genuine, traceable development history.
-6. A 5–7 minute pitching video with a prototype demonstration, submitted as a YouTube link.
-
-The handbook also requires the submitted repository to be **public**, to contain an **Apache License 2.0 `LICENSE` file**, and to be accessible to judges. It says to keep the repository private during development and add the committee's designated GitHub account(s) as collaborators before submission. Check the official Discord for any later operational changes before changing repository visibility or sharing access.
-
-**Required tools:** The Participant Handbook requires use of Replit and proof of that use in the Technical & Tools Declaration. Any work that needs a GPU must use RunPod; teams that use RunPod must include the specified dashboard screenshot or serverless endpoint evidence. Other tools remain available, subject to the declaration rules.
-
-**Development record:** Build the project during the official competition period, commit actual progress as it happens, declare reused materials, and do not modify the submitted repository after the deadline unless the organisers instruct otherwise. Keep API keys, passwords and personal data out of the repository.
-
-The preliminary rubric weights are **Innovation & Creativity (30%)**, **Problem–Solution Fit (25%)**, **Feasibility of Build (25%)**, and **Clarity of Proposal (20%)**. The final-round rubric is separate and will be shared with finalists.
-
-## Scope
-
-**In scope:** Career profiling, trend intelligence, matching, reskilling recommendations, SDG mapping and scenario comparison.
-
-**Out of scope for this challenge:** Building full course content, payment systems and real recruitment integrations.
+The preliminary round (due **25 October 2026, 7:59:59 AM MYT** via sdchack.my) asks for the product requirement document, pitch slides, a working prototype link, the Technical & Tools Declaration, this public repository with an Apache 2.0 `LICENSE`, and a 5–7 minute YouTube video. The documents are in [`submission/`](submission/). No API keys, passwords or personal data are in the repository.
 
 ## Acknowledgements
 
 **This publication uses the ESCO classification of the European Commission.** `data/roles.json` is an adapted selection of ESCO v1.2.1; the Commission does not guarantee ESCO's accuracy or completeness.
 
-Data source: Department of Statistics Malaysia. Data sources: Department of Statistics Malaysia (DOSM), *Big Data Analytics: Job Market Insights*, Q1 and Q2 2026; International Labour Organization, Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025); European Commission, ESCO v1.2.1. Model: `BAAI/bge-m3` (open weights), run on RunPod.
+Data source: Department of Statistics Malaysia (DOSM), *Big Data Analytics: Job Market Insights*, Q1 and Q2 2026; International Labour Organization, Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025); European Commission, ESCO v1.2.1. Model: `BAAI/bge-m3` (open weights), run on RunPod.
 
-
-Built for the **Aiversecity Future-Ready Workforce Domain (Domain 1)** hackathon challenge. Requirements and judging criteria are adapted from the event's *Domain 1 — Problem Statement & Marking Rubric* document.
-
----
-
-<div align="center">
-
-**TomorrowWorks — Discover what comes next. Build the skills to get there.**
-
-</div>
+Built for the **Aiversecity Future-Ready Workforce Domain (Domain 1)** at SDC Hackathon 2026.
