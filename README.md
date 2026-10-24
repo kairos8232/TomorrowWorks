@@ -23,7 +23,7 @@
 | Live Demo         | https://tomorrow-works.replit.app |
 | RunPod Endpoint   | https://api.runpod.ai/v2/j6ssjfy9z074hp |
 | Slide Deck        | [`submission/SDC2026_NoMoreTokens_PitchDeck.pdf`](submission/SDC2026_NoMoreTokens_PitchDeck.pdf) |
-| Demo Video        | TO FILL (YouTube) |
+| Demo Video        | https://youtu.be/GQMCiAabnOI |
 
 ---
 
@@ -248,7 +248,12 @@ Every file in this branch and what it is for. Planning notes (build stages, chec
 │   ├── TeamView.tsx                             # Team view (HR, career centres)
 │   └── vite-env.d.ts                            # Vite type declarations
 ├── submission/
-│   └── README.md                                # Lists the required submission PDFs
+│   ├── README.md                                # Lists the submission files
+│   ├── SDC2026_NoMoreTokens_PitchDeck.pdf       # Slide deck
+│   ├── SDC2026_NoMoreTokens_Preliminary.pdf     # Preliminary submission (PRD)
+│   ├── SDC2026_NoMoreTokens_Replit_POU.pdf      # Replit proof of use
+│   ├── SDC2026_NoMoreTokens_Runpod_POU.pdf      # RunPod proof of use
+│   └── SDC2026_NoMoreTokens_TechDeclaration.pdf # Technical and tools declaration
 ├── .env.example                                 # Environment variables to set
 ├── .gitignore                                   # Files kept out of git
 ├── .replit                                      # Replit run and deployment
