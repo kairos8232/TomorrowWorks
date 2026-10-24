@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## Job-ad check and job-site links — 24 Oct 2026
 
+- [x] Place the empty *Your plan* and *Your moves* **Add skills** action in the guided bottom bar; keep the reason in the card. Checked the empty plan and return to skills in the local browser; build passes.
 - [x] Extend the shared bottom action position to the already-working path, including Hakim's *Start learning* on Your plan and the forward actions on Your skills and Your moves. Verified the guided path in the local browser; build and tests pass.
 - [x] Keep the fresh-graduate path's primary action in one fixed bottom-right position on *Your CV*, *A job ad* (both before and after matching), and *Your plan*. Keep the selected course's title and skills in the plan content. Verified the full fictional-ad path in the local browser, including the button position while scrolling; build and 140 tests pass.
 - [x] Distinguish CV feedback from the ad-wide totals: replace its repeated horizontal count strip with a proportioned circular CV evidence chart and two compact action counts. Verified the fictional ad and CV result in a local browser; build and 137 tests pass.

@@ -5,6 +5,7 @@ import { MovesStep, SourcesFooter } from './MovesStep';
 import { advanceLearning, type CourseProgress, type LearningAction } from './learningCheck';
 import { SkillsStep } from './SkillsStep';
 import { GradSteps, isStepScreen, type GradStep, type StepPath } from './GradSteps';
+import { GuidedActionDock } from './GuidedActionDock';
 import { LangProvider, languages, translate, useT, type Lang } from './i18n';
 import { applyFonts, DataSaverProvider, initialDataSaver, saveDataSaver } from './dataSaver';
 import './styles.css';
@@ -352,6 +353,12 @@ function App() {
   if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} startFreshGrad={startFreshGrad} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
   const onGradPath = path !== null && isStepScreen(path, screen);
+  const missingSkillsState = (message: string) => <>
+    <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t(message)}</p>
+      {!onGradPath && <div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div>}
+    </section>
+    {onGradPath && <GuidedActionDock><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></GuidedActionDock>}
+  </>;
   const inMarket = marketNav.some(item => item.id === screen) && !onGradPath;
   const subnavButton = (item: NavItem) => <button key={item.id} type="button" className={screen === item.id ? 'active' : ''} aria-current={screen === item.id ? 'page' : undefined} onClick={() => go(item.id)}>{t(item.label)}</button>;
   const isOrganisation = kind === 'team' || kind === 'region';
@@ -397,10 +404,10 @@ function App() {
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : path === 'work' ? 'Next: Your moves' : undefined} onCvText={gradPath ? setGradCv : undefined} guided={onGradPath} />}
         {screen === 'moves' && (profile.held.size > 0
           ? <MovesStep showNext={path === 'work'} profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
-          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your moves are ranked from your skills.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
+          : missingSkillsState('Your moves are ranked from your skills.'))}
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} guided={onGradPath} />
-          : <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t('Your plan is built from the skills a move needs that you don’t have yet.')}</p><div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div></section>)}
+          : missingSkillsState('Your plan is built from the skills a move needs that you don’t have yet.'))}
         {screen === 'plan' && path !== null && profile.held.size > 0 && <section className="panel"><h2>{t('Want to try another role?')}</h2><p className="note">{t('Compare every role we track against your skills.')}</p><div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => go('moves')}>{t('Try another role')}</button></div></section>}
         {screen === 'region' && <RegionView viewer={kind === 'region' ? viewerById(viewer) : viewerById('region')} />}
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
