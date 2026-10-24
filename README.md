@@ -102,182 +102,165 @@ Two optional switches (work interests, chosen SDG goals) are off by default. Ful
 
 Every file in this branch and what it is for. Planning notes (build stages, checklist, UI notes) stay on the `dev` branch.
 
-**Root**
-
 ```
-.env.example       Environment variables to set (RunPod key and endpoint ID; no secrets inside)
-.gitignore         Files kept out of git (.env, raw downloads, evidence screenshots)
-.replit            Replit run and deployment configuration
-CLAUDE.md          Context and rules for the AI coding agent used on this project
-LICENSE            Apache License 2.0
-README.md          This file
-index.html         Page shell that loads the React app
-package-lock.json  Pinned dependency versions
-package.json       Dependencies and npm scripts (start, build, test, serve)
-replit.md          Replit run and publish notes
-tsconfig.json      TypeScript settings
-vite.config.ts     Vite build and dev-server settings
-```
-
-**docs/**
-
-```
-docs/PROGRESS_LOG.md          Dated record of what was built and what is still open
-docs/RUNPOD_SETUP.md          How RunPod Job A (GPU Pod) and Job B (Serverless) were set up
-docs/SCREENS.md               Screen-by-screen behaviour of the app
-docs/SIGNALS_AND_MATCHING.md  Chosen data sources, the scoring rule, the futures simulator and a worked example
-```
-
-**src/**
-
-```
-src/AdCheck.tsx             Check a job ad: pasted ad to ESCO skills, held / close / to build, closest role, courses
-src/ChangeCourse.tsx        Lets a person swap the suggested course in a plan
-src/CourseProgress.tsx      Course status (not started, in progress) in the plan; never verified
-src/CvAvoid.tsx             List of things to avoid in a CV, each with its source
-src/CvCheck.tsx             The stand-alone Check my CV screen
-src/CvPanel.tsx             CV upload and skill suggestions on Your CV
-src/FairnessNote.tsx        Shows the fairness audit result in How ranking works
-src/GradSteps.tsx           The three-step bar (Your CV, A job ad, Your plan)
-src/GuidedActionDock.tsx    The bottom action bar of the guided steps
-src/JobLinks.tsx            Shows the Find this role links
-src/LearningMilestones.tsx  Milestone badges, locked until verification
-src/MovesStep.tsx           Your moves: ranked roles, futures panel, adjust ranking
-src/NewsView.tsx            Workplace news (context only, never in a score)
-src/PlanStep.tsx            Your plan screen
-src/PublicTables.tsx        Job ads and AI exposure tables
-src/RadarView.tsx           Future skills radar screen
-src/RegionView.tsx          Region view for a regional skills centre (fictional groups)
-src/SdgViews.tsx            SDG tags and goal pieces shared by moves, plan and team
-src/SignalSources.tsx       Signal sources page: every source with its date
-src/SkillsStep.tsx          Your skills / Your CV screen
-src/TeamView.tsx            Team view for HR and career centres (fictional groups)
-src/adFit.test.ts           Tests for adFit
-src/adFit.ts                Rule that sorts ad skills into held, related and to build
-src/aicourses.test.ts       Tests for aicourses
-src/aiviews.test.ts         Tests for aiviews
-src/aiviews.ts              Puts ILO, Microsoft and Anthropic AI-impact views side by side per role
-src/changes.test.ts         Tests for changes
-src/changes.ts              What changed between DOSM snapshots, and why a move went up or down
-src/cv.test.ts              Tests for cv
-src/cv.ts                   CV intake: file to short lines, contact details removed, nothing stored
-src/cvChecks.test.ts        Tests for cvChecks
-src/cvChecks.ts             CV check rules, each with a cited source
-src/data.ts                 All imported, attributed data the app uses, in one place; profile type and fictional people
-src/dataSaver.tsx           Low-data mode: no web font, no live news or labour requests
-src/fairness.test.ts        Tests for fairness
-src/futures.test.ts         Tests for futures
-src/futures.ts              1,000 seeded simulated futures: best-move shares, score ranges, tipping point
-src/i18n.test.ts            Tests for i18n
-src/i18n.tsx                English, Bahasa Malaysia and Chinese screen text
-src/interests.test.ts       Tests for interests
-src/interests.ts            Work-interest fit (RIASEC) for the optional Interests switch
-src/jobSearch.test.ts       Tests for jobSearch
-src/jobSearch.ts            Builds search links to JobStreet, LinkedIn, Indeed and MYFutureJobs (never scraped)
-src/learningCheck.test.ts   Tests for learningCheck
-src/learningCheck.ts        Demo evidence form for courses (not verified)
-src/main.tsx                App shell: home, navigation, step bar, screen routing
-src/milestones.test.ts      Tests for milestones
-src/milestones.ts           Milestone rules (only authoritative verification can unlock)
-src/pathway.test.ts         Tests for pathway
-src/pathway.ts              Learning-plan rule: ordered courses and NOSS/SKM route
-src/radar.test.ts           Tests for radar
-src/radar.ts                Future skills radar: outlook per essential skill
-src/region.test.ts          Tests for region
-src/region.ts               Region view rules: SDG contribution person to group to region, totals only
-src/sampleAd.ts             Fictional job ad used by Try a fictional example
-src/sampleCv.ts             Fictional CV used by Try a fictional CV
-src/scoring.test.ts         Tests for scoring
-src/scoring.ts              Pure scoring functions: skill fit, demand, AI resilience, ranking
-src/sdg.test.ts             Tests for sdg
-src/sdg.ts                  SDG link rule from the team review (strong, possible, 4.4 baseline)
-src/styles.css              All styles
-src/team.test.ts            Tests for team
-src/team.ts                 Team view rules: same scoring for several people
-src/vite-env.d.ts           Vite type declarations
-```
-
-**server/**
-
-```
-server/dosm.mjs           Daily check whether DOSM has published a newer Job Market Insights quarter
-server/dosm.test.mjs      Tests for the DOSM check
-server/identity.d.mts     TypeScript types for identity.mjs
-server/identity.mjs       Strips common name, age and identity phrases from text before it is matched
-server/identity.test.mjs  Tests for the identity-phrase filter
-server/index.mjs          Dependency-free Node server: serves the built app and the /api routes
-server/lfs.mjs            Daily refresh of the OpenDOSM monthly labour force figures (memory only)
-server/lfs.test.mjs       Tests for the labour force refresh
-server/news.mjs           Daily GDELT headlines per topic, with key headlines picked by RunPod bge-m3
-server/news.test.mjs      Tests for the news route
-server/search.mjs         Loads the ESCO skill vectors, asks RunPod Job B for a query vector and ranks the nearest skills
-server/search.test.mjs    Tests for the skill search
-```
-
-**scripts/ and runpod/**
-
-```
-runpod/embed_esco_skills.py            Job A: embeds all ESCO skills with bge-m3 on a RunPod GPU Pod
-scripts/build_roles.py                 Builds data/roles.json (nine ESCO roles and their skills) from the ESCO files
-scripts/build_sdg_review.py            Builds the blind SDG review kit for two reviewers
-scripts/build_transferable_skills.py   Finds pairs of similar ESCO skills (threshold 0.85) for half-credit matches
-scripts/calibrate_sdg_osdg.py          Optional check of the SDG matcher against the public OSDG dataset
-scripts/check_dosm_jmi.py              Checks whether DOSM has published a newer quarter and says what to run next
-scripts/evaluate_sdg_review.py         Scores the review: agreement between reviewers and precision of the matchers
-scripts/fairness_audit.mjs             Fairness audit of the text intake (fictional descriptions with identity cues)
-scripts/import_anthropic_index.mjs     Imports the Anthropic Economic Index figures
-scripts/import_coursera_catalog.py     Downloads the Coursera course catalogue (course text only)
-scripts/import_dosm_jmi.py             Converts a DOSM Job Market Insights xlsx into a dated JSON snapshot
-scripts/import_gdelt_news.py           Imports GDELT headline metadata for the news page
-scripts/import_ilo_exposure.py         Reads ILO Table A1 from the PDF into JSON
-scripts/import_lfs_month.py            Imports the OpenDOSM monthly labour force data
-scripts/import_ms_ai_applicability.py  Imports the Microsoft Working with AI applicability scores
-scripts/match_courses_runpod.py        Matches courses to ESCO skills with RunPod embeddings (AI-matched, not hand-checked)
-scripts/match_sdg_runpod.py            Matches UN SDG targets to ESCO skills with RunPod embeddings
-```
-
-**data/**
-
-```
-data/derived/coursera-skill-matches.json      AI-matched Coursera courses per skill (name, link, stated workload, similarity)
-data/derived/coursera-spotcheck.md            Spot-check of the Coursera matches
-data/derived/esco/esco-skill-index.json       ESCO skill list in the order of the vectors
-data/derived/esco/esco-skill-vectors.f16.npy  bge-m3 vectors for 13,960 ESCO skills (RunPod Job A output)
-data/derived/esco/run-info.json               Job A run details (GPU type, time, model)
-data/derived/fairness-audit.json              Fairness audit results
-data/derived/fairness-audit.md                Fairness audit report shown in the app
-data/derived/sdg-skill-matches.json           Top SDG targets per role skill from RunPod embeddings
-data/derived/sdg-spotcheck.md                 Spot-check of the SDG matches
-data/derived/transferable-skills.json         Similar ESCO skill pairs for half-credit matches
-data/interests/role-interests.json            Work-interest profile of each role
-data/pathway/noss.json                        Hand-checked Malaysian NOSS/SKM routes
-data/pathway/resources.json                   Hand-checked course records with provider-stated times
-data/roles.json                               Nine adapted ESCO occupations with essential skills
-data/sdg/review/GUIDE.md                      Reviewer instructions (relevant / not relevant / uncertain)
-data/sdg/review/disagreements.csv             Pairs the two reviewers labelled differently
-data/sdg/review/key.csv                       Answer key of the review pairs
-data/sdg/review/results.md                    Review results: agreement, precision of each matcher
-data/sdg/review/review-A.csv                  Reviewer A labels
-data/sdg/review/review-B.csv                  Reviewer B labels
-data/sdg/review/skill-texts.json              ESCO text that was embedded
-data/sdg/sdg-links.json                       Short goal and target names used on screen
-data/sdg/sdg-review.json                      Team-reviewed SDG links the app uses
-data/sources/anthropic-economic-index.json    Anthropic Economic Index snapshot
-data/sources/dosm-jmi-2026-q1.json            DOSM Job Market Insights Q1 2026 snapshot
-data/sources/dosm-jmi-2026-q2.json            DOSM Job Market Insights Q2 2026 snapshot
-data/sources/gdelt-news.json                  GDELT news snapshot
-data/sources/ilo-genai-exposure-2025.json     ILO generative AI exposure, Table A1
-data/sources/ms-ai-applicability.json         Microsoft Working with AI applicability
-data/sources/news-topics.json                 Topic words for the news page
-data/sources/opendosm-lfs-month.json          OpenDOSM monthly labour force snapshot
-data/sources/role-soc.json                    Maps the nine roles to US SOC codes for the AI-impact views
-data/sources/un-sdg-targets.json              UN SDG target list
-```
-
-**submission/**
-
-```
-submission/README.md  Lists the required submission PDFs
+.
+├── data/
+│   ├── derived/
+│   │   ├── esco/
+│   │   │   ├── esco-skill-index.json            # ESCO skill order for vectors
+│   │   │   ├── esco-skill-vectors.f16.npy       # bge-m3 vectors, 13,960 skills
+│   │   │   └── run-info.json                    # Job A run details
+│   │   ├── coursera-skill-matches.json          # AI-matched Coursera courses
+│   │   ├── coursera-spotcheck.md                # Spot-check of the Coursera matches
+│   │   ├── fairness-audit.json                  # Fairness audit results
+│   │   ├── fairness-audit.md                    # Fairness audit report
+│   │   ├── sdg-skill-matches.json               # Top SDG targets per skill
+│   │   ├── sdg-spotcheck.md                     # Spot-check of the SDG matches
+│   │   └── transferable-skills.json             # Similar-skill pairs
+│   ├── interests/
+│   │   └── role-interests.json                  # Work-interest profile of each role
+│   ├── pathway/
+│   │   ├── noss.json                            # Hand-checked Malaysian NOSS/SKM
+│   │   └── resources.json                       # Hand-checked course records
+│   ├── sdg/
+│   │   ├── review/
+│   │   │   ├── disagreements.csv                # Pairs the two reviewers labelled
+│   │   │   ├── GUIDE.md                         # Reviewer instructions
+│   │   │   ├── key.csv                          # Answer key of the review pairs
+│   │   │   ├── results.md                       # Review results
+│   │   │   ├── review-A.csv                     # Reviewer A labels
+│   │   │   ├── review-B.csv                     # Reviewer B labels
+│   │   │   └── skill-texts.json                 # ESCO text that was embedded
+│   │   ├── sdg-links.json                       # Short goal and target names used
+│   │   └── sdg-review.json                      # Team-reviewed SDG links the app
+│   ├── sources/
+│   │   ├── anthropic-economic-index.json        # Anthropic Economic Index snapshot
+│   │   ├── dosm-jmi-2026-q1.json                # DOSM Job Market Insights Q1 2026
+│   │   ├── dosm-jmi-2026-q2.json                # DOSM Job Market Insights Q2 2026
+│   │   ├── gdelt-news.json                      # GDELT news snapshot
+│   │   ├── ilo-genai-exposure-2025.json         # ILO generative AI exposure, Table
+│   │   ├── ms-ai-applicability.json             # Microsoft Working with AI
+│   │   ├── news-topics.json                     # Topic words for the news page
+│   │   ├── opendosm-lfs-month.json              # OpenDOSM monthly labour force
+│   │   ├── role-soc.json                        # Roles mapped to US SOC codes
+│   │   └── un-sdg-targets.json                  # UN SDG target list
+│   └── roles.json                               # Nine adapted ESCO occupations
+├── docs/
+│   ├── PROGRESS_LOG.md                          # What was built, what is open
+│   ├── RUNPOD_SETUP.md                          # RunPod Job A and Job B setup
+│   ├── SCREENS.md                               # Screen-by-screen behaviour of
+│   └── SIGNALS_AND_MATCHING.md                  # Sources and scoring rule
+├── runpod/
+│   └── embed_esco_skills.py                     # RunPod Job A: embeds ESCO skills
+├── scripts/
+│   ├── build_roles.py                           # Builds data/roles.json
+│   ├── build_sdg_review.py                      # Builds the blind SDG review kit
+│   ├── build_transferable_skills.py             # Finds pairs of similar ESCO skills
+│   ├── calibrate_sdg_osdg.py                    # Checks SDG matcher on OSDG
+│   ├── check_dosm_jmi.py                        # Checks for a new DOSM quarter
+│   ├── evaluate_sdg_review.py                   # Scores the SDG review
+│   ├── fairness_audit.mjs                       # Fairness audit of the text intake
+│   ├── import_anthropic_index.mjs               # Imports Anthropic index
+│   ├── import_coursera_catalog.py               # Downloads Coursera catalogue
+│   ├── import_dosm_jmi.py                       # Converts DOSM xlsx to JSON
+│   ├── import_gdelt_news.py                     # Imports GDELT headlines
+│   ├── import_ilo_exposure.py                   # Reads ILO Table A1 from the PDF
+│   ├── import_lfs_month.py                      # Imports OpenDOSM labour data
+│   ├── import_ms_ai_applicability.py            # Imports Microsoft AI scores
+│   ├── match_courses_runpod.py                  # Matches courses to skills
+│   └── match_sdg_runpod.py                      # Matches SDG targets to skills
+├── server/
+│   ├── dosm.mjs                                 # Daily DOSM new-quarter check
+│   ├── dosm.test.mjs                            # Tests
+│   ├── identity.d.mts                           # TypeScript types for identity.mjs
+│   ├── identity.mjs                             # Strips name/age/identity phrases
+│   ├── identity.test.mjs                        # Tests
+│   ├── index.mjs                                # Dependency-free Node server
+│   ├── lfs.mjs                                  # Daily labour-force refresh
+│   ├── lfs.test.mjs                             # Tests
+│   ├── news.mjs                                 # Daily news per topic
+│   ├── news.test.mjs                            # Tests
+│   ├── search.mjs                               # Skill search via RunPod Job B
+│   └── search.test.mjs                          # Tests
+├── src/
+│   ├── AdCheck.tsx                              # Check a job ad screen
+│   ├── adFit.test.ts                            # Tests
+│   ├── adFit.ts                                 # Ad skills: held, related, to build
+│   ├── aicourses.test.ts                        # Tests
+│   ├── aiviews.test.ts                          # Tests
+│   ├── aiviews.ts                               # Three AI-impact views per role
+│   ├── ChangeCourse.tsx                         # Lets a person swap the suggested
+│   ├── changes.test.ts                          # Tests
+│   ├── changes.ts                               # Changes between snapshots
+│   ├── CourseProgress.tsx                       # Course status in the plan
+│   ├── cv.test.ts                               # Tests
+│   ├── cv.ts                                    # CV text intake
+│   ├── CvAvoid.tsx                              # List of things to avoid in a CV,
+│   ├── CvCheck.tsx                              # The stand-alone Check my CV screen
+│   ├── cvChecks.test.ts                         # Tests
+│   ├── cvChecks.ts                              # CV check rules, each with a cited
+│   ├── CvPanel.tsx                              # CV upload and skill suggestions
+│   ├── data.ts                                  # All imported data in one place
+│   ├── dataSaver.tsx                            # Low-data mode
+│   ├── fairness.test.ts                         # Tests
+│   ├── FairnessNote.tsx                         # Shows the fairness audit result
+│   ├── futures.test.ts                          # Tests
+│   ├── futures.ts                               # 1,000 simulated futures
+│   ├── GradSteps.tsx                            # Three-step bar
+│   ├── GuidedActionDock.tsx                     # The bottom action bar of
+│   ├── i18n.test.ts                             # Tests
+│   ├── i18n.tsx                                 # English, Bahasa Malaysia
+│   ├── interests.test.ts                        # Tests
+│   ├── interests.ts                             # Work-interest fit
+│   ├── JobLinks.tsx                             # Shows the Find this role links
+│   ├── jobSearch.test.ts                        # Tests
+│   ├── jobSearch.ts                             # Job-site search links
+│   ├── learningCheck.test.ts                    # Tests
+│   ├── learningCheck.ts                         # Demo evidence form
+│   ├── LearningMilestones.tsx                   # Milestone badges
+│   ├── main.tsx                                 # App shell
+│   ├── milestones.test.ts                       # Tests
+│   ├── milestones.ts                            # Milestone rules
+│   ├── MovesStep.tsx                            # Your moves screen
+│   ├── NewsView.tsx                             # Workplace news screen
+│   ├── pathway.test.ts                          # Tests
+│   ├── pathway.ts                               # Learning-plan rule
+│   ├── PlanStep.tsx                             # Your plan screen
+│   ├── PublicTables.tsx                         # Job ads and AI exposure tables
+│   ├── radar.test.ts                            # Tests
+│   ├── radar.ts                                 # Future skills radar rule
+│   ├── RadarView.tsx                            # Future skills radar screen
+│   ├── region.test.ts                           # Tests
+│   ├── region.ts                                # Region view rules
+│   ├── RegionView.tsx                           # Region view (skills centre)
+│   ├── sampleAd.ts                              # Fictional sample job ad
+│   ├── sampleCv.ts                              # Fictional sample CV
+│   ├── scoring.test.ts                          # Tests
+│   ├── scoring.ts                               # Pure scoring functions
+│   ├── sdg.test.ts                              # Tests
+│   ├── sdg.ts                                   # SDG link rule from review
+│   ├── SdgViews.tsx                             # SDG tags and goal pieces
+│   ├── SignalSources.tsx                        # Signal sources page
+│   ├── SkillsStep.tsx                           # Your skills / Your CV screen
+│   ├── styles.css                               # All styles
+│   ├── team.test.ts                             # Tests
+│   ├── team.ts                                  # Team view rules
+│   ├── TeamView.tsx                             # Team view (HR, career centres)
+│   └── vite-env.d.ts                            # Vite type declarations
+├── submission/
+│   └── README.md                                # Lists the required submission PDFs
+├── .env.example                                 # Environment variables to set
+├── .gitignore                                   # Files kept out of git
+├── .replit                                      # Replit run and deployment
+├── CLAUDE.md                                    # Rules for the AI coding agent
+├── index.html                                   # Page shell that loads the React
+├── LICENSE                                      # Apache License 2.0
+├── package-lock.json                            # Pinned dependency versions
+├── package.json                                 # Dependencies and npm scripts
+├── README.md                                    # This file
+├── replit.md                                    # Replit run and publish notes
+├── tsconfig.json                                # TypeScript settings
+└── vite.config.ts                               # Vite build and dev-server settings
 ```
 
 ### Architecture
