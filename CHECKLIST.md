@@ -4,6 +4,8 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## Job-ad check and job-site links — 24 Oct 2026
 
+- [x] Align the Your moves best-move panel with both sidebar cards and make its coloured future-share segments and legend open role details. Checked the panel edges and Bookkeeper segment in the local browser; build passes.
+- [x] Let *What this job is* fill the focused role card width. Checked the Financial Analyst detail at desktop width; build passes.
 - [x] Place the empty *Your plan* and *Your moves* **Add skills** action in the guided bottom bar; keep the reason in the card. Checked the empty plan and return to skills in the local browser; build passes.
 - [x] Extend the shared bottom action position to the already-working path, including Hakim's *Start learning* on Your plan and the forward actions on Your skills and Your moves. Verified the guided path in the local browser; build and tests pass.
 - [x] Keep the fresh-graduate path's primary action in one fixed bottom-right position on *Your CV*, *A job ad* (both before and after matching), and *Your plan*. Keep the selected course's title and skills in the plan content. Verified the full fictional-ad path in the local browser, including the button position while scrolling; build and 140 tests pass.

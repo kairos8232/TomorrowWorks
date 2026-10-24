@@ -60,7 +60,7 @@ const CLOSE_CALL = 0.3;
 const FUTURE_COLOURS = ['#7fd6a8', '#f2b84b', '#ef8a6b'];
 const FUTURE_REST = '#5d7d70';
 /** Compact summary of 1,000 simulated futures and the AI-speed tipping point. */
-function FuturesPanel({ futures, tipping, quarter }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string }) {
+function FuturesPanel({ futures, tipping, quarter, onInspect }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string; onInspect: (roleId: string) => void }) {
   const t = useT();
   const leaders = [...futures.byRole.values()].filter((x) => x.best > 0).sort((a, b) => b.best - a.best);
   const shown = leaders.slice(0, 3);
@@ -78,16 +78,16 @@ function FuturesPanel({ futures, tipping, quarter }: { futures: ReturnType<typeo
         <p className="futures-sub">{robust
           ? t('Best in {p}% of {n} simulated futures: a robust choice.', { p: share(top.best), n: futures.runs.toLocaleString() })
           : t('{n} simulated futures', { n: futures.runs.toLocaleString() })}</p>
-        <ul className="futures-legend">{shown.map((x) => <li key={x.roleId}>
+        <ul className="futures-legend">{shown.map((x) => <li key={x.roleId}><button type="button" onClick={() => onInspect(x.roleId)} aria-label={t('View {role} details', { role: name(x.roleId) })}>
           <i style={{ background: colour(x.roleId) }} aria-hidden="true" />
           <span className="cap-first">{name(x.roleId)}</span>
           <strong>{share(x.best)}%</strong>
-        </li>)}</ul>
+        </button></li>)}</ul>
       </div>
     </div>
-    <div className="futures-share" role="img" aria-label={leaders.map(x => `${name(x.roleId)} ${share(x.best)}%`).join(', ')}>
-      {shown.map(x => <span key={x.roleId} style={{ width: `${x.best * 100}%`, background: colour(x.roleId) }} />)}
-      {rest > 0 && <span style={{ width: `${rest * 100}%`, background: FUTURE_REST }} />}
+    <div className="futures-share" role="group" aria-label={t('Select a role to see details.')}>
+      {shown.map(x => <button key={x.roleId} type="button" onClick={() => onInspect(x.roleId)} aria-label={t('View {role} details', { role: name(x.roleId) })} title={name(x.roleId)} style={{ width: `${x.best * 100}%`, background: colour(x.roleId) }} />)}
+      {rest > 0 && <span style={{ width: `${rest * 100}%`, background: FUTURE_REST }} aria-hidden="true" />}
     </div>
     {tipping.length > 1 ? <div className="futures-speed">
       <div className="speed-labels"><span>{t('Gradually')}</span><span>{t('AI speed')}</span><span>{t('Quickly')}</span></div>
@@ -262,6 +262,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
   }, [current, moves, switchKey]);
 
   const selectedResult = selectedRoleId ? [current, ...moves].find((result) => result?.role.id === selectedRoleId) : null;
+  const inspectRole = (roleId: string) => { setSelectedRoleId(roleId); window.scrollTo({ top: 0 }); };
   const nextDock = (target: RoleScore | undefined) => showNext && target && <GuidedActionDock note={roleTitle(target.role.title)}><button type="button" className="primary-button" onClick={() => onPlan(target.role.id)}>{t('Next: Your plan')}</button></GuidedActionDock>;
   const backToRanking = () => { setPanel('ranking'); setSelectedRoleId(null); window.scrollTo({ top: 0 }); };
   const openPanel = (next: 'changes' | 'method') => { setPanel(next); window.scrollTo({ top: 0 }); };
@@ -289,7 +290,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
 
     <div className="moves-workbench">
       <div className="moves-main">
-        <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
+        <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} onInspect={inspectRole} />
       </div>
       <div className="moves-sidebar">
         <section className="moves-update" aria-labelledby="moves-update-title">
@@ -321,8 +322,8 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
       <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see what the job is and which skills you would need.')}</p></div>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
-        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => { setSelectedRoleId(current.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals} />}
-        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onInspect={() => { setSelectedRoleId(m.role.id); window.scrollTo({ top: 0 }); }} picks={picks} goals={goals}
+        {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => inspectRole(current.role.id)} picks={picks} goals={goals} />}
+        {moves.map((m, i) => <LedgerRow key={m.role.id} result={m} rank={i + 1} delta={deltas.get(m.role.id)} onInspect={() => inspectRole(m.role.id)} picks={picks} goals={goals}
           future={futures.byRole.get(m.role.id)} closeTo={i > 0 && futures.swapShare(moves[i - 1].role.id, m.role.id) >= CLOSE_CALL ? i : undefined} />)}
       </ol>
     </section>

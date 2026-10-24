@@ -1119,7 +1119,8 @@ details.course-check { padding-block:0; }
 .futures-panel h2 { margin: 0; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.05; letter-spacing: -.03em; font-weight: 800; }
 .futures-sub { margin: 0; font-size: 16px; color: #b9cdc2; max-width: 36ch; }
 .futures-legend { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 7px; }
-.futures-legend li { display: grid; grid-template-columns: 14px 1fr auto; gap: 10px; align-items: center; font-size: 17px; }
+.futures-legend button { display: grid; grid-template-columns: 14px 1fr auto; gap: 10px; align-items: center; width: 100%; padding: 2px 0; border: 0; background: transparent; color: inherit; font: inherit; font-size: 17px; text-align: left; cursor: pointer; }
+.futures-legend button:hover .cap-first { text-decoration: underline; text-underline-offset: 3px; }
 .futures-legend i { width: 14px; height: 14px; border-radius: 4px; }
 .futures-legend strong { font-size: 20px; font-variant-numeric: tabular-nums; }
 .futures-dots { width: 100%; height: auto; display: block; }
@@ -1155,11 +1156,14 @@ details.course-check { padding-block:0; }
 .moves-page .futures-panel h2 { font-size: clamp(29px, 2.5vw, 37px); }
 .moves-page .futures-sub { grid-column: 1; font-size: 17px; max-width: none; }
 .moves-page .futures-legend { grid-column: 2; grid-row: 1 / 3; margin: 0; gap: 8px; }
-.moves-page .futures-legend li { font-size: 17px; }
+.moves-page .futures-legend button { font-size: 17px; }
 .moves-page .futures-legend i { width: 13px; height: 13px; }
 .moves-page .futures-legend strong { font-size: 19px; }
 .futures-share { display: flex; width: 100%; height: 13px; overflow: hidden; border-radius: 4px; background: #5d7d70; }
 .futures-share span { display: block; flex: none; min-width: 1px; }
+.futures-share button { display: block; flex: none; min-width: 2px; height: 100%; padding: 0; border: 0; cursor: pointer; }
+.futures-share button:hover { filter: brightness(1.18); }
+.futures-share button:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
 .moves-page .futures-share { height: 17px; }
 .moves-page .futures-speed { padding-top: 13px; gap: 6px; }
 .moves-page .speed-strip { height: 10px; gap: 2px; }
@@ -1732,9 +1736,8 @@ details.course-check { padding-block:0; }
   .grad-steps li + li::before { width: 5px; height: 5px; margin-right: 2px; }
 }
 
-/* Your moves: the Next button sits under the best-move card. */
-.moves-main { display: grid; gap: 14px; align-content: start; min-width: 0; }
-.moves-next { flex-wrap: wrap; }
+/* Let the best-move panel match the combined height of the two controls beside it. */
+.moves-main { display: grid; align-content: stretch; min-width: 0; }
 
 /* Job ads: a pointer to the CV check. */
 .demand-cta { margin: 0 0 14px; color: #59645e; font-size: 16px; }
@@ -1765,5 +1768,5 @@ details.course-check { padding-block:0; }
 .ledger-line:hover .row-open { text-decoration: underline; }
 .role-about { padding: 4px 0 0; }
 .role-about h3 { margin: 0 0 6px; font-size: 16px; }
-.role-about p { margin: 0 0 6px; max-width: 70ch; font-size: 17px; line-height: 1.55; }
+.role-about p { margin: 0 0 6px; font-size: 17px; line-height: 1.55; }
 .role-about small { color: #5d6873; font-size: 14px; }
