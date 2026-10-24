@@ -699,3 +699,5 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 ## 25 Oct 2026, 00:30
 
 - Graduate path: Your moves opened from the ad result used to drop the step bar and the "Next: Your plan" button (it showed the career-path tabs instead). Now it stays under step 2 (A job ad) with the step bar, a "Back to the job ad" button and "Next: Your plan". The ad result stays mounted (hidden) while Your moves is open, so going back shows the same result. "Compare all roles in Your moves" moved from the page into the bottom bar, left of "Next: Your plan". Checked locally with a mocked /api/cv-skills (flow: CV, ad, compare, back, compare, plan); build and 140 tests pass. Not yet checked on the live app.
+
+- 25 Oct 00:45: Check a job ad opened from the Job market tabs after "Start here" used to show the 3-step bar (the path was still set). It now opens as the tool (Job market tabs, inline Check this ad button); reached from Next: A job ad it stays the guided step 2. Checked locally with a mocked /api/cv-skills; build and 140 tests pass.

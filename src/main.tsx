@@ -289,6 +289,9 @@ function App() {
   // True only after "Start here" on Home: shows the three-step bar. In memory, so a refresh returns to Home without it.
   const [path, setPath] = useState<StepPath | null>(null);
   const gradPath = path === 'grad';
+  // Check a job ad opened from the Job market tabs is the tool, not step 2 of the path (even after "Start here").
+  const [adFromMarket, setAdFromMarket] = useState(false);
+  const guidedAd = gradPath && !adFromMarket;
   // The CV text read in step 1, so step 2 does not ask for it again. Memory only; cleared with the path.
   const [gradCv, setGradCv] = useState('');
   const [carryCv, setCarryCv] = useState('');   // CV text handed from Check my CV to Check a job ad (memory only)
@@ -323,7 +326,7 @@ function App() {
   const [saver, setSaver] = useState(initialDataSaver);
   useEffect(() => applyFonts(saver), [saver]);
   const toggleSaver = () => { setSaver(!saver); saveDataSaver(!saver); };
-  const go = (s: Screen) => { if (s === 'home') { setPath(null); setGradCv(''); } if (s !== 'adcheck') setCarryCv(''); setScreen(s); window.scrollTo({ top: 0 }); };
+  const go = (s: Screen) => { if (s === 'home') { setPath(null); setGradCv(''); } if (s === 'adcheck' && screen !== 'moves') setAdFromMarket(marketNav.some((item) => item.id === screen)); if (s !== 'adcheck') setCarryCv(''); setScreen(s); window.scrollTo({ top: 0 }); };
   function start(who: ViewerId) {
     const v = viewerById(who);
     setPath(v.kind === 'person' || v.kind === 'me' ? 'work' : null);
@@ -358,7 +361,7 @@ function App() {
   const t = translate(lang);
   if (screen === 'home') return <LangProvider value={lang}><DataSaverProvider value={saver}><Home start={start} startWithRole={startWithRole} startFreshGrad={startFreshGrad} go={go} lang={lang} setLang={setLang} /></DataSaverProvider></LangProvider>;
 
-  const onGradPath = path !== null && isStepScreen(path, screen);
+  const onGradPath = path !== null && isStepScreen(path, screen) && !(screen === 'adcheck' && adFromMarket);
   const missingSkillsState = (message: string) => <>
     <section className="panel"><h2>{t('Add your skills first')}</h2><p className="note">{t(message)}</p>
       {!onGradPath && <div className="empty-state-actions"><button type="button" className="primary-button" onClick={() => go('skills')}>{t('Add skills')}</button></div>}
@@ -420,7 +423,7 @@ function App() {
         {screen === 'demand' && <DemandTable onCheckAd={() => go('adcheck')} />}
         {screen === 'cvcheck' && <CvCheck onCompare={(cv) => { setCarryCv(cv); go('adcheck'); }} />}
         {/* On the graduate path the ad stays mounted (hidden) while Your moves is open, so "Back to the job ad" returns to the same result. */}
-        {(screen === 'adcheck' || (gradPath && screen === 'moves')) && <div hidden={screen !== 'adcheck'}><AdCheck profile={profile} onGo={go} initialCv={carryCv || (gradPath ? gradCv : '')} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} /></div>}
+        {(screen === 'adcheck' || (gradPath && screen === 'moves')) && <div hidden={screen !== 'adcheck'}><AdCheck profile={profile} onGo={go} initialCv={carryCv || (guidedAd ? gradCv : '')} onNext={guidedAd ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} /></div>}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}
