@@ -60,24 +60,25 @@ const CLOSE_CALL = 0.3;
 const FUTURE_COLOURS = ['#7fd6a8', '#f2b84b', '#ef8a6b'];
 const FUTURE_REST = '#5d7d70';
 /** Compact summary of 1,000 simulated futures and the AI-speed tipping point. */
-function FuturesPanel({ futures, tipping, quarter, onInspect }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string; onInspect: (roleId: string) => void }) {
+function FuturesPanel({ futures, tipping, quarter, leadId, onInspect }: { futures: ReturnType<typeof simulateFutures>; tipping: ReturnType<typeof tippingPoints>; quarter: string; leadId: string | undefined; onInspect: (roleId: string) => void }) {
   const t = useT();
   const leaders = [...futures.byRole.values()].filter((x) => x.best > 0).sort((a, b) => b.best - a.best);
   const shown = leaders.slice(0, 3);
   const name = (id: string) => roleTitle(roles.find((r) => r.id === id)!.title);
   const p = (x: number) => Math.round(x * 100);
   const share = (x: number) => (x > 0 && x < 0.005 ? '<1' : String(p(x)));   // a move that wins a few futures is not 0%
-  const top = leaders[0];
+  // The heading names the same role as rank 1 in the list below (the picked setting); the futures only say how often it wins.
+  const top = leadId ? { roleId: leadId, best: futures.byRole.get(leadId)?.best ?? 0 } : leaders[0];
   const robust = !!top && top.best >= 0.8;
   const colour = (id: string) => { const k = shown.findIndex((x) => x.roleId === id); return k >= 0 ? FUTURE_COLOURS[k] : FUTURE_REST; };
   const rest = leaders.slice(3).reduce((sum, x) => sum + x.best, 0);
   return <section className="futures-panel" aria-labelledby="futures-head">
     <div className="futures-top">
       <div className="futures-lead">
-        <h2 id="futures-head">{robust ? t('{role} is your best move', { role: name(top.roleId) }) : t('No single best move')}</h2>
-        <p className="futures-sub">{robust
-          ? t('Best in {p}% of {n} simulated futures: a robust choice.', { p: share(top.best), n: futures.runs.toLocaleString() })
-          : t('{n} simulated futures', { n: futures.runs.toLocaleString() })}</p>
+        <h2 id="futures-head">{top ? t('{role} is your best move', { role: name(top.roleId) }) : t('No single best move')}</h2>
+        <p className="futures-sub">{!top ? t('{n} simulated futures', { n: futures.runs.toLocaleString() })
+          : robust ? t('Best in {p}% of {n} simulated futures: a robust choice.', { p: share(top.best), n: futures.runs.toLocaleString() })
+          : t('Top at your settings. Best in {p}% of {n} simulated futures.', { p: share(top.best), n: futures.runs.toLocaleString() })}</p>
         <ul className="futures-legend">{shown.map((x) => <li key={x.roleId}><button type="button" onClick={() => onInspect(x.roleId)} aria-label={t('View {role} details', { role: name(x.roleId) })}>
           <i style={{ background: colour(x.roleId) }} aria-hidden="true" />
           <span className="cap-first">{name(x.roleId)}</span>
@@ -290,7 +291,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
 
     <div className="moves-workbench">
       <div className="moves-main">
-        <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} onInspect={inspectRole} />
+        <FuturesPanel futures={futures} tipping={tipping} leadId={moves[0]?.role.id} quarter={snapshot.source.latestQuarter.replace('-', ' ')} onInspect={inspectRole} />
       </div>
       <div className="moves-sidebar">
         <section className="moves-update" aria-labelledby="moves-update-title">
@@ -319,7 +320,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
     </div>
 
     <section className="ledger" aria-label="Ranked moves">
-      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see what the job is and which skills you would need.')}</p><p className="note">{t('Ranked at the AI speed and quarter you picked. The heading above counts 1,000 simulated futures, so the two can differ.')}</p></div>
+      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see what the job is and which skills you would need.')}</p></div>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => inspectRole(current.role.id)} picks={picks} goals={goals} />}
