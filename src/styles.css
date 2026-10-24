@@ -1602,7 +1602,7 @@ details.course-check { padding-block:0; }
 .posting-cv .cv-avoid { min-width: 0; margin: 0; padding: 16px; }
 .posting-cv .cv-avoid-file { grid-column: 1 / -1; margin: 0; padding: 0; }
 .cv-avoid-file .cv-avoid-checklist { margin: 0; border: 0; }
-.cv-avoid-file .cv-avoid-sources { padding: 0 16px 16px; margin: 0; }
+.cv-avoid-file .cv-avoid-sources { margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid #e2e6e2; }
 .posting-cv-evidence summary { cursor: pointer; font-weight: 700; }
 .posting-cv-evidence summary::marker { color: #477157; }
 .posting-cv-evidence[open] small { margin-top: 6px; }
@@ -1642,21 +1642,21 @@ details.course-check { padding-block:0; }
 .cv-avoid-list small { color: #5d6873; font-size: 14px; }
 .cv-avoid-list a, .cv-avoid-sources a { color: #1e6b4f; }
 .cv-avoid-manual label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
-.cv-avoid-manual input { margin-top: 4px; }
-.cv-avoid-checklist { margin-top: 18px; padding: 13px 16px; border: 1px solid #d9ded9; border-radius: 10px; }
-.cv-avoid-checklist summary { cursor: pointer; font-weight: 700; }
-.cv-avoid-checklist summary span { margin-left: 5px; color: #5d6873; font-weight: 400; }
-.cv-avoid-checklist[open] .note { margin: 12px 0; }
-.cv-avoid-progress { height: 7px; margin-top: 12px; overflow: hidden; border-radius: 99px; background: #e8ece9; }
-.cv-avoid-progress span { display: block; height: 100%; border-radius: 99px; background: #477157; }
+.cv-avoid-manual input { margin-top: 4px; accent-color: #1e6b4f; }
+.cv-avoid-file-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 16px; }
+.cv-avoid-file-head h2 { margin: 0 0 3px; }
+.cv-avoid-file-head .note { margin: 0; }
+.cv-avoid-file-head > span { flex: none; color: #315f46; font-weight: 700; font-variant-numeric: tabular-nums; }
 .cv-avoid-manual-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
 .cv-avoid-manual-source { margin: 0 0 5px; color: #5d6873; font-size: 14px; }
 .cv-avoid-manual-source a { color: #1e6b4f; }
 .cv-avoid-manual { gap: 0; }
 .cv-avoid-manual li { border: 0; border-bottom: 1px solid #e2e6e2; border-radius: 0; padding: 9px 2px; background: transparent; }
 .cv-avoid-manual li:last-child { border-bottom: 0; }
-.cv-avoid-sources { margin-top: 14px; font-size: 14px; }
-.cv-avoid-sources ul { padding-left: 18px; }
+.cv-avoid-sources { color: #5d6873; font-size: 14px; line-height: 1.45; }
+.cv-avoid-sources > strong { color: #263240; }
+.cv-avoid-sources ul { display: flex; flex-wrap: wrap; gap: 6px 20px; list-style: none; margin: 6px 0 0; padding: 0; }
+.cv-avoid-sources li { max-width: 48ch; }
 @media (max-width: 800px) {
   .posting-entry-grid { grid-template-columns: 1fr; }
   .posting-entry-main textarea { min-height: 210px; }
@@ -1760,8 +1760,15 @@ details.course-check { padding-block:0; }
 @keyframes news-fade { from { opacity: .35; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .news-fade { animation: none; } }
 
-/* Check my CV (CV only, no ad) */
-.cv-check-entry textarea { display: block; box-sizing: border-box; width: 100%; height: 260px; min-height: 200px; margin: 12px 0; background: #fff; }
+/* Check my CV: text and live findings share the first row; file-only checks follow. */
+.cv-check-has-text { grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr); align-items: start; }
+.cv-check > .cv-check-entry, .cv-check > .cv-avoid { min-width: 0; }
+.cv-check-has-text > .cv-avoid-file { grid-column: 1 / -1; }
+.cv-check-entry textarea { display: block; box-sizing: border-box; width: 100%; height: 260px; min-height: 200px; margin: 12px 0 16px; padding: 13px 14px; border: 1px solid #c5ccc6; border-radius: 6px; background: #fff; color: #1c2430; font: inherit; font-size: 16px; line-height: 1.45; resize: vertical; }
+.cv-check .cv-avoid > .cv-avoid-list { gap: 0; }
+.cv-check .cv-avoid > .cv-avoid-list li { padding: 10px 0; border: 0; border-top: 1px solid #e5dedb; border-radius: 0; background: transparent; }
+.cv-check .cv-avoid-heading > strong { min-width: 0; height: auto; border-radius: 0; background: transparent; font-size: 20px; }
+@media (max-width: 1000px) { .cv-check-has-text { grid-template-columns: 1fr; } }
 
 /* Moves: rows say they open, and the role page starts with what the job is */
 .row-open { display: block; margin-top: 4px; font-size: 14px; font-weight: 600; color: #1e6b4f; text-transform: none; }

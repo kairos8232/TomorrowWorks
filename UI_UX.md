@@ -16,6 +16,10 @@ The user preferred the compact plan redesign over the earlier attempt to move a 
 
 On wide screens, the plan's main choice and action fit in the first view. On phones, controls stack without horizontal page overflow, and the action appears before supporting facts. Low-data mode lives in the account menu, which is reachable on phones. See [SCREENS.md](SCREENS.md) for current behaviour.
 
+## CV check layout — 24 Oct 2026
+
+Keep the editable CV and the text findings together so a person can fix one issue and see the result. Show the file-only checks directly below them, since pasted text cannot confirm document layout. Group those checks by publisher and keep source dates in a short footer; do not make the person open a second disclosure to find the checklist or its sources.
+
 ## Screen design rules
 
 - Put the main question and useful action in the first view. Avoid large empty hero space that pushes content below the fold.

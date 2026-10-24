@@ -209,7 +209,7 @@ The page paints the saved headlines first, then swaps in today's from `/api/news
 
 ## Check my CV (CV only, added 24 Oct 2026)
 
-`src/CvCheck.tsx`, screen `cvcheck`, a Job market tab. For anyone, including people who already work, who only want feedback on their CV and have no ad. One box for the CV text (or *Try a fictional example*) and, once there is text, the same *CV checks* and *Check the file yourself* panels used in *Check a job ad* (`CvAvoid`, rules in `src/cvChecks.ts`). It runs in the browser only: no RunPod call, nothing sent or stored, no skill matching and no score. *Compare with a job ad* opens *Check a job ad* with the CV text already in its CV box (kept in memory only for that hand-over).
+`src/CvCheck.tsx`, screen `cvcheck`, a Job market tab. For anyone, including people who already work, who only want feedback on their CV and have no ad. The CV editor (or *Try a fictional example*) sits beside the live *CV checks* on wide screens; they stack on narrower screens. The eight *Check the file yourself* items are always visible below, grouped by publisher, with short source links and dates at the foot. The same feedback component is used in *Check a job ad* (`CvAvoid`, rules in `src/cvChecks.ts`). It runs in the browser only: no RunPod call, nothing sent or stored, no skill matching and no score. *Compare with a job ad* opens *Check a job ad* with the CV text already in its CV box (kept in memory only for that hand-over).
 
 
 ## Your moves: rows say they open, role page says what the job is (added 24 Oct 2026)

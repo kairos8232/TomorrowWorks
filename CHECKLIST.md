@@ -4,6 +4,7 @@ This checklist tracks the hackathon prototype. Complete one stage at a time. Che
 
 ## Job-ad check and job-site links — 24 Oct 2026
 
+- [x] Rework *Check my CV* into an editor and live findings on wide screens, with the file checklist and compact sources visible below. The shared CV feedback no longer uses nested disclosures. Checked the fictional CV, a working checklist tick, and desktop layout in the local browser; build passes.
 - [x] Align the Your moves best-move panel with both sidebar cards and make its coloured future-share segments and legend open role details. Checked the panel edges and Bookkeeper segment in the local browser; build passes.
 - [x] Let *What this job is* fill the focused role card width. Checked the Financial Analyst detail at desktop width; build passes.
 - [x] Place the empty *Your plan* and *Your moves* **Add skills** action in the guided bottom bar; keep the reason in the card. Checked the empty plan and return to skills in the local browser; build passes.

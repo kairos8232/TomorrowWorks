@@ -24,20 +24,18 @@ export function CvAvoid({ cvText }: { cvText: string }) {
       </li>)}</ul>}
   </section>
   <section className="panel cv-avoid-file" aria-label={t('Check the file yourself')}>
-    <details className="cv-avoid-checklist"><summary>{t('Check the file yourself')} <span>{done.size}/{CV_MANUAL_CHECKS.length}</span></summary>
-      <div className="cv-avoid-progress" role="img" aria-label={t('{done} of {total} file checks reviewed', { done: done.size, total: CV_MANUAL_CHECKS.length })}><span style={{ width: `${done.size / CV_MANUAL_CHECKS.length * 100}%` }} /></div>
-      <p className="note">{t('We cannot see columns, headers or the file type from pasted text.')}</p>
+    <div className="cv-avoid-checklist">
+      <div className="cv-avoid-file-head"><div><h2>{t('Check the file yourself')}</h2><p className="note">{t('We cannot see columns, headers or the file type from pasted text.')}</p></div><span aria-label={t('{done} of {total} file checks reviewed', { done: done.size, total: CV_MANUAL_CHECKS.length })}>{done.size}/{CV_MANUAL_CHECKS.length}</span></div>
       <div className="cv-avoid-manual-groups">{manualSources.map((source) => <div className="cv-avoid-manual-group" key={source}>
         <p className="cv-avoid-manual-source">{t('Guidance from')} {src(source)}</p>
         <ul className="cv-avoid-list cv-avoid-manual">{CV_MANUAL_CHECKS.filter((c) => c.source === source).map((c) => <li key={c.id}>
           <label><input type="checkbox" checked={done.has(c.id)} onChange={() => toggle(c.id)} /> <span>{t(c.text)}</span></label>
         </li>)}</ul>
       </div>)}</div>
-    </details>
+    </div>
 
-    <details className="cv-avoid-sources"><summary>{t('Sources')}</summary>
-      <ul>{[...used].map((id) => <li key={id}><a href={CV_SOURCES[id].url} target="_blank" rel="noreferrer">{CV_SOURCES[id].name}</a> ({CV_SOURCES[id].date}, read 24 Oct 2026){CV_SOURCES[id].note ? ` ${CV_SOURCES[id].note}` : ''}</li>)}</ul>
-      <p className="note">{t('Enhancv study of 25 US recruiters, reported 19 Nov 2025: 92% said their system does not auto-reject for formatting or keywords. Small, US-only, self-reported.')}</p>
-    </details>
+    <div className="cv-avoid-sources"><strong>{t('Sources')}</strong>
+      <ul>{[...used].map((id) => <li key={id}><a href={CV_SOURCES[id].url} aria-label={CV_SOURCES[id].name} target="_blank" rel="noreferrer">{t(CV_SOURCES[id].name.split(':')[0])}</a> · {CV_SOURCES[id].date}{CV_SOURCES[id].note ? ` · ${CV_SOURCES[id].note}` : ''}</li>)}</ul>
+    </div>
   </section></>;
 }
