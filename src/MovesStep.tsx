@@ -12,6 +12,7 @@ import { FairnessNote } from './FairnessNote';
 import { JobLinks } from './JobLinks';
 import { recommendMoves, scenarios, type Extras, type RoleScore, type ScenarioId } from './scoring';
 import { useLang, useT, useTx } from './i18n';
+import { GuidedActionDock } from './GuidedActionDock';
 
 const pct = (x: number) => `${x >= 0 ? '+' : ''}${(x * 100).toFixed(1)}%`;
 
@@ -118,7 +119,7 @@ function LedgerRow({ result, rank, delta, onInspect, picks, goals, future, close
   </li>;
 }
 
-function RoleDetail({ result, rank, picks, onBack, onPlan, planLabel }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void; planLabel?: string }) {
+function RoleDetail({ result, rank, picks, onBack, onPlan, planLabel, inlinePlanAction = true }: { result: RoleScore; rank: number | null; picks: InterestType[]; onBack: () => void; onPlan?: () => void; planLabel?: string; inlinePlanAction?: boolean }) {
   const t = useT();
   const { role, fit, demand, resilience } = result;
   const allSkillsHeld = fit.matched.length === role.essentialSkills.length && fit.missing.length === 0 && fit.transferable.length === 0;
@@ -137,7 +138,7 @@ function RoleDetail({ result, rank, picks, onBack, onPlan, planLabel }: { result
     </div>
     <div className="role-focus-summary">
       <p>{skillSummary}</p>
-      {onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t(planLabel ?? 'See a learning plan')}</button>}
+      {inlinePlanAction && onPlan && fit.missing.length + fit.transferable.length > 0 && <button type="button" className="primary-button" onClick={onPlan}>{t(planLabel ?? 'See a learning plan')}</button>}
     </div>
     <div className="detail-facts">
       <span className="fact-f">{t('{n} essential ESCO skills', { n: role.essentialSkills.length })}<small><a className="esco-link" href={role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: role.isco })}</a></small></span>
@@ -257,16 +258,17 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
   }, [current, moves, switchKey]);
 
   const selectedResult = selectedRoleId ? [current, ...moves].find((result) => result?.role.id === selectedRoleId) : null;
+  const nextDock = (target: RoleScore | undefined) => showNext && target && <GuidedActionDock note={roleTitle(target.role.title)}><button type="button" className="primary-button" onClick={() => onPlan(target.role.id)}>{t('Next: Your plan')}</button></GuidedActionDock>;
   const backToRanking = () => { setPanel('ranking'); setSelectedRoleId(null); window.scrollTo({ top: 0 }); };
   const openPanel = (next: 'changes' | 'method') => { setPanel(next); window.scrollTo({ top: 0 }); };
   if (selectedResult) {
     const rank = moves.findIndex((result) => result.role.id === selectedRoleId);
     return <div className="step-body"><RoleDetail result={selectedResult} rank={rank < 0 ? null : rank + 1} picks={picks}
-      onBack={backToRanking} planLabel={showNext ? 'Next: Your plan' : undefined}
-      onPlan={rank < 0 ? undefined : () => onPlan(selectedResult.role.id)} /></div>;
+      onBack={backToRanking} planLabel={showNext ? 'Next: Your plan' : undefined} inlinePlanAction={!showNext}
+      onPlan={rank < 0 ? undefined : () => onPlan(selectedResult.role.id)} />{nextDock(rank < 0 ? moves[0] : selectedResult)}</div>;
   }
-  if (panel === 'changes') return <div className="step-body"><ChangesView changes={changes} onBack={backToRanking} /></div>;
-  if (panel === 'method') return <div className="step-body"><MethodView onBack={backToRanking} /></div>;
+  if (panel === 'changes') return <div className="step-body"><ChangesView changes={changes} onBack={backToRanking} />{nextDock(moves[0])}</div>;
+  if (panel === 'method') return <div className="step-body"><MethodView onBack={backToRanking} />{nextDock(moves[0])}</div>;
   const rankMoves = changes.filter((change) => change.rankBefore !== change.rankAfter).length;
   const allDown = changes.length > 0 && changes.every((change) => change.scoreAfter < change.scoreBefore);
   return <div className="step-body">
@@ -284,7 +286,6 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
     <div className="moves-workbench">
       <div className="moves-main">
         <FuturesPanel futures={futures} tipping={tipping} quarter={snapshot.source.latestQuarter.replace('-', ' ')} />
-        {showNext && moves[0] && <div className="step-actions moves-next"><button type="button" className="primary-button" onClick={() => onPlan(moves[0].role.id)}>{t('Next: Your plan for {role}', { role: roleTitle(moves[0].role.title) })}</button><span className="note">{t('Or select any role below to see its details first.')}</span></div>}
       </div>
       <div className="moves-sidebar">
         <section className="moves-update" aria-labelledby="moves-update-title">
@@ -321,6 +322,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
           future={futures.byRole.get(m.role.id)} closeTo={i > 0 && futures.swapShare(moves[i - 1].role.id, m.role.id) >= CLOSE_CALL ? i : undefined} />)}
       </ol>
     </section>
+    {nextDock(moves[0])}
   </div>;
 }
 
