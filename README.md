@@ -1,24 +1,200 @@
-<div align="center">
+# TomorrowWorks
 
-# 🌅 TomorrowWorks
+> From your CV to a career path for the AI era: a web app that shows a fresh graduate which skills a job ad asks for, whether their CV shows them, and what to learn next, using dated public labour-market and AI-exposure data.
 
-### Navigate the future of work, one skill at a time.
+---
 
-**A public, evidence-driven guide to changing work and skills, with optional personal career guidance.**
+## Team Information
 
-![Status](https://img.shields.io/badge/status-working%20prototype-blue)
-![Domain](https://img.shields.io/badge/domain-Aiversecity%20Future--Ready%20Workforce-green)
-![SDGs](https://img.shields.io/badge/impact-UN%20SDGs-orange)
+| Field                  | Details                                     |
+| ---------------------- | ------------------------------------------- |
+| **Team Name**          | NoMoreTokens |
+| **Team Domain**        | Domain 1: Aiversecity Future-Ready Workforce |
+| **SDG Track (1–17)**   | SDG 4 (Quality Education, target 4.4) and SDG 8 (Decent Work and Economic Growth, targets 8.2 and 8.5) |
+| **Team Leader**        | Lee Yun Loong |
+| **University**         | Multimedia University (MMU) |
+| **Number of Members**  | TO FILL |
 
-</div>
+## Links
+
+| Resource          | Link                                           |
+| ----------------- | ---------------------------------------------- |
+| GitHub Repository | https://github.com/kairos8232/TomorrowWorks |
+| Live Demo         | https://tomorrow-works.replit.app |
+| RunPod Endpoint   | https://api.runpod.ai/v2/j6ssjfy9z074hp |
+| Slide Deck        | TO FILL (PDF in [`submission/`](submission/)) |
+| Demo Video        | TO FILL (YouTube) |
+
+---
 
 ## Overview
+
+### Problem
+
+AI is changing tasks faster than career advice keeps up. In Malaysia, DOSM counted 555,509 online job offers in Q2 2026, and the ILO rates 112 of 427 occupations as exposed to generative AI. A fresh graduate holding a job ad cannot easily tell which skills it asks for, whether their CV shows them, or which role to aim for and what to learn first.
+
+### Solution
+
+TomorrowWorks turns a CV and a job ad into a clear gap list and a learning plan. An open embedding model (`BAAI/bge-m3` on RunPod) only maps text onto real ESCO skills, and the person confirms every skill. Roles are then ranked by a visible rule (skill fit, DOSM demand trend, ILO AI exposure), so changing the trend data visibly changes the result. AI never generates roles, courses or scores.
+
+### Key Features
+
+- **Your CV → a job ad → your plan** — paste a CV, paste an ad, see which of the ad's skills the CV shows, which are held but not shown, and which are still to learn, then get ordered, checked courses and a Malaysian NOSS/SKM route where one exists.
+- **Check my CV** — plain, source-cited CV checks that need no job ad and run in the browser; nothing is stored.
+- **Trend data feeds the ranking** — nine ESCO roles scored with visible skill fit, DOSM demand and ILO AI resilience; switch the DOSM quarter or the AI speed and the ranking changes; 1,000 seeded simulated futures show how stable the top choice is.
+- **An updatable source** — DOSM Job Market Insights is quarterly; the server checks once a day for a newer quarter and one import command updates every score.
+- **Team and Region views** — fictional groups for HR, career centres and regional skills centres, with SDG contribution shown in totals and no names.
+- **Fairness and honesty** — a published fairness audit of the text intake, team-reviewed SDG links, and every signal shown with source, date and geography.
+
+### Tech Stack
+
+| Layer         | Technology                   |
+| ------------- | ---------------------------- |
+| Frontend      | React 19, TypeScript, Vite 6 |
+| Backend       | Node 20 server with no dependencies (`server/index.mjs`) |
+| Database      | None: nothing about a person is stored; public data ships as JSON files |
+| AI / Compute  | RunPod: GPU Pod (Job A) and Serverless (Job B), `BAAI/bge-m3` |
+| Hosting / Dev | Replit (Autoscale deployment) |
+
+---
+
+## Project Structure
+
+```
+.
+├── data/                    # Dated source snapshots, derived data, SDG review
+├── docs/                    # Product, scoring, screens and progress notes
+├── runpod/                  # RunPod Job A script (embeds ESCO skills on a GPU Pod)
+├── scripts/                 # Importers and audits (DOSM, ILO, ESCO, SDG, fairness)
+├── server/                  # Node server: static site and API routes (+ tests)
+├── src/                     # React app, scoring rule, CV checks, futures simulator (+ tests)
+├── submission/              # Required submission documents (PDFs)
+├── .env.example             # Environment variables to set
+├── .replit                  # Replit run configuration
+├── LICENSE                  # Apache 2.0
+└── package.json
+```
+
+### Architecture
+
+```
+Browser (React) ──► Replit (Node server) ──► RunPod Serverless (bge-m3, Job B)
+      │                    │
+      │                    └──► ranks the ESCO skill vectors that Job A embedded once on a RunPod GPU Pod
+      └──► scoring, CV checks and plan run in the browser on committed data snapshots
+```
+
+---
+
+## How to Run
+
+### Option 1: Run on Replit (recommended)
+
+1. Open the Replit project, or import this repository with **Create Repl → Import from GitHub**.
+2. Open the **Secrets** tab and add the variables listed in `.env.example`: `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID`.
+3. Click **Run**. The app works without the keys, but the CV and skill search then falls back to a searchable list.
+
+### Option 2: Run locally
+
+```bash
+git clone https://github.com/kairos8232/TomorrowWorks.git
+cd TomorrowWorks
+npm install
+cp .env.example .env          # fill in your values (optional)
+npm start                     # http://127.0.0.1:5173
+# production build and server: npm run build && npm run serve   (port 5000)
+```
+
+### Run Tests
+
+```bash
+npm test
+```
+
+---
+
+## How We Use Replit *(Required)*
+
+- **Development and hosting:** the app is developed in Replit and published with Replit Deployments (Autoscale) at the Live Demo link above.
+- **Secrets:** the RunPod API key and endpoint ID are stored in Replit Secrets and read by the server only. They are never in the code.
+- **Why Autoscale:** the server holds the API key, so static hosting would not work.
+
+📄 Proof of use: [`submission/SDC2026_NoMoreTokens_Replit_POU.pdf`](submission/SDC2026_NoMoreTokens_Replit_POU.pdf)
+
+## How We Use RunPod *(Required)*
+
+- **Job A (GPU Pod, run once):** `runpod/embed_esco_skills.py` embedded 13,960 ESCO v1.2.1 skills with `BAAI/bge-m3` on an NVIDIA RTX A5000 in 92.5 seconds. The vectors are saved in `data/derived/esco/`.
+- **Job B (Serverless endpoint, live):** the Replit server sends a person's text to the endpoint, gets a query vector back, and ranks the closest real ESCO skills. The person then confirms which are true.
+- **Integration:** the server reads `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` from the environment.
+
+Example request (an OpenAI-compatible embeddings route; use your own key and endpoint):
+
+```bash
+curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/openai/v1/embeddings \
+  -H "Authorization: Bearer $RUNPOD_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "BAAI/bge-m3", "input": ["maintain financial records"]}'
+```
+
+📄 Proof of use: [`submission/SDC2026_NoMoreTokens_Runpod_POU.pdf`](submission/SDC2026_NoMoreTokens_Runpod_POU.pdf)
+
+---
+
+## Challenges & Learnings
+
+- **Public data is coarse:** DOSM gives demand by occupation group only, so roles in one group share a demand signal. We use quarter-on-quarter change and say so on screen.
+- **AI needs checking:** AI matching alone proposed 73 SDG links and our two reviewers judged 21 relevant, so only team-reviewed links are used.
+- **Bias in text matching:** our audit found ethnicity words pulled in language skills (63 suggestions across 12 descriptions, against 0 for neutral phrases). We strip common identity phrases first; this is reduced, not solved.
+- **Cold starts:** the first RunPod search can be slow; a searchable list is the fallback.
+
+## Future Improvements
+
+- [ ] More roles that graduates apply for
+- [ ] A finer Malaysian demand source and a quarterly DOSM import that a person approves
+- [ ] Compare several job ads at once
+- [ ] Interviews with real graduates, career centres and HR teams
+- [ ] More hand-checked courses and reviewed Malay and Chinese skill names
+- [ ] Optional accounts, with consent, to link a plan to a career centre or employer's Team view
+
+## Team
+
+| Name        | Role                | GitHub                                   |
+| ----------- | ------------------- | ---------------------------------------- |
+| Lee Yun Loong | Team Leader | [@kairos8232](https://github.com/kairos8232) |
+| TO FILL | TO FILL | TO FILL |
+
+---
+
+## Submission Checklist
+
+- [x] Team name, domain (Domain 1) and SDG track filled in
+- [ ] Slide deck link added
+- [ ] Demo video link added
+- [ ] Replit used, with proof of use in `submission/`
+- [ ] RunPod used, with proof of use in `submission/`
+- [ ] Preliminary submission completed (`SDC2026_NoMoreTokens_Preliminary.pdf`)
+- [ ] Technology declaration completed (`SDC2026_NoMoreTokens_TechDeclaration.pdf`)
+- [ ] Submission files renamed with the team name
+- [ ] "How to Run" steps verified
+- [x] No API keys or secrets committed to the repository (scanned 24 Oct 2026)
+
+This service uses the ESCO classification of the European Commission.
+
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
+
+---
+
+## Detailed Project Notes
+
+### Overview
 
 AI and other industry changes affect people across ages, occupations, and career stages. **TomorrowWorks** aims to help anyone explore what is happening at work, which skills and roles have supported demand signals, and what might change. The first source coverage is Malaysia-first; visitors can browse without an account.
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage (21 Oct 2026):** A working React, TypeScript and Vite prototype runs on Replit. It has sourced role rankings, DOSM snapshot and AI-scenario switches, a RunPod-backed ESCO skill search, learning plans with checked courses and Malaysian certification routes, and explained SDG links. Fictional individual and team views cover the four target groups in the brief. The GDELT news page is built but its snapshot is still empty; the public *Skills in demand* page is still planned. Team review of translations and SDG mappings, live-demo checks, and submission materials remain open. See [SCREENS.md](SCREENS.md), [CHECKLIST.md](CHECKLIST.md) and [PROGRESS_LOG.md](PROGRESS_LOG.md) for current behaviour and status.
+> **Project stage (24 Oct 2026):** a working React, TypeScript and Vite prototype runs on Replit with a RunPod-backed ESCO skill search. A fresh graduate follows *Your CV → A job ad → Your plan*; *Check my CV* works on its own; role rankings come from sourced DOSM and ILO data, with a daily DOSM new-quarter check. All people and teams are fictional. See [SCREENS.md](SCREENS.md), [CHECKLIST.md](CHECKLIST.md) and [PROGRESS_LOG.md](PROGRESS_LOG.md) for current behaviour and open items.
 
 ## The Problem
 
@@ -282,19 +458,11 @@ The preliminary rubric weights are **Innovation & Creativity (30%)**, **Problem�
 
 **Out of scope for this challenge:** Building full course content, payment systems and real recruitment integrations.
 
-## Team
-
-Team members and responsibilities: **TBD**.
-
-## License
-
-Licensed under the [Apache License, Version 2.0](LICENSE), as required by the Participant Handbook for the submitted repository. The project team retains ownership of its original work; third-party components retain their own licenses and must be attributed as applicable.
-
 ## Acknowledgements
 
 **This publication uses the ESCO classification of the European Commission.** `data/roles.json` is an adapted selection of ESCO v1.2.1; the Commission does not guarantee ESCO's accuracy or completeness.
 
-Data sources: Department of Statistics Malaysia (DOSM), *Big Data Analytics: Job Market Insights*, Q1 and Q2 2026; International Labour Organization, Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025); European Commission, ESCO v1.2.1. Model: `BAAI/bge-m3` (open weights), run on RunPod.
+Data source: Department of Statistics Malaysia. Data sources: Department of Statistics Malaysia (DOSM), *Big Data Analytics: Job Market Insights*, Q1 and Q2 2026; International Labour Organization, Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025); European Commission, ESCO v1.2.1. Model: `BAAI/bge-m3` (open weights), run on RunPod.
 
 
 Built for the **Aiversecity Future-Ready Workforce Domain (Domain 1)** hackathon challenge. Requirements and judging criteria are adapted from the event's *Domain 1 — Problem Statement & Marking Rubric* document.
