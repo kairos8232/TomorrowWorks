@@ -15,6 +15,7 @@ import matchesFile from '../data/derived/coursera-skill-matches.json';
 import { CourseProgressControl } from './CourseProgress';
 import { MilestoneIcon } from './LearningMilestones';
 import type { CourseProgress, LearningAction } from './learningCheck';
+import { GuidedActionDock } from './GuidedActionDock';
 
 const resources = resourcesFile.resources as Resource[];
 // AI-matched Coursera courses (RunPod, bge-m3); see scripts/match_courses_runpod.py.
@@ -68,11 +69,12 @@ function NossRoute({ roleId }: { roleId: string }) {
   return <div className="plan-fact"><span>{t('Optional certification')}{entry.match === 'related' ? ` · ${t('Related route')}` : ''}</span><a href={`${nossSources[first.source].url}#page=${first.page}`} target="_blank" rel="noreferrer">SKM {[...groups][0][0]} · {t('Level')} {levels([...groups][0][1])} ↗</a></div>;
 }
 
-export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus, openedCourses, onOpenCourse, learningChoices, onChooseLearningCourse }: {
+export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus, openedCourses, onOpenCourse, learningChoices, onChooseLearningCourse, guided = false }: {
   profile: Profile; roleId: string | null; onPickRole: (id: string) => void;
   learningChoices: Record<string, string>; onChooseLearningCourse: (role: string, url: string) => void;
   openedCourses: Set<string> | undefined; onOpenCourse: (url: string) => void;
   progress: CourseProgress; onCourseStatus: (course: string, action: LearningAction) => void;
+  guided?: boolean;
 }) {
   const t = useT();
   const [showAllSteps, setShowAllSteps] = useState(false);
@@ -127,7 +129,7 @@ export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus
           </div>
           <div className="plan-selected-course">
             <div className="plan-selected-heading"><div><h3>{nextCourse.title}</h3></div>
-              <a className="primary-button" href={nextCourse.url} target="_blank" rel="noreferrer" onClick={() => onOpenCourse(nextCourse.url)} aria-label={t(openedCourses?.has(nextCourse.url) ? 'Continue learning: {name}' : 'Start learning: {name}', { name: nextCourse.title })}>{t(openedCourses?.has(nextCourse.url) ? 'Continue learning' : 'Start learning')} ↗</a></div>
+              {!guided && <a className="primary-button" href={nextCourse.url} target="_blank" rel="noreferrer" onClick={() => onOpenCourse(nextCourse.url)} aria-label={t(openedCourses?.has(nextCourse.url) ? 'Continue learning: {name}' : 'Start learning: {name}', { name: nextCourse.title })}>{t(openedCourses?.has(nextCourse.url) ? 'Continue learning' : 'Start learning')} ↗</a>}</div>
             <div className="tag-row plan-selected-skills"><span className="plan-closes">{t('Builds')}</span>{nextCourse.closes.map(gap => <GapTag key={gap.skill.uri} gap={gap} />)}</div>
             <CourseProgressControl key={(profile.persona ?? 'me') + nextCourse.url} status={progress[nextCourse.url]} onAction={action => onCourseStatus(nextCourse.url, action)} />
             <p className="plan-verification-note">{t('Completion not verified here')}</p>
@@ -141,6 +143,9 @@ export function PlanStep({ profile, roleId, onPickRole, progress, onCourseStatus
           <div className="plan-fact plan-milestone-fact"><span>{t('Milestones')} · {t('Locked until verification')}</span><div className="plan-mini-milestones"><span className="mini-milestone mini-milestone-first"><MilestoneIcon kind="first" />{t('First course')}</span><span className="mini-milestone mini-milestone-plan"><MilestoneIcon kind="plan" />{t('Full plan')}</span></div></div>
         </div>
       </section>}
+    {guided && nextCourse && <GuidedActionDock>
+      <a className="primary-button" href={nextCourse.url} target="_blank" rel="noreferrer" onClick={() => onOpenCourse(nextCourse.url)} aria-label={t(openedCourses?.has(nextCourse.url) ? 'Continue learning: {name}' : 'Start learning: {name}', { name: nextCourse.title })}>{t(openedCourses?.has(nextCourse.url) ? 'Continue learning' : 'Start learning')} ↗</a>
+    </GuidedActionDock>}
 
   </div>;
 }

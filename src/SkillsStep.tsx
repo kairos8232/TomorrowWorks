@@ -10,10 +10,11 @@ import { interestData, interestTypes, type InterestType } from './interests';
 import { goalStatus, sdgData } from './sdg';
 import { CvPanel } from './CvPanel';
 import { stripIdentity } from '../server/identity.mjs';
+import { GuidedActionDock } from './GuidedActionDock';
 
 const skillByUri = new Map(allSkills.map((s) => [s.uri, s]));
 
-export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void; nextLabel?: string; onCvText?: (text: string) => void }) {
+export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText, guided = false }: { profile: Profile; setProfile: (p: Profile) => void; onNext: () => void; nextLabel?: string; onCvText?: (text: string) => void; guided?: boolean }) {
   const t = useT();
   const [description, setDescription] = useState('');
   const [found, setFound] = useState<(Skill & { similarity: number })[]>([]);
@@ -113,10 +114,10 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
           : <div className="tag-row">{visibleHeld.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
         {heldSkills.length > 4 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
       </div>
-      <div className="journey-next-action">
+      {!guided && <div className="journey-next-action">
         <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t(nextLabel ?? 'See my moves')}</button>
         {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
-      </div>
+      </div>}
     </section>
 
     <section className="skills-preferences" aria-labelledby="preferences-title">
@@ -157,5 +158,8 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
       </div>
       </div>
     </section>
+    {guided && <GuidedActionDock note={heldSkills.length === 0 ? t('Add at least one skill first.') : undefined}>
+      <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t(nextLabel ?? 'See my moves')}</button>
+    </GuidedActionDock>}
   </div>;
 }

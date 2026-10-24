@@ -16,6 +16,7 @@ import { sampleCvWithHabits } from './sampleCv';
 import { CvAvoid } from './CvAvoid';
 import { JobLinks } from './JobLinks';
 import { useT } from './i18n';
+import { GuidedActionDock } from './GuidedActionDock';
 
 const resources = resourcesFile.resources as Resource[];
 type Suggestion = Skill & { similarity: number; from: string };
@@ -120,7 +121,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
         </div>
       </div>
       <div className="posting-entry-actions">
-        <div className="cv-go"><button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>
+        <div className="cv-go">{!onNext && <button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>}
           {(text || cvText || found) && <button type="button" className="text-button" onClick={clear}>{t('Clear')}</button>}</div>
         <p>{t('Contact details are removed before matching. Your text is not stored.')}</p>
       </div>
@@ -129,9 +130,7 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
     </section>
 
     {hasResult && <section className="panel posting-result" aria-labelledby="posting-result-head">
-      <div className="posting-result-heading journey-action-heading"><div><h2 id="posting-result-head">{t('Your ad at a glance')}</h2><p className="note">{t('AI-matched skills. Check the matches before relying on this result.')}</p></div>
-        {onNext && <div className="journey-next-action"><button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button></div>}
-      </div>
+      <div className="posting-result-heading journey-action-heading"><div><h2 id="posting-result-head">{t('Your ad at a glance')}</h2><p className="note">{t('AI-matched skills. Check the matches before relying on this result.')}</p></div></div>
       <div className="posting-result-counts" aria-label={t('Skill summary')}>
         <div><strong>{cmp.total}</strong><span>{t('From this ad')}</span></div>
         {profile.held.size > 0 && <><div><strong>{cmp.matched.length}</strong><span>{t('You have')}</span></div><div><strong>{cmp.transferable.length}</strong><span>{t('Related')}</span></div><div><strong>{cmp.missing.length}</strong><span>{t('To build')}</span></div></>}
@@ -220,5 +219,10 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
         </div><CvAvoid cvText={cvText} /></div>
       </div>}
     </section>}
+    {onNext && <GuidedActionDock>
+      {hasResult && !showEntry
+        ? <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>
+        : <button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>}
+    </GuidedActionDock>}
   </div>;
 }
