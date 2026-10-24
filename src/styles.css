@@ -1504,6 +1504,7 @@ details.course-check { padding-block:0; }
 .guided-action-dock-inner { display: flex; align-items: center; justify-content: flex-end; gap: 16px; width: 100%; max-width: 1580px; min-height: 72px; margin: 0 auto; padding: 12px clamp(22px, 5vw, 76px) calc(12px + env(safe-area-inset-bottom)); }
 .guided-action-dock-note { margin-right: auto; color: #5d6873; font-size: 14px; }
 .guided-action-dock .primary-button { display: inline-flex; align-items: center; justify-content: center; min-width: 180px; min-height: 44px; border-radius: 2px; background: #477157; border-color: #477157; color: #fff; font-weight: 400; text-align: center; text-decoration: none; white-space: nowrap; }
+.guided-action-dock .secondary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 2px; font-weight: 400; white-space: nowrap; }
 .guided-action-dock .primary-button:hover { background: #385d49; border-color: #385d49; }
 @media (max-width: 560px) {
   .content-wrap.guided-action-page { padding-bottom: 130px; }

@@ -315,6 +315,7 @@ const dict: Record<string, Entry> = {
   'A job ad': { ms: 'Iklan kerja', zh: '一则招聘广告' },
   'Your steps': { ms: 'Langkah anda', zh: '你的步骤' },
   'Next: A job ad': { ms: 'Seterusnya: Iklan kerja', zh: '下一步：招聘广告' },
+  'Back to the job ad': { ms: 'Kembali ke iklan kerja', zh: '返回职位广告' },
   'Next: Your plan': { ms: 'Seterusnya: Pelan anda', zh: '下一步：你的计划' },
   'Check an ad first.': { ms: 'Semak iklan dahulu.', zh: '请先检查一则广告。' },
   'Want to try another role?': { ms: 'Mahu cuba peranan lain?', zh: '想试试其他职业吗？' },

@@ -220,7 +220,7 @@ function MethodView({ onBack }: { onBack: () => void }) {
   </section>;
 }
 
-export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void; showNext?: boolean }) {
+export function MovesStep({ profile, onEditSkills, onPlan, showNext, onBackToAd }: { profile: Profile; onEditSkills: () => void; onPlan: (roleId: string) => void; showNext?: boolean; onBackToAd?: () => void }) {
   const t = useT();
   const [snapshotId, setSnapshotId] = useState<SnapshotId>('q2');
   const [scenarioId, setScenarioId] = useState<ScenarioId>('moderate');
@@ -264,7 +264,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
 
   const selectedResult = selectedRoleId ? [current, ...moves].find((result) => result?.role.id === selectedRoleId) : null;
   const inspectRole = (roleId: string) => { setSelectedRoleId(roleId); window.scrollTo({ top: 0 }); };
-  const nextDock = (target: RoleScore | undefined) => showNext && target && <GuidedActionDock note={roleTitle(target.role.title)}><button type="button" className="primary-button" onClick={() => onPlan(target.role.id)}>{t('Next: Your plan')}</button></GuidedActionDock>;
+  const nextDock = (target: RoleScore | undefined) => showNext && target && <GuidedActionDock note={roleTitle(target.role.title)}>{onBackToAd && <button type="button" className="secondary-button" onClick={onBackToAd}>{t('Back to the job ad')}</button>}<button type="button" className="primary-button" onClick={() => onPlan(target.role.id)}>{t('Next: Your plan')}</button></GuidedActionDock>;
   const backToRanking = () => { setPanel('ranking'); setSelectedRoleId(null); window.scrollTo({ top: 0 }); };
   const openPanel = (next: 'changes' | 'method') => { setPanel(next); window.scrollTo({ top: 0 }); };
   if (selectedResult) {
