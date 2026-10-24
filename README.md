@@ -22,7 +22,7 @@
 | GitHub Repository | https://github.com/kairos8232/TomorrowWorks |
 | Live Demo         | https://tomorrow-works.replit.app |
 | RunPod Endpoint   | https://api.runpod.ai/v2/j6ssjfy9z074hp |
-| Slide Deck        | TO FILL (PDF in [`submission/`](submission/)) |
+| Slide Deck        | [`submission/SDC2026_NoMoreTokens_PitchDeck.pdf`](submission/SDC2026_NoMoreTokens_PitchDeck.pdf) |
 | Demo Video        | TO FILL (YouTube) |
 
 ---
