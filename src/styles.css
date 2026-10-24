@@ -1355,8 +1355,6 @@ details.course-check { padding-block:0; }
 .skills-coverage-track span { display: block; height: 100%; border-radius: inherit; background: #477157; }
 .skills-summary-main .tag-row { margin: 12px 0 8px; }
 .skills-summary-main .skill-tag { text-align: left; }
-.skills-body .selected-skills .step-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-.skills-body .selected-skills .step-actions .note { margin: 0; max-width: 22ch; text-align: right; }
 .skills-preferences { display: grid; gap: 14px; }
 .skills-preferences-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; }
 .skills-preferences-head h2 { margin: 0; font-size: 22px; }
@@ -1375,8 +1373,9 @@ details.course-check { padding-block:0; }
   .skills-body .selected-skills { grid-template-columns: 1fr; gap: 16px; }
   .skills-overview { align-items: stretch; flex-direction: column; gap: 12px; }
   .skills-coverage { width: 100%; border-left: 0; padding: 0; }
-  .skills-body .selected-skills .step-actions { align-items: flex-start; border-top: 1px solid #d9ded9; padding-top: 16px; }
-  .skills-body .selected-skills .step-actions .note { text-align: left; }
+  .skills-body .selected-skills .journey-next-action { align-items: stretch; width: 100%; border-top: 1px solid #d9ded9; padding-top: 16px; }
+  .skills-body .selected-skills .journey-next-action .primary-button { width: 100%; }
+  .skills-body .selected-skills .journey-next-action .note { max-width: none; text-align: left; }
   .skills-body .choice-list { grid-template-columns: 1fr; }
 }
 
@@ -1503,7 +1502,9 @@ details.course-check { padding-block:0; }
 .posting-result-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; }
 .posting-result-heading h2 { margin-bottom: 4px; }
 .posting-result-heading .note { margin: 0; }
-.posting-result-heading .primary-button { flex: none; }
+.journey-action-heading { align-items: flex-start; }
+.journey-next-action { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex: none; }
+.journey-next-action .note { margin: 0; max-width: 22ch; text-align: right; }
 .posting-result-counts { display: flex; flex-wrap: wrap; gap: 0; margin: 16px 0 0; border: 1px solid #d9ded9; border-radius: 10px; overflow: hidden; }
 .posting-result-counts > div { display: grid; gap: 1px; flex: 1; min-width: 120px; padding: 12px 18px; border-right: 1px solid #e3e7e3; }
 .posting-result-counts > div:last-child { border-right: 0; }
@@ -1651,6 +1652,9 @@ details.course-check { padding-block:0; }
   .posting-entry-head { flex-direction: column; }
   .posting-entry-head .secondary-button { order: 1; }
   .posting-result-heading { align-items: stretch; flex-direction: column; }
+  .journey-next-action { align-items: stretch; width: 100%; }
+  .journey-next-action .primary-button { width: 100%; }
+  .journey-next-action .note { max-width: none; text-align: left; }
   .posting-result-nav { overflow-x: auto; white-space: nowrap; }
   .posting-result-nav button { padding-inline: 10px; font-size: 15px; }
   .posting-entry-cv { padding: 14px; }

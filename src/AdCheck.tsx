@@ -129,8 +129,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
     </section>
 
     {hasResult && <section className="panel posting-result" aria-labelledby="posting-result-head">
-      <div className="posting-result-heading"><div><h2 id="posting-result-head">{t('Your ad at a glance')}</h2><p className="note">{t('AI-matched skills. Check the matches before relying on this result.')}</p></div>
-        {onNext && <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>}
+      <div className="posting-result-heading journey-action-heading"><div><h2 id="posting-result-head">{t('Your ad at a glance')}</h2><p className="note">{t('AI-matched skills. Check the matches before relying on this result.')}</p></div>
+        {onNext && <div className="journey-next-action"><button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button></div>}
       </div>
       <div className="posting-result-counts" aria-label={t('Skill summary')}>
         <div><strong>{cmp.total}</strong><span>{t('From this ad')}</span></div>

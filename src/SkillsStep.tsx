@@ -113,7 +113,7 @@ export function SkillsStep({ profile, setProfile, onNext, nextLabel, onCvText }:
           : <div className="tag-row">{visibleHeld.map((s) => <button type="button" key={s.uri} className="skill-tag removable" onClick={() => toggle(s)} aria-label={t('Remove {skill}', { skill: s.label })}>{s.label} <span aria-hidden="true">✕</span></button>)}</div>}
         {heldSkills.length > 4 && <button type="button" className="text-button" aria-expanded={showAllHeld} onClick={() => setShowAllHeld(!showAllHeld)}>{showAllHeld ? t('Show fewer') : t('Show all {n}', { n: heldSkills.length })}</button>}
       </div>
-      <div className="step-actions">
+      <div className="journey-next-action">
         <button type="button" className="primary-button" onClick={onNext} disabled={heldSkills.length === 0}>{t(nextLabel ?? 'See my moves')}</button>
         {heldSkills.length === 0 && <span className="note">{t('Add at least one skill first.')}</span>}
       </div>
