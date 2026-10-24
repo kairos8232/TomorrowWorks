@@ -215,3 +215,8 @@ The page paints the saved headlines first, then swaps in today's from `/api/news
 ## Your moves: rows say they open, role page says what the job is (added 24 Oct 2026)
 
 Each row in *Compare roles* ends with a visible "View details ›" (it was a hidden label), and the hint above the table says what the click shows. The role page now opens with *What this job is*: the ESCO occupation description from `data/roles.json`, labelled "Description from ESCO, adapted" with the ESCO link (licence rule). Nothing is written by AI. *Find this role* (JobStreet, LinkedIn, Indeed, MYFutureJobs search links) was already on the role page.
+
+
+## Home: four start cards (24 Oct 2026)
+
+*Choose where to start* now has four cards: Career path, **Check my CV** (new; opens the CV-only screen), Job market, For organisations. Four columns on desktop, two by two on tablets, one column on phones.

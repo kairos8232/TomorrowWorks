@@ -207,13 +207,19 @@ function Home({ start, startWithRole, startFreshGrad, go, lang, setLang }: {
             <button type="button" onClick={() => go('skills')}>{t('Explore careers')} <span aria-hidden="true">↗</span></button>
           </article>
           <article className="quiet-path">
-            <span className="quiet-path-number">02 / {t('Job market')}</span>
+            <span className="quiet-path-number">02 / {t('Check my CV')}</span>
+            <h3>{t('Fix your CV before you send it')}</h3>
+            <p>{t('Paste your CV to see what to fix, then compare it with a job ad.')}</p>
+            <button type="button" onClick={() => go('cvcheck')}>{t('Check my CV')} <span aria-hidden="true">↗</span></button>
+          </article>
+          <article className="quiet-path">
+            <span className="quiet-path-number">03 / {t('Job market')}</span>
             <h3>{t('See how work is changing')}</h3>
             <p>{t('Explore Malaysian job ads, AI impact, workplace news and future skills.')}</p>
             <button type="button" onClick={() => go('demand')}>{t('Explore the job market')} <span aria-hidden="true">↗</span></button>
           </article>
           <article className="quiet-path">
-            <span className="quiet-path-number">03 / {t('For organisations')}</span>
+            <span className="quiet-path-number">04 / {t('For organisations')}</span>
             <h3>{t('Plan for your team')}</h3>
             <p>{t('Compare role fit across a team and see which skills to build first.')}</p>
             <button type="button" onClick={() => start('hr')}>{t('Explore organisations')} <span aria-hidden="true">↗</span></button>

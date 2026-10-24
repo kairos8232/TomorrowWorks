@@ -1072,6 +1072,8 @@ const dict: Record<string, Entry> = {
   'Select a role to see what the job is and which skills you would need.': { ms: 'Pilih peranan untuk melihat apa kerja itu dan kemahiran yang anda perlukan.', zh: '选择职位，查看这份工作是什么以及需要哪些技能。' },
   'What this job is': { ms: 'Apakah kerja ini', zh: '这份工作是什么' },
   'Description from ESCO, adapted.': { ms: 'Penerangan daripada ESCO, disesuaikan.', zh: '描述来自 ESCO，经改编。' },
+  'Fix your CV before you send it': { ms: 'Baiki CV anda sebelum menghantarnya', zh: '发送简历前先修改好' },
+  'Paste your CV to see what to fix, then compare it with a job ad.': { ms: 'Tampal CV anda untuk melihat apa yang perlu dibaiki, kemudian bandingkan dengan iklan kerja.', zh: '粘贴简历，看看要改什么，再与职位广告比较。' },
   'AI impact': { ms: 'Kesan AI', zh: 'AI 影响' },
   'Three views of AI by role': { ms: 'Tiga pandangan AI mengikut peranan', zh: '按职位的三种 AI 视角' },
   '{role} is your best move': { ms: '{role} ialah langkah terbaik anda', zh: '{role} 是你的最佳选择' },

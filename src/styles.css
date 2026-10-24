@@ -57,9 +57,9 @@ html { scrollbar-color: #477157 #ecece8; }
 .quiet-paths { padding: 82px 6.05% 96px; background: #f2f3f0; scroll-margin-top: 24px; }
 .quiet-paths-head { margin-bottom: 34px; }
 .quiet-paths h2 { margin: 0; color: #0c182c; font: 400 clamp(40px, 4vw, 58px)/1.06 'Carlito', sans-serif; letter-spacing: -.025em; }
-.quiet-paths-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #cdd2cc; border-bottom: 1px solid #cdd2cc; }
-.quiet-path { display: flex; flex-direction: column; min-width: 0; padding: 28px clamp(20px, 2.7vw, 48px) 30px 0; }
-.quiet-path + .quiet-path { border-left: 1px solid #cdd2cc; padding-left: clamp(20px, 2.7vw, 48px); }
+.quiet-paths-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #cdd2cc; border-bottom: 1px solid #cdd2cc; }
+.quiet-path { display: flex; flex-direction: column; min-width: 0; padding: 28px clamp(16px, 2vw, 36px) 30px 0; }
+.quiet-path + .quiet-path { border-left: 1px solid #cdd2cc; padding-left: clamp(16px, 2vw, 36px); }
 .quiet-path-number { color: #477157; font-size: 15px; font-weight: 700; }
 .quiet-path h3 { max-width: 14ch; margin: 28px 0 12px; font: 400 clamp(28px, 2.5vw, 38px)/1.08 'Carlito', sans-serif; letter-spacing: -.02em; }
 .quiet-path p { max-width: 31ch; margin: 0 0 46px; color: #59665c; font-size: 18px; line-height: 1.45; }
@@ -1770,3 +1770,10 @@ details.course-check { padding-block:0; }
 .role-about h3 { margin: 0 0 6px; font-size: 16px; }
 .role-about p { margin: 0 0 6px; font-size: 17px; line-height: 1.55; }
 .role-about small { color: #5d6873; font-size: 14px; }
+
+/* Four start cards: two by two on tablets */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .quiet-paths-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .quiet-path:nth-child(3) { border-left: 0; padding-left: 0; }
+  .quiet-path:nth-child(n+3) { border-top: 1px solid #cdd2cc; }
+}
