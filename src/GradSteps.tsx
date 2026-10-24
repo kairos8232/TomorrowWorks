@@ -12,12 +12,12 @@ const PATHS: Record<StepPath, { id: GradStep; label: string }[]> = {
 };
 
 /** True if the screen is one of the three steps of this path. */
-export const isStepScreen = (path: StepPath, screen: string) => PATHS[path].some((s) => s.id === screen);
+export const isStepScreen = (path: StepPath, screen: string) => PATHS[path].some((s) => s.id === screen) || (path === 'grad' && screen === 'moves');   // graduates reach Your moves from the ad result: it stays under step 2
 
 export function GradSteps({ path, current, onGo }: { path: StepPath; current: GradStep; onGo: (step: GradStep) => void }) {
   const t = useT();
   const steps = PATHS[path];
-  const at = steps.findIndex((s) => s.id === current);
+  const at = steps.findIndex((s) => s.id === (path === 'grad' && current === 'moves' ? 'adcheck' : current));
   return <nav className="grad-steps" aria-label={t('Your steps')}>
     <ol>{steps.map((s, i) => <li key={s.id} className={i < at ? 'done' : i === at ? 'current' : ''}>
       <button type="button" aria-current={i === at ? 'step' : undefined} onClick={() => onGo(s.id)}>

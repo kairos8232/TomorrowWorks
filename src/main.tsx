@@ -409,7 +409,7 @@ function App() {
         <Suspense fallback={<p className="note loading-note">{t('Loading…')}</p>}>
         {screen === 'skills' && <SkillsStep profile={profile} setProfile={setProfile} onNext={() => go(gradPath ? 'adcheck' : 'moves')} nextLabel={gradPath ? 'Next: A job ad' : path === 'work' ? 'Next: Your moves' : undefined} onCvText={gradPath ? setGradCv : undefined} guided={onGradPath} />}
         {screen === 'moves' && (profile.held.size > 0
-          ? <MovesStep showNext={path === 'work'} profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
+          ? <MovesStep showNext={path !== null} onBackToAd={gradPath ? () => go('adcheck') : undefined} profile={profile} onEditSkills={() => { if (profile.persona) { setProfile(emptyProfile()); setViewer('me'); } go('skills'); }} onPlan={(id) => { setPlanRoleId(id); go('plan'); }} />
           : missingSkillsState('Your moves are ranked from your skills.'))}
         {screen === 'plan' && (profile.held.size > 0
           ? <PlanStep learningChoices={learningChoices[progressOwner] ?? {}} onChooseLearningCourse={chooseLearningCourse} openedCourses={openedCourses[progressOwner]} onOpenCourse={openCourse} progress={courseProgress[progressOwner] ?? {}} onCourseStatus={updateCourseStatus} profile={profile} roleId={planRoleId} onPickRole={setPlanRoleId} guided={onGradPath} />
@@ -419,7 +419,8 @@ function App() {
         {screen === 'team' && <TeamView viewer={kind === 'team' ? viewerById(viewer) : viewerById('hr')} />}
         {screen === 'demand' && <DemandTable onCheckAd={() => go('adcheck')} />}
         {screen === 'cvcheck' && <CvCheck onCompare={(cv) => { setCarryCv(cv); go('adcheck'); }} />}
-        {screen === 'adcheck' && <AdCheck profile={profile} onGo={go} initialCv={carryCv || (gradPath ? gradCv : '')} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} />}
+        {/* On the graduate path the ad stays mounted (hidden) while Your moves is open, so "Back to the job ad" returns to the same result. */}
+        {(screen === 'adcheck' || (gradPath && screen === 'moves')) && <div hidden={screen !== 'adcheck'}><AdCheck profile={profile} onGo={go} initialCv={carryCv || (gradPath ? gradCv : '')} onNext={gradPath ? (id) => { setPlanRoleId(id); go('plan'); } : undefined} /></div>}
         {screen === 'outlook' && <OutlookTable />}
         {screen === 'news' && <NewsView />}
         {screen === 'trending' && <RadarView profile={profile} onGo={go} />}

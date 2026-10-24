@@ -158,7 +158,6 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
         <span className="fact-f">{t('{n} essential ESCO skills', { n: closest.role.essentialSkills.length })}<small><a className="esco-link" href={closest.role.escoUri} target="_blank" rel="noreferrer">{t('ESCO occupation {code}', { code: closest.role.isco })}</a></small></span>
       </div>
       <JobLinks title={closest.role.title} />
-      {profile.held.size > 0 && <div className="empty-state-actions"><button type="button" className="secondary-button" onClick={() => onGo('moves')}>{t('Compare all roles in Your moves')}</button></div>}
         </div> : <p className="note">{t('No role we track shares enough skills with this ad to compare its demand and AI signals.')}</p>}
         {profile.held.size > 0 && cmp.gaps.length > 0 && <div className="posting-courses" aria-labelledby="posting-courses-head">
       <h2 id="posting-courses-head">{t('Checked courses for these gaps')}</h2>
@@ -221,7 +220,8 @@ export function AdCheck({ profile, onGo, onNext, initialCv = '' }: { profile: Pr
     </section>}
     {onNext && <GuidedActionDock>
       {hasResult && !showEntry
-        ? <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button>
+        ? <>{profile.held.size > 0 && <button type="button" className="secondary-button" onClick={() => onGo('moves')}>{t('Compare all roles in Your moves')}</button>}
+          <button type="button" className="primary-button" onClick={() => onNext(closest?.role.id ?? null)}>{t('Next: Your plan')}</button></>
         : <button type="button" className="primary-button" disabled={!text.trim() || status.busy} onClick={check}>{status.busy ? t('Reading…') : t('Check this ad')}</button>}
     </GuidedActionDock>}
   </div>;

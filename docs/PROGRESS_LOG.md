@@ -695,3 +695,7 @@ Licence terms recorded in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#esco
 ## 24 Oct 2026, late evening
 
 - Your moves heading now names the same role as rank 1 in the list (the picked setting). Before, with Goals on, the heading named the simulated-futures winner (Sustainability manager) while the list had Bookkeeper first by one point. The sub-line still says how often that role wins in 1,000 simulated futures; "a robust choice" shows only at 80% or more, otherwise "Top at your settings". No scoring change; build and 140 tests pass. Not yet checked on the live app: republish first.
+
+## 25 Oct 2026, 00:30
+
+- Graduate path: Your moves opened from the ad result used to drop the step bar and the "Next: Your plan" button (it showed the career-path tabs instead). Now it stays under step 2 (A job ad) with the step bar, a "Back to the job ad" button and "Next: Your plan". The ad result stays mounted (hidden) while Your moves is open, so going back shows the same result. "Compare all roles in Your moves" moved from the page into the bottom bar, left of "Next: Your plan". Checked locally with a mocked /api/cv-skills (flow: CV, ad, compare, back, compare, plan); build and 140 tests pass. Not yet checked on the live app.
