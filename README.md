@@ -13,7 +13,7 @@
 | **SDG Track (1–17)**   | SDG 4 (Quality Education, target 4.4) and SDG 8 (Decent Work and Economic Growth, targets 8.2 and 8.5) |
 | **Team Leader**        | Lee Yun Loong |
 | **University**         | Multimedia University (MMU) |
-| **Number of Members**  | TO FILL |
+| **Number of Members**  | 5 |
 
 ## Links
 
@@ -161,7 +161,10 @@ curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/openai/v1/embeddings \
 | Name        | Role                | GitHub                                   |
 | ----------- | ------------------- | ---------------------------------------- |
 | Lee Yun Loong | Team Leader | [@kairos8232](https://github.com/kairos8232) |
-| TO FILL | TO FILL | TO FILL |
+| Chiu Shiao Ying | Member | [@smallwinnn] (https://github.com/smallwinnn) |
+| Khoo Ji Sheng | Member | [@xdevilchild] (https://github.com/xdevilchild) |
+| Tan Kit Yiu | Member | [@kykityiu] (https://github.com/kykityiu) |
+| Yeap Wei Hong | Member | [@Nic2018] (https://github.com/Nic2018)  |
 
 ---
 
