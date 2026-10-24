@@ -319,7 +319,7 @@ export function MovesStep({ profile, onEditSkills, onPlan, showNext }: { profile
     </div>
 
     <section className="ledger" aria-label="Ranked moves">
-      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see what the job is and which skills you would need.')}</p></div>
+      <div className="ledger-intro"><h2>{t('Compare roles')}</h2><p>{t('Select a role to see what the job is and which skills you would need.')}</p><p className="note">{t('Ranked at the AI speed and quarter you picked. The heading above counts 1,000 simulated futures, so the two can differ.')}</p></div>
       <ol className="ledger-table">
         <li className="ledger-head" aria-hidden="true"><span className="rank">{t('Rank')}</span><span>{t('Role')}</span><span>{t('Skill fit')}</span><span>{t('Demand')}</span><span>{t('AI resilience')}</span><span className="score">{t('Score')}</span></li>
         {current && <LedgerRow result={current} rank={null} delta={deltas.get(current.role.id)} onInspect={() => inspectRole(current.role.id)} picks={picks} goals={goals} />}
