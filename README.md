@@ -371,7 +371,7 @@ curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/openai/v1/embeddings \
 - [x] Preliminary submission completed (`SDC2026_NoMoreTokens_Preliminary.pdf`)
 - [x] Technology declaration completed (`SDC2026_NoMoreTokens_TechDeclaration.pdf`)
 - [x] Submission files renamed with the team name
-- [ ] "How to Run" steps verified
+- [x] "How to Run" steps verified
 - [x] No API keys or secrets committed to the repository (scanned 24 Oct 2026)
 
 This service uses the ESCO classification of the European Commission.
