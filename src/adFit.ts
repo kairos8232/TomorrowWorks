@@ -1,5 +1,5 @@
 // Job-ad check: compare the skills a pasted ad asks for with the skills a person holds.
-// Rule (documented in SIGNALS_AND_MATCHING.md, "Job-ad check"):
+// Rule (documented in docs/SIGNALS_AND_MATCHING.md, "Job-ad check"):
 //   1. The ad's lines are matched to ESCO skills on RunPod (same service as the CV intake).
 //      The person can untick any skill that is not really in the ad.
 //   2. Held / close / to build uses the SAME rule as a role's essential skills (skillFit),

@@ -2,7 +2,7 @@
 
 > **21 Oct 2026:** the app now uses a guided flow (Home → 1. Your skills → 2. Your moves → 3. Your plan) with Aina as a fictional sample; the old *My profile* form, *My skill gaps* and *Sign in* screens were removed. [SCREENS.md](SCREENS.md) is the current reference; older screen names below are historical.
 
-This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the product, [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines private-area questions, [SCREENS.md](SCREENS.md) records each screen's actual behaviour, and [DESIGN.md](DESIGN.md) records visual consistency rules. The reusable project skill is [tomorrowworks-web-ux](skills/tomorrowworks-web-ux/SKILL.md).
+This guide records interface decisions for the React prototype. [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) defines the product, [PERSONAL_GUIDANCE.md](PERSONAL_GUIDANCE.md) defines private-area questions, [SCREENS.md](SCREENS.md) records each screen's actual behaviour, and [DESIGN.md](DESIGN.md) records visual consistency rules. The reusable project skill is [tomorrowworks-web-ux](../skills/tomorrowworks-web-ux/SKILL.md).
 
 ## Visitor priorities
 

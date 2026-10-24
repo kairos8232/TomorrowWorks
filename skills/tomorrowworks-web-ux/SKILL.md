@@ -5,7 +5,7 @@ description: Improve UI and UX in the TomorrowWorks React website, including nav
 
 # TomorrowWorks web UX
 
-Read `PRODUCT_SCOPE.md`, `PERSONAL_GUIDANCE.md`, `SCREENS.md`, and `UI_UX.md` before changing a screen. Use `CHECKLIST.md` and `BUILD_STAGES.md` to keep each change in a small, verifiable commit.
+Read `docs/PRODUCT_SCOPE.md`, `docs/PERSONAL_GUIDANCE.md`, `docs/SCREENS.md`, and `docs/UI_UX.md` before changing a screen. Use `docs/CHECKLIST.md` and `docs/BUILD_STAGES.md` to keep each change in a small, verifiable commit.
 
 For each UI task:
 

@@ -1,5 +1,5 @@
 // Future Skills Radar: where the viewer's own skills stand, and the nine jobs
-// behind the signals. Rule: src/radar.ts (SIGNALS_AND_MATCHING.md, "Future Skills Radar").
+// behind the signals. Rule: src/radar.ts (docs/SIGNALS_AND_MATCHING.md, "Future Skills Radar").
 // One skill band and one role can be inspected at a time, keeping long skill
 // lists from pushing the rest of the comparison far down the page.
 import { useMemo, useState, type KeyboardEvent } from 'react';

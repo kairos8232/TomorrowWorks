@@ -1,5 +1,5 @@
 // Step 3: a learning plan for one chosen move.
-// Rule: src/pathway.ts (documented in SIGNALS_AND_MATCHING.md, "Learning plan rule").
+// Rule: src/pathway.ts (documented in docs/SIGNALS_AND_MATCHING.md, "Learning plan rule").
 // Courses: data/pathway/resources.json. NOSS: data/pathway/noss.json. Both checked by hand.
 import type React from 'react';
 import { useMemo, useState } from 'react';

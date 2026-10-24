@@ -1,5 +1,5 @@
 // Step 2: ranked moves for the person's ESCO skills, as a ledger.
-// Data: src/data.ts. Scoring rule: src/scoring.ts (documented in SIGNALS_AND_MATCHING.md).
+// Data: src/data.ts. Scoring rule: src/scoring.ts (documented in docs/SIGNALS_AND_MATCHING.md).
 import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ilo, roles, roleTitle, snapshots, transferable, type Profile, type SnapshotId } from './data';

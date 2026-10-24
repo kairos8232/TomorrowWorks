@@ -1,4 +1,4 @@
-// Learning plan for one chosen move. Documented in SIGNALS_AND_MATCHING.md
+// Learning plan for one chosen move. Documented in docs/SIGNALS_AND_MATCHING.md
 // ("Learning plan rule") and tested in src/pathway.test.ts.
 //
 // Gaps     = the role's essential skills the person is missing, plus the

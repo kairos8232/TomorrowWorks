@@ -16,7 +16,7 @@ THRESHOLD was chosen on 21 Oct 2026 by inspecting real pairs for the demo
 user: at >= 0.85 every pair was sensible (e.g. "perform business analysis" <-
 "perform business research", 0.87); at 0.80 wrong pairs appear (e.g.
 "perform scientific research" <- "perform business research"). Details in
-SIGNALS_AND_MATCHING.md.
+docs/SIGNALS_AND_MATCHING.md.
 """
 import json
 from pathlib import Path

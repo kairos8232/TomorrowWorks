@@ -1,5 +1,5 @@
 // Three views of AI impact per role. Tested in src/aiviews.test.ts.
-// Rule documented in SIGNALS_AND_MATCHING.md ("Three views of AI impact").
+// Rule documented in docs/SIGNALS_AND_MATCHING.md ("Three views of AI impact").
 //
 //   ILO        how exposed the job's tasks are to generative AI (expert + model rating, global;
 //              mean and standard deviation per ISCO occupation)            → used in the score

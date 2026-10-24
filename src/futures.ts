@@ -1,5 +1,5 @@
 // Futures simulator for "Handling uncertainty". Tested in src/futures.test.ts.
-// Rule documented in SIGNALS_AND_MATCHING.md ("Futures simulator").
+// Rule documented in docs/SIGNALS_AND_MATCHING.md ("Futures simulator").
 //
 // Instead of two fixed scenarios, score every move in many simulated futures, each with:
 //   AI speed  t ~ uniform(0, 1): weights move in a straight line from "Gradually" (t = 0)

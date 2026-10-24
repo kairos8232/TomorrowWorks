@@ -7,7 +7,7 @@ Usage (needs internet; standard library only; one request, a few seconds):
 Writes data/sources/gdelt-news.json: headline, link, outlet, language, the
 date GDELT first saw it, and topic tags.
 
-Rules (see API_PLAN.md):
+Rules (see docs/API_PLAN.md):
 - Only metadata and a link to the original article are stored; no article text.
 - ONE request covers all four topics (GDELT rate-limits repeated calls).
   Topic tags are then given by matching each topic's search terms in the

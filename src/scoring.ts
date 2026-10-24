@@ -1,4 +1,4 @@
-// Explainable role scoring. The rule is documented in SIGNALS_AND_MATCHING.md
+// Explainable role scoring. The rule is documented in docs/SIGNALS_AND_MATCHING.md
 // ("Scoring rule (hand-checkable)") and tested in src/scoring.test.ts.
 //
 //   score = wF·F + wD·D + wR·R

@@ -38,4 +38,4 @@ features, not requirements for starting this imported app. Do not introduce
 fake credentials or fabricate market evidence to fill those states.
 
 Keep the existing repository structure and stack. Read `CLAUDE.md` for project
-rules and `PROGRESS_LOG.md` for the team's development context.
+rules and `docs/PROGRESS_LOG.md` for the team's development context.

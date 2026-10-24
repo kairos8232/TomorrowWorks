@@ -194,7 +194,7 @@ AI and other industry changes affect people across ages, occupations, and career
 
 Instead of offering generic chatbot career advice, TomorrowWorks is designed to connect **dated, identifiable labour-market and AI-trend signals** to **explainable role recommendations**, **personalised skills-gap analysis**, and **actionable reskilling pathways**. Recommendations also explain their relationship to the **17 United Nations Sustainable Development Goals (SDGs)**.
 
-> **Project stage (24 Oct 2026):** a working React, TypeScript and Vite prototype runs on Replit with a RunPod-backed ESCO skill search. A fresh graduate follows *Your CV → A job ad → Your plan*; *Check my CV* works on its own; role rankings come from sourced DOSM and ILO data, with a daily DOSM new-quarter check. All people and teams are fictional. See [SCREENS.md](SCREENS.md), [CHECKLIST.md](CHECKLIST.md) and [PROGRESS_LOG.md](PROGRESS_LOG.md) for current behaviour and open items.
+> **Project stage (24 Oct 2026):** a working React, TypeScript and Vite prototype runs on Replit with a RunPod-backed ESCO skill search. A fresh graduate follows *Your CV → A job ad → Your plan*; *Check my CV* works on its own; role rankings come from sourced DOSM and ILO data, with a daily DOSM new-quarter check. All people and teams are fictional. See [docs/SCREENS.md](docs/SCREENS.md), [docs/CHECKLIST.md](docs/CHECKLIST.md) and [docs/PROGRESS_LOG.md](docs/PROGRESS_LOG.md) for current behaviour and open items.
 
 ## The Problem
 
@@ -207,7 +207,7 @@ Instead of offering generic chatbot career advice, TomorrowWorks is designed to 
 
 ## Who It Is For
 
-Anyone interested in work and skills, including students, employed or unemployed people, people returning to work, career switchers, advisers, and employers. The product does not ask for age to browse. Initial source coverage may be limited; the app must show those limits clearly. See [PRODUCT_SCOPE.md](PRODUCT_SCOPE.md) for the full product promise and evidence rules.
+Anyone interested in work and skills, including students, employed or unemployed people, people returning to work, career switchers, advisers, and employers. The product does not ask for age to browse. Initial source coverage may be limited; the app must show those limits clearly. See [docs/PRODUCT_SCOPE.md](docs/PRODUCT_SCOPE.md) for the full product promise and evidence rules.
 
 ## How People Use the App
 
@@ -222,7 +222,7 @@ flowchart LR
     H --- A[AI exposure]
 ```
 
-New visitors start on **Home** and can enter their own skills or use **View as** to explore fictional examples: Aina (working adult), Hakim (fresh graduate), Puan Rosnah (HR manager), Encik Lim (career adviser) and Encik Faizal (regional skills centre officer, Region view). Individuals follow **Your skills** (confirm ESCO skills from a RunPod search or the searchable list), **Your moves** (a compact ranking with visible personalisation controls and focused role, quarter-comparison and method views) and **Your plan** (ordered courses, uncovered gaps and NOSS/SKM routes). Role details keep skills and evidence links together; the method view holds the longer source and fairness explanations. Team view shows a manager's own group only (score heatmap, shared gaps); the Region view adds up the SDG contribution of all groups a regional skills centre funds, in totals with no names. Everyone can browse Job ads, AI exposure and the currently empty Workplace news page. The interface supports English, Bahasa Malaysia and Chinese; ESCO names and provider course titles remain in English. These are demo views, not accounts; no profile is saved. See [SCREENS.md](SCREENS.md).
+New visitors start on **Home** and can enter their own skills or use **View as** to explore fictional examples: Aina (working adult), Hakim (fresh graduate), Puan Rosnah (HR manager), Encik Lim (career adviser) and Encik Faizal (regional skills centre officer, Region view). Individuals follow **Your skills** (confirm ESCO skills from a RunPod search or the searchable list), **Your moves** (a compact ranking with visible personalisation controls and focused role, quarter-comparison and method views) and **Your plan** (ordered courses, uncovered gaps and NOSS/SKM routes). Role details keep skills and evidence links together; the method view holds the longer source and fairness explanations. Team view shows a manager's own group only (score heatmap, shared gaps); the Region view adds up the SDG contribution of all groups a regional skills centre funds, in totals with no names. Everyone can browse Job ads, AI exposure and the currently empty Workplace news page. The interface supports English, Bahasa Malaysia and Chinese; ESCO names and provider course titles remain in English. These are demo views, not accounts; no profile is saved. See [docs/SCREENS.md](docs/SCREENS.md).
 
 ## Required Features
 
@@ -243,7 +243,7 @@ The key prototype goal is to show that **changing trend evidence changes a caree
 
 ## Chosen Signals and Matching (Preliminary Build)
 
-Details, data shapes, findings and the worked example are in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md).
+Details, data shapes, findings and the worked example are in [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md).
 
 **Demo user:** a junior accounting assistant in the Klang Valley, 1–5 years in, whose routine tasks (data entry, billing, reconciliation, reports) are increasingly done by AI tools, deciding what to learn next. The clerical accounting work around this job (ISCO 4311) is in the ILO's highest GenAI-exposure gradient, while accountants are among DOSM's top advertised jobs.
 
@@ -287,15 +287,15 @@ The default score is `wF·F + wD·D + wR·R`, with every part shown on screen:
 | Moderate AI change | 0.60 | 0.25 | 0.15 |
 | Fast AI change | 0.50 | 0.20 | 0.30 |
 
-Two **optional, off-by-default** switches can add work-interest fit and chosen-SDG fit to the ranking. Interest profiles use job tag for eight roles and O*NET for one; SDG links use documented role reasons and skill rules. Each optional part has weight 0.20 before all weights are rescaled. The user can inspect the resulting change in rank. See [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#interest-fit-optional-fourth-part-added-21-oct-2026) for the rules and source limits.
+Two **optional, off-by-default** switches can add work-interest fit and chosen-SDG fit to the ranking. Interest profiles use job tag for eight roles and O*NET for one; SDG links use documented role reasons and skill rules. Each optional part has weight 0.20 before all weights are rescaled. The user can inspect the resulting change in rank. See [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md#interest-fit-optional-fourth-part-added-21-oct-2026) for the rules and source limits.
 
-**Real result for the demo user (Q2 2026):** bookkeeper 58, accountant 45, billing clerk 36, financial analyst 21 under moderate change; under fast change sustainability manager rises from 6th to 4th. Details in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#demo-result-with-real-data-accounting-assistants-20-esco-skills).
+**Real result for the demo user (Q2 2026):** bookkeeper 58, accountant 45, billing clerk 36, financial analyst 21 under moderate change; under fast change sustainability manager rises from 6th to 4th. Details in [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md#demo-result-with-real-data-accounting-assistants-20-esco-skills).
 
 **Proof that trends matter:** a *Job-ad data* switch (DOSM Q1 ↔ Q2 2026) changes D for the same profile. Real example: Professionals +15.8% → −9.5% (D 0.66 → 0.41); Clerical support −1.8% → −17.2% (D 0.48 → 0.33). The importer can convert a future DOSM release; exposing a new snapshot in the current two-option interface also requires a small code update.
 
 ### Where AI is used: RunPod
 
-RunPod is a required part of the build ([RUNPOD_SETUP.md](RUNPOD_SETUP.md)). One open-weights multilingual model, `BAAI/bge-m3`:
+RunPod is a required part of the build ([docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md)). One open-weights multilingual model, `BAAI/bge-m3`:
 
 1. **Job A (GPU Pod, done):** embedded every ESCO skill once (Pod `40jrr8aulh76tb`, RTX A5000, 92.5 s).
 2. **Job B (Serverless, live):** embeds the person's own description (English, Bahasa Malaysia or Chinese); the backend returns the nearest real ESCO skills and the person confirms which are true. A Chinese search was verified on the published Replit app on 21 Oct 2026; English and Malay live checks remain to be recorded.
@@ -312,7 +312,7 @@ The model only retrieves existing ESCO records. It never creates roles, courses,
 
 ## Data, Evidence and AI Guardrails
 
-Candidate news, vacancy, official-statistics, and skills sources are documented in [API_PLAN.md](API_PLAN.md). These sources must pass the Stage 1 access and suitability checks before the app presents their data.
+Candidate news, vacancy, official-statistics, and skills sources are documented in [docs/API_PLAN.md](docs/API_PLAN.md). These sources must pass the Stage 1 access and suitability checks before the app presents their data.
 
 - Use **public, open or synthetic data only**; no real CVs or personal records in demos.
 - Show the **name, date and link/reference** for each underlying trend source.
@@ -344,19 +344,19 @@ TomorrowWorks/
 │   ├── interests.ts, sdg.ts # Optional interest and SDG fit
 │   └── styles.css          # Responsive styles
 ├── package.json            # Scripts and pinned dependencies
-├── CHECKLIST.md            # Staged build and submission tasks
-├── BUILD_STAGES.md         # Small commit slices for each stage
-├── SCREENS.md              # Purpose and behaviour of each screen
-├── PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
-├── PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
-├── UI_UX.md                # Screen layout and usability decisions
-├── DESIGN.md               # Visual and component consistency rules
-├── RUNPOD_SETUP.md         # RunPod GPU jobs, evidence, and agent tooling status
+├── docs/CHECKLIST.md            # Staged build and submission tasks
+├── docs/BUILD_STAGES.md         # Small commit slices for each stage
+├── docs/SCREENS.md              # Purpose and behaviour of each screen
+├── docs/PRODUCT_SCOPE.md        # Audience, public areas, and evidence rules
+├── docs/PERSONAL_GUIDANCE.md    # Personal gaps, promotion targets, and credentials
+├── docs/UI_UX.md                # Screen layout and usability decisions
+├── docs/DESIGN.md               # Visual and component consistency rules
+├── docs/RUNPOD_SETUP.md         # RunPod GPU jobs, evidence, and agent tooling status
 ├── runpod/
 │   └── embed_esco_skills.py # RunPod GPU job: embed ESCO skills
-├── SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
+├── docs/SIGNALS_AND_MATCHING.md # Chosen sources, scoring rule, and demo proof
 ├── CLAUDE.md               # Context and rules for coding agents
-├── PROGRESS_LOG.md         # What was done, findings, and open items
+├── docs/PROGRESS_LOG.md         # What was done, findings, and open items
 ├── scripts/
 │   ├── import_dosm_jmi.py      # DOSM xlsx → data/sources/dosm-jmi-<quarter>.json
 │   ├── import_ilo_exposure.py  # ILO WP140 PDF → data/sources/ilo-genai-exposure-2025.json
@@ -379,16 +379,16 @@ TomorrowWorks/
 ├── vite.config.ts          # Allows Replit's preview proxy; proxies /api in development
 ├── server/                 # Node server: built app + RunPod skill search (Job B)
 ├── skills/                 # Project-specific Codex UX skill
-└── API_PLAN.md             # Proposed sources and validation steps
+└── docs/API_PLAN.md             # Proposed sources and validation steps
 ```
 
-**Current stack:** React, TypeScript and Vite on Replit, with a Node backend for skill search. RunPod is a required part of the build: a GPU Pod embedded the ESCO skill taxonomy with `BAAI/bge-m3`, and a Serverless endpoint serves query embeddings ([RUNPOD_SETUP.md](RUNPOD_SETUP.md)).
+**Current stack:** React, TypeScript and Vite on Replit, with a Node backend for skill search. RunPod is a required part of the build: a GPU Pod embedded the ESCO skill taxonomy with `BAAI/bge-m3`, and a Serverless endpoint serves query embeddings ([docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md)).
 
 ## Current Status and Next Work
 
 - **Working (21 Oct):** fictional individual and team views ("View as"); ESCO skill intake with RunPod skill search, interests and SDG goals; nine-role ranking with DOSM Q1/Q2 and gradual/fast switches and "what changed"; learning plans (21 checked courses plus RunPod-matched Coursera suggestions, estimated time, HRD Corp note, NOSS/SKM step); Future Skills Radar; Team view with heatmap and group course plan; SDG links from RunPod matches with strong/possible levels and a 4.4 baseline; Workplace news (GDELT, refreshed daily until 1 Nov, key headlines picked by RunPod); English, Bahasa Malaysia and Chinese.
 - **Review pending (team):** translations (`translation-review.csv`), SDG matches (blind review kit in `data/sdg/review/`, two reviewers), checked courses and NOSS codes, Coursera spot-check; DOSM reuse terms; live, mobile and link checks; Replit and RunPod evidence for the Tools Declaration. Optional: `scripts/calibrate_sdg_osdg.py` (OSDG) for goal-level accuracy.
-- **Submission pending:** PRD in the official template, pitch slides, declaration, 5–7 minute video, public repository and judge access. Follow [CHECKLIST.md](CHECKLIST.md) for verified status and [PROGRESS_LOG.md](PROGRESS_LOG.md) for recent decisions.
+- **Submission pending:** PRD in the official template, pitch slides, declaration, 5–7 minute video, public repository and judge access. Follow [docs/CHECKLIST.md](docs/CHECKLIST.md) for verified status and [docs/PROGRESS_LOG.md](docs/PROGRESS_LOG.md) for recent decisions.
 
 ## Running Locally
 
@@ -419,11 +419,11 @@ python3 scripts/import_lfs_month.py            # OpenDOSM monthly labour force (
 python3 scripts/import_gdelt_news.py           # GDELT Malaysian workplace headlines (internet; standard library)
 ```
 
-The ESCO embedding runs on a RunPod GPU Pod; see [RUNPOD_SETUP.md](RUNPOD_SETUP.md#part-2-project-gpu-work-required).
+The ESCO embedding runs on a RunPod GPU Pod; see [docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md#part-2-project-gpu-work-required).
 
 ## UI design workflow
 
-[DESIGN.md](DESIGN.md) records visual consistency rules; [UI_UX.md](UI_UX.md) records screen and usability decisions. The optional [Impeccable](https://impeccable.style/docs/) skill can be installed locally for Codex from this repository:
+[docs/DESIGN.md](docs/DESIGN.md) records visual consistency rules; [docs/UI_UX.md](docs/UI_UX.md) records screen and usability decisions. The optional [Impeccable](https://impeccable.style/docs/) skill can be installed locally for Codex from this repository:
 
 ```bash
 npx impeccable install -y --providers=codex --scope=project

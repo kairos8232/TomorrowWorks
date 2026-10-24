@@ -1,5 +1,13 @@
 # Progress log
 
+## 24 Oct 2026 (evening): repo tidy for submission
+
+- Read the hackathon submission template (michaelzhngg/SDC_Hackathon_Submission_Template). README now opens with its sections (team info, links, how we use Replit and RunPod, how to run, challenges, future improvements, team, checklist); the detailed notes follow. Team members, deck link and video link are marked TO FILL for the team.
+- Added `.env.example` and `submission/` (PDFs are added by the team after the final check and signature).
+- Moved the 12 planning docs from the repo root into `docs/` and updated every reference (CLAUDE.md, README, code comments); all relative markdown links resolve, 140 tests pass, build passes.
+- Secret scan of tracked files: no key-like strings, no `.env`.
+- Open: submission branch and PR, default branch on GitHub, public repo with committee collaborators, PDFs, video and deck links.
+
 ## 24 Oct 2026 — CV vs ad, and evidence for the fresh-graduate direction
 
 - Carson: aim at fresh graduates; many companies use AI to filter CVs, so help them see what to avoid and get more offers; keep the other roles inside the system as "try another"; make the flow one path (一条龙) and easier for non-technical users. Plan agreed: (1) CV vs ad gap, (2) a short, sourced "avoid these" list, (3) fresh-grad-first UI, (4) freeze the UI. Cutoff: if 1 to 3 are not done by Saturday afternoon, ship what exists and put the rest in the pitch as Phase 2.

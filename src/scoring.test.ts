@@ -15,7 +15,7 @@ const q2 = dosmQ2 as DosmSnapshot;
 const ilo = iloFile as IloExposure;
 const transferable = transferableFile as TransferableSkills;
 
-// --- Worked example from SIGNALS_AND_MATCHING.md (synthetic inputs) ---------
+// --- Worked example from docs/SIGNALS_AND_MATCHING.md (synthetic inputs) ---------
 const skill = (n: number) => ({ uri: `s${n}`, label: `skill ${n}`, type: 'skill/competence', green: false, digital: false });
 const exampleRole: Role = {
   id: 'example', title: 'Example role', escoUri: 'x', isco: '9999', iscoMajorGroup: '9',
@@ -28,7 +28,7 @@ const exampleSnapshot: DosmSnapshot = {
 const exampleIlo: IloExposure = { source: { name: 'test', url: '' }, occupations: [{ isco: '9999', mean: 0.45, sd: 0.1, gradient: 'Gradient 2' }] };
 const holdsThree = new Set(['s1', 's2', 's3']);
 
-describe('worked example (hand-checked in SIGNALS_AND_MATCHING.md)', () => {
+describe('worked example (hand-checked in docs/SIGNALS_AND_MATCHING.md)', () => {
   it('F = 3/6, D = 0.5 + 8% = 0.58, R = 1 − 0.45 = 0.55', () => {
     const r = scoreRole(exampleRole, holdsThree, exampleSnapshot, exampleIlo, scenarios.moderate);
     expect(r.fit.F).toBe(0.5);

@@ -1,5 +1,5 @@
 // All imported, attributed data the app uses, in one place.
-// Sources and how each file is built: SIGNALS_AND_MATCHING.md.
+// Sources and how each file is built: docs/SIGNALS_AND_MATCHING.md.
 import rolesFile from '../data/roles.json';
 import dosmQ1 from '../data/sources/dosm-jmi-2026-q1.json';
 import dosmQ2 from '../data/sources/dosm-jmi-2026-q2.json';
