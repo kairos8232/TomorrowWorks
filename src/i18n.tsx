@@ -1069,6 +1069,7 @@ const dict: Record<string, Entry> = {
   'See what to fix in your CV before you send it. No job ad needed.': { ms: 'Lihat apa yang perlu dibaiki dalam CV anda sebelum menghantarnya. Tidak perlu iklan kerja.', zh: '发送前看看简历有什么需要修改。不需要职位广告。' },
   'Paste the text of your CV. The checks run on this page; nothing is sent or stored.': { ms: 'Tampal teks CV anda. Semakan berjalan pada halaman ini; tiada apa dihantar atau disimpan.', zh: '粘贴你的简历文字。检查在本页进行；不会发送或保存任何内容。' },
   'Compare with a job ad': { ms: 'Bandingkan dengan iklan kerja', zh: '与职位广告比较' },
+  'Ranked at the AI speed and quarter you picked. The heading above counts 1,000 simulated futures, so the two can differ.': { ms: 'Disusun mengikut kelajuan AI dan suku tahun yang anda pilih. Tajuk di atas mengira 1,000 masa depan simulasi, jadi kedua-duanya boleh berbeza.', zh: '按你选择的 AI 速度和季度排序。上方标题统计的是 1,000 种模拟未来，因此两者可能不同。' },
   'Select a role to see what the job is and which skills you would need.': { ms: 'Pilih peranan untuk melihat apa kerja itu dan kemahiran yang anda perlukan.', zh: '选择职位，查看这份工作是什么以及需要哪些技能。' },
   'What this job is': { ms: 'Apakah kerja ini', zh: '这份工作是什么' },
   'Description from ESCO, adapted.': { ms: 'Penerangan daripada ESCO, disesuaikan.', zh: '描述来自 ESCO，经改编。' },
