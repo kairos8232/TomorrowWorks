@@ -1601,7 +1601,7 @@ details.course-check { padding-block:0; }
 .posting-cv-shown summary span { color: #315f46; margin-left: 6px; }
 .posting-cv-shown .posting-skills { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
 .posting-cv .cv-avoid { min-width: 0; margin: 0; padding: 16px; }
-.posting-cv .cv-avoid-file { grid-column: 1 / -1; margin: 0; padding: 0; }
+.posting-cv .cv-avoid-file { grid-column: 1 / -1; margin: 0; }
 .cv-avoid-file .cv-avoid-checklist { margin: 0; border: 0; }
 .cv-avoid-file .cv-avoid-sources { margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid #e2e6e2; }
 .posting-cv-evidence summary { cursor: pointer; font-weight: 700; }
