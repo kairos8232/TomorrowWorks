@@ -148,7 +148,7 @@ Every file in this branch and what it is for. Planning notes (build stages, chec
 ├── docs/
 │   ├── PROGRESS_LOG.md                          # What was built, what is open
 │   ├── RUNPOD_SETUP.md                          # RunPod Job A and Job B setup
-│   ├── SCREENS.md                               # Screen-by-screen behaviour of
+│   ├── SCREENS.md                               # Screen-by-screen behaviour
 │   └── SIGNALS_AND_MATCHING.md                  # Sources and scoring rule
 ├── runpod/
 │   └── embed_esco_skills.py                     # RunPod Job A: embeds ESCO skills
@@ -207,7 +207,7 @@ Every file in this branch and what it is for. Planning notes (build stages, chec
 │   ├── futures.test.ts                          # Tests
 │   ├── futures.ts                               # 1,000 simulated futures
 │   ├── GradSteps.tsx                            # Three-step bar
-│   ├── GuidedActionDock.tsx                     # The bottom action bar of
+│   ├── GuidedActionDock.tsx                     # Bottom action bar of the steps
 │   ├── i18n.test.ts                             # Tests
 │   ├── i18n.tsx                                 # English, Bahasa Malaysia
 │   ├── interests.test.ts                        # Tests
