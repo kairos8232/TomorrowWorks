@@ -44,7 +44,47 @@ TomorrowWorks turns a CV and a job ad into a clear gap list and a learning plan.
 - **Trend data feeds the ranking** — nine ESCO roles scored with visible skill fit, DOSM demand and ILO AI resilience; switch the DOSM quarter or the AI speed and the ranking changes; 1,000 seeded simulated futures show how stable the top choice is.
 - **An updatable source** — DOSM Job Market Insights is quarterly; the server checks once a day for a newer quarter and one import command updates every score.
 - **Team and Region views** — fictional groups for HR, career centres and regional skills centres, with SDG contribution shown in totals and no names.
+- **Three languages, no accounts** — English, Bahasa Malaysia and Chinese screens; nothing is saved about a person.
 - **Fairness and honesty** — a published fairness audit of the text intake, team-reviewed SDG links, and every signal shown with source, date and geography.
+
+### Data Sources
+
+All public, dated and attributed. Every number on screen shows its source, date and geography, and the *Signal sources* page lists them with dates read from the files.
+
+| Signal | Source | Used for |
+| --- | --- | --- |
+| Demand now (the updatable source) | DOSM *Big Data Analytics: Job Market Insights*, Q1 and Q2 2026, online job offers by occupation major group | Demand part of the score |
+| AI exposure | ILO Working Paper 140 (2025), Table A1: 427 occupations, 112 exposed | AI-resilience part of the score |
+| Other AI-impact views | Microsoft *Working with AI*; Anthropic Economic Index | Shown beside ILO, not in the score |
+| Roles and skills | ESCO v1.2.1 (European Commission), nine adapted occupations | Roles, skills, skill matching |
+| Labour and news context | OpenDOSM labour force survey; GDELT headlines | Context only, never in a score |
+| SDG targets | UN SDG target list, links reviewed by two team reviewers | SDG tags and the plan |
+
+**Known limits:** DOSM gives job ads by occupation major group only, so roles in one group share a demand signal, and only quarter-on-quarter change is used. ILO exposure means tasks *could* change, not that jobs disappear. Scores are estimates from stated weights, not forecasts of job loss.
+
+### How the Ranking Works
+
+`score = wF·F + wD·D + wR·R`, with each part shown on screen:
+
+- **F, skill fit:** the person's skills against the role's essential ESCO skills (a related skill counts half).
+- **D, demand trend:** DOSM quarter-on-quarter change for the role's occupation group.
+- **R, AI resilience:** `1 − ILO mean exposure`.
+
+| AI speed | wF | wD | wR |
+| --- | --- | --- | --- |
+| Gradually | 0.60 | 0.25 | 0.15 |
+| Quickly | 0.50 | 0.20 | 0.30 |
+
+Two optional switches (work interests, chosen SDG goals) are off by default. Full rule and worked example: [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md).
+
+**Proof that trend data changes the result** (measured on the live app, 24 Oct 2026, fictional graduate with 20 skills): switching the DOSM quarter from Q2 to Q1 moves Accountant from 3rd to 2nd and Financial analyst from 5th to 3rd; with Q1 data, switching the AI speed from Gradually to Quickly puts Sustainability manager in 2nd place. The DOSM data itself changes between quarters, for example Professionals −9.5% and Clerical support −17.2% from Q1 to Q2 2026.
+
+### Responsible AI
+
+- **No invented data:** roles, courses, statistics and SDG links are checked or reviewed, never generated. No real CVs or personal records anywhere.
+- **AI only maps text onto known lists:** `BAAI/bge-m3` matches words to existing ESCO skills and the person confirms every skill. It never creates roles, courses or scores.
+- **Fairness audit and SDG review are published:** [data/derived/fairness-audit.md](data/derived/fairness-audit.md), [data/sdg/review/results.md](data/sdg/review/results.md).
+- **Decisions stay with the person:** estimates are shown as scenarios; the app does not automate hiring decisions.
 
 ### Tech Stack
 
@@ -60,19 +100,184 @@ TomorrowWorks turns a CV and a job ad into a clear gap list and a learning plan.
 
 ## Project Structure
 
+Every file in this branch and what it is for. Planning notes (build stages, checklist, UI notes) stay on the `dev` branch.
+
+**Root**
+
 ```
-.
-├── data/                    # Dated source snapshots, derived data, SDG review
-├── docs/                    # Product, scoring, screens and progress notes
-├── runpod/                  # RunPod Job A script (embeds ESCO skills on a GPU Pod)
-├── scripts/                 # Importers and audits (DOSM, ILO, ESCO, SDG, fairness)
-├── server/                  # Node server: static site and API routes (+ tests)
-├── src/                     # React app, scoring rule, CV checks, futures simulator (+ tests)
-├── submission/              # Required submission documents (PDFs)
-├── .env.example             # Environment variables to set
-├── .replit                  # Replit run configuration
-├── LICENSE                  # Apache 2.0
-└── package.json
+.env.example       Environment variables to set (RunPod key and endpoint ID; no secrets inside)
+.gitignore         Files kept out of git (.env, raw downloads, evidence screenshots)
+.replit            Replit run and deployment configuration
+CLAUDE.md          Context and rules for the AI coding agent used on this project
+LICENSE            Apache License 2.0
+README.md          This file
+index.html         Page shell that loads the React app
+package-lock.json  Pinned dependency versions
+package.json       Dependencies and npm scripts (start, build, test, serve)
+replit.md          Replit run and publish notes
+tsconfig.json      TypeScript settings
+vite.config.ts     Vite build and dev-server settings
+```
+
+**docs/**
+
+```
+docs/PROGRESS_LOG.md          Dated record of what was built and what is still open
+docs/RUNPOD_SETUP.md          How RunPod Job A (GPU Pod) and Job B (Serverless) were set up
+docs/SCREENS.md               Screen-by-screen behaviour of the app
+docs/SIGNALS_AND_MATCHING.md  Chosen data sources, the scoring rule, the futures simulator and a worked example
+```
+
+**src/**
+
+```
+src/AdCheck.tsx             Check a job ad: pasted ad to ESCO skills, held / close / to build, closest role, courses
+src/ChangeCourse.tsx        Lets a person swap the suggested course in a plan
+src/CourseProgress.tsx      Course status (not started, in progress) in the plan; never verified
+src/CvAvoid.tsx             List of things to avoid in a CV, each with its source
+src/CvCheck.tsx             The stand-alone Check my CV screen
+src/CvPanel.tsx             CV upload and skill suggestions on Your CV
+src/FairnessNote.tsx        Shows the fairness audit result in How ranking works
+src/GradSteps.tsx           The three-step bar (Your CV, A job ad, Your plan)
+src/GuidedActionDock.tsx    The bottom action bar of the guided steps
+src/JobLinks.tsx            Shows the Find this role links
+src/LearningMilestones.tsx  Milestone badges, locked until verification
+src/MovesStep.tsx           Your moves: ranked roles, futures panel, adjust ranking
+src/NewsView.tsx            Workplace news (context only, never in a score)
+src/PlanStep.tsx            Your plan screen
+src/PublicTables.tsx        Job ads and AI exposure tables
+src/RadarView.tsx           Future skills radar screen
+src/RegionView.tsx          Region view for a regional skills centre (fictional groups)
+src/SdgViews.tsx            SDG tags and goal pieces shared by moves, plan and team
+src/SignalSources.tsx       Signal sources page: every source with its date
+src/SkillsStep.tsx          Your skills / Your CV screen
+src/TeamView.tsx            Team view for HR and career centres (fictional groups)
+src/adFit.test.ts           Tests for adFit
+src/adFit.ts                Rule that sorts ad skills into held, related and to build
+src/aicourses.test.ts       Tests for aicourses
+src/aiviews.test.ts         Tests for aiviews
+src/aiviews.ts              Puts ILO, Microsoft and Anthropic AI-impact views side by side per role
+src/changes.test.ts         Tests for changes
+src/changes.ts              What changed between DOSM snapshots, and why a move went up or down
+src/cv.test.ts              Tests for cv
+src/cv.ts                   CV intake: file to short lines, contact details removed, nothing stored
+src/cvChecks.test.ts        Tests for cvChecks
+src/cvChecks.ts             CV check rules, each with a cited source
+src/data.ts                 All imported, attributed data the app uses, in one place; profile type and fictional people
+src/dataSaver.tsx           Low-data mode: no web font, no live news or labour requests
+src/fairness.test.ts        Tests for fairness
+src/futures.test.ts         Tests for futures
+src/futures.ts              1,000 seeded simulated futures: best-move shares, score ranges, tipping point
+src/i18n.test.ts            Tests for i18n
+src/i18n.tsx                English, Bahasa Malaysia and Chinese screen text
+src/interests.test.ts       Tests for interests
+src/interests.ts            Work-interest fit (RIASEC) for the optional Interests switch
+src/jobSearch.test.ts       Tests for jobSearch
+src/jobSearch.ts            Builds search links to JobStreet, LinkedIn, Indeed and MYFutureJobs (never scraped)
+src/learningCheck.test.ts   Tests for learningCheck
+src/learningCheck.ts        Demo evidence form for courses (not verified)
+src/main.tsx                App shell: home, navigation, step bar, screen routing
+src/milestones.test.ts      Tests for milestones
+src/milestones.ts           Milestone rules (only authoritative verification can unlock)
+src/pathway.test.ts         Tests for pathway
+src/pathway.ts              Learning-plan rule: ordered courses and NOSS/SKM route
+src/radar.test.ts           Tests for radar
+src/radar.ts                Future skills radar: outlook per essential skill
+src/region.test.ts          Tests for region
+src/region.ts               Region view rules: SDG contribution person to group to region, totals only
+src/sampleAd.ts             Fictional job ad used by Try a fictional example
+src/sampleCv.ts             Fictional CV used by Try a fictional CV
+src/scoring.test.ts         Tests for scoring
+src/scoring.ts              Pure scoring functions: skill fit, demand, AI resilience, ranking
+src/sdg.test.ts             Tests for sdg
+src/sdg.ts                  SDG link rule from the team review (strong, possible, 4.4 baseline)
+src/styles.css              All styles
+src/team.test.ts            Tests for team
+src/team.ts                 Team view rules: same scoring for several people
+src/vite-env.d.ts           Vite type declarations
+```
+
+**server/**
+
+```
+server/dosm.mjs           Daily check whether DOSM has published a newer Job Market Insights quarter
+server/dosm.test.mjs      Tests for the DOSM check
+server/identity.d.mts     TypeScript types for identity.mjs
+server/identity.mjs       Strips common name, age and identity phrases from text before it is matched
+server/identity.test.mjs  Tests for the identity-phrase filter
+server/index.mjs          Dependency-free Node server: serves the built app and the /api routes
+server/lfs.mjs            Daily refresh of the OpenDOSM monthly labour force figures (memory only)
+server/lfs.test.mjs       Tests for the labour force refresh
+server/news.mjs           Daily GDELT headlines per topic, with key headlines picked by RunPod bge-m3
+server/news.test.mjs      Tests for the news route
+server/search.mjs         Loads the ESCO skill vectors, asks RunPod Job B for a query vector and ranks the nearest skills
+server/search.test.mjs    Tests for the skill search
+```
+
+**scripts/ and runpod/**
+
+```
+runpod/embed_esco_skills.py            Job A: embeds all ESCO skills with bge-m3 on a RunPod GPU Pod
+scripts/build_roles.py                 Builds data/roles.json (nine ESCO roles and their skills) from the ESCO files
+scripts/build_sdg_review.py            Builds the blind SDG review kit for two reviewers
+scripts/build_transferable_skills.py   Finds pairs of similar ESCO skills (threshold 0.85) for half-credit matches
+scripts/calibrate_sdg_osdg.py          Optional check of the SDG matcher against the public OSDG dataset
+scripts/check_dosm_jmi.py              Checks whether DOSM has published a newer quarter and says what to run next
+scripts/evaluate_sdg_review.py         Scores the review: agreement between reviewers and precision of the matchers
+scripts/fairness_audit.mjs             Fairness audit of the text intake (fictional descriptions with identity cues)
+scripts/import_anthropic_index.mjs     Imports the Anthropic Economic Index figures
+scripts/import_coursera_catalog.py     Downloads the Coursera course catalogue (course text only)
+scripts/import_dosm_jmi.py             Converts a DOSM Job Market Insights xlsx into a dated JSON snapshot
+scripts/import_gdelt_news.py           Imports GDELT headline metadata for the news page
+scripts/import_ilo_exposure.py         Reads ILO Table A1 from the PDF into JSON
+scripts/import_lfs_month.py            Imports the OpenDOSM monthly labour force data
+scripts/import_ms_ai_applicability.py  Imports the Microsoft Working with AI applicability scores
+scripts/match_courses_runpod.py        Matches courses to ESCO skills with RunPod embeddings (AI-matched, not hand-checked)
+scripts/match_sdg_runpod.py            Matches UN SDG targets to ESCO skills with RunPod embeddings
+```
+
+**data/**
+
+```
+data/derived/coursera-skill-matches.json      AI-matched Coursera courses per skill (name, link, stated workload, similarity)
+data/derived/coursera-spotcheck.md            Spot-check of the Coursera matches
+data/derived/esco/esco-skill-index.json       ESCO skill list in the order of the vectors
+data/derived/esco/esco-skill-vectors.f16.npy  bge-m3 vectors for 13,960 ESCO skills (RunPod Job A output)
+data/derived/esco/run-info.json               Job A run details (GPU type, time, model)
+data/derived/fairness-audit.json              Fairness audit results
+data/derived/fairness-audit.md                Fairness audit report shown in the app
+data/derived/sdg-skill-matches.json           Top SDG targets per role skill from RunPod embeddings
+data/derived/sdg-spotcheck.md                 Spot-check of the SDG matches
+data/derived/transferable-skills.json         Similar ESCO skill pairs for half-credit matches
+data/interests/role-interests.json            Work-interest profile of each role
+data/pathway/noss.json                        Hand-checked Malaysian NOSS/SKM routes
+data/pathway/resources.json                   Hand-checked course records with provider-stated times
+data/roles.json                               Nine adapted ESCO occupations with essential skills
+data/sdg/review/GUIDE.md                      Reviewer instructions (relevant / not relevant / uncertain)
+data/sdg/review/disagreements.csv             Pairs the two reviewers labelled differently
+data/sdg/review/key.csv                       Answer key of the review pairs
+data/sdg/review/results.md                    Review results: agreement, precision of each matcher
+data/sdg/review/review-A.csv                  Reviewer A labels
+data/sdg/review/review-B.csv                  Reviewer B labels
+data/sdg/review/skill-texts.json              ESCO text that was embedded
+data/sdg/sdg-links.json                       Short goal and target names used on screen
+data/sdg/sdg-review.json                      Team-reviewed SDG links the app uses
+data/sources/anthropic-economic-index.json    Anthropic Economic Index snapshot
+data/sources/dosm-jmi-2026-q1.json            DOSM Job Market Insights Q1 2026 snapshot
+data/sources/dosm-jmi-2026-q2.json            DOSM Job Market Insights Q2 2026 snapshot
+data/sources/gdelt-news.json                  GDELT news snapshot
+data/sources/ilo-genai-exposure-2025.json     ILO generative AI exposure, Table A1
+data/sources/ms-ai-applicability.json         Microsoft Working with AI applicability
+data/sources/news-topics.json                 Topic words for the news page
+data/sources/opendosm-lfs-month.json          OpenDOSM monthly labour force snapshot
+data/sources/role-soc.json                    Maps the nine roles to US SOC codes for the AI-impact views
+data/sources/un-sdg-targets.json              UN SDG target list
+```
+
+**submission/**
+
+```
+submission/README.md  Lists the required submission PDFs
 ```
 
 ### Architecture
@@ -161,10 +366,10 @@ curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/openai/v1/embeddings \
 | Name        | Role                | GitHub                                   |
 | ----------- | ------------------- | ---------------------------------------- |
 | Lee Yun Loong | Team Leader | [@kairos8232](https://github.com/kairos8232) |
-| Chiu Shiao Ying | Member | [@smallwinnn] (https://github.com/smallwinnn) |
-| Khoo Ji Sheng | Member | [@xdevilchild] (https://github.com/xdevilchild) |
-| Tan Kit Yiu | Member | [@kykityiu] (https://github.com/kykityiu) |
-| Yeap Wei Hong | Member | [@Nic2018] (https://github.com/Nic2018)  |
+| Chiu Shiao Ying | Member | [@smallwinnn](https://github.com/smallwinnn) |
+| Khoo Ji Sheng | Member | [@xdevilchild](https://github.com/xdevilchild) |
+| Tan Kit Yiu | Member | [@kykityiu](https://github.com/kykityiu) |
+| Yeap Wei Hong | Member | [@Nic2018](https://github.com/Nic2018)  |
 
 ---
 
@@ -187,103 +392,8 @@ This service uses the ESCO classification of the European Commission.
 
 This project is licensed under the [Apache License 2.0](LICENSE).
 
+
 ---
-
-## Detailed Project Notes
-
-### How people use the app
-
-A **fresh graduate** follows three steps: *Your CV* (paste or upload a CV; it is read in the browser, contact details are removed, and the app suggests ESCO skills for the person to tick), *A job ad* (paste an ad; its skills are sorted into on the CV, held but not shown, and still to build), and *Your plan* (ordered, checked courses and a Malaysian NOSS/SKM route where one exists). **Check my CV** works on its own, with no job ad. **Your moves** ranks nine ESCO roles with visible skill-fit, demand and AI-resilience parts, so a graduate can try another role. **Job market** holds the public tables (DOSM job ads, ILO AI exposure, AI impact by role, Signal sources).
-
-Someone **already working** picks their skills and a current role, then follows the same ranking and plan. **Team view** (HR and career centres) and **Region view** (a regional skills centre) use fictional groups only; the Region view shows SDG contribution in totals with no names. The interface supports English, Bahasa Malaysia and Chinese; ESCO names and provider course titles stay in English. There are no accounts and nothing is saved. Screen-by-screen behaviour is in [docs/SCREENS.md](docs/SCREENS.md).
-
-### Required features
-
-| Feature | Working in the prototype |
-| --- | --- |
-| Skills profile intake | Paste or upload a CV, or pick skills by a RunPod-assisted ESCO search or a searchable list; fictional profiles can be loaded |
-| AI-trend signal layer | Dated DOSM Q1 and Q2 2026 job-ad snapshots and ILO occupation exposure feed the role score; a daily check shows whether DOSM has published a newer quarter |
-| Future-role matching | Nine ESCO roles ranked with visible skill fit, demand and AI-resilience parts; exact, transferable and missing skills shown |
-| Personalised reskilling | Selected move produces ordered steps from hand-checked course records with provider-stated times, uncovered gaps and a sourced NOSS/SKM route where found |
-| SDG mapping | Skill and role links come from the team's blind review of two reviewers; chosen goals show in moves, plans and the Team and Region views |
-| Handling uncertainty | DOSM quarter and AI-speed switches show score and rank changes; 1,000 seeded simulated futures show how stable the top move is |
-
-**What makes it different:** public market evidence → demand and AI exposure → personal fit → skill gap → learning plan, with proof on screen that **changing the trend data changes the result**.
-
-### Data sources (all public, dated, attributed)
-
-| Signal | Source | In the repo |
-| --- | --- | --- |
-| Demand now (the updatable source) | DOSM *Big Data Analytics: Job Market Insights*, quarterly online job offers by occupation major group (Q2 2026 total: 555,509) | `data/sources/dosm-jmi-2026-q1.json`, `-q2.json` (`scripts/import_dosm_jmi.py`; `scripts/check_dosm_jmi.py` and `server/dosm.mjs` check for a new quarter) |
-| AI exposure | ILO Working Paper 140, *Generative AI and Jobs: A Refined Global Index of Occupational Exposure* (2025), Table A1: 427 occupations, 112 exposed | `data/sources/ilo-genai-exposure-2025.json` (`scripts/import_ilo_exposure.py`) |
-| Other AI-impact views | Microsoft *Working with AI* applicability; Anthropic Economic Index (shown beside ILO, not in the score) | `data/sources/ms-ai-applicability.json`, `anthropic-economic-index.json` |
-| Roles and skills | ESCO v1.2.1 (European Commission), nine adapted occupations | `data/roles.json` (`scripts/build_roles.py`) |
-| Skill search index | ESCO skills embedded with `BAAI/bge-m3` on a RunPod GPU: 13,960 skills in 92.5 s on an NVIDIA RTX A5000 | `data/derived/esco/` (`runpod/embed_esco_skills.py`) |
-| Labour and news context | OpenDOSM monthly labour force survey; GDELT headline metadata. Shown separately, never in a score | `data/sources/opendosm-lfs-month.json`, `gdelt-news.json` |
-| SDG targets | UN SDG target list (UNSD SDG API), reviewed by the team | `data/sources/un-sdg-targets.json`, `data/sdg/` |
-
-Every number on screen carries its source, date and geography. The *Signal sources* page lists them with dates read from the files.
-
-**Known limits:** DOSM gives vacancies by occupation major group only, so roles in one group share a demand signal, and only quarter-on-quarter change is used. ILO exposure means tasks *could* change, not that jobs disappear. Scores are estimates from stated weights, not forecasts of job loss.
-
-### Scoring
-
-The default score is `wF·F + wD·D + wR·R`, with every part shown on screen:
-
-- **F, skill fit:** `(exact + 0.5 × transferable) / essential skills`. *Transferable* means the person holds a different ESCO skill whose embedding is at least 0.85 similar; the pair is shown.
-- **D, demand trend:** `clamp(0.5 + quarter-on-quarter change, 0, 1)` for the role's DOSM major group.
-- **R, AI resilience:** `1 − ILO mean exposure`.
-
-| Scenario | wF | wD | wR |
-| --- | --- | --- | --- |
-| Gradually (moderate AI change) | 0.60 | 0.25 | 0.15 |
-| Quickly (fast AI change) | 0.50 | 0.20 | 0.30 |
-
-Two optional, off-by-default switches can add work-interest fit and chosen-SDG fit. The full rule, data shapes and worked example are in [docs/SIGNALS_AND_MATCHING.md](docs/SIGNALS_AND_MATCHING.md).
-
-**Proof that trends matter** (measured on the live app, 24 Oct 2026, with the fictional graduate's skills): switching the DOSM quarter from Q2 to Q1 moves Accountant from 3rd to 2nd and Financial analyst from 5th to 3rd; switching the AI speed from Gradually to Quickly moves Sustainability manager from 6th to 2nd. The best-move shares from the 1,000 simulated futures stay the same, because those futures already cover every AI speed and both quarters. The DOSM data itself changes between quarters: for example Professionals −9.5% and Clerical support −17.2% from Q1 to Q2 2026.
-
-### Where AI is used: RunPod
-
-RunPod is a required part of the build ([docs/RUNPOD_SETUP.md](docs/RUNPOD_SETUP.md)). One open-weights multilingual model, `BAAI/bge-m3`, is used only to match text to existing records:
-
-1. **Job A (GPU Pod, run once):** embedded every ESCO skill (RTX A5000, 92.5 s).
-2. **Job B (Serverless endpoint, live):** embeds the person's CV lines, job-ad lines or own description (English, Bahasa Malaysia or Chinese); the server returns the nearest real ESCO skills and the person confirms which are true. It also picks key news headlines and matches Coursera courses and SDG targets to skills offline.
-
-The model never creates roles, courses, statistics or scores. If the endpoint is unavailable, the person picks skills from a searchable list. A published fairness audit of the text intake is in [data/derived/fairness-audit.md](data/derived/fairness-audit.md).
-
-### Data, evidence and AI guardrails
-
-- **Public, open or synthetic data only;** no real CVs or personal records anywhere.
-- **Every signal shows** name, date, geography and link; scoring rules and limits are documented.
-- **No invented data:** job titles, courses, statistics and SDG links are checked or reviewed, never generated.
-- **AI forecasts** are shown as scenarios and estimates, and human career decisions stay with the person; the app does not automate hiring decisions.
-- **Disclosure:** `BAAI/bge-m3` and its retrieval-only purpose, and the AI development tools used, are declared in the Technical & Tools Declaration.
-
-### Repository map
-
-```text
-├── src/            # React app: screens, scoring, CV checks, learning plan, futures simulator (+ tests)
-├── server/         # Node server: static site and API routes (skills, news, labour force, DOSM check) (+ tests)
-├── data/           # Source snapshots, ESCO roles and vectors, courses, SDG review, fairness audit
-├── scripts/        # Importers, RunPod matchers, SDG review kit, fairness audit
-├── runpod/         # Job A: embed ESCO skills on a GPU Pod
-├── docs/           # Product scope, screens, scoring rules, checklist and progress log
-├── submission/     # Required submission PDFs
-├── skills/         # Project UX notes for coding agents
-├── CLAUDE.md       # Context and rules for coding agents
-└── replit.md       # Replit run and publish notes
-```
-
-### Running locally and rebuilding data
-
-Use Node.js 20 or newer: `npm ci`, then `npm start` (development, port 5173), `npm test`, `npm run build`, and `npm run serve` (production server on port 5000). Live skill search needs `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` in the server environment; without them the person picks skills from the list. On Replit, press **Pull** and then **Run**; do not commit lockfile changes that point to Replit's internal package mirror.
-
-Raw source files go in `data/raw/` (gitignored); each snapshot's `source` block has the download link. Importer commands are listed at the top of each script, for example `python3 scripts/import_dosm_jmi.py <xlsx> <release date> <download date>`.
-
-### Hackathon deliverables
-
-The preliminary round (due **25 October 2026, 7:59:59 AM MYT** via sdchack.my) asks for the product requirement document, pitch slides, a working prototype link, the Technical & Tools Declaration, this public repository with an Apache 2.0 `LICENSE`, and a 5–7 minute YouTube video. The documents are in [`submission/`](submission/). No API keys, passwords or personal data are in the repository.
 
 ## Acknowledgements
 

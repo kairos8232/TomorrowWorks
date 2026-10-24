@@ -380,7 +380,7 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 - **News: yes, as context, not demand.** GDELT DOC API (free, no key, Malaysian sources) on *Workplace changes*: dated headlines with links and topic tags. It never changes scores — news volume is not job demand.
 - **Fresher official figure:** OpenDOSM monthly Labour Force Survey (`lfs_month`) as context on *Demand*.
 - **ESCO in Malaysia: yes.** ESCO, ILO and DOSM share ISCO-08 codes and MASCO 2020 follows ISCO-08, so codes join directly. ESCO lacks Malaysian qualifications, so **NOSS/SKM** (JPK) is added to the pathway as the local certification route.
-- **Plan updated:** [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026-0230) (Wed: Job B live, 6d news, 6e LFS; Thu: pathway 10a–10d with NOSS, SDG 11; Fri: buffer, PRD and slides drafts; Sat: finalise and submit), [API_PLAN.md](API_PLAN.md#next-sources-decided-21-oct-2026-0224) (roles and boundaries of each source), [CHECKLIST.md](CHECKLIST.md) (6d, 6e, 10d) and [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#planned-additions-21-oct-2026).
+- **Plan updated:** BUILD_STAGES.md (Wed: Job B live, 6d news, 6e LFS; Thu: pathway 10a–10d with NOSS, SDG 11; Fri: buffer, PRD and slides drafts; Sat: finalise and submit), API_PLAN.md (roles and boundaries of each source), CHECKLIST.md (6d, 6e, 10d) and [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#planned-additions-21-oct-2026).
 
 ---
 
@@ -558,8 +558,8 @@ What was done, why, and what is still open. Newest entry first. Add an entry whe
 **Done in this entry:**
 - **Verified the eight candidate role codes** against ESCO `ISCOGroups_en.csv` and ILO Table A1; all present. ILO scores added to the role table in [SIGNALS_AND_MATCHING.md](SIGNALS_AND_MATCHING.md#candidate-roles). The demo user's current job (4311, 0.64) is the most exposed; Environmental protection professionals (2133, 0.38) the least. MASCO 2020 check still open.
 - **Fixed the DOSM importer** to store the release date (`publishedAt`), which the brief requires on every source. It now takes three arguments: file, release date, download date. Regenerated both snapshots: Q1 published 2026-06-25 (date of DOSM's Q1 release file and press coverage; confirm on the release page), Q2 2026-08-18 (release page).
-- **Ticked verified checklist items** in [CHECKLIST.md](CHECKLIST.md): Stage 1 (Replit/RunPod split, sample import, measure label, risks), Stage 2 (GPU task chosen), Stage 5 (repeatable import, metadata, refresh command). DOSM reuse terms remain unchecked.
-- **Wrote the day-by-day plan** in [BUILD_STAGES.md](BUILD_STAGES.md#next-selection-updated-21-oct-2026), with a drop order if time runs short.
+- **Ticked verified checklist items** in CHECKLIST.md: Stage 1 (Replit/RunPod split, sample import, measure label, risks), Stage 2 (GPU task chosen), Stage 5 (repeatable import, metadata, refresh command). DOSM reuse terms remain unchecked.
+- **Wrote the day-by-day plan** in BUILD_STAGES.md, with a drop order if time runs short.
 
 **Next step (Wed 21):** ILO importer → ESCO roles importer → scoring module with the worked-example unit test → import the repo into Replit.
 
