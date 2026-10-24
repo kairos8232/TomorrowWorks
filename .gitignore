@@ -4,3 +4,19 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+.agents/skills/impeccable/
+.codex/hooks.json
+
+# Official source files: download from the URLs in data/sources/*.json
+data/raw/
+
+# Never commit: credentials, keys, and account evidence
+*.pem
+*.key
+.runpod/
+secrets*
+# RunPod/Replit dashboard screenshots go in the Tools Declaration, not the repo
+evidence/
+# Downloaded archives (unzip into data/derived/ instead)
+*.zip
+__pycache__/

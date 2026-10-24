@@ -1,0 +1,3780 @@
+{
+  "source": {
+    "name": "ESCO v1.2.1 classification (English)",
+    "publisher": "European Commission",
+    "url": "https://esco.ec.europa.eu/en/use-esco/download",
+    "version": "v1.2.1 (last update 10 Dec 2025)",
+    "retrievedAt": "2026-10-21",
+    "acknowledgement": "This service uses the ESCO classification of the European Commission.",
+    "adaptation": "Adapted selection: nine ESCO occupations chosen for the TomorrowWorks demo; skills and flags copied unchanged from ESCO. Not an official ESCO product.",
+    "licence": "Commission Decision 2011/833/EU (free reuse with acknowledgement)"
+  },
+  "roles": [
+    {
+      "id": "billing-clerk",
+      "title": "billing clerk",
+      "escoUri": "http://data.europa.eu/esco/occupation/bafbc672-0ad9-41af-9de8-db0c91a24f9b",
+      "escoCode": "4311.1",
+      "isco": "4311",
+      "iscoMajorGroup": "4",
+      "description": "Billing clerks create credit memos, invoices and monthly customer statements and issue them to customers by all necessary means. They update customer files accordingly.",
+      "whyInDemoSet": "Clerical end of the path; ISCO 4311 is in the ILO's highest exposure gradient.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/28a2ff4b-5f99-448e-8bd7-fb836166e95f",
+          "label": "allocate bills",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3d427a49-4f85-42cd-8a92-62d4a34f41a1",
+          "label": "file documents",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8d49f760-3765-4612-8d40-a2bdd50738fe",
+          "label": "fill out forms",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/811bdb9d-5bf7-4b5a-a3f5-4fc2002f6d57",
+          "label": "financial capability",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/39e43f7c-a95e-4583-be76-bb134ccce1ae",
+          "label": "financial department processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/68b51538-b056-4cb3-bb15-ab8c3e576cc9",
+          "label": "follow up accounts receivables",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f7e7ccb6-fadc-4c35-935d-e1040be40dfe",
+          "label": "handle financial transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/95fc86de-8e74-4753-9344-281179aa74b0",
+          "label": "maintain credit history of clients",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c753a3b5-d5cc-406d-adfe-3372bb267f4b",
+          "label": "maintain customer records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/faf8943c-72ff-4736-a587-25508695d6f0",
+          "label": "maintain financial records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3e04e39d-9eb6-4167-ad2d-e3413f647e4e",
+          "label": "organise business documents",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/71dde84c-0058-4c52-a556-523369333db8",
+          "label": "use office systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/36570124-e778-4213-862e-c4059eb5c224",
+          "label": "assess debtor's financial situation",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/de2f0ce8-f8d6-48c5-a213-4d065251cecf",
+          "label": "communicate by telephone",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0da516ee-e70e-4384-be13-f5ff80be8127",
+          "label": "communicate with customers",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/42cad89f-afd4-4418-8439-8ce87eff1f26",
+          "label": "count money",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dd7c9dfd-6e2c-46fd-aefc-369402d0200c",
+          "label": "create a financial report",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/63321ecf-4fc6-44d9-88f1-5373a4f3038a",
+          "label": "handle petty cash",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b",
+          "label": "interpret financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/34e0f023-0ca9-4f64-a932-3248bb4ed5df",
+          "label": "interview bank loanees",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022",
+          "label": "manage accounts",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580",
+          "label": "prepare financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bdcac0c8-b77a-4640-9eaf-c0cf3efd1e23",
+          "label": "process payments",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1973c966-f236-40c9-b2d4-5d71a89019be",
+          "label": "use spreadsheets software",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        }
+      ]
+    },
+    {
+      "id": "accounting-assistant",
+      "title": "accounting assistant",
+      "escoUri": "http://data.europa.eu/esco/occupation/bfe142b9-a049-4d41-89c4-fd2f34ac56b6",
+      "escoCode": "3313.1",
+      "isco": "3313",
+      "iscoMajorGroup": "3",
+      "description": "Accounting assistants record and report ticketing accounting situations to the accountant they work with, verify deposits and prepare daily reports and income. They arrange authorised refund vouchers, maintain the returned check accounts and communicate with ticketing managers concerning about any issues with ticketing systems.",
+      "whyInDemoSet": "The demo user's current job: junior accounting work.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/08371fe9-c658-4f6a-966f-71dbb0ab683d",
+          "label": "accounting department processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/99b163e8-7815-43e2-83f3-a47f3076354c",
+          "label": "accounting entries",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/880c54f9-866e-4f37-b5fa-25ef8a7d49b6",
+          "label": "accounting techniques",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/28a2ff4b-5f99-448e-8bd7-fb836166e95f",
+          "label": "allocate bills",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e9030465-13c5-46d2-bdae-c2c1a9dbec86",
+          "label": "attach accounting certificates to accounting transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2ff405ec-f59c-4a7b-84b6-9776a49582c4",
+          "label": "bookkeeping regulations",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1ebff6-98ec-411f-a1d4-0bf04bd03bdf",
+          "label": "check accounting records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/64be6a06-52e8-4f5c-b64d-caa516cfa291",
+          "label": "depreciation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/83e97138-899a-4af8-9187-47823e875841",
+          "label": "follow the statutory obligations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/68b51538-b056-4cb3-bb15-ab8c3e576cc9",
+          "label": "follow up accounts receivables",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8a326ee1-169c-4c44-b38b-8f1bb20ec79b",
+          "label": "identify accounting errors",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e3e42d54-78bd-4337-aa87-bb31a7670c9a",
+          "label": "issue sales invoices",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/faf8943c-72ff-4736-a587-25508695d6f0",
+          "label": "maintain financial records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/658a38bd-6954-4a2a-945c-42330c5d13b9",
+          "label": "manage corporate bank accounts",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e717b036-2c0c-4c11-99e9-0cb4ce084fed",
+          "label": "perform account allocation",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88",
+          "label": "perform business research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/eaa9727c-df1e-407a-85d3-48cc71508bc2",
+          "label": "prepare trial accounting balances",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d669af41-756c-48d9-a286-1443253f54b1",
+          "label": "tax legislation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a0d79341-8398-4019-ad1b-27888ec35aaa",
+          "label": "use accounting systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/71dde84c-0058-4c52-a556-523369333db8",
+          "label": "use office systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/3c209873-c757-47bb-91b5-9b6dc05df116",
+          "label": "banking activities",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2ecf90f1-c511-464b-b26f-598d69182c70",
+          "label": "calculate tax",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f75b740c-b36c-495e-bc67-efe347bbc6b5",
+          "label": "company policies",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0dd4d328-f015-463d-9a7e-06b7041f0b26",
+          "label": "consumer goods industry",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b8656b5c-e3f0-4418-82ff-87b5f677f9e8",
+          "label": "disseminate information on tax legislation",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1",
+          "label": "financial statements",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f7e7ccb6-fadc-4c35-935d-e1040be40dfe",
+          "label": "handle financial transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b",
+          "label": "interpret financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/08fe5910-8c4c-4679-a988-eb2ded3c4909",
+          "label": "labour legislation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e345cf05-bc6b-43a6-aca3-2f9c1ec0e772",
+          "label": "maintain register of shareholders",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/047fcf0a-2936-49fb-b4eb-97cdd8d09d0b",
+          "label": "maintain statutory books",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022",
+          "label": "manage accounts",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3982571a-e9ce-442a-a4a0-fdfc97727091",
+          "label": "manage cash desk",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3ee090a1-9d1c-44ed-bd93-f6b7c9b68a97",
+          "label": "manage payroll reports",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dc417e19-edb4-4401-883a-2375f67a162f",
+          "label": "manage the general ledger",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c5b90c0c-3af0-4c8c-a06c-cc3ced02242c",
+          "label": "perform cost accounting activities",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7e305865-5b6d-4225-a4f7-ee5c10aaa134",
+          "label": "perform dunning activities",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580",
+          "label": "prepare financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/22a173f5-868c-4d82-87e6-beed500ce070",
+          "label": "prepare tax returns forms",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833",
+          "label": "statistics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        }
+      ]
+    },
+    {
+      "id": "bookkeeper",
+      "title": "bookkeeper",
+      "escoUri": "http://data.europa.eu/esco/occupation/c3aae59e-1441-4b3e-bdd1-6da50dc7cf42",
+      "escoCode": "3313.2",
+      "isco": "3313",
+      "iscoMajorGroup": "3",
+      "description": "Bookkeepers record and assemble the day-to-day financial transactions of an organisation or company, consisting usually of sales, purchases, payments and receipts. They ensure all financial transactions are documented in the appropriate (day) book and general ledger, and that they are balanced out. Bookkeepers prepare the recorded books and ledgers with financial transactions for an accountant to then analyse balance sheets and income statements.",
+      "whyInDemoSet": "Sibling role at the same level.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/08371fe9-c658-4f6a-966f-71dbb0ab683d",
+          "label": "accounting department processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/99b163e8-7815-43e2-83f3-a47f3076354c",
+          "label": "accounting entries",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/880c54f9-866e-4f37-b5fa-25ef8a7d49b6",
+          "label": "accounting techniques",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e9030465-13c5-46d2-bdae-c2c1a9dbec86",
+          "label": "attach accounting certificates to accounting transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2ff405ec-f59c-4a7b-84b6-9776a49582c4",
+          "label": "bookkeeping regulations",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d63c2bad-817d-4116-b4d8-b927cb01212d",
+          "label": "commercial law",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f75b740c-b36c-495e-bc67-efe347bbc6b5",
+          "label": "company policies",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/64be6a06-52e8-4f5c-b64d-caa516cfa291",
+          "label": "depreciation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1",
+          "label": "financial statements",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/83e97138-899a-4af8-9187-47823e875841",
+          "label": "follow the statutory obligations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8a326ee1-169c-4c44-b38b-8f1bb20ec79b",
+          "label": "identify accounting errors",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/faf8943c-72ff-4736-a587-25508695d6f0",
+          "label": "maintain financial records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dc417e19-edb4-4401-883a-2375f67a162f",
+          "label": "manage the general ledger",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/585ed991-fdab-4f3c-9187-a32bfb7ab822",
+          "label": "perform balance sheet operations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580",
+          "label": "prepare financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/eaa9727c-df1e-407a-85d3-48cc71508bc2",
+          "label": "prepare trial accounting balances",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d669af41-756c-48d9-a286-1443253f54b1",
+          "label": "tax legislation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a0d79341-8398-4019-ad1b-27888ec35aaa",
+          "label": "use accounting systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/28a2ff4b-5f99-448e-8bd7-fb836166e95f",
+          "label": "allocate bills",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6451e645-67b5-4cc7-aafd-fab19629fa82",
+          "label": "archive documentation related to work",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2ecf90f1-c511-464b-b26f-598d69182c70",
+          "label": "calculate tax",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d6e78d9a-deca-4bcb-b08d-011b2616758d",
+          "label": "ensure compliance with accounting conventions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/39e43f7c-a95e-4583-be76-bb134ccce1ae",
+          "label": "financial department processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/68b51538-b056-4cb3-bb15-ab8c3e576cc9",
+          "label": "follow up accounts receivables",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f7e7ccb6-fadc-4c35-935d-e1040be40dfe",
+          "label": "handle financial transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/63321ecf-4fc6-44d9-88f1-5373a4f3038a",
+          "label": "handle petty cash",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b",
+          "label": "interpret financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e3e42d54-78bd-4337-aa87-bb31a7670c9a",
+          "label": "issue sales invoices",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/08fe5910-8c4c-4679-a988-eb2ded3c4909",
+          "label": "labour legislation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022",
+          "label": "manage accounts",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3982571a-e9ce-442a-a4a0-fdfc97727091",
+          "label": "manage cash desk",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3ee090a1-9d1c-44ed-bd93-f6b7c9b68a97",
+          "label": "manage payroll reports",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3e04e39d-9eb6-4167-ad2d-e3413f647e4e",
+          "label": "organise business documents",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/22a173f5-868c-4d82-87e6-beed500ce070",
+          "label": "prepare tax returns forms",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833",
+          "label": "statistics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/147170ba-0141-4337-89af-b4513d745afe",
+          "label": "support development of annual budget",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        }
+      ]
+    },
+    {
+      "id": "accountant",
+      "title": "accountant",
+      "escoUri": "http://data.europa.eu/esco/occupation/eda0d957-3c3c-4139-b89a-a18bc9e18897",
+      "escoCode": "2411.1",
+      "isco": "2411",
+      "iscoMajorGroup": "2",
+      "description": "Accountants review and analyse financial statements, budgets, financial reports, and business plans in order to check for irregularities resulting from error or fraud, and provide their clients with financial advice in matters such as financial forecasting and risk analysis. They may audit financial data, resolve insolvency cases, prepare tax returns and provide other tax-related advice in reference to current legislation.",
+      "whyInDemoSet": "Promotion path; accountants are a top-five advertised job in DOSM's Q2 2026 release.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/08371fe9-c658-4f6a-966f-71dbb0ab683d",
+          "label": "accounting department processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/99b163e8-7815-43e2-83f3-a47f3076354c",
+          "label": "accounting entries",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/880c54f9-866e-4f37-b5fa-25ef8a7d49b6",
+          "label": "accounting techniques",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8a43795b-bb38-4f29-91df-a6c92ad4643c",
+          "label": "analyse financial performance of a company",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e9030465-13c5-46d2-bdae-c2c1a9dbec86",
+          "label": "attach accounting certificates to accounting transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2ff405ec-f59c-4a7b-84b6-9776a49582c4",
+          "label": "bookkeeping regulations",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2ecf90f1-c511-464b-b26f-598d69182c70",
+          "label": "calculate tax",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1ebff6-98ec-411f-a1d4-0bf04bd03bdf",
+          "label": "check accounting records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d63c2bad-817d-4116-b4d8-b927cb01212d",
+          "label": "commercial law",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/64be6a06-52e8-4f5c-b64d-caa516cfa291",
+          "label": "depreciation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b5cb259e-83e7-48f5-950e-245d5b5fd6d0",
+          "label": "draft accounting procedures",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d6e78d9a-deca-4bcb-b08d-011b2616758d",
+          "label": "ensure compliance with accounting conventions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/cb059032-dd34-4761-a786-98cfb9d0efe3",
+          "label": "explain accounting records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/39e43f7c-a95e-4583-be76-bb134ccce1ae",
+          "label": "financial department processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1",
+          "label": "financial statements",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/83e97138-899a-4af8-9187-47823e875841",
+          "label": "follow the statutory obligations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/541cdc23-1eec-4520-81fc-3392eaf538ed",
+          "label": "fraud detection",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8a326ee1-169c-4c44-b38b-8f1bb20ec79b",
+          "label": "identify accounting errors",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b",
+          "label": "interpret financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e2e15494-65b9-4af5-8b86-53fb51e7e022",
+          "label": "manage accounts",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/585ed991-fdab-4f3c-9187-a32bfb7ab822",
+          "label": "perform balance sheet operations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/60f51172-37c0-4933-a27a-cbf55dcd7580",
+          "label": "prepare financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/22a173f5-868c-4d82-87e6-beed500ce070",
+          "label": "prepare tax returns forms",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/eaa9727c-df1e-407a-85d3-48cc71508bc2",
+          "label": "prepare trial accounting balances",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833",
+          "label": "statistics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d669af41-756c-48d9-a286-1443253f54b1",
+          "label": "tax legislation",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/79c36c91-28a5-44b7-ab9b-7093b2d4b21e",
+          "label": "advise on financial matters",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0efbe2dc-2770-47ec-b8f4-d1bdff6ac0a4",
+          "label": "advise on risk management",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6f8f86f8-0ef9-4dd6-8e29-7d790e65706b",
+          "label": "calculate production costs",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/153517bb-84ef-45f1-a185-1d427792026d",
+          "label": "check the production schedule",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/89ff28d6-342c-435d-83aa-83e71dbbbc96",
+          "label": "conduct financial audits",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1d0c2220-6855-4689-aeea-16c9c615b284",
+          "label": "consult with motion picture producer",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/24229e89-9e1d-4c1a-ae23-c64777b152ce",
+          "label": "consult with production director",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b8656b5c-e3f0-4418-82ff-87b5f677f9e8",
+          "label": "disseminate information on tax legislation",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6556cbf1-d5c0-4f53-89a9-8707066069a6",
+          "label": "evaluate budgets",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b08ec8ff-1a3e-4cc3-8016-9520b21666a6",
+          "label": "exert expenditure control",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/493b20c2-c435-449a-896e-0af057c41fef",
+          "label": "film production process",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4b2db903-cd8e-48ce-97fb-a92db4def54e",
+          "label": "financial forecasting",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f7e7ccb6-fadc-4c35-935d-e1040be40dfe",
+          "label": "handle financial transactions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/91003b4a-f2aa-4472-a9c1-4597abb518f2",
+          "label": "insolvency law",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4a855abe-ac5b-4e95-ac10-3c1adceeee28",
+          "label": "international financial reporting standards",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e2161b42-46f4-4b62-8136-c190edce56fc",
+          "label": "keep track of expenses",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/24e67151-ff7e-43e2-99c0-424a758278a4",
+          "label": "liaise with auditors",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/781797f4-c2c3-49a4-a80d-eb81eb4f818c",
+          "label": "liquidity management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/21c5790c-0930-4d74-b3b0-84caf5af12ea",
+          "label": "manage budgets",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/658a38bd-6954-4a2a-945c-42330c5d13b9",
+          "label": "manage corporate bank accounts",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ab6265f2-a9bf-49e8-a9a5-67cbab4de38b",
+          "label": "manage inventory",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3ee090a1-9d1c-44ed-bd93-f6b7c9b68a97",
+          "label": "manage payroll reports",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3e28860e-f520-461d-8282-a32264c4f4a1",
+          "label": "manage revenue",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d52487b0-cb03-4f41-a269-40c718018c2c",
+          "label": "monitor after sales records",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d0c425c6-e3de-465e-923d-d4d30ec4be9b",
+          "label": "national generally accepted accounting principles",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c5b90c0c-3af0-4c8c-a06c-cc3ced02242c",
+          "label": "perform cost accounting activities",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7e305865-5b6d-4225-a4f7-ee5c10aaa134",
+          "label": "perform dunning activities",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1dd23dba-dd00-45ab-abf4-642902538317",
+          "label": "perform risk analysis",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3e9b580d-811b-48df-a5d1-a7bdd26f901f",
+          "label": "prepare financial auditing reports",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/72c02483-714c-47de-a3ff-870c5eb634d0",
+          "label": "resolve difficult account allocation cases",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/147170ba-0141-4337-89af-b4513d745afe",
+          "label": "support development of annual budget",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        }
+      ]
+    },
+    {
+      "id": "financial-analyst",
+      "title": "financial analyst",
+      "escoUri": "http://data.europa.eu/esco/occupation/8d586ee9-0ab1-4155-a3b0-2ca786c8e48c",
+      "escoCode": "2413.1",
+      "isco": "2413",
+      "iscoMajorGroup": "2",
+      "description": "Financial analysts conduct economic research and elicit valuable analyses on financial matters such as profitability, liquidity, solvency, and asset management. They provide recommendations on financial matters for decision-making processes. Financial analysts work in both the public and the private sector.",
+      "whyInDemoSet": "Analytics move with high exposure: a useful contrast.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/ecc18804-a466-40d9-98b4-fba5cd67dd4b",
+          "label": "accounting",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/79c36c91-28a5-44b7-ab9b-7093b2d4b21e",
+          "label": "advise on financial matters",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b02b38c4-d46d-44da-9479-1310060bd74d",
+          "label": "asset management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/98a1dec3-8138-4f46-a596-5e2a83b884b9",
+          "label": "business analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9e84a506-df06-4be3-874a-fa01293e3dd5",
+          "label": "business processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d41262ae-eca1-4ede-89a8-46d2d99a7a31",
+          "label": "consider economic criteria in decision making",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dd7c9dfd-6e2c-46fd-aefc-369402d0200c",
+          "label": "create a financial report",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/629685b8-5f9e-4522-8cff-b3e2c4ec625a",
+          "label": "digital data processing",
+          "type": "unspecified",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/88af9294-b697-4687-ae19-aefbb6234dfa",
+          "label": "economics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f6ac6241-adb2-4ce2-b35f-09832cbb11ea",
+          "label": "empirical analysis",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/52e53619-fa77-4f72-b237-5e4aae784dc2",
+          "label": "financial management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9c6974e1-8d8b-43e9-b6b0-75da7634bfc9",
+          "label": "fundamental analysis",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b",
+          "label": "interpret financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/49047409-9307-4b41-9b04-a9615f049044",
+          "label": "investment banking",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d1910ad7-0c87-4f38-8a41-7c193e5dc16d",
+          "label": "macroeconomics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7cacd304-996d-47d1-88ef-4ddb9ce102bd",
+          "label": "microeconomics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e3c7bd87-edc1-4d9a-a3d5-36415de1aac6",
+          "label": "offer financial services",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/27ed854c-15b8-4ba2-90e9-ae888a219703",
+          "label": "perform business analysis",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88",
+          "label": "perform business research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d37bc902-f640-48d7-9db4-544db9aa65fa",
+          "label": "prepare financial projections",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6360a934-cc87-4954-9656-b32db20592e3",
+          "label": "quantitative analysis",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833",
+          "label": "statistics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4b3ae518-6746-4487-8d3b-4cfc063a43d0",
+          "label": "use business simulation tools",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/161a6c5a-593a-4977-b7b7-49c6a2a2f2a3",
+          "label": "advise on tax planning",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8a43795b-bb38-4f29-91df-a6c92ad4643c",
+          "label": "analyse financial performance of a company",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/eb8babfb-ab91-4937-a032-6a79f82e9b7f",
+          "label": "analyse financial risk",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e95058a6-e139-42e7-a470-72038a606649",
+          "label": "assess financial viability",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7d35602d-bc94-4975-aa7c-f4e8e05ce8e0",
+          "label": "cost management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/56ff27ef-2565-45bf-a70c-f06d78d2a480",
+          "label": "create a financial plan",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/452c4c68-50d7-42ed-8c4e-b437446637d0",
+          "label": "develop investment portfolio",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/99c45fa5-093a-4fb9-b682-4ca46e552e33",
+          "label": "develop transportation cost metrics",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/da629999-d226-4ff3-9e1a-01788132664f",
+          "label": "ensure compliance with disclosure criteria of accounting information",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0f5bd097-ed76-47f7-8f44-93be67967b5f",
+          "label": "explain financial jargon",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4b2db903-cd8e-48ce-97fb-a92db4def54e",
+          "label": "financial forecasting",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0bd4c62a-c309-467e-be76-8403b3f3a1a8",
+          "label": "financial products",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8b0f73ff-d36b-4196-bb83-464c3a6ef07d",
+          "label": "game theory",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/86f0bb12-6491-4be7-8306-c88900e91a63",
+          "label": "green bonds",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7eb4c570-9dc7-4f4d-83d2-f4c4c87b6e49",
+          "label": "handle mergers and acquisitions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c2617b44-886a-485e-8393-bc0fc6339539",
+          "label": "management consulting",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/075c68d7-efe4-4466-be4a-9acc726504df",
+          "label": "mergers and acquisitions",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c35b19ad-b06f-44e8-be9f-c20c68750346",
+          "label": "monitor loan portfolio",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b078d38c-7dd4-4efc-b333-7633d8bf6259",
+          "label": "monitor stock market",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/48b68726-0fd6-4e03-a5eb-82236516ee7a",
+          "label": "provide cost benefit analysis reports",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f4cd7802-123a-4bd5-9bfa-bf915a04e969",
+          "label": "public offering",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b895bd42-0009-4815-a150-eb9eb5caec21",
+          "label": "stock market",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/203083ca-b051-4c28-8986-fc8731bacee5",
+          "label": "sustainable finance",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0edaab25-1b72-4531-950d-d8b9a9f4a1c8",
+          "label": "treasury management system",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        }
+      ]
+    },
+    {
+      "id": "business-analyst",
+      "title": "business analyst",
+      "escoUri": "http://data.europa.eu/esco/occupation/60082a99-d8ef-4e84-9290-78902681b6ed",
+      "escoCode": "2421.1",
+      "isco": "2421",
+      "iscoMajorGroup": "2",
+      "description": "Business analysts research and understand the strategic position of businesses and companies in relation to their markets and their stakeholders. They analyse and present their views on how the company, from many perspectives, can improve its strategic position and internal corporate structure. They assess needs for change, communication methods, technology, IT tools, new standards and certifications.",
+      "whyInDemoSet": "Process and transformation move.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/8bc75dce-beba-40f9-93fc-66c9708ed74b",
+          "label": "advise on efficiency improvements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ee7f90cc-922e-4da7-a7ae-83c2688fed10",
+          "label": "align efforts towards business development",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5da3c765-10a3-49eb-934c-ec401ceb1a34",
+          "label": "analyse business plans",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ce5b1446-b5e3-4f05-a5ac-83f2ee142a44",
+          "label": "analyse external factors of companies",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8a43795b-bb38-4f29-91df-a6c92ad4643c",
+          "label": "analyse financial performance of a company",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/91816e1a-d026-4d21-9b1c-59ca5cf488de",
+          "label": "analyse internal factors of companies",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3c03ee71-4a23-448f-b79e-81fd75d27dca",
+          "label": "apply change management",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dc72ad0a-c5dc-4abd-bc0d-ca43e82162e1",
+          "label": "build business relationships",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/633a3637-2c6b-40ae-ac38-289eb2a62aa6",
+          "label": "business analysis",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/98a1dec3-8138-4f46-a596-5e2a83b884b9",
+          "label": "business analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b17f4305-741a-4a1c-8fe8-6f11cb3d5c0a",
+          "label": "business communication",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fa465db3-56e8-4b5d-a781-e2a313a4ed2d",
+          "label": "conduct qualitative research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8316979b-df5a-4dc7-98ef-61ec6a10df84",
+          "label": "conduct quantitative research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/65e58886-bd1e-4c5b-8ca5-8d9b353c8aa1",
+          "label": "data visualisation software",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/629685b8-5f9e-4522-8cff-b3e2c4ec625a",
+          "label": "digital data processing",
+          "type": "unspecified",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/43d1d56b-ce62-4fe8-8f18-35d92ec73023",
+          "label": "identify undetected organisational needs",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5f1d1319-7954-4a9b-90c7-57668e3a0d4b",
+          "label": "interpret financial statements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97e",
+          "label": "liaise with managers",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f60c9e52-95fc-4ca1-a73c-18a491153b63",
+          "label": "make strategic business decisions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c2617b44-886a-485e-8393-bc0fc6339539",
+          "label": "management consulting",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ff599c4c-f7bc-44fc-b75f-eea4b7178692",
+          "label": "management systems standards",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8770350e-746f-4adb-9556-18ca68104be6",
+          "label": "market research",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/27ed854c-15b8-4ba2-90e9-ae888a219703",
+          "label": "perform business analysis",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6eff134b-e34f-4d6e-a6e8-5e47cf2228d0",
+          "label": "risk management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ed3f3dba-3a35-4ed5-b113-67f4d10ef4c8",
+          "label": "scientific research methodology",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4b3ae518-6746-4487-8d3b-4cfc063a43d0",
+          "label": "use business simulation tools",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/7b3abd38-61ae-42a4-88bb-0884784f9ee1",
+          "label": "advise client on technical possibilities",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/69f36674-440a-4fa0-89f9-1b70172ebb9d",
+          "label": "advise on communication strategies",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/79c36c91-28a5-44b7-ab9b-7093b2d4b21e",
+          "label": "advise on financial matters",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d2dc31f1-720c-4757-bc1b-9e563d264dcf",
+          "label": "advise on organisational culture",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1212ac42-2564-4fce-80e1-6ce4ea4d9bf5",
+          "label": "advise on personnel management",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0efbe2dc-2770-47ec-b8f4-d1bdff6ac0a4",
+          "label": "advise on risk management",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/143769cb-b61e-47d8-a61e-eedfbec1016c",
+          "label": "business intelligence",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/341c4478-c976-4ff0-a102-cfd92174d873",
+          "label": "business law",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/98301d4a-2cc3-439d-8d7f-0b6ac76302bb",
+          "label": "business process modelling",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bd698bbe-7003-4508-b422-46c2ff4d5e95",
+          "label": "business strategy concepts",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d77d7685-04fb-43a4-a1ac-09a10811f646",
+          "label": "corporate law",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d53b04fb-1bbb-4a25-92f8-8ceb308d276f",
+          "label": "define organisational standards",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4a460161-eaea-4fe2-bd0e-164ccc635be1",
+          "label": "financial statements",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/66d47084-9437-48b2-819b-c4c8214ed650",
+          "label": "interview people",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/49047409-9307-4b41-9b04-a9615f049044",
+          "label": "investment banking",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/812590e4-7108-4016-baba-957dcf8213ae",
+          "label": "keep updated on the political landscape",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/62bf2e21-2613-47f1-a624-fe0fc925e671",
+          "label": "market entry strategies",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/11c56452-fcec-4b00-9695-cca4728e5048",
+          "label": "marketing analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bdf5ca62-9053-4652-b5e4-4eb95c271945",
+          "label": "organisational learning",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3a5231a0-8c30-48ee-b671-08e2debd4441",
+          "label": "organisational policies",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/07e51c60-763a-4335-b4ec-70a15f66d328",
+          "label": "propose ICT solutions to business problems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8d4271ca-c9fd-40b3-875f-15f78332a49e",
+          "label": "quality standards",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c544a9f3-5945-4b54-afed-de0697852817",
+          "label": "report analysis results",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f975091a-e5a5-4472-ac17-11680e53e98f",
+          "label": "seek innovation in current practices",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f1155d3f-fbca-4298-a31c-f6955653bacf",
+          "label": "shape organisational teams based on competencies",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ccbd0898-e225-4abc-8992-57a23b0e2eec",
+          "label": "support implementation of quality management systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/28ad7c97-9fb3-4b1d-846a-654e529ab8ac",
+          "label": "sustainable manufacturing",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        }
+      ]
+    },
+    {
+      "id": "data-analyst",
+      "title": "data analyst",
+      "escoUri": "http://data.europa.eu/esco/occupation/d3edb8f8-3a06-47a0-8fb9-9b212c006aa2",
+      "escoCode": "2511.3",
+      "isco": "2511",
+      "iscoMajorGroup": "2",
+      "description": "Data analysts import, inspect, clean, transform, validate, model, or interpret collections of data with regard to the business goals of the company. They ensure that the data sources and repositories provide consistent and reliable data. Data analysts use different algorithms and IT tools as demanded by the situation and the current data. They might prepare reports in the form of visualisations such as graphs, charts, and dashboards.",
+      "whyInDemoSet": "Data move commonly taken from accounting.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/47a49cd6-097d-457a-9f7b-c290c14930d5",
+          "label": "analyse big data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/382c11ed-20d5-4ae7-b60e-15fec527fa6c",
+          "label": "apply statistical analysis techniques",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/98a1dec3-8138-4f46-a596-5e2a83b884b9",
+          "label": "business analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/143769cb-b61e-47d8-a61e-eedfbec1016c",
+          "label": "business intelligence",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/79e29b8b-47d1-470d-b7b1-32506bfe7d9a",
+          "label": "collect ICT data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/48db96bf-3314-45c6-bad8-fdb6e20e5639",
+          "label": "data engineering",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e9575f7f-053a-439e-8074-f93df3334e92",
+          "label": "data ethics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/25f0ea33-b4a2-4f31-b7b4-7d20e827b180",
+          "label": "data mining",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fecf8a0d-62c4-4e71-9b03-0f4fc2ad7bf5",
+          "label": "data models",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/cc7370dd-69fa-4c67-a96f-d4d135d38700",
+          "label": "data quality assessment",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/edebd83d-35f6-4ed5-a940-6c203d178c01",
+          "label": "data science",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/65e58886-bd1e-4c5b-8ca5-8d9b353c8aa1",
+          "label": "data visualisation software",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/54c9c155-9293-4329-8ed2-2e76e8b519d4",
+          "label": "define data quality criteria",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/629685b8-5f9e-4522-8cff-b3e2c4ec625a",
+          "label": "digital data processing",
+          "type": "unspecified",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/327d15c8-29ff-4ad4-a4fe-6536d777a45f",
+          "label": "documentation types",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2daec0e6-f0c1-43e8-8178-aedba99130ec",
+          "label": "establish data processes",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/31c69100-b612-4a61-8db5-fd314318854c",
+          "label": "execute analytical mathematical calculations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e",
+          "label": "handle data samples",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/713fb616-118e-40bc-9366-4a69879a49d5",
+          "label": "implement data quality processes",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/93aaf65c-5aad-4e6f-a7ba-ce9bf7c0e6e6",
+          "label": "information categorisation",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a56dec32-05ef-45de-a256-ee6741f356db",
+          "label": "information confidentiality",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/696e3b5b-8b61-45af-ae4c-3ab700f197ec",
+          "label": "information extraction",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/03ff0d53-573a-47a0-a0ad-1995815a4339",
+          "label": "information structure",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/46ec0033-3c71-415e-bcff-b065675ba2dc",
+          "label": "integrate ICT data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1e77e42a-181f-4b48-8e74-201ce50ffc29",
+          "label": "interpret current data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9ff9db9d-d14b-426e-83f3-e7449af6c79f",
+          "label": "manage data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/07889c08-7220-47c8-96f7-6068fbea00dc",
+          "label": "normalise data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/50b100ea-74fd-4706-99db-3e4ca55e51b8",
+          "label": "perform data cleansing",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4216e465-7baa-4884-a241-54b197bb9278",
+          "label": "perform data mining",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9cf681c7-89ec-470c-b651-7fe03786f586",
+          "label": "query languages",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/99207709-d076-4cce-ba38-e90d3bb28806",
+          "label": "resource description framework query language",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7ee4c2ea-b349-4bd2-81a3-ec31475d4833",
+          "label": "statistics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c5e8abde-d2ba-4e8e-a65e-720b71180666",
+          "label": "unstructured data",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1b70a55d-b8a4-49fc-96c6-15ab4cff2522",
+          "label": "use data processing techniques",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4463a721-69f3-413d-8321-43e3af13a4f1",
+          "label": "use databases",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/348b74cd-49ce-4844-8bdf-ec188b497213",
+          "label": "visual presentation techniques",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/bd14968e-e409-45af-b362-3495ed7b10e0",
+          "label": "cloud technologies",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fbafa41f-cd05-4109-a649-8b44d306d779",
+          "label": "create data models",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a7f0fbe0-c546-4f30-8e41-34a58c64567e",
+          "label": "data storage",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/43ae58b9-5e56-4524-b45a-b422777a0576",
+          "label": "database",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c3e36d05-8ae8-447f-bb2b-6f9409f85389",
+          "label": "deliver visual presentation of data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8b0f73ff-d36b-4196-bb83-464c3a6ef07d",
+          "label": "game theory",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0c766ca3-9364-4203-916b-fed16e4814c1",
+          "label": "gather data for forensic purposes",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e46291c7-52b9-4174-bd59-178884861038",
+          "label": "Hadoop",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a1eef0f4-133f-464a-a8f1-68fe3e8cc1b4",
+          "label": "healthcare analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/45f1ae17-c20d-40fc-9307-7d33b6ca9213",
+          "label": "image recognition",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1bba98a7-92b9-450b-9235-e0c905f8f3c4",
+          "label": "information architecture",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a57a54b6-2f2e-43e4-9621-b52f4a63cb08",
+          "label": "LDAP",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c7d24594-0c11-4b27-9039-fe0bb903da8e",
+          "label": "LINQ",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/be20d05c-f6b4-4580-9fcf-f00f4baab562",
+          "label": "make data-driven decisions",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d3286405-49f8-4e8a-8046-a4376b4e7963",
+          "label": "manage cloud data and storage",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a80fb090-63f4-4b05-83a5-2f090deb7757",
+          "label": "manage data collection systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/57231a22-4da7-49c8-97b8-75672feadf1e",
+          "label": "manage quantitative data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/11c56452-fcec-4b00-9695-cca4728e5048",
+          "label": "marketing analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1b7c716e-af95-4cda-a42f-6479c8b139f5",
+          "label": "MDX",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9fc400ac-8ed2-4aff-915f-aa4f2609ec7b",
+          "label": "multidisciplinary research",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f597f772-24d3-4cec-813c-cf5a7027c794",
+          "label": "N1QL",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b0a3bb25-a02f-43ed-ab1f-994fa66a424a",
+          "label": "online analytical processing",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c544a9f3-5945-4b54-afed-de0697852817",
+          "label": "report analysis results",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7159e587-c7cb-4ec0-a662-03e1dee2cccb",
+          "label": "research design",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/33e584f9-ff7a-4979-bfc0-5a3a374a145a",
+          "label": "social network analysis",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5da8018b-ae85-4cde-ad93-0394369018f3",
+          "label": "SPARQL",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/68ef0e4d-5542-4e64-84f4-752cce5a3c22",
+          "label": "statistical modeling techniques",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/611ed16b-99bf-4840-9cab-f55d1d286e0a",
+          "label": "store digital data and systems",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1973c966-f236-40c9-b2d4-5d71a89019be",
+          "label": "use spreadsheets software",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1605025e-a179-421f-8f35-5b07d182a6b2",
+          "label": "web analytics",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3f4dab51-572b-4e2c-85ef-3b4c3f7094e1",
+          "label": "XQuery",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        }
+      ]
+    },
+    {
+      "id": "software-developer",
+      "title": "software developer",
+      "escoUri": "http://data.europa.eu/esco/occupation/f2b15a0e-e65a-438a-affb-29b9d50b77d1",
+      "escoCode": "2512.4",
+      "isco": "2512",
+      "iscoMajorGroup": "2",
+      "description": "Software developers implement or program all kinds of software systems based on specifications and designs by using programming languages, tools, and platforms.",
+      "whyInDemoSet": "Software developers are a top-five advertised job in DOSM's Q2 2026 release; a long reskilling path.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/f28617ad-afdd-4041-814c-216153a38998",
+          "label": "analyse software specifications",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/21d2f96d-35f7-4e3f-9745-c533d2dd6e97",
+          "label": "computer programming",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/901105f8-3a08-453e-b1dc-23619e317fd3",
+          "label": "create flowchart diagram",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2522a6ce-3202-4ac8-9f5b-b9cb5a3a83a1",
+          "label": "debug software",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d9e5349e-8791-49c2-8ba4-839fdd1606c2",
+          "label": "define technical requirements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0b0335f3-0aa1-491e-895e-81fc8774a300",
+          "label": "develop automated migration methods",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/797a4416-0b8d-44f3-8fcd-eb10bd0be6b4",
+          "label": "develop software prototype",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/209a5498-3449-4689-8ed9-bd08cab4fd78",
+          "label": "engineering principles",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/72a74f69-5cf1-43c5-99b9-62a444578919",
+          "label": "engineering processes",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6014921e-1d25-4039-adc2-04852d61880e",
+          "label": "ICT debugging tools",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0e0c9c11-b39e-43cf-ba95-2fe646f5de64",
+          "label": "identify customer requirements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/925463a7-d51f-4d5b-9f79-4d28cf30acde",
+          "label": "integrated development environment software",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/be48353d-25c7-4f86-bea9-7b9e248fbc6e",
+          "label": "interpret technical requirements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6a899482-8bcf-40ca-ae67-579a1cc467ab",
+          "label": "manage engineering project",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4fabca9a-7435-4f33-b1da-3cdb00340fdc",
+          "label": "perform scientific research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7111b95d-0ce3-441a-9d92-4c75d05c4388",
+          "label": "project management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/59ea80e1-463a-4dba-82c6-d0b6d577d532",
+          "label": "technical drawings",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9d2e926f-53d9-41f5-98f3-19dfaa687f3f",
+          "label": "tools for software configuration management",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/04fe962b-4017-4eb7-9139-7d69b6922bc9",
+          "label": "use an application-specific interface",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2b7a79e5-84d8-4880-be66-3d9bb05bea17",
+          "label": "use software design patterns",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8b94aa1e-89c9-459d-b3b4-1dfab8dec2df",
+          "label": "use software libraries",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/541561bc-510c-4a99-881c-2d8bf5a85462",
+          "label": "use technical drawing software",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/172020d1-e151-445b-8173-e2a5fb16fe51",
+          "label": "utilise computer-aided software engineering tools",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f84a433f-34f1-4083-b0a3-24802623509c",
+          "label": "web services",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/eb0e5615-1575-4a86-a1a2-7d39595033c5",
+          "label": "ABAP",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f5308e60-d763-4ead-be95-88c96fb3e02b",
+          "label": "adapt to changes in technological development plans",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b4dc6e4f-dc7d-445f-8ce2-d7b9d225e282",
+          "label": "AJAX",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8c88d336-c249-4537-b26e-d679a85c4b9b",
+          "label": "Ajax Framework",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6f8a40d6-f9ce-43ec-a72f-d4213a53f3ed",
+          "label": "Ansible",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0d168770-4d9c-4096-b048-a6577818d306",
+          "label": "Apache Maven",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0fb753a1-2ef2-4429-84d2-ecb2b24daf7a",
+          "label": "Apache Tomcat",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/58d7a289-dafd-4363-833f-d1dc4140885e",
+          "label": "APL",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/56a7f561-1d55-43c9-9cd7-36a0a9bc6c50",
+          "label": "ASP.NET",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/47b9bbcf-356c-4782-83a4-7f5a1b2b51a3",
+          "label": "Assembly (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3c2e6f38-42c1-46ec-b782-5854b2db330d",
+          "label": "blockchain openness",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9035afc4-5317-455d-ab60-f32e2ecc6bfc",
+          "label": "blockchain platforms",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4c016b68-4116-468c-9dc6-42710c239e4a",
+          "label": "C#",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b633eb55-8f1f-4ae6-ab4c-2022ffe2cb7f",
+          "label": "C++",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/def007fa-5fed-4a5f-91a2-b0d7e3db1be1",
+          "label": "COBOL",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/993b1e23-f2de-4bd8-b33f-f86dde1c8e9d",
+          "label": "CoffeeScript",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/71746a0b-e58d-4dc4-ad03-bd84082eae21",
+          "label": "collect customer feedback on applications",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0cd6dcf1-5778-42a5-b685-4d01ae4a4871",
+          "label": "Common Lisp",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5898d99a-62a4-4e10-a2e3-0d815ce44248",
+          "label": "cyber attack counter-measures",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/65e58886-bd1e-4c5b-8ca5-8d9b353c8aa1",
+          "label": "data visualisation software",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/17924c75-45f4-4593-afac-eea0d51f04b5",
+          "label": "defence standard procedures",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fd33c66c-70c4-40e6-b87c-5495bd3bf26e",
+          "label": "design user interface",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8c4c49d4-9708-433f-8ca7-bf2c5211ee49",
+          "label": "develop creative ideas",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/38716afc-a93b-44ab-96cc-2ecf67edcf32",
+          "label": "do cloud refactoring",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1de3942b-99d8-41e8-9ef0-fbc9e9f6307b",
+          "label": "Drupal",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6b6a9252-2ed7-4862-a02f-1578f4a532ea",
+          "label": "Eclipse (integrated development environment software)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/034c29fa-c3ba-45ea-b8f3-bf8e3705e386",
+          "label": "Erlang",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/52cf3037-ab53-4806-85ed-7fd21ea7f6a1",
+          "label": "Groovy",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/000f1d3d-220f-4789-9c0a-cc742521fb02",
+          "label": "Haskell",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a4e31589-3632-4926-91d0-15b889c90b9b",
+          "label": "IBM WebSphere",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7814e88f-c133-4c3b-b27f-857afa145d42",
+          "label": "ICT security legislation",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ed8de897-adbe-4f0e-b4d2-534953e64c72",
+          "label": "integrate system components",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f049d050-12da-4e40-813a-2b5eb6df6b51",
+          "label": "Internet of Things",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/19a8293b-8e95-4de3-983f-77484079c389",
+          "label": "Java (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3cd569a2-4f88-4c1e-9995-8dce8c5e51a7",
+          "label": "JavaScript",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9b9de2a4-d8af-4a7b-933a-a8334ae60067",
+          "label": "JavaScript Framework",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f47a1998-0beb-43be-9f46-380aa4d183da",
+          "label": "Jenkins (tools for software configuration management)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/013441c1-1f13-47e9-80c4-9a53e8e1bc05",
+          "label": "KDevelop",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0de61385-de6d-4146-ba32-1cc1bc102220",
+          "label": "Lisp",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c3a03c5a-c260-4c26-9b9a-873abb396f4d",
+          "label": "MATLAB",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8369ede5-4200-4a44-be2e-bc60ef959259",
+          "label": "Microsoft Visual C++",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/020918ef-4b55-47c1-8430-ab7b8f6a7377",
+          "label": "migrate existing data",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a4d336a6-9ffd-402a-91cc-f359716ba4e0",
+          "label": "ML (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/76ef6ed3-1658-4a1a-9593-204d799c6d0c",
+          "label": "NoSQL",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5be3d306-6cf1-4b49-aa1d-01651dd4ba4c",
+          "label": "object-oriented modelling",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9973a5a2-7822-4161-99e9-95c781eb63f8",
+          "label": "Objective-C",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/300d432b-f457-4cd3-9cb1-1858c7d14954",
+          "label": "OpenEdge Advanced Business Language",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8764d4b1-e069-44f2-8baa-fb1eee1850ec",
+          "label": "Oracle Application Development Framework",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e8b89eb6-51e8-4c3a-babb-88b2e110376b",
+          "label": "Pascal (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/401eb8d8-6daa-4f8b-90ad-60afc71eb4f8",
+          "label": "Perl",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4350c38d-0fe9-4ca7-bab9-40ed7f72b04f",
+          "label": "PHP",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2bde42ae-e776-41c1-9ded-b07b30bfe985",
+          "label": "Prolog (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6417a4cc-6f61-4459-a114-761a7fa0279d",
+          "label": "Puppet (tools for software configuration management)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ccd0a1d9-afda-43d9-b901-96344886e14d",
+          "label": "Python (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/51586df8-1c46-4b47-8583-773cb63bf00b",
+          "label": "R",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0ccdfe98-f845-4598-84a1-3dca66e9d9a3",
+          "label": "Ruby (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c7451027-8249-405a-bb1b-342ff0f3fb3b",
+          "label": "Salt (tools for software configuration management)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bb99af26-71ff-4dca-bde7-1eb1f6194426",
+          "label": "SAP R3",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/04f1b938-d4d4-4cb1-a863-982af76b9d93",
+          "label": "SAS language",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ffddfc7c-a9dd-449f-9e96-882dc447c8b6",
+          "label": "Scala",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d56fc2b5-4b0a-4e7e-9bde-a33736f6ff18",
+          "label": "Scratch (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1774bd31-8893-44cf-9498-7e3d95508419",
+          "label": "screen reader",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/42ed3bfb-1a01-4c8b-9758-fc6438865734",
+          "label": "Smalltalk (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/670f8eea-f25b-4c3f-97ef-a4729d4c63d6",
+          "label": "smart contract",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/438ff259-d086-4004-acda-1ec3e1631bc6",
+          "label": "software anomalies",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/24c200e5-be20-4370-a137-ab53797f3a17",
+          "label": "software frameworks",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/af7ae54f-4649-4c16-87c7-59ba41d4d57f",
+          "label": "SPARK",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/598de5b0-5b58-4ea7-8058-a4bc4d18c742",
+          "label": "SQL",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/69f0167e-75d9-46cf-847f-72a592880ebb",
+          "label": "STAF",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/be80acfc-b6f2-4411-9b8d-b19d9cd2556a",
+          "label": "Swift (computer programming)",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ba1b0441-a6b8-4e57-8ccc-871012f63e42",
+          "label": "trading software",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/867137fb-ff1b-4ca3-99f3-cb6969aa2c68",
+          "label": "TypeScript",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7d10fcb2-b368-48ab-996b-7c9fafcf68ed",
+          "label": "use automatic programming",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/25b291b5-8245-4d9d-b391-86a8a31d7109",
+          "label": "use concurrent programming",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d31fab87-2a7d-485c-b699-2901ca294b15",
+          "label": "use functional programming",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2c4e11ef-da18-4e19-816b-e6bc19e12424",
+          "label": "use logic programming",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5b9cde20-f1b9-4adc-bfb3-dbf70b14138d",
+          "label": "use object-oriented programming",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/75f839c2-fd9a-4ad3-8921-6e734608568d",
+          "label": "use query languages",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8369c2d6-c100-4cf6-bd83-9668d8678433",
+          "label": "utilise machine learning",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dcdd5ddf-82a6-4ac3-8edc-d4b23cae9a88",
+          "label": "VBScript",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/13bdd41a-2a18-441f-96db-41252c519413",
+          "label": "Visual Basic",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6d289e8b-2cc1-4eda-ab1f-ad1090ef98f0",
+          "label": "WordPress",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8696aff0-18c0-4ba6-a4d0-9a21861b3e5e",
+          "label": "World Wide Web Consortium standards",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/449d119b-2d66-43a9-9230-7d27f16afbb6",
+          "label": "Xcode",
+          "type": "knowledge",
+          "green": false,
+          "digital": true
+        }
+      ]
+    },
+    {
+      "id": "sustainability-manager",
+      "title": "sustainability manager",
+      "escoUri": "http://data.europa.eu/esco/occupation/2cf2b905-3308-4b5d-8e8d-633fc7a3f3ce",
+      "escoCode": "1213.8",
+      "isco": "1213",
+      "iscoMajorGroup": "1",
+      "description": "Sustainability managers are responsible for ensuring the sustainability of business processes. They provide assistance in the design and implementation of plans and measures to ensure that the manufacturing processes and products comply with given environmental regulations and social responsibility standards and they monitor and report on the implementation of sustainability strategies within the company supply chain and business process. They analyse issues linked to manufacturing processes, use of materials, waste reduction, energy efficiency and products traceability to improve environmental and social impacts and integrate sustainability aspects into the company culture.",
+      "whyInDemoSet": "Sustainability (ESG) move; low GenAI exposure.",
+      "essentialSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/c8b4b02c-d9ce-4e24-ab43-5dd52c6dff48",
+          "label": "advise on carbon emissions reduction",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b2f05068-c409-43ec-ba58-b5dfe991ca5e",
+          "label": "advise on corporate social responsibility",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dbef5042-4b99-4e6f-b2ed-1d33b07b3ed6",
+          "label": "advise on sustainability solutions",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6742977a-aa00-4c8c-9861-898b0373907e",
+          "label": "advise on sustainable management policies",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8f585def-6ade-41b3-b897-3d71fba4151d",
+          "label": "alternative energy",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b04f377b-ee80-4b38-aca1-19d266a23b17",
+          "label": "analyse business requirements",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/96d549bb-3e62-4c45-92a7-f114df089581",
+          "label": "analyse supply chain strategies",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e541c69c-ea80-4b17-87cb-4001d0b9d303",
+          "label": "assess environmental impact",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4e87c852-602a-4a0e-b8d8-20709ce14ac5",
+          "label": "assess the life cycle of resources",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2cb27e30-2be7-4a09-9502-fdd2102c046b",
+          "label": "carry out training in environmental matters",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/22c45bf7-e52b-475f-847b-c32a87f65a5d",
+          "label": "circular economy",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1565b401-1754-4b07-8f1a-eb5869e64d95",
+          "label": "climate change impact",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fa465db3-56e8-4b5d-a781-e2a313a4ed2d",
+          "label": "conduct qualitative research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8316979b-df5a-4dc7-98ef-61ec6a10df84",
+          "label": "conduct quantitative research",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bd70f004-e1d6-43f0-96f1-59c014a4ea01",
+          "label": "coordinate environmental efforts",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/66db424f-2abe-420d-8e5b-186607266b61",
+          "label": "corporate social responsibility",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f5bf985b-ac78-4d23-881a-18a359234528",
+          "label": "corporate sustainability",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2bdc2f65-b42f-4963-abff-d7214ca4caae",
+          "label": "emission standards",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/ddce2912-bc0f-4a47-aa2b-c1de48bc4b44",
+          "label": "energy conservation",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/83fc0b2b-6cd2-46af-b1ff-d3fc83604c26",
+          "label": "energy efficiency",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/089ee650-297e-4716-87d1-440743b70a0d",
+          "label": "ensure compliance with environmental legislation",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dab7c301-2a33-454e-8fed-23218fa28eee",
+          "label": "environmental design",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6f5850ea-5785-4e2c-b062-743066fd5bdb",
+          "label": "environmental legislation",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e3f2c37f-e484-4b4c-ad82-f565a2b98f89",
+          "label": "environmental management monitors",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/95bff246-c3ce-4181-a11b-e4363453c2f8",
+          "label": "environmental management standards",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/081d7679-5070-4777-bece-a28c49f15636",
+          "label": "environmental policy",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/969ebc5a-e486-41b7-9a3d-15f9aa61680d",
+          "label": "evaluate company needs",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1c08d63d-1c5e-4b9b-ad3e-f7ba7debb2d1",
+          "label": "forecast organisational risks",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4300b453-9bcf-474c-9ee3-92ec2229720c",
+          "label": "global standards for sustainability reporting",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7f4d1dee-bc5a-495a-926b-17b383b8d8fd",
+          "label": "green building standards",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0e78d9c9-7c3c-4c5c-82cb-205c16edbcb8",
+          "label": "green computing",
+          "type": "knowledge",
+          "green": true,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/5944cee9-763e-4b08-99e4-f514bdde14a6",
+          "label": "hazardous waste types",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bbcc7e1b-3d4d-4422-9fac-efd636eb9de4",
+          "label": "lead the sustainability reporting process",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b13e0689-636d-42d0-86c3-df9d6f85a882",
+          "label": "manage environmental management system",
+          "type": "skill/competence",
+          "green": true,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d9d3eb78-a7c6-4076-9e19-df225af2ec62",
+          "label": "manage recycling program budget",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d53eab76-e8ff-4e28-af26-7e012951c763",
+          "label": "measure company's sustainability performance",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d2c81ad1-2439-43cf-9c63-204187b8f771",
+          "label": "mitigate waste of resources",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/696e604d-53d2-4243-a6cb-a99663caa119",
+          "label": "monitor social impact",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1dd23dba-dd00-45ab-abf4-642902538317",
+          "label": "perform risk analysis",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/97725325-5287-4ebb-9f83-1ba2c38f465c",
+          "label": "produce sustainable products",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/8abdc43c-2bfd-417c-97c2-27fcdaf53171",
+          "label": "promote environmental awareness",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d1f73ae9-d348-4aac-b5d5-9b6d508401d3",
+          "label": "resource-efficient technologies",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6eff134b-e34f-4d6e-a6e8-5e47cf2228d0",
+          "label": "risk management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/d84326c9-a3d3-4e22-a6a1-1ad42a356f10",
+          "label": "sustainability consulting",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/203083ca-b051-4c28-8986-fc8731bacee5",
+          "label": "sustainable finance",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/103f7814-d262-4df6-a1b6-759bc51f76cb",
+          "label": "sustainable technologies",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/73576419-31c2-4e45-8e30-ab1afec3db4e",
+          "label": "use sustainable materials and components",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/40f65a56-ccbe-4601-9f32-1cc6cdd24f28",
+          "label": "waste management",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        }
+      ],
+      "optionalSkills": [
+        {
+          "uri": "http://data.europa.eu/esco/skill/a366bfc5-8d17-4792-a9f0-db0951528dda",
+          "label": "advise on environmental risk management systems",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/2691f4d8-d090-423f-afd7-9e721f562e8d",
+          "label": "advise on public relations",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f82b05a7-128b-4a72-a815-044ff6062f62",
+          "label": "advise on waste management procedures",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/e9ff446f-6a8a-4e35-a611-176508964be3",
+          "label": "alternative fuels",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/77f109c4-3107-4d2a-a512-5160ac103933",
+          "label": "analyse environmental data",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/670ebf56-761c-4d3d-865a-db14085b77f7",
+          "label": "apply procedures and regulations for eco-labelling",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/4d30ad07-9e39-4899-81dd-02b280f162f9",
+          "label": "apply systemic design thinking",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/96ec2d53-4f41-4172-8ef2-70742c4bb540",
+          "label": "assess supplier risks",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/f2412a5c-8072-4cd7-8fa1-806864f91276",
+          "label": "by-products",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/885808f7-f42b-406e-95f2-28efcd45ddda",
+          "label": "carry out energy management of facilities",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/cde9911c-f92e-4de1-811f-336e177ac4ce",
+          "label": "chemistry",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fe30a4b0-1a99-4fc7-afff-b162b8c834ba",
+          "label": "communication principles",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/0ad6d5e8-593f-4191-843c-439b23a468ca",
+          "label": "conduct energy audit",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bbfb0e36-807c-492f-bed2-267224ba7bc7",
+          "label": "conduct research on food waste prevention",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3936cc7d-d045-4eb0-b951-b862a072c0a2",
+          "label": "design indicators for food waste reduction",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/dff0087d-25e4-40bf-979e-32fdf2445438",
+          "label": "develop food waste reduction strategies",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3220a66f-d129-463b-848e-891b4f1c79e3",
+          "label": "develop hazardous waste management strategies",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/862920c8-f2d0-4058-8fb8-9f06fbfc2446",
+          "label": "develop recycling programs",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/071c7f1d-f659-4b96-a222-b21012297f3b",
+          "label": "energy market",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/1063b061-329e-4212-8db4-ab936dc60efc",
+          "label": "environmental economics",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/bf4779c9-ce55-4110-a996-a7014ca3f1f9",
+          "label": "green automotive technologies",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/86f0bb12-6491-4be7-8306-c88900e91a63",
+          "label": "green bonds",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c3ac5c4c-b4b9-4842-b871-43e12cfc0442",
+          "label": "green building practices",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/59004ee8-3975-4877-bf82-ff0b8070ef28",
+          "label": "implement environmental action plans",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/6962058d-9808-4820-a6bc-d7cabce60cde",
+          "label": "implement sustainable procurement",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/3d69b305-4051-4c1d-ba1e-d8c5b35e22db",
+          "label": "monitor manufacturing impact",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/cd5efa8c-e44d-4cbc-91c6-796018dbed68",
+          "label": "perform project management",
+          "type": "skill/competence",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/7111b95d-0ce3-441a-9d92-4c75d05c4388",
+          "label": "project management",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/51399b1c-15d6-4e4c-8673-30c25a094fce",
+          "label": "promote sustainable packaging",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/41daf4d3-33b8-4199-b814-e54964d277b6",
+          "label": "properties of textile materials",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/a1388163-462a-4b76-8649-67470ea858a1",
+          "label": "search databases",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/fcc29203-1f8d-4c54-90ee-78cb18467695",
+          "label": "supervise waste water treatments",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/691c7db6-bad8-4a09-a3c4-4bf799375a35",
+          "label": "sustainable agricultural production principles",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/750c0a9d-248e-49f1-a270-1bfdcf980bbd",
+          "label": "thermal treatment",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/001d46db-035e-4b92-83a3-ed8771e0c123",
+          "label": "train staff to reduce food waste",
+          "type": "skill/competence",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/9c66b182-96ec-43b3-8821-2aeb7df66f12",
+          "label": "types of plastic",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/538f8bc6-a5bf-422b-8112-5ad3fe9de9a0",
+          "label": "urban sustainability",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/c95c29fe-3971-46b7-80e9-1f7e75ba99b3",
+          "label": "use specific data analysis software",
+          "type": "skill/competence",
+          "green": false,
+          "digital": true
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/edb029e7-43a8-45a9-b37c-00ff730a1092",
+          "label": "vehicle manufacturing process",
+          "type": "knowledge",
+          "green": false,
+          "digital": false
+        },
+        {
+          "uri": "http://data.europa.eu/esco/skill/b970e437-2f8b-42e3-ae49-6718a0cca44f",
+          "label": "water reuse",
+          "type": "knowledge",
+          "green": true,
+          "digital": false
+        }
+      ]
+    }
+  ]
+}

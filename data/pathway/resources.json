@@ -1,0 +1,374 @@
+{
+  "about": "Free or low-cost learning resources checked by hand on the provider's own course page. 'covers' lists the ESCO essential skills (exact labels from data/roles.json) that the course's stated learning outcomes address; the mapping was reviewed by the team and is an adapted use of ESCO. 'hours' is the study time the provider states; null means the provider states no hours. Never add a course without opening its page. 'free' is true only when the course itself can be studied at no cost; Coursera courses are paid but can be reached free through the access programme named in 'access'.",
+  "checkedAt": "2026-10-21",
+  "resources": [
+    {
+      "id": "ol-bookkeeping",
+      "title": "Introduction to bookkeeping and accounting",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/money-business/introduction-bookkeeping-and-accounting/content-section-overview",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": 8,
+      "timeBasis": "8 hours study, as stated on the course page",
+      "covers": [
+        "manage the general ledger",
+        "perform balance sheet operations",
+        "prepare financial statements",
+        "financial statements",
+        "handle financial transactions",
+        "accounting"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-financial-statements",
+      "title": "Financial statement analysis and interpretation",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/money-business/financial-statement-analysis-and-interpretation/content-section-overview",
+      "cost": "Free",
+      "level": "Intermediate",
+      "hours": 12,
+      "timeBasis": "12 hours study, as stated on the course page",
+      "covers": [
+        "interpret financial statements",
+        "analyse financial performance of a company",
+        "fundamental analysis",
+        "financial statements"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-code-data-analysis",
+      "title": "Learn to code for data analysis",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/science-maths-technology/learn-code-data-analysis/content-section-overview",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": 24,
+      "timeBasis": "24 hours study (8 weeks, about 3 hours a week), as stated on the course page",
+      "covers": [
+        "computer programming",
+        "digital data processing",
+        "use data processing techniques"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-excel-visualisation",
+      "title": "Data analysis: visualisations in Excel",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/science-maths-technology/data-analysis-visualisations-excel/content-section-overview",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": 6,
+      "timeBasis": "6 hours study, as stated on the course page",
+      "covers": [
+        "visual presentation techniques",
+        "data visualisation software"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-hypothesis-testing",
+      "title": "Data analysis: hypothesis testing",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/science-maths-technology/data-analysis-hypothesis-testing/content-section-overview",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": 9,
+      "timeBasis": "9 hours study, as stated on the course page",
+      "covers": [
+        "statistics",
+        "apply statistical analysis techniques"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-swot",
+      "title": "Business communication: writing a SWOT analysis",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/money-business/business-communication-writing-swot-analysis/content-section-overview",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": 8,
+      "timeBasis": "8 hours study, as stated on the course page",
+      "covers": [
+        "analyse internal factors of companies",
+        "analyse external factors of companies",
+        "business communication"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-project-management",
+      "title": "Project management: the start of the project journey",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/money-business/leadership-management/project-management-the-start-the-project-journey/content-section-overview",
+      "cost": "Free",
+      "level": "Advanced",
+      "hours": 35,
+      "timeBasis": "35 hours study, as stated on the course page",
+      "covers": [
+        "project management"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "cs50x",
+      "title": "CS50's Introduction to Computer Science",
+      "provider": "Harvard University (CS50x OpenCourseWare)",
+      "url": "https://cs50.harvard.edu/x/",
+      "cost": "Free (paid certificate optional)",
+      "level": "Introductory",
+      "hours": null,
+      "timeBasis": "Eleven weeks of material, as stated on the course page; no hours are stated",
+      "covers": [
+        "computer programming",
+        "debug software",
+        "query languages",
+        "use databases"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-supply-chain-sustainability",
+      "title": "Supply chain sustainability",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/money-business/leadership-management/supply-chain-sustainability/content-section-overview",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": 8,
+      "timeBasis": "8 hours study, as stated on the course page",
+      "covers": [
+        "analyse supply chain strategies",
+        "corporate sustainability",
+        "measure company's sustainability performance"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "ol-climate-transitions",
+      "title": "Climate change: transitions to sustainability",
+      "provider": "The Open University (OpenLearn)",
+      "url": "https://www.open.edu/openlearn/nature-environment/environmental-studies/climate-change-transitions-sustainability/content-section-0",
+      "cost": "Free",
+      "level": "Intermediate",
+      "hours": 5,
+      "timeBasis": "5 hours study, as stated on the course page",
+      "covers": [
+        "climate change impact",
+        "environmental policy"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "unccl-intro-climate",
+      "title": "Introductory e-Course on Climate Change",
+      "provider": "UN CC:Learn (UNITAR)",
+      "url": "https://unitar.org/courses/introductory-e-course-climate-change-6190",
+      "cost": "Free",
+      "level": "Introductory",
+      "hours": null,
+      "timeBasis": "Self-paced; the provider lists a duration of 2 days and no hours",
+      "covers": [
+        "climate change impact",
+        "advise on carbon emissions reduction"
+      ],
+      "free": true,
+      "access": null
+    },
+    {
+      "id": "cr-sql-data-science",
+      "title": "SQL for Data Science",
+      "provider": "University of California, Davis (Coursera)",
+      "url": "https://www.coursera.org/learn/sql-for-data-science",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Beginner",
+      "hours": 20,
+      "timeBasis": "2 weeks at 10 hours a week, as stated on the course page",
+      "covers": [
+        "query languages",
+        "use databases"
+      ]
+    },
+    {
+      "id": "cr-process-data",
+      "title": "Process Data from Dirty to Clean",
+      "provider": "Google (Coursera)",
+      "url": "https://www.coursera.org/learn/process-data",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Beginner",
+      "hours": 20,
+      "timeBasis": "2 weeks at 10 hours a week, as stated on the course page",
+      "covers": [
+        "perform data cleansing",
+        "data quality assessment",
+        "query languages"
+      ]
+    },
+    {
+      "id": "cr-foundations-data",
+      "title": "Foundations: Data, Data, Everywhere",
+      "provider": "Google (Coursera)",
+      "url": "https://www.coursera.org/learn/foundations-data",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Beginner",
+      "hours": 10,
+      "timeBasis": "1 week at 10 hours a week, as stated on the course page",
+      "covers": [
+        "data ethics"
+      ]
+    },
+    {
+      "id": "cr-design-patterns",
+      "title": "Design Patterns",
+      "provider": "University of Alberta (Coursera)",
+      "url": "https://www.coursera.org/learn/design-patterns",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Intermediate",
+      "hours": 20,
+      "timeBasis": "2 weeks at 10 hours a week, as stated on the course page",
+      "covers": [
+        "use software design patterns"
+      ]
+    },
+    {
+      "id": "cr-git",
+      "title": "Version Control with Git",
+      "provider": "Atlassian (Coursera)",
+      "url": "https://www.coursera.org/learn/version-control-with-git",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Level not stated",
+      "hours": 10,
+      "timeBasis": "1 week at 10 hours a week, as stated on the course page",
+      "covers": [
+        "tools for software configuration management"
+      ]
+    },
+    {
+      "id": "cr-corporate-sustainability",
+      "title": "Corporate Sustainability. Understanding and Seizing the Strategic Opportunity",
+      "provider": "Università Bocconi (Coursera)",
+      "url": "https://www.coursera.org/learn/corporate-sustainability",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Level not stated",
+      "hours": 20,
+      "timeBasis": "2 weeks at 10 hours a week, as stated on the course page",
+      "covers": [
+        "corporate sustainability",
+        "corporate social responsibility"
+      ]
+    },
+    {
+      "id": "cr-circular-economy",
+      "title": "Circular Economy - Sustainable Materials Management",
+      "provider": "Lund University (Coursera)",
+      "url": "https://www.coursera.org/learn/circular-economy",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Beginner",
+      "hours": 20,
+      "timeBasis": "2 weeks at 10 hours a week, as stated on the course page",
+      "covers": [
+        "circular economy",
+        "use sustainable materials and components",
+        "environmental design"
+      ]
+    },
+    {
+      "id": "cr-financial-accounting",
+      "title": "Introduction to Financial Accounting",
+      "provider": "University of Pennsylvania (Wharton) (Coursera)",
+      "url": "https://www.coursera.org/learn/wharton-accounting",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Level not stated",
+      "hours": 20,
+      "timeBasis": "2 weeks at 10 hours a week, as stated on the course page",
+      "covers": [
+        "financial statements",
+        "interpret financial statements",
+        "accounting"
+      ]
+    },
+    {
+      "id": "cr-quant-modeling",
+      "title": "Fundamentals of Quantitative Modeling",
+      "provider": "University of Pennsylvania (Wharton) (Coursera)",
+      "url": "https://www.coursera.org/learn/wharton-quantitative-modeling",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Level not stated",
+      "hours": 10,
+      "timeBasis": "1 week at 10 hours a week, as stated on the course page",
+      "covers": [
+        "quantitative analysis"
+      ]
+    },
+    {
+      "id": "cr-business-strategy",
+      "title": "Foundations of Business Strategy",
+      "provider": "University of Virginia (Darden) (Coursera)",
+      "url": "https://www.coursera.org/learn/uva-darden-foundations-business-strategy",
+      "cost": "Paid on Coursera; eligible Malaysians can get 3 months free through Rakyat Digital's Global Learning Pass",
+      "free": false,
+      "access": "rakyat-digital",
+      "level": "Beginner",
+      "hours": 9,
+      "timeBasis": "9 hours to complete, as stated on the course page",
+      "covers": [
+        "analyse external factors of companies",
+        "analyse internal factors of companies",
+        "make strategic business decisions"
+      ]
+    }
+  ],
+  "access": {
+    "rakyat-digital": {
+      "name": "Rakyat Digital: Global Learning Pass",
+      "url": "https://rakyatdigital.gov.my",
+      "note": "Ministry of Digital programme: 100,000 licences giving eligible Malaysians with MyDigital ID three months of free Coursera access, distributed in phases from 16 Sep 2026, subject to eligibility and availability.",
+      "source": "https://www.businesstoday.com.my/2026/10/08/digital-ministry-to-provide-100000-malaysians-with-three-months-free-access-to-coursera-courses/",
+      "checkedAt": "2026-10-21"
+    }
+  },
+  "hrdCorp": {
+    "checkedAt": "2026-10-21",
+    "claimable": {
+      "name": "HRD Corp Claimable Courses",
+      "url": "https://hrdcorp.gov.my/program-registration-hrd-corp-claimable-course/",
+      "note": "Training providers register programmes under this scheme to offer them to employers registered with HRD Corp (Training Providers Circular No. 3/2021). None of the courses in this plan is checked as HRD Corp-claimable; ask your HR if your employer is registered."
+    },
+    "elatih": {
+      "name": "HRD Corp e-LATiH",
+      "url": "https://supportcentre.hrdcorp.gov.my/portal/en/kb/articles/faqs-hrd-corp-e-latih",
+      "note": "HRD Corp's e-learning platform is open to all individuals, with more than 1,000 free courses (HRD Corp FAQ). Not matched to these skills yet."
+    }
+  }
+}

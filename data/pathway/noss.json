@@ -1,0 +1,154 @@
+{
+  "about": "Malaysian certification route per role: the closest National Occupational Skills Standard (NOSS / SKPK) by title, looked up by hand. A NOSS leads to a Sijil Kemahiran Malaysia (SKM) at the stated level through JPK-accredited centres or recognition of prior learning (PPT). Listing a NOSS does not mean the certificate is required for the job. 'match' is 'close' when the NOSS title names the same work, 'related' when it covers part of it. Codes and levels are from the current JPK register (Daftar Standard, 22 Jan 2025, page given). Check with JPK before enrolling.",
+  "checkedAt": "2026-10-21",
+  "sources": {
+    "jpk2025": {
+      "name": "JPK: Daftar Standard, versi 22 Januari 2025 (current NOSS register)",
+      "url": "https://www.myspike.my/lampiran/manual/DaftarStandardVersi22Januari2025.pdf"
+    },
+    "jpa2024": {
+      "name": "JPA: Senarai Bidang ... SKM Berdasarkan SKPK (updated 1 December 2024)",
+      "url": "https://docs.jpa.gov.my/docs/bpo/2024/skm.pdf"
+    }
+  },
+  "roles": {
+    "billing-clerk": {
+      "match": "close",
+      "noss": [
+        {
+          "code": "FB-100-3:2012",
+          "title": "Perakaunan (Accounting)",
+          "level": 3,
+          "source": "jpk2025",
+          "page": 127
+        }
+      ]
+    },
+    "accounting-assistant": {
+      "match": "close",
+      "noss": [
+        {
+          "code": "FB-100-3:2012",
+          "title": "Perakaunan (Accounting)",
+          "level": 3,
+          "source": "jpk2025",
+          "page": 127
+        }
+      ]
+    },
+    "bookkeeper": {
+      "match": "close",
+      "noss": [
+        {
+          "code": "FB-100-3:2012",
+          "title": "Perakaunan (Accounting)",
+          "level": 3,
+          "source": "jpk2025",
+          "page": 127
+        },
+        {
+          "code": "FB-100-4:2012",
+          "title": "Perakaunan (Accounting)",
+          "level": 4,
+          "source": "jpk2025",
+          "page": 127
+        }
+      ]
+    },
+    "accountant": {
+      "match": "related",
+      "noss": [
+        {
+          "code": "FB-100-5:2012",
+          "title": "Perakaunan (Accounting)",
+          "level": 5,
+          "source": "jpk2025",
+          "page": 127
+        }
+      ],
+      "note": "SKM Perakaunan Level 5 is the highest accounting standard in the register; it is not a professional accountancy qualification."
+    },
+    "financial-analyst": {
+      "match": "related",
+      "noss": [
+        {
+          "code": "K661-004-4:2025",
+          "title": "Pentadbiran Pra-Perancangan Kewangan (Financial Paraplanning Administration)",
+          "level": 4,
+          "source": "jpk2025",
+          "page": 124
+        },
+        {
+          "code": "K661-004-5:2025",
+          "title": "Pengurusan Pra-Perancangan Kewangan (Financial Paraplanning Management)",
+          "level": 5,
+          "source": "jpk2025",
+          "page": 124
+        }
+      ],
+      "note": "Financial planning support, which overlaps with part of the analyst's work."
+    },
+    "business-analyst": {
+      "match": "none",
+      "noss": []
+    },
+    "data-analyst": {
+      "match": "close",
+      "noss": [
+        {
+          "code": "IT-082-4:2016",
+          "title": "Perlombongan Data (Data Mining Operation)",
+          "level": 4,
+          "source": "jpk2025",
+          "page": 121
+        },
+        {
+          "code": "IT-082-5:2016",
+          "title": "Analisis & Pengurusan Perlombongan Data (Data Mining Management & Analysis)",
+          "level": 5,
+          "source": "jpk2025",
+          "page": 121
+        }
+      ]
+    },
+    "software-developer": {
+      "match": "close",
+      "noss": [
+        {
+          "code": "J620-002-4:2020",
+          "title": "Pembangunan Perisian Front-End (Front-End Software Development)",
+          "level": 4,
+          "source": "jpk2025",
+          "page": 120
+        },
+        {
+          "code": "J620-002-5:2020",
+          "title": "Pembangunan Perisian Full Stack (Full Stack Software Development)",
+          "level": 5,
+          "source": "jpk2025",
+          "page": 120
+        },
+        {
+          "code": "IT-010-3:2016",
+          "title": "Pembangunan Aplikasi (Application Development)",
+          "level": 3,
+          "source": "jpk2025",
+          "page": 121
+        }
+      ]
+    },
+    "sustainability-manager": {
+      "match": "related",
+      "noss": [
+        {
+          "code": "M711-005-5:2019",
+          "title": "Pengurusan Audit Tenaga (Energy Audit Management)",
+          "level": 5,
+          "source": "jpk2025",
+          "page": 131
+        }
+      ],
+      "note": "Covers energy efficiency, one part of sustainability work."
+    }
+  }
+}

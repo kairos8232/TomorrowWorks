@@ -1,0 +1,11 @@
+{
+  "model": "BAAI/bge-m3",
+  "device": "cuda",
+  "gpu": "NVIDIA RTX A5000",
+  "skills": 13960,
+  "dimensions": 1024,
+  "seconds": 92.5,
+  "source": "ESCO v1.2.1 skills_en.csv (European Commission)",
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128"
+}

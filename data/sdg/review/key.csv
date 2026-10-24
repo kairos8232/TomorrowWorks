@@ -1,0 +1,146 @@
+id,skill,target,source,embedding_similarity,keyword_score,A_embedding,B_embedding_rules,C_keyword,draft_decision
+P001,information structure,9.1,keyword baseline top 40,0.511,0.267,0,0,1,
+P002,environmental policy,14.2,embedding >= 0.60,0.618,0.000,1,0,0,rejected (whole target)
+P003,environmental policy,17.13,keyword baseline top 40,,0.334,0,0,1,
+P004,environmental policy,17.14,keyword baseline top 40,,0.306,0,0,1,
+P005,environmental policy,17.16,embedding >= 0.60,0.615,0.010,1,0,0,rejected
+P006,environmental policy,9.4,embedding >= 0.60,0.621,0.000,1,1,0,kept
+P007,accounting department processes,12.6,embedding 0.00-0.50 (fresh),0.485,0.000,0,0,0,
+P008,accounting department processes,8.2,embedding 0.00-0.50 (fresh),0.495,0.000,0,0,0,
+P009,perform business research,9.5,keyword baseline top 40,0.570,0.253,0,0,1,
+P010,ensure compliance with environmental legislation,10.3,embedding >= 0.60,0.617,0.147,1,0,0,rejected
+P011,ensure compliance with environmental legislation,14.2,embedding >= 0.60,0.603,0.000,1,0,0,rejected (whole target)
+P012,ensure compliance with environmental legislation,17.16,embedding >= 0.60,0.606,0.000,1,0,0,rejected
+P013,develop automated migration methods,10.7,embedding >= 0.60,0.603,0.096,1,0,0,rejected
+P014,green computing,9.4,embedding >= 0.60,0.632,0.052,1,1,0,kept
+P015,sustainable technologies,2.4,embedding >= 0.60,0.665,0.007,1,0,0,rejected (whole target)
+P016,sustainable technologies,4.7,embedding >= 0.60,0.663,0.022,1,0,0,uncertain
+P017,sustainable technologies,9.4,embedding >= 0.60,0.703,0.153,1,1,0,kept
+P018,climate change impact,13.2,keyword baseline top 40,,0.348,0,0,1,
+P019,climate change impact,13.3,keyword baseline top 40,0.549,0.294,0,0,1,
+P020,sustainable finance,12.6,embedding >= 0.60,0.641,0.044,1,1,0,kept
+P021,sustainable finance,17.16,embedding >= 0.60,0.654,0.091,1,0,0,rejected
+P022,sustainable finance,9.4,embedding >= 0.60,0.634,0.080,1,1,0,kept
+P023,engineering principles,9.1,embedding 0.55-0.60 (fresh),0.574,0.000,0,0,0,
+P024,prepare tax returns forms,9.4,embedding 0.50-0.55 (fresh),0.500,0.007,0,0,0,
+P025,circular economy,6.4,embedding >= 0.60,0.639,0.026,1,0,0,rejected (whole target)
+P026,circular economy,8.4,embedding >= 0.60,0.661,0.061,1,1,0,kept
+P027,circular economy,9.4,embedding >= 0.60,0.668,0.106,1,1,0,kept
+P028,debug software,10.3,embedding 0.50-0.55 (fresh),0.503,0.000,0,0,0,
+P029,data mining,12.1,random negative,,0.000,0,0,0,
+P030,perform business analysis,9.5,embedding 0.50-0.55 (fresh),0.535,0.035,0,0,0,
+P031,allocate bills,12.5,random negative,,0.000,0,0,0,
+P032,carry out training in environmental matters,12.6,embedding 0.55-0.60 (fresh),0.563,0.000,0,0,0,
+P033,carry out training in environmental matters,4.7,embedding 0.55-0.60 (fresh),0.576,0.000,0,0,0,
+P034,carry out training in environmental matters,8.6,keyword baseline top 40,,0.275,0,0,1,
+P035,calculate tax,17.1,embedding 0.55-0.60 (fresh),0.585,0.269,0,0,1,
+P036,bookkeeping regulations,10.7,embedding 0.50-0.55 (fresh),0.505,0.000,0,0,0,
+P037,apply change management,13.2,keyword baseline top 40,,0.230,0,0,1,
+P038,apply change management,8.3,embedding 0.55-0.60 (fresh),0.561,0.006,0,0,0,
+P039,organise business documents,8.2,embedding 0.00-0.50 (fresh),0.467,0.000,0,0,0,
+P040,organise business documents,8.3,embedding 0.00-0.50 (fresh),0.499,0.000,0,0,0,
+P041,waste management,11.6,keyword baseline top 40,,0.212,0,0,1,
+P042,waste management,12.4,embedding 0.55-0.60 (fresh),0.579,0.013,0,0,0,
+P043,waste management,12.5,embedding 0.50-0.55 (fresh),0.537,0.297,0,0,1,
+P044,global standards for sustainability reporting,12.6,embedding >= 0.60,0.647,0.255,1,1,1,kept
+P045,global standards for sustainability reporting,17.16,embedding >= 0.60,0.646,0.046,1,0,0,rejected
+P046,data engineering,8.7,random negative,,0.000,0,0,0,
+P047,investment banking,8.10,keyword baseline top 40,,0.239,0,0,1,
+P048,assess the life cycle of resources,12.4,keyword baseline top 40,,0.232,0,0,1,
+P049,perform scientific research,9.5,embedding 0.55-0.60 (fresh),0.590,0.315,0,0,1,
+P050,hazardous waste types,3.9,keyword baseline top 40,0.492,0.202,0,0,1,
+P051,ICT debugging tools,17.6,embedding 0.00-0.50 (fresh),0.424,0.000,0,0,0,
+P052,business analysis,9.3,embedding 0.50-0.55 (fresh),0.527,0.000,0,0,0,
+P053,corporate social responsibility,4.7,embedding 0.50-0.55 (fresh),0.539,0.045,0,0,0,
+P054,advise on sustainable management policies,11.3,keyword baseline top 40,,0.286,0,0,1,
+P055,advise on sustainable management policies,12.2,keyword baseline top 40,,0.337,0,0,1,
+P056,advise on sustainable management policies,12.6,embedding >= 0.60,0.685,0.115,1,1,0,kept
+P057,advise on sustainable management policies,14.7,keyword baseline top 40,,0.218,0,0,1,
+P058,advise on sustainable management policies,17.14,keyword baseline top 40,,0.243,0,0,1,
+P059,advise on sustainable management policies,17.16,embedding >= 0.60,0.685,0.126,1,0,0,rejected
+P060,advise on sustainable management policies,8.3,embedding >= 0.60,0.641,0.073,1,0,0,uncertain
+P061,use sustainable materials and components,12.6,embedding >= 0.60,0.627,0.026,1,1,0,kept
+P062,use sustainable materials and components,17.16,embedding >= 0.60,0.634,0.039,1,0,0,rejected
+P063,use sustainable materials and components,9.4,embedding >= 0.60,0.666,0.066,1,1,0,kept
+P064,collect ICT data,17.16,embedding 0.55-0.60 (fresh),0.553,0.000,0,0,0,
+P065,green building standards,4.7,embedding >= 0.60,0.617,0.071,1,0,0,uncertain
+P066,green building standards,9.4,embedding >= 0.60,0.618,0.014,1,1,0,kept
+P067,follow the statutory obligations,17.4,embedding 0.00-0.50 (fresh),0.493,0.000,0,0,0,rejected (whole target)
+P068,energy efficiency,6.4,embedding >= 0.60,0.622,0.033,1,0,0,rejected (whole target)
+P069,energy efficiency,7.1,keyword baseline top 40,,0.281,0,0,1,
+P070,energy efficiency,7.2,keyword baseline top 40,,0.495,0,0,1,
+P071,energy efficiency,7.3,keyword baseline top 40,,0.356,0,0,1,
+P072,energy efficiency,8.4,embedding >= 0.60,0.619,0.067,1,1,0,kept
+P073,promote environmental awareness,10.3,embedding >= 0.60,0.622,0.028,1,0,0,rejected
+P074,promote environmental awareness,12.6,embedding >= 0.60,0.662,0.045,1,0,0,uncertain
+P075,promote environmental awareness,12.8,keyword baseline top 40,,0.284,0,0,1,
+P076,promote environmental awareness,13.3,keyword baseline top 40,,0.238,0,0,1,
+P077,promote environmental awareness,17.16,embedding >= 0.60,0.656,0.000,1,0,0,rejected
+P078,advise on efficiency improvements,7.3,keyword baseline top 40,,0.223,0,0,1,
+P079,alternative energy,7.2,keyword baseline top 40,,0.271,0,0,1,
+P080,produce sustainable products,2.4,embedding >= 0.60,0.657,0.025,1,0,0,rejected (whole target)
+P081,produce sustainable products,4.7,embedding >= 0.60,0.639,0.084,1,0,0,uncertain
+P082,produce sustainable products,9.4,embedding >= 0.60,0.630,0.027,1,1,0,kept
+P083,tools for software configuration management,10.5,embedding 0.00-0.50 (fresh),0.456,0.000,0,0,0,
+P084,business processes,8.2,embedding >= 0.60,0.616,0.000,1,1,0,kept
+P085,information confidentiality,16.10,embedding >= 0.60,0.625,0.075,1,0,0,rejected
+P086,information confidentiality,17.6,embedding 0.50-0.55 (fresh),0.537,0.053,0,0,0,
+P087,asset management,8.2,embedding 0.55-0.60 (fresh),0.562,0.028,0,0,0,
+P088,manage environmental management system,14.2,embedding >= 0.60,0.603,0.042,1,0,0,rejected (whole target)
+P089,advise on corporate social responsibility,12.6,embedding >= 0.60,0.640,0.103,1,1,0,kept
+P090,advise on corporate social responsibility,17.16,embedding >= 0.60,0.637,0.000,1,0,0,rejected
+P091,advise on corporate social responsibility,17.4,embedding >= 0.60,0.615,0.030,1,0,0,rejected (whole target)
+P092,lead the sustainability reporting process,12.6,embedding >= 0.60,0.664,0.282,1,1,1,kept
+P093,coordinate environmental efforts,11.4,keyword baseline top 40,,0.252,0,0,1,
+P094,coordinate environmental efforts,12.6,embedding >= 0.60,0.635,0.022,1,1,0,kept
+P095,coordinate environmental efforts,14.2,embedding >= 0.60,0.608,0.000,1,0,0,rejected (whole target)
+P096,coordinate environmental efforts,17.16,embedding >= 0.60,0.620,0.000,1,0,0,rejected
+P097,maintain customer records,16.10,embedding 0.55-0.60 (fresh),0.566,0.024,0,0,0,
+P098,advise on carbon emissions reduction,12.6,embedding >= 0.60,0.620,0.040,1,1,0,kept
+P099,advise on carbon emissions reduction,3.6,random negative,,0.000,0,0,0,
+P100,explain accounting records,10.3,embedding 0.50-0.55 (fresh),0.500,0.000,0,0,0,
+P101,analyse external factors of companies,12.6,keyword baseline top 40,0.555,0.212,0,0,1,
+P102,analyse external factors of companies,8.2,embedding 0.50-0.55 (fresh),0.537,0.000,0,0,0,
+P103,resource-efficient technologies,16.8,random negative,,0.000,0,0,0,
+P104,resource-efficient technologies,6.4,embedding >= 0.60,0.651,0.152,1,0,0,rejected (whole target)
+P105,resource-efficient technologies,8.4,embedding >= 0.60,0.635,0.098,1,1,0,kept
+P106,resource-efficient technologies,9.4,embedding >= 0.60,0.652,0.174,1,1,0,kept
+P107,mitigate waste of resources,12.5,keyword baseline top 40,,0.248,0,0,1,
+P108,mitigate waste of resources,6.3,embedding >= 0.60,0.610,0.000,1,0,0,rejected (whole target)
+P109,mitigate waste of resources,6.4,embedding >= 0.60,0.647,0.024,1,0,0,rejected (whole target)
+P110,mitigate waste of resources,8.4,embedding >= 0.60,0.617,0.042,1,1,0,kept
+P111,prepare financial projections,8.3,embedding 0.55-0.60 (fresh),0.572,0.047,0,0,0,
+P112,consider economic criteria in decision making,14.1,random negative,,0.000,0,0,0,
+P113,consider economic criteria in decision making,5.5,keyword baseline top 40,,0.252,0,0,1,
+P114,consider economic criteria in decision making,7.2,random negative,,0.000,0,0,0,
+P115,measure company's sustainability performance,12.6,embedding >= 0.60,0.658,0.195,1,1,0,kept
+P116,measure company's sustainability performance,17.16,embedding >= 0.60,0.654,0.079,1,0,0,rejected
+P117,measure company's sustainability performance,17.19,embedding >= 0.60,0.644,0.022,1,1,0,kept
+P118,tax legislation,17.1,keyword baseline top 40,0.544,0.205,0,0,1,
+P119,sustainability consulting,12.6,embedding >= 0.60,0.636,0.086,1,1,0,kept
+P120,sustainability consulting,17.16,embedding >= 0.60,0.647,0.000,1,0,0,rejected
+P121,advise on sustainability solutions,12.6,embedding >= 0.60,0.660,0.108,1,1,0,kept
+P122,advise on sustainability solutions,17.16,embedding >= 0.60,0.637,0.032,1,0,0,rejected
+P123,advise on sustainability solutions,9.4,embedding >= 0.60,0.611,0.080,1,1,0,kept
+P124,build business relationships,17.16,embedding >= 0.60,0.631,0.000,1,0,0,rejected
+P125,energy conservation,6.3,embedding >= 0.60,0.602,0.021,1,0,0,rejected (whole target)
+P126,energy conservation,6.4,embedding >= 0.60,0.625,0.006,1,0,0,rejected (whole target)
+P127,energy conservation,7.1,keyword baseline top 40,,0.312,0,0,1,
+P128,energy conservation,7.2,keyword baseline top 40,,0.436,0,0,1,
+P129,energy conservation,7.3,keyword baseline top 40,,0.275,0,0,1,
+P130,energy conservation,8.4,embedding >= 0.60,0.625,0.058,1,1,0,kept
+P131,offer financial services,8.10,embedding 0.55-0.60 (fresh),0.587,0.246,0,0,1,
+P132,offer financial services,8.3,embedding >= 0.60,0.605,0.092,1,0,0,uncertain
+P133,offer financial services,9.3,embedding >= 0.60,0.620,0.123,1,0,0,uncertain
+P134,assess environmental impact,14.2,embedding >= 0.60,0.602,0.039,1,0,0,rejected (whole target)
+P135,accounting,8.2,embedding 0.00-0.50 (fresh),0.496,0.000,0,0,0,
+P136,scientific research methodology,9.5,keyword baseline top 40,0.560,0.295,0,0,1,
+P137,align efforts towards business development,17.16,embedding >= 0.60,0.630,0.050,1,0,0,rejected
+P138,align efforts towards business development,8.2,embedding >= 0.60,0.618,0.000,1,1,0,kept
+P139,align efforts towards business development,8.3,embedding >= 0.60,0.631,0.048,1,1,0,kept
+P140,analyse software specifications,4.5,random negative,,0.000,0,0,0,
+P141,corporate sustainability,12.6,embedding >= 0.60,0.676,0.081,1,1,0,kept
+P142,corporate sustainability,17.16,embedding >= 0.60,0.621,0.020,1,0,0,rejected
+P143,corporate sustainability,9.4,embedding >= 0.60,0.626,0.010,1,1,0,kept
+P144,company policies,10.3,keyword baseline top 40,0.562,0.202,0,0,1,
+P145,company policies,10.4,keyword baseline top 40,,0.227,0,0,1,
