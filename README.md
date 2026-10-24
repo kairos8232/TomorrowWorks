@@ -364,13 +364,13 @@ curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/openai/v1/embeddings \
 ## Submission Checklist
 
 - [x] Team name, domain (Domain 1) and SDG track filled in
-- [ ] Slide deck link added
-- [ ] Demo video link added
-- [ ] Replit used, with proof of use in `submission/`
-- [ ] RunPod used, with proof of use in `submission/`
-- [ ] Preliminary submission completed (`SDC2026_NoMoreTokens_Preliminary.pdf`)
-- [ ] Technology declaration completed (`SDC2026_NoMoreTokens_TechDeclaration.pdf`)
-- [ ] Submission files renamed with the team name
+- [x] Slide deck link added
+- [x] Demo video link added
+- [x] Replit used, with proof of use in `submission/`
+- [x] RunPod used, with proof of use in `submission/`
+- [x] Preliminary submission completed (`SDC2026_NoMoreTokens_Preliminary.pdf`)
+- [x] Technology declaration completed (`SDC2026_NoMoreTokens_TechDeclaration.pdf`)
+- [x] Submission files renamed with the team name
 - [ ] "How to Run" steps verified
 - [x] No API keys or secrets committed to the repository (scanned 24 Oct 2026)
 
