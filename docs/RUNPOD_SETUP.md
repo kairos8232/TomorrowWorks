@@ -23,7 +23,7 @@ The agent skills and plugin live in local Codex directories, not in this reposit
 1. Fully quit and reopen Codex Desktop so it loads the new plugin and MCP tools.
 2. Open `/mcp` in Codex, choose **runpod**, and select **Sign in with Runpod**. Approve the OAuth flow in the browser. Use the Runpod account intended for this project.
 3. After sign-in, list Pods through the Runpod MCP tools. An empty list still verifies the connection; if the account should have Pods, check that the correct account was used.
-4. Only then mark MCP authentication complete in [CHECKLIST.md](CHECKLIST.md).
+4. Only then mark MCP authentication complete in CHECKLIST.md.
 
 ### Separate project work
 
